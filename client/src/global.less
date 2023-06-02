@@ -1,0 +1,145 @@
+body {
+  // background-color: #e6ffef;
+  background-color: #ecffe6;
+}
+img {
+  margin: 0;
+}
+div {
+  line-height: 24px;
+  font-size: 12px;
+  margin: 5px 0;
+}
+i {
+  display: inline-block;
+  font-weight: 500;
+  font-style: normal;
+}
+:global {
+  .g_u > span {
+    padding-bottom: 1px;
+    border-bottom: 1px solid #00628c;
+    color: #00628c;
+    cursor: pointer;
+    padding: 0 2px;
+    margin: 0 8px;
+  }
+  .g_u::after {
+    content: "|";
+    padding-right: 2px;
+  }
+  .g_u:last-of-type::after {
+    content: "";
+    padding: 0;
+  }
+
+  .g_u_d > span {
+    border-bottom-color: #000;
+    color: #000;
+  }
+  .g_u_s > span {
+    padding-bottom: 1px;
+    border-bottom: 1px solid #00628c;
+    color: #00628c;
+    cursor: pointer;
+    padding: 0 2px;
+    margin: 0 8px;
+  }
+
+  .g_u_s_d > span {
+    padding-bottom: 1px;
+    border-bottom: 1px solid #000;
+    color: #000;
+    cursor: pointer;
+    padding: 0 2px;
+    margin: 0 8px;
+  }
+
+  .g_u_s::after,
+  .g_u_s_d::after {
+    content: "|";
+    padding-right: 2px;
+  }
+
+  .g_u_end {
+    padding-bottom: 1px;
+    border-bottom: 1px solid #00628c;
+    color: #00628c;
+    cursor: pointer;
+    padding: 0 2px;
+    margin: 0 8px;
+  }
+
+  .g_u_end_d {
+    cursor: pointer;
+    padding: 0 2px;
+    margin: 0 8px;
+    border-bottom: 1px solid #000;
+    color: #000;
+  }
+
+  .g_b {
+    cursor: pointer;
+  }
+
+  .g_b::before {
+    content: "【";
+  }
+
+  .g_b::after {
+    content: "】";
+  }
+
+  .g_b_u {
+    display: inline-block;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #00628c;
+    color: #00628c;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  .g_b_u::before {
+    content: "【";
+    padding-right: 2px;
+  }
+
+  .g_b_u::after {
+    content: "】";
+    padding-left: 2px;
+  }
+  .g_error {
+    color: rgb(224, 17, 17);
+    font-size: 11px;
+    margin-left: 2px;
+  }
+
+  .g_radio_group {
+    display: flex;
+    justify-items: center;
+    .g_radio_itme {
+      display: flex;
+      justify-items: center;
+      margin-right: 20px;
+    }
+  }
+  .g_fgx {
+    height: 24px;
+    width: 50%;
+    overflow: hidden;
+  }
+  .g_fgx::after {
+    content: "---------------------------------------------------------------";
+    white-space: nowrap;
+  }
+  .g_empty {
+    line-height: 120px;
+    text-indent: 1em;
+  }
+  .g_btn{
+    padding:2px 6px;
+    border: 1px solid #000;
+    background-color: #e9dedef7;
+    border-radius: 2px;
+    margin: 0 3px;
+  }
+}
