@@ -103,7 +103,7 @@ const Grand = ({ history }) => {
                 <span className="g_b_u">情缘</span>
             </div>
             <div>
-                <span className="g_b_u">装备</span>
+                <span className="g_b_u" onClick={() => { history.push('/equip') }}>装备</span>
                 <span className="g_b_u">技能</span>
                 <span className="g_b_u">宠物</span>
                 <span className="g_b_u">天榜</span>

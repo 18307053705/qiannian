@@ -1,5 +1,74 @@
 
+const Attribute = require("./attribute");
+
+const EQUIP_ATTR = {
+    1: {
+        pos: 'weapon',
+        attr: ['atk_min', 'atk_max']
+    },
+    2: {
+        pos: 'helmet',
+        attr: ['mana']
+    },
+    3: {
+        pos: 'clothing',
+        attr: ['life']
+    },
+    4: {
+        pos: 'belt',
+        attr: ['dfs_min', 'dfs_max']
+    },
+    5: {
+        pos: 'shoe',
+        attr: ['dodge']
+    },
+    6: {
+        pos: 'ring',
+        attr: ['hit']
+    },
+    7: {
+        pos: 'necklace',
+        attr: ['sudden']
+    },
+    8: {
+        pos: 'treasure1',
+        attr: ['atk']
+    }
+};
 module.exports = {
+    // 计算装备属性
+    computeAttr: function (equip, ext) {
+        const { pos, career, attr, level } = equip
+        // 解析强化，锻造，宝石
+        const [firm, forge, ...gem] = ext.split('_');
+        let Increase = 1 + forge * 0.1;
+        if (firm < 6) {
+            Increase += firm * 0.1
+        } else if (firm < 11) {
+            Increase += 0.5 + (firm - 5) * 0.3
+        }
+        else if (firm < 15) {
+            Increase += 2 + (firm - 10) * 0.5
+        }
+        else if (firm < 16) {
+            Increase += 6
+        } else {
+            Increase += 9
+        }
+
+        const equipAttr = {};
+        const posInfo = EQUIP_ATTR[pos];
+        const base = Attribute.getAttr(career);
+
+        posInfo.attr.forEach((key) => {
+            equipAttr[key] = parseInt(base[key] * attr * level * Increase);
+        })
+        return {
+            attr: equipAttr,
+            posName: posInfo.pos
+        }
+
+    },
     1: {
         id: 1,
         type: 3,
@@ -8,7 +77,11 @@ module.exports = {
         level: 1,
         pos: 1,
         attr: 5,
-        group: 10000
+        group: 10000,
+        // ext: {
+        //     attr: 'atk'
+        // },
+
     },
     2: {
         id: 2,

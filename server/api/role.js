@@ -35,8 +35,8 @@ router.post("/getRoleInfo", async (req, res) => {
       data: {
         attr: data.attr,
         buff: data.buff,
-        life: results['life'],
-        mana: results['mana'],
+        life: results['life'] > data.attr.life_max ? data.attr.life_max : results['life'],
+        mana: results['mana'] > data.attr.mana_max ? data.attr.mana_max : results['mana'],
         role_name: results['role_name'],
         role_level: results['role_level'],
         role_exp: results['role_exp'],

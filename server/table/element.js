@@ -116,7 +116,7 @@ const ELEMENT_5 = {
     article: [
       {
         ...Knapsack[1],
-        num:5,
+        num: 5,
       },
       Knapsack[2],
       {
@@ -146,7 +146,23 @@ const ELEMENT_5 = {
   5000002: {
     id: 5000002,
     name: "九天神龙",
-    type: 5
+    type: 5,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1
+    },
+    article: [
+      {
+        ...Knapsack[1],
+        num: 5,
+      },
+      Knapsack[2],
+      {
+        ...Equip[6],
+        rate: 100
+      },
+    ]
   },
   5000003: {
     id: 5000003,

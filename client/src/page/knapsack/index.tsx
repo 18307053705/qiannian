@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { getKnapsack, initKnapsack } from '@cgi/knapsack';
+import { getKnapsack, initKnapsack, operate } from '@cgi/knapsack';
+import { getEquipName } from '@utils/equip'
 
 import Style from './index.less';
 // 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物
@@ -41,8 +42,7 @@ const namehandel = (n, p, ext) => {
     if (p !== 3) {
         return n;
     }
-    const [firm] = ext.split('_');
-    return firm == 0 ? n : `${n}+${firm}`
+    return getEquipName(ext, n);
 }
 
 const ACTIVE_TYPE = {
@@ -95,21 +95,41 @@ const knapsack = ({ history }) => {
                 data.push({ n, p, ...itme, in_x: index })
             }
         });
+
         return data;
 
     }, [current, list, serchValue]);
 
-    const activeClick = useCallback((id, in_x, s) => {
-        setActive({
-            id,
-            in_x,
-            s,
-            type,
+    const operateClick = (parms) => {
+        operate(parms).then(({ data }) => {
+            setKnapsack(data);
         })
+    }
+
+    const activeClick = useCallback((id, in_x, s, p) => {
+        if (p === 3) {
+            operateClick({
+                id,
+                in_x,
+                s: 1,
+                p,
+                type,
+            })
+        } else {
+            setActive({
+                id,
+                in_x,
+                s,
+                p,
+                type,
+            })
+        }
+
+
     }, [type])
     const total = data.length;
     const { page, size } = table;
-    const tList = data.slice(page, size);
+    const tList = data.slice(page * size, (page + 1) * size);
     return (
         <div className={Style["knapsack-page"]}>
             {
@@ -123,7 +143,7 @@ const knapsack = ({ history }) => {
                             onChange={(e) => {
                                 setActive({ ...active, s: e.target.value })
                             }} />
-                        <button>确定</button>
+                        <button onClick={() => { operateClick(active) }}>确定</button>
                     </div>
                 )
             }
@@ -143,7 +163,7 @@ const knapsack = ({ history }) => {
                                 <span className="g_u">
                                     <span>{index + (page * size) + 1}. {namehandel(n, p, ext)} x {s}</span>
                                 </span>
-                                <span className="g_u"><span onClick={() => { activeClick(id, in_x, s) }}>{ACTIVE_TYPE[type]}</span></span>
+                                <span className="g_u"><span onClick={() => { activeClick(id, in_x, s, p) }}>{ACTIVE_TYPE[type]}</span></span>
                             </div>
                         )
                     })
@@ -169,7 +189,7 @@ const knapsack = ({ history }) => {
             <div>
                 背包：{list.length}/200
                 <input
-                   className={Style.input}
+                    className={Style.input}
                     value={serch}
                     onChange={(e) => {
                         setSerch(e.target.value)

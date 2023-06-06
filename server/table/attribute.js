@@ -19,6 +19,20 @@
 //  fire_dfs-火防
 
 module.exports = {
+    getAttr: function (career) {
+        let roleAttr = this.roleAttr;
+        let attr = roleAttr['atk'];
+        if (career % 3 === 2) {
+            attr = roleAttr['def']
+        }
+        if (career % 3 === 0) {
+            attr = roleAttr['agile']
+        }
+        if (career == 0) {
+            attr = roleAttr['balanced']
+        }
+        return { ...attr }
+    },
     MEUN: {
         life: '生命',
         mana: '法力',
@@ -33,7 +47,7 @@ module.exports = {
             life: 200,
             life_max: 200,
             mana: 150,
-            mana_max:150,
+            mana_max: 150,
             atk_max: 12,
             atk_min: 10,
             dfs_max: 4,

@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 // 接入数据库信息
 const SQL_INFO = {

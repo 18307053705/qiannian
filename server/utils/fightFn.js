@@ -20,15 +20,17 @@ module.exports = {
             Global.fightLoop.fightRoleId[role.id] = role.id;
             // 创建战斗信息池
             if (!Global.fightLoop.fightMap[role.id]) {
+                const rival = this.creatFreak(extDir);
                 Global.fightLoop.fightMap[role.id] = {
                     type: 1,
-                    rival: this.creatFreak(extDir),
+                    rival,
                     player: [],
                     id: [],
                     buffs: {},
                     freak: {
                         extDir,
-                        statu: 0
+                        statu: 0,
+                        num: rival.length
                     } // 怪物原型，战斗结束时,获取奖励等信息,或者继续
                 }
             }
@@ -51,7 +53,7 @@ module.exports = {
             const results = await roleFn.getRoleInfo(req, res);
             if (results) {
                 const { skill_pool } = results;
-                const { fight, art } = JSON.parse(skill_pool);
+                const { fight = [null, null, null, null, null, null], art } = JSON.parse(skill_pool);
                 const knapasackId = {};
                 let update = false;
                 fight.forEach((itme, index) => {
@@ -62,9 +64,8 @@ module.exports = {
                         }
                     }
                 })
-
                 // 判断战斗设置中是否有消耗物品
-                if (JSON.stringify(knapasackId) == "{}") {
+                if (JSON.stringify(knapasackId) !== "{}") {
                     update = true;
                     const knapasack = await roleFn.getKnapsack(req);
                     if (knapasack) {
@@ -74,7 +75,7 @@ module.exports = {
                             const { id, p } = data[i];
                             // Id存在战斗设置中,且为消耗品
                             if (knapasackId[id] && p === 1) {
-                                fight[knapasackId['index']] = {
+                                fight[knapasackId[id]['index']] = {
                                     ...data[i],
                                     p2: 2
                                 }
@@ -109,8 +110,8 @@ module.exports = {
                     id: role.id,
                     attr: {
                         ...data.attr,
-                        life: results.life,
-                        mana: results.mana,
+                        life: results['life'] > data.attr.life_max ? data.attr.life_max : results['life'],
+                        mana: results['mana'] > data.attr.mana_max ? data.attr.mana_max : results['mana'],
                     },
                     art: fight,
                     name: results.role_name
@@ -143,16 +144,18 @@ module.exports = {
         const attrs = { ...freakAttr[type] };
         const addition = level * attr;
         Object.keys(attrs).forEach((key) => {
-            if (boss && key == 'life' || key == 'mana') {
-                attrs[key] *= addition * 100;
+            if (key == 'life' || key == 'mana') {
+                attrs[key] *= addition * (boss ? 100 : 1);
                 attrs[`${key}_max`] = attrs[key];
                 return;
             }
             attrs[key] *= addition;
         });
-
         // boss只有一个,非boss存在多个
         let num = Math.floor(Math.random() * ((boss ? 1 : 5) - 1)) + 1;
+        if (level < 20) {
+            num = 1;
+        }
         const rival = [];
         for (num; 0 < num; num--) {
             rival.push({
@@ -310,6 +313,31 @@ module.exports = {
             text: `${info.name}使用${info.artName},${info.tagName}施展出诡异身法避开了。`
         }
     },
+    // 普通攻击
+    normalDir: function (player, in_x, rival, playerAttr, rivalAttr, fightRes) {
+        const dpsList = [];
+        const { name } = player[in_x];
+        const info = {
+            name,
+            artName: '普通攻击',
+            tagName: rival[0].name
+        }
+        // 计算玩家对怪物的伤害
+        const playerDps = this.computeDps(playerAttr, rivalAttr, info);
+        const life = rival[0]['attr']['life'] - playerDps.dps;
+        rival[0]['attr']['life'] = life;
+        // 判断怪物是否死亡，死亡则不记录伤害
+        if (life > 0) {
+            dpsList.push(playerDps.dps);
+        }
+        // 将死亡怪物清除
+        rival = rival.filter(({ attr }) => attr.life > 0);
+        fightRes['player'] = {
+            text: playerDps.text,
+            dpslist: [...dpsList],
+        }
+        return rival.length === 0 ? 1 : 0
+    },
     // 技能攻击
     atkDir: function (player, in_x, dirIndex, rival, playerAttr, rivalAttr, fightRes) {
         const dpsList = [];
@@ -348,26 +376,22 @@ module.exports = {
     rivalDir: function (player, in_x, rival, playerAttr, rivalAttr, fightRes) {
         const { attr, name } = player[in_x];
         const dpsList = [];
-        const num = rival.lenght > player.lenght ? rival.lenght - player.lenght + 1 : 1;
+        const num = rival.length > player.length ? rival.length - player.length + 1 : 1;
         const info = {
             name: rival[0].name,
             artName: '普通攻击',
             tagName: name
         }
         const rivalDps = this.computeDps(rivalAttr, playerAttr, info);
-        let i = 0;
-        // 记录怪物伤害
-        for (i; i < num && i < 3; i++) {
-            dpsList.push(rivalDps.dps);
-        }
         // 最多被三个怪攻击
-        attr.life -= (rivalDps.dps * (i - 1));
+        const dps = num > 3 ? rivalDps.dps * 3 : rivalDps.dps * num;
+        attr.life -= dps;
         if (attr.life <= 0) {
             attr.life = 0;
         };
         fightRes['rival'] = {
             text: rivalDps.text,
-            dpslist: [...dpsList]
+            dpslist: [dps]
         }
         return attr.life === 0 ? -1 : 0;
     },
@@ -387,7 +411,7 @@ module.exports = {
         const drug = {};
         // 找到使用过的消耗品
         art.forEach((itme) => {
-            if (itme.num) {
+            if (itme && itme.num) {
                 drug[itme.id] = {
                     num: itme.num,
                     p: itme.p
@@ -492,9 +516,9 @@ module.exports = {
         // 银两
         const tael = taels || exp < 100 ? exp : exp / 100;
         // 更新背包
-        roleFn.updateKnapsack(req, { data: JSON.stringify(data), tael: knapsack.tael - 0 + tael });
+        roleFn.updateKnapsack(req, { data: JSON.stringify(data), tael: knapsack.tael - 0 + tael * freak.num });
         // 更新角色经验等级
-        roleFn.computeRoleLevel(req, res, exp);
+        roleFn.computeRoleLevel(req, res, exp * freak.num);
         res.send({
             code: 0,
             data: {
@@ -502,8 +526,8 @@ module.exports = {
                 data,
                 freak: {
                     name,
-                    exp,
-                    tael,
+                    exp: exp * freak.num,
+                    tael: tael * freak.num,
                     article: textReward.join(','),
                     tip: JSON.stringify(artReward) !== '{}' || JSON.stringify(equipReward) !== '{}' ? '背包已满,请注意清理。' : ''
                 },

@@ -69,9 +69,14 @@ export const config: RouterType[] = [
     component: lazy(() => import("@page/socialize"))
   },
   {
-    name: "势力界面",
+    name: "创建势力",
     path: "/createSocialize",
     component: lazy(() => import("@page/socialize/create"))
+  },
+  {
+    name: "装备界面",
+    path: "/equip",
+    component: lazy(() => import("@page/equip"))
   }
 ];
 

@@ -7,7 +7,7 @@ const { error, ERR_MEUN } = require("../utils/errorFn");
 const router = new express.Router();
 
 router.post("/getFightInfo", (req, res) => {
-    const { role:role_g } = Global.getUserRole(req);
+    const { role: role_g } = Global.getUserRole(req);
     // 获取战斗池id
     const fightId = Global.fightLoop.fightRoleId[role_g.id];
     const { player, ...data } = Global.fightLoop.fightMap[fightId];
@@ -38,7 +38,7 @@ router.post("/getFightInfo", (req, res) => {
     });
 });
 
-// 设置战斗键列表
+// 战斗键列表
 router.post("/getFightDir", async (req, res) => {
     const kanp = await roleFn.getKnapsack(req, res);
     const role = await roleFn.getRoleInfo(req, res);
@@ -52,7 +52,7 @@ router.post("/getFightDir", async (req, res) => {
                 drug.push({ name: n, id, })
             }
         })
-        skill.art.forEach(({ n, id, p }) => {
+        skill.art && skill.art.forEach(({ n, id, p }) => {
             if (p !== 3) {
                 art.push({ name: n, id, })
             }
@@ -69,7 +69,7 @@ router.post("/getFightDir", async (req, res) => {
 // 设置战斗键
 router.post("/setFightDir", async (req, res) => {
     const { dir, type, index } = req.body;
-    const { role:role_g } = Global.getUserRole(req);
+    const { role: role_g } = Global.getUserRole(req);
     const fightId = Global.fightLoop.fightRoleId[role_g.id];
     const role = await roleFn.getRoleInfo(req, res);
     const { art, fight } = JSON.parse(role.skill_pool);
@@ -80,7 +80,7 @@ router.post("/setFightDir", async (req, res) => {
         const kanp = await roleFn.getKnapsack(req);
         const data = JSON.parse(kanp.data);
         // 获取替换前的物品信息
-        const { num, id } = fight[index];
+        const { num, id } = fight[index] = {};
         // 消耗过该物品，则进行背包更新
         if (num) {
             for (let i = 0; i < Knapsack.size; i++) {
@@ -141,7 +141,7 @@ router.post("/fightDir", async (req, res) => {
     const fightId = Global.fightLoop.fightRoleId[role.id];
     let { player, rival, buffs, freak } = Global.fightLoop.fightMap[fightId];
     if (freak.statu === 1) {
-        fightFn.releaseFight(req, res,fightId)
+        fightFn.releaseFight(req, res, fightId)
         fightFn.getFightReward(req, res, freak);
         return;
     }
@@ -151,8 +151,7 @@ router.post("/fightDir", async (req, res) => {
         return;
     }
     const { art, attr } = player[in_x];
-    const { p2, s, p } = art[index];
-
+    const { p2 = 0, s, p } =  art[index] || {};
     // 我方属性
     const playerAttr = fightFn.creatAttr(attr);
     // 敌方属性
@@ -181,6 +180,10 @@ router.post("/fightDir", async (req, res) => {
     if (p2 === 1 && p === 2) {
         fightFn.computeBuff(player, in_x, index, buffs);
     }
+    // 普通攻击
+    if (p2 === 0) {
+        fightRes.statu = fightFn.normalDir(player, in_x, rival, playerAttr, rivalAttr, fightRes);
+    }
     // 判断战斗是否结束
     fightRes.statu = fightRes.statu || fightFn.rivalDir(player, in_x, rival, playerAttr, rivalAttr, fightRes);
 
@@ -193,7 +196,6 @@ router.post("/fightDir", async (req, res) => {
     Global.fightLoop.fightMap[fightId]['player'] = player;
     Global.fightLoop.fightMap[fightId]['buffs'] = buffs;
     Global.fightLoop.fightMap[fightId]['rival'] = rival;
-
     // 战斗结束
     if (fightRes.statu !== 0) {
         // 释放战斗池,更新背包
@@ -202,7 +204,7 @@ router.post("/fightDir", async (req, res) => {
 
     // 战胜
     if (fightRes.statu === 1) {
-        // 更新怪我状态
+        // 更新我状态
         freak.statu = fightRes.statu;
         if (Global.fightLoop.fightMap[fightId]) {
             Global.fightLoop.fightMap[fightId]['freak'] = freak;
@@ -238,7 +240,7 @@ router.post("/clean", (req, res) => {
         data: ''
     });
 });
-
+// 刷怪
 router.post("/continue", (req, res) => {
     fightFn.creatFight(req, res).then(() => {
         res.send({
@@ -249,13 +251,13 @@ router.post("/continue", (req, res) => {
         });
     })
 });
-
+// 放弃战斗
 router.post("/give", (req, res) => {
     Global.grandDir.set(req, { extDir: undefined });
     const { role } = Global.getUserRole(req);
     // 获取战斗池id
     const fightId = Global.fightLoop.fightRoleId[role.id];
-    fightFn.releaseFight(req,res, fightId);
+    fightFn.releaseFight(req, res, fightId);
     res.send({
         code: 0,
         data: ''

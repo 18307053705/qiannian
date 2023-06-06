@@ -2,8 +2,8 @@ const mysql = require("../mysql");
 const errorFn = require("./errorFn");
 // const fightFn = require("./fightFn");
 // const pulic = require("./pulic");
-const { Realm } = require("../table/realm");
-const { RoleAttr } = require("../table/attribute");
+const { realm: Realm } = require("../table/realm");
+const { roleAttr: RoleAttr } = require("../table/attribute");
 const Global = require("../global");
 module.exports = {
   // 获取玩家信息
@@ -51,7 +51,7 @@ module.exports = {
     });
   },
   // 计算角色属性
-  computeRoleAttr: function (req, res, results,update) {
+  computeRoleAttr: function (req, res, results, update) {
     try {
       const { base_pool, addition_pool, buff_pool } = results;
       const basePool = JSON.parse(base_pool);
@@ -94,7 +94,7 @@ module.exports = {
       // 计算基础属性
       this.computeBaseAttr(attr, basePool);
       // 计算buff属性
-      const buff = this.computeRoleBuff(req, attr, buffPool,update);
+      const buff = this.computeRoleBuff(req, attr, buffPool, update);
       // 计算非时间限制属性: 装备,宠物,称号,技能,等
       Object.keys(addition).forEach((key) => {
         if (key === 'life' || key === 'mana') {
@@ -139,7 +139,7 @@ module.exports = {
 
   },
   // 计算角色buff
-  computeRoleBuff: function (req, attr, buffPool,update) {
+  computeRoleBuff: function (req, attr, buffPool, update) {
     const { pellet = {}, vip = {}, } = buffPool;
     const expireple = Object.keys(pellet);
     const expireVip = Object.keys(vip);
@@ -235,20 +235,19 @@ module.exports = {
           case 1:
           case 4:
           case 7:
-            base = atk;
+            base = { ...atk };
             break;
           case 2:
           case 5:
           case 8:
-            base = def;
+            base = { ...def };
             break;
           default:
-            base = agile;
+            base = { ...agile };
         }
         Object.keys(base).forEach(key => {
           base[key] *= attr * role_level;
         })
-
         // 计算升级经验
         switch (parseInt(role_level / 10)) {
           case 0:
@@ -276,7 +275,7 @@ module.exports = {
 
       }
       const update = {
-        role_exp: `${oldExp}/${upExp}`,
+        role_exp: `${current}/${upExp}`,
         role_level,
       }
       if (base) {
