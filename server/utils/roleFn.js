@@ -1,7 +1,5 @@
 const mysql = require("../mysql");
 const errorFn = require("./errorFn");
-// const fightFn = require("./fightFn");
-// const pulic = require("./pulic");
 const { realm: Realm } = require("../table/realm");
 const { roleAttr: RoleAttr } = require("../table/attribute");
 const Global = require("../global");

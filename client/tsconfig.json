@@ -46,9 +46,12 @@
     "paths": {
       // 路径映射，相对于baseUrl
       "@utils/*": ["src/utils/*"],
+      "@utils": ["src/utils/index"],
       "@request": ["src/cgi/request"],
       "@cgi/*": ["./src/cgi/*"],
+      "@cgi": ["./src/cgi/index"],
       "@page/*": ["./src/page/*"],
+      "@components": ["./src/components/index"],
       "@components/*": ["./src/components/*"],
       "@model": ["./src/model/index"]
     },

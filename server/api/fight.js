@@ -195,7 +195,7 @@ router.post("/fightDir", async (req, res) => {
     // 指令结束,更新战斗池
     Global.fightLoop.fightMap[fightId]['player'] = player;
     Global.fightLoop.fightMap[fightId]['buffs'] = buffs;
-    Global.fightLoop.fightMap[fightId]['rival'] = rival;
+    Global.fightLoop.fightMap[fightId]['rival'] = rival.filter(({ attr }) => attr.life > 0);
     // 战斗结束
     if (fightRes.statu !== 0) {
         // 释放战斗池,更新背包

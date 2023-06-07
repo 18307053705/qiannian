@@ -12,7 +12,6 @@ export const Tab = ({ list = [], onCheng, currentKey }: TabType) => {
     }
     const [current, setCurrent] = useState(currentKey);
     useEffect(() => {
-        console.log('执行')
         onCheng && onCheng(current);
     }, [current])
     return (

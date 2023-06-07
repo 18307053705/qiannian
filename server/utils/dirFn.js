@@ -130,11 +130,11 @@ module.exports = {
     let path = '';
     // 怪物元素，进入战斗界面
     if (type === 5) {
-      fightFn.creatFight(req, res).then(()=>{
+      fightFn.creatFight(req, res).then(() => {
         res.send({
           code: 0,
           data: {
-            path:'/fight'
+            path: '/fight'
           }
         });
       })
@@ -147,7 +147,8 @@ module.exports = {
     res.send({
       code: 0,
       data: {
-        path: path || dir
+        path: path || dir,
+        ext: dirInfo['ext']
       }
     });
   }

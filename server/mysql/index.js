@@ -86,8 +86,31 @@ function asyncQuery(queryString, callback, sqlInfo = {}) {
 
 }
 
+function asyncAdd(queryString, data, sqlInfo = {}) {
+  return new Promise((resolve) => {
+    const connecttion = mysql.createConnection({
+      ...SQL_INFO,
+      sqlInfo
+    });
+    //  数据库信息
+    connecttion.connect();
+    // 查询数据
+    connecttion.query(queryString, data, (err, results, fields) => {
+      if (err) {
+        throw err;
+      }
+
+      // 关闭连接
+      connecttion.end();
+      resolve({ results, fields })
+    });
+  })
+
+}
+
 module.exports = {
   sqlQuery,
   sqlAdd,
-  asyncQuery
+  asyncQuery,
+  asyncAdd
 };

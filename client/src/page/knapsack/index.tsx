@@ -47,9 +47,9 @@ const namehandel = (n, p, ext) => {
 
 const ACTIVE_TYPE = {
     1: '使用',
-    2: '出售',
-    3: '入库',
-    4: '出库',
+    2: '入库',
+    3: '取出',
+    4: '出售',
 }
 
 const knapsack = ({ history }) => {
@@ -63,15 +63,18 @@ const knapsack = ({ history }) => {
     useEffect(() => {
         const { state } = history.location;
         setType(state.type);
-        getKnapsack().then(({ data }) => {
+        getKnapsack({type:state.type}).then(({ data }) => {
             setKnapsack(data);
         });
     }, [])
 
+    useEffect(() => {
+        setTable(tabelConfig);
+    }, [current])
+
     const { list, tael, yuanbao } = knapsack;
     const data = useMemo(() => {
         // 初始化表格配置
-        setTable(tabelConfig);
         setActive(null);
         const data: any = [];
         if (current === 0) {
@@ -160,7 +163,7 @@ const knapsack = ({ history }) => {
                     total ? tList.map(({ id, n, p, s, ext, in_x }, index) => {
                         return (
                             <div key={index}>
-                                <span className="g_u">
+                                <span className="g_u" onClick={() => { history.push('/knapsackDetail', { id, in_x, p, type }) }}>
                                     <span>{index + (page * size) + 1}. {namehandel(n, p, ext)} x {s}</span>
                                 </span>
                                 <span className="g_u"><span onClick={() => { activeClick(id, in_x, s, p) }}>{ACTIVE_TYPE[type]}</span></span>

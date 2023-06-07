@@ -74,7 +74,7 @@ module.exports = {
                         for (let i = 0; i < len; i++) {
                             const { id, p } = data[i];
                             // Id存在战斗设置中,且为消耗品
-                            if (knapasackId[id] && p === 1) {
+                            if (knapasackId[id] && p == 1) {
                                 fight[knapasackId[id]['index']] = {
                                     ...data[i],
                                     p2: 2
@@ -90,6 +90,16 @@ module.exports = {
 
 
                     }
+                }
+                // 还存在的物品为消耗殆尽
+                if (JSON.stringify(knapasackId) !== "{}") {
+                    Object.keys(knapasackId).forEach((key) => {
+                        fight[knapasackId[key]['index']] = {
+                            ...fight[knapasackId[key]['index']],
+                            s: 0
+                        }
+                    })
+
                 }
                 // 更新角色信息
                 if (update) {
@@ -159,7 +169,7 @@ module.exports = {
         const rival = [];
         for (num; 0 < num; num--) {
             rival.push({
-                attr: attrs,
+                attr: { ...attrs },
                 name
             })
         }
@@ -265,7 +275,6 @@ module.exports = {
             isHit = Math.floor(Math.random() * (100 - 1)) + 1 > rate;
         }
         if (isHit) {
-
             let dps = (atk - dfs) * (rise / 100);
             let rate = 10;
             let sudden = 100;
@@ -324,10 +333,9 @@ module.exports = {
         }
         // 计算玩家对怪物的伤害
         const playerDps = this.computeDps(playerAttr, rivalAttr, info);
-        const life = rival[0]['attr']['life'] - playerDps.dps;
-        rival[0]['attr']['life'] = life;
+        rival[0]['attr']['life'] -= playerDps.dps;
         // 判断怪物是否死亡，死亡则不记录伤害
-        if (life > 0) {
+        if (rival[0]['attr']['life'] > 0) {
             dpsList.push(playerDps.dps);
         }
         // 将死亡怪物清除
@@ -480,6 +488,9 @@ module.exports = {
                         data[index]['s'] += num;
                         textReward.push(`${n}x${num}`)
                         delete artReward[id];
+                    } else {
+                        artReward[id]['num2'] = data[index]['s'] + num - 999999;
+                        data[index]['s'] = 999999;
                     }
                 }
                 // 全部处理完,结束循环
@@ -491,8 +502,8 @@ module.exports = {
             //  遍历结束还存在物品奖励，说明物品为新增
             Object.keys(artReward).forEach(key => {
                 if (!data[Knapsack.size]) {
-                    const { id, type, n, num = 1 } = artReward[key];
-                    data.push({ id, n, p: type, s: num });
+                    const { id, type, n, num = 1, num2 } = artReward[key];
+                    data.push({ id, n, p: type, s: num2 || num });
                     textReward.push(`${n}x${num}`);
                     delete artReward[key];
                 }
@@ -509,12 +520,36 @@ module.exports = {
                 }
             })
         }
+        // 获取人物buff
+        const role = await roleFn.getRoleInfo(req, res);
+        const buffPool = JSON.parse(role.buff_pool)
+        const { vip = {} } = buffPool;
+        let vipExp = 0;
+        if (vip['exp2']) {
+            vipExp += 2
+        }
+        if (vip['exp3']) {
+            vipExp += 3
+        }
+        if (vip['exp5']) {
+            vipExp += 5
+        }
+        let vipTael = 0;
+        if (vip['money2']) {
+            vipTael += 2
+        }
+        if (vip['money3']) {
+            vipTael += 3
+        }
+        if (vip['money5']) {
+            vipTael += 5
+        }
         // 物品可叠加
         const { level, arrt, boss, exps = 0, taels = 0 } = ext;
         // 经验
-        const exp = exps || level * (parseInt(arrt / 10) || 1) * (boss ? 1000 : 1);
+        const exp = (exps || level * (parseInt(arrt / 10) || 1) * (boss ? 1000 : 1)) * (vipExp || 1);
         // 银两
-        const tael = taels || exp < 100 ? exp : exp / 100;
+        const tael = (taels || exp < 100 ? exp : exp / 100) * (vipTael || 1);
         // 更新背包
         roleFn.updateKnapsack(req, { data: JSON.stringify(data), tael: knapsack.tael - 0 + tael * freak.num });
         // 更新角色经验等级
@@ -523,11 +558,10 @@ module.exports = {
             code: 0,
             data: {
                 statu: 1,
-                data,
                 freak: {
                     name,
-                    exp: exp * freak.num,
-                    tael: tael * freak.num,
+                    exp: vipExp ? `${exp * freak.num}(${vipExp}倍经验)` : exp * freak.num,
+                    tael: vipTael ? `${tael * freak.num}(${vipTael}倍银两)` : tael * freak.num,
                     article: textReward.join(','),
                     tip: JSON.stringify(artReward) !== '{}' || JSON.stringify(equipReward) !== '{}' ? '背包已满,请注意清理。' : ''
                 },

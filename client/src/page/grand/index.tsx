@@ -15,8 +15,8 @@ const Grand = ({ history }) => {
     }, [])
     const dirClick = useCallback((dir) => {
         moveDir({ dir }).then(({ data }: any) => {
-            const { path } = data;
-            path ? window.location.pathname = path : setGrandInfo(data);
+            const { path, ext } = data;
+            path ? history.push(path, {...ext}) : setGrandInfo(data);
         })
     }, [])
     return (

@@ -43,7 +43,8 @@ const ELEMENT_2 = {
   2000003: {
     id: 2000003,
     name: "店铺",
-    type: 2
+    type: 2,
+    dir: '/shopping',
   },
   2000004: {
     id: 2000004,
@@ -53,7 +54,11 @@ const ELEMENT_2 = {
   2000005: {
     id: 2000005,
     name: "仓库",
-    type: 2
+    type: 2,
+    dir: '/warehouse',
+    ext: {
+      type: 3
+    }
   }
 };
 
@@ -141,7 +146,57 @@ const ELEMENT_5 = {
       career: 1,
       level: 100,
       attr: 5
-    }
+    },
+    article: [
+      {
+        ...Knapsack[5],
+        num: 5,
+      },
+      {
+        ...Knapsack[6],
+        num: 5,
+      },
+      {
+        ...Knapsack[7],
+        num: 5,
+      },
+      {
+        ...Knapsack[8],
+        num: 5,
+      },
+      {
+        ...Knapsack[9],
+        num: 5,
+      },
+      {
+        ...Knapsack[10],
+        num: 5,
+      },
+      {
+        ...Knapsack[11],
+        num: 5,
+      },
+      {
+        ...Knapsack[12],
+        num: 5,
+      },
+      {
+        ...Knapsack[13],
+        num: 5,
+      },
+      {
+        ...Knapsack[14],
+        num: 5,
+      },
+      {
+        ...Knapsack[15],
+        num: 5,
+      },
+      {
+        ...Knapsack[16],
+        num: 5,
+      },
+    ]
   },
   5000002: {
     id: 5000002,
@@ -158,10 +213,8 @@ const ELEMENT_5 = {
         num: 5,
       },
       Knapsack[2],
-      {
-        ...Equip[6],
-        rate: 100
-      },
+      Equip[120],
+      Equip[121],
     ]
   },
   5000003: {

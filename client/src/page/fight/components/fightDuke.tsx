@@ -33,7 +33,7 @@ const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
                     fightInfo.rival.map(({ attr, name }, index) => (
                         <div key={index}>
                             <span className="g_b">{name}(命)</span>：<span>{`${attr.life}/${attr.life_max}`}</span>
-                            {player.dpslist && <span>[-{player.dpslist[index]}]</span>}
+                            {player.dpslist && <span>{player.dpslist[index] ? `[-${player.dpslist[index]}]` : ''}</span>}
                         </div>
                     ))
                 }
@@ -46,7 +46,7 @@ const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
                         <div key={index}>
                             <div>
                                 <span className="g_b">{name}(命)</span>：<span>{`${attr.life}/${attr.life_max}`}</span>
-                                {rival.dpslist && <span>[-{rival.dpslist[0]}]</span>}
+                                {rival.dpslist && <span>{rival.dpslist[index] ? `[-${rival.dpslist[0]}]` : ''}</span>}
                             </div>
                             <div><span className="g_b">{name}(法)</span>：<span>{`${attr.mana}/${attr.mana_max}`}</span></div>
                         </div>

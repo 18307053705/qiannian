@@ -1,5 +1,5 @@
 import React from "react";
-import { getEquipName } from '@utils/equip'
+import { getEquipName } from '@utils/equip';
 const RoleAttr = ({ roleInfo }) => {
     const { attr, socialize_pool, equip_pool } = roleInfo;
     const socialize = socialize_pool ? JSON.parse(socialize_pool) : {};

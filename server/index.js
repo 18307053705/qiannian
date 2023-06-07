@@ -65,6 +65,7 @@ app.use("/api/knapsack", require("./api/knapsack"));
 app.use("/api/player", require("./api/player"));
 app.use("/api/friends", require("./api/friends"));
 app.use("/api/socialize", require("./api/socialize"));
+app.use("/api/shopping", require("./api/shopping"));
 
 // 全局捕获异常
 app.use(errorFn.globalError);
