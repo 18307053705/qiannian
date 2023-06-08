@@ -84,8 +84,7 @@ export const getEquipInfo = equip => {
   const [_, __, ...gem] = ext.split("_");
   // 解析宝石
   const gemList: any[] = [];
-  gem.forEach(itmes => {
-    let itme = "11";
+  gem.forEach(itme => {
     if (itme !== "0") {
       const type = itme.substr(itme.length - 1);
       const level = itme.substr(0, itme.length - 1);

@@ -13,21 +13,12 @@ const namehandel = (n, p, ext) => {
 const ArticleList = ({ history, data, roleId, updataDetail }) => {
     const [error, setError] = useState('')
     const [in_x, setInX]: any = useState();
-    const [list, setList]: any[] = useState([]);
-
-    useEffect(() => {
-        getKnapsack({ type: 1 }).then(({ data }) => {
-            setList(data.list);
-        })
-    }, [])
-
-
     const activeClick = (itme, index) => {
         setError('');
         // 下架
         if (!roleId) {
             grounding({ in_x: index, type: 1, active: 2 }).then((res) => {
-                updataDetail()
+                updataDetail();
             })
             return;
         }
@@ -54,6 +45,7 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
     )
 
     const submit = (num, index=0) => {
+        
         purchase({
             type: 1,
             role_id: roleId,
@@ -63,15 +55,15 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
             if (message) {
                 setError(message);
             } else {
-                setInX(-1);
-                updataDetail()
+                updataDetail();
+                setInX(0)
             }
         })
     }
     return (
         <div>
             {error && <div style={{ color: 'red' }}>提示：{error}</div>}
-            {in_x  && <Input submit={submit} label='物品数量' type='number' />}
+            {in_x  ?  <Input submit={submit} label='物品数量' type='number' /> : ''}
             <List data={data} prefix={prefix} active={active} />
             <div></div>
         </div>

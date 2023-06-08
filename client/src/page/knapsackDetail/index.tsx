@@ -24,14 +24,14 @@ const knapsackDetail = ({ history }) => {
             {
                 equip && (
                     <div>
-                        <div style={{ textIndent: '1em' }}>{getEquipName(equip.ext, equip.n)}</div>
+                        <div> {getEquipName(equip.ext, equip.n)}</div>
                         {
                             Object.keys(equip.attr).map((key) => (<div key={key}><span className="g_b">{key}</span>：<span>{equip.attr[key]}</span></div>))
                         }
                         <div><span className="g_b">等级</span>：<span>{equip.level}</span></div>
                         <div><span className="g_b">职业</span>：<span>{equipInfo.careerName}</span></div>
                         <div>
-                            <span className="g_b">镶嵌</span>：<span>{equipInfo.gemList.length ? equipInfo.gemList.map(({ level }) => level) : ''}</span>
+                            <span className="g_b">镶嵌</span>：<span>{equipInfo.gemList.length ? equipInfo.gemList.map(({ level }) => level) : '无'}</span>
                         </div>
                         <div><span className="g_b">简介</span>：<span>{equip.tips}</span></div>
                     </div>
@@ -49,7 +49,7 @@ const knapsackDetail = ({ history }) => {
             }
             =========================
             <div><span className="g_u_end" onClick={() => { history.goBack() }}>返回上页</span></div>
-            <div><span onClick={backGrand} className="g_b">返回游戏</span></div>
+            <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )
 

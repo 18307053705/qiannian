@@ -32,8 +32,9 @@ router.post("/create", async (req, res) => {
         })
         return;
     }
-    const shopSql = "insert into shop(user_id,role_id,name,pet,article) values(?,?,?,?,?)";
-    const shopData = [user, role.id, name, '{}', '[]'];
+
+    const shopSql = "insert into shop(user_id,role_id,name,pet,article,date,role_name) values(?,?,?,?,?)";
+    const shopData = [user, role.id, name, '{}', '[]',new Date() *1,role.name];
     await mysql.asyncAdd(shopSql, shopData);
     await knapsackFn.updateKnapsack(req, {
         tael: tael - 500000
@@ -202,7 +203,7 @@ router.post("/grounding", async (req, res) => {
 // 购买 type: 1 物品 2 宠物
 router.post("/purchase", async (req, res) => {
     const { type, in_x, s, role_id } = req.body;
-    if (!(type && in_x && s && role_id)) {
+    if (!(type && in_x !== undefined && s && role_id)) {
         res.send({
             code: 100005,
             message: '参数有误'
@@ -229,6 +230,8 @@ router.post("/purchase", async (req, res) => {
             })
             return;
         }
+
+
         const price = s * article[in_x]['price'];
 
         if (tael < price) {
@@ -240,32 +243,30 @@ router.post("/purchase", async (req, res) => {
         }
 
         const info = article[in_x];
-        const length = data.length - 1;
-        let rema = 0;
-        for (let index = 0; index < length; index++) {
-            const itme = data[index];
-            if (itme.p === info.p && itme.id === info.id && itme.s <= KnapsackTable.Maxs) {
-                index = length;
-                data[index]['s'] = itme.s + s;
-                if (data[index]['s'] > KnapsackTable.Maxs) {
-                    data[index]['s'] = KnapsackTable.Maxs;
-                    s -= itme.s;
-                    article[in_x]['s'] -= s;
-                } else {
-                    s = 0;
+        const length = data.length;
+        let rema = s;
+        if (info.p != 3) {
+            for (let index = 0; index < length; index++) {
+                const itme = data[index];
+                if (itme.p === info.p && itme.id === info.id && itme.s < KnapsackTable.Maxs) {
+                    if (itme.s + rema > KnapsackTable.Maxs) {
+                        data[index]['s'] = KnapsackTable.Maxs;
+                        rema = itme.s + rema - KnapsackTable.Maxs;
+                    } else {
+                        data[index]['s'] += rema;
+                        rema = 0;
+                    }
+                    index = length;
                 }
             }
         }
-
-        if (s != 0) {
+        if (rema) {
             data.push({
                 ...info,
-                s
+                s: rema
             })
         }
-        console.log(article, 'article...');
-
-
+        article[in_x]['s'] -= s;
         if (!article[in_x]['s']) {
             article.splice(in_x, 1);
         }
@@ -275,7 +276,6 @@ router.post("/purchase", async (req, res) => {
         const { tael: tael_t } = await knapsackFn.getKnapsackInfo(req, 1, role_id);
         // 扣除20%手续费
         await knapsackFn.updateKnapsack(req, { tael: tael_t + parseInt(price * 0.8) }, role_id);
-
         res.send({
             code: 0,
             data: article

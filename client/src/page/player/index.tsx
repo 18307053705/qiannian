@@ -9,8 +9,8 @@ const Plater = ({ history }) => {
     const { attr, socialize_pool, equip_pool } = roleInfo;
     const socialize = socialize_pool ? JSON.parse(socialize_pool) : {};
     const equip = equip_pool ? JSON.parse(equip_pool) : {};
+    const { state } = history.location;
     useEffect(() => {
-        const { state } = history.location;
         getRoleInfo({ role_id: state.role_id }).then(({ data }) => {
             setRoleInfo(data);
         })
@@ -22,8 +22,6 @@ const Plater = ({ history }) => {
     }, [])
 
     const applyClick = useCallback(() => {
-        const { state } = history.location;
-        console.log(state.role_id);
         playerApply({ role_id: state.role_id, role_name: state.role_name })
     }, [])
 
@@ -33,7 +31,7 @@ const Plater = ({ history }) => {
 
                 <div>
                     <span className="g_u"><span>私聊</span></span>
-                    <span className="g_u"><span>店铺</span></span>
+                    <span className="g_u"><span onClick={() => { history.push('/shopping', { role_id: state.role_id }) }}>店铺</span></span>
                     <span className="g_u"><span>赠送</span></span>
                     {!isFriend && <span className="g_u"><span onClick={applyClick}>加好友</span></span>}
                 </div>

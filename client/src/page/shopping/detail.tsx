@@ -30,14 +30,37 @@ export const DetailShop = ({ setKey, info, setInfo, roleId }) => {
                     </div>
                 ) : (
                         <div>
-                            <div><span className="g_u_end" onClick={() => { setKey('articleList') }}>9件货物</span></div>
-                            <div><span className="g_u_end">9只宠物</span></div>
+                            {
+                                info.article.length ? (
+                                    <div>
+                                        <span className="g_u_end" onClick={() => { setKey('articleList') }}>
+                                            {info.article.length}件货物
+                                        </span>
+                                    </div>
+                                ) : ''
+                            }
+                             {
+                                info.pet.length ? (
+                                    <div>
+                                        <span className="g_u_end" onClick={() => { setKey('articleList') }}>
+                                            {info.pet.length}只宠物
+                                        </span>
+                                    </div>
+                                ) : ''
+                            }
                             {
                                 !roleId && (
                                     <div>
-                                        <span className="g_u"><span onClick={() => { setKey('article') }}>物品上架</span></span>
-                                        <span className="g_u"><span onClick={() => { setKey('pet') }}>宠物上架</span></span>
+                                        <div>
+                                            <span className="g_u"><span onClick={() => { setKey('articleList') }}>物品下架</span></span>
+                                            <span className="g_u"><span onClick={() => { setKey('pet') }}>宠物下架</span></span>
+                                        </div>
+                                        <div>
+                                            <span className="g_u"><span onClick={() => { setKey('article') }}>物品上架</span></span>
+                                            <span className="g_u"><span onClick={() => { setKey('pet') }}>宠物上架</span></span>
+                                        </div>
                                     </div>
+
                                 )
                             }
                             <div>

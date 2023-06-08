@@ -33,6 +33,7 @@ router.post("/getRoleInfo", async (req, res) => {
     res.send({
       code: 0,
       data: {
+        role_id:results['role_id'],
         attr: data.attr,
         buff: data.buff,
         life: results['life'] > data.attr.life_max ? data.attr.life_max : results['life'],

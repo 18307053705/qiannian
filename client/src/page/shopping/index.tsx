@@ -12,27 +12,31 @@ import ArticleList from './articleList';
 type KeyType = 'detai' | 'shopList' | 'article' | 'pet' | 'articleList'
 
 export const Shopping = ({ history }) => {
+    const { state } = history.location;
     const [key, setKey] = useState<KeyType>('detai');
     const [info, setInfo] = useState();
-    const [roleId, setRoleId] = useState('');
+
+    const [roleId, setRoleId] = useState(state.role_id);
 
     const updataDetail = () => {
         getDetail({ role_id: roleId }).then(({ data }) => {
             setInfo(data);
         })
     }
+    const shopClick = (role_id) => {
+        setKey('detai');
+        setRoleId(role_id);
+    }
 
     useEffect(() => {
-        setKey('detai');
         updataDetail()
     }, [roleId])
-
     return (
         <div>
             {key === 'detai' && <DetailShop info={info} setInfo={setInfo} setKey={setKey} roleId={roleId} />}
-            {key === 'shopList' && <ShopList setRoleId={setRoleId} />}
+            {key === 'shopList' && <ShopList setRoleId={shopClick} />}
             {key === 'article' && <Article history={history} />}
-            {key === 'articleList' && <ArticleList history={history} data={info['article']} roleId={roleId} updataDetail={updataDetail}/>}
+            {key === 'articleList' && <ArticleList history={history} data={info['article']} roleId={roleId} updataDetail={updataDetail} />}
             <div>
                 {key === 'detai' && <span className="g_u_end" onClick={() => { setKey('shopList') }}>店铺列表</span>}
                 {key === 'shopList' && <span className="g_u_end" onClick={() => { setKey('detai'); setRoleId(''); }}>我的店铺</span>}
