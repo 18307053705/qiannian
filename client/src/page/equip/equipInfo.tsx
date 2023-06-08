@@ -23,12 +23,13 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">武器</span>：
                 {
                     equip.weapon ?
-                        <span
-                            style={{ color: '#00628c' }}
-                            onClick={() => {
-                                clickEquip('weapon')
-                            }}>
-                            {getEquipName(equip.weapon.ext, equip.weapon.name)}
+                        <span className="g_u">
+                            <span
+                                onClick={() => {
+                                    clickEquip('weapon')
+                                }}>
+                                {getEquipName(equip.weapon.ext, equip.weapon.name)}
+                            </span>
                         </span>
                         : <span >无</span>
                 }
@@ -38,12 +39,13 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">头盔</span>：
                 {
                     equip.helmet ?
-                        <span
-                            style={{ color: '#00628c' }}
-                            onClick={() => {
-                                clickEquip('helmet')
-                            }}>
-                            {getEquipName(equip.helmet.ext, equip.helmet.name)}
+                        <span className="g_u">
+                            <span
+                                onClick={() => {
+                                    clickEquip('helmet')
+                                }}>
+                                {getEquipName(equip.helmet.ext, equip.helmet.name)}
+                            </span>
                         </span>
                         : <span >无</span>
                 }
@@ -53,12 +55,13 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">衣服</span>：
                 {
                     equip.clothing ?
-                        <span
-                            style={{ color: '#00628c' }}
-                            onClick={() => {
-                                clickEquip('clothing')
-                            }}>
-                            {getEquipName(equip.clothing.ext, equip.clothing.name)}
+                        <span className="g_u">
+                            <span
+                                onClick={() => {
+                                    clickEquip('clothing')
+                                }}>
+                                {getEquipName(equip.clothing.ext, equip.clothing.name)}
+                            </span>
                         </span>
                         : <span >无</span>
                 }
@@ -68,12 +71,13 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">腰带</span>：
                 {
                     equip.belt ?
-                        <span
-                            style={{ color: '#00628c' }}
-                            onClick={() => {
-                                clickEquip('belt')
-                            }}>
-                            {getEquipName(equip.belt.ext, equip.belt.name)}
+                        <span className="g_u">
+                            <span
+                                onClick={() => {
+                                    clickEquip('belt')
+                                }}>
+                                {getEquipName(equip.belt.ext, equip.belt.name)}
+                            </span>
                         </span>
                         : <span >无</span>
                 }
@@ -83,12 +87,13 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">鞋子</span>：
                 {
                     equip.shoe ?
-                        <span
-                            style={{ color: '#00628c' }}
-                            onClick={() => {
-                                clickEquip('shoe')
-                            }}>
-                            {getEquipName(equip.shoe.ext, equip.shoe.name)}
+                        <span className="g_u">
+                            <span
+                                onClick={() => {
+                                    clickEquip('shoe')
+                                }}>
+                                {getEquipName(equip.shoe.ext, equip.shoe.name)}
+                            </span>
                         </span>
                         : <span >无</span>
                 }
@@ -98,12 +103,13 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">戒指</span>：
                 {
                     equip.ring ?
-                        <span
-                            style={{ color: '#00628c' }}
-                            onClick={() => {
-                                clickEquip('ring')
-                            }}>
-                            {getEquipName(equip.ring.ext, equip.ring.name)}
+                        <span className="g_u">
+                            <span
+                                onClick={() => {
+                                    clickEquip('ring')
+                                }}>
+                                {getEquipName(equip.ring.ext, equip.ring.name)}
+                            </span>
                         </span>
                         : <span >无</span>
                 }
@@ -113,12 +119,13 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">项链</span>：
                 {
                     equip.necklace ?
-                        <span
-                            style={{ color: '#00628c' }}
-                            onClick={() => {
-                                clickEquip('necklace')
-                            }}>
-                            {getEquipName(equip.necklace.ext, equip.necklace.name)}
+                        <span  className="g_u">
+                            <span
+                                onClick={() => {
+                                    clickEquip('necklace')
+                                }}>
+                                {getEquipName(equip.necklace.ext, equip.necklace.name)}
+                            </span>
                         </span>
                         : <span >无</span>
                 }
@@ -130,12 +137,13 @@ export const Equip = ({ pageCheng, history }) => {
                     <span className="g_b">法宝</span>：
                     {
                         equip.treasure1 ?
-                            <span
-                                style={{ color: '#00628c' }}
-                                onClick={() => {
-                                    clickEquip('treasure1')
-                                }}>
-                                {getEquipName(equip.treasure1.ext, equip.treasure1.name)}
+                            <span className="g_u">
+                                <span
+                                    onClick={() => {
+                                        clickEquip('treasure1')
+                                    }}>
+                                    {getEquipName(equip.treasure1.ext, equip.treasure1.name)}
+                                </span>
                             </span>
                             : <span >无</span>
                     }
@@ -147,12 +155,13 @@ export const Equip = ({ pageCheng, history }) => {
                     <span className="g_b">法宝</span>：
                     {
                         equip.treasure2 ?
-                            <span
-                                style={{ color: '#00628c' }}
-                                onClick={() => {
-                                    clickEquip('treasure2')
-                                }}>
-                                {getEquipName(equip.treasure2.ext, equip.treasure2.name)}
+                            <span className="g_u">
+                                <span
+                                    onClick={() => {
+                                        clickEquip('treasure2')
+                                    }}>
+                                    {getEquipName(equip.treasure2.ext, equip.treasure2.name)}
+                                </span>
                             </span>
                             : <span >无</span>
                     }
@@ -164,12 +173,13 @@ export const Equip = ({ pageCheng, history }) => {
                     <span className="g_b">法宝</span>：
                     {
                         equip.treasure3 ?
-                            <span
-                                style={{ color: '#00628c' }}
-                                onClick={() => {
-                                    clickEquip('treasure3')
-                                }}>
-                                {getEquipName(equip.treasure3.ext, equip.treasure3.name)}
+                            <span className="g_u">
+                                <span
+                                    onClick={() => {
+                                        clickEquip('treasure3')
+                                    }}>
+                                    {getEquipName(equip.treasure3.ext, equip.treasure3.name)}
+                                </span>
                             </span>
                             : <span >无</span>
                     }
@@ -181,12 +191,13 @@ export const Equip = ({ pageCheng, history }) => {
                     <span className="g_b">法宝</span>：
                     {
                         equip.treasure4 ?
-                            <span
-                                style={{ color: '#00628c' }}
-                                onClick={() => {
-                                    clickEquip('treasure4')
-                                }}>
-                                {getEquipName(equip.treasure4.ext, equip.treasure4.name)}
+                            <span className="g_u">
+                                <span
+                                    onClick={() => {
+                                        clickEquip('treasure4')
+                                    }}>
+                                    {getEquipName(equip.treasure4.ext, equip.treasure4.name)}
+                                </span>
                             </span>
                             : <span >无</span>
                     }

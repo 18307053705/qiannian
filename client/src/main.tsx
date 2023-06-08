@@ -4,7 +4,7 @@ import { ModelContext } from '@model';
 import Root from './router';
 
 import './global.less';
-
+import 'lib-flexible';
 ReactDOM.render(
     <ModelContext>
        <Root />

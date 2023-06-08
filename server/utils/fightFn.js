@@ -484,13 +484,13 @@ module.exports = {
                 if (artReward[id] && artReward[id].type == p) {
                     const { num = 1, n } = artReward[id];
                     // 找到对应id,判断是否可以继续叠加
-                    if (s + num <= 999999) {
+                    if (s + num <= KnapsackTable.Maxs) {
                         data[index]['s'] += num;
                         textReward.push(`${n}x${num}`)
                         delete artReward[id];
                     } else {
-                        artReward[id]['num2'] = data[index]['s'] + num - 999999;
-                        data[index]['s'] = 999999;
+                        artReward[id]['num2'] = data[index]['s'] + num - KnapsackTable.Maxs;
+                        data[index]['s'] = KnapsackTable.Maxs;
                     }
                 }
                 // 全部处理完,结束循环

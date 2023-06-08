@@ -11,7 +11,7 @@ export const EquipList = ({ pageCheng, posInfo,history }) => {
 
     }, [])
     const prefix = (itme, index) => {
-        return (<span>{index}.{getEquipName(itme.ext, itme.n)}</span>)
+        return (<span className='g_u'><span>{index}.{getEquipName(itme.ext, itme.n)}</span></span>)
     }
     const active = (itme) => {
         return (

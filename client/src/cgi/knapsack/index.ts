@@ -22,8 +22,14 @@ export const initKnapsack: KnapsackType = {
   list: []
 };
 
+type KnapsackReq = {
+  type?: number;
+};
+
 //获取背包信息
-export async function getKnapsack(data): Promise<{ data: KnapsackType }> {
+export async function getKnapsack(
+  data: KnapsackReq = {}
+): Promise<{ data: KnapsackType }> {
   return await post(getKnapsackUrl, data);
 }
 

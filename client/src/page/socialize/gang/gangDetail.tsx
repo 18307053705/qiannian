@@ -32,7 +32,7 @@ export const GangDetail = ({ history, socialize }) => {
         return <div>
             <div className="g_empty">暂无帮会</div>
             <div className='g_b' onClick={() => { history.push('/createSocialize', { type: 1 }) }}>创建帮会</div>
-            <Input />
+            {/* <Input /> */}
             {/* <input
                 type="text"
                 value={value}

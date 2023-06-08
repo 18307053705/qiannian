@@ -134,7 +134,6 @@ router.post("/operate", async (req, res) => {
                 attr[key] += effect[key] * s;
             });
             data[in_x]['s'] -= s;
-
             if (!data[in_x]['s']) {
                 data.splice(in_x, 1);
             }
@@ -267,9 +266,9 @@ router.post("/operate", async (req, res) => {
             if (p !== 3) {
                 wareData.forEach((itme) => {
                     if (itme.id === id && itme.p === p) {
-                        if (addNum + itme.s > 999999) {
-                            itme.s = 999999;
-                            addNum = addNum + itme.s - 999999;
+                        if (addNum + itme.s > KnapsackTable.Maxs) {
+                            itme.s = KnapsackTable.Maxs;
+                            addNum = addNum + itme.s - KnapsackTable.Maxs;
                         } else {
                             itme.s += addNum;
                             isAdd = false;
@@ -305,9 +304,9 @@ router.post("/operate", async (req, res) => {
             if (p !== 3) {
                 knaData.forEach((itme) => {
                     if (itme.id === id && itme.p === p) {
-                        if (addNum + itme.s > 999999) {
-                            itme.s = 999999;
-                            addNum = addNum + itme.s - 999999;
+                        if (addNum + itme.s > KnapsackTable.Maxs) {
+                            itme.s = KnapsackTable.Maxs;
+                            addNum = addNum + itme.s - KnapsackTable.Maxs;
                         } else {
                             itme.s += addNum;
                             isAdd = false;

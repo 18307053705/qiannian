@@ -1,5 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { getFightDri, setFightDir } from '@cgi/fight';
+import { Tab } from '@components/index';
+
+const list = [
+    { value: 1, label: '技能' },
+    { value: 2, label: '药品' },
+]
+
 const FightSet = ({ dirClick, art }) => {
     const [dirList, setDirList] = useState({ art: [], drug: [] });
     const [type, setType] = useState(0);
@@ -9,10 +16,10 @@ const FightSet = ({ dirClick, art }) => {
         setIndex(i);
         setType(1);
         getFightDri().then(({ data }) => {
-            setDirList(data); 
+            setDirList(data);
         })
     }, [])
-    const setClick = useCallback((id, type,index) => {
+    const setClick = useCallback((id, type, index) => {
         console.log(id, type)
         setFightDir({ dir: id, type, index }).then(({ data }) => {
             setArtlist(data);
@@ -28,20 +35,13 @@ const FightSet = ({ dirClick, art }) => {
                         <span>{name}</span>
                         <span className="g_u_end" onClick={() => { chengClick(index) }}>更换</span>
                     </div>
-                )) : (
-                        <div>
-                            <span className={type === 1 ? 'g_u_s_d' : 'g_u_s'}>
-                                <span onClick={() => { setType(1) }}>技能</span>
-                            </span>
-                            <span className={type === 2 ? 'g_u_end_d' : 'g_u_end'} onClick={() => { setType(2) }}><span>药品</span></span>
-                        </div>
-                    )
+                )) : (<Tab currentKey={type} onCheng={setType} list={list} />)
             }
             {
                 type === 1 && dirList.art.map(({ id, name }) => (
                     <div key={id}>
                         <span>{name}</span>
-                        <span className="g_u_end" onClick={() => { setClick(id, 1,index) }}>设置</span>
+                        <span className="g_u_end" onClick={() => { setClick(id, 1, index) }}>设置</span>
                     </div>
                 ))
             }
@@ -49,7 +49,7 @@ const FightSet = ({ dirClick, art }) => {
                 type === 2 && dirList.drug.map(({ id, name }) => (
                     <div key={id}>
                         <span>{name}</span>
-                        <span className="g_u_end" onClick={() => { setClick(id, 2,index) }}>设置</span>
+                        <span className="g_u_end" onClick={() => { setClick(id, 2, index) }}>设置</span>
                     </div>
                 ))
             }

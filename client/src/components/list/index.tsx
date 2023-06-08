@@ -3,9 +3,9 @@ import Style from './index.less';
 type ListType = {
     data: any[],
     onCheng?: (page, size) => void;
-    prefix: (itme: any, index) => any;
+    prefix: (itme: any, in_x, index) => any;
     prefix_d?: boolean;
-    active?: (itme: any, index) => any;
+    active?: (itme: any, in_x) => any;
 }
 
 export const List = ({ data = [], onCheng, prefix, active, prefix_d }: ListType) => {
@@ -23,7 +23,7 @@ export const List = ({ data = [], onCheng, prefix, active, prefix_d }: ListType)
                 total ? list.map((itme, index) => {
                     return (
                         <div className={Style.row} key={index}>
-                            <span className={prefix_d ? 'g_u' :"g_u_d"}>{prefix(itme, index + (page * size) + 1)}</span>
+                            {prefix(itme, index + (page * size) + 1, index)}
                             <span className="g_u">{active && active(itme, index + (page * size) + 1)}</span>
                         </div>
                     )

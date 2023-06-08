@@ -41,6 +41,7 @@ export async function request(
     if (request.status === 200 && res.data.code === 0) {
       return res.data;
     } else if (res.data.code === 100000) {
+      
       // 登录异常跳转登录页
       goLogin();
     } else if (res.data.code === 100007 || res.data.code === 100006) {

@@ -5,56 +5,39 @@ import { getShopList, createShop, getDetail } from '@cgi/shopping';
 import { backGrand } from '@utils/grand'
 
 import DetailShop from './detail';
+import ShopList from './shopList';
+import Article from './article';
+import ArticleList from './articleList';
 
-const list = [
-    { value: 1, label: '我的店铺' },
-    { value: 2, label: '店铺列表' },
-]
+type KeyType = 'detai' | 'shopList' | 'article' | 'pet' | 'articleList'
+
 export const Shopping = ({ history }) => {
-    const [error, setError] = useState('')
-    const [key, setKey] = useState(1);
+    const [key, setKey] = useState<KeyType>('detai');
     const [info, setInfo] = useState();
-    const [shopList, setShopList] = useState([]);
-    useEffect(() => {
-        // 店铺详情
-        getDetail().then(({ data }) => {
-            setInfo(data)
-        })
-        // 店铺列表
-        getShopList().then(({ data }) => {
-            setShopList(data)
-        })
-    }, [])
+    const [roleId, setRoleId] = useState('');
 
-    const create = (name) => {
-        createShop({ name }).then(({ data, message }) => {
-            if (message) {
-                setError(message)
-            } else {
-                setError('')
-                setInfo(data)
-            }
+    const updataDetail = () => {
+        getDetail({ role_id: roleId }).then(({ data }) => {
+            setInfo(data);
         })
     }
 
+    useEffect(() => {
+        setKey('detai');
+        updataDetail()
+    }, [roleId])
+
     return (
         <div>
-            {error && <div style={{ color: 'red' }}>提示：{error}</div>}
-            <Tab list={list}
-                currentKey={key}
-                onCheng={(value) => {
-                    setError('')
-                    setKey(value);
-                }}
-            />
-            {
-                key === 1 ? <DetailShop history={history} info={info} create={create} />
-                    : <List
-                        data={shopList}
-                        prefix={(row, index) => (<span>{index}.{row.name}</span>)}
-                    />
-            }
-            <div><span className="g_b" onClick={backGrand}>返回游戏</span></div>
+            {key === 'detai' && <DetailShop info={info} setInfo={setInfo} setKey={setKey} roleId={roleId} />}
+            {key === 'shopList' && <ShopList setRoleId={setRoleId} />}
+            {key === 'article' && <Article history={history} />}
+            {key === 'articleList' && <ArticleList history={history} data={info['article']} roleId={roleId} updataDetail={updataDetail}/>}
+            <div>
+                {key === 'detai' && <span className="g_u_end" onClick={() => { setKey('shopList') }}>店铺列表</span>}
+                {key === 'shopList' && <span className="g_u_end" onClick={() => { setKey('detai'); setRoleId(''); }}>我的店铺</span>}
+            </div>
+            <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>
         </div>
     )
 

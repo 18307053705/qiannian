@@ -1,11 +1,12 @@
 const Global = require("../global");
 const mysql = require("../mysql");
+const KnapsackTable = require("../table/knapsack");
 module.exports = {
-    getKnapsackInfo: async function (req, type) {
+    getKnapsackInfo: async function (req, type, role_id) {
         const { role, user } = Global.getUserRole(req);
         // 背包
         if (type == 1 || type == 2 || type == 4 || type == 5) {
-            const { results } = await mysql.asyncQuery(`select * from knapsack  where user_id="${user}" and role_id="${role.id}"`);
+            const { results } = await mysql.asyncQuery(`select * from knapsack  where role_id="${role_id || role.id}"`);
             const data = JSON.parse(results[0].data);
             return {
                 ...results[0],
@@ -13,7 +14,7 @@ module.exports = {
             };
         }
         if (type == 3) {
-            const { results } = await mysql.asyncQuery(`select * from warehouse  where user_id="${user}" and role_id="${role.id}"`);
+            const { results } = await mysql.asyncQuery(`select * from warehouse  where role_id="${role_id || role.id}"`);
             const data = JSON.parse(results[0].data);
             return {
                 ...results[0],
@@ -22,13 +23,13 @@ module.exports = {
         }
     },
     // 更新背包
-    updateKnapsack: async function (req, data) {
+    updateKnapsack: async function (req, data, role_id) {
         const { role, user } = Global.getUserRole(req);
         const upData = [];
         Object.keys(data).forEach(key => {
             upData.push(`${key}='${data[key]}'`)
         })
-        const { results } = await mysql.asyncQuery(`update knapsack  SET ${upData.join(',')}  where user_id="${user}" and role_id="${role.id}"`);
+        const { results } = await mysql.asyncQuery(`update knapsack  SET ${upData.join(',')}  where  role_id="${role_id || role.id}"`);
         return results;
     },
     // 更新仓库
@@ -48,7 +49,7 @@ module.exports = {
             return '参数有误'
         }
         const itme = data[in_x];
-        if (itme && itme.id != id && itme.p != p && itme.s < s) {
+        if (itme && itme.id != id && itme.p != p && itme.s < s && s > KnapsackTable.Maxs) {
             return '物品信息有误'
         }
         return false;

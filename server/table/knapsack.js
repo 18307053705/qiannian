@@ -1,5 +1,6 @@
 // 技能类型type 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物
 module.exports = {
+    Maxs: 999999,
     size: 200,
     1: {
         id: 1,
@@ -92,7 +93,7 @@ module.exports = {
         n: '双倍银两卡',
         sell: 0,
         effect: {
-           money2: 1,
+            money2: 1,
         },
         tips: '使用后打怪可获得双倍银两,持续120分钟。',
     },
@@ -102,7 +103,7 @@ module.exports = {
         n: '三倍银两卡',
         sell: 0,
         effect: {
-           money3: 1,
+            money3: 1,
         },
         tips: '使用后打怪可获得三倍银两,持续120分钟。',
     },
@@ -112,7 +113,7 @@ module.exports = {
         n: '五倍银两卡',
         sell: 0,
         effect: {
-           money5: 1,
+            money5: 1,
         },
         tips: '使用后打怪可获得五倍银两,持续120分钟。',
     },
