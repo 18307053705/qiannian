@@ -47,6 +47,13 @@ module.exports = {
               ],
             },
           },
+          {
+            loader: "url-loader",
+            options: {
+              outputPath: 'js/',
+              // name: "js/",
+            },
+          }
         ],
       },
       // 处理less
@@ -64,7 +71,7 @@ module.exports = {
               }
             }
           },
-          
+
           {
             loader: 'px2rem-loader',
             options: {
@@ -74,7 +81,7 @@ module.exports = {
               remPrecision: 8
             }
           },
-          
+
           {
             loader: "less-loader",
             options: {
@@ -95,7 +102,7 @@ module.exports = {
           //     ]
           //   }
           // },
-          
+
         ],
       },
       // 处理css
