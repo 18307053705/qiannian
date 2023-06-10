@@ -39,7 +39,7 @@ export const DetailShop = ({ setKey, info, setInfo, roleId }) => {
                                     </div>
                                 ) : ''
                             }
-                             {
+                            {
                                 info.pet.length ? (
                                     <div>
                                         <span className="g_u_end" onClick={() => { setKey('articleList') }}>
@@ -51,16 +51,9 @@ export const DetailShop = ({ setKey, info, setInfo, roleId }) => {
                             {
                                 !roleId && (
                                     <div>
-                                        <div>
-                                            <span className="g_u"><span onClick={() => { setKey('articleList') }}>物品下架</span></span>
-                                            <span className="g_u"><span onClick={() => { setKey('pet') }}>宠物下架</span></span>
-                                        </div>
-                                        <div>
-                                            <span className="g_u"><span onClick={() => { setKey('article') }}>物品上架</span></span>
-                                            <span className="g_u"><span onClick={() => { setKey('pet') }}>宠物上架</span></span>
-                                        </div>
+                                        <span className="g_u"><span onClick={() => { setKey('article') }}>物品上架</span></span>
+                                        <span className="g_u"><span onClick={() => { setKey('pet') }}>宠物上架</span></span>
                                     </div>
-
                                 )
                             }
                             <div>

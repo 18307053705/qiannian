@@ -3,6 +3,7 @@ const Attribute = require("../table/attribute");
 const Knapsack = require('../table/knapsack');
 const Art = require("../table/art");
 const roleFn = require("../utils/roleFn");
+const taskFn = require('./taskFn');
 // 战斗相关api
 module.exports = {
     // 创建战斗
@@ -180,7 +181,7 @@ module.exports = {
     creatAttr: function (attr) {
         function random(max, min) {
             if (max && min) {
-                return Math.floor(Math.random() * (max - min)) + min;
+                return Math.floor(Math.random() * (max - min + 1)) + min;
             }
             return 0;
         }
@@ -554,6 +555,8 @@ module.exports = {
         roleFn.updateKnapsack(req, { data: JSON.stringify(data), tael: knapsack.tael - 0 + tael * freak.num });
         // 更新角色经验等级
         roleFn.computeRoleLevel(req, res, exp * freak.num);
+        // 监听任务池
+        taskFn.listenTask(req, freak.extDir, freak.num);
         res.send({
             code: 0,
             data: {

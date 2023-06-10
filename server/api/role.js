@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("../mysql");
 const roleFn = require("../utils/roleFn");
 const globalFn = require("../utils/globalFn");
+const taskFn = require("../utils/taskFn");
 const { roleAttr } = require("../table/attribute");
 const Global = require("../global");
 const { title } = require("../table/title");
@@ -33,7 +34,7 @@ router.post("/getRoleInfo", async (req, res) => {
     res.send({
       code: 0,
       data: {
-        role_id:results['role_id'],
+        role_id: results['role_id'],
         attr: data.attr,
         buff: data.buff,
         life: results['life'] > data.attr.life_max ? data.attr.life_max : results['life'],
@@ -69,6 +70,11 @@ router.post("/roleLogin", (req, res) => {
         await globalFn.roleExit(req, res);
         // 保存角色信息,并且记录登录时间
         Global.roleLoop[user] = { id: role_id, time: new Date() * 1, name: results[0].role_name };
+        // 不存在任务池，即代表今天第一次登录,初始化任务池
+        if (!Global.taskLoop[role_id]) {
+          await taskFn.initTack(results[0], role_id)
+        }
+        // 初始化任务
         res.send({
           code: 0,
           data: '角色选择成功'
@@ -112,8 +118,8 @@ router.post("/createRole", (req, res) => {
         const base_pool = {
           base: attr
         }
-        const roleSql = "insert into role(user_id,role_id,role_name,role_race,role_career,role_sex,role_level,role_exp,role_realm,role_title,life,mana,address,role_evil,role_signature,equip_pool,socialize_pool,skill_pool,base_pool,addition_pool,buff_pool,reputation_pool) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        const roleData = [user, role_id, role_name, role_race, role_career, role_sex == 1 ? '男' : '女', 1, '0/200', 1, 0, life, mana, '10000,0,0', 0, '', '{}', '{}', '{}', JSON.stringify(base_pool), '{}', '{}', '{}'];
+        const roleSql = "insert into role(user_id,role_id,role_name,role_race,role_career,role_sex,role_level,role_exp,role_realm,role_title,life,mana,address,role_evil,role_signature,equip_pool,socialize_pool,skill_pool,base_pool,addition_pool,buff_pool,reputation_pool,task_pool) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        const roleData = [user, role_id, role_name, role_race, role_career, role_sex == 1 ? '男' : '女', 1, '0/200', 1, 0, life, mana, '10000,0,0', 0, '', '{}', '{}', '{}', JSON.stringify(base_pool), '{}', '{}', '{}', '{"main":[{"id":1,"in_x":0}]}'];
         mysql.sqlAdd(roleSql, roleData, () => {
           //  背包
           const knapsackSql = "insert into knapsack(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";

@@ -82,6 +82,16 @@ export const config: RouterType[] = [
     name: "物品详情界面",
     path: "/knapsackDetail",
     component: lazy(() => import("@page/knapsackDetail"))
+  },
+  {
+    name: "任务界面",
+    path: "/task",
+    component: lazy(() => import("@page/task"))
+  },
+  {
+    name: "剧情界面",
+    path: "/scene",
+    component: lazy(() => import("@page/scene"))
   }
 ];
 

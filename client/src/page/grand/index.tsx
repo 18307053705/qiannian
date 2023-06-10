@@ -26,7 +26,7 @@ const Grand = ({ history }) => {
                 <span className="g_u"><span onClick={backGrand}>刷新</span></span>
                 <span className="g_u"><span>聊天</span></span>
                 <span className="g_u"><span onClick={() => { history.push('/friends') }}>好友</span></span>
-                <span className="g_u"><span>任务</span></span>
+                <span className="g_u"><span onClick={() => { history.push('/task') }}>任务</span></span>
                 <span className="g_u"><span>腾云</span></span>
             </div>
             {/* 地图元素 */}

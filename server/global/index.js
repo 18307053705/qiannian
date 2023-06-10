@@ -56,5 +56,10 @@ module.exports = {
       return true;
     }
   },
+  // 任务池,判断角色任务池
+  taskLoop: {
+    // key：角色id { main:[{id:1,in_x:0}],branch:[],money:[], world:[],chance:[],exploit:[]}
+  },
   // 临时聊天缓存
 };
+

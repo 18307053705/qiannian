@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { getKnapsack } from '@cgi/knapsack';
+import React, { useState } from "react";
 import { grounding, purchase } from '@cgi/shopping';
 import { getEquipName } from '@utils/equip'
 import { Input, List } from '@components';
-import { number } from "prop-types";
 const namehandel = (n, p, ext) => {
     if (p !== 3) {
         return n;
@@ -17,8 +15,13 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         setError('');
         // 下架
         if (!roleId) {
-            grounding({ in_x: index, type: 1, active: 2 }).then((res) => {
-                updataDetail();
+            grounding({ in_x: index - 1, type: 1, active: 2 }).then((message) => {
+                if (message) {
+                    setError(message);
+                } else {
+                    updataDetail();
+                }
+
             })
             return;
         }
@@ -30,7 +33,7 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         setInX(index)
     }
 
-    const prefix = ({ id, in_x, p, ext, s, n,price }, index) => (
+    const prefix = ({ id, in_x, p, ext, s, n, price }, index) => (
         <span className='g_u'>
             <span
                 onClick={() => {
@@ -44,8 +47,8 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         <span className='g_u_end' onClick={() => { activeClick(itme, index); }}>{roleId ? '购买' : '下架'}</span>
     )
 
-    const submit = (num, index=0) => {
-        
+    const submit = (num, index = 0) => {
+
         purchase({
             type: 1,
             role_id: roleId,
@@ -63,9 +66,8 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
     return (
         <div>
             {error && <div style={{ color: 'red' }}>提示：{error}</div>}
-            {in_x  ?  <Input submit={submit} label='物品数量' type='number' /> : ''}
+            {in_x ? <Input submit={submit} label='物品数量' type='number' /> : ''}
             <List data={data} prefix={prefix} active={active} />
-            <div></div>
         </div>
     )
 

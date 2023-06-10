@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { List, Tab } from '@components/index';
-import { getShopList, createShop, getDetail } from '@cgi/shopping';
+import { getDetail } from '@cgi/shopping';
 
 import { backGrand } from '@utils/grand'
 
@@ -36,10 +35,25 @@ export const Shopping = ({ history }) => {
             {key === 'detai' && <DetailShop info={info} setInfo={setInfo} setKey={setKey} roleId={roleId} />}
             {key === 'shopList' && <ShopList setRoleId={shopClick} />}
             {key === 'article' && <Article history={history} />}
-            {key === 'articleList' && <ArticleList history={history} data={info['article']} roleId={roleId} updataDetail={updataDetail} />}
+            {key === 'articleList' && (
+                <ArticleList history={history} data={info['article']} roleId={roleId} updataDetail={updataDetail} />)
+            }
             <div>
                 {key === 'detai' && <span className="g_u_end" onClick={() => { setKey('shopList') }}>店铺列表</span>}
-                {key === 'shopList' && <span className="g_u_end" onClick={() => { setKey('detai'); setRoleId(''); }}>我的店铺</span>}
+                {
+                    (key !== 'detai' || roleId) && (
+                        <div>
+                            <span
+                                className="g_u_end"
+                                onClick={() => {
+                                    setKey('detai');
+                                    setRoleId('');
+                                }}>
+                                我的店铺
+                            </span>
+                        </div>
+                    )
+                }
             </div>
             <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>
         </div>

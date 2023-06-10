@@ -46,14 +46,14 @@ module.exports = {
                 "@babel/preset-typescript",
               ],
             },
-          },
-          {
-            loader: "url-loader",
-            options: {
-              outputPath: 'js/',
-              // name: "js/",
-            },
           }
+          // {
+          //   loader: "url-loader",
+          //   options: {
+          //     outputPath: 'js/',
+          //     // name: "js/",
+          //   },
+          // }
         ],
       },
       // 处理less

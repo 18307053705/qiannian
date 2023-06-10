@@ -153,7 +153,7 @@ router.post("/grounding", async (req, res) => {
         return;
     }
     // 物品下架
-    if (active === 1 && type === 2) {
+    if (active === 2 && type === 1) {
         const { article } = await shoppingFn.getShopInfo(req);
         const { data } = await knapsackFn.getKnapsackInfo(req, type);
         if (data.length < KnapsackTable.size) {
