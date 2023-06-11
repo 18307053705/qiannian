@@ -53,7 +53,5 @@ module.exports = {
             return '物品信息有误'
         }
         return false;
-    },
-
-
+    }
 }

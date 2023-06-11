@@ -69,10 +69,10 @@ router.post("/roleLogin", (req, res) => {
       if (results[0]) {
         await globalFn.roleExit(req, res);
         // 保存角色信息,并且记录登录时间
-        Global.roleLoop[user] = { id: role_id, time: new Date() * 1, name: results[0].role_name };
+        Global.roleLoop[user] = { id: role_id, time: new Date() * 1, name: results[0].role_name, level: results[0].role_level };
         // 不存在任务池，即代表今天第一次登录,初始化任务池
         if (!Global.taskLoop[role_id]) {
-          await taskFn.initTack(results[0], role_id)
+          await taskFn.initTask(role_id, results[0]);
         }
         // 初始化任务
         res.send({

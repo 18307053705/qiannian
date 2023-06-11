@@ -15,6 +15,12 @@ const ELEMENT_1 = {
     name: "送财童子",
     type: 1,
     cs: "g_b_u"
+  },
+  1000001: {
+    id: 1000001,
+    name: "天机老人",
+    type: 1,
+    dir: '/task',
   }
 };
 
@@ -114,8 +120,8 @@ const ELEMENT_5 = {
     type: 5,
     ext: {
       career: 1,
-      level: 100,
-      attr: 10,
+      level: 20,
+      attr: 1,
       boss: true,
     },
     article: [
@@ -251,7 +257,27 @@ const ELEMENT_5 = {
     id: 5000009,
     name: "元素2.2",
     type: 5
-  }
+  },
+  5000010: {
+    id: 5000010,
+    name: "魔尊分身",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 50,
+      attr: 10
+    }
+  },
+  5000011: {
+    id: 5000011,
+    name: "魔尊重楼",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 100,
+      attr: 10
+    }
+  },
 };
 
 module.exports = {

@@ -14,7 +14,7 @@ const Result = ({ result, dirClick }) => {
             dirClick()
         })
     }, [])
-    const { freak = {}, statu } = result;
+    const { freak = {}, statu,tasks } = result;
     if (statu === -1) {
         return (<div>
             <div>你被某某击杀了,点击传送至云荒大陆！</div>
@@ -31,6 +31,9 @@ const Result = ({ result, dirClick }) => {
             </div>
             <div>战斗胜利！</div>
             <div>恭喜玩家，成功击杀{freak.name}。</div>
+            {
+              tasks.map((itme, index) => <div key={index}>任务进度：{itme}</div>)
+            }
             <div>获得经验：{freak.exp}</div>
             <div>获得银两：{freak.tael}</div>
             {freak.article && <div>获得物品：{freak.article}</div>}

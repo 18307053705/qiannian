@@ -52,9 +52,10 @@ const Fight = ({ history }) => {
                 upFightInfo();
                 setFightDirInfp(data);
             } else {
-                sessionStorage.setItem('fightResult', JSON.stringify(data))
-                setPanel('result');
+                sessionStorage.setItem('fightResult', JSON.stringify(data));
                 setResult(data);
+                setPanel('result');
+                
             }
         })
     }, [fightInfo])

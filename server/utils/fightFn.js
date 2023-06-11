@@ -485,13 +485,13 @@ module.exports = {
                 if (artReward[id] && artReward[id].type == p) {
                     const { num = 1, n } = artReward[id];
                     // 找到对应id,判断是否可以继续叠加
-                    if (s + num <= KnapsackTable.Maxs) {
+                    if (s + num <= Knapsack.Maxs) {
                         data[index]['s'] += num;
                         textReward.push(`${n}x${num}`)
                         delete artReward[id];
                     } else {
-                        artReward[id]['num2'] = data[index]['s'] + num - KnapsackTable.Maxs;
-                        data[index]['s'] = KnapsackTable.Maxs;
+                        artReward[id]['num2'] = data[index]['s'] + num - Knapsack.Maxs;
+                        data[index]['s'] = Knapsack.Maxs;
                     }
                 }
                 // 全部处理完,结束循环
@@ -556,7 +556,7 @@ module.exports = {
         // 更新角色经验等级
         roleFn.computeRoleLevel(req, res, exp * freak.num);
         // 监听任务池
-        taskFn.listenTask(req, freak.extDir, freak.num);
+       const tasks = taskFn.listenTask(req, freak.extDir['id'], freak.num);
         res.send({
             code: 0,
             data: {
@@ -568,6 +568,7 @@ module.exports = {
                     article: textReward.join(','),
                     tip: JSON.stringify(artReward) !== '{}' || JSON.stringify(equipReward) !== '{}' ? '背包已满,请注意清理。' : ''
                 },
+                tasks
             }
         });
 

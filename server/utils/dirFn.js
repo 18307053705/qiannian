@@ -116,7 +116,7 @@ module.exports = {
     // 获取地图玩家信息
     const players = await roleFn.getAddressPlayers(req, address);
     // 获取地图元素信息
-    const { dir, ...data } = grandFn.getGrandInfo(address, players);
+    const { dir, ...data } = grandFn.getGrandInfo(req,address, players);
     // 更新对应角色全局地图指令
     Global.grandDir.set(req, { moveDir: data.grand.map(({ dir }) => dir), eleDir: dir });
     res.send({

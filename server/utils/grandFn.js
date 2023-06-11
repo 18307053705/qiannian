@@ -1,4 +1,5 @@
 const { grand } = require("../table/grand");
+const Global = require("../global");
 
 module.exports = {
   getGrand: function (id, x, y) {
@@ -35,7 +36,7 @@ module.exports = {
 
     return direction.map(itme => ({ ...itme }));
   },
-  getGrandInfo: function (address, players) {
+  getGrandInfo: function (req, address, players) {
     const [id, strX, strY] = address.split(",");
     const x = Number(strX);
     const y = Number(strY);
@@ -51,7 +52,8 @@ module.exports = {
       });
       ele.push(eleItme)
     });
-
+    const { role } = Global.getUserRole(req);
+    Global.taskLoop[role.id]
     return {
       name,
       x: x + 1,

@@ -212,16 +212,40 @@ module.exports = {
       );
     });
   },
+  // 升级经验
+  computeUpLevel: function (level) {
+    switch (parseInt(level / 10)) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+        return 10 * parseInt(level / 10) * 100 * (level % 10 + 1);
+      case 5:
+      case 6:
+        return 10000000 + (level % 10 + 1) * 5000000;
+      case 7:
+        return 100000000 + (level % 10 + 1) * 10000000;
+      case 8:
+        return 300000000 + (level % 10 + 1) * 20000000;
+      case 9:
+        return 500000000 + (level % 10 + 1) * 50000000;
+      default:
+        return 1000000000 + (level % 10 + 1) * 500000000;
+    }
+
+  },
   // 计算经验
-  computeRoleLevel: async function (req, res, exp) {
+  computeRoleLevel: async function (req, res, exp, callback) {
     const role = await this.getRoleInfo(req, res);
-    if (role && role.role_level < 100) {
+    if (role) {
+
       let { role_level, role_exp, role_realm, role_career, base_pool } = role;
       let [oldExp, upExp] = role_exp.split('/');
       let current = Number(oldExp) + exp;
       let base = undefined;
       // 当前经验大于升级经验,处理升级逻辑
-      if (current >= upExp) {
+      if (current >= upExp && role.role_level < 100) {
         current -= upExp;
         // 角色升级
         role_level++;
@@ -246,36 +270,17 @@ module.exports = {
         Object.keys(base).forEach(key => {
           base[key] *= attr * role_level;
         })
-        // 计算升级经验
-        switch (parseInt(role_level / 10)) {
-          case 0:
-          case 1:
-          case 2:
-          case 3:
-          case 4:
-            upExp = 10 ** parseInt(role_level / 10) * 100 * (role_level % 10 + 1);
-            break;
-          case 5:
-          case 6:
-            upExp = 10000000 + (role_level % 10 + 1) * 5000000;
-            break;
-          case 7:
-            upExp = 100000000 + (role_level % 10 + 1) * 10000000;
-            break;
-          case 8:
-            upExp = 300000000 + (role_level % 10 + 1) * 20000000;
-            break;
-          case 9:
-            upExp = 500000000 + (role_level % 10 + 1) * 50000000;
-            break;
-        }
-
-
+        upExp = this.computeUpLevel(role_level)
       }
       const update = {
         role_exp: `${current}/${upExp}`,
         role_level,
       }
+      if (callback) {
+        // 计算经验时，还有其他需要更新的数据
+        callback(role, update);
+      }
+
       if (base) {
         const basePool = JSON.parse(base_pool);
         basePool.base = base;
