@@ -54,7 +54,7 @@ module.exports = {
       ele.push(eleItme)
     });
     // 获取任务临时元素
-    taskFn.grandTaskEle(req, address, ele,dirList);
+    taskFn.grandTaskEle(req, address, ele, dirList);
     return {
       name,
       x: x + 1,

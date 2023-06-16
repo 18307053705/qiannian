@@ -2,9 +2,9 @@ const mysql = require("../mysql");
 const Global = require("../global");
 module.exports = {
     // 获取店铺信息
-    getShopInfo: async function (req, role_id) {
-        const { role } = Global.getUserRole(req);
-        const { results } = await mysql.asyncQuery(`select * from shop  where role_id="${role_id || role.id}"`);
+    getShopInfo: async function (req, roleId) {
+        const { role_id } = Global.getRoleGlobal(req);
+        const { results } = await mysql.asyncQuery(`select * from shop  where role_id="${roleId || role_id}"`);
         if(results[0]){
             return {
                 ...results[0],

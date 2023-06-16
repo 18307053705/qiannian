@@ -20,8 +20,8 @@ const TASK_MEUN = {
 const DAILY_TASK_KEY = taskFn.DAILY_TASK_KEY;
 
 router.post("/getTaskList", (req, res) => {
-    const { role } = Global.getUserRole(req);
-    const task = Global.taskLoop[role.id];
+    const { role_id } = Global.getRoleGlobal(req);
+    const task = Global.taskLoop[role_id];
     const taskList = Object.keys(task).map(key => {
         return {
             text: `${TASK_MEUN[key]}(${task[key].length})`,
@@ -36,9 +36,9 @@ router.post("/getTaskList", (req, res) => {
 
 
 router.post("/getTaskDetail", async (req, res) => {
-    const { role } = Global.getUserRole(req);
+    const { role_id } = Global.getRoleGlobal(req);
     const { type } = req.body;
-    const tasks = Global.taskLoop[role.id][type];
+    const tasks = Global.taskLoop[role_id][type];
     if (tasks && tasks.length) {
         const { data } = await knapsackFn.getKnapsackInfo(req, 1);
         // 判断是否为每日任务
@@ -102,9 +102,9 @@ router.post("/doneTask", async (req, res) => {
         })
         return;
     }
-    const { role } = Global.getUserRole(req);
-    const dir = Global.grandDir.dir[role.id];
-    const tasks = Global.taskLoop[role.id][type];
+    const { role_id } = Global.getRoleGlobal(req);
+    const dir = Global.getDir(req);
+    const tasks = Global.taskLoop[role_id][type];
     if (type === 'main') {
         const task = tasks[in_x];
         const { npc } = task['grand'];
@@ -136,14 +136,11 @@ router.post("/doneTask", async (req, res) => {
 // 获取任务剧情
 router.post("/getTaskStory", async (req, res) => {
     // return;
-    const { role_id,can_task_pool,task_pool } = await roleFn.getRoleInfo(req, res);
+    const { role_id, can_task_pool, task_pool } = Global.getRoleGlobal(req);
     // 获取指令池,npc对应任务信息
-    const { extDir } = Global.getDir(req) || { extDir: undefined };
-    console.log(Global.getDir[role_id],'Global.getDir[role_id]')
+    const { extDir } = Global.getDir(req);
     if (extDir) {
-
         const { taskType, taskId, activation } = extDir;
-        console.log('extDir')
         const backInfo = {
             taskId,
             state: 0
@@ -155,16 +152,14 @@ router.post("/getTaskStory", async (req, res) => {
                 // 返回信息
                 const result = await taskFn.getTaskReward(req, res, task, (roleInfo, updata) => {
                     // 已领取任务信息处理
-                    const taskLoop = JSON.parse(roleInfo.task_pool);
-                    taskLoop[taskType] = taskLoop[taskType].filter((id) => (id !== taskId));
-                    updata['task_pool'] = JSON.stringify(taskLoop);
+                    task_pool[taskType] = task_pool[taskType].filter((id) => (id !== taskId));
+                    updata['task_pool'] = task_pool;
                     Global.taskLoop[role_id][taskType] = Global.taskLoop[role_id][taskType].filter(({ id }) => (id !== taskId));
                     // 可领取任务处理
                     if (task['nextTask'] !== -1) {
                         // 下一环任务加入可领取列表
-                        const caTaskPool = JSON.parse(roleInfo.can_task_pool);
-                        caTaskPool[taskType].push(task['nextTask']);
-                        updata['can_task_pool'] = JSON.stringify(caTaskPool);
+                        can_task_pool[taskType].push(task['nextTask']);
+                        updata['can_task_pool'] = can_task_pool;
                         Global.canTaskPool[role_id][taskType].push(task['nextTask']);
                         // 判断下一环任务是否还是当前npc
                         const { npc } = taskTable[taskType][task['nextTask']]['grand'];
@@ -234,7 +229,7 @@ router.post("/getTaskStory", async (req, res) => {
 
 
 
-router.post("/taskNpc", async (req, res) => {
+router.post("/taskNpc", (req, res) => {
     const { address } = req.body;
     if (!address) {
         res.send({
@@ -243,8 +238,7 @@ router.post("/taskNpc", async (req, res) => {
         })
         return;
     }
-    const { role_id } = Global.getUserRole(req);
-    const { extDir } = Global.grandDir.dir[role_id];
+    const { extDir } = Global.getDir(req);
     if (extDir['address'] !== address) {
         dirFn.tpDir(address, req, res);
         return;

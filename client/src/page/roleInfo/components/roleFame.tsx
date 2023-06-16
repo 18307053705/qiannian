@@ -1,8 +1,7 @@
 import React from "react";
 
 const RoleFame = ({ roleInfo }) => {
-    const { reputation_pool } = roleInfo;
-    const reputation = reputation_pool ? JSON.parse(reputation_pool) : {};
+    const { reputation_pool:reputation } = roleInfo;
     return (
         <>
             <div className="g_fgx"></div>

@@ -37,16 +37,13 @@ app.use(express.json());
 // cookie
 app.use(cookieParser());
 // 请求网关验证
-app.use("*", function (req, res, next) {
+app.use("*", async function (req, res, next) {
   // 验证登录态
   if (!gatewayFn.checkApi(req)) {
     errorFn.error(res, 100000);
     return;
   }
-  // 
-  // console.log('验证前:',req.originalUrl)
   if (!gatewayFn.roleCheck(req)) {
-    // console.log('验证不通过:',req.originalUrl)
     errorFn.error(res, errorFn.ERR_MEUN.ROLE);
     return;
   }

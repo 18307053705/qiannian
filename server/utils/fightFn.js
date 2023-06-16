@@ -3,137 +3,100 @@ const Attribute = require("../table/attribute");
 const Knapsack = require('../table/knapsack');
 const Art = require("../table/art");
 const roleFn = require("../utils/roleFn");
+const knapsackFn = require("../utils/knapsackFn");
 const taskFn = require('./taskFn');
 // 战斗相关api
 module.exports = {
     // 创建战斗
     creatFight: function (req, res) {
-        return new Promise((resolve) => {
-            const { role } = Global.getUserRole(req);
-            // 获取指令池,敌人信息
-            const { extDir } = Global.grandDir.dir[role.id] || { extDir: undefined };
-            // 判断战斗角色池中是否已存在
-            if (Global.fightLoop.fightRoleId[role.id] || !extDir) {
-                resolve();
-                return;
-            }
-            // 加入战斗角色池
-            Global.fightLoop.fightRoleId[role.id] = role.id;
-            // 创建战斗信息池
-            if (!Global.fightLoop.fightMap[role.id]) {
-                const rival = this.creatFreak(extDir);
-                Global.fightLoop.fightMap[role.id] = {
-                    type: 1,
-                    rival,
-                    player: [],
-                    id: [],
-                    buffs: {},
-                    freak: {
-                        extDir,
-                        statu: 0,
-                        num: rival.length
-                    } // 怪物原型，战斗结束时,获取奖励等信息,或者继续
-                }
-            }
-            this.creatPlayer(req, res).then((data) => {
-                if (data) {
-                    Global.fightLoop.fightMap[role.id]['player'].push(data);
-                    Global.fightLoop.fightMap[role.id]['id'].push({ id: role.id, name: data.name });
-                }
-
-                resolve();
-                return;
-            })
-
-        })
-
+        const { role_id, role_name } = Global.getRoleGlobal(req);
+        const fightInfo = Global.getFight(req);
+        // 获取指令池,敌人信息
+        const { extDir } = Global.getDir(req);
+        if (fightInfo || !extDir) {
+            return undefined;
+        }
+        // 加入战斗角色池
+        Global.fightRoleId[role_id] = role_id;
+        // 创建怪物
+        const rival = this.creatFreak(extDir);
+        const fight = {
+            type: 1,
+            rival,
+            player: [],
+            id: [],
+            buffs: {},
+            freak: {
+                extDir,
+                statu: 0,
+                num: rival.length
+            } // 怪物原型，战斗结束时,获取奖励等信息,或者继续
+        }
+        const player = this.creatPlayer(req);
+        fight['player'].push(player);
+        fight['id'].push({ id: role_id, name: role_name });
+        Global.setFight(req, fight);
     },
     // 创建玩家属性
-    creatPlayer: async function (req, res) {
-        try {
-            const results = await roleFn.getRoleInfo(req, res);
-            if (results) {
-                const { skill_pool } = results;
-                const { fight = [null, null, null, null, null, null], art } = JSON.parse(skill_pool);
-                const knapasackId = {};
-                let update = false;
-                fight.forEach((itme, index) => {
-                    if (itme && itme.p2 == 2) {
-                        knapasackId[itme.id] = {
-                            id: itme.id,
-                            index
-                        }
+    creatPlayer: function (req, res) {
+        const roleInfo = Global.getRoleGlobal(req);
+        const knapasack = Global.getknapsackGlobal(req);
+        const { fight = [null, null, null, null, null, null], art } = roleInfo.skill_pool;
+        const knapasackId = {};
+        fight.forEach((itme, index) => {
+            if (itme && itme.p2 == 2) {
+                knapasackId[itme.id] = {
+                    id: itme.id,
+                    index
+                }
+            }
+        })
+        // 判断战斗设置中是否有消耗物品
+        if (JSON.stringify(knapasackId) !== "{}") {
+            const { data } = knapasack;
+            const len = data.length;
+            for (let i = 0; i < len; i++) {
+                const { id, p } = data[i];
+                // Id存在战斗设置中,且为消耗品
+                if (knapasackId[id] && p == 1) {
+                    fight[knapasackId[id]['index']] = {
+                        ...data[i],
+                        p2: 2
                     }
-                })
-                // 判断战斗设置中是否有消耗物品
-                if (JSON.stringify(knapasackId) !== "{}") {
-                    update = true;
-                    const knapasack = await roleFn.getKnapsack(req);
-                    if (knapasack) {
-                        const data = JSON.parse(knapasack.data);
-                        const len = data.length;
-                        for (let i = 0; i < len; i++) {
-                            const { id, p } = data[i];
-                            // Id存在战斗设置中,且为消耗品
-                            if (knapasackId[id] && p == 1) {
-                                fight[knapasackId[id]['index']] = {
-                                    ...data[i],
-                                    p2: 2
-                                }
-                                // 删除该项
-                                delete knapasackId[id];
-                            }
-                            // 结束循环
-                            if (JSON.stringify(knapasackId) == "{}") {
-                                i = len;
-                            }
-                        }
-
-
-                    }
+                    // 删除该项
+                    delete knapasackId[id];
                 }
-                // 还存在的物品为消耗殆尽
-                if (JSON.stringify(knapasackId) !== "{}") {
-                    Object.keys(knapasackId).forEach((key) => {
-                        fight[knapasackId[key]['index']] = {
-                            ...fight[knapasackId[key]['index']],
-                            s: 0
-                        }
-                    })
-
-                }
-                // 更新角色信息
-                if (update) {
-                    roleFn.updateRoleInfo(req, {
-                        skill_pool: JSON.stringify({
-                            fight,
-                            art
-                        })
-                    })
-                }
-                // 计算角色属性
-                const data = roleFn.computeRoleAttr(req, res, results);
-                if (!data) {
-                    return;
-                }
-                const { role } = Global.getUserRole(req);
-                return {
-                    id: role.id,
-                    attr: {
-                        ...data.attr,
-                        life: results['life'] > data.attr.life_max ? data.attr.life_max : results['life'],
-                        mana: results['mana'] > data.attr.mana_max ? data.attr.mana_max : results['mana'],
-                    },
-                    art: fight,
-                    name: results.role_name
+                // 结束循环
+                if (JSON.stringify(knapasackId) == "{}") {
+                    i = len;
                 }
             }
 
-        } catch (error) {
-            return;
+            // 还存在的物品,为消耗殆尽
+            if (JSON.stringify(knapasackId) !== "{}") {
+                Object.keys(knapasackId).forEach((key) => {
+                    fight[knapasackId[key]['index']] = {
+                        ...fight[knapasackId[key]['index']],
+                        s: 0
+                    }
+                })
+
+            }
         }
-
-
+        // 更新战斗信息
+        Global.updateRoleGlobal(req, { skill_pool: roleInfo.skill_pool });
+        // 计算角色属性
+        const data = roleFn.computeRoleAttr(req, res, roleInfo);
+        return {
+            id: roleInfo.role_id,
+            attr: {
+                ...data.attr,
+                life: roleInfo['life'] > data.attr.life_max ? data.attr.life_max : roleInfo['life'],
+                mana: roleInfo['mana'] > data.attr.mana_max ? data.attr.mana_max : roleInfo['mana'],
+            },
+            art: fight,
+            name: roleInfo.role_name
+        }
     },
     // 创建怪物
     creatFreak: function (freak) {
@@ -404,60 +367,61 @@ module.exports = {
         return attr.life === 0 ? -1 : 0;
     },
     // 释放战斗
-    releaseFight: async function (req, res, fightId) {
-        const { role: role_g } = Global.getUserRole(req);
-        let { player, id: ids } = Global.fightLoop.fightMap[fightId];
-        const { art, attr } = player.find(({ id }) => id === role_g.id);
-        const role = await roleFn.getRoleInfo(req, res);
-        if (role) {
-            //    更新角色当前生命
-            roleFn.updateRoleInfo(req, {
+    releaseFight: async function (req, res) {
+        const { role_id } = Global.getRoleGlobal(req);
+        const { data } = Global.getknapsackGlobal(req);
+        const fightId = Global.fightRoleId[role_id];
+        const fightInfo = Global.getFight(req);
+        if (fightInfo) {
+            let { player, id: ids } = fightInfo;
+            const { art, attr } = player.find(({ id }) => id === role_id);
+            Global.updateRoleGlobal(req, {
                 life: attr.life,
                 mana: attr.mana
             })
-        }
-        const drug = {};
-        // 找到使用过的消耗品
-        art.forEach((itme) => {
-            if (itme && itme.num) {
-                drug[itme.id] = {
-                    num: itme.num,
-                    p: itme.p
+            const drug = {};
+            // 找到使用过的消耗品
+            art.forEach((itme) => {
+                if (itme && itme.num) {
+                    drug[itme.id] = {
+                        num: itme.num,
+                        p: itme.p
+                    }
                 }
+            })
+            if (JSON.stringify(drug) !== "{}") {
+                for (let i = 0; i < Knapsack.size; i++) {
+                    const { id, p } = data[i];
+                    // 找到使用过的消耗品
+                    if (drug[id] && p === drug[id]['p']) {
+                        // 减去对应丹药
+                        data[i].s -= drug[id]['num'];
+                        delete drug[id];
+                    }
+                    // 结束循环
+                    if (JSON.stringify(drug) === "{}") {
+                        i = Knapsack.size;
+                    }
+                }
+                // 更新背包
+                Global.updateknapsackGlobal(req, { data })
             }
-        })
-        if (JSON.stringify(drug) !== "{}") {
-            const knapasack = await roleFn.getKnapsack(req);
-            const data = JSON.parse(knapasack.data);
-            for (let i = 0; i < Knapsack.size; i++) {
-                const { id, p } = data[i];
-                // 找到使用过的消耗品
-                if (drug[id] && p === drug[id]['p']) {
-                    // 减去对应丹药
-                    data[i].s -= drug[id]['num'];
-                    delete drug[id];
-                }
-                // 结束循环
-                if (JSON.stringify(drug) === "{}") {
-                    i = Knapsack.size;
-                }
+            // 释放战斗池id
+            delete Global.fightRoleId[role_id];
+            //  释放战斗信息池
+            // 判断是否为本次战斗中最后一个玩家,否则移除自己即可
+            if (player.lenght === 1) {
+                delete Global.fightMap[fightId]
+            } else {
+                Global.fightMap[fightId]['player'] = player.filter(({ id }) => id !== role_id);
+                Global.fightMap[fightId]['id'] = ids.filter(({ id }) => id !== role_id);
             }
-            // 更新背包
-            await roleFn.updateKnapsack(req, { data: JSON.stringify(data) });
-        }
-        // 释放战斗池id
-        delete Global.fightLoop.fightRoleId[role_g.id];
-        //  释放战斗信息池
-        // 判断是否为本次战斗中最后一个玩家,否则移除自己即可
-        if (player.lenght !== 1) {
-            delete Global.fightLoop.fightMap[fightId]
-        } else {
-            Global.fightLoop.fightMap[fightId]['player'] = player.filter(({ id }) => id !== role_g.id);
-            Global.fightLoop.fightMap[fightId]['id'] = ids.filter(({ id }) => id !== role_g.id);
         }
     },
     // 结算战斗奖励
     getFightReward: async function (req, res, freak) {
+        const roleInfo = Global.getRoleGlobal(req);
+        const knapsack = Global.getknapsackGlobal(req);
         const { name, article = [], ext } = freak.extDir;
         const textReward = [];
         const artReward = {}; // 物品奖励
@@ -469,60 +433,66 @@ module.exports = {
                 itme.type == 3 ? equipReward[itme.id] = itme : artReward[itme.id] = itme;
             }
         });
-        const knapsack = await roleFn.getKnapsack(req);
-        const data = JSON.parse(knapsack.data);
-        // 背包最大200条数据
-        if (JSON.stringify(artReward) !== '{}' && !data[Knapsack.size]) {
-            // 查找物品是否存在背包内
-            for (let index = 0; index < Knapsack.size; index++) {
-                if (!data[index]) {
-                    index = Knapsack.size;
-                    continue;
-                }
-                const { p, id, s } = data[index];
-                // 判断物品id与物品类型是否相同
-                if (artReward[id] && artReward[id].type == p) {
-                    const { num = 1, n } = artReward[id];
-                    // 找到对应id,判断是否可以继续叠加
-                    if (s + num <= Knapsack.Maxs) {
-                        data[index]['s'] += num;
-                        textReward.push(`${n}x${num}`)
-                        delete artReward[id];
-                    } else {
-                        artReward[id]['num2'] = data[index]['s'] + num - Knapsack.Maxs;
-                        data[index]['s'] = Knapsack.Maxs;
-                    }
-                }
-                // 全部处理完,结束循环
-                if (JSON.stringify(artReward) === '{}') {
-                    index = Knapsack.size;
-                }
-            }
+        knapsackFn.addKnapsack({ artReward, equipReward }, knapsack.data);
+        // const { artReward, equipReward } = article;
+        // addKnapsack
+        // addKnapsack.
 
-            //  遍历结束还存在物品奖励，说明物品为新增
-            Object.keys(artReward).forEach(key => {
-                if (!data[Knapsack.size]) {
-                    const { id, type, n, num = 1, num2 } = artReward[key];
-                    data.push({ id, n, p: type, s: num2 || num });
-                    textReward.push(`${n}x${num}`);
-                    delete artReward[key];
-                }
-            })
-        }
+        // const knapsack = await roleFn.getKnapsack(req);
+        // const data = JSON.parse(knapsack.data);
+        // // 背包最大200条数据
+        // if (JSON.stringify(artReward) !== '{}' && !data[Knapsack.size]) {
+        //     // 查找物品是否存在背包内
+        //     for (let index = 0; index < Knapsack.size; index++) {
+        //         if (!data[index]) {
+        //             index = Knapsack.size;
+        //             continue;
+        //         }
+        //         const { p, id, s } = data[index];
+        //         // 判断物品id与物品类型是否相同
+        //         if (artReward[id] && artReward[id].type == p) {
+        //             const { num = 1, n } = artReward[id];
+        //             // 找到对应id,判断是否可以继续叠加
+        //             if (s + num <= Knapsack.Maxs) {
+        //                 data[index]['s'] += num;
+        //                 textReward.push(`${n}x${num}`)
+        //                 delete artReward[id];
+        //             } else {
+        //                 artReward[id]['num2'] = data[index]['s'] + num - Knapsack.Maxs;
+        //                 data[index]['s'] = Knapsack.Maxs;
+        //             }
+        //         }
+        //         // 全部处理完,结束循环
+        //         if (JSON.stringify(artReward) === '{}') {
+        //             index = Knapsack.size;
+        //         }
+        //     }
 
-        if (!data[Knapsack.size]) {
-            Object.keys(equipReward).forEach(key => {
-                if (!data[Knapsack.size]) {
-                    const { id, type, name, num = 1 } = equipReward[key];
-                    data.push({ id, n: name, p: type, s: num, ext: '0_0_0_0_0_0_0' });
-                    textReward.push(`${name}x${num}`);
-                    delete equipReward[key];
-                }
-            })
-        }
-        // 获取人物buff
-        const role = await roleFn.getRoleInfo(req, res);
-        const buffPool = JSON.parse(role.buff_pool)
+        //     //  遍历结束还存在物品奖励，说明物品为新增
+        //     Object.keys(artReward).forEach(key => {
+        //         if (!data[Knapsack.size]) {
+        //             const { id, type, n, num = 1, num2 } = artReward[key];
+        //             data.push({ id, n, p: type, s: num2 || num });
+        //             textReward.push(`${n}x${num}`);
+        //             delete artReward[key];
+        //         }
+        //     })
+        // }
+
+        // if (!data[Knapsack.size]) {
+        //     Object.keys(equipReward).forEach(key => {
+        //         if (!data[Knapsack.size]) {
+        //             const { id, type, name, num = 1 } = equipReward[key];
+        //             data.push({ id, n: name, p: type, s: num, ext: '0_0_0_0_0_0_0' });
+        //             textReward.push(`${name}x${num}`);
+        //             delete equipReward[key];
+        //         }
+        //     })
+        // }
+        // // 获取人物buff
+        // const role = await roleFn.getRoleInfo(req, res);
+        const { buff_pool: buffPool } = roleInfo;
+        // const buffPool = JSON.parse(role.buff_pool)
         const { vip = {} } = buffPool;
         let vipExp = 0;
         if (vip['exp2']) {
@@ -551,11 +521,12 @@ module.exports = {
         // 银两
         const tael = (taels || exp < 100 ? exp : exp / 100) * (vipTael || 1);
         // 更新背包
-        roleFn.updateKnapsack(req, { data: JSON.stringify(data), tael: knapsack.tael - 0 + tael * freak.num });
+        Global.updateknapsackGlobal(req, { data: knapsack.data, tael: knapsack.tael - 0 + tael * freak.num });
+        // roleFn.updateKnapsack(req, { data: JSON.stringify(data), tael: knapsack.tael - 0 + tael * freak.num });
         // 更新角色经验等级
         roleFn.computeRoleLevel(req, res, exp * freak.num);
         // 监听任务池
-       const tasks = taskFn.listenTask(req, freak.extDir['id'], freak.num);
+        const tasks = taskFn.listenTask(req, freak.extDir['id'], freak.num);
         res.send({
             code: 0,
             data: {

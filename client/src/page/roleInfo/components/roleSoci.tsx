@@ -1,8 +1,7 @@
 import React from "react";
 
 const RoleSoci = ({ roleInfo }) => {
-    const { socialize_pool } = roleInfo;
-    const socialize = socialize_pool ? JSON.parse(socialize_pool) : {};
+    const { socialize_pool:socialize } = roleInfo;
     return (
         <>
             <div className="g_fgx"></div>

@@ -23,35 +23,35 @@ router.post("/getRoleList", (req, res) => {
 // 状态信息
 router.post("/getRoleInfo", async (req, res) => {
   const { role_id } = req.body;
-  const results = await roleFn.getRoleInfo(req, res, role_id);
-  if (results) {
-    const { base_pool, buff_pool, addition_pool, address, ...info } = results;
+  const roleInfo = await roleFn.getRoleInfo(req, role_id);
+  if (roleInfo) {
+    const { base_pool, buff_pool, addition_pool, address, ...info } = roleInfo;
     // 计算角色属性
-    const data = roleFn.computeRoleAttr(req, res, results, role_id);
+    const data = roleFn.computeRoleAttr(req, res, roleInfo, role_id);
     if (!data) {
       return;
     }
     res.send({
       code: 0,
       data: {
-        role_id: results['role_id'],
+        role_id: roleInfo['role_id'],
         attr: data.attr,
         buff: data.buff,
-        life: results['life'] > data.attr.life_max ? data.attr.life_max : results['life'],
-        mana: results['mana'] > data.attr.mana_max ? data.attr.mana_max : results['mana'],
-        role_name: results['role_name'],
-        role_level: results['role_level'],
-        role_exp: results['role_exp'],
-        role_evil: results['role_evil'],
-        role_signature: results['role_signature'],
-        role_career: CAREER_TYPE[results['role_career']],
-        role_race: RACE_TYPE[results['role_race']],
-        role_realm: realm[results['role_realm']] ? realm[results['role_realm']].name : '',
-        role_sex: results['role_sex'],
-        role_title: title[results['role_title']] ? title[results['role_title']].name : '',
-        reputation_pool: results['reputation_pool'],
-        socialize_pool: results['socialize_pool'],
-        equip_pool: results['equip_pool']
+        life: roleInfo['life'] > data.attr.life_max ? data.attr.life_max : roleInfo['life'],
+        mana: roleInfo['mana'] > data.attr.mana_max ? data.attr.mana_max : roleInfo['mana'],
+        role_name: roleInfo['role_name'],
+        role_level: roleInfo['role_level'],
+        role_exp: roleInfo['role_exp'],
+        role_evil: roleInfo['role_evil'],
+        role_signature: roleInfo['role_signature'],
+        role_career: CAREER_TYPE[roleInfo['role_career']],
+        role_race: RACE_TYPE[roleInfo['role_race']],
+        role_realm: realm[roleInfo['role_realm']] ? realm[roleInfo['role_realm']].name : '',
+        role_sex: roleInfo['role_sex'],
+        role_title: title[roleInfo['role_title']] ? title[roleInfo['role_title']].name : '',
+        reputation_pool: roleInfo['reputation_pool'],
+        socialize_pool: roleInfo['socialize_pool'],
+        equip_pool: roleInfo['equip_pool']
       }
     });
   }
@@ -60,36 +60,31 @@ router.post("/getRoleInfo", async (req, res) => {
 });
 
 // 选择角色
-router.post("/roleLogin", (req, res) => {
+router.post("/roleLogin", async (req, res) => {
   const user = req.cookies["q_uid"];
   const { role_id } = req.body;
-  mysql.sqlQuery(
-    `select * from role  where user_id="${user}" and role_id="${role_id}"`,
-    async (results) => {
-      if (results[0]) {
-        await globalFn.roleExit(req, res);
-        // 保存角色信息,并且记录登录时间
-        Global.setRoleGlobal(req,results[0]);
-
-        // Global.roleLoop[user] = { id: role_id, time: new Date() * 1, name: results[0].role_name, level: results[0].role_level };
-        // 不存在任务池，即代表今天第一次登录,初始化任务池
-        if (!Global.taskLoop[role_id]) {
-          await taskFn.initTask(req);
-        }
-        // 初始化任务
-        res.send({
-          code: 0,
-          data: '角色选择成功'
-        });
-
-      } else {
-        res.send({
-          code: 100006,
-          data: '角色信息异常'
-        });
-      }
-    }
-  );
+  const { results: role } = await mysql.asyncQuery(`select * from role  where user_id="${user}" and role_id="${role_id}"`);
+  const { results: knapsack } = await mysql.asyncQuery(`select * from knapsack  where user_id="${user}" and role_id="${role_id}"`);
+  if (!role[0] && !knapsack[0]) {
+    res.send({
+      code: 100006,
+      data: '角色信息异常'
+    });
+    return;
+  }
+  // 退出同账号下的其他角色
+  await globalFn.roleExit(req, res);
+  // 保存角色信息,并且记录登录时间
+  Global.setRoleGlobal(req, role[0]);
+  Global.setknapsackGlobal(req, knapsack[0]);
+  // 不存在任务池，即代表今天第一次登录,初始化任务池
+  if (!Global.taskLoop[role_id]) {
+    taskFn.initTask(req);
+  }
+  res.send({
+    code: 0,
+    data: '角色选择成功'
+  });
 });
 
 // 创建角色

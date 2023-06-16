@@ -30,7 +30,6 @@ module.exports = {
       return true;
     }
     return Global.getRoleGlobal(req);
-    // return Global.roleLoop[req.cookies["q_uid"]];
 
   }
 };

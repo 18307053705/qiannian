@@ -16,6 +16,7 @@ module.exports = {
   dirControl: function (req, res) {
     // 获取对应角色指令
     const { eleDir = [], moveDir = [] } = Global.getDir(req) || {};
+    // console.log(Global.dir)
     const { dir } = req.body;
     // 选择角色进入地图指令
     if (dir == -1) {
@@ -44,9 +45,9 @@ module.exports = {
   },
   // 指令为-1 则是选择角色进入游戏,初次发出指令
   enterDir: async function (req, res) {
-    const results = await roleFn.getRoleInfo(req, res);
-    if (results) {
-      this["toDir"](req, res, results.address);
+    const { address } = await roleFn.getRoleInfo(req);
+    if (address) {
+      this["toDir"](req, res, address);
     }
   },
   // 指令为-2 回城指令
@@ -80,9 +81,8 @@ module.exports = {
   },
   //   地图指令
   moveDir: async function (dir, req, res) {
-    const results = await roleFn.getRoleInfo(req, res);
-    if (results) {
-      const { address } = results;
+    const { address } = Global.getRoleGlobal(req);
+    if (address) {
       const [id, strX, strY] = address.split(",");
       let x = Number(strX);
       let y = Number(strY);
@@ -101,10 +101,8 @@ module.exports = {
           break;
       }
       const upAddress = `${id},${x},${y}`;
-      const update = await roleFn.updateRoleInfo(req, { address: upAddress });
-      if (update.changedRows) {
-        this["toDir"](req, res, upAddress);
-      }
+      Global.updateRoleGlobal(req, { address: upAddress });
+      this["toDir"](req, res, upAddress);
     }
   },
   // 更新角色地图指令信息,并返回前端
@@ -127,20 +125,15 @@ module.exports = {
     let path = '';
     // 怪物元素，进入战斗界面
     if (type === 5) {
-      fightFn.creatFight(req, res).then(() => {
-        res.send({
-          code: 0,
-          data: {
-            path: '/fight'
-          }
-        });
-      })
+      fightFn.creatFight(req, res);
+      res.send({
+        code: 0,
+        data: {
+          path: '/fight'
+        }
+      });
       return;
     }
-    //  // npc元素，进入战斗界面
-    //  if(type === 1){
-    //   path = '/fight';
-    // }
     res.send({
       code: 0,
       data: {

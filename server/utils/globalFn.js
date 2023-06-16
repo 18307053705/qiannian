@@ -5,13 +5,13 @@ module.exports = {
     roleExit: function (req, res, userid) {
         return new Promise(async (resolve) => {
             const user = userid || req.cookies["q_uid"];
-            const roleLoop = Global.roleLoop[user];
-            if (roleLoop) {
-                const role = roleLoop;
+            const roleInfo = Global.roleGlobal[user];
+            if (roleInfo) {
+                const role = roleInfo;
                 //释放角色池
                 delete Global.roleLoop[user];
                 //释放地图
-                delete Global.grandDir.dir[`${user}_${role.id}`];
+                delete Global.dir[roleInfo.role_id];
                 // 判断是否存战斗,存在则释放
                 const fightId = Global.fightLoop.fightRoleId[role.id];
                 if (fightId) {

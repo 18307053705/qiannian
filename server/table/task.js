@@ -18,6 +18,7 @@ module.exports = {
             reward: {
                 article: [Equip[96]],
                 exp: 100000,
+                world: 200,
             },
             grand: {
                 npc: {

@@ -5,43 +5,48 @@ const { roleAttr: RoleAttr } = require("../table/attribute");
 const Global = require("../global");
 module.exports = {
   // 获取玩家信息
-  getRoleInfo: async function (req, res, role_id) {
+  getRoleInfo: async function (req, role_id) {
     const roleInfo = Global.getRoleGlobal(req, role_id);
     if (roleInfo) {
       return roleInfo;
     }
-    const { results } = mysql.asyncQuery(`select * from role  where role_id="${role_id || roleInfo.id}"`)
+    const { results } = await mysql.asyncQuery(`select * from role  where role_id="${role_id}"`);
+    if (results[0]) {
+      const role = {}
+      Object.keys(results[0]).forEach((key) => {
+        role[key] = Global.JSON_KEYS.includes(key) ? JSON.parse(results[0][key]) : results[0][key]
+      })
+      return role;
+    }
     return results[0];
   },
   // 更新玩家信息
   updateRoleInfo: async function (req, data, roleId) {
-    const { role_id, user_id } = Global.getRoleGlobal(req, data, roleId);
-    const res = Global.updateRoleGlobal(req, data, roleId);
-    if (res) {
-      return res
+    const roleInfo = Global.updateRoleGlobal(req, data, roleId);
+    if (roleInfo) {
+      return roleInfo;
     }
     const upData = [];
     Object.keys(data).forEach(key => {
-      upData.push(`${key}='${data[key]}'`)
+      const value = Global.JSON_KEYS.includes(key) ? JSON.stringify(data[key]) : data[key];
+      upData.push(`${key}='${value}'`)
     })
-    const { results } = mysql.asyncQuery(`update role  SET ${upData.join(',')}  where user_id="${user_id}" and role_id="${role_id}"`);
+    const { results } = await mysql.asyncQuery(`update role  SET ${upData.join(',')}  where role_id="${roleId}"`);
     return results
+
   },
 
   // 获取坐标对应的玩家数量
   getAddressPlayers: async function (req, address) {
-    const roleInfo = Global.getRoleGlobal(req);
+    const roleInfo = await Global.getRoleGlobal(req);
     const { results } = await mysql.asyncQuery(`select * from role  where address="${address}" and role_id<>"${roleInfo.id}"`);
     return results;
   },
 
   // 计算角色属性
-  computeRoleAttr: function (req, res, results, update) {
+  computeRoleAttr: function (req, res, roleInfo, update) {
     try {
-      const { base_pool, addition_pool, buff_pool } = results;
-      const basePool = JSON.parse(base_pool);
-      const addition = addition_pool ? JSON.parse(addition_pool) : {};
-      const buffPool = buff_pool ? JSON.parse(buff_pool) : {};
+      const { base_pool: basePool, addition_pool: addition, buff_pool: buffPool } = roleInfo;
       const attr = {
         life_max: 0,
         life: 0,
@@ -159,10 +164,10 @@ module.exports = {
     // 有buff过其,执行更新
     if ((Object.keys(pellet).length !== expireple.length || Object.keys(vip).length !== expireVip.length) && !update) {
       this.updateRoleInfo(req, {
-        buff_pool: JSON.stringify({
+        buff_pool: {
           pellet,
           vip
-        })
+        }
       })
     }
 
@@ -173,7 +178,7 @@ module.exports = {
   },
   // 获取背包信息
   getKnapsack: function (req) {
-    const { role, user } = Global.getUserRole(req);
+    const { role, user } = Global.getknapsackGlobal(req);
     return new Promise(res => {
       mysql.sqlQuery(
         `select * from knapsack  where user_id="${user}" and role_id="${role.id}"`,
@@ -223,58 +228,53 @@ module.exports = {
 
   },
   // 计算经验
-  computeRoleLevel: async function (req, res, exp, callback) {
-    const role = await this.getRoleInfo(req, res);
-    if (role) {
-      let { role_level, role_exp, role_realm, role_career, base_pool } = role;
-      let [oldExp, upExp] = role_exp.split('/');
-      let current = Number(oldExp) + exp;
-      let base = undefined;
-      // 当前经验大于升级经验,处理升级逻辑
-      if (current >= upExp && role.role_level < 100) {
-        current -= upExp;
-        // 角色升级
-        role_level++;
-        // 获取境界对应属性增幅
-        const { attr } = Realm[role_realm];
-        const { atk, def, agile } = RoleAttr;
-        // 根据职业选择升级属性加成
-        switch (role_career) {
-          case 1:
-          case 4:
-          case 7:
-            base = { ...atk };
-            break;
-          case 2:
-          case 5:
-          case 8:
-            base = { ...def };
-            break;
-          default:
-            base = { ...agile };
-        }
-        Object.keys(base).forEach(key => {
-          base[key] *= attr * role_level;
-        })
-        upExp = this.computeUpLevel(role_level)
+  computeRoleLevel: function (req, res, exp, callback) {
+    const roleInfo = Global.getRoleGlobal(req);
+    let { role_level, role_exp, role_realm, role_career, base_pool } = roleInfo;
+    let [oldExp, upExp] = role_exp.split('/');
+    let current = Number(oldExp) + exp;
+    let base = undefined;
+    // 当前经验大于升级经验,处理升级逻辑
+    if (current >= upExp && role_level < 100) {
+      current -= upExp;
+      // 角色升级
+      role_level++;
+      // 获取境界对应属性增幅
+      const { attr } = Realm[role_realm];
+      const { atk, def, agile } = RoleAttr;
+      // 根据职业选择升级属性加成
+      switch (role_career) {
+        case 1:
+        case 4:
+        case 7:
+          base = { ...atk };
+          break;
+        case 2:
+        case 5:
+        case 8:
+          base = { ...def };
+          break;
+        default:
+          base = { ...agile };
       }
-      const update = {
-        role_exp: `${current}/${upExp}`,
-        role_level,
-      }
-      if (callback) {
-        // 计算经验时，还有其他需要更新的数据
-        callback(role, update);
-      }
-
-      if (base) {
-        const basePool = JSON.parse(base_pool);
-        basePool.base = base;
-        update['base_pool'] = JSON.stringify(basePool);
-      }
-      // 更新角色信息
-      this.updateRoleInfo(req, update);
-      return;
+      Object.keys(base).forEach(key => {
+        base[key] *= attr * role_level;
+      })
+      upExp = this.computeUpLevel(role_level)
     }
+    const update = {
+      role_exp: `${current}/${upExp}`,
+      role_level,
+    }
+    if (callback) {
+      // 计算经验时，还有其他需要更新的数据
+      callback(roleInfo, update);
+    }
+    if (base) {
+      base_pool.base = base;
+      update['base_pool'] = JSON.stringify(base_pool);
+    }
+    Global.updateRoleGlobal(req, update);
+
   }
 };
