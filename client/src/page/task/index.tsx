@@ -5,6 +5,8 @@ import { getTaskDetail, getTaskList, doneTask } from '@cgi/taks';
 
 
 export const Task = () => {
+    const [error, setError] = useState('')
+    const [updata, setUpdata]: any[] = useState(false);
     const [taskList, setTaskList]: any[] = useState([]);
     const [taskDetail, setTaskDetail]: any = useState([]);
     const getDetail = (type) => {
@@ -16,15 +18,23 @@ export const Task = () => {
         Promise.all([getTaskList(), getTaskDetail()]).then((res) => {
             setTaskList(res[0].data);
             setTaskDetail(res[1].data);
+            setError('');
         })
-    }, [])
+    }, [updata])
 
     const deonTask = (type, in_x) => {
         doneTask({
             type,
             in_x
-        }).then((res)=>{
-            console.log(res,'res...')
+        }).then(({ data, message }) => {
+            if (message) {
+                setError(message);
+            } else if (typeof data === 'string') {
+                setUpdata(!updata);
+            } else {
+                backGrand();
+            }
+
         })
     }
 
@@ -32,22 +42,22 @@ export const Task = () => {
         <div>
             <div>
                 {
-                    taskDetail.map(({ title, tips, reward = [], speed, type }, index) => {
+                    taskDetail.map(({ title, tips, reward = [], speed, type, btn }, index) => {
                         return (
                             <div key={index}>
                                 <div className='g_b'>{title}</div>
                                 <div>描述：{tips}</div>
                                 <div>奖励：{reward}</div>
                                 <div>进度：{speed} </div>
-                                <span><span className='g_u_end' onClick={() => { deonTask(type, index) }}>领取奖励</span></span>
+                                <span>
+                                    {btn && <span className='g_u_end' onClick={() => { deonTask(type, index) }}>{btn}</span>}
+                                </span>
                             </div>
                         )
                     })
                 }
-
-
+                {error && <div style={{ color: 'red' }}>提示：{error}</div>}
             </div>
-
             <div>
                 <div>===========================</div>
                 {

@@ -1,5 +1,6 @@
 const { grand } = require("../table/grand");
 const Global = require("../global");
+const taskFn = require('./taskFn');
 
 module.exports = {
   getGrand: function (id, x, y) {
@@ -8,28 +9,28 @@ module.exports = {
     if (data[x + 1] && Boolean(data[x + 1][y])) {
       direction.push({
         lable: "北",
-        value: `${name}(${x + 2},${y + 1})`,
+        value: `${name}(${x + 2},${y + 1}) ↑`,
         dir: "u"
       });
     }
     if (Boolean(data[x][y + 1])) {
       direction.push({
         lable: "东",
-        value: `${name}(${x + 1},${y + 2})`,
+        value: `${name}(${x + 1},${y + 2})→`,
         dir: "r"
       });
     }
     if (Boolean(data[x][y - 1])) {
       direction.push({
         lable: "西",
-        value: `${name}(${x + 1},${y})`,
+        value: `${name}(${x + 1},${y})←`,
         dir: "l"
       });
     }
     if (data[x - 1] && Boolean(data[x - 1][y])) {
       direction.push({
         lable: "南",
-        value: `${name}(${x},${y + 1})`,
+        value: `${name}(${x},${y + 1}) ↓`,
         dir: "d"
       });
     }
@@ -52,8 +53,8 @@ module.exports = {
       });
       ele.push(eleItme)
     });
-    const { role } = Global.getUserRole(req);
-    Global.taskLoop[role.id]
+    // 获取任务临时元素
+    taskFn.grandTaskEle(req, address, ele,dirList);
     return {
       name,
       x: x + 1,

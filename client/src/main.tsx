@@ -5,6 +5,7 @@ import Root from './router';
 
 import './global.less';
 import 'lib-flexible';
+import 'autoprefixer';
 ReactDOM.render(
     <ModelContext>
        <Root />

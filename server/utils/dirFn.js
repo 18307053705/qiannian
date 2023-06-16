@@ -14,12 +14,8 @@ const mapDir = {
 module.exports = {
   mapDir,
   dirControl: function (req, res) {
-    // 所有指令，必须是可执行指令状态
-    // 获取对应角色全局地图指令
-    const { dirDisable, error, eleDir = [], moveDir = [] } = Global.grandDir.get(req, res, true) || {};
-    if (dirDisable || error) {
-      throw ERR_MEUN.DIR;
-    }
+    // 获取对应角色指令
+    const { eleDir = [], moveDir = [] } = Global.getDir(req) || {};
     const { dir } = req.body;
     // 选择角色进入地图指令
     if (dir == -1) {
@@ -116,16 +112,17 @@ module.exports = {
     // 获取地图玩家信息
     const players = await roleFn.getAddressPlayers(req, address);
     // 获取地图元素信息
-    const { dir, ...data } = grandFn.getGrandInfo(req,address, players);
+    const { dir, ...data } = grandFn.getGrandInfo(req, address, players);
     // 更新对应角色全局地图指令
-    Global.grandDir.set(req, { moveDir: data.grand.map(({ dir }) => dir), eleDir: dir });
+    // Global.grandDir.set(req, { moveDir: data.grand.map(({ dir }) => dir), eleDir: dir, address });
+    Global.setDir(req, { moveDir: data.grand.map(({ dir }) => dir), eleDir: dir, address });
     res.send({
       code: 0,
       data
     });
   },
   panelDir: function (dirInfo, req, res) {
-    Global.grandDir.set(req, { extDir: dirInfo });
+    Global.setDir(req, { extDir: dirInfo });
     const { dir, type } = dirInfo;
     let path = '';
     // 怪物元素，进入战斗界面

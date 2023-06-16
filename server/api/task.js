@@ -1,11 +1,11 @@
 const express = require("express");
 const router = new express.Router();
 const Global = require('../global')
-const taskTable = require('../table/task');
-const knapsackTable = require('../table/knapsack');
 const knapsackFn = require('../utils/knapsackFn');
 const taskFn = require('../utils/taskFn');
 const roleFn = require('../utils/roleFn');
+const dirFn = require('../utils/dirFn');
+const taskTable = require('../table/task');
 const TASK_MEUN = {
     main: '主线任务',
     branch: '支线任务',
@@ -15,8 +15,9 @@ const TASK_MEUN = {
     exploit: '每日功勋',
     chance: '奇遇任务',
     copy: '副本任务',
-
 }
+
+const DAILY_TASK_KEY = taskFn.DAILY_TASK_KEY;
 
 router.post("/getTaskList", (req, res) => {
     const { role } = Global.getUserRole(req);
@@ -29,13 +30,10 @@ router.post("/getTaskList", (req, res) => {
     })
     res.send({
         code: 0,
-        data: taskList,
-        task,
+        data: taskList
     })
 });
 
-
-const dailyTaskKey = ['exp', 'tael', 'world', 'exploit'];
 
 router.post("/getTaskDetail", async (req, res) => {
     const { role } = Global.getUserRole(req);
@@ -44,9 +42,9 @@ router.post("/getTaskDetail", async (req, res) => {
     if (tasks && tasks.length) {
         const { data } = await knapsackFn.getKnapsackInfo(req, 1);
         // 判断是否为每日任务
-        if (dailyTaskKey.includes(type)) {
+        if (DAILY_TASK_KEY.includes(type)) {
             const task = tasks[0] ? tasks[0] : (tasks[0] = taskFn.createTask({ req, type }));
-            const { text } = taskFn.speedTask(task['complete'], task, data);
+            const { state, text } = taskFn.speedTask(task['complete'], task, data);
             res.send({
                 code: 0,
                 data: [{
@@ -55,18 +53,30 @@ router.post("/getTaskDetail", async (req, res) => {
                     reward: task.reward['text'],
                     speed: text,
                     type,
+                    btn: state ? '领取奖励' : ''
                 }],
             })
             return;
         }
         if (type === 'main') {
-            const taskList = tasks.map((task) => ({
-                title: task['title'],
-                tips: task['tips'],
-                reward: task.reward['text'],
-                speed: taskFn.speedTask(task['complete'], task, data)['text'],
-                type,
-            }));
+            const taskList = tasks.map((task) => {
+                const { grand } = task;
+                // 没有条件代表为对话型任务
+                const { state, text } = task['complete']
+                    ? taskFn.speedTask(task['complete'], task, data)
+                    : {
+                        text: `对话${grand.targetNpc.name}(未完成)`,
+                        state: false,
+                    };
+                return ({
+                    title: task['title'],
+                    tips: task['tips'],
+                    reward: task.reward['text'],
+                    speed: text,
+                    type,
+                    btn: state ? '前往领取' : ''
+                })
+            });
             res.send({
                 code: 0,
                 data: taskList
@@ -83,8 +93,6 @@ router.post("/getTaskDetail", async (req, res) => {
 
 });
 
-
-
 router.post("/doneTask", async (req, res) => {
     const { in_x, type } = req.body;
     if (!(in_x !== undefined && type)) {
@@ -95,97 +103,157 @@ router.post("/doneTask", async (req, res) => {
         return;
     }
     const { role } = Global.getUserRole(req);
+    const dir = Global.grandDir.dir[role.id];
     const tasks = Global.taskLoop[role.id][type];
-
-    if (tasks && tasks.length) {
-        let { data, tael: oldTael } = await knapsackFn.getKnapsackInfo(req, 1);
-        const task = dailyTaskKey.includes(type) ? tasks[0] : tasks[in_x];
-        const speed = taskFn.speedTask(task['complete'], task, data);
-         // 判断任务是否完成
-         if (!speed['state']) {
+    if (type === 'main') {
+        const task = tasks[in_x];
+        const { npc } = task['grand'];
+        if (dir['address'] !== npc['address']) {
+            dirFn.tpDir(npc['address'], req, res);
+        } else {
             res.send({
                 code: 0,
-                message: '任务未完成',
-            })
+                data: {}
+            });
+        }
+        return;
+    }
+    if (DAILY_TASK_KEY.includes(type) && tasks[0]) {
+        const data = await taskFn.getTaskReward(req, res, tasks[0]);
+        // 每日任务逻辑
+        if (!data) {
+            Global.taskLoop[role.id][type].splice(0, 1);
+            res.send({
+                code: 0,
+                data: '领取奖励成功'
+            });
             return;
         }
-        const { reward } = task;
-        if (reward['knapsack']) {
-            const { tael, article } = reward['knapsack'];
-            if (tael) {
-                oldTael += tael;
-            }
-            if (article) {
-                const len = data.length;
-                const { artReward, equipReward } = article;
-                // 物品奖励
-                if (artReward) {
-                    for (let index = 0; index < len; index++) {
-                        const { p, id, s } = data[index];
-                        // 判断物品id与物品类型是否相同
-                        if (artReward[id] && artReward[id].p == p) {
-                            const { s: num } = artReward[id];
-                            // 找到对应id,判断是否可以继续叠加
-                            if (s + num <= knapsackTable.Maxs) {
-                                data[index]['s'] += num;
-                                delete artReward[id];
-                            } else {
-                                artReward[id]['num2'] = data[index]['s'] + num - knapsackTable.Maxs;
-                                data[index]['s'] = knapsackTable.Maxs;
+        res.send(data);
+    };
+});
+
+// 获取任务剧情
+router.post("/getTaskStory", async (req, res) => {
+    // return;
+    const { role_id,can_task_pool,task_pool } = await roleFn.getRoleInfo(req, res);
+    // 获取指令池,npc对应任务信息
+    const { extDir } = Global.getDir(req) || { extDir: undefined };
+    console.log(Global.getDir[role_id],'Global.getDir[role_id]')
+    if (extDir) {
+
+        const { taskType, taskId, activation } = extDir;
+        console.log('extDir')
+        const backInfo = {
+            taskId,
+            state: 0
+        };
+        // 判断是否接取该任务,是则获取对应奖励
+        if (activation) {
+            const task = Global.taskLoop[role_id][taskType].find(({ id }) => id === taskId);
+            if (task) {
+                // 返回信息
+                const result = await taskFn.getTaskReward(req, res, task, (roleInfo, updata) => {
+                    // 已领取任务信息处理
+                    const taskLoop = JSON.parse(roleInfo.task_pool);
+                    taskLoop[taskType] = taskLoop[taskType].filter((id) => (id !== taskId));
+                    updata['task_pool'] = JSON.stringify(taskLoop);
+                    Global.taskLoop[role_id][taskType] = Global.taskLoop[role_id][taskType].filter(({ id }) => (id !== taskId));
+                    // 可领取任务处理
+                    if (task['nextTask'] !== -1) {
+                        // 下一环任务加入可领取列表
+                        const caTaskPool = JSON.parse(roleInfo.can_task_pool);
+                        caTaskPool[taskType].push(task['nextTask']);
+                        updata['can_task_pool'] = JSON.stringify(caTaskPool);
+                        Global.canTaskPool[role_id][taskType].push(task['nextTask']);
+                        // 判断下一环任务是否还是当前npc
+                        const { npc } = taskTable[taskType][task['nextTask']]['grand'];
+                        if (extDir['address'] === npc['address'] && npc['id'] === extDir.id) {
+                            // 是则更改npc指令信息
+                            // 前端操作展示：继续, 返回任务id
+                            Global.setDir(req, { extDir: { ...extDir, activation: false, taskId: task['nextTask'] } });
+                            backInfo['taskId'] = taskId;
+                        } else {
+                            // 否 返回传送npc信息：坐标，名字
+                            // 前端操作展示：点击传送
+                            backInfo['tpNpc'] = {
+                                address: npc['address'],
+                                name: npc['name'],
                             }
                         }
-                        // 全部处理完,结束循环
-                        if (JSON.stringify(artReward) === '{}') {
-                            index = knapsackTable.size;
-                        }
+
                     }
-                    //  遍历结束还存在物品奖励，说明物品为新增
-                    Object.keys(artReward).forEach(key => {
-                        const { id, type, n, s, num2 } = artReward[key];
-                        data.push({ id, n, p: type, s: num2 || s });
-                        delete artReward[key];
-                    })
-                }
-                // 装备奖励
-                if (equipReward) {
-                    Object.keys(equipReward).forEach(key => {
-                        data.push(equipReward[key]);
-                        delete equipReward[key];
-                    })
-                }
+                });
+                backInfo['reward'] = task['reward']['text'];
+                backInfo['state'] = result ? 2 : 1;
+                res.send(({
+                    code: 0,
+                    data: {
+                        ...backInfo,
+                        message: result && result.message
+                    },
+                }))
+                return;
             }
-            if (data.length > knapsackTable.size) {
+
+        } else {
+            // 否则领取任务
+            const task = Global.canTaskPool[role_id][taskType].find((id) => id === taskId);
+            if (task) {
+                can_task_pool[taskType] = can_task_pool[taskType].filter((id) => (taskId !== id));
+                task_pool[taskType].push(taskId);
+                // 更新全局任务信息
+                Global.canTaskPool[role_id] = can_task_pool;
+                const taskInfo = taskFn.createTask({ req, type: taskType, id: taskId });
+                Global.taskLoop[role_id][taskType].push(taskInfo);
+                const { freak, targetNpc } = taskInfo['grand'];
+                backInfo['tpNpc'] = {
+                    address: freak ? freak[0]['address'] : targetNpc['address'],
+                    name: freak ? freak[0]['name'] : targetNpc['name'],
+                }
+                // 更新数据库任务信息
+                const updata = {
+                    can_task_pool,
+                    task_pool,
+                }
+                roleFn.updateRoleInfo(req, updata);
                 res.send({
                     code: 0,
-                    message: '背包已满,请先清理背包',
-                    data: { data, oldTael }
+                    data: backInfo,
                 })
                 return;
             }
 
         }
-        roleFn.updateKnapsack(req,{tael:oldTael,data:JSON.stringify(data)});
-        if (reward['role']) {
-            const { role_exp = 0, reputation_pool={} } = reward['role'];
-            roleFn.computeRoleLevel(req, res, role_exp, (role, updata) => {
-                const requtation = JSON.parse(role.reputation_pool);
-                Object.keys(reputation_pool).forEach((key)=>{
-                    requtation[key] =  requtation[key] ? requtation[key] + reputation_pool[key] : reputation_pool[key];
-                })
-                updata['reputation_pool'] = JSON.stringify(requtation);
-            })
-        }
+    }
+    res.send({
+        code: 10005,
+        message: '任务信息异常'
+    })
+});
+
+
+
+router.post("/taskNpc", async (req, res) => {
+    const { address } = req.body;
+    if (!address) {
         res.send({
-            code: 0,
-            data: '',
+            code: 10005,
+            message: '参数错误'
         })
         return;
     }
-
+    const { role_id } = Global.getUserRole(req);
+    const { extDir } = Global.grandDir.dir[role_id];
+    if (extDir['address'] !== address) {
+        dirFn.tpDir(address, req, res);
+        return;
+    }
     res.send({
         code: 0,
         data: ''
     })
 });
+
 
 module.exports = router;

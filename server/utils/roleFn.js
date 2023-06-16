@@ -5,49 +5,36 @@ const { roleAttr: RoleAttr } = require("../table/attribute");
 const Global = require("../global");
 module.exports = {
   // 获取玩家信息
-  getRoleInfo: function (req, res, role_id) {
-    const { role, user } = Global.getUserRole(req);
-    return new Promise(resolve => {
-      mysql.sqlQuery(
-        `select * from role  where role_id="${role_id || role.id}"`,
-        results => {
-          if (results[0]) {
-            return resolve(results[0]);
-          }
-          errorFn.error(res, errorFn.ERR_MEUN.SEARCH);
-          return resolve('');
-        }
-      );
-    });
-  },
-  // 获取坐标对应的玩家数量
-  getAddressPlayers: function (req, address) {
-    const { role } = Global.getUserRole(req);
-    return new Promise(res => {
-      mysql.sqlQuery(
-        `select * from role  where address="${address}" and role_id<>"${role.id}"`,
-        results => {
-          return res(results);
-        }
-      );
-    });
+  getRoleInfo: async function (req, res, role_id) {
+    const roleInfo = Global.getRoleGlobal(req, role_id);
+    if (roleInfo) {
+      return roleInfo;
+    }
+    const { results } = mysql.asyncQuery(`select * from role  where role_id="${role_id || roleInfo.id}"`)
+    return results[0];
   },
   // 更新玩家信息
-  updateRoleInfo: function (req, data) {
-    const { role, user } = Global.getUserRole(req);
+  updateRoleInfo: async function (req, data, roleId) {
+    const { role_id, user_id } = Global.getRoleGlobal(req, data, roleId);
+    const res = Global.updateRoleGlobal(req, data, roleId);
+    if (res) {
+      return res
+    }
     const upData = [];
     Object.keys(data).forEach(key => {
       upData.push(`${key}='${data[key]}'`)
     })
-    return new Promise(res => {
-      mysql.sqlQuery(
-        `update role  SET ${upData.join(',')}  where user_id="${user}" and role_id="${role.id}"`,
-        results => {
-          return res(results);
-        }
-      );
-    });
+    const { results } = mysql.asyncQuery(`update role  SET ${upData.join(',')}  where user_id="${user_id}" and role_id="${role_id}"`);
+    return results
   },
+
+  // 获取坐标对应的玩家数量
+  getAddressPlayers: async function (req, address) {
+    const roleInfo = Global.getRoleGlobal(req);
+    const { results } = await mysql.asyncQuery(`select * from role  where address="${address}" and role_id<>"${roleInfo.id}"`);
+    return results;
+  },
+
   // 计算角色属性
   computeRoleAttr: function (req, res, results, update) {
     try {
@@ -239,7 +226,6 @@ module.exports = {
   computeRoleLevel: async function (req, res, exp, callback) {
     const role = await this.getRoleInfo(req, res);
     if (role) {
-
       let { role_level, role_exp, role_realm, role_career, base_pool } = role;
       let [oldExp, upExp] = role_exp.split('/');
       let current = Number(oldExp) + exp;

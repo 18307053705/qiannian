@@ -29,7 +29,8 @@ module.exports = {
     if ([...whiteApiList, ...roleApiList].includes(req.originalUrl)) {
       return true;
     }
-    return Global.roleLoop[req.cookies["q_uid"]];
+    return Global.getRoleGlobal(req);
+    // return Global.roleLoop[req.cookies["q_uid"]];
 
   }
 };

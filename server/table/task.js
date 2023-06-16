@@ -2,7 +2,12 @@
 const Equip = require('./equip');
 const knapsack = require('./knapsack');
 const { ELEMENT_5, ELEMENT_1 } = require('./element');
-
+// 全部奖励实例
+// article: [Equip[1], { ...knapsack[1], num: 5 }],
+// exp: 100000,
+// tael: 100000,
+// exploit: 5000,
+// world: 5000,
 
 module.exports = {
     main: {
@@ -11,29 +16,51 @@ module.exports = {
             title: '斩杀魔尊分身',
             tips: '前往魔界最深处斩杀魔尊分身(剑舞城2,1),然后回到找天机老人剑舞城(1,1)',
             reward: {
-                article: [Equip[1], { ...knapsack[1], num: 5 }],
-                exploit: 5000,
-                world: 5000,
+                article: [Equip[96]],
                 exp: 100000,
-                tael: 100000,
             },
             grand: {
-                '100001,0,0': {
-                    npc: [ELEMENT_1[1000001]]
+                npc: {
+                    ...ELEMENT_1[1000001],
+                    address: '10000,0,0',
+
                 },
-                '100001,1,0': {
-                    freak: [ELEMENT_5[5000010]]
-                }
+                targetNpc: {
+                    ...ELEMENT_1[1000000],
+                    address: '10000,0,0',
+                },
+
             },
-            complete: {
-                fight: [{ id: ELEMENT_5[5000010]['id'], name: ELEMENT_5[5000010]['name'], num: 1 }],
-            },
-            nextTask: 2
+            nextTask: 2,
         },
         2: {
             id: 2,
             title: '斩杀魔尊',
-            tips: '前往魔界最深处斩杀魔尊重楼(剑舞城2,1),然后回到找天机老人剑舞城(1,1)',
+            tips: '前往魔界最深处斩杀魔尊重楼(剑舞城2,1),然后回到找白胡子老人剑舞城(2,1)',
+            reward: {
+                article: [Equip[97]],
+                exp: 100000,
+            },
+            grand: {
+                npc: {
+                    ...ELEMENT_1[1000001],
+                    address: '10000,0,0',
+                },
+                freak: [{
+                    ...ELEMENT_5[5000011],
+                    address: '10000,0,0',
+                }]
+            },
+            complete: {
+                fight: [{ id: ELEMENT_5[5000011]['id'], name: ELEMENT_5[5000011]['name'], num: 1 }],
+                article: [{ id: knapsack[1]['id'], p: knapsack[1]['type'], num: 1 }]
+            },
+            nextTask: 3
+        },
+        3: {
+            id: 3,
+            title: '追杀魔尊',
+            tips: '魔尊败逃，赶紧追过去吧,魔尊重楼(剑舞城2,1),然后回到找天机老人剑舞城(1,1)',
             reward: {
                 article: [Equip[1], { ...knapsack[1], num: 5 }],
                 exp: 100000,
@@ -42,17 +69,16 @@ module.exports = {
                 world: 5000,
             },
             grand: {
-                '100001,0,0': {
-                    npc: [ELEMENT_1[1000001]]
+                npc: {
+                    ...ELEMENT_1[1000002],
+                    address: '10000,0,0',
                 },
-                '100001,1,0': {
-                    freak: [ELEMENT_5[5000011]]
-                }
-
-            },
-            complete: {
-                fight: [{ id: ELEMENT_5[5000011]['id'], name: ELEMENT_5[5000011]['name'], num: 1 }],
-                article: [{ id: knapsack[1]['id'], p: knapsack[1]['type'], num: 1 }]
+                targetNpc: [
+                    {
+                        ...ELEMENT_1[1000000],
+                        address: '10000,0,0',
+                    }
+                ],
             },
             nextTask: -1
         },
@@ -86,6 +112,5 @@ module.exports = {
                 fight: [{ id: ELEMENT_5[5000001]['id'], name: ELEMENT_5[5000001]['name'], num: 3 }],
             }
         },
-    }
-
+    },
 }

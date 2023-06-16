@@ -90,8 +90,8 @@ export const config: RouterType[] = [
   },
   {
     name: "剧情界面",
-    path: "/scene",
-    component: lazy(() => import("@page/scene"))
+    path: "/taskScene",
+    component: lazy(() => import("@page/taskScene"))
   }
 ];
 

@@ -19,8 +19,12 @@ const ELEMENT_1 = {
   1000001: {
     id: 1000001,
     name: "天机老人",
-    type: 1,
-    dir: '/task',
+    type: 1
+  },
+  1000002: {
+    id: 1000002,
+    name: "白胡子老人",
+    type: 1
   }
 };
 

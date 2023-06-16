@@ -1,26 +1,25 @@
 const { ERR_MEUN, error } = require("../utils/errorFn");
+const roleG = require("./roleG");
+const grandG = require("./grandG");
 module.exports = {
-  grandDir: {
-    dir: {
-      // user_id_role_id: {
-      //   moveDir: [],
-      //   eleDir: {}
-      //   extDir:{} 元素面板扩展信息，比如怪物元素：怪物id，npc元素：剧情ID，建筑元素：活动ID，背包ID，仓库ID等..
-      //   dirDisable:false
-      // }
-    },
-    get: function (req, getDisable) {
-      const _this = module.exports;
-      const { role } = _this.getUserRole(req);
-      const dir = _this["grandDir"]["dir"][role.id];
-      return (!dir && !getDisable) ? { error: ERR_MEUN.ROLE } : dir;
-    },
-    set: function (req, dir) {
-      const _this = module.exports;
-      const { role } = _this.getUserRole(req);
-      _this["grandDir"]["dir"][role.id] = dir;
-    }
-  },
+  ...roleG,
+  ...grandG,
+  // grandDir: {
+  //   dir: {
+
+  //   },
+  //   get: function (req, getDisable) {
+  //     const _this = module.exports;
+  //     const { role } = _this.getUserRole(req);
+  //     const dir = _this["grandDir"]["dir"][role.id];
+  //     return (!dir && !getDisable) ? { error: ERR_MEUN.ROLE } : dir;
+  //   },
+  //   set: function (req, dir) {
+  //     const _this = module.exports;
+  //     const { role } = _this.getUserRole(req);
+  //     _this["grandDir"]["dir"][role.id] = dir;
+  //   }
+  // },
   // 战斗池
   fightLoop: {
     fightRoleId: {
@@ -61,6 +60,8 @@ module.exports = {
     // main 
     // key：角色id { main:[{id:1,in_x:0}],branch:[],money:[], world:[],chance:[],exploit:[]}
   },
+  // 可接任务池
+  canTaskPool: {},
   // 临时聊天缓存
 };
 

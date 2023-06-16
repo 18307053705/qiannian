@@ -1,7 +1,7 @@
 const Global = require('../global');
-const mysql = require('../mysql');
 const roleFn = require('./roleFn');
 const taskTable = require('../table/task');
+const knapsackTable = require('../table/knapsack');
 const knapsackFn = require('./knapsackFn');
 const DAILY_TASK_KEY = ['exp', 'tael', 'world', 'exploit'];
 const REWARD_MEUN = {
@@ -11,21 +11,28 @@ const REWARD_MEUN = {
   world: '世界声望',
 }
 module.exports = {
+  DAILY_TASK_KEY,
   // 重置任务池
   restTask: function () {
     Global.taskLoop = {};
+    Global.canTaskPool = {}
   },
   // 初始化任务池
-  initTask: async function (role_id, roleInfo) {
-    const taskLoop = JSON.parse(roleInfo.task_pool);
-    const level = roleInfo.role_level;
+  initTask: async function (req, roleInfo) {
+    const { can_task_pool, task_pool, role_level, role_id } = Global.getRoleGlobal(req);
+    // 可领取任务池
+    // const canTaskPool = JSON.parse(roleInfo.can_task_pool);
+    Global.canTaskPool[role_id] = can_task_pool;
+    // 已领取的任务池
+    // const taskLoop = JSON.parse(roleInfo.task_pool);
+    // const role_level = roleInfo.role_role_level;
     let exploitNum = 0;
     let taskNum = 8;
-    if (level > 65) {
+    if (role_level > 65) {
       exploitNum = 8;
       taskNum = 12;
     }
-    if (level > 74) {
+    if (role_level > 74) {
       exploitNum = 10;
       taskNum = 15;
     }
@@ -34,8 +41,8 @@ module.exports = {
     const exp = new Array(taskNum);
 
     const tasks = {};
-    Object.keys(taskLoop).forEach((type) => {
-      tasks[type] = taskLoop[type].map((id) => this.createTask({ type, id }))
+    Object.keys(task_pool).forEach((type) => {
+      tasks[type] = task_pool[type].map((id) => this.createTask({ type, id }))
     })
 
     Global.taskLoop = {
@@ -101,19 +108,19 @@ module.exports = {
         let rewardItme = taskReward[key];
         if (key === 'exp') {
           reward['role']['role_exp'] = rewardItme;
-          text.push(`经验x${rewardItme}`);
+          text.push(`经验+${rewardItme}`);
           return;
         }
         if (key === 'tael') {
           reward['knapsack']['tael'] = rewardItme;
-          text.push(`银两x${rewardItme}`);
+          text.push(`银两+${rewardItme}`);
           return;
         }
         if (key === 'exploit' || key === 'world') {
           reward['role']['reputation_pool'] = {
             [key]: rewardItme
           }
-          text.push(`${REWARD_MEUN[key]}x${rewardItme}`);
+          text.push(`${REWARD_MEUN[key]}+${rewardItme}`);
           return;
         }
         if (key === 'article') {
@@ -121,7 +128,7 @@ module.exports = {
           const artReward = {};
           const equipReward = {};
           rewardItme.forEach(({ id, type, n, name, num = 1 }) => {
-            text.push(`${name || n}x${num || 1}`);
+            text.push(`${name || n}+${num || 1}`);
             if (type === 3) {
               equipReward[id] = { id, n: name, p: type, s: num, ext: '0_0_0_0_0_0_0' }
             } else {
@@ -148,7 +155,6 @@ module.exports = {
         text: text.join(',')
       }
       return task;
-
     }
   },
   // 监听任务池
@@ -165,7 +171,7 @@ module.exports = {
         let task = undefined;
         // 主线任务
         if (key === 'main') {
-          task = taskTable['main'][itme.id]['group'][itme.in_x];
+          task = taskTable['main'][itme.id];
         }
 
         // 每日任务
@@ -224,8 +230,8 @@ module.exports = {
     }
 
     return {
-      text: speed.join(','),
-      state: done
+      text: `${speed.join(',')}(${done ? '已完成' : '未完成'})`,
+      state: done,
     };
   },
   // 计算每日任务经验
@@ -252,19 +258,129 @@ module.exports = {
         return parseInt(exp * 0.002);
     }
   },
-
   // 获取地图临时任务元素
   // type main主线 copy:副本 支线:branch 目前只有主线有临时npc和怪物，后续考虑支线与副本
-  grandTask: function (req, address) {
-    const { role } = Global.getUserRole(req);
-    const tasks = Global.taskLoop[role.id]['mian'];
-    const ele = [];
-    tasks.forEach((task) => {
-      const taskInfo = taskTable['main'][task.id];
-      console.log(taskInfo)
+  grandTaskEle: function (req, address, eles, dirList) {
+    const {role_id} = Global.getRoleGlobal(req);
+    const tasks = Global.taskLoop[role_id]['main'] || [];
+    const canTask = Global.canTaskPool[role_id]['main'] || [];
+    const npcEle = [];
+    const freakEle = [];
+    tasks.forEach(({ id, grand }) => {
+      // targetNpc 目前暂未定义对话型任务
+      const { npc, freak = [], targetNpc = {} } = grand;
+      if (npc.address === address) {
+        // 加入指令列表
+        dirList[npc.id] = { ...npc, taskId: id, taskType: 'main', dir: '/taskScene', activation: true };
+        // 加入元素列表
+        npcEle.push({ name: npc.name, cs: 'g_doubt', dir: npc.id })
+      }
+      freak.forEach((itme) => {
+        if (itme.address === address) {
+          // 加入指令列表
+          dirList[itme.id] = itme;
+          // 加入元素列表
+          freakEle.push({ name: itme.name, cs: 'g_doubt', dir: itme.id })
+        }
+      })
+      if (targetNpc.address === address) {
+        // 加入指令列表
+        dirList[targetNpc.id] = { ...targetNpc, taskId: id, taskType: 'main', dir: '/taskScene', activation: true, targetNpc: true };
+        // 加入元素列表
+        npcEle.push({ name: targetNpc.name, cs: 'g_doubt', dir: targetNpc.id })
+      }
     })
+    canTask.forEach((id) => {
+      const { grand } = JSON.parse(JSON.stringify(taskTable['main'][id]));
+      const { npc } = grand;
+      if (npc.address === address) {
+        // 加入指令列表
+        dirList[npc.id] = { ...npc, taskId: id, taskType: 'main', dir: '/taskScene', activation: false };
+        // 加入元素列表
+        npcEle.push({ name: npc.name, cs: 'g_sigh', dir: npc.id })
+      }
+    })
+    freakEle.length && eles.push(freakEle);
+    npcEle.length && eles.push(npcEle);
+  },
+  // 获取任务奖励
+  getTaskReward: async function (req, res, task, callback) {
+    let { data, tael: oldTael } = await knapsackFn.getKnapsackInfo(req, 1);
+    const speed = task['complete'] ? this.speedTask(task['complete'], task, data) : { state: true };
+    // 判断任务是否完成
+    if (!speed['state']) {
+      return {
+        code: 0,
+        message: speed['text'],
+      };
+    }
+    const { reward } = task;
+    if (reward['knapsack']) {
+      const { tael, article } = reward['knapsack'];
+      if (tael) {
+        oldTael += tael;
+      }
+      if (article) {
+        const len = data.length;
+        const { artReward, equipReward } = article;
+        // 物品奖励
+        if (artReward) {
+          for (let index = 0; index < len; index++) {
+            const { p, id, s } = data[index];
+            // 判断物品id与物品类型是否相同
+            if (artReward[id] && artReward[id].p == p) {
+              const { s: num } = artReward[id];
+              // 找到对应id,判断是否可以继续叠加
+              if (s + num <= knapsackTable.Maxs) {
+                data[index]['s'] += num;
+                delete artReward[id];
+              } else {
+                artReward[id]['num2'] = data[index]['s'] + num - knapsackTable.Maxs;
+                data[index]['s'] = knapsackTable.Maxs;
+              }
+            }
+            // 全部处理完,结束循环
+            if (JSON.stringify(artReward) === '{}') {
+              index = knapsackTable.size;
+            }
+          }
+          //  遍历结束还存在物品奖励，说明物品为新增
+          Object.keys(artReward).forEach(key => {
+            const { id, type, n, s, num2 } = artReward[key];
+            data.push({ id, n, p: type, s: num2 || s });
+            delete artReward[key];
+          })
+        }
+        // 装备奖励
+        if (equipReward) {
+          Object.keys(equipReward).forEach(key => {
+            data.push(equipReward[key]);
+            delete equipReward[key];
+          })
+        }
+      }
+      if (data.length > knapsackTable.size) {
+        return {
+          code: 0,
+          message: '背包已满,请先清理背包'
+        }
+      }
 
-
-
+    }
+    await roleFn.updateKnapsack(req, { tael: oldTael, data: JSON.stringify(data) });
+    if (reward['role'] || callback) {
+      const { role_exp = 0, reputation_pool = {} } = reward['role'];
+      await roleFn.computeRoleLevel(req, res, role_exp, (role, updata) => {
+        // 处理声望
+        const requtation = JSON.parse(role.reputation_pool);
+        Object.keys(reputation_pool).forEach((key) => {
+          requtation[key] = requtation[key] ? requtation[key] + reputation_pool[key] : reputation_pool[key];
+        })
+        updata['reputation_pool'] = JSON.stringify(requtation);
+        callback && callback(role, updata);
+      })
+    }
+    return;
   }
+
 };

@@ -91,17 +91,17 @@ module.exports = {
               },
             },
           },
-          // {
-          //   loader: 'postcss-loader',
-          //   options: {
-          //     plugins: () => [
-          //       require('autoprefixer')({
-          //         // 最近两个版本、使用人数所占比例、兼容哪个版本以上
-          //         browsers: ['last 2 version', '>1%', 'ios 7']
-          //       })
-          //     ]
-          //   }
-          // },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer')({
+                  // 最近两个版本、使用人数所占比例、兼容哪个版本以上
+                  browsers: ['last 2 version', '>1%', 'ios 7']
+                })
+              ]
+            }
+          },
 
         ],
       },

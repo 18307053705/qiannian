@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("../mysql");
 const Global = require("../global");
 const roleFn = require("../utils/roleFn");
+const knapsackFn = require("../utils/knapsackFn");
 const router = new express.Router();
 
 const TYPE_MEUN = {
@@ -15,29 +16,45 @@ const TYPE_MEUN_NAME = {
     2: 'intersect',
     3: 'ranks',
 }
+
+
+
 // 创建势力
 router.post("/create", async (req, res) => {
     const { type, name, text } = req.body;
     if (!type || !name) {
         res.send({
-            code: 100007,
+            code: 100005,
             message: '参数有误'
         })
         return;
     }
-    const { results } = await mysql.asyncQuery(`select * from socialize  where name="${name}"`);
+    const { results } = await mysql.asyncQuery(`select * from socialize  where name="${name}" and type=${type} `);
     if (results[0]) {
         res.send({
-            code: 100004,
+            code: 0,
             message: `已经存在该${TYPE_MEUN[type]}`
         })
         return;
     }
+    const { tael } = await knapsackFn.getKnapsackInfo(req, 1);
+    if (tael < 1000000) {
+        res.send({
+            code: 0,
+            message: '银两不足'
+        })
+        return;
+    }
+   
+
     const role = await roleFn.getRoleInfo(req, res);
-    const compose = [{ id: role.role_id, name: role_name, status: 1 }]
+    const compose = [{ id: role.role_id, name: role_name, level: 1 }]
     const petSql = "insert into socialize(name,level,compose,text,type) values(?,?,?,?,?)";
     const petData = [name, 1, JSON.stringify(compose), text || '', type];
-    mysql.sqlAdd(petSql, petData, () => { });
+    await mysql.asyncAdd(petSql, petData);
+    await knapsackFn.updateKnapsack(req, {
+        tael: tael - 1000000
+    });
     res.send({
         code: 0,
         data: '创建成功'
