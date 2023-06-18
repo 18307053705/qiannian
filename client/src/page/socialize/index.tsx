@@ -1,38 +1,21 @@
 import React, { useState, useEffect } from 'react';
-
 import { List } from '@components/index';
-import { getsocializeList, getsocializeDetail, socializeApply, socializeActive, socializeAdjust } from '@cgi/socialize';
+import { getsocializeList, getsocializeDetail, socializeApply, socializeActive, socializeAdjust, socializeExit } from '@cgi/socialize';
 import { backGrand } from '@utils/grand'
 import Gang from './gang';
+import Intersect from './intersect';
+import Ranks from './ranks';
 import Create from './create';
+import Material from './material';
+import Tael from './tael';
+import Member from './member';
 const TYPE_MEUN = {
     1: '帮会',
     2: '庄园',
     3: '队伍',
 }
 
-const getRoleLevelName = (type, level) => {
-    if (type === 1) {
-        return {
-            text: ['帮主', '副帮主', '长老', '精英', '成员'][level - 1],
-            limits: level < 4
-        }
-    }
-    if (type === 2) {
-        return {
-            text: ['庄主', '副庄主', '精英', '成员', '成员'][level - 1],
-            limits: level < 3
-        }
-    }
-    return {
-        text: ['队长', '成员', '成员', '成员', '成员'][level - 1],
-        limits: level === 1
-    }
-
-
-}
-
-type KeyType = 'detai' | 'list' | 'apply' | 'member' | 'adjust' | 'create';
+type KeyType = 'detai' | 'list' | 'apply' | 'member' | 'adjust' | 'create' | 'material' | 'tael';
 
 export const Socialize = ({ history }) => {
     const [error, setError] = useState('');
@@ -42,8 +25,34 @@ export const Socialize = ({ history }) => {
     const [pageName, setPageName] = useState<KeyType>('detai');
     const [socializeList, setSocializeList] = useState([]);
     const [socialize, setSocializea] = useState();
-    const updataDetail = () => {
+    const [ok, setOk] = useState(false);
+    // 退出势力
+    const eixt = () => {
+        socializeExit({ type }).then(({ data }) => {
+            if (data) {
+                setUptate(!updata);
+                setPageName('detai');
+            }
+        })
+    }
+
+    // 创建势力回调
+    const createCb = ({ message }) => {
+        if (message) {
+            setError(message);
+            return;
+        }
+        setIsCreate(false);
+    }
+
+    useEffect(() => {
+        setError('');
+        setOk(false);
+    }, [pageName])
+    useEffect(() => {
         const { state } = history.location;
+        setType(state.type);
+        // 获取势力详情
         getsocializeDetail({ type: state.type }).then(({ data }) => {
             if (data) {
                 const list = data.compose.sort((a, b) => a.level - b.level);
@@ -57,18 +66,7 @@ export const Socialize = ({ history }) => {
                 setIsCreate(true);
             }
         })
-    }
-    const createCb = ({ message }) => {
-        if (message) {
-            setError(message);
-            return;
-        }
-        setIsCreate(false);
-    }
-    useEffect(() => {
-        const { state } = history.location;
-        setType(state.type);
-        updataDetail();
+        // 获取势力列表
         getsocializeList({ type: state.type }).then(({ data }) => {
             setSocializeList(data);
         })
@@ -105,59 +103,28 @@ export const Socialize = ({ history }) => {
 
     }
 
-    const active = ({ level, id }, index) => {
-        if (pageName === 'member' && level !== 1) {
-            return (
-                <div key={index}>
-                    <span
-
-                        className="g_u_end"
-                        style={{ marginLeft: '3px' }}
-                        onClick={() => { adjustClick(id, -1) }}
-                    >
-                        踢出{TYPE_MEUN[type]}
-                    </span>
-                </div>
-
-            )
-        }
-
-        if (type === 1 && level !== 1) {
-            return (
-                <div key={index}>
-                    {level !== 2 && <span className="g_u"><span onClick={() => { adjustClick(id, 2) }}>副帮主</span></span>}
-                    {level !== 3 && <span className="g_u"><span onClick={() => { adjustClick(id, 3) }}>长老</span></span>}
-                    {level !== 4 && <span className="g_u"><span onClick={() => { adjustClick(id, 4) }}>精英</span></span>}
-                    {level !== 5 && <span className="g_u"><span onClick={() => { adjustClick(id, 5) }}>成员</span></span>}
-                </div>
-            )
-        }
-
-        if (type === 2 && level !== 1) {
-            return (
-                <div key={index}>
-                    {level !== 2 && <span className="g_u"><span onClick={() => { adjustClick(id, 2) }}>副庄主</span></span>}
-                    {level !== 3 && <span className="g_u"><span onClick={() => { adjustClick(id, 3) }}>精英</span></span>}
-                    {level !== 5 && <span className="g_u"><span onClick={() => { adjustClick(id, 5) }}>成员</span></span>}
-                </div>
-            )
-        }
-        return null;
-    }
-
-
     return (
         <div>
             {error && <div style={{ color: 'red' }}>提示：{error}</div>}
+            {/* 创建势力 */}
             {pageName === 'detai' && isCreate && <Create type={type} createCb={createCb} />}
-
-            {
-                pageName === 'detai' && type == 1 && (
-                    <Gang updata={updata} socialize={socialize} setPageName={setPageName} />
-                )
-            }
-            {/* {pageName === 'detai' && type == 2 && <Intersect history={history}  socialize={socialize} />}
-            {pageName === 'detai' && type == 3 && <Ranks history={history}  socialize={socialize} />} */}
+            {/* 捐赠材料 */}
+            {pageName === 'material' && (<Material type={type} />)}
+            {/* 捐赠银两 */}
+            {pageName === 'tael' && (<Tael type={type} />)}
+            {/* 帮会界面 */}
+            {pageName === 'detai' && type == 1 && (<Gang socialize={socialize} setPageName={setPageName} />)}
+            {pageName === 'detai' && type == 2 && <Intersect socialize={socialize} setPageName={setPageName} />}
+            {pageName === 'detai' && type == 3 && (
+                <Ranks
+                    setPageName={setPageName}
+                    socialize={socialize}
+                    pageName={pageName}
+                    adjustClick={adjustClick}
+                    type={type}
+                    eixt={eixt} />
+            )}
+            {/* 势力列表 */}
             {
                 pageName === 'list' && <List
                     data={socializeList}
@@ -165,11 +132,11 @@ export const Socialize = ({ history }) => {
                     prefix={(row, index) => (
                         <span key={index}>{index}.{row.name}{type !== 3 && `(${row.level}级)`}</span>
                     )}
-                    active={({ soci_id }) => (
+                    active={({ soci_id }, index) => (
                         isCreate && (
                             <span
                                 className='g_u_end'
-                                key={soci_id}
+                                key={index}
                                 onClick={() => { applyClick(soci_id) }}
                             >
                                 加入{TYPE_MEUN[type]}
@@ -178,13 +145,14 @@ export const Socialize = ({ history }) => {
                     )}
                 />
             }
+            {/* 势力申请列表 */}
             {
                 pageName === 'apply' && <List
                     data={socialize.apply}
                     prefix_d={true}
-                    prefix={({ name, id }, index) => <span key={id}>{index}.{name}</span>}
-                    active={({ id }) => (
-                        <div key={id}>
+                    prefix={({ name}, index) => <span key={index}>{index}.{name}</span>}
+                    active={({ id }, index) => (
+                        <div key={index}>
                             <span className='g_u'><span onClick={() => { activeClick(id, 1) }}>通过</span></span>
                             <span className='g_u'><span onClick={() => { activeClick(id, 0) }}>拒绝</span></span>
                         </div>
@@ -193,26 +161,7 @@ export const Socialize = ({ history }) => {
             }
             {
                 (pageName === 'member' || pageName === 'adjust') && (
-                    <div>
-
-                        <List
-                            data={socialize.list}
-                            prefix_d={true}
-                            prefix={({ id, name, line, level }, index) => (
-                                <div key={id}>
-                                    <span className={line && 'g_u_end'}>
-                                        {index}.{name}
-                                        {line && `${line}级`}
-                                        ({getRoleLevelName(type, level).text})
-                                    </span>
-                                </div>
-                            )}
-                            active={active}
-                        />
-                        <span className='g_u_end'>
-                            {socialize.role_level === 1 ? `解散${TYPE_MEUN[type]}` : `退出${TYPE_MEUN[type]}`}
-                        </span>
-                    </div>
+                    <Member socialize={socialize} pageName={pageName} adjustClick={adjustClick} type={type} eixt={eixt} />
                 )
             }
             <div><span className="g_u_end" onClick={() => { setPageName('detai'); setUptate(!updata); }}>我的{TYPE_MEUN[type]}</span></div>

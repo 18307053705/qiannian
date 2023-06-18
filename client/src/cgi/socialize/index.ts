@@ -61,7 +61,7 @@ export const socializeAdjust = async (data: {
 };
 
 // 退出势力
-export const socializeExit = async (data: { id: string }) => {
+export const socializeExit = async (data: { type: socializeType }) => {
   return await post(socializeExitUrl, data);
 };
 

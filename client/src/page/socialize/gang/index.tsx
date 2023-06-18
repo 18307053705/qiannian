@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react';
-
-import Detail from './detail';
-import Material from './material';
-
-
-type PageType = 'detail' | 'tael' | 'material';
-
-export const Gang = ({ updata, socialize, setPageName }) => {
-    const [page, setPage] = useState<PageType>('detail');
-    if (!socialize) {
+import React from 'react';
+export const Detail = ({ socialize, setPageName }) => {
+    if(!socialize){
         return null;
     }
-    useEffect(() => {
-        setPage('detail');
-    }, [updata])
     return (
         <div>
-            {page === 'detail' && <Detail socialize={socialize} setPageName={setPageName} setPage={setPage} />}
-            {page === 'material' && <Material  />}
-
+            <div>{socialize.name}</div>
+            <div><span>帮主</span>：{socialize.mianInfo.name}</div>
+            <div><span>等级</span>：{socialize.level}级({socialize.exp})</div>
+            <div><span>成员</span>：{socialize.list.length}人</div>
+            <div><span>宣言</span>：{socialize.text || '暂无'}</div>
+            <div>
+                <span className='g_u'><span onClick={() => { setPageName('tael') }}>捐献银两</span></span>
+                <span className='g_u'><span onClick={() => { setPageName('material') }}>捐献材料</span></span>
+                <span className='g_u'><span>帮会装备</span></span>
+                {socialize.level === 5 && <span className='g_u'><span>修炼房</span></span>}
+            </div>
+            <div>
+                <span className='g_u'><span onClick={() => { setPageName('member') }}>帮会成员</span></span>
+                <span className='g_u'><span onClick={() => { setPageName('adjust') }}>人员调整</span></span>
+                <span className='g_u'><span onClick={() => { setPageName('apply') }}>入帮申请</span></span>
+            </div>
         </div>
     )
 
-
 }
 
-export default Gang;
+export default Detail;

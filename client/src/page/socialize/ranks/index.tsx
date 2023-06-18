@@ -1,30 +1,19 @@
-import React, { useState } from 'react';
-import Tab from '@components/tab';
-import RanksDetail from './ranksDetail';
-import List from '@components/list';
-const list = [
-    { value: 1, label: '我的队伍' },
-    { value: 2, label: '队伍列表' },
-]
-export const Gang = ({ history, data, socialize }) => {
-    const [key, setKey] = useState(1);
+import React from 'react';
+import Member from '../member';
+export const Detail = ({ type, pageName, adjustClick, socialize, eixt,setPageName }) => {
+    if (!socialize) {
+        return null;
+    }
     return (
         <div>
-            <Tab list={list} currentKey={key} onCheng={setKey} />
-            {
-                key === 1 ? <RanksDetail history={history} />
-                    : <List
-                        data={data}
-                        prefix={(row, index) => (<span>{index}.{row.name}</span>)}
-                        active={(row, index) => (<span>申请入队</span>)}
-                    />
-            }
-
-
+            <div>{socialize.name}</div>
+            <div><span>队长</span>：{socialize.mianInfo.name}</div>
+            <div><span>宣言</span>：{socialize.text || '暂无'}</div>
+            <Member socialize={socialize} pageName={pageName} adjustClick={adjustClick} type={type} eixt={eixt} />
+            <div><span className='g_u'><span onClick={() => { setPageName('apply') }}>入队申请</span></span></div>
         </div>
     )
 
-
 }
 
-export default Gang;
+export default Detail;

@@ -36,24 +36,51 @@ router.post("/create", async (req, res) => {
         })
         return;
     }
-    const { tael } = Global.getknapsackGlobal(req);
-    if (tael < 1000000) {
-        res.send({
-            code: 0,
-            message: '银两不足'
+    let { tael, data } = Global.getknapsackGlobal(req);
+    let tokenId = type === 1 ? 59 : 60;
+    let token = 0;
+    const chengData = [];
+    if (type !== 3) {
+        data.forEach((itme) => {
+            if (itme.id === tokenId && itme.p === 5) {
+                itme.s -= 1;
+                token = 1;
+                if (!itme.s) {
+                    return;
+                }
+            }
+            chengData.push(itme);
         })
-        return;
+    }
+
+    const sumeTael =  type === 3 ? 100000 : 5000000;
+    // 没有令牌则扣除银两
+    if(!token){
+        if (tael < sumeTael) {
+            res.send({
+                code: 0,
+                message: `银两不足${sumeTael}`
+            })
+            return;
+        }
     }
 
     const { role_id, role_name, socialize_pool } = Global.getRoleGlobal(req);
     const compose = [{ id: role_id, name: role_name, level: 1 }];
-    const petSql = "insert into socialize(name,level,compose,text,type,soci_id,apply,exp) values(?,?,?,?,?,?,?)";
+    const petSql = "insert into socialize(name,level,compose,text,type,soci_id,apply,exp) values(?,?,?,?,?,?,?,?)";
     const petData = [name, 1, JSON.stringify(compose), text || '', type, role_id, '[]', '0/10000'];
     await mysql.asyncAdd(petSql, petData);
-
-    Global.updateknapsackGlobal(req, {
-        tael: tael - 1000000
-    })
+    // 没有令牌消耗银两，反之消耗令牌
+    if(!token){
+        Global.updateknapsackGlobal(req, {
+            tael: tael - sumeTael
+        })
+    }else{
+        Global.updateknapsackGlobal(req, {
+            data: chengData
+        })
+    }
+   
     Global.updateRoleGlobal(req, {
         socialize_pool: {
             ...socialize_pool,
@@ -63,7 +90,6 @@ router.post("/create", async (req, res) => {
             }
         }
     })
-
     res.send({
         code: 0,
         data: '创建成功'
@@ -103,14 +129,14 @@ router.post("/detail", async (req, res) => {
     const id = socialize_pool[keyName].id
     // 获取帮会信息
     const socialize = await socializeFn.getSocialize(id, type);
-    // console.log(Global.roleGlobal)
     if (socialize) {
         let { compose } = socialize;
         const { line = {} } = Global.getSocializeGlobal(socialize.soci_id, keyName) || {};
         compose = compose.map(itme => {
             return {
                 ...itme,
-                line: line[itme.id]
+                line: line[itme.id],
+                isRole: itme.id === role_id
             }
         })
         const soci = compose.find((itme) => itme.id === role_id);
@@ -160,8 +186,8 @@ router.post("/apply", async (req, res) => {
         const role_a = socialize.apply.find(({ id }) => id === role_id);
         if (role_c || role_a) {
             res.send({
-                code: 100004,
-                message: '重复申请帮会'
+                code: 0,
+                message: `已申请过该${TYPE_MEUN[type]},无法重复申请。`
             })
             return;
         }
@@ -251,7 +277,7 @@ router.post("/adjust", async (req, res) => {
         return;
     }
 
-    const { socialize_pool: mySocialize } = Global.getRoleGlobal(req);
+    const { socialize_pool: mySocialize, role_id: roleId } = Global.getRoleGlobal(req);
     const keyName = TYPE_MEUN_NAME[type];
     const { level, id } = mySocialize[keyName];
     if ((type === 1 && level > 3) || (type === 2 && level > 2) || (type === 3 && level > 1) || (level !== 1 && level < chengLevel)) {
@@ -269,6 +295,13 @@ router.post("/adjust", async (req, res) => {
         let { compose } = socialize;
         // 踢人操作
         if (chengLevel === -1) {
+            if (role_id === roleId) {
+                res.send({
+                    code: 0,
+                    message: '你没有此权限。'
+                })
+                return;
+            }
             compose = compose.filter(({ id }) => id !== role_id);
             // 删除角色势力信息
             delete targSocialize[keyName];
@@ -355,23 +388,28 @@ router.post("/exit", async (req, res) => {
         return;
     }
     const { socialize_pool, role_id } = Global.getRoleGlobal(req);
-    const { id, level } = socialize_pool[TYPE_MEUN_NAME[type]];
+    const typeName = TYPE_MEUN_NAME[type];
+    const { id, level } = socialize_pool[typeName];
     // 获取帮会信息
     const socialize = await socializeFn.getSocialize(id, type);
     if (socialize) {
-        delete socialize_pool[TYPE_MEUN_NAME[type]];
-        Global.updateRoleGlobal(req, { socialize_pool })
+        delete socialize_pool[typeName];
+        Global.updateRoleGlobal(req, { socialize_pool });
         // 等级1操作即为解散操作
         if (level === 1) {
-            await mysql.asyncQuery(`delete from socialize  where id="${id}" type=${type}`);
+            await mysql.asyncQuery(`delete from socialize  where soci_id="${id}" and type=${type}`);
+            res.send({
+                code: 0,
+                data: '成功退出！'
+            })
             return;
         }
         // 其他则自身退出即可
-        const compose = socialize.compose.filter(({ id }) => id === role_id);
-        await socializeFn.updataSocialize(id, type, { compose })
+        const compose = socialize.compose.filter(({ id }) => id !== role_id);
+        await socializeFn.updataSocialize(id, type, { compose });
         res.send({
             code: 0,
-            data: ''
+            data: '成功退出！'
         })
     }
 });
@@ -386,7 +424,7 @@ router.post("/material", async (req, res) => {
     const materialIdList = MATERIAL_MEUN[type] || [];
     if (!(
         (type === 1)
-        && (materialIdList.includes(materialId) || materialId === 'all')
+        && (materialIdList.includes(materialId) || materialId === 'all' || materialId === -1)
         && materialNum >= 0)) {
         res.send({
             code: 100007,
@@ -394,21 +432,47 @@ router.post("/material", async (req, res) => {
         })
         return;
     }
-    // 开始捐赠材料计算
-    const { data } = Global.getknapsackGlobal(req);
-    const material = {};
-    const materialList = [];
-    let chengData = [];
+
+    // 开始捐赠计算
+    let { data, tael } = Global.getknapsackGlobal(req);
+    // 获取全局角色信息
+    const { reputation_pool, socialize_pool } = Global.getRoleGlobal(req);
+    // 计算帮会贡献
+    const typeText = type === 1 ? '帮会' : '结义';
+    // 贡献点
+    let proffer = 0;
+    // 错误信息
     let message = '';
+    // 结果信息
+    const text = [];
+    // materialId -1 捐献银两
+    if (materialId === -1) {
+        if (tael < materialNum) {
+            message = `银两不足${materialNum}`;
+        } else {
+            tael -= materialNum;
+            // 每100000银两可获得1点贡献与声望
+            proffer = parseInt(materialNum / 100000);
+            text.push(`捐献${materialNum}银两，获得${typeText}贡献${proffer * 10}点,个人${typeText}声望${proffer}点`);
+        }
+    }
+    // 剩余材料
+    const material = {};
+    // 消耗材料列表
+    const materialList = [];
+    // 消耗材料后的背包
     if (materialId === 'all') {
-        chengData = data.filter(({ id, p, s, n }) => {
+        data = data.filter(({ id, p, s, n }) => {
             if (materialIdList.includes(id) && p === 5) {
                 materialList.push({ id, s, n })
                 return false;
             }
             return true;
         })
-    } else {
+    }
+
+    if (materialIdList.includes(materialId)) {
+        let chengData = [];
         data.forEach(({ id, p, s, ...itme }) => {
             if (materialIdList.includes(id) && p === 5) {
                 material[id] = s;
@@ -422,11 +486,11 @@ router.post("/material", async (req, res) => {
                             s: s - materialNum,
                             ...itme
                         })
-                        materialList.push({ id, s, n: itme.n });
+                        materialList.push({ id, s: materialNum, n: itme.n });
                         material[id] = s - materialNum;
                         return;
                     } else {
-                        message = `你没有那么多${itme.n}`
+                        message = `捐赠失败,${itme.n}不足${materialNum}。`
                     }
                 }
             }
@@ -438,6 +502,7 @@ router.post("/material", async (req, res) => {
             })
 
         })
+        data = chengData;
     }
     // 判断是否存在错误信息
     if (message) {
@@ -448,19 +513,13 @@ router.post("/material", async (req, res) => {
         return;
     }
     // 更新全局背包信息
-    Global.updateknapsackGlobal(req, { data: chengData });
-    // TYPE_MEUN_NAME[type]
-    // 计算帮会贡献
-    const typeText = type === 1 ? '帮会' : '结义';
-    const text = [];
-    let proffer = 0;
+    Global.updateknapsackGlobal(req, { data, tael });
     materialList.forEach(({ id, s, n }) => {
         const { value } = knapsackTable[id];
         proffer += value * s;
-        text.push(`消耗${s}个${n}，获得${typeText}声望${value * s}点`)
+        text.push(`捐献${s}个${n}，获得${typeText}贡献${value * s * 10}点,个人${typeText}声望${value * s}点`);
     })
-    // 获取全局角色信息
-    const { reputation_pool, socialize_pool } = Global.getRoleGlobal(req);
+
     // 获取帮会信息
     const { id } = socialize_pool[TYPE_MEUN_NAME[type]];
     const socialize = await socializeFn.getSocialize(id, type);
@@ -470,7 +529,7 @@ router.post("/material", async (req, res) => {
         Global.updateRoleGlobal(req, { reputation_pool });
         let { exp, level } = socialize;
         let [c_exp, up_exp] = exp.split('/');
-        c_exp = Number(c_exp) + proffer;
+        c_exp = Number(c_exp) + (proffer * 10);
         const updata = {};
         if (c_exp >= up_exp) {
             level++;
@@ -481,7 +540,6 @@ router.post("/material", async (req, res) => {
             }
         }
         updata['exp'] = `${c_exp}/${up_exp}`;
-        console.log(updata, 'updata...')
         // 更新帮会信息
         await socializeFn.updataSocialize(id, type, updata);
     }
@@ -489,7 +547,7 @@ router.post("/material", async (req, res) => {
         code: 0,
         data: {
             list: material,
-            text: text.join(',')
+            text: text.join(',') + '。'
         }
     })
 
