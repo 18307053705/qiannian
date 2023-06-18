@@ -9,11 +9,12 @@ type InputProps = {
     label?: string;
     onText?: string;
     type?: 'text' | 'number' | 'textarea',
-    InputRef?: { current: any }
+    InputRef?: { current: any },
+    layout?: boolean
 }
 
 export const Input = (props: InputProps) => {
-    const { submit, type = 'text', InputRef } = props;
+    const { submit, type = 'text', InputRef, layout = true } = props;
     const [value, setValue] = useState('');
     const [error, setError] = useState('');
     const btnClick = () => {
@@ -53,8 +54,7 @@ export const Input = (props: InputProps) => {
     return (
         <div >
             <div className={Style.input}>
-                {props.label && <span className={Style.label}>{props.label}:</span>}
-
+                {props.label && <span className={layout ? Style.label : ''}>{props.label}:</span>}
                 {type === 'textarea' ? (
                     <textarea
                         className={Style.connet}
@@ -70,8 +70,9 @@ export const Input = (props: InputProps) => {
                             onChange={onChange}
                         />
                     )}
+                {submit && <span className={Style.btn} onClick={btnClick}>{props.onText || '确认'}</span>}
             </div>
-            {submit && <div className={Style.btn} ><span onClick={btnClick}>{props.onText || '确认'}</span></div>}
+
             {error && <div className={Style.error}>{error}</div>}
         </div>
     )

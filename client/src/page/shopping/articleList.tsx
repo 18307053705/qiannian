@@ -15,11 +15,11 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         setError('');
         // 下架
         if (!roleId) {
-            grounding({ in_x: index - 1, type: 1, active: 2 }).then((message) => {
+            grounding({ in_x: index - 1, type: 1, active: 2 }).then(({message}) => {
                 if (message) {
                     setError(message);
                 } else {
-                    updataDetail();
+                    updataDetail(roleId);
                 }
 
             })
@@ -58,7 +58,7 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
             if (message) {
                 setError(message);
             } else {
-                updataDetail();
+                updataDetail(roleId);
                 setInX(0)
             }
         })

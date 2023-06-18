@@ -40,7 +40,8 @@ module.exports = {
         let role = undefined;
         // 获取其他玩家信息
         if (role_id) {
-            role = Object.keys(this.roleGlobal).find(({ id }) => id === role_id);
+            const userKey = Object.keys(this.roleGlobal).find((key) => this.roleGlobal[key].role_id === role_id);
+            role = userKey ? this.roleGlobal[userKey] : undefined
         } else {
             role = this.roleGlobal[user];
         }
@@ -53,19 +54,19 @@ module.exports = {
         let roleInfo = undefined;
         // 存在代表为操作其他玩家角色
         if (role_id) {
-            roleInfo = Object.keys(this.roleGlobal).find(({ id }) => id === role_id);
-
+            const userKey = Object.keys(this.roleGlobal).find((key) => this.roleGlobal[key].role_id === role_id);
+            roleInfo = userKey ? this.roleGlobal[userKey] : undefined
         } else {
             roleInfo = this.roleGlobal[user];
         }
-
         if (roleInfo) {
             this.roleGlobal[roleInfo.user_id] = {
                 ...roleInfo,
                 ...data,
-                updateKeys: updateKeys.push(...updateKeys)
+                updateKeys: [...roleInfo.updateKeys,...updateKeys]
             };
         }
+        
         return roleInfo;
     },
     // 更新角色访问时间
@@ -77,5 +78,17 @@ module.exports = {
             return true;
         }
     },
-
+    // 角色释放，信息保存到数据库
+    saveRole: async function (userid) {
+        const { updateKeys, ...roleInfo } = this.roleGlobal[userid];
+        const data = [];
+        [...new Set(updateKeys)].forEach((key) => {
+            const value = JSON_KEYS.includes(key) ? JSON.stringify(roleInfo[key]) : roleInfo[key];
+            data.push(`${key}='${value}'`)
+        })
+        if (data.length) {
+            await mysql.asyncQuery(`update role  SET ${data.join(',')}  where role_id="${roleInfo.role_id}"`);
+        }
+        return;
+    }
 }

@@ -26,8 +26,8 @@ export const gangList = ({ history }) => {
         <List
             data={list}
             prefix_d={true}
-            prefix={(row, index) => <span key={index} onClick={() => { }}>{index}.{row.name}({row.level}级)</span>}
-            active={(row) => (<span key={row.id} onClick={() => { }}>加入帮会</span>)}
+            prefix={prefix}
+            active={active}
         />
     )
 

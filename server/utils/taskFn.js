@@ -35,7 +35,7 @@ module.exports = {
 
     const tasks = {};
     Object.keys(task_pool).forEach((type) => {
-      tasks[type] = task_pool[type].map((id) => this.createTask({ type, id }))
+      tasks[type] = task_pool[type].map((id) => this.createTask({ req,type, id }))
     })
     Global.taskLoop = {
       [role_id]: {
@@ -53,10 +53,11 @@ module.exports = {
   },
   // 创建任务
   createTask: function ({ req, type, id }) {
+    const { role_level: level } = Global.getRoleGlobal(req);
     // 每日任务
     if (DAILY_TASK_KEY.includes(type)) {
-      const user = req.cookies["q_uid"];
-      const { level } = Global.roleLoop[user];
+      // const user = req.cookies["q_uid"];
+      // const { level } = Global.roleLoop[user];
       const id_s = Math.floor(Math.random() * 2) + 1;
       // 深拷贝
       const task = JSON.parse(JSON.stringify(taskTable['daily'][id_s]));
@@ -299,7 +300,7 @@ module.exports = {
     npcEle.length && eles.push(npcEle);
   },
   // 获取任务奖励
-  getTaskReward: async function (req, res, task, callback) {
+  getTaskReward: function (req, res, task, callback) {
     let { data, tael: oldTael } = Global.getknapsackGlobal(req);
     const speed = task['complete'] ? this.speedTask(task['complete'], task, data) : { state: true };
     // 判断任务是否完成
@@ -313,6 +314,7 @@ module.exports = {
     if (reward['knapsack']) {
       const { tael = 0, article } = reward['knapsack'];
       oldTael += tael;
+      console.log(article,'article...tak')
       if (knapsackFn.addKnapsack(article, data)) {
         return {
           code: 0,

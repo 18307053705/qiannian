@@ -1,3 +1,4 @@
+const mysql = require("../mysql");
 const JSON_KEYS = [
     'equip_pool',
     'socialize_pool',
@@ -26,13 +27,7 @@ module.exports = {
     // 获取角色全局背包信息
     getknapsackGlobal: function (req, roleId) {
         const { role_id } = this.getRoleGlobal(req);
-        let knapsack = undefined;
-        // 获取其他玩家信息
-        if (roleId) {
-            knapsack = Object.keys(this.roleGlobal).find(({ id }) => id === roleId);
-        } else {
-            knapsack = this.knapsackGlobal[role_id];
-        }
+        const knapsack = this.knapsackGlobal[roleId || role_id];
         if (knapsack) {
             return JSON.parse(JSON.stringify(knapsack));
         }
@@ -41,22 +36,28 @@ module.exports = {
     // 更新角色全局背包信息
     updateknapsackGlobal: function (req, data, roleId) {
         const { role_id } = this.getRoleGlobal(req);
-        let knapsack = undefined;
         let updateKeys = Object.keys(data);
-        // 存在代表为操作其他玩家角色
-        if (roleId) {
-            knapsack = Object.keys(this.knapsackGlobal).find(({ id }) => id === roleId);
-        } else {
-            knapsack = this.knapsackGlobal[role_id];
-        }
+        const knapsack = this.knapsackGlobal[roleId || role_id];
         if (knapsack) {
             this.knapsackGlobal[knapsack.role_id] = {
                 ...knapsack,
                 ...data,
-                updateKeys: updateKeys.push(...updateKeys)
+                updateKeys: [...knapsack.updateKeys,...updateKeys]
             };
         }
         return knapsack;
     },
-
+    // 角色释放，信息保存到数据库
+    saveknapsack: async function (role_id) {
+        const { updateKeys, ...knapsack } = this.knapsackGlobal[role_id];
+        const data = [];
+        [...new Set(updateKeys)].forEach((key) => {
+            const value = key === 'data' ? JSON.stringify(knapsack[key]) : knapsack[key];
+            data.push(`${key}='${value}'`)
+        })
+        if(data.length){
+            await mysql.asyncQuery(`update knapsack  SET ${data.join(',')}  where role_id="${role_id}"`);
+        }
+        return 
+    }
 }

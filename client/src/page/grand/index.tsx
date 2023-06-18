@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { moveDir, initGrandInfo } from '@cgi/grand';
 import { backGrand } from '@utils/grand';
+import { roleExit } from '@cgi/roleInfo';
 import './index.less';
 
 const Grand = ({ history }) => {
@@ -16,7 +17,7 @@ const Grand = ({ history }) => {
     const dirClick = useCallback((dir) => {
         moveDir({ dir }).then(({ data }: any) => {
             const { path, ext } = data;
-            path ? history.push(path, {...ext}) : setGrandInfo(data);
+            path ? history.push(path, { ...ext }) : setGrandInfo(data);
         })
     }, [])
     return (
@@ -109,12 +110,15 @@ const Grand = ({ history }) => {
                 <span className="g_b_u">天榜</span>
             </div>
             <div>
-
                 <span className="g_b_u">房屋</span>
                 <span className="g_b_u">勋章</span>
                 <span className="g_b_u">活动</span>
             </div>
-            <span className="g_b_u" onClick={() => { history.push('/') }}>返回首页</span>
+            <span className="g_b_u" onClick={() => {
+                roleExit().then(() => {
+                    history.push('/');
+                })
+            }}>返回首页</span>
         </div>
     )
 

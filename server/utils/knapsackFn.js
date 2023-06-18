@@ -17,7 +17,8 @@ module.exports = {
             };
         }
         if (type == 3) {
-            const { results } = await mysql.asyncQuery(`select * from warehouse  where role_id="${roleId}"`);
+            const { role_id } = Global.getRoleGlobal(req);
+            const { results } = await mysql.asyncQuery(`select * from warehouse  where role_id="${role_id}"`);
             const data = JSON.parse(results[0].data);
             return {
                 ...results[0],
@@ -27,7 +28,8 @@ module.exports = {
     },
     // 更新背包
     updateKnapsack: async function (req, data, roleId) {
-        const knapsack = Global.updateKnapsack(req, roleId);
+        const knapsack = Global.updateknapsackGlobal(req, data, roleId);
+
         if (knapsack) {
             return knapsack;
         }
@@ -45,7 +47,7 @@ module.exports = {
         const upData = [];
         Object.keys(data).forEach(key => {
             let value = key === 'data' ? JSON.stringify(data[key]) : data[key];
-            upData.push(`${key}='${value}'`)
+            upData.push(`${key}=${value}`)
         })
         const { results } = await mysql.asyncQuery(`update warehouse  SET ${upData.join(',')}  where role_id="${role_id}"`);
         return results;
@@ -53,7 +55,7 @@ module.exports = {
     // 验证物品信息
     chekeArticle: function (req, data) {
         const { id, in_x, s, p, type } = req.body;
-        if (!id || in_x === undefined || !s || !p || !type) {
+        if (!id || in_x === undefined || s >= 0 || !p || !type) {
             return '参数有误'
         }
         const itme = data[in_x];
@@ -77,8 +79,8 @@ module.exports = {
             for (let index = 0; index < len; index++) {
                 const { p, id, s } = data[index];
                 // 判断物品id与物品类型是否相同
-                if (artReward[id] && artReward[id].p == p) {
-                    const { s: num } = artReward[id];
+                if (artReward[id] && (artReward[id].p == p || artReward[id].type == p)) {
+                    const { s: num = 1 } = artReward[id];
                     // 找到对应id,判断是否可以继续叠加
                     if (s + num <= KnapsackTable.Maxs) {
                         data[index]['s'] += num;
@@ -103,7 +105,13 @@ module.exports = {
         // 装备奖励
         if (equipReward) {
             Object.keys(equipReward).forEach(key => {
-                data.push(equipReward[key]);
+                const { id, name, n, ext = '0_0_0_0_0_0_0' } = equipReward[key];
+                data.push({
+                    id,
+                    n: name || n,
+                    ext,
+                    s: 1
+                });
                 delete equipReward[key];
             })
         }

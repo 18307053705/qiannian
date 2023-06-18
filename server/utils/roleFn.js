@@ -212,10 +212,11 @@ module.exports = {
       case 2:
       case 3:
       case 4:
-        return 10 * parseInt(level / 10) * 100 * (level % 10 + 1);
+        return 100 * (10 ** parseInt(level / 10)) * (level % 10 + 1);
       case 5:
-      case 6:
         return 10000000 + (level % 10 + 1) * 5000000;
+      case 6:
+        return 50000000 + (level % 10 + 1) * 5000000;
       case 7:
         return 100000000 + (level % 10 + 1) * 10000000;
       case 8:

@@ -9,7 +9,7 @@ export const Equip = ({ pageCheng, history }) => {
             setRoleInfo(data);
         })
     }, [])
-    const equip = JSON.parse(roleInfo.equip_pool);
+    const equip = roleInfo.equip_pool;
 
     const clickEquip = (key) => {
         const { id } = equip[key];
@@ -119,7 +119,7 @@ export const Equip = ({ pageCheng, history }) => {
                 <span className="g_b">项链</span>：
                 {
                     equip.necklace ?
-                        <span  className="g_u">
+                        <span className="g_u">
                             <span
                                 onClick={() => {
                                     clickEquip('necklace')

@@ -20,9 +20,9 @@ const time = 600000;
 // const time = 5000;
 // 定时清楚长时间不访问的角色全局空间
 setInterval(() => {
-  const roleLoop = Global.roleLoop;
-  Object.keys(roleLoop).forEach(user => {
-    const role = roleLoop[user];
+  const roleGlobal = Global.roleGlobal;
+  Object.keys(roleGlobal).forEach(user => {
+    const role = roleGlobal[user];
     // 超过十分钟不访问的角色,释放对应全局空间
     if (new Date() * 1 - role.time > time) {
       globalFn.roleExit('', '', user);

@@ -3,11 +3,13 @@ const roleG = require("./roleG");
 const grandG = require("./grandG");
 const knapsackG = require("./knapsackG");
 const fightG = require("./fightG");
+const socializeG = require("./socializeG");
 module.exports = {
   ...roleG,
   ...grandG,
   ...knapsackG,
   ...fightG,
+  ...socializeG,
   // 战斗池
   // fightLoop: {
   //   fightRoleId: {

@@ -17,7 +17,7 @@ export const Shopping = ({ history }) => {
 
     const [roleId, setRoleId] = useState(state.role_id);
 
-    const updataDetail = () => {
+    const updataDetail = (roleId) => {
         getDetail({ role_id: roleId }).then(({ data }) => {
             setInfo(data);
         })
@@ -28,8 +28,8 @@ export const Shopping = ({ history }) => {
     }
 
     useEffect(() => {
-        updataDetail()
-    }, [roleId])
+        updataDetail(roleId);
+    }, [roleId, key]);
     return (
         <div>
             {key === 'detai' && <DetailShop info={info} setInfo={setInfo} setKey={setKey} roleId={roleId} />}

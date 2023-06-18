@@ -119,10 +119,10 @@ router.post("/doneTask", async (req, res) => {
         return;
     }
     if (DAILY_TASK_KEY.includes(type) && tasks[0]) {
-        const data = await taskFn.getTaskReward(req, res, tasks[0]);
+        const data = taskFn.getTaskReward(req, res, tasks[0]);
         // 每日任务逻辑
         if (!data) {
-            Global.taskLoop[role.id][type].splice(0, 1);
+            Global.taskLoop[role_id][type].splice(0, 1);
             res.send({
                 code: 0,
                 data: '领取奖励成功'
@@ -150,7 +150,7 @@ router.post("/getTaskStory", async (req, res) => {
             const task = Global.taskLoop[role_id][taskType].find(({ id }) => id === taskId);
             if (task) {
                 // 返回信息
-                const result = await taskFn.getTaskReward(req, res, task, (roleInfo, updata) => {
+                const result = taskFn.getTaskReward(req, res, task, (roleInfo, updata) => {
                     // 已领取任务信息处理
                     task_pool[taskType] = task_pool[taskType].filter((id) => (id !== taskId));
                     updata['task_pool'] = task_pool;

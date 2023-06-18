@@ -213,7 +213,7 @@ router.post("/fightDir", async (req, res) => {
 });
 
 router.post("/clean", (req, res) => {
-    Global.grandDir.set(req, { extDir: undefined });
+    fightFn.releaseFight(req, res);
     res.send({
         code: 0,
         data: ''

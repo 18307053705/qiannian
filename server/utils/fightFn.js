@@ -417,6 +417,7 @@ module.exports = {
                 Global.fightMap[fightId]['id'] = ids.filter(({ id }) => id !== role_id);
             }
         }
+        return;
     },
     // 结算战斗奖励
     getFightReward: async function (req, res, freak) {
@@ -434,65 +435,8 @@ module.exports = {
             }
         });
         knapsackFn.addKnapsack({ artReward, equipReward }, knapsack.data);
-        // const { artReward, equipReward } = article;
-        // addKnapsack
-        // addKnapsack.
-
-        // const knapsack = await roleFn.getKnapsack(req);
-        // const data = JSON.parse(knapsack.data);
-        // // 背包最大200条数据
-        // if (JSON.stringify(artReward) !== '{}' && !data[Knapsack.size]) {
-        //     // 查找物品是否存在背包内
-        //     for (let index = 0; index < Knapsack.size; index++) {
-        //         if (!data[index]) {
-        //             index = Knapsack.size;
-        //             continue;
-        //         }
-        //         const { p, id, s } = data[index];
-        //         // 判断物品id与物品类型是否相同
-        //         if (artReward[id] && artReward[id].type == p) {
-        //             const { num = 1, n } = artReward[id];
-        //             // 找到对应id,判断是否可以继续叠加
-        //             if (s + num <= Knapsack.Maxs) {
-        //                 data[index]['s'] += num;
-        //                 textReward.push(`${n}x${num}`)
-        //                 delete artReward[id];
-        //             } else {
-        //                 artReward[id]['num2'] = data[index]['s'] + num - Knapsack.Maxs;
-        //                 data[index]['s'] = Knapsack.Maxs;
-        //             }
-        //         }
-        //         // 全部处理完,结束循环
-        //         if (JSON.stringify(artReward) === '{}') {
-        //             index = Knapsack.size;
-        //         }
-        //     }
-
-        //     //  遍历结束还存在物品奖励，说明物品为新增
-        //     Object.keys(artReward).forEach(key => {
-        //         if (!data[Knapsack.size]) {
-        //             const { id, type, n, num = 1, num2 } = artReward[key];
-        //             data.push({ id, n, p: type, s: num2 || num });
-        //             textReward.push(`${n}x${num}`);
-        //             delete artReward[key];
-        //         }
-        //     })
-        // }
-
-        // if (!data[Knapsack.size]) {
-        //     Object.keys(equipReward).forEach(key => {
-        //         if (!data[Knapsack.size]) {
-        //             const { id, type, name, num = 1 } = equipReward[key];
-        //             data.push({ id, n: name, p: type, s: num, ext: '0_0_0_0_0_0_0' });
-        //             textReward.push(`${name}x${num}`);
-        //             delete equipReward[key];
-        //         }
-        //     })
-        // }
-        // // 获取人物buff
-        // const role = await roleFn.getRoleInfo(req, res);
+        // 获取人物buff
         const { buff_pool: buffPool } = roleInfo;
-        // const buffPool = JSON.parse(role.buff_pool)
         const { vip = {} } = buffPool;
         let vipExp = 0;
         if (vip['exp2']) {
@@ -543,6 +487,4 @@ module.exports = {
         });
 
     },
-
-
 };

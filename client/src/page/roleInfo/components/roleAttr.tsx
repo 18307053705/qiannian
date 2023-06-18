@@ -1,7 +1,7 @@
 import React from "react";
 import { getEquipName } from '@utils/equip';
 const RoleAttr = ({ roleInfo }) => {
-    const { attr, socialize_pool:socialize, equip_pool:equip } = roleInfo;
+    const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo;
     return (
         <>
             <div>

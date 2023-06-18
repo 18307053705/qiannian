@@ -24,7 +24,8 @@ export const List = ({ data = [], onCheng, prefix, active, prefix_d }: ListType)
                     return (
                         <div className={Style.row} key={index}>
                             {prefix(itme, index + (page * size) + 1, index)}
-                            <span className="g_u">{active && active(itme, index + (page * size) + 1)}</span>
+                            {active && active(itme, index + (page * size) + 1)}
+                            {/* <span className="g_u">{active && active(itme, index + (page * size) + 1)}</span> */}
                         </div>
                     )
                 })

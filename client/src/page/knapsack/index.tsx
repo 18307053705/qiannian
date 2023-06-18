@@ -133,6 +133,7 @@ const knapsack = ({ history }) => {
     const total = data.length;
     const { page, size } = table;
     const tList = data.slice(page * size, (page + 1) * size);
+ 
     return (
         <div className={Style["knapsack-page"]}>
             {

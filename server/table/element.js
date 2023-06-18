@@ -131,7 +131,7 @@ const ELEMENT_5 = {
     article: [
       {
         ...Knapsack[1],
-        num: 5,
+        s: 5,
       },
       Knapsack[2],
       {
@@ -160,51 +160,51 @@ const ELEMENT_5 = {
     article: [
       {
         ...Knapsack[5],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[6],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[7],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[8],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[9],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[10],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[11],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[12],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[13],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[14],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[15],
-        num: 5,
+        s: 5,
       },
       {
         ...Knapsack[16],
-        num: 5,
+        s: 5,
       },
     ]
   },
@@ -220,7 +220,7 @@ const ELEMENT_5 = {
     article: [
       {
         ...Knapsack[1],
-        num: 5,
+        s: 5,
       },
       Knapsack[2],
       Equip[120],
@@ -281,6 +281,42 @@ const ELEMENT_5 = {
       level: 100,
       attr: 10
     }
+  },
+  5000012: {
+    id: 5000012,
+    name: "帮会材料怪",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 10
+    },
+    article: [
+      {
+        ...Knapsack[54],
+        s: 5,
+      },
+      {
+        ...Knapsack[55],
+        s: 5,
+      },
+      {
+        ...Knapsack[56],
+        s: 5,
+      },
+      {
+        ...Knapsack[57],
+        s: 5,
+      },
+      {
+        ...Knapsack[58],
+        s: 5,
+      },
+      {
+        ...Knapsack[59],
+        s: 1,
+      },
+    ]
   },
 };
 

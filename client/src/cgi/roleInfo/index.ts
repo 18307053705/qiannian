@@ -4,7 +4,7 @@ const createRoleUrl = `/role/createRole`;
 const getRoleListUrl = `/role/getRoleList`;
 const getRoleInfoUrl = `/role/getRoleInfo`;
 const roleLoginUrl = `/role/roleLogin`;
-
+const roleExitUrl = `/role/exit`;
 export interface getRoleListRes {
   error: string;
   code: number;
@@ -101,8 +101,8 @@ export interface RoleInfoRes {
   reputation_pool: string;
   socialize_pool: string;
   equip_pool: string;
-  life:number;
-  mana:number;
+  life: number;
+  mana: number;
 }
 
 export const initRoleInfo: RoleInfoRes = {
@@ -177,17 +177,21 @@ export const initRoleInfo: RoleInfoRes = {
   reputation_pool: "{}",
   socialize_pool: "{}",
   equip_pool: "{}",
-  life:0,
-  mana:0
+  life: 0,
+  mana: 0
 };
 
 // 获取角色信息
-export async function getRoleInfo(data={}) {
-  return await post(getRoleInfoUrl,data);
+export async function getRoleInfo(data = {}) {
+  return await post(getRoleInfoUrl, data);
 }
-
 
 // 角色登录
 export async function roleLogin(data) {
-  return await post(roleLoginUrl,data);
+  return await post(roleLoginUrl, data);
+}
+
+// 角色退出
+export async function roleExit() {
+  return await post(roleExitUrl);
 }

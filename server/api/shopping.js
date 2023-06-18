@@ -15,8 +15,8 @@ router.post("/create", async (req, res) => {
         })
         return;
     }
-    const { user, role } = Global.getUserRole(req);
-    const { results } = await mysql.asyncQuery(`select * from shop where role_id="${role.id}" or name="${name}"`);
+    const { role_id } = Global.getRoleGlobal(req);
+    const { results } = await mysql.asyncQuery(`select * from shop where role_id="${role_id}" or name="${name}"`);
     if (results[0]) {
         res.send({
             code: 0,
@@ -24,7 +24,7 @@ router.post("/create", async (req, res) => {
         })
         return;
     }
-    const { tael } = await knapsackFn.getKnapsackInfo(req, 1);
+    const { tael } = Global.getknapsackGlobal(req);
     if (tael < 500000) {
         res.send({
             code: 0,
@@ -34,11 +34,11 @@ router.post("/create", async (req, res) => {
     }
 
     const shopSql = "insert into shop(user_id,role_id,name,pet,article,date,role_name) values(?,?,?,?,?)";
-    const shopData = [user, role.id, name, '{}', '[]',new Date() *1,role.name];
+    const shopData = [user, role.id, name, '{}', '[]', new Date() * 1, role.name];
     await mysql.asyncAdd(shopSql, shopData);
-    await knapsackFn.updateKnapsack(req, {
+    Global.updateknapsackGlobal(req, {
         tael: tael - 500000
-    });
+    })
     res.send({
         code: 0,
         data: {
@@ -68,7 +68,7 @@ router.post("/modify", async (req, res) => {
         })
         return;
     }
-    const { tael } = await knapsackFn.getKnapsackInfo(req, 1);
+    const { tael } = Global.getknapsackGlobal(req);
     if (tael < 500000) {
         res.send({
             code: 0,
@@ -77,9 +77,9 @@ router.post("/modify", async (req, res) => {
         return;
     }
     await shoppingFn.updataShopInfo(req, { name })
-    await knapsackFn.updateKnapsack(req, {
+    Global.updateknapsackGlobal(req, {
         tael: tael - 500000
-    });
+    })
     const data = await shoppingFn.getShopInfo(req);
     res.send({
         code: 0,
@@ -89,8 +89,8 @@ router.post("/modify", async (req, res) => {
 
 
 router.post("/list", async (req, res) => {
-    const { role } = Global.getUserRole(req);
-    const { results } = await mysql.asyncQuery(`select * from shop where role_id<>"${role.id}"`);
+    const { role_id } = Global.getRoleGlobal(req);
+    const { results } = await mysql.asyncQuery(`select * from shop where role_id<>"${role_id}"`);
     res.send({
         code: 0,
         data: results
@@ -100,7 +100,6 @@ router.post("/list", async (req, res) => {
 router.post("/detail", async (req, res) => {
     const { role_id } = req.body;
     const data = await shoppingFn.getShopInfo(req, role_id);
-
     res.send({
         code: 0,
         data: JSON.stringify(data) === '{}' ? '' : data
@@ -117,9 +116,10 @@ router.post("/grounding", async (req, res) => {
         })
         return;
     }
+    const { data } = Global.getknapsackGlobal(req);
+    const { article } = await shoppingFn.getShopInfo(req);
     // 物品上架
     if (active === 1 && type === 1) {
-        const { article } = await shoppingFn.getShopInfo(req);
         if (article.length === 50) {
             res.send({
                 code: 0,
@@ -127,7 +127,6 @@ router.post("/grounding", async (req, res) => {
             })
             return;
         }
-        const { data } = await knapsackFn.getKnapsackInfo(req, type);
         if (!(data[in_x] && data[in_x]['s'] >= s && s <= KnapsackTable.Maxs)) {
             res.send({
                 code: 0,
@@ -145,7 +144,7 @@ router.post("/grounding", async (req, res) => {
             data.splice(in_x, 1);
         }
         await shoppingFn.updataShopInfo(req, { article: JSON.stringify(article) });
-        await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data) });
+        Global.updateknapsackGlobal(req, { data });
         res.send({
             code: 0,
             data
@@ -154,8 +153,6 @@ router.post("/grounding", async (req, res) => {
     }
     // 物品下架
     if (active === 2 && type === 1) {
-        const { article } = await shoppingFn.getShopInfo(req);
-        const { data } = await knapsackFn.getKnapsackInfo(req, type);
         if (data.length < KnapsackTable.size) {
             if (!article[in_x]) {
                 res.send({
@@ -185,7 +182,7 @@ router.post("/grounding", async (req, res) => {
             }
 
             await shoppingFn.updataShopInfo(req, { article: JSON.stringify(article) });
-            await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data) });
+            Global.updateknapsackGlobal(req, { data });
             res.send({
                 code: 0,
                 data: article
@@ -222,7 +219,7 @@ router.post("/purchase", async (req, res) => {
             return;
         }
         // 获取我的背包信息
-        const { data, tael } = await knapsackFn.getKnapsackInfo(req, 1);
+        const { data, tael } = Global.getknapsackGlobal(req);
         if (data.length === KnapsackTable.size) {
             res.send({
                 code: 0,
@@ -271,7 +268,8 @@ router.post("/purchase", async (req, res) => {
             article.splice(in_x, 1);
         }
         await shoppingFn.updataShopInfo(req, { article: JSON.stringify(article) });
-        await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data), tael: tael - price });
+        // await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data), tael: tael - price });
+        Global.updateknapsackGlobal(req, { data, tael: tael - price });
         // 获取店主背包
         const { tael: tael_t } = await knapsackFn.getKnapsackInfo(req, 1, role_id);
         // 扣除20%手续费

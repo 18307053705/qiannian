@@ -1,4 +1,5 @@
 const express = require("express");
+const Global = require("../global");
 const roleFn = require("../utils/roleFn");
 const knapsackFn = require("../utils/knapsackFn");
 const KnapsackTable = require("../table/knapsack");
@@ -30,11 +31,13 @@ router.post("/getDetail", async (req, res) => {
         })
         return;
     }
+
     // posKey
     // 人物装备详情
     if (posKey) {
-        const role = await roleFn.getRoleInfo(req, res);
-        const equipPool = JSON.parse(role.equip_pool);
+        const { equip_pool: equipPool } = Global.getRoleGlobal(req);
+        // const role = await roleFn.getRoleInfo(req, res);
+        // const equipPool = JSON.parse(role.equip_pool);
         const { id, ext } = equipPool[posKey];
         const equip = Equip.getEquipTip(Equip[id], ext);
         res.send({
@@ -87,8 +90,7 @@ router.post("/getDetail", async (req, res) => {
 
 // 获取装备列表
 router.post("/equipList", async (req, res) => {
-    const result = await roleFn.getKnapsack(req);
-    const data = JSON.parse(result.data);
+    const { data } = Global.getknapsackGlobal(req);
     const list = [];
     data.forEach(((itme, index) => {
         if (itme.p === 3 && Equip[itme.id]) {
@@ -107,7 +109,7 @@ router.post("/equipList", async (req, res) => {
 // 物品操作：type 1使用，2出库，3入库，4出售,5购买{考虑是否实现},
 router.post("/operate", async (req, res) => {
     const { id, in_x, s, p, type, posKey } = req.body;
-    const role = await roleFn.getRoleInfo(req, res);
+    const role = Global.getRoleGlobal(req);
     const { data, tael, yuanbao } = await knapsackFn.getKnapsackInfo(req, type);
     const msg = knapsackFn.chekeArticle(req, data);
     // 验证物品信息
@@ -137,8 +139,10 @@ router.post("/operate", async (req, res) => {
             if (!data[in_x]['s']) {
                 data.splice(in_x, 1);
             }
-            await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data) });
-            await roleFn.updateRoleInfo(req, {
+            Global.updateknapsackGlobal(req, {
+                data,
+            })
+            Global.updateRoleGlobal(req, {
                 life: role.life + attr.life,
                 mana: role.mana + attr.mana,
             })
@@ -146,7 +150,7 @@ router.post("/operate", async (req, res) => {
         // buff丹药
         if (p === 2) {
             message = ''
-            const buffPool = JSON.parse(role.buff_pool)
+            const buffPool = role.buff_pool;
             const { pellet = {}, vip = {}, } = buffPool;
             const effect = KnapsackTable[id]['effect'];
             Object.keys(effect).forEach(key => {
@@ -164,20 +168,20 @@ router.post("/operate", async (req, res) => {
             if (!data[in_x]['s']) {
                 data.splice(in_x, 1);
             }
-            await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data) });
-            await roleFn.updateRoleInfo(req, {
-                buff_pool: JSON.stringify({
+
+            Global.updateknapsackGlobal(req, { data });
+            Global.updateRoleInfo(req, {
+                buff_pool: {
                     pellet,
                     vip
-                })
-            })
+                }
+            });
         }
         // 装备
         if (p === 3) {
             message = ''
             const { ext, n } = data[in_x];
-            const equipPool = JSON.parse(role.equip_pool);
-            const addition = JSON.parse(role.addition_pool);
+            const { equip_pool: equipPool, addition_pool: addition } = role;
             const equipInfo = Equip.computeAttr(Equip[id], ext);
             const addAttr = equipInfo.attr;
             const posName = posKey || equipInfo.posName;
@@ -211,17 +215,17 @@ router.post("/operate", async (req, res) => {
                 name: n,
                 ext
             }
-            await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data) });
-            await roleFn.updateRoleInfo(req, {
-                addition_pool: JSON.stringify(addition),
-                equip_pool: JSON.stringify(equipPool)
+
+            Global.updateknapsackGlobal(req, { data });
+            Global.updateRoleGlobal(req, {
+                addition_pool: addition,
+                equip_pool: equipPool
             });
         }
         // 卷轴
         if (p === 4) {
             message = ''
-            const buffPool = JSON.parse(role.buff_pool)
-            const reputationPool = JSON.parse(role.reputation_pool)
+            const { reputation_pool: reputationPool, buff_pool: buffPool } = role;
             const { pellet = {}, vip = {}, } = buffPool;
             const { effect, reputation } = KnapsackTable[id];
             if (effect) {
@@ -246,14 +250,14 @@ router.post("/operate", async (req, res) => {
             if (!data[in_x]['s']) {
                 data.splice(in_x, 1);
             }
-            await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data) });
-            await roleFn.updateRoleInfo(req, {
-                buff_pool: JSON.stringify({
+            Global.updateknapsackGlobal(req, { data });
+            Global.updateRoleGlobal(req, {
+                buff_pool: {
                     pellet,
                     vip
-                }),
-                reputation_pool: JSON.stringify(reputationPool)
-            })
+                },
+                reputation_pool: reputationPool
+            });
         }
 
     }
@@ -291,7 +295,7 @@ router.post("/operate", async (req, res) => {
             message = '仓库已满,无法继续存入物品';
         }
         if (!message) {
-            await knapsackFn.updateKnapsack(req, { data: JSON.stringify(data) });
+            Global.updateknapsackGlobal(req, { data });
             await knapsackFn.updateWarehouse(req, { data: JSON.stringify(wareData) });
         }
     }
@@ -326,10 +330,10 @@ router.post("/operate", async (req, res) => {
                 data.splice(in_x, 1);
             }
         } else {
-            message = '仓库已满,无法继续存入物品';
+            message = '背包已满,无法继续取出物品';
         }
         if (!message) {
-            await knapsackFn.updateKnapsack(req, { data: JSON.stringify(knaData) });
+            Global.updateknapsackGlobal(req, { data: knaData });
             await knapsackFn.updateWarehouse(req, { data: JSON.stringify(data) });
         }
     }

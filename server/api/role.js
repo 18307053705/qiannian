@@ -77,6 +77,7 @@ router.post("/roleLogin", async (req, res) => {
   // 保存角色信息,并且记录登录时间
   Global.setRoleGlobal(req, role[0]);
   Global.setknapsackGlobal(req, knapsack[0]);
+  Global.setSocializeGlobal(req);
   // 不存在任务池，即代表今天第一次登录,初始化任务池
   if (!Global.taskLoop[role_id]) {
     taskFn.initTask(req);
@@ -119,8 +120,8 @@ router.post("/createRole", (req, res) => {
         const roleData = [user, role_id, role_name, role_race, role_career, role_sex == 1 ? '男' : '女', 1, '0/200', 1, 0, life, mana, '10000,0,0', 0, '', '{}', '{}', '{}', JSON.stringify(base_pool), '{}', '{}', '{}', '{"main":[{"id":1,"in_x":0}]}'];
         mysql.sqlAdd(roleSql, roleData, () => {
           //  背包
-          const knapsackSql = "insert into knapsack(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
-          const knapsackData = [user, role_id, 0, 0, '[]'];
+          const knapsackSql = "insert into knapsack(user_id,role_id,tael,yuanbao,data,integral) values(?,?,?,?,?,?)";
+          const knapsackData = [user, role_id, 0, 0, '[]', '{}'];
           mysql.sqlAdd(knapsackSql, knapsackData, () => { });
           //  仓库
           const warehouseSql = "insert into warehouse(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
@@ -152,5 +153,12 @@ router.post("/createRole", (req, res) => {
 
 });
 
-
+// 角色退出
+router.post("/exit", async (req, res) => {
+  await globalFn.roleExit(req, res);
+  res.send({
+    code: 0,
+    data: '角色选择成功'
+  });
+});
 module.exports = router;
