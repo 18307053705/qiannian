@@ -10,7 +10,7 @@ module.exports = {
     if (roleInfo) {
       return roleInfo;
     }
-    const { results } = await mysql.asyncQuery(`select * from role  where role_id="${role_id}"`);
+    const { results } = await mysql.asyncQuery(`select * from role where role_id="${role_id}"`);
     if (results[0]) {
       const role = {}
       Object.keys(results[0]).forEach((key) => {

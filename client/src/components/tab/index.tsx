@@ -6,11 +6,8 @@ type TabType = {
     currentKey?: any
 }
 
-export const Tab = ({ list = [], onCheng, currentKey }: TabType) => {
-    if (!list.length) {
-        return null;
-    }
-    const [current, setCurrent] = useState(currentKey);
+export const Tab = ({ list, onCheng, currentKey }: TabType) => {
+    const [current, setCurrent] = useState(currentKey || list[0].value);
     useEffect(() => {
         onCheng && onCheng(current);
     }, [current])

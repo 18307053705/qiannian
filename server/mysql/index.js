@@ -78,7 +78,6 @@ function asyncQuery(queryString, callback, sqlInfo = {}) {
         reject({ err, results, fields });
         return;
       }
-      // callback(results, fields);s
       //   将结果传入回调函数
       resolve({ results, fields })
     });

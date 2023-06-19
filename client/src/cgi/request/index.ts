@@ -20,7 +20,7 @@ export async function request(
   url: string,
   data?: any,
   config?: requestConfig
-): Promise<any> {
+): Promise<{ code: number; data: any; message: string; text: string }> {
   const newUrl = config && config.baseUrl ? config.baseUrl : URL;
   try {
     const method = config && config.type ? config.type : "get";
@@ -41,7 +41,6 @@ export async function request(
     if (request.status === 200 && res.data.code === 0) {
       return res.data;
     } else if (res.data.code === 100000) {
-      
       // 登录异常跳转登录页
       goLogin();
     } else if (res.data.code === 100007 || res.data.code === 100006) {

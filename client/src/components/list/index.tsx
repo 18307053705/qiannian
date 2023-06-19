@@ -6,9 +6,10 @@ type ListType = {
     prefix: (itme: any, in_x, index) => any;
     prefix_d?: boolean;
     active?: (itme: any, in_x) => any;
+    emptyText?:string
 }
 
-export const List = ({ data = [], onCheng, prefix, active, prefix_d }: ListType) => {
+export const List = ({ data = [], onCheng, prefix, active, emptyText }: ListType) => {
     const [page, setPage] = useState(0);
     const [size] = useState(20);
     const total = data.length;
@@ -29,7 +30,7 @@ export const List = ({ data = [], onCheng, prefix, active, prefix_d }: ListType)
                         </div>
                     )
                 })
-                    : <div className={Style.empty}>暂无数据</div>
+                    : <div className={Style.empty}>{emptyText || '暂无数据'}</div>
             }
             {
                 total ? (

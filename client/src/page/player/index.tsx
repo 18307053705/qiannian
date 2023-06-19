@@ -1,34 +1,41 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
-import { playerApply } from '@cgi/player';
-import { getFriendsList } from '@cgi/friends';
-
+import { getFriendsList, friendsApply } from '@cgi/friends';
+import { getEquipName } from '@utils/equip';
 const Plater = ({ history }) => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
     const [isFriend, setIsFriend] = useState(true);
-    const { attr, socialize_pool, equip_pool } = roleInfo;
-    const socialize = socialize_pool ? JSON.parse(socialize_pool) : {};
-    const equip = equip_pool ? JSON.parse(equip_pool) : {};
+    const [error, setError] = useState('');
+    const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo as any;
     const { state } = history.location;
     useEffect(() => {
         getRoleInfo({ role_id: state.role_id }).then(({ data }) => {
             setRoleInfo(data);
         })
         getFriendsList().then(({ data }) => {
-            const { f_list } = data;
-            setIsFriend(JSON.parse(f_list).find(({ id }) => id === state.role_id));
-
+            let falg = false;
+            if (data) {
+                const { list } = data;
+                falg = JSON.parse(list).find(({ id }) => id === state.role_id);
+            }
+            setIsFriend(falg);
         })
     }, [])
 
     const applyClick = useCallback(() => {
-        playerApply({ role_id: state.role_id, role_name: state.role_name })
+        friendsApply({ role_id: state.role_id }).then(({ message }) => {
+            if (message) {
+                setError(message);
+            } else {
+                setIsFriend(true);
+            }
+        })
     }, [])
 
     return (
         <>
             <div>
-
+                {error && <div style={{ color: 'red' }}>提示：{error}</div>}
                 <div>
                     <span className="g_u"><span>私聊</span></span>
                     <span className="g_u"><span onClick={() => { history.push('/shopping', { role_id: state.role_id }) }}>店铺</span></span>
@@ -58,20 +65,20 @@ const Plater = ({ history }) => {
             <div><span className="g_b">命中</span>：<span>{attr.hit}</span></div>
             <div><span className="g_b">闪避</span>：<span>{attr.dodge}</span></div>
             <div><span className="g_b">暴击</span>：<span>{attr.sudden}</span></div>
-
             <div>
-                <div><span className="g_b">宠物</span>：<span>{equip.pet ? equip.pet.name : '无'}</span></div>
-                <div><span className="g_b">武器</span>：<span>{equip.weapon ? equip.weapon.name : '无'}</span></div>
-                <div><span className="g_b">头盔</span>：<span>{equip.helmet ? equip.helmet.name : '无'}</span></div>
-                <div><span className="g_b">衣服</span>：<span>{equip.clothing ? equip.clothing.name : '无'}</span></div>
-                <div><span className="g_b">腰带</span>：<span>{equip.belt ? equip.belt.name : '无'}</span></div>
-                <div><span className="g_b">鞋子</span>：<span>{equip.shoe ? equip.shoe.name : '无'}</span></div>
-                <div><span className="g_b">戒指</span>：<span>{equip.ring ? equip.ring.name : '无'}</span></div>
-                <div><span className="g_b">项链</span>：<span>{equip.necklace ? equip.necklace.name : '无'}</span></div>
-                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure1 ? equip.treasure1.name : '无'}</span></div>}
-                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure2 ? equip.treasure2.name : '无'}</span></div>}
-                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure3 ? equip.treasure3.name : '无'}</span></div>}
-                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure4 ? equip.treasure4.name : '无'}</span></div>}
+                <div>
+                    <span className="g_b">宠物</span>：<span>{equip.pet ? equip.pet.name : '无'}</span></div>
+                <div><span className="g_b">武器</span>：<span>{equip.weapon ? getEquipName(equip.weapon.ext, equip.weapon.name) : '无'}</span></div>
+                <div><span className="g_b">头盔</span>：<span>{equip.helmet ? getEquipName(equip.helmet.ext, equip.helmet.name) : '无'}</span></div>
+                <div><span className="g_b">衣服</span>：<span>{equip.clothing ? getEquipName(equip.clothing.ext, equip.clothing.name) : '无'}</span></div>
+                <div><span className="g_b">腰带</span>：<span>{equip.belt ? getEquipName(equip.belt.ext, equip.belt.name) : '无'}</span></div>
+                <div><span className="g_b">鞋子</span>：<span>{equip.shoe ? getEquipName(equip.shoe.ext, equip.shoe.name) : '无'}</span></div>
+                <div><span className="g_b">戒指</span>：<span>{equip.ring ? getEquipName(equip.ring.ext, equip.ring.name) : '无'}</span></div>
+                <div><span className="g_b">项链</span>：<span>{equip.necklace ? getEquipName(equip.necklace.ext, equip.necklace.name) : '无'}</span></div>
+                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure1 ? getEquipName(equip.treasure1.ext, equip.treasure1.name) : '无'}</span></div>}
+                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure2 ? getEquipName(equip.treasure2.ext, equip.treasure2.name) : '无'}</span></div>}
+                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure3 ? getEquipName(equip.treasure3.ext, equip.treasure3.name) : '无'}</span></div>}
+                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure4 ? getEquipName(equip.treasure4.ext, equip.treasure4.name) : '无'}</span></div>}
             </div>
             <span className="g_b_u" onClick={() => { history.push('/grand') }}>返回游戏</span>
 

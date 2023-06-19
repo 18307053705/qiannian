@@ -3,9 +3,6 @@ const mysql = require("../mysql");
 const Global = require("../global");
 const router = new express.Router();
 
-
-
-
 // 申请
 router.post("/playerApply", (req, res) => {
     const { role_id } = req.body;
