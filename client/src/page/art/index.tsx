@@ -1,17 +1,6 @@
 import React, { useState, useCallback } from 'react';
-
-export const Art = ({ history }) => {
-    const [page, setPage] = useState('info');
-    const [posInfo, setPosInfo] = useState({
-        pos: 0,
-        key: ''
-    });
-    const pageCheng = useCallback((name, pos, key) => {
-        setPage(name);
-        if (pos) {
-            setPosInfo({ pos, key })
-        }
-    }, [])
+import { backGrand } from '@utils/grand'
+export const Art = () => {
     return (
         <div>
             <div>===技能===</div>
@@ -27,6 +16,7 @@ export const Art = ({ history }) => {
             <div className='g_color'>无上道法 零转0级</div>
             <div>===防御===</div>
             <div className='g_color'>荒古圣体 零转0级</div>
+            <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { List } from '@components/index';
 import { getsocializeList, getsocializeDetail, socializeApply, socializeActive, socializeAdjust, socializeExit } from '@cgi/socialize';
-import { backGrand } from '@utils/grand'
+import { backGrand } from '@utils/grand';
 import Gang from './gang';
 import Intersect from './intersect';
 import Ranks from './ranks';
