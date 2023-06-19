@@ -64,6 +64,7 @@ app.use("/api/friends", require("./api/friends"));
 app.use("/api/socialize", require("./api/socialize"));
 app.use("/api/shopping", require("./api/shopping"));
 app.use("/api/task", require("./api/task"));
+app.use("/api/art", require("./api/art"));
 
 // 全局捕获异常
 app.use(errorFn.globalError);

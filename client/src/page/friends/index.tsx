@@ -44,7 +44,7 @@ export const Friends = ({ history }) => {
         return (
             <span
                 key={index}
-                className="g_u_end"
+                className={current ? '' : "g_u_end"}
                 onClick={() => {
                     history.push("/player", { role_id: row.id });
                 }}

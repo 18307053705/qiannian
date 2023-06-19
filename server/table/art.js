@@ -1,4 +1,4 @@
-// 技能类型p 1:伤害 2:buff 3:被动
+// 技能类型p 1:伤害 2:buff 3:天赋
 // 基础数值v 升级增加up 转生rp 消耗d 目标数量t
 module.exports = {
     art: {
