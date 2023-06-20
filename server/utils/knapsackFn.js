@@ -55,7 +55,7 @@ module.exports = {
     // 验证物品信息
     chekeArticle: function (req, data) {
         const { id, in_x, s, p, type } = req.body;
-        if (!id || in_x === undefined || s >= 0 || !p || !type) {
+        if (!(id && in_x !== undefined && s >= 0 && p && type)) {
             return '参数有误'
         }
         const itme = data[in_x];
@@ -118,7 +118,45 @@ module.exports = {
         if (data.length > KnapsackTable.size) {
             return '背包已满,请先清理背包'
         }
+    },
+    // 消耗物品
+    deleteKnapsack: function (req, article) {
+        const { data } = Global.getknapsackGlobal(req);
+        let chengData = [];
+        let message = [];
+        data.forEach(({ id, p, s, ...itme }) => {
+            if (article[id] && p === article[id]['p']) {
+                let num = s - article[id]['s'];
+                if (num > 0) {
+                    delete article[id];
+                    chengData.push({
+                        ...itme,
+                        id,
+                        p,
+                        s: num
+                    });
+                    return;
+                }
+            }
+            chengData.push({
+                id,
+                p,
+                s,
+                ...itme
+            })
 
-
+        })
+        if (JSON.stringify(article) !== '{}') {
+            Object.keys(article).forEach((key) => {
+                const { n, s } = article[key];
+                message.push(`${n}数量不足`);
+            })
+        } else {
+            Global.updateknapsackGlobal(req, { data: chengData });
+        }
+        return {
+            message: message.join(','),
+            data: chengData
+        };
     }
 }

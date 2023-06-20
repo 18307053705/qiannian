@@ -5,11 +5,8 @@ import './index.less';
 export default ({ history }) => {
     const [isLogin, setIsLogin] = useState(true);
     const callback = useCallback(() => {
-        console.log('执行callback')
         history.push('/')
     }, [])
-    // const 
-    console.log(history, 'props...')
     return (
         <div className="login-register-page">
             {isLogin ?
@@ -19,5 +16,3 @@ export default ({ history }) => {
     )
 
 }
-
-// export default Login;

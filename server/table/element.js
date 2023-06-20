@@ -124,8 +124,8 @@ const ELEMENT_5 = {
     type: 5,
     ext: {
       career: 1,
-      level: 20,
-      attr: 1,
+      level: 1,
+      attr: 10,
       boss: true,
     },
     article: [
@@ -315,6 +315,98 @@ const ELEMENT_5 = {
       {
         ...Knapsack[59],
         s: 1,
+      },
+      {
+        ...Knapsack[67],
+        s: 100,
+      },
+      {
+        ...Knapsack[68],
+        s: 100,
+      },
+      {
+        ...Knapsack[69],
+        s: 100,
+      },
+      {
+        ...Knapsack[70],
+        s: 100,
+      },
+      {
+        ...Knapsack[71],
+        s: 100,
+      },
+      {
+        ...Knapsack[72],
+        s: 100,
+      },
+      {
+        ...Knapsack[73],
+        s: 100,
+      },
+      {
+        ...Knapsack[74],
+        s: 100,
+      },
+      {
+        ...Knapsack[75],
+        s: 100,
+      },
+      {
+        ...Knapsack[76],
+        s: 100,
+      },
+      {
+        ...Knapsack[77],
+        s: 100,
+      },
+      {
+        ...Knapsack[78],
+        s: 100,
+      },
+      {
+        ...Knapsack[79],
+        s: 100,
+      },
+      {
+        ...Knapsack[80],
+        s: 100,
+      },
+      {
+        ...Knapsack[81],
+        s: 100,
+      },
+      {
+        ...Knapsack[82],
+        s: 100,
+      },
+      {
+        ...Knapsack[83],
+        s: 100,
+      },
+      {
+        ...Knapsack[84],
+        s: 100,
+      },
+      {
+        ...Knapsack[85],
+        s: 100,
+      },
+      {
+        ...Knapsack[86],
+        s: 100,
+      },
+      {
+        ...Knapsack[87],
+        s: 100,
+      },
+      {
+        ...Knapsack[88],
+        s: 100,
+      },
+      {
+        ...Knapsack[89],
+        s: 100,
       },
     ]
   },

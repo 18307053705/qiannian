@@ -25,7 +25,7 @@ const Grand = ({ history }) => {
             <div className="g_b">{`${name}(${x}.${y})`}</div>
             <div>
                 <span className="g_u"><span onClick={backGrand}>刷新</span></span>
-                <span className="g_u"><span>聊天</span></span>
+                <span className="g_u"><span onClick={() => { history.push('/chat') }}>聊天</span></span>
                 <span className="g_u"><span onClick={() => { history.push('/friends') }}>好友</span></span>
                 <span className="g_u"><span onClick={() => { history.push('/task') }}>任务</span></span>
                 <span className="g_u"><span>腾云</span></span>

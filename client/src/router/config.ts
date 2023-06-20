@@ -97,6 +97,11 @@ export const config: RouterType[] = [
     name: "技能界面",
     path: "/art",
     component: lazy(() => import("@page/art"))
+  },
+  {
+    name: "聊天界面",
+    path: "/chat",
+    component: lazy(() => import("@page/chat"))
   }
 ];
 

@@ -1,5 +1,6 @@
 const express = require("express");
 const fightFn = require("../utils/fightFn");
+const artFn = require("../utils/artFn");
 const Knapsack = require('../table/knapsack');
 const Global = require("../global");
 const { error, ERR_MEUN } = require("../utils/errorFn");
@@ -45,11 +46,15 @@ router.post("/getFightDir", async (req, res) => {
             drug.push({ name: n, id, })
         }
     })
-    skill_pool.art && skill_pool.art.forEach(({ n, id, p }) => {
-        if (p !== 3) {
-            art.push({ name: n, id, })
-        }
-    })
+
+    if (skill_pool.art) {
+        Object.keys(skill_pool.art).forEach((key) => {
+            const { n, id, p, l } = skill_pool.art[key]
+            if (p !== 4 && l !== -1) {
+                art.push({ name: n, id, })
+            }
+        })
+    }
     res.send({
         code: 0,
         data: {
@@ -65,7 +70,15 @@ router.post("/setFightDir", async (req, res) => {
     const { data } = Global.getknapsackGlobal(req);
     const { art, fight } = skill_pool;
     // 默认为技能列表
-    let list = art;
+    let list = [];
+    if (art) {
+        Object.keys(art).forEach((key) => {
+            const { n, id, p, l } = art[key]
+            if (p !== 4 && l !== -1) {
+                list.push({ n, id, })
+            }
+        })
+    }
     // 若更改类型为消耗品，则获取背包物品,并更新消耗物品
     if (type == 2) {
         // 获取替换前的物品信息
@@ -85,10 +98,9 @@ router.post("/setFightDir", async (req, res) => {
         }
         list = data
     }
-    // 
-    const itme = list.find(({ id, p }) => dir == id && p == 1);
+    const itme = list.find(({ id }) => dir == id);
     // 设置技能键未更改情况,不做处理返回之前战斗设置
-    if (itme && fight[index].id !== dir) {
+    if (itme && (fight[index] === null || fight[index].id !== dir)) {
         fight[index] = {
             ...itme,
             p2: type,
@@ -123,71 +135,73 @@ router.post("/fightDir", async (req, res) => {
     }
     const { role_id } = Global.getRoleGlobal(req);
     let { player, rival, buffs, freak } = Global.getFight(req);
-
     if (freak.statu === 1) {
         fightFn.releaseFight(req, res);
         fightFn.getFightReward(req, res, freak);
         return;
     }
+
     const in_x = player.findIndex(({ id }) => id == role_id);
     if (in_x === -1) {
         error(res, ERR_MEUN.ROLE)
         return;
     }
+
     const { art, attr } = player[in_x];
-    const { p2 = 0, s, p } = art[index] || {};
+    const { p2 = 0, s, id: artId } = art[index] || {};
     // 我方属性
     const playerAttr = fightFn.creatAttr(attr);
     // 敌方属性
     const rivalAttr = fightFn.creatAttr(rival[0].attr);
-    const fightRes = {
-        player: {
-            text: '',
-            dpslist: []
-        },
-        rival: {
-            text: '',
-            dpslist: []
-        },
-        statu: 0
+
+    // 定义回合文案
+    const fightRound = {
+        text: '', // 出招文案
+        rival_text:'', // 怪无出招文案
+        buffText: [], // buff信息
+        dps: [], // 造成的伤害
+        mana: '', // 消耗的法力
+        life: '',// 消耗的生命
+        statu: 0 // 结果
     }
 
     // 使用药品
     if (p2 === 2 && s > 0) {
         fightFn.drugDir(player, in_x, index);
     }
-    // 使用伤害技能: 技能类型:p(1伤害,2buff) 消耗:d 伤害:v 目标数量:t 
-    if (p2 === 1 && p === 1) {
-        fightRes.statu = fightFn.atkDir(player, in_x, index, rival, playerAttr, rivalAttr, fightRes);
-    }
-    // 使用buffs技能: 技能类型:p(1伤害,2buff) 消耗:d buff值:v 目标回合:t buff属性：attr
-    if (p2 === 1 && p === 2) {
-        fightFn.computeBuff(player, in_x, index, buffs);
+    if (p2 === 1) {
+        const { message, p, data, art } = artFn.ArtHandler(req, artId, player, in_x,fightRound);
+        // 法力不足
+        if (message) {
+            fightRound['text'] = message;
+        } else if (p === 3) {
+            // buff技能，更新玩家战斗属性
+            player = data;
+        } else {
+            // 伤害技能,计算敌方生命与我方输出,文案写入回合信息中 fightRound
+            rival = fightFn.artDir(art, player[in_x], playerAttr, rival, rivalAttr, fightRound);
+        }
     }
     // 普通攻击
     if (p2 === 0) {
-        fightRes.statu = fightFn.normalDir(player, in_x, rival, playerAttr, rivalAttr, fightRes);
+        rival = fightFn.normalDir(rival, playerAttr, rivalAttr, fightRound);
     }
     // 判断战斗是否结束
-    fightRes.statu = fightRes.statu || fightFn.rivalDir(player, in_x, rival, playerAttr, rivalAttr, fightRes);
+    let statu = rival.length ? fightFn.rivalDir(player, in_x, rival, playerAttr, rivalAttr, fightRound) : 1;
+    fightFn.computeBuffs(player, in_x, fightRound);
 
-    player[in_x] = {
-        ...player[in_x],
-        art,
-        attr
-    }
     // 指令结束,更新战斗池
-    Global.updataFight(req, { player, buffs, rival: rival.filter(({ attr }) => attr.life > 0) });
+    Global.updataFight(req, { player, rival });
     // 战斗结束
-    if (fightRes.statu !== 0) {
+    if (statu !== 0) {
         // 释放战斗池,更新背包
         fightFn.releaseFight(req, res)
     }
 
     // 战胜
-    if (fightRes.statu === 1) {
+    if (statu === 1) {
         // 更新我状态
-        freak.statu = fightRes.statu;
+        freak.statu = statu;
         if (Global.getFight(req)) {
             Global.updataFight(req, { freak })
         }
@@ -195,7 +209,7 @@ router.post("/fightDir", async (req, res) => {
         return;
     }
 
-    if (fightRes.statu === -1) {
+    if (statu === -1) {
         res.send({
             code: 0,
             data: {
@@ -207,7 +221,10 @@ router.post("/fightDir", async (req, res) => {
     }
     res.send({
         code: 0,
-        data: fightRes
+        data: {
+            ...fightRound,
+            statu
+        }
     })
     return;
 });

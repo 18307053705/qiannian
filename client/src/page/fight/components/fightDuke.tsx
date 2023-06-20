@@ -3,8 +3,8 @@ import { backGrand } from '@utils/grand';
 import { fightGive } from '@cgi/fight';
 
 const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
-    const { rival = {}, player = {} } = fightDirInfp || { rival: {}, player: {} };
-    const buff = Object.keys(fightInfo.buffs);
+    const { dps=[], text,rival_text, mana, life, buffText = [] } = fightDirInfp;
+    // const buff = Object.keys(fightInfo.buffs);
     const backClick = useCallback(() => {
         fightGive().then(() => {
             backGrand()
@@ -24,8 +24,8 @@ const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
                     ))
                 }
             </div>
-            <div>{player.text}</div>
-            <div>{rival.text}</div>
+            <div>{text}</div>
+            <div>{rival_text}</div>
             {/* 敌方状态 */}
             <div>----------------敌人状态--------------</div>
             <div>
@@ -33,7 +33,7 @@ const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
                     fightInfo.rival.map(({ attr, name }, index) => (
                         <div key={index}>
                             <span className="g_b">{name}(命)</span>：<span>{`${attr.life}/${attr.life_max}`}</span>
-                            {player.dpslist && <span>{player.dpslist[index] ? `[-${player.dpslist[index]}]` : ''}</span>}
+                            {dps.length && <span>{dps[index] ? `[${dps[index]}]` : ''}</span>}
                         </div>
                     ))
                 }
@@ -46,18 +46,19 @@ const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
                         <div key={index}>
                             <div>
                                 <span className="g_b">{name}(命)</span>：<span>{`${attr.life}/${attr.life_max}`}</span>
-                                {rival.dpslist && <span>{rival.dpslist[index] ? `[-${rival.dpslist[0]}]` : ''}</span>}
+                                {life && <span>[{life}]</span>}
                             </div>
-                            <div><span className="g_b">{name}(法)</span>：<span>{`${attr.mana}/${attr.mana_max}`}</span></div>
+                            <div>
+                                <span className="g_b">{name}(法)</span>：<span>{`${attr.mana}/${attr.mana_max}`}</span>
+                                {mana && <span>[{mana}]</span>}
+                            </div>
                         </div>
                     ))
                 }
             </div>
             {/* buff展示 */}
-            {buff.length ? <div>----------------战斗buff--------------</div> : ''}
-            {
-                buff.map((key) => (<div key={key}>{fightInfo.buffs[key]}</div>))
-            }
+            {buffText.length ? <div>----------------战斗buff--------------</div> : ''}
+            {buffText.map((itme, index) => (<div key={index}>{itme}</div>))}
             <div>----------------状态详情--------------</div>
             {/* 敌方成员 */}
             <div>

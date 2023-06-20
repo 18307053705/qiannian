@@ -16,7 +16,6 @@ module.exports = {
   dirControl: function (req, res) {
     // 获取对应角色指令
     const { eleDir = [], moveDir = [] } = Global.getDir(req) || {};
-    // console.log(Global.dir)
     const { dir } = req.body;
     // 选择角色进入地图指令
     if (dir == -1) {

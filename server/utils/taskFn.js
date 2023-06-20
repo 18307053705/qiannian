@@ -314,7 +314,6 @@ module.exports = {
     if (reward['knapsack']) {
       const { tael = 0, article } = reward['knapsack'];
       oldTael += tael;
-      console.log(article,'article...tak')
       if (knapsackFn.addKnapsack(article, data)) {
         return {
           code: 0,

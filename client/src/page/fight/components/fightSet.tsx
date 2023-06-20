@@ -20,7 +20,6 @@ const FightSet = ({ dirClick, art }) => {
         })
     }, [])
     const setClick = useCallback((id, type, index) => {
-        console.log(id, type)
         setFightDir({ dir: id, type, index }).then(({ data }) => {
             setArtlist(data);
             setType(0);

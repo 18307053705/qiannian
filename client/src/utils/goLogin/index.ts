@@ -3,7 +3,9 @@ export function goLogin() {
   // 非登录页的情况，校验登陆态，进行拦截
   if (!Cookies.get("token") && window.location.pathname !== "/login") {
     window.location.pathname = "/login";
+    return false;
   }
+  return true;
 }
 
 export function goHoem() {

@@ -1,6 +1,5 @@
 import React from "react";
 const FightAtt = ({ dirClick, attrInfo }) => {
-    console.log(attrInfo,'attr...')
     const { name, attr } = attrInfo;
     return (
         <>

@@ -5,6 +5,7 @@ const Art = require("../table/art");
 const roleFn = require("../utils/roleFn");
 const knapsackFn = require("../utils/knapsackFn");
 const taskFn = require('./taskFn');
+const artFn = require('./artFn');
 // 战斗相关api
 module.exports = {
     // 创建战斗
@@ -25,7 +26,7 @@ module.exports = {
             rival,
             player: [],
             id: [],
-            buffs: {},
+            // buffs: {},
             freak: {
                 extDir,
                 statu: 0,
@@ -95,7 +96,8 @@ module.exports = {
                 mana: roleInfo['mana'] > data.attr.mana_max ? data.attr.mana_max : roleInfo['mana'],
             },
             art: fight,
-            name: roleInfo.role_name
+            name: roleInfo.role_name,
+            buffs: {} // {role_id:{value:life:5000,atk:500,t:5,text:描述}}
         }
     },
     // 创建怪物
@@ -175,40 +177,44 @@ module.exports = {
         }
         attr.life -= dps
     },
-    // buff解析
-    computeBuff: function (player, in_x, dirIndex, buffs) {
-        const { art, attr, name } = player[in_x];
-        const { id, d, v } = art[dirIndex];
-        // 已存在属性属性buff,或者法力不足
-        if (buffs[id] || attr.mana - d < 0) {
-            return;
-        }
+    // buff计算
+    computeBuffs: function (player, in_x, fightRound) {
+        const { buffs } = player[in_x];
+        // buffs: {} // {role_id:{value:life:5000,atk:500,t:5,text:描述}}
+        const role_ids = [];
+        const bufftext = [];
+        Object.keys(buffs).forEach((role_id) => {
+            const { value, t, text } = buffs[role_id];
+            if (t === 1) {
+                role_ids.push(role_id);
+                Object.keys(value).forEach((key) => {
+                    if (key === 'life' || key === 'mana') {
+                        player.forEach((itme) => {
+                            itme.attr[`${key}_max`] -= value[key];
+                        })
+                        return;
+                    }
+                    if (key === 'hit' || key === 'dodge' || key === "sudden") {
+                        player.forEach((itme) => {
+                            itme.attr[key] -= value[key];
+                        })
+                        return;
+                    }
+                    player.forEach((itme) => {
+                        itme.attr[`${key}_max`] -= value[key];
+                        itme.attr[`${key}_min`] -= value[key];
+                    })
 
-        attr.mana -= d;
-        let buffTip = `【${name}(${Art.art[id]['n']})】：`;
-        Object.keys(v).forEach(key => {
-            const val = v[key];
-            buffTip += `${Attribute.MEUN[key]}上限+${val},`
-            if (key === 'life' || key === 'mana') {
-                player.forEach((itme) => {
-                    itme.attr[`${key}_max`] += val;
-                    itme.attr[key] += val;
                 })
                 return;
             }
-            if (key === 'hit' || key === 'dodge' || key === "sudden") {
-                player.forEach((itme) => {
-                    itme.attr[key] += val;
-                })
-                return;
-            }
-            player.forEach((itme) => {
-                itme.attr[`${key}_max`] += val;
-                itme.attr[`${key}_min`] += val;
-            })
-
+            bufftext.push(`${text},持续${t - 1}回合。`)
+            buffs[role_id]['t'] = t - 1;
         })
-        buffs[id] = buffTip.slice(0, -1);
+        role_ids.forEach((role_id) => {
+            delete buffs[role_id]
+        })
+        fightRound['buffText'] = bufftext;
     },
     // 使用物品
     drugDir: function (player, in_x, dirIndex) {
@@ -226,7 +232,7 @@ module.exports = {
         });
     },
     // 计算伤害
-    computeDps: function (attr1, attr2, info, rise = 100) {
+    computeDps: function (attr1, attr2, rise = 100) {
         const { atk, ice_atk = 0, mine_atk = 0, wind_atk = 0, water_atk = 0, fire_atk = 0, hit, sudden: sudden1 } = attr1;
         const { dfs, ice_dfs = 0, mine_dfs = 0, wind_dfs = 0, water_dfs = 0, fire_dfs = 0, dodge, sudden: sudden2 } = attr2;
         let isHit = hit >= dodge;
@@ -237,8 +243,9 @@ module.exports = {
             // 随机1-100的值，如果大于闪避值则命中
             isHit = Math.floor(Math.random() * (100 - 1)) + 1 > rate;
         }
+        let dps = 0;
         if (isHit) {
-            let dps = (atk - dfs) * (rise / 100);
+            dps = (atk - dfs) * (rise / 100);
             let rate = 10;
             let sudden = 100;
             dps += ice_atk - ice_dfs;
@@ -269,101 +276,72 @@ module.exports = {
                 }
             }
             dps = parseInt(dps * sudden / 100);
-            if (dps <= 0) {
-                return {
-                    dps: 0,
-                    text: `${info.name}使用${info.artName},未能对${info.tagName}造成伤害。`
-                }
-            }
-            return {
-                dps,
-                text: ''
-            }
         }
         return {
-            dps: 0,
-            text: `${info.name}使用${info.artName},${info.tagName}施展出诡异身法避开了。`
+            dps: dps < 0 ? 0 : dps,
+            isHit
         }
     },
     // 普通攻击
-    normalDir: function (player, in_x, rival, playerAttr, rivalAttr, fightRes) {
-        const dpsList = [];
-        const { name } = player[in_x];
-        const info = {
-            name,
-            artName: '普通攻击',
-            tagName: rival[0].name
-        }
+    normalDir: function (rival, playerAttr, rivalAttr, fightRound) {
         // 计算玩家对怪物的伤害
-        const playerDps = this.computeDps(playerAttr, rivalAttr, info);
-        rival[0]['attr']['life'] -= playerDps.dps;
+        let { isHit, dps } = this.computeDps(playerAttr, rivalAttr);
+        rival[0]['attr']['life'] -= dps;
         // 判断怪物是否死亡，死亡则不记录伤害
         if (rival[0]['attr']['life'] > 0) {
-            dpsList.push(playerDps.dps);
+            fightRound['dps'] = [-dps]
         }
         // 将死亡怪物清除
         rival = rival.filter(({ attr }) => attr.life > 0);
-        fightRes['player'] = {
-            text: playerDps.text,
-            dpslist: [...dpsList],
-        }
-        return rival.length === 0 ? 1 : 0
+        return rival;
     },
     // 技能攻击
-    atkDir: function (player, in_x, dirIndex, rival, playerAttr, rivalAttr, fightRes) {
-        const dpsList = [];
-        const { art, attr, name } = player[in_x];
-        const { t, d, n, v } = art[dirIndex];
-        const mana = attr.mana - d;
-        let artV = 100;
-        if (mana >= 0) {
-            artV = v;
-            attr.mana = mana;
+    artDir: function (art, player, playerAttr, rival, rivalAttr, fightRound) {
+        const { v, e, t = 1, n } = art;
+        if (e && e['ignore']) {
+            // 无视防御
+            rivalAttr['dfs'] = rivalAttr['dfs'] * (100 - e['ignore']) / 100;
         }
-        const info = {
-            name,
-            artName: n,
-            tagName: rival[0].name
+        let { isHit, dps } = this.computeDps(playerAttr, rivalAttr, v);
+        if (e && e['atk']) {
+            // 增伤
+            dps = parseInt(dps * (100 + e['atk']) / 100);
         }
-        // 计算玩家对怪物的伤害
-        const playerDps = this.computeDps(playerAttr, rivalAttr, info, artV);
-        for (let i = 0; i < t && rival[i]; i++) {
-            const life = rival[i]['attr']['life'] - playerDps.dps;
-            rival[i]['attr']['life'] = life;
-            // 判断怪物是否死亡，死亡则不记录伤害
-            if (life > 0) {
-                dpsList.push(playerDps.dps);
+        if (e && e['suck']) {
+            // 吸血
+            let life = parseInt(dps * e['suck'] / 100);
+            player['attr']['life'] += life;
+            fightRound['life'] = life
+        }
+        const dpsText = [];
+        // 命中且造成伤害
+        if (isHit && dps > 0) {
+            for (let i = 0; i < t && rival[i]; i++) {
+                const life = rival[i]['attr']['life'] - dps;
+                rival[i]['attr']['life'] = life;
+                // 判断怪物是否死亡，死亡则不记录伤害
+                if (life > 0) {
+                    dpsText.push(-dps);
+                }
             }
         }
         // 将死亡怪物清除
         rival = rival.filter(({ attr }) => attr.life > 0);
-        fightRes['player'] = {
-            text: playerDps.text,
-            dpslist: [...dpsList],
-        }
-        return rival.length === 0 ? 1 : 0
+        fightRound['dps'] = dpsText;
+        return rival;
     },
     // 怪物伤害
-    rivalDir: function (player, in_x, rival, playerAttr, rivalAttr, fightRes) {
-        const { attr, name } = player[in_x];
-        const dpsList = [];
+    rivalDir: function (player, in_x, rival, playerAttr, rivalAttr, fightRound) {
+        const { attr } = player[in_x];
         const num = rival.length > player.length ? rival.length - player.length + 1 : 1;
-        const info = {
-            name: rival[0].name,
-            artName: '普通攻击',
-            tagName: name
-        }
-        const rivalDps = this.computeDps(rivalAttr, playerAttr, info);
+        let { isHit, dps } = this.computeDps(rivalAttr, playerAttr);
         // 最多被三个怪攻击
-        const dps = num > 3 ? rivalDps.dps * 3 : rivalDps.dps * num;
+        dps = num > 3 ? dps * 3 : dps * num;
         attr.life -= dps;
         if (attr.life <= 0) {
             attr.life = 0;
         };
-        fightRes['rival'] = {
-            text: rivalDps.text,
-            dpslist: [dps]
-        }
+        fightRound['life'] += -dps;
         return attr.life === 0 ? -1 : 0;
     },
     // 释放战斗
@@ -432,9 +410,10 @@ module.exports = {
             if (!itme.rate || itme.rate > rateS) {
                 // 根据类型保存
                 itme.type == 3 ? equipReward[itme.id] = itme : artReward[itme.id] = itme;
+                textReward.push(`${itme.name || itme.n}+${itme.s || itme.num || 1}`)
             }
         });
-        knapsackFn.addKnapsack({ artReward, equipReward }, knapsack.data);
+       const tip = knapsackFn.addKnapsack({ artReward, equipReward }, knapsack.data);
         // 获取人物buff
         const { buff_pool: buffPool } = roleInfo;
         const { vip = {} } = buffPool;
@@ -466,7 +445,6 @@ module.exports = {
         const tael = (taels || exp < 100 ? exp : exp / 100) * (vipTael || 1);
         // 更新背包
         Global.updateknapsackGlobal(req, { data: knapsack.data, tael: knapsack.tael - 0 + tael * freak.num });
-        // roleFn.updateKnapsack(req, { data: JSON.stringify(data), tael: knapsack.tael - 0 + tael * freak.num });
         // 更新角色经验等级
         roleFn.computeRoleLevel(req, res, exp * freak.num);
         // 监听任务池
@@ -479,8 +457,8 @@ module.exports = {
                     name,
                     exp: vipExp ? `${exp * freak.num}(${vipExp}倍经验)` : exp * freak.num,
                     tael: vipTael ? `${tael * freak.num}(${vipTael}倍银两)` : tael * freak.num,
-                    article: textReward.join(','),
-                    tip: JSON.stringify(artReward) !== '{}' || JSON.stringify(equipReward) !== '{}' ? '背包已满,请注意清理。' : ''
+                    article: tip ? '' : textReward.join(','),
+                    tip
                 },
                 tasks
             }

@@ -58,12 +58,6 @@ export const taskScene = () => {
     }
     const { state, reward, tpNpc, taskId, message, taskType } = info;
 
-    console.log(tpNpc, 'tpNpc...')
-    console.log(state, 'state...')
-    console.log(scne, 'scne...')
-
-
-
     if (state === 0 || state === 1) {
         const { page, size } = scne;
         const Dom: any = MAIN1_100_SCENE[taskId];

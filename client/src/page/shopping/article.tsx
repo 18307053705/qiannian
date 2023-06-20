@@ -96,8 +96,6 @@ const Article = ({ history }) => {
     )
 
     const submit = (price) => {
-
-        console.log(price, num, info.in_x);
         grounding({
             type: 1,
             active: 1,
