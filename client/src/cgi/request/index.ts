@@ -20,7 +20,13 @@ export async function request(
   url: string,
   data?: any,
   config?: requestConfig
-): Promise<{ code: number; data: any; message: string; text: string }> {
+): Promise<{
+  code: number;
+  data: any;
+  message: string;
+  text: string;
+  success: string;
+}> {
   const newUrl = config && config.baseUrl ? config.baseUrl : URL;
   try {
     const method = config && config.type ? config.type : "get";
@@ -39,6 +45,12 @@ export async function request(
 
     const request = res.request;
     if (request.status === 200 && res.data.code === 0) {
+      if (res.data.message) {
+        window.QN.setError(res.data.message);
+      }
+      if (res.data.success) {
+        window.QN.setError(res.data.success);
+      }
       return res.data;
     } else if (res.data.code === 100000) {
       // 登录异常跳转登录页

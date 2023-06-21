@@ -36,8 +36,6 @@ router.post("/getDetail", async (req, res) => {
     // 人物装备详情
     if (posKey) {
         const { equip_pool: equipPool } = Global.getRoleGlobal(req);
-        // const role = await roleFn.getRoleInfo(req, res);
-        // const equipPool = JSON.parse(role.equip_pool);
         const { id, ext } = equipPool[posKey];
         const equip = Equip.getEquipTip(Equip[id], ext);
         res.send({

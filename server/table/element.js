@@ -59,7 +59,8 @@ const ELEMENT_2 = {
   2000004: {
     id: 2000004,
     name: "商城",
-    type: 2
+    type: 2,
+    dir: '/shops',
   },
   2000005: {
     id: 2000005,

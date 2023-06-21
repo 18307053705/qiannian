@@ -87,7 +87,6 @@ export const Chat = ({ history }) => {
                     <span className='g_u_end' onClick={() => { history.push('./player', { role_id: id }) }}>{n}</span>
                     <span>({moment(s).format('hh:mm')})</span>
                     <span>:{t}</span>
-
                     {tabKey === 1 && <span className='g_color' onClick={() => { setRole({ id, name: n }) }}>回复</span>}
                 </div>
             </div>

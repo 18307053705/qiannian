@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getDetail } from '@cgi/shopping';
 
-import { backGrand } from '@utils/grand'
+import { backGrand } from '@utils/grand';
 
 import DetailShop from './detail';
 import ShopList from './shopList';

@@ -3,7 +3,6 @@ import React, { Suspense, useEffect, useContext, useState, memo, useRef } from "
 import config from "./config";
 // import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route, useHistory, useLocation, Redirect } from "react-router-dom";
-import { goLogin } from "@utils/goLogin";
 import { getMeunList } from '@cgi/meun';
 import Cookies from 'js-cookie';
 import { Model, GET_MEUN_LIST } from '@model';
@@ -19,11 +18,12 @@ function RouterGuard({ setUnread, historyRef }) {
         chatGet().then(({ data }) => {
             setUnread(data);
         })
-    }else{
+    } else {
         setUnread([]);
     }
     useEffect(() => {
         historyRef.current = history;
+        window.QN.history = history;
     }, [])
 
     // 拿到当前路由
@@ -73,8 +73,28 @@ const CHAT_TYPE_MEUN = {
 const Root = () => {
     const { state, dispatch } = useContext(Model);
     const [unread, setUnread] = useState([]);
-    const historyRef:any = useRef(null);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    const historyRef: any = useRef(null);
     useEffect(() => {
+        window.QN.setError = (value) => {
+            window.QN.error = value;
+            setError(value);
+        };
+        window.QN.setSuccess = (value) => {
+            window.QN.success = value;
+            setSuccess(value);
+        };
+        // 监听全局点击事件,处理错误信息
+        window.addEventListener("click", () => {
+            if (window.QN.error) {
+                setError('');
+            }
+            if (window.QN.success) {
+                setSuccess('');
+            }
+        });
         // 请求枚举列表
         getMeunList().then(({ data }) => {
             dispatch({
@@ -84,17 +104,18 @@ const Root = () => {
         })
     }, [])
     // 登录态验证
-    goLogin();
+    // goLogin();
     return (
         <div>
-            {state.error && <div style={{ color: 'red' }}>提示：{state.error}</div>}
+            {success && <div>{success}</div>}
+            {error && <div style={{ color: 'red' }}>提示：{error}</div>}
             <div>{
-                unread.map((id,index) => (
+                unread.map((id, index) => (
                     <span
                         onClick={() => { historyRef.current.push('./chat', { type: id }) }}
                         className='g_u_end'
                     >
-                        {CHAT_TYPE_MEUN[id]}({index+1})
+                        {CHAT_TYPE_MEUN[id]}({index + 1})
                     </span>
                 ))
 
