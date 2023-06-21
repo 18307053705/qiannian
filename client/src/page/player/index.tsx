@@ -37,7 +37,7 @@ const Plater = ({ history }) => {
             <div>
                 {error && <div style={{ color: 'red' }}>提示：{error}</div>}
                 <div>
-                    <span className="g_u"><span>私聊</span></span>
+                    <span className="g_u"><span onClick={() => { history.push('/chat', { role_id: state.role_id, role_name: roleInfo.role_name }) }}>私聊</span></span>
                     <span className="g_u"><span onClick={() => { history.push('/shopping', { role_id: state.role_id }) }}>店铺</span></span>
                     <span className="g_u"><span>赠送</span></span>
                     {!isFriend && <span className="g_u"><span onClick={applyClick}>加好友</span></span>}

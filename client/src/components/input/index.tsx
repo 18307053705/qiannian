@@ -4,17 +4,18 @@ import { nameCheck, areaCheck, numCheck } from '@utils/check'
 
 
 type InputProps = {
-    submit?: (value: string) => void;
+    submit?: (value: string, fn: (value: string) => any) => void;
     onChange?: (value: string) => void;
     label?: string;
     onText?: string;
     type?: 'text' | 'number' | 'textarea',
     InputRef?: { current: any },
-    layout?: boolean
+    layout?: boolean,
+    length?: [number, number],
 }
 
 export const Input = (props: InputProps) => {
-    const { submit, type = 'text', InputRef, layout = true } = props;
+    const { submit, type = 'text', InputRef, layout = true, length = [2, 8] } = props;
     const [value, setValue] = useState('');
     const [error, setError] = useState('');
     const btnClick = () => {
@@ -26,7 +27,7 @@ export const Input = (props: InputProps) => {
             }
         }
         if (type === 'text') {
-            const msg = nameCheck(value);
+            const msg = nameCheck(value, length[0], length[1]);
             if (msg) {
                 setError(msg);
                 return msg;
@@ -39,7 +40,7 @@ export const Input = (props: InputProps) => {
                 return msg;
             }
         }
-        submit && submit(value);
+        submit && submit(value, setValue);
         return ''
     }
     useEffect(() => {

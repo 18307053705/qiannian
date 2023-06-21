@@ -1,5 +1,5 @@
 
-import React, { Suspense, useEffect, useContext } from "react";
+import React, { Suspense, useEffect, useContext, useState, memo, useRef } from "react";
 import config from "./config";
 // import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route, useHistory, useLocation, Redirect } from "react-router-dom";
@@ -7,18 +7,25 @@ import { goLogin } from "@utils/goLogin";
 import { getMeunList } from '@cgi/meun';
 import Cookies from 'js-cookie';
 import { Model, GET_MEUN_LIST } from '@model';
+import { chatGet } from "@cgi/chat";
 
-function RouterGuard() {
-
-    useEffect(()=>{
-        console.log(pathname);
-    })
-
+function RouterGuard({ setUnread, historyRef }) {
     let history = useHistory();
+
     let location = useLocation();
     // 拿到路径
     let { pathname } = location;
-    
+    if (pathname !== '/' && pathname !== '/login' && pathname !== '/reactRole') {
+        chatGet().then(({ data }) => {
+            setUnread(data);
+        })
+    }else{
+        setUnread([]);
+    }
+    useEffect(() => {
+        historyRef.current = history;
+    }, [])
+
     // 拿到当前路由
     let thisRoute = config.find((el) => el['path'] == pathname);
     let isLogin = Cookies.get("token");
@@ -45,8 +52,28 @@ function RouterGuard() {
     }
 }
 
+const RouterGuardMemo = memo<{ setUnread: any, historyRef: any }>(({ setUnread, historyRef }) => {
+    return <Router>
+        <Suspense fallback={<div>加载中</div>}>
+            <Switch>
+                <RouterGuard setUnread={setUnread} historyRef={historyRef} />
+            </Switch>
+        </Suspense>
+    </Router>
+}, () => true)
+
+
+const CHAT_TYPE_MEUN = {
+    1: '私',
+    2: '帮',
+    3: '义',
+    4: '队',
+}
+
 const Root = () => {
     const { state, dispatch } = useContext(Model);
+    const [unread, setUnread] = useState([]);
+    const historyRef:any = useRef(null);
     useEffect(() => {
         // 请求枚举列表
         getMeunList().then(({ data }) => {
@@ -60,27 +87,19 @@ const Root = () => {
     goLogin();
     return (
         <div>
-            {
-                state.error && <div style={{ color: 'red' }}>提示：{state.error}</div>
-            }
-            <div><span>私(1)</span> <span>帮(1)</span></div>
-            <Router>
-                <Suspense fallback={<div>加载中</div>}>
-                    <Switch>
-                        <RouterGuard />
-                        {/* {config.map(({ component, path, exact }, index) => {
-                            return (
-                                <Route
-                                    key={index}
-                                    path={path}
-                                    component={component}
-                                    exact={exact}
-                                />
-                            );
-                        })} */}
-                    </Switch>
-                </Suspense>
-            </Router>
+            {state.error && <div style={{ color: 'red' }}>提示：{state.error}</div>}
+            <div>{
+                unread.map((id,index) => (
+                    <span
+                        onClick={() => { historyRef.current.push('./chat', { type: id }) }}
+                        className='g_u_end'
+                    >
+                        {CHAT_TYPE_MEUN[id]}({index+1})
+                    </span>
+                ))
+
+            }</div>
+            <RouterGuardMemo setUnread={setUnread} historyRef={historyRef} />
         </div>
     );
 }
