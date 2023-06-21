@@ -8,10 +8,10 @@ export async function chatSet(data: {
   text: string;
   t_role?: string;
 }) {
-  return await post(chatSettUrl, data);
+  return await post<{socializeName:string}>(chatSettUrl, data);
 }
 
 // 获取信息
 export async function chatGet(data: { type?: number } = {}) {
-  return await post(chatGettUrl, data);
+  return await post<{socializeName:string}>(chatGettUrl, data);
 }

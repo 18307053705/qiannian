@@ -16,17 +16,19 @@ export interface BaseResponseBody {
 }
 export type DR = [BaseRequstData, BaseResponseBody];
 
-export async function request(
-  url: string,
-  data?: any,
-  config?: requestConfig
-): Promise<{
+type ResType = {
   code: number;
   data: any;
   message: string;
   text: string;
   success: string;
-}> {
+};
+
+export async function request<T={}>(
+  url: string,
+  data?: any,
+  config?: requestConfig
+): Promise<ResType & T> {
   const newUrl = config && config.baseUrl ? config.baseUrl : URL;
   try {
     const method = config && config.type ? config.type : "get";
@@ -41,6 +43,7 @@ export async function request(
     if (method === "post" || method === "POST") {
       requestConfig.data = data;
     }
+
     let res = await axios.request(requestConfig);
 
     const request = res.request;
@@ -58,9 +61,8 @@ export async function request(
     } else if (res.data.code === 100007 || res.data.code === 100006) {
       // 指令异常，返回角色选择页
       window.location.pathname = "/";
-    } else {
-      return Promise.reject(res.data);
     }
+    return Promise.reject(res.data);
   } catch (err) {
     // 处理失败情况，可用于上报错误日志
     console.log("!!! Error !!!", err);
@@ -68,12 +70,12 @@ export async function request(
   }
 }
 
-export async function post(url: string, data?: any, config?: requestConfig) {
-  return request(url, data, { type: "post", ...config });
+export async function post<T>(url: string, data?: any, config?: requestConfig) {
+  return request<T>(url, data, { type: "post", ...config });
 }
 
-export async function get(url: string, data?: any, config?: requestConfig) {
-  return request(url, data, { type: "get", ...config });
+export async function get<T>(url: string, data?: any, config?: requestConfig) {
+  return request<T>(url, data, { type: "get", ...config });
 }
 
 export default request;
