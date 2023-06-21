@@ -6,18 +6,21 @@ type ListType = {
     prefix: (itme: any, in_x, index) => any;
     prefix_d?: boolean;
     active?: (itme: any, in_x) => any;
-    emptyText?:string
+    emptyText?: string
 }
 
 export const List = ({ data = [], onCheng, prefix, active, emptyText }: ListType) => {
     const [page, setPage] = useState(0);
     const [size] = useState(20);
     const total = data.length;
-    const list = data.slice(page, size);
+    const list = data.slice(page * size, (page + 1) * size);
+    // const list = data.slice(page, size);
     useEffect(() => { setPage(0) }, [data])
     useEffect(() => {
         onCheng && onCheng(page, size)
     }, [page])
+
+    const numPage = [...new Array(Math.floor(total / size) + 1)];
     return (
         <div className={Style['g-list-page']}>
             {
@@ -25,6 +28,7 @@ export const List = ({ data = [], onCheng, prefix, active, emptyText }: ListType
                     return (
                         <div className={Style.row} key={index}>
                             {prefix(itme, index + (page * size) + 1, index)}
+                            {active && <span style={{margin:'0 1px'}}>|</span>}
                             {active && active(itme, index + (page * size) + 1)}
                             {/* <span className="g_u">{active && active(itme, index + (page * size) + 1)}</span> */}
                         </div>
@@ -35,12 +39,13 @@ export const List = ({ data = [], onCheng, prefix, active, emptyText }: ListType
             {
                 total ? (
                     <div>
-                        {page !== 0 && <span className="g_u"><span onClick={() => {
-                            setPage(page - 1);
-                        }}>上一页</span></span>}
-                        {total > (page + 1) * size && <span className="g_u" onClick={() => {
-                            setPage(page + 1);
-                        }}><span>下一页</span></span>}
+                        第{
+                            numPage.map((_, index) => (
+                                <span key={index} className={page === index ? '' : 'g_u'}>
+                                    <span onClick={()=>{setPage(index)}}>{index + 1}</span>
+                                </span>
+                            ))
+                        }页
                     </div>
                 ) : ''
             }

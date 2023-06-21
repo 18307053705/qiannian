@@ -61,7 +61,7 @@ module.exports = {
         }
     },
     // 计算装备属性
-    computeAttr: function (equip, ext) {
+    computeAttr: function (equip, ext='0_0_0_0_0_0_0') {
         const { pos, career, attr, level } = equip
         // 解析强化，锻造，宝石
         const [firm, forge, ...gem] = ext.split('_');

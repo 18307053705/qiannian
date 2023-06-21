@@ -1,6 +1,7 @@
 const Global = require("../global");
 const mysql = require("../mysql");
 const KnapsackTable = require("../table/knapsack");
+
 module.exports = {
     getKnapsackInfo: async function (req, type, roleId) {
         // 背包

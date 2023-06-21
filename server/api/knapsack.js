@@ -21,6 +21,9 @@ router.post("/getKnapsack", async (req, res) => {
         }
     })
 });
+
+
+
 // 获取物品信息
 router.post("/getDetail", async (req, res) => {
     const { id, in_x, p, posKey, type } = req.body;

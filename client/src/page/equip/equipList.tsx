@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { getEquipList, operate } from '@cgi/knapsack';
 import { List } from '@components/list'
 import { getEquipName } from '@utils/equip'
-export const EquipList = ({ pageCheng, posInfo,history }) => {
+
+
+export const EquipList = ({ pageCheng, posInfo, history }) => {
     const [list, setList] = useState();
     useEffect(() => {
         getEquipList().then(({ data }) => {
@@ -11,11 +13,11 @@ export const EquipList = ({ pageCheng, posInfo,history }) => {
 
     }, [])
     const prefix = (itme, index) => {
-        return (<span className='g_u'><span>{index}.{getEquipName(itme.ext, itme.n)}</span></span>)
+        return (<span className='g_u_end' key={index}>{index}.{getEquipName(itme.ext, itme.n)}</span>)
     }
     const active = (itme) => {
         return (
-            <span onClick={() => {
+            <span className='g_u_end' onClick={() => {
                 operate({
                     id: itme.id,
                     in_x: itme.in_x,
@@ -34,7 +36,7 @@ export const EquipList = ({ pageCheng, posInfo,history }) => {
         <div>
             =====
             <List data={list} prefix={prefix} active={active} prefix_d={true} />
-            <div><span className="g_b" onClick={() => { pageCheng('info') }}>返回装备</span></div>
+            <div><span className="g_u_end" onClick={() => { pageCheng('info') }}>返回装备</span></div>
         </div>
     )
 }

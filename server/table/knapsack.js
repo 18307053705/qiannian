@@ -413,8 +413,6 @@ module.exports = {
         id: 37,
         type: 4,
         n: '三倍经验卡',
-        price: 500,
-        unit: 'yuanbao',
         effect: {
             exp3: 1,
         },
@@ -424,8 +422,6 @@ module.exports = {
         id: 38,
         type: 4,
         n: '五倍经验卡',
-        price: 1000,
-        unit: 'yuanbao',
         effect: {
             exp5: 1,
         },
@@ -446,8 +442,6 @@ module.exports = {
         id: 40,
         type: 4,
         n: '三倍银两卡',
-        price: 500,
-        unit: 'yuanbao',
         effect: {
             money3: 1,
         },
@@ -457,8 +451,6 @@ module.exports = {
         id: 41,
         type: 4,
         n: '五倍银两卡',
-        price: 1000,
-        unit: 'yuanbao',
         effect: {
             money5: 1,
         },
@@ -1732,8 +1724,6 @@ module.exports = {
         id: 226,
         type: 5,
         n: '①级生命宝石',
-        price: 1,
-        unit: 'yuanbao',
         effect: {
             life: 10000
         },
@@ -1743,8 +1733,6 @@ module.exports = {
         id: 227,
         type: 5,
         n: '②级生命宝石',
-        price: 2,
-        unit: 'yuanbao',
         effect: {
             life: 15000
         },
@@ -1754,8 +1742,6 @@ module.exports = {
         id: 228,
         type: 5,
         n: '③级生命宝石',
-        price: 3,
-        unit: 'yuanbao',
         effect: {
             life: 20000
         },
@@ -1765,8 +1751,6 @@ module.exports = {
         id: 229,
         type: 5,
         n: '④级生命宝石',
-        price: 5,
-        unit: 'yuanbao',
         effect: {
             life: 30000
         },
@@ -1776,8 +1760,6 @@ module.exports = {
         id: 230,
         type: 5,
         n: '⑤级生命宝石',
-        price: 7,
-        unit: 'yuanbao',
         effect: {
             life: 50000
         },
@@ -1787,8 +1769,6 @@ module.exports = {
         id: 231,
         type: 5,
         n: '⑥级生命宝石',
-        price: 10,
-        unit: 'yuanbao',
         effect: {
             life: 75000
         },
@@ -1798,8 +1778,6 @@ module.exports = {
         id: 232,
         type: 5,
         n: '⑦级生命宝石',
-        price: 15,
-        unit: 'yuanbao',
         effect: {
             life: 100000
         },
@@ -1809,8 +1787,6 @@ module.exports = {
         id: 233,
         type: 5,
         n: '⑧级生命宝石',
-        price: 20,
-        unit: 'yuanbao',
         effect: {
             life: 125000
         },
@@ -1820,8 +1796,6 @@ module.exports = {
         id: 234,
         type: 5,
         n: '⑨级生命宝石',
-        price: 30,
-        unit: 'yuanbao',
         effect: {
             life: 150000
         },
@@ -1831,8 +1805,6 @@ module.exports = {
         id: 235,
         type: 5,
         n: '⑩级生命宝石',
-        price: 50,
-        unit: 'yuanbao',
         effect: {
             life: 200000
         },
@@ -1842,8 +1814,6 @@ module.exports = {
         id: 236,
         type: 5,
         n: '①级法力宝石',
-        price: 1,
-        unit: 'yuanbao',
         effect: {
             life: 10000
         },
@@ -1853,8 +1823,6 @@ module.exports = {
         id: 237,
         type: 5,
         n: '②级法力宝石',
-        price: 2,
-        unit: 'yuanbao',
         effect: {
             life: 15000
         },
@@ -1864,8 +1832,6 @@ module.exports = {
         id: 238,
         type: 5,
         n: '③级法力宝石',
-        price: 3,
-        unit: 'yuanbao',
         effect: {
             life: 20000
         },
@@ -1875,8 +1841,6 @@ module.exports = {
         id: 239,
         type: 5,
         n: '④级法力宝石',
-        price: 5,
-        unit: 'yuanbao',
         effect: {
             life: 30000
         },
@@ -1886,8 +1850,6 @@ module.exports = {
         id: 240,
         type: 5,
         n: '⑤级法力宝石',
-        price: 7,
-        unit: 'yuanbao',
         effect: {
             life: 50000
         },
@@ -1897,8 +1859,6 @@ module.exports = {
         id: 241,
         type: 5,
         n: '⑥级法力宝石',
-        price: 10,
-        unit: 'yuanbao',
         effect: {
             life: 75000
         },
@@ -1908,8 +1868,6 @@ module.exports = {
         id: 242,
         type: 5,
         n: '⑦级法力宝石',
-        price: 15,
-        unit: 'yuanbao',
         effect: {
             life: 100000
         },
@@ -1919,8 +1877,6 @@ module.exports = {
         id: 243,
         type: 5,
         n: '⑧级法力宝石',
-        price: 20,
-        unit: 'yuanbao',
         effect: {
             life: 125000
         },
@@ -1930,8 +1886,6 @@ module.exports = {
         id: 244,
         type: 5,
         n: '⑨级法力宝石',
-        price: 30,
-        unit: 'yuanbao',
         effect: {
             life: 150000
         },
@@ -1941,8 +1895,6 @@ module.exports = {
         id: 245,
         type: 5,
         n: '⑩级法力宝石',
-        price: 50,
-        unit: 'yuanbao',
         effect: {
             life: 200000
         },
@@ -1952,8 +1904,6 @@ module.exports = {
         id: 246,
         type: 5,
         n: '①级攻击宝石',
-        price: 1,
-        unit: 'yuanbao',
         effect: {
             life: 1000
         },
@@ -1963,8 +1913,6 @@ module.exports = {
         id: 247,
         type: 5,
         n: '②级攻击宝石',
-        price: 2,
-        unit: 'yuanbao',
         effect: {
             life: 1500
         },
@@ -1974,8 +1922,6 @@ module.exports = {
         id: 248,
         type: 5,
         n: '③级攻击宝石',
-        price: 3,
-        unit: 'yuanbao',
         effect: {
             life: 2000
         },
@@ -1985,8 +1931,6 @@ module.exports = {
         id: 249,
         type: 5,
         n: '④级攻击宝石',
-        price: 5,
-        unit: 'yuanbao',
         effect: {
             life: 3000
         },
@@ -1996,8 +1940,6 @@ module.exports = {
         id: 250,
         type: 5,
         n: '⑤级攻击宝石',
-        price: 7,
-        unit: 'yuanbao',
         effect: {
             life: 5000
         },
@@ -2007,8 +1949,6 @@ module.exports = {
         id: 251,
         type: 5,
         n: '⑥级攻击宝石',
-        price: 10,
-        unit: 'yuanbao',
         effect: {
             life: 7500
         },
@@ -2018,8 +1958,6 @@ module.exports = {
         id: 252,
         type: 5,
         n: '⑦级攻击宝石',
-        price: 15,
-        unit: 'yuanbao',
         effect: {
             life: 10000
         },
@@ -2029,8 +1967,6 @@ module.exports = {
         id: 253,
         type: 5,
         n: '⑧级攻击宝石',
-        price: 20,
-        unit: 'yuanbao',
         effect: {
             life: 12500
         },
@@ -2040,8 +1976,6 @@ module.exports = {
         id: 254,
         type: 5,
         n: '⑨级攻击宝石',
-        price: 30,
-        unit: 'yuanbao',
         effect: {
             life: 15000
         },
@@ -2051,8 +1985,6 @@ module.exports = {
         id: 255,
         type: 5,
         n: '⑩级攻击宝石',
-        price: 50,
-        unit: 'yuanbao',
         effect: {
             life: 20000
         },
@@ -2062,8 +1994,6 @@ module.exports = {
         id: 256,
         type: 5,
         n: '①级防御宝石',
-        price: 1,
-        unit: 'yuanbao',
         effect: {
             life: 500
         },
@@ -2073,8 +2003,6 @@ module.exports = {
         id: 257,
         type: 5,
         n: '②级防御宝石',
-        price: 2,
-        unit: 'yuanbao',
         effect: {
             life: 750
         },
@@ -2084,8 +2012,6 @@ module.exports = {
         id: 258,
         type: 5,
         n: '③级防御宝石',
-        price: 3,
-        unit: 'yuanbao',
         effect: {
             life: 1000
         },
@@ -2095,8 +2021,6 @@ module.exports = {
         id: 259,
         type: 5,
         n: '④级防御宝石',
-        price: 5,
-        unit: 'yuanbao',
         effect: {
             life: 1500
         },
@@ -2106,8 +2030,6 @@ module.exports = {
         id: 260,
         type: 5,
         n: '⑤级防御宝石',
-        price: 7,
-        unit: 'yuanbao',
         effect: {
             life: 2500
         },
@@ -2117,8 +2039,6 @@ module.exports = {
         id: 261,
         type: 5,
         n: '⑥级防御宝石',
-        price: 10,
-        unit: 'yuanbao',
         effect: {
             life: 3750
         },
@@ -2128,8 +2048,6 @@ module.exports = {
         id: 262,
         type: 5,
         n: '⑦级防御宝石',
-        price: 15,
-        unit: 'yuanbao',
         effect: {
             life: 5000
         },
@@ -2139,8 +2057,6 @@ module.exports = {
         id: 263,
         type: 5,
         n: '⑧级防御宝石',
-        price: 20,
-        unit: 'yuanbao',
         effect: {
             life: 6250
         },
@@ -2150,8 +2066,6 @@ module.exports = {
         id: 264,
         type: 5,
         n: '⑨级防御宝石',
-        price: 30,
-        unit: 'yuanbao',
         effect: {
             life: 7500
         },
@@ -2161,8 +2075,6 @@ module.exports = {
         id: 265,
         type: 5,
         n: '⑩级防御宝石',
-        price: 50,
-        unit: 'yuanbao',
         effect: {
             life: 10000
         },
@@ -2172,8 +2084,6 @@ module.exports = {
         id: 266,
         type: 5,
         n: '①级命中宝石',
-        price: 1,
-        unit: 'yuanbao',
         effect: {
             life: 100
         },
@@ -2183,8 +2093,6 @@ module.exports = {
         id: 267,
         type: 5,
         n: '②级命中宝石',
-        price: 2,
-        unit: 'yuanbao',
         effect: {
             life: 150
         },
@@ -2194,8 +2102,6 @@ module.exports = {
         id: 268,
         type: 5,
         n: '③级命中宝石',
-        price: 3,
-        unit: 'yuanbao',
         effect: {
             life: 200
         },
@@ -2205,8 +2111,6 @@ module.exports = {
         id: 269,
         type: 5,
         n: '④级命中宝石',
-        price: 5,
-        unit: 'yuanbao',
         effect: {
             life: 300
         },
@@ -2216,8 +2120,6 @@ module.exports = {
         id: 270,
         type: 5,
         n: '⑤级命中宝石',
-        price: 7,
-        unit: 'yuanbao',
         effect: {
             life: 500
         },
@@ -2227,8 +2129,6 @@ module.exports = {
         id: 271,
         type: 5,
         n: '⑥级命中宝石',
-        price: 10,
-        unit: 'yuanbao',
         effect: {
             life: 750
         },
@@ -2238,8 +2138,6 @@ module.exports = {
         id: 272,
         type: 5,
         n: '⑦级命中宝石',
-        price: 15,
-        unit: 'yuanbao',
         effect: {
             life: 1000
         },
@@ -2249,8 +2147,6 @@ module.exports = {
         id: 273,
         type: 5,
         n: '⑧级命中宝石',
-        price: 20,
-        unit: 'yuanbao',
         effect: {
             life: 1250
         },
@@ -2260,8 +2156,6 @@ module.exports = {
         id: 274,
         type: 5,
         n: '⑨级命中宝石',
-        price: 30,
-        unit: 'yuanbao',
         effect: {
             life: 1500
         },
@@ -2271,8 +2165,6 @@ module.exports = {
         id: 275,
         type: 5,
         n: '⑩级命中宝石',
-        price: 50,
-        unit: 'yuanbao',
         effect: {
             life: 2000
         },
@@ -2282,8 +2174,6 @@ module.exports = {
         id: 276,
         type: 5,
         n: '①级闪避宝石',
-        price: 1,
-        unit: 'yuanbao',
         effect: {
             life: 100
         },
@@ -2293,8 +2183,6 @@ module.exports = {
         id: 277,
         type: 5,
         n: '②级闪避宝石',
-        price: 2,
-        unit: 'yuanbao',
         effect: {
             life: 150
         },
@@ -2304,8 +2192,6 @@ module.exports = {
         id: 278,
         type: 5,
         n: '③级闪避宝石',
-        price: 3,
-        unit: 'yuanbao',
         effect: {
             life: 200
         },
@@ -2315,8 +2201,6 @@ module.exports = {
         id: 279,
         type: 5,
         n: '④级闪避宝石',
-        price: 5,
-        unit: 'yuanbao',
         effect: {
             life: 300
         },
@@ -2326,8 +2210,6 @@ module.exports = {
         id: 280,
         type: 5,
         n: '⑤级闪避宝石',
-        price: 7,
-        unit: 'yuanbao',
         effect: {
             life: 500
         },
@@ -2337,8 +2219,6 @@ module.exports = {
         id: 281,
         type: 5,
         n: '⑥级闪避宝石',
-        price: 10,
-        unit: 'yuanbao',
         effect: {
             life: 750
         },
@@ -2348,8 +2228,6 @@ module.exports = {
         id: 282,
         type: 5,
         n: '⑦级闪避宝石',
-        price: 15,
-        unit: 'yuanbao',
         effect: {
             life: 1000
         },
@@ -2359,8 +2237,6 @@ module.exports = {
         id: 283,
         type: 5,
         n: '⑧级闪避宝石',
-        price: 20,
-        unit: 'yuanbao',
         effect: {
             life: 1250
         },
@@ -2370,8 +2246,6 @@ module.exports = {
         id: 284,
         type: 5,
         n: '⑨级闪避宝石',
-        price: 30,
-        unit: 'yuanbao',
         effect: {
             life: 1500
         },
@@ -2381,8 +2255,6 @@ module.exports = {
         id: 285,
         type: 5,
         n: '⑩级闪避宝石',
-        price: 50,
-        unit: 'yuanbao',
         effect: {
             life: 2000
         },
@@ -2392,8 +2264,6 @@ module.exports = {
         id: 286,
         type: 5,
         n: '①级暴击宝石',
-        price: 1,
-        unit: 'yuanbao',
         effect: {
             life: 100
         },
@@ -2403,8 +2273,6 @@ module.exports = {
         id: 287,
         type: 5,
         n: '②级暴击宝石',
-        price: 2,
-        unit: 'yuanbao',
         effect: {
             life: 150
         },
@@ -2414,8 +2282,6 @@ module.exports = {
         id: 288,
         type: 5,
         n: '③级暴击宝石',
-        price: 3,
-        unit: 'yuanbao',
         effect: {
             life: 200
         },
@@ -2425,8 +2291,6 @@ module.exports = {
         id: 289,
         type: 5,
         n: '④级暴击宝石',
-        price: 5,
-        unit: 'yuanbao',
         effect: {
             life: 300
         },
@@ -2436,8 +2300,6 @@ module.exports = {
         id: 290,
         type: 5,
         n: '⑤级暴击宝石',
-        price: 7,
-        unit: 'yuanbao',
         effect: {
             life: 500
         },
@@ -2447,8 +2309,6 @@ module.exports = {
         id: 291,
         type: 5,
         n: '⑥级暴击宝石',
-        price: 10,
-        unit: 'yuanbao',
         effect: {
             life: 750
         },
@@ -2458,8 +2318,6 @@ module.exports = {
         id: 292,
         type: 5,
         n: '⑦级暴击宝石',
-        price: 15,
-        unit: 'yuanbao',
         effect: {
             life: 1000
         },
@@ -2469,8 +2327,6 @@ module.exports = {
         id: 293,
         type: 5,
         n: '⑧级暴击宝石',
-        price: 20,
-        unit: 'yuanbao',
         effect: {
             life: 1250
         },
@@ -2480,8 +2336,6 @@ module.exports = {
         id: 294,
         type: 5,
         n: '⑨级暴击宝石',
-        price: 30,
-        unit: 'yuanbao',
         effect: {
             life: 1500
         },
@@ -2491,8 +2345,6 @@ module.exports = {
         id: 295,
         type: 5,
         n: '⑩级暴击宝石',
-        price: 50,
-        unit: 'yuanbao',
         effect: {
             life: 2000
         },

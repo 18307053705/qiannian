@@ -6,28 +6,6 @@ const KnapsackTable = require("../table/knapsack");
 const knapsackFn = require("../utils/knapsackFn");
 const shoppingFn = require("../utils/shoppingFn");
 
-router.post("/getList", (req, res) => {
-    const data = [];
-    Object.keys(KnapsackTable).forEach(key => {
-        if (key !== 'Maxs' && key !== 'size') {
-            const { price, unit, id, n, type } = KnapsackTable[key];
-            unit && data.push({ price, unit, id, n, type })
-        }
-    })
-    res.send({
-        code: 0,
-        data
-    })
-
-});
-
-
-router.post("/purchase", (req, res) => {
-    const { id } = req.body;
-
-});
-
-
 const KANAPSACK_MEUN = {
     kanapsack: 1,
     role: 2,
@@ -36,7 +14,6 @@ const KANAPSACK_MEUN = {
     shops: 5,
 }
 
-// 获取物品详情
 router.post("/detail", async (req, res) => {
     const { id, in_x, kanapsackType } = req.body;
     if (!(id && in_x !== undefined && kanapsackType)) {
@@ -55,6 +32,8 @@ router.post("/detail", async (req, res) => {
     }
     // 物品在身上(已穿戴装备)
     if (kanapsackType === KANAPSACK_MEUN.role) {
+        const { equip_pool: equipPool } = Global.getRoleGlobal(req);
+        const { id, ext } = equipPool[posKey];
         const { data } = Global.getknapsackGlobal(req);
         articleInfo = data[in_x];
     }
@@ -93,5 +72,7 @@ router.post("/detail", async (req, res) => {
         })
     }
 });
+
+
 
 module.exports = router;

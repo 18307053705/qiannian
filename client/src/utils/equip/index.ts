@@ -109,3 +109,54 @@ export const getEquipInfo = equip => {
     gemList
   };
 };
+
+export const EQUIP_POS_LIST = [
+  {
+    label: "武器",
+    value: "weapon"
+  },
+  {
+    label: "头部",
+    value: "helmet"
+  },
+  {
+    label: "衣服",
+    value: "clothing"
+  },
+  {
+    label: "腰带",
+    value: "belt"
+  },
+  {
+    label: "鞋子",
+    value: "shoe"
+  },
+  {
+    label: "戒指",
+    value: "ring"
+  },
+  {
+    label: "项链",
+    value: "necklace"
+  },
+  {
+    label: "法宝",
+    value: "treasure1",
+    condition:66
+  },
+  {
+    label: "法宝",
+    value: "treasure2",
+    condition:66
+  },
+  {
+    label: "法宝",
+    value: "treasure3",
+    condition:75
+  },
+  {
+    label: "法宝",
+    value: "treasure4",
+    condition:75
+  }
+];

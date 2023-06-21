@@ -15,7 +15,7 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         setError('');
         // 下架
         if (!roleId) {
-            grounding({ in_x: index - 1, type: 1, active: 2 }).then(({message}) => {
+            grounding({ in_x: index - 1, type: 1, active: 2 }).then(({ message }) => {
                 if (message) {
                     setError(message);
                 } else {
@@ -34,13 +34,12 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
     }
 
     const prefix = ({ id, in_x, p, ext, s, n, price }, index) => (
-        <span className='g_u'>
-            <span
-                onClick={() => {
-                    history.push('/knapsackDetail', { id, in_x, p, type: 1 })
-                }}>
-                {index}. {namehandel(n, p, ext)} x {s}({price}银两/件)
-            </span>
+        <span
+            className='g_u_end'
+            onClick={() => {
+                history.push('/knapsackDetail', { id, in_x, p, type: 1 })
+            }}>
+            {index}. {namehandel(n, p, ext)} x {s}({price}/件)
         </span>
     )
     const active = (itme, index) => (

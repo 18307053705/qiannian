@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import Style from './index.less';
 type TabType = {
     list: { label: any; value: any }[],
     onCheng?: (value: any) => void;
@@ -12,7 +12,7 @@ export const Tab = ({ list, onCheng, currentKey }: TabType) => {
         onCheng && onCheng(current);
     }, [current])
     return (
-        <div>
+        <div className={Style['g-tab-page']}>
             {
                 list.map(({ value, label }, index) => (
                     <span className={current === value ? "g_u g_u_d" : 'g_u'} key={index} >
