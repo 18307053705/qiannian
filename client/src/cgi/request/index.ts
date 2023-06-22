@@ -52,7 +52,7 @@ export async function request<T={}>(
         window.QN.setError(res.data.message);
       }
       if (res.data.success) {
-        window.QN.setError(res.data.success);
+        window.QN.setSuccess(res.data.success);
       }
       return res.data;
     } else if (res.data.code === 100000) {

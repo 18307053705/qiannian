@@ -12,10 +12,10 @@ export const Equip = ({ pageCheng, history }) => {
     }, [])
     const equip = roleInfo.equip_pool;
 
-    const clickEquip = (key) => {
-        const { id } = equip[key];
-        history.push('/knapsackDetail', { id, p: 3, posKey: key })
-    }
+    // const clickEquip = (key) => {
+    //     const { id } = equip[key];
+    //     history.push('/articleDetail', { id, p: 3, posKey: key })
+    // }
 
     return (
         <div>
@@ -28,7 +28,16 @@ export const Equip = ({ pageCheng, history }) => {
                         <div key={index}>
                             {index === 7 && <div>==法宝==</div>}
                             <span className="g_b">{label}</span>
-                            {equip[value] ? <span className="g_u_end">{getEquipName(equip[value].ext, equip[value].name)}</span> : '无'}
+                            {equip[value] ? (
+                                <span
+                                    className="g_u_end"
+                                    onClick={() => {
+                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2 });
+                                    }}
+                                >
+                                    {getEquipName(equip[value].ext, equip[value].name)}
+                                </span>
+                            ) : '无'}
                             <span> | </span>
                             <span className="g_u_end" onClick={() => { pageCheng('list', index + 1, value) }}>换</span>
                         </div>

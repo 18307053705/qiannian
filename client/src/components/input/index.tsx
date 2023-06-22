@@ -4,7 +4,7 @@ import { nameCheck, areaCheck, numCheck } from '@utils/check'
 
 
 type InputProps = {
-    submit?: (value: string, fn: (value: string) => any) => void;
+    submit?: (value: string, fn: (value: any) => any) => void;
     onChange?: (value: string) => void;
     label?: string;
     onText?: string;
@@ -12,11 +12,13 @@ type InputProps = {
     InputRef?: { current: any },
     layout?: boolean,
     length?: [number, number],
+    defaultValue?: any,
+    close?: any
 }
 
 export const Input = (props: InputProps) => {
-    const { submit, type = 'text', InputRef, layout = true, length = [2, 8] } = props;
-    const [value, setValue] = useState('');
+    const { submit, type = 'text', InputRef, layout = true, length = [2, 8], defaultValue } = props;
+    const [value, setValue] = useState(defaultValue);
     const [error, setError] = useState('');
     const btnClick = () => {
         if (type === 'number') {
@@ -72,6 +74,7 @@ export const Input = (props: InputProps) => {
                         />
                     )}
                 {submit && <span className={Style.btn} onClick={btnClick}>{props.onText || '确认'}</span>}
+                {props.close && <span className={Style.btn} onClick={props.close}>取消</span>}
             </div>
 
             {error && <div className={Style.error}>{error}</div>}

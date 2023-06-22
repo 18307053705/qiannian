@@ -122,20 +122,20 @@ const knapsack = ({ history }) => {
     const prefix = ({ id, n, p, s, ext, in_x }, index) => {
         return (
             <span
-                key={`${id}_2`}
+                key={`${id}_1`}
                 className="g_u_end"
                 onClick={() => {
-                    history.push('/knapsackDetail', { id, in_x, p, type })
+                    history.push('/articleDetail', { id, in_x, kanapsackType: type === 3 ? 3 : 1 });
                 }}
             >
                 {index}. {namehandel(n, p, ext)} x {s}
             </span>
         )
     }
-    
+
     const activeDom = ({ id, p, s, in_x }) => {
         return (
-            <span key={`${id}_1`} className="g_u_end" onClick={() => { activeClick(id, in_x, s, p) }}>{ACTIVE_TYPE[type]}</span>
+            <span key={`${id}_2`} className="g_u_end" onClick={() => { activeClick(id, in_x, s, p) }}>{ACTIVE_TYPE[type]}</span>
         )
     }
 

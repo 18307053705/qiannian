@@ -1,10 +1,11 @@
 // 解析强化，锻造，宝石
 // ☆★〖〗『』〓】
 // ①②③④⑤⑥⑦⑧⑨⑩
-export const getEquipName = (ext, name) => {
-  const [firm, forge] = ext.split("_");
-  // const forge = 50;
-  // const firm = 16;
+
+export const getEquipExtInfo = (ext, name) => {
+  const [firm, forge,sigil] = ext.split("_");
+  // const forge = 10;
+  // const firm = 14;
   let increase = 1 + forge * 0.1;
   if (firm < 6) {
     increase += firm * 0.1;
@@ -17,32 +18,58 @@ export const getEquipName = (ext, name) => {
   } else {
     increase += 9;
   }
-
+  let text = "";
+  // if (increase < 1.5) {
+  //   text = `[普通] ${name} 强${firm}锻${forge}`;
+  // } else if (increase < 3.1) {
+  //   text = `[精良] ${name} 强${firm}锻${forge}`;
+  // } else if (increase < 3.6) {
+  //   text = `(优秀) ${name} 强${firm}锻${forge}`;
+  // } else if (increase < 5.1) {
+  //   text = `{杰出} ${name} 强${firm}锻${forge}`;
+  // } else if (increase < 6.1) {
+  //   text = `『卓越』${name} 强${firm}锻${forge}`;
+  // } else if (increase < 7.1) {
+  //   text = `〖完美〗${name} 强${firm}锻${forge}`;
+  // } else if (increase < 7.6) {
+  //   text = `〖史诗〗${name} 强${firm}锻${forge}`;
+  // } else if (increase < 15) {
+  //   text = `★传说★${name} 强${firm}锻${forge}`;
+  // } else {
+  //   text = `☆神话☆${name} 强${firm}锻${forge}`;
+  // }
   if (increase < 1.5) {
-    return `[普通] ${name} 强${firm}锻${forge}`;
+    text = `[普通] ${name}`;
+  } else if (increase < 3.1) {
+    text = `[精良] ${name}`;
+  } else if (increase < 3.6) {
+    text = `(优秀) ${name}`;
+  } else if (increase < 5.1) {
+    text = `{杰出} ${name}`;
+  } else if (increase < 6.1) {
+    text = `『卓越』${name}`;
+  } else if (increase < 7.1) {
+    text = `〖完美〗${name}`;
+  } else if (increase < 7.6) {
+    text = `〖史诗〗${name}`;
+  } else if (increase < 15) {
+    text = `★传说★${name}`;
+  } else {
+    text = `☆神话☆${name}`;
   }
-  if (increase < 3.1) {
-    return `[精良] ${name} 强${firm}锻${forge}`;
-  }
-  if (increase < 3.6) {
-    return `(优秀) ${name} 强${firm}锻${forge}`;
-  }
-  if (increase < 5.1) {
-    return `{杰出} ${name} 强${firm}锻${forge}`;
-  }
-  if (increase < 6.1) {
-    return `『卓越』${name} 强${firm}锻${forge}`;
-  }
-  if (increase < 7.1) {
-    return `〖完美〗${name} 强${firm}锻${forge}`;
-  }
-  if (increase < 7.6) {
-    return `〖史诗〗${name} 强${firm}锻${forge}`;
-  }
-  if (increase < 15) {
-    return `★传说★${name} 强${firm}锻${forge}`;
-  }
-  return `☆神话☆${name} 强${firm}锻${forge}`;
+
+  return {
+    increase,
+    firm:Number(firm),
+    forge:Number(forge),
+    sigil:Number(sigil),
+    text
+  };
+};
+
+export const getEquipName = (ext, name) => {
+  const { text } = getEquipExtInfo(ext, name);
+  return text;
 };
 
 // life_max-最大生命
@@ -142,21 +169,21 @@ export const EQUIP_POS_LIST = [
   {
     label: "法宝",
     value: "treasure1",
-    condition:66
+    condition: 66
   },
   {
     label: "法宝",
     value: "treasure2",
-    condition:66
+    condition: 66
   },
   {
     label: "法宝",
     value: "treasure3",
-    condition:75
+    condition: 75
   },
   {
     label: "法宝",
     value: "treasure4",
-    condition:75
+    condition: 75
   }
 ];

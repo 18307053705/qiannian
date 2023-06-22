@@ -106,7 +106,7 @@ module.exports = {
         // 装备奖励
         if (equipReward) {
             Object.keys(equipReward).forEach(key => {
-                const { id, name, n, ext = '0_0_0_0_0_0_0' } = equipReward[key];
+                const { id, name, n, ext = '0_0_0_0_0_0_0_0' } = equipReward[key];
                 data.push({
                     id,
                     n: name || n,

@@ -124,7 +124,7 @@ module.exports = {
           rewardItme.forEach(({ id, type, n, name, num = 1 }) => {
             text.push(`${name || n}+${num || 1}`);
             if (type === 3) {
-              equipReward[id] = { id, n: name, p: type, s: num, ext: '0_0_0_0_0_0_0' }
+              equipReward[id] = { id, n: name, p: type, s: num, ext: '0_0_0_0_0_0_0_0' }
             } else {
               artReward[id] = { id, n, p: type, s: num };
             }

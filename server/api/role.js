@@ -95,7 +95,7 @@ router.post("/createRole", (req, res) => {
   mysql.sqlQuery(`select * from role  where role_name="${role_name}"`, (results) => {
     if (results[0]) {
       res.send({
-        code: 100004,
+        code: 0,
         message: '角色名重复'
       })
       return;
@@ -138,7 +138,7 @@ router.post("/createRole", (req, res) => {
           Global.roleLoop[user] = { id: role_id, time: new Date() * 1 };
           res.send({
             code: 0,
-            message: '创建成功'
+            data: '角色选择成功'
           })
         });
         return;

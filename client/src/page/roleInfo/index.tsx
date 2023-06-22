@@ -31,7 +31,7 @@ const RoleInfo = ({ history }) => {
                 }
             </div>
             <div>
-                {current === 0 && <RoleAttr roleInfo={roleInfo} />}
+                {current === 0 && <RoleAttr roleInfo={roleInfo}  history={history}/>}
                 {current === 1 && <RoleEle roleInfo={roleInfo} />}
                 {current === 2 && <Reputation roleInfo={roleInfo} />}
                 {current === 3 && <RoleSoci roleInfo={roleInfo} />}

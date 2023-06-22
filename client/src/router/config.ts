@@ -80,8 +80,8 @@ export const config: RouterType[] = [
   },
   {
     name: "物品详情界面",
-    path: "/knapsackDetail",
-    component: lazy(() => import("@page/knapsackDetail"))
+    path: "/articleDetail",
+    component: lazy(() => import("@page/articleDetail"))
   },
   {
     name: "任务界面",

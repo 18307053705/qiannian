@@ -27,17 +27,17 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         }
         // 购买
         if (itme.p == 3) {
-            submit(1, index);
+            purchaseClick(1, index);
             return;
         }
         setInX(index)
     }
 
-    const prefix = ({ id, in_x, p, ext, s, n, price }, index) => (
+    const prefix = ({ id, p, ext, s, n, price }, index) => (
         <span
             className='g_u_end'
             onClick={() => {
-                history.push('/knapsackDetail', { id, in_x, p, type: 1 })
+                history.push('/articleDetail', { id, in_x:index-1, kanapsackType: 4, t_roleId: roleId });
             }}>
             {index}. {namehandel(n, p, ext)} x {s}({price}/件)
         </span>
@@ -46,12 +46,11 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         <span className='g_u_end' onClick={() => { activeClick(itme, index); }}>{roleId ? '购买' : '下架'}</span>
     )
 
-    const submit = (num, index = 0) => {
-
+    const purchaseClick = (num, index) => {
         purchase({
             type: 1,
             role_id: roleId,
-            in_x: (index ? index : in_x) - 1,
+            in_x: index - 1,
             s: Number(num),
         }).then(({ message }) => {
             if (message) {
@@ -61,6 +60,10 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
                 setInX(0)
             }
         })
+    }
+
+    const submit = (num) => {
+        purchaseClick(num, in_x);
     }
     return (
         <div>

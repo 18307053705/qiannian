@@ -1,6 +1,6 @@
 import React from "react";
-import { getEquipName } from '@utils/equip';
-const RoleAttr = ({ roleInfo }) => {
+import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
+const RoleAttr = ({ roleInfo, history }) => {
     const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo;
     return (
         <>
@@ -22,17 +22,26 @@ const RoleAttr = ({ roleInfo }) => {
             </div>
             <div>
                 <div><span className="g_b">宠物</span>：<span>{equip.pet ? equip.pet.name : '无'}</span></div>
-                <div><span className="g_b">武器</span>：<span>{equip.weapon ? getEquipName(equip.weapon.ext, equip.weapon.name) : '无'}</span></div>
-                <div><span className="g_b">头盔</span>：<span>{equip.helmet ? getEquipName(equip.helmet.ext, equip.helmet.name) : '无'}</span></div>
-                <div><span className="g_b">衣服</span>：<span>{equip.clothing ? getEquipName(equip.clothing.ext, equip.clothing.name) : '无'}</span></div>
-                <div><span className="g_b">腰带</span>：<span>{equip.belt ? getEquipName(equip.belt.ext, equip.belt.name) : '无'}</span></div>
-                <div><span className="g_b">鞋子</span>：<span>{equip.shoe ? getEquipName(equip.shoe.ext, equip.shoe.name) : '无'}</span></div>
-                <div><span className="g_b">戒指</span>：<span>{equip.ring ? getEquipName(equip.ring.ext, equip.ring.name) : '无'}</span></div>
-                <div><span className="g_b">项链</span>：<span>{equip.necklace ? getEquipName(equip.necklace.ext, equip.necklace.name) : '无'}</span></div>
-                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure1 ? getEquipName(equip.treasure1.ext, equip.treasure1.name) : '无'}</span></div>}
-                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure2 ? getEquipName(equip.treasure2.ext, equip.treasure2.name) : '无'}</span></div>}
-                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure3 ? getEquipName(equip.treasure3.ext, equip.treasure3.name) : '无'}</span></div>}
-                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure4 ? getEquipName(equip.treasure4.ext, equip.treasure4.name) : '无'}</span></div>}
+                {
+                    EQUIP_POS_LIST.map(({ label, value, condition = 0 }, index) => {
+                        if (roleInfo.role_level < condition) {
+                            return null;
+                        }
+                        return (
+                            <div key={index}>
+                                <span className="g_b">{label}</span>
+                                {equip[value] ? <span
+                                    onClick={() => {
+                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2 });
+                                    }}
+                                    className="g_u_end"
+                                >
+                                    {getEquipName(equip[value].ext, equip[value].name)}
+                                </span> : '无'}
+                            </div>
+                        )
+                    })
+                }
             </div>
             <div></div>
 

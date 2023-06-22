@@ -40,7 +40,14 @@ export const Shops = ({ history }) => {
     const prefix = (row, index) => {
         return (
             <div key={index}>
-                <span className='g_u_end'>{row.n}(售价:{row.price}{tabKey === 0 ? '元宝' : '银两'})</span>
+                <span
+                    className='g_u_end'
+                    onClick={() => {
+                        history.push('/articleDetail', { id:row.id, in_x: row.in_x, kanapsackType: 5 });
+                    }}
+                >
+                    {row.n}(售价:{row.price}{tabKey === 0 ? '元宝' : '银两'})
+                </span>
             </div>
         )
     }

@@ -22,7 +22,7 @@ router.post("/login", (req, res) => {
         res.cookie("q_m", userFn.creatPass(pass));
         res.send({
           code: 0,
-          message: "登录成功"
+          data: "登录成功"
         });
         return false;
       }
@@ -54,7 +54,7 @@ router.post("/register", (req, res) => {
       res.cookie("q_m", userFn.creatPass(pass));
       res.send({
         code: 0,
-        message: "注册成功"
+        data: "注册成功"
       });
     });
   });

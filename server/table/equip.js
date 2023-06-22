@@ -33,9 +33,22 @@ const EQUIP_ATTR = {
     8: {
         pos: 'treasure1',
         attr: ['atk_min', 'atk_max']
-    }
+    },
+    9: {
+        pos: 'treasure2',
+        attr: ['atk_min', 'atk_max']
+    },
+    10: {
+        pos: 'treasure3',
+        attr: ['atk_min', 'atk_max']
+    },
+    11: {
+        pos: 'treasure4',
+        attr: ['atk_min', 'atk_max']
+    },
 };
 module.exports = {
+    EQUIP_ATTR,
     // 获取装备描述
     getEquipTip: function (equip, ext) {
         const { career, level } = equip;
@@ -61,10 +74,12 @@ module.exports = {
         }
     },
     // 计算装备属性
-    computeAttr: function (equip, ext='0_0_0_0_0_0_0') {
+    computeAttr: function (equip, ext = '0_0_0_0_0_0_0_0') {
         const { pos, career, attr, level } = equip
         // 解析强化，锻造，宝石
         const [firm, forge, ...gem] = ext.split('_');
+        // const forge = 50;
+        // const firm = 16;
         let Increase = 1 + forge * 0.1;
         if (firm < 6) {
             Increase += firm * 0.1
@@ -1277,7 +1292,7 @@ module.exports = {
         }
     },
 }
-// treasure1: {id: 121, name: '新手☆木剑', ext: '0_0_0_0_0_0_0'}
+// treasure1: {id: 121, name: '新手☆木剑', ext: '0_0_0_0_0_0_0_0'}
 // ☆★〖〗『』〓】
 // life_max-最大生命
 // life-当前生命
