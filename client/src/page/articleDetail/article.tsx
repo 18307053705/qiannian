@@ -5,7 +5,7 @@ import { getEquipName, getEquipInfo } from '@utils/equip'
 
 
 
-const Article = ({ article,query,cheng }) => {
+const Article = ({ article,query }) => {
     if (!article) {
         return null;
     }

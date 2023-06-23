@@ -76,8 +76,8 @@ module.exports = {
     // 计算装备属性
     computeAttr: function (equip, ext = '0_0_0_0_0_0_0_0') {
         const { pos, career, attr, level } = equip
-        // 解析强化，锻造，宝石
-        const [firm, forge, ...gem] = ext.split('_');
+        // 解析强化，锻造，附魔,宝石
+        const [firm, forge, sigil,...gem] = ext.split('_');
         // const forge = 50;
         // const firm = 16;
         let Increase = 1 + forge * 0.1;
@@ -94,15 +94,13 @@ module.exports = {
         } else {
             Increase += 9
         }
-
         const equipAttr = {};
         const posInfo = pos < 8 ? EQUIP_ATTR[pos] : { pos: 'treasure1', attr: equip['ext'].attr };
         const base = { ...Attribute.getAttr(career), ...Attribute['eleAttr'] };
-
+       
         posInfo.attr.forEach((key) => {
             equipAttr[key] = parseInt(base[key] * attr * level * Increase);
         })
-
         return {
             attr: equipAttr,
             posName: posInfo.pos

@@ -107,7 +107,7 @@ const Root = () => {
     // goLogin();
     return (
         <div>
-            {success && <div>{success}</div>}
+            <div>{success}</div>
             {error && <div className='g_error'>提示：{error}</div>}
             <div>{
                 unread.map((id, index) => (

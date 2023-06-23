@@ -32,14 +32,14 @@ export const Equip = ({ pageCheng, history }) => {
                                 <span
                                     className="g_u_end"
                                     onClick={() => {
-                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2 });
+                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2,p:3 });
                                     }}
                                 >
                                     {getEquipName(equip[value].ext, equip[value].name)}
                                 </span>
                             ) : '无'}
                             <span> | </span>
-                            <span className="g_u_end" onClick={() => { pageCheng('list', index + 1, value) }}>换</span>
+                            <span className="g_u_end" onClick={() => { pageCheng('list', index >= 7 ? 8 : index + 1, value) }}>换</span>
                         </div>
                     )
                 })

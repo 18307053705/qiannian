@@ -2,13 +2,13 @@ import React from "react";
 
 // 头部操作
 export const HeadActive = ({ query, setIsRename, activeClick }) => {
-    if (query.kanapsackType !== 1 && query.kanapsackType !== 2) {
+    if (query.kanapsackType !== 2) {
         return null;
     }
-
     return (
         <div>
-            <span className='g_u'><span onClick={activeClick}>{query.kanapsackType === 2 ? '卸下' : '使用'}</span></span>
+
+            <span className='g_u'><span onClick={activeClick}>卸下</span></span>
             <span className='g_u_end' onClick={() => { setIsRename(true) }}>改名</span>
 
         </div>
@@ -26,10 +26,13 @@ export const FirmActive = ({ query, firm, firmClick }) => {
     const stoneNum = firm < 11 ? 2 ** firm : 512 * firm;
     let rate = 100 - upFirm * 10;
     if (upFirm > 7) {
-        rate -= (upFirm - 5) * 5;
+        rate = 30 - (upFirm - 7) * 5;
     }
     if (upFirm > 12) {
         rate = 5 - (upFirm - 12)
+    }
+    if (upFirm === 1) {
+        rate = 100;
     }
     const exp = 75000000 + 75000000 * firm / 2;
     return (
@@ -72,7 +75,7 @@ export const ForgeActive = ({ query, ext, forgeClick, level, career }) => {
 }
 
 export const SigilActive = ({ query, sigil, sigilClick }) => {
-    if (query.kanapsackType === 1 && sigil=== 9) {
+    if (query.kanapsackType !== 1 || sigil === 9) {
         return null;
     }
     let text = ['一星', '二星', '三星', '四星', '五星', '六星', '七星', '八星', '九星'][sigil];

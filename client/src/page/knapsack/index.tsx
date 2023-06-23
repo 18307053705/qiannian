@@ -125,7 +125,7 @@ const knapsack = ({ history }) => {
                 key={`${id}_1`}
                 className="g_u_end"
                 onClick={() => {
-                    history.push('/articleDetail', { id, in_x, kanapsackType: type === 3 ? 3 : 1 });
+                    history.push('/articleDetail', { id, in_x, kanapsackType: type === 3 ? 3 : 1,p });
                 }}
             >
                 {index}. {namehandel(n, p, ext)} x {s}

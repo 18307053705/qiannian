@@ -1,6 +1,19 @@
 const Equip = require('./equip');
 const Knapsack = require('./knapsack');
 
+
+const getArticle = (stratId, len) => {
+  const article = []
+  for (let index = 0; index < len; index++) {
+    const articleId = stratId + index;
+    article.push({
+      ...Knapsack[articleId],
+      s: 5
+    })
+  }
+  return article;
+}
+
 const elementType = {
   1: "NPC元素",
   2: "面板元素",
@@ -408,6 +421,29 @@ const ELEMENT_5 = {
       {
         ...Knapsack[89],
         s: 100,
+      },
+    ]
+  },
+  5000013: {
+    id: 5000013,
+    name: "装备材料怪",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 100,
+      attr: 10
+    },
+    article: [
+      ...getArticle(147, 9),
+      ...getArticle(90, 16),
+      ...getArticle(106, 12),
+      {
+        ...Knapsack[156],
+        s: 99999,
+      },
+      {
+        ...Knapsack[157],
+        s: 99999,
       },
     ]
   },

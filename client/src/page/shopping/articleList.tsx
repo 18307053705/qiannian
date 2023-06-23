@@ -37,7 +37,7 @@ const ArticleList = ({ history, data, roleId, updataDetail }) => {
         <span
             className='g_u_end'
             onClick={() => {
-                history.push('/articleDetail', { id, in_x:index-1, kanapsackType: 4, t_roleId: roleId });
+                history.push('/articleDetail', { id, in_x: index - 1, kanapsackType: 4, t_roleId: roleId, p });
             }}>
             {index}. {namehandel(n, p, ext)} x {s}({price}/件)
         </span>

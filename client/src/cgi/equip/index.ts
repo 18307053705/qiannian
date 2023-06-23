@@ -10,7 +10,7 @@ type EquipReq = {
   in_x: number;
 };
 // 改名
-export async function renameFn(data: EquipReq & { kanapsackType: 1 | 2 }) {
+export async function renameFn(data: EquipReq) {
   return await post(renameUrl, data);
 }
 
@@ -34,6 +34,6 @@ export async function sigilFn(data: EquipReq) {
   return await post(sigilUrl, data);
 }
 // 卸下
-export async function activeFn(data: EquipReq & { active: 1 | 2 }) {
+export async function unsnatchFn(data: EquipReq) {
   return await post(activeUrl, data);
 }

@@ -111,7 +111,8 @@ module.exports = {
                     id,
                     n: name || n,
                     ext,
-                    s: 1
+                    s: 1,
+                    p: 3
                 });
                 delete equipReward[key];
             })
@@ -122,22 +123,26 @@ module.exports = {
     },
     // 消耗物品
     deleteKnapsack: function (req, article) {
+        const delInx = [];
         const { data } = Global.getknapsackGlobal(req);
         let chengData = [];
         let message = [];
-        data.forEach(({ id, p, s, ...itme }) => {
-            if (article[id] && p === article[id]['p']) {
+        data.forEach(({ id, p, s, ...itme }, index) => {
+            if (article[id] && (p === article[id]['p'] || p === article[id]['type'])) {
                 let num = s - article[id]['s'];
+                num >= 0 && delete article[id];
                 if (num > 0) {
-                    delete article[id];
                     chengData.push({
                         ...itme,
                         id,
                         p,
                         s: num
                     });
-                    return;
+                } else {
+                    delInx.push(index);
                 }
+
+                return;
             }
             chengData.push({
                 id,
@@ -157,7 +162,8 @@ module.exports = {
         }
         return {
             message: message.join(','),
-            data: chengData
+            data: chengData,
+            delInx
         };
     }
 }

@@ -32,7 +32,7 @@ const RoleAttr = ({ roleInfo, history }) => {
                                 <span className="g_b">{label}</span>
                                 {equip[value] ? <span
                                     onClick={() => {
-                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2 });
+                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2,p:3 });
                                     }}
                                     className="g_u_end"
                                 >

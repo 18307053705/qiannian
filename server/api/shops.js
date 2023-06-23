@@ -74,10 +74,10 @@ router.post("/detail", async (req, res) => {
         articleInfo = KnapsackTable[id];
     }
     if (articleInfo) {
-        const { p, id } = articleInfo;
+        const { p, id, ext } = articleInfo;
         const data = {};
         if (p === 3) {
-            const equip = Equip.getEquipTip(Equip[id]);
+            const equip = Equip.getEquipTip(Equip[id], ext);
             data['equip'] = {
                 ...equip,
                 ...articleInfo,

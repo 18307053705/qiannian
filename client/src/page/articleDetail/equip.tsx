@@ -1,33 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 import { Input } from '@components';
-import { renameFn, firmFn, forgeFn, activeFn, sigilFn } from '@cgi/equip';
+import { renameFn, firmFn, forgeFn, unsnatchFn, sigilFn } from '@cgi/equip';
+import { getDetail } from '@cgi/shops';
 import { HeadActive, FirmActive, ForgeActive, SigilActive } from './equipActive'
 import Style from './index.less';
 
 
-const Equip = ({ equip, query, cheng }) => {
+const Equip = ({ history }) => {
+    const { state: query } = history.location;
     const [isRename, setIsRename] = useState(false);
+    const [equip, setEquip] = useState();
+   
+    const update = () => {
+        const { state } = history.location;
+        getDetail({
+            id: state.id,
+            in_x: state.in_x,
+            kanapsackType: state.kanapsackType,
+        }).then(({ data }) => {
+            setEquip(data.equip)
+        })
+    }
+    useEffect(update, []);
+
     if (!equip) {
         return null;
     }
+
+
     const equipInfo = getEquipInfo(equip);
     const { text, ...ext } = getEquipExtInfo(equip.ext, equip.name || equip.n);
-
     const rename = (name) => {
         renameFn({
             ...query,
             name
         }).then(({ data }) => {
             setIsRename(false);
-            cheng({
-                equip: {
-                    ...equip,
-                    name: data
-                }
+            setEquip({
+                ...equip,
+                name: data
             })
         });
-
     }
 
     // 强化
@@ -36,6 +50,14 @@ const Equip = ({ equip, query, cheng }) => {
             id: query.id,
             in_x: query.in_x,
             materialtype
+        }).then(({ data }) => {
+            if (data) {
+                history.location.state = {
+                    ...query,
+                    in_x: data
+                }
+                update()
+            }
         })
     }
 
@@ -45,6 +67,14 @@ const Equip = ({ equip, query, cheng }) => {
             id: query.id,
             in_x: query.in_x,
             materialtype
+        }).then(({ data }) => {
+            if (data) {
+                history.location.state = {
+                    ...query,
+                    in_x: data
+                }
+                update()
+            }
         })
     }
     // 附魔
@@ -52,20 +82,27 @@ const Equip = ({ equip, query, cheng }) => {
         sigilFn({
             id: query.id,
             in_x: query.in_x
+        }).then(({ data }) => {
+            if (data) {
+                history.location.state = {
+                    ...query,
+                    in_x: data
+                }
+                update()
+            }
         })
     }
 
     // 使用或者卸下
-    const activeClick = () => {
-        activeFn({
+    const  unsnatchClick = () => {
+        unsnatchFn({
             id: query.id,
-            in_x: query.in_x,
-            active: query.kanapsackType
+            in_x: query.in_x
         })
     }
     return (
         <div>
-            <HeadActive query={query} setIsRename={setIsRename} activeClick={activeClick} />
+            <HeadActive query={query} setIsRename={setIsRename} activeClick={unsnatchClick} />
             <div >
                 {isRename ?
                     <Input
@@ -75,12 +112,13 @@ const Equip = ({ equip, query, cheng }) => {
                         close={() => { console.log('执行'); setIsRename(false); }} />
                     : text}
             </div>
+            <div><span>职业：{equip.level}级{equipInfo.careerName}</span></div>
             {
                 Object.keys(equip.attr).map((key) => (
                     <div key={key}>{key}：{equip.attr[key]}</div>
                 ))
             }
-            <div><span>职业：{equip.level}级{equipInfo.careerName}</span></div>
+
             <div>强化：{ext.firm}级</div>
             <div>锻造：{ext.forge}次</div>
             <div>镶嵌：{equipInfo.gemList.length ? equipInfo.gemList.map(({ level }) => level) : '无'}</div>

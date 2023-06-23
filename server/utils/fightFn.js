@@ -409,11 +409,11 @@ module.exports = {
         article.forEach((itme) => {
             if (!itme.rate || itme.rate > rateS) {
                 // 根据类型保存
-                itme.type == 3 ? equipReward[itme.id] = itme : artReward[itme.id] = itme;
+                itme.type == 3 ? equipReward[itme.id] = { ...itme, ext: '0_0_0_0_0_0_0_0' } : artReward[itme.id] = itme;
                 textReward.push(`${itme.name || itme.n}+${itme.s || itme.num || 1}`)
             }
         });
-       const tip = knapsackFn.addKnapsack({ artReward, equipReward }, knapsack.data);
+        const tip = knapsackFn.addKnapsack({ artReward, equipReward }, knapsack.data);
         // 获取人物buff
         const { buff_pool: buffPool } = roleInfo;
         const { vip = {} } = buffPool;

@@ -11,22 +11,25 @@ const ArticleDetail = ({ history }) => {
     const [info, setInfo]: any = useState({});
     const [query, setQuery]: any = useState({});
     const { equip, article } = info;
-    useEffect(() => {
+    console.log(history.location)
+    const update = () => {
         const { state } = history.location;
         setQuery(state);
         getDetail(state).then(({ data }) => {
             setInfo(data)
         })
-    }, []);
-
-    const cheng = (data) => {
-        setInfo(data)
     }
 
+    useEffect(update, []);
+    const { state } = history.location;
     return (
         <div >
-            <Equip equip={equip} query={query} cheng={cheng}/>
-            <Article article={article} query={query} cheng={cheng}/>
+            {state.p === 3 ?
+                <Equip equip={equip} update={update} history={history} />
+                : <Article article={article} query={query} />}
+
+
+
             <div><span className="g_u_end" onClick={() => { history.goBack() }}>返回上页</span></div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>

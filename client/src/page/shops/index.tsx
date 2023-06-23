@@ -43,7 +43,7 @@ export const Shops = ({ history }) => {
                 <span
                     className='g_u_end'
                     onClick={() => {
-                        history.push('/articleDetail', { id:row.id, in_x: row.in_x, kanapsackType: 5 });
+                        history.push('/articleDetail', { id:row.id, in_x: row.in_x, kanapsackType: 5,p: row.type});
                     }}
                 >
                     {row.n}(售价:{row.price}{tabKey === 0 ? '元宝' : '银两'})
