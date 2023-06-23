@@ -11,7 +11,7 @@ const Equip = ({ history }) => {
     const { state: query } = history.location;
     const [isRename, setIsRename] = useState(false);
     const [equip, setEquip] = useState();
-   
+
     const update = () => {
         const { state } = history.location;
         getDetail({
@@ -94,10 +94,14 @@ const Equip = ({ history }) => {
     }
 
     // 使用或者卸下
-    const  unsnatchClick = () => {
+    const unsnatchClick = () => {
         unsnatchFn({
             id: query.id,
             in_x: query.in_x
+        }).then(({ message }) => {
+            if (!message) {
+                history.goBack()
+            }
         })
     }
     return (
@@ -118,7 +122,6 @@ const Equip = ({ history }) => {
                     <div key={key}>{key}：{equip.attr[key]}</div>
                 ))
             }
-
             <div>强化：{ext.firm}级</div>
             <div>锻造：{ext.forge}次</div>
             <div>镶嵌：{equipInfo.gemList.length ? equipInfo.gemList.map(({ level }) => level) : '无'}</div>

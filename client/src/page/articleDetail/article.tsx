@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { backGrand } from '@utils/grand';
 import { getDetail } from '@cgi/shops';
-import { getEquipName, getEquipInfo } from '@utils/equip'
 
+const Article = ({ history }) => {
+    const [article, setArticle] = useState();
 
-
-const Article = ({ article,query }) => {
+    useEffect(() => {
+        const { state } = history.location;
+        getDetail({
+            id: state.id,
+            in_x: state.in_x,
+            kanapsackType: state.kanapsackType,
+        }).then(({ data }) => {
+            setArticle(data.article)
+        })
+    }, []);
     if (!article) {
         return null;
     }
-    console.log(query,'article...');
-    
     return (
         <div >
             <div>
-                <div><span className="g_b">{article.n}</span></div>
-                <div><span className="g_b">数量</span>：<span>{article.s}</span></div>
-                <div><span className="g_b">单价</span>：<span>{article.sell}银两</span></div>
-                <div><span className="g_b">简介</span>：<span>{article.tips}</span></div>
+                <div><span>{article.n}</span></div>
+                <div><span>数量</span>：<span>{article.s}</span></div>
+                {
+                    article.price && (
+                        <div>
+                            <span>单价</span>：
+                            <span>{article.price}{article.unit === 'yuanbo' ? '元宝' : '银两'}</span>
+                        </div>
+                    )
+                }
+
+                <div><span>简介</span>：<span>{article.tips}</span></div>
             </div>
         </div>
     )

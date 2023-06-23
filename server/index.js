@@ -68,6 +68,7 @@ app.use("/api/art", require("./api/art"));
 app.use("/api/chat", require("./api/chat"));
 app.use("/api/shops", require("./api/shops"));
 app.use("/api/equip", require("./api/equip"));
+app.use("/api/pet", require("./api/pet"));
 
 // 全局捕获异常
 app.use(errorFn.globalError);
