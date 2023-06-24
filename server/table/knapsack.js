@@ -8,9 +8,7 @@ module.exports = {
         n: '小血瓶',
         price: 2000,
         unit: 'tael',
-        effect: {
-            life: 5000,
-        },
+        effect1: 'life-1-5000',
         tips: '使用后可以恢复5000生命值。',
     },
     2: {
@@ -19,9 +17,7 @@ module.exports = {
         n: '小蓝瓶',
         price: 2000,
         unit: 'tael',
-        effect: {
-            mana: 2000,
-        },
+        effect1: 'mana-1-2000',
         tips: '使用后可以恢复2000法力值。',
     },
     3: {
@@ -30,9 +26,7 @@ module.exports = {
         n: '中血瓶',
         price: 5000,
         unit: 'tael',
-        effect: {
-            life: 10000,
-        },
+        effect1: 'life-1-10000',
         tips: '使用后可以恢复10000生命值。',
     },
     4: {
@@ -41,9 +35,7 @@ module.exports = {
         n: '中蓝瓶',
         price: 5000,
         unit: 'tael',
-        effect: {
-            mana: 5000,
-        },
+        effect1: 'mana-1-5000',
         tips: '使用后可以恢复5000法力值。',
     },
     5: {
@@ -52,9 +44,7 @@ module.exports = {
         n: '大血瓶',
         price: 20000,
         unit: 'tael',
-        effect: {
-            life: 50000,
-        },
+        effect1: 'life-1-50000',
         tips: '使用后可以恢复50000生命值。',
     },
     6: {
@@ -63,9 +53,7 @@ module.exports = {
         n: '大蓝瓶',
         price: 20000,
         unit: 'tael',
-        effect: {
-            mana: 20000,
-        },
+        effect1: 'mana-1-20000',
         tips: '使用后可以恢复20000法力值。',
     },
     7: {
@@ -74,9 +62,7 @@ module.exports = {
         n: '超级血瓶',
         price: 50000,
         unit: 'tael',
-        effect: {
-            life: 100000,
-        },
+        effect1: 'life-1-100000',
         tips: '使用后可以恢复100000生命值。',
     },
     8: {
@@ -85,9 +71,7 @@ module.exports = {
         n: '超级蓝瓶',
         price: 50000,
         unit: 'tael',
-        effect: {
-            mana: 50000,
-        },
+        effect1: 'mana-1-50000',
         tips: '使用后可以恢复50000法力值。',
     },
     9: {
@@ -96,9 +80,7 @@ module.exports = {
         n: '天山雪莲',
         price: 100000,
         unit: 'tael',
-        effect: {
-            life: 250000,
-        },
+        effect1: 'life-1-250000',
         tips: '使用后可以恢复250000生命值。',
     },
     10: {
@@ -107,10 +89,8 @@ module.exports = {
         n: '天山真水',
         price: 100000,
         unit: 'tael',
-        effect: {
-            mana: 1000000,
-        },
-        tips: '使用后可以恢复1000000法力值。',
+        effect1: 'mana-1-100000',
+        tips: '使用后可以恢复100000法力值。',
     },
     11: {
         id: 11,
@@ -118,10 +98,8 @@ module.exports = {
         n: '千年首乌',
         price: 200000,
         unit: 'tael',
-        effect: {
-            life: 5000000,
-        },
-        tips: '使用后可以恢复5000000生命值。',
+        effect1: 'life-1-500000',
+        tips: '使用后可以恢复500000生命值。',
     },
     12: {
         id: 12,
@@ -129,10 +107,8 @@ module.exports = {
         n: '琼浆玉液',
         price: 200000,
         unit: 'tael',
-        effect: {
-            mana: 2000000,
-        },
-        tips: '使用后可以恢复2000000法力值。',
+        effect1: 'mana-1-200000',
+        tips: '使用后可以恢复200000法力值。',
     },
     13: {
         id: 13,
@@ -140,9 +116,7 @@ module.exports = {
         n: '小体力丹',
         price: 10000,
         unit: 'tael',
-        effect: {
-            life: 2500,
-        },
+        effect1: 'life_max-1-2500',
         tips: '使用后生命上限+2500,持续120分钟。',
     },
     14: {
@@ -151,9 +125,7 @@ module.exports = {
         n: '小法力丹',
         price: 10000,
         unit: 'tael',
-        effect: {
-            mana: 1000,
-        },
+        effect1: 'mana_max-1-1000',
         tips: '使用后法力上限+1000,持续120分钟。',
     },
     15: {
@@ -162,9 +134,7 @@ module.exports = {
         n: '小攻击丹',
         price: 10000,
         unit: 'tael',
-        effect: {
-            atk: 250,
-        },
+        effect1: 'atk-1-250',
         tips: '使用后攻击上限+250,持续120分钟。',
     },
     16: {
@@ -173,9 +143,7 @@ module.exports = {
         n: '小防御丹',
         price: 10000,
         unit: 'tael',
-        effect: {
-            dfs: 120,
-        },
+        effect1: 'dfs-1-120',
         tips: '使用后防御上限+120,持续120分钟。',
     },
     17: {
@@ -184,9 +152,7 @@ module.exports = {
         n: '中体力丹',
         price: 20000,
         unit: 'tael',
-        effect: {
-            life: 5000,
-        },
+        effect1: 'life_max-1-5000',
         tips: '使用后生命上限+5000,持续120分钟。',
     },
     18: {
@@ -195,9 +161,7 @@ module.exports = {
         n: '中法力丹',
         price: 20000,
         unit: 'tael',
-        effect: {
-            mana: 2500,
-        },
+        effect1: 'mana_max-1-2500',
         tips: '使用后法力上限+2500,持续120分钟。',
     },
     19: {
@@ -206,9 +170,7 @@ module.exports = {
         n: '中攻击丹',
         price: 20000,
         unit: 'tael',
-        effect: {
-            atk: 500,
-        },
+        effect1: 'atk-1-500',
         tips: '使用后攻击上限+500,持续120分钟。',
     },
     20: {
@@ -217,9 +179,7 @@ module.exports = {
         n: '中防御丹',
         price: 20000,
         unit: 'tael',
-        effect: {
-            dfs: 250,
-        },
+        effect1: 'dfs-1-250',
         tips: '使用后防御上限+250,持续120分钟。',
     },
     21: {
@@ -228,9 +188,7 @@ module.exports = {
         n: '大体力丹',
         price: 100000,
         unit: 'tael',
-        effect: {
-            mana: 10000,
-        },
+        effect1: 'life_max-1-10000',
         tips: '使用后生命上限+10000,持续120分钟。',
     },
     22: {
@@ -239,9 +197,7 @@ module.exports = {
         n: '大法力丹',
         price: 100000,
         unit: 'tael',
-        effect: {
-            mana: 5000,
-        },
+        effect1: 'mana_max-1-5000',
         tips: '使用后法力上限+5000,持续120分钟。',
     },
     23: {
@@ -250,9 +206,7 @@ module.exports = {
         n: '大攻击丹',
         price: 100000,
         unit: 'tael',
-        effect: {
-            atk: 1000,
-        },
+        effect1: 'atk-1-1000',
         tips: '使用后攻击上限+1000,持续120分钟。',
     },
     24: {
@@ -261,9 +215,7 @@ module.exports = {
         n: '大防御丹',
         price: 100000,
         unit: 'tael',
-        effect: {
-            dfs: 500,
-        },
+        effect1: 'dfs-1-500',
         tips: '使用后防御上限+500,持续120分钟。',
     },
     25: {
@@ -272,9 +224,7 @@ module.exports = {
         n: '超级体力丹',
         price: 200000,
         unit: 'tael',
-        effect: {
-            life: 25000,
-        },
+        effect1: 'life_max-1-25000',
         tips: '使用后生命上限+25000,持续120分钟。',
     },
     26: {
@@ -283,9 +233,7 @@ module.exports = {
         n: '超级法力丹',
         price: 200000,
         unit: 'tael',
-        effect: {
-            mana: 10000,
-        },
+        effect1: 'mana_max-1-10000',
         tips: '使用后法力上限+10000,持续120分钟。',
     },
     27: {
@@ -294,9 +242,7 @@ module.exports = {
         n: '超级攻击丹',
         price: 200000,
         unit: 'tael',
-        effect: {
-            atk: 2500,
-        },
+        effect1: 'atk-1-2500',
         tips: '使用后攻击上限+2500,持续120分钟。',
     },
     28: {
@@ -305,31 +251,25 @@ module.exports = {
         n: '超级防御丹',
         price: 200000,
         unit: 'tael',
-        effect: {
-            dfs: 1000,
-        },
+        effect1: 'dfs-1-1000',
         tips: '使用后防御上限+1000,持续120分钟。',
     },
-    // 29: {
-    //     id: 29,
-    //     type: 2,
-    //     n: '神魔血丹',
-    //     price: 5000,
-    //     unit: 'tael',
-    //     effect: {
-    //         life: 5000,
-    //     },
-    //     tips: '使用后生命上限+5000,持续120分钟。',
-    // },
+    29: {
+        id: 29,
+        type: 2,
+        n: '神魔血丹',
+        price: 5000,
+        unit: 'tael',
+        effect1: 'life_max-1-5000',
+        tips: '使用后生命上限+5000,持续120分钟。',
+    },
     30: {
         id: 30,
         type: 2,
-        n: '神魔血丹',
+        n: '神魔血丹2',
         price: 500000,
         unit: 'tael',
-        effect: {
-            life: 50000,
-        },
+        effect1: 'life_max-1-50000',
         tips: '使用后生命上限+50000,持续120分钟。',
     },
     31: {
@@ -338,9 +278,7 @@ module.exports = {
         n: '九天圣泉',
         price: 500000,
         unit: 'tael',
-        effect: {
-            mana: 25000,
-        },
+        effect1: 'mana_max-1-25000',
         tips: '使用后法力上限+25000,持续120分钟。',
     },
     32: {
@@ -349,9 +287,7 @@ module.exports = {
         n: '鬼煞真丹',
         price: 500000,
         unit: 'tael',
-        effect: {
-            atk: 5000,
-        },
+        effect1: 'atk-1-5000',
         tips: '使用后攻击上限+5000,持续120分钟。',
     },
     33: {
@@ -360,9 +296,7 @@ module.exports = {
         n: '琉璃真丹',
         price: 500000,
         unit: 'tael',
-        effect: {
-            dfs: 2000,
-        },
+        effect1: 'dfs-1-2000',
         tips: '使用后防御上限+2000,持续120分钟。',
     },
     34: {
@@ -404,27 +338,21 @@ module.exports = {
         n: '双倍经验卡',
         price: 200,
         unit: 'yuanbao',
-        effect: {
-            exp2: 1,
-        },
+        vip: 'exp2',
         tips: '使用后打怪可获得双倍经验,持续120分钟。',
     },
     37: {
         id: 37,
         type: 4,
         n: '三倍经验卡',
-        effect: {
-            exp3: 1,
-        },
+        vip: 'exp3',
         tips: '使用后打怪可获得三倍经验,持续120分钟。',
     },
     38: {
         id: 38,
         type: 4,
         n: '五倍经验卡',
-        effect: {
-            exp5: 1,
-        },
+        vip: 'exp5',
         tips: '使用后打怪可获得五倍经验,持续120分钟。',
     },
     39: {
@@ -433,27 +361,21 @@ module.exports = {
         n: '双倍银两卡',
         price: 200,
         unit: 'yuanbao',
-        effect: {
-            money2: 1,
-        },
+        vip: 'money2',
         tips: '使用后打怪可获得双倍银两,持续120分钟。',
     },
     40: {
         id: 40,
         type: 4,
         n: '三倍银两卡',
-        effect: {
-            money3: 1,
-        },
+        vip: 'money3',
         tips: '使用后打怪可获得三倍银两,持续120分钟。',
     },
     41: {
         id: 41,
         type: 4,
         n: '五倍银两卡',
-        effect: {
-            money5: 1,
-        },
+        vip: 'money5',
         tips: '使用后打怪可获得五倍银两,持续120分钟。',
     },
     42: {
@@ -462,9 +384,7 @@ module.exports = {
         n: '世界声望卷轴',
         price: 200,
         unit: 'yuanbao',
-        reputation: {
-            world: 100,
-        },
+        effect1:'world-1-100',
         tips: '使用后可获得100世界声望。',
     },
     43: {
@@ -473,9 +393,7 @@ module.exports = {
         n: '帮会声望卷轴',
         price: 200,
         unit: 'yuanbao',
-        reputation: {
-            gang: 100,
-        },
+        effect1:'gang-1-100',
         tips: '使用后可获得100帮会声望。',
     },
     44: {
@@ -484,9 +402,7 @@ module.exports = {
         n: '结义声望卷轴',
         price: 200,
         unit: 'yuanbao',
-        reputation: {
-            intersect: 100,
-        },
+        effect1:'intersect-1-100',
         tips: '使用后可获得100结义声望。',
     },
     45: {
@@ -495,9 +411,7 @@ module.exports = {
         n: '世界功勋卷轴',
         price: 400,
         unit: 'yuanbao',
-        reputation: {
-            exploit: 100,
-        },
+        effect1:'exploit-1-100',
         tips: '使用后可获得100功勋。',
     },
     46: {
@@ -506,9 +420,7 @@ module.exports = {
         n: '世界名气卷轴',
         price: 1000,
         unit: 'yuanbao',
-        reputation: {
-            fame: 100,
-        },
+        effect1:'fame-1-100',
         tips: '使用后可获得100名气。',
     },
     47: {

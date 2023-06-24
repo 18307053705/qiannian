@@ -87,7 +87,7 @@ module.exports = {
         // 更新战斗信息
         Global.updateRoleGlobal(req, { skill_pool: roleInfo.skill_pool });
         // 计算角色属性
-        const data = roleFn.computeRoleAttr(req, res, roleInfo);
+        const data = roleFn.computeRoleAttr(req, roleInfo);
         return {
             id: roleInfo.role_id,
             attr: {
@@ -415,8 +415,8 @@ module.exports = {
         });
         const tip = knapsackFn.addKnapsack({ artReward, equipReward }, knapsack.data);
         // 获取人物buff
-        const { buff_pool: buffPool } = roleInfo;
-        const { vip = {} } = buffPool;
+        const { role_buff } = roleInfo;
+        const { vip = {} } = role_buff;
         let vipExp = 0;
         if (vip['exp2']) {
             vipExp += 2

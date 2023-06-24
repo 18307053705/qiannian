@@ -2,13 +2,13 @@ const Equip = require('./equip');
 const Knapsack = require('./knapsack');
 
 
-const getArticle = (stratId, len) => {
+const getArticle = (stratId, len,s=5) => {
   const article = []
   for (let index = 0; index < len; index++) {
     const articleId = stratId + index;
     article.push({
       ...Knapsack[articleId],
-      s: 5
+      s
     })
   }
   return article;
@@ -302,8 +302,8 @@ const ELEMENT_5 = {
     type: 5,
     ext: {
       career: 1,
-      level: 1,
-      attr: 10
+      level: 30,
+      attr: 1
     },
     article: [
       {
@@ -430,8 +430,8 @@ const ELEMENT_5 = {
     type: 5,
     ext: {
       career: 1,
-      level: 100,
-      attr: 10
+      level: 30,
+      attr: 1
     },
     article: [
       ...getArticle(147, 9),
@@ -445,6 +445,19 @@ const ELEMENT_5 = {
         ...Knapsack[157],
         s: 99999,
       },
+    ]
+  },
+  5000014: {
+    id: 5000014,
+    name: "丹药怪",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 20,
+      attr: 1
+    },
+    article: [
+      ...getArticle(1, 46,20),
     ]
   },
 };

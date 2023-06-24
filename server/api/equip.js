@@ -360,7 +360,8 @@ router.post("/active", (req, res) => {
         })
         return;
     }
-    const { equip_pool, addition_pool } = Global.getRoleGlobal(req);
+    const { equip_pool, role_attr } = Global.getRoleGlobal(req);
+   
     const { data } = Global.getknapsackGlobal(req);
     // 对应部位装备
     const equip = equip_pool[Equip.EQUIP_ATTR[in_x]['pos']];
@@ -385,10 +386,11 @@ router.post("/active", (req, res) => {
         // 计算属性
         const equipInfo = Equip.computeAttr(Equip[id], ext);
         const dleAttr = equipInfo.attr;
+        const { addition } = role_attr;
         Object.keys(dleAttr).forEach(key => {
-            addition_pool[key] -= dleAttr[key];
+            addition[key] -= dleAttr[key];
         })
-        Global.updateRoleGlobal(req, { equip_pool, addition_pool });
+        Global.updateRoleGlobal(req, { equip_pool, role_attr });
         Global.updateknapsackGlobal(req, { data });
     }
     res.send({

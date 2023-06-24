@@ -1,7 +1,7 @@
 const mysql = require("../mysql");
-const errorFn = require("./errorFn");
 const { realm: Realm } = require("../table/realm");
-const { roleAttr: RoleAttr } = require("../table/attribute");
+const { roleAttr: RoleAttr, getInitAttr } = require("../table/attribute");
+const effect1 = require("../table/effect1");
 const Global = require("../global");
 module.exports = {
   // 获取玩家信息
@@ -43,166 +43,49 @@ module.exports = {
     return results;
   },
 
-  // 计算角色属性
-  computeRoleAttr: function (req, res, roleInfo, update) {
-    try {
-      const { base_pool: basePool, addition_pool: addition, buff_pool: buffPool } = roleInfo;
-      const attr = {
-        life_max: 0,
-        life: 0,
-        mana_max: 0,
-        mana: 0,
-        atk_max: 0,
-        atk_min: 0,
-        dfs_max: 0,
-        dfs_min: 0,
-        hit: 0,
-        dodge: 0,
-        sudden: 0,
-        ice_atk_max: 0,
-        ice_atk_min: 0,
-        ice_dfs_max: 0,
-        ice_dfs_min: 0,
-        mine_atk_max: 0,
-        mine_atk_min: 0,
-        mine_dfs_max: 0,
-        mine_dfs_min: 0,
-        wind_atk_max: 0,
-        wind_atk_min: 0,
-        wind_dfs_max: 0,
-        wind_dfs_min: 0,
-        water_atk_max: 0,
-        water_atk_min: 0,
-        water_dfs_max: 0,
-        water_dfs_min: 0,
-        fire_atk_max: 0,
-        fire_atk_min: 0,
-        fire_dfs_max: 0,
-        fire_dfs_min: 0,
-      }
-
-      // 计算基础属性
-      this.computeBaseAttr(attr, basePool);
-      // 计算buff属性
-      const buff = this.computeRoleBuff(req, attr, buffPool, update);
-      // 计算非时间限制属性: 装备,宠物,称号,技能,等
-      Object.keys(addition).forEach((key) => {
-        if (key === 'life' || key === 'mana') {
-          attr[`${key}_max`] += addition[key];
-          return;
-        }
-        attr[key] += addition[key];
+  // 计算角色属性 role_id(非自身的情况下才更新buff)
+  computeRoleAttr: function (req, roleInfo, role_id) {
+    const { role_attr, role_buff } = roleInfo;
+    const { base, addition } = role_attr;
+    const attr = getInitAttr();
+    // 基础属性与额外属性
+    Object.keys(attr).forEach((key) => {
+      attr[key] += base[key] || 0;
+      attr[key] += addition[key] || 0;
+    })
+    // buff属性
+    let { attr: attrBuff, vip } = role_buff;
+    const buffs = [];
+    attrBuff = attrBuff.filter(({ e, d }) => {
+      if (d < new Date() * 1) return false;
+      const { text } = effect1.effect1Add(e, attr, base);
+      buffs.push({
+        text,
+        end: d
       })
-      return { attr, buff };
-    } catch (error) {
-      errorFn.error(res, errorFn.ERR_MEUN.ROLE);
-      return '';
-    }
-  },
-  // 计算角色基础属性
-  computeBaseAttr: function (attr, basePool) {
-    const { base, potential = {}, realm } = basePool;
-    const ele = ['ice', 'mine', 'wind', 'water', 'fire'];
-    Object.keys(base).forEach((key) => {
-      attr[key] += base[key];
+      return true;
     })
-    Object.keys(potential).forEach((key) => {
-      if (key === 'atk' || key === 'dfs') {
-        attr[`${key}_max`] += potential[key];
-        attr[`${key}_min`] += potential[key];
-        return;
-      }
-      if (key === 'life' || key === 'mana') {
-        attr[`${key}_max`] += potential[key];
-        return;
-      }
-      attr[key] += potential[key];
-    })
-    if (realm) {
-      ele.forEach((key) => {
-        attr[`${key}_atk_max`] += realm;
-        attr[`${key}_atk_min`] += realm;
-        attr[`${key}_dfs_max`] += realm;
-        attr[`${key}_dfs_min`] += realm;
-      })
-    }
-
-  },
-  // 计算角色buff
-  computeRoleBuff: function (req, attr, buffPool, update) {
-    const { pellet = {}, vip = {}, } = buffPool;
-    const expireple = Object.keys(pellet);
-    const expireVip = Object.keys(vip);
-    // 战斗buff
-    expireple.forEach((key) => {
-      const { end, value } = pellet[key];
+    Object.keys(vip).forEach(key => {
       // 判断buff是否过期,过期直接跳过,并且删除
-      if (end < new Date() * 1) {
-        delete pellet[key];
-        return;
-      }
-      if (key === 'atk' || key === 'dfs') {
-        attr[`${key}_max`] += value;
-        attr[`${key}_min`] += value;
-        return;
-      }
-      if (key === 'life' || key === 'mana') {
-        attr[`${key}_max`] += value;
-        // attr[key] += value;
-        return;
-      }
-      attr[key] += value;
-    })
-    // 月卡，经验，金钱 buff
-    expireVip.forEach(key => {
-      // 判断buff是否过期,过期直接跳过,并且删除
-      if (vip[key]['end'] < new Date() * 1) {
+      if (vip[key]['d'] < new Date() * 1) {
         delete vip[key];
         return;
       }
     })
-    // 有buff过其,执行更新
-    if ((Object.keys(pellet).length !== expireple.length || Object.keys(vip).length !== expireVip.length) && !update) {
-      this.updateRoleInfo(req, {
-        buff_pool: {
-          pellet,
-          vip
-        }
-      })
+    if (!role_id) {
+      // 更新buff
+      Global.updateRoleGlobal(req, { role_buff: { attr: attrBuff, vip } });
+
     }
 
+    // 返回属性与buff信息
     return {
-      ...vip,
-      ...pellet
-    };
-  },
-  // 获取背包信息
-  getKnapsack: function (req) {
-    const { role, user } = Global.getknapsackGlobal(req);
-    return new Promise(res => {
-      mysql.sqlQuery(
-        `select * from knapsack  where user_id="${user}" and role_id="${role.id}"`,
-        results => {
-          return res(results[0]);
-        }
-      );
-    });
-  },
-  // 更新背包
-  updateKnapsack: function (req, data) {
-    const { role, user } = Global.getUserRole(req);
-    const upData = [];
-    Object.keys(data).forEach(key => {
-      upData.push(`${key}='${data[key]}'`)
-    })
-    return new Promise(res => {
-      mysql.sqlQuery(
-        `update knapsack  SET ${upData.join(',')}  where user_id="${user}" and role_id="${role.id}"`,
-        results => {
-          return res(results);
-        }
-      );
-    });
+      attr,
+      buff: {
+        attr: buffs,
+        vip
+      }
+    }
   },
   // 升级经验
   computeUpLevel: function (level) {
@@ -231,7 +114,7 @@ module.exports = {
   // 计算经验
   computeRoleLevel: function (req, res, exp, callback) {
     const roleInfo = Global.getRoleGlobal(req);
-    let { role_level, role_exp, role_realm, role_career, base_pool } = roleInfo;
+    let { role_level, role_exp, role_realm, role_career, role_attr } = roleInfo;
     let [oldExp, upExp] = role_exp.split('/');
     let current = Number(oldExp) + exp;
     let base = undefined;
@@ -261,7 +144,7 @@ module.exports = {
       Object.keys(base).forEach(key => {
         base[key] *= attr * role_level;
       })
-      upExp = this.computeUpLevel(role_level)
+      upExp = this.computeUpLevel(role_level);
     }
     const update = {
       role_exp: `${current}/${upExp}`,
@@ -272,8 +155,12 @@ module.exports = {
       callback(roleInfo, update);
     }
     if (base) {
-      base_pool.base = base;
-      update['base_pool'] = JSON.stringify(base_pool);
+      role_attr.base = base;
+      update['role_attr'] = role_attr;
+      const { attr } = this.computeRoleAttr(req, roleInfo);
+      update['life'] = attr.life_max;
+      update['mana'] = attr.mana_max;
+
     }
     Global.updateRoleGlobal(req, update);
 

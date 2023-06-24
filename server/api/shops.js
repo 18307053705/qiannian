@@ -23,7 +23,18 @@ router.post("/getList", (req, res) => {
 
 
 router.post("/purchase", (req, res) => {
-    const { id } = req.body;
+    // const { id } = req.body;
+    // const { sell } = KnapsackTable[id];
+    // if (sell && p !== 3) {
+    //     data[in_x]['s'] -= s;
+    //     if (!data[in_x]['s']) {
+    //         data.splice(in_x, 1);
+    //     }
+    //     await knapsackFn.updateKnapsack(req, { tael: tael + (sell * s), data: JSON.stringify(data) });
+    // } else {
+    //     message = '该物品无法出售';
+    // }
+
 });
 
 

@@ -82,7 +82,7 @@ module.exports = {
       if (type === 'exploit' || type === 'world') {
         reward = {
           role: {
-            reputation_pool: {
+            role_integral: {
               [type]: 100
             }
           },
@@ -111,7 +111,7 @@ module.exports = {
           return;
         }
         if (key === 'exploit' || key === 'world') {
-          reward['role']['reputation_pool'] = {
+          reward['role']['role_integral'] = {
             [key]: rewardItme
           }
           text.push(`${REWARD_MEUN[key]}+${rewardItme}`);
@@ -324,14 +324,14 @@ module.exports = {
     }
 
     if (reward['role'] || callback) {
-      const { role_exp = 0, reputation_pool = {} } = reward['role'];
+      const { role_exp = 0, role_integral = {} } = reward['role'];
       roleFn.computeRoleLevel(req, res, role_exp, (roleInfo, updata) => {
         // 处理声望
-        const requtation = roleInfo.reputation_pool;
-        Object.keys(reputation_pool).forEach((key) => {
-          requtation[key] = requtation[key] ? requtation[key] + reputation_pool[key] : reputation_pool[key];
+        const requtation = roleInfo.role_integral;
+        Object.keys(role_integral).forEach((key) => {
+          requtation[key] = requtation[key] ? requtation[key] + role_integral[key] : role_integral[key];
         })
-        updata['reputation_pool'] = requtation;
+        updata['role_integral'] = requtation;
         callback && callback(roleInfo, updata);
       })
     }

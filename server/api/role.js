@@ -23,35 +23,36 @@ router.post("/getRoleList", (req, res) => {
 // 状态信息
 router.post("/getRoleInfo", async (req, res) => {
   const { role_id } = req.body;
-  const roleInfo = await roleFn.getRoleInfo(req, role_id);
-  if (roleInfo) {
-    const { base_pool, buff_pool, addition_pool, address, ...info } = roleInfo;
+  const role = await roleFn.getRoleInfo(req, role_id);
+  if (role) {
     // 计算角色属性
-    const data = roleFn.computeRoleAttr(req, res, roleInfo, role_id);
+    const data = roleFn.computeRoleAttr(req, role, role_id);
     if (!data) {
       return;
     }
     res.send({
       code: 0,
       data: {
-        role_id: roleInfo['role_id'],
+        role_id: role['role_id'],
         attr: data.attr,
         buff: data.buff,
-        life: roleInfo['life'] > data.attr.life_max ? data.attr.life_max : roleInfo['life'],
-        mana: roleInfo['mana'] > data.attr.mana_max ? data.attr.mana_max : roleInfo['mana'],
-        role_name: roleInfo['role_name'],
-        role_level: roleInfo['role_level'],
-        role_exp: roleInfo['role_exp'],
-        role_evil: roleInfo['role_evil'],
-        role_signature: roleInfo['role_signature'],
-        role_career: CAREER_TYPE[roleInfo['role_career']],
-        role_race: RACE_TYPE[roleInfo['role_race']],
-        role_realm: realm[roleInfo['role_realm']] ? realm[roleInfo['role_realm']].name : '',
-        role_sex: roleInfo['role_sex'],
-        role_title: title[roleInfo['role_title']] ? title[roleInfo['role_title']].name : '',
-        reputation_pool: roleInfo['reputation_pool'],
-        socialize_pool: roleInfo['socialize_pool'],
-        equip_pool: roleInfo['equip_pool']
+        life: role['life'] > data.attr.life_max ? data.attr.life_max : role['life'],
+        mana: role['mana'] > data.attr.mana_max ? data.attr.mana_max : role['mana'],
+        role_name: role['role_name'],
+        role_level: role['role_level'],
+        role_exp: role['role_exp'],
+        role_evil: role['role_evil'],
+        role_signature: role['role_signature'],
+        role_career: CAREER_TYPE[role['role_career']],
+        role_race: RACE_TYPE[role['role_race']],
+        role_realm: realm[role['role_realm']] ? realm[role['role_realm']].name : '',
+        role_sex: role['role_sex'],
+        role_title: title[role['role_title']] ? title[role['role_title']].name : '',
+        reputation_pool: role['reputation_pool'],
+        socialize_pool: role['socialize_pool'],
+        equip_pool: role['equip_pool'],
+        role_integral: role['role_integral'],
+        pet_pool: role['pet_pool'],
       }
     });
   }
@@ -104,7 +105,6 @@ router.post("/createRole", (req, res) => {
     mysql.sqlQuery(`select * from role  where user_id="${user}"`, results => {
       if (results.length < 3) {
         const role_id = `${user}_${results.length + 1}`;
-
         let attr = roleAttr['atk'];
         if (role_career % 3 === 2) {
           attr = roleAttr['def']
@@ -112,35 +112,81 @@ router.post("/createRole", (req, res) => {
         if (role_career % 3 === 0) {
           attr = roleAttr['agile']
         }
-        const { life, mana } = attr;
-        const base_pool = {
-          base: attr
+        //  角色初始属性
+        const sqlInfo = {
+          user_id: user,
+          role_id,
+          role_name,
+          role_race,
+          role_career,
+          role_sex: role_sex == 1 ? '男' : '女',
+          role_level: 1,
+          role_exp: '0/200',
+          role_realm: 1,
+          role_title: 0,
+          life: attr.life,
+          mana: attr.mana,
+          role_attr: {
+            base: attr,
+            addition: {}
+          },
+          role_buff: {
+            attr: [],
+            vip: {}
+          },
+          address: '10000,0,0',
+          role_evil: 0,
+          role_signature: '',
+          socialize_pool: {},
+          equip_pool: {},
+          skill_pool: {
+            art:{},
+            fight:[null,null,null,null,null,null]
+          },
+          
+          task_pool: {
+            main: [1]
+          },
+          can_task_pool: {
+            main: []
+          },
+          role_integral: {
+
+          },
+          pet_pool: {
+            c: {},
+            l: [],
+            x: 5
+          }
         }
-        const roleSql = "insert into role(user_id,role_id,role_name,role_race,role_career,role_sex,role_level,role_exp,role_realm,role_title,life,mana,address,role_evil,role_signature,equip_pool,socialize_pool,skill_pool,base_pool,addition_pool,buff_pool,reputation_pool,task_pool) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        const roleData = [user, role_id, role_name, role_race, role_career, role_sex == 1 ? '男' : '女', 1, '0/200', 1, 0, life, mana, '10000,0,0', 0, '', '{}', '{}', '{}', JSON.stringify(base_pool), '{}', '{}', '{}', '{"main":[{"id":1,"in_x":0}]}'];
-        mysql.sqlAdd(roleSql, roleData, () => {
-          //  背包
-          const knapsackSql = "insert into knapsack(user_id,role_id,tael,yuanbao,data,integral) values(?,?,?,?,?,?)";
-          const knapsackData = [user, role_id, 0, 0, '[]', '{}'];
-          mysql.sqlAdd(knapsackSql, knapsackData, () => { });
-          //  仓库
-          const warehouseSql = "insert into warehouse(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
-          const warehouseData = [user, role_id, 0, 0, '[]'];
-          mysql.sqlAdd(warehouseSql, warehouseData, () => { });
-          //  宠物
-          const petSql = "insert into pet(user_id,role_id,wear_pet,list_pet) values(?,?,?,?)";
-          const petData = [user, role_id, '{}', '[]'];
-          mysql.sqlAdd(petSql, petData, () => { });
-          //  好友
-          const friendsSql = "insert into friends(user_id,role_id,list,apply) values(?,?,?,?)";
-          const friendsData = [user, role_id, '[]', '[]'];
-          mysql.sqlAdd(friendsSql, friendsData, () => { });
-          Global.roleLoop[user] = { id: role_id, time: new Date() * 1 };
-          res.send({
-            code: 0,
-            data: '角色选择成功'
-          })
-        });
+
+        const keys = [];
+        const value = [];
+        const insert = [];
+        Object.keys(sqlInfo).forEach((key) => {
+          keys.push(key);
+          value.push(typeof sqlInfo[key] === 'object' ? JSON.stringify(sqlInfo[key]) : sqlInfo[key]);
+          insert.push('?');
+        })
+
+        const roleSql = `insert into role(${keys.join(',')}) values(${insert.join(',')})`
+        mysql.asyncAdd(roleSql, value);
+        //  背包
+        const knapsackSql = "insert into knapsack(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
+        const knapsackData = [user, role_id, 0, 0, '[]', '{}'];
+        mysql.asyncAdd(knapsackSql, knapsackData);
+        //  仓库
+        const warehouseSql = "insert into warehouse(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
+        const warehouseData = [user, role_id, 0, 0, '[]'];
+        mysql.asyncAdd(warehouseSql, warehouseData);
+        //  好友
+        const friendsSql = "insert into friends(user_id,role_id,list,apply) values(?,?,?,?)";
+        const friendsData = [user, role_id, '[]', '[]'];
+        mysql.asyncAdd(friendsSql, friendsData);
+        res.send({
+          code: 0,
+          data: '角色创建成功'
+        })
         return;
       }
       res.send({

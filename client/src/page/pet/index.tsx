@@ -17,21 +17,3 @@ const Pet = ({ history }) => {
 
 export default Pet;
 
-const petInfo = {
-    id: 19999,
-    xf: 100, // 先天资质
-    f: 100, // 后天资质
-    l: 100, // 等级
-    p: 1,// 类型
-    art: {
-        // 技能信息
-    },
-    equip: {
-
-    },
-    addition: {
-
-    }
-}
-
-

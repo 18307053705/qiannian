@@ -1,15 +1,26 @@
 import React from "react";
 
+const INTEGRA_MEUN = {
+    world: "世界声望",
+    gang: "帮会声望",
+    intersect: "结义声望",
+    exploit: "世界功勋",
+    fame: "世界名气",
+}
+
 const RoleFame = ({ roleInfo }) => {
-    const { reputation_pool:reputation } = roleInfo;
+    const { role_integral } = roleInfo;
     return (
         <>
             <div className="g_fgx"></div>
-            <div><span className="g_b">世界声望</span>：<span>{reputation.world || 0}</span></div>
-            <div><span className="g_b">帮会声望</span>：<span>{reputation.gang || 0}</span></div>
-            <div><span className="g_b">结义声望</span>：<span>{reputation.intersect || 0}</span></div>
-            <div><span className="g_b">世界功勋</span>：<span>{reputation.exploit || 0}</span></div>
-            <div><span className="g_b">世界名气</span>：<span>{reputation.fame || 0}</span></div>
+            {
+                Object.keys(INTEGRA_MEUN).map((key, index) => (
+                    <div key={index}>
+                        <span className="g_b">{INTEGRA_MEUN[key]}</span>：
+                        <span>{role_integral[key] || 0}</span>
+                    </div>
+                ))
+            }
         </>
     )
 

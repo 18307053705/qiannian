@@ -103,7 +103,7 @@ module.exports = {
         })
         return {
             attr: equipAttr,
-            posName: posInfo.pos
+            posName: posInfo.pos,
         }
 
     },

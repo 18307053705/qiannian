@@ -3,6 +3,7 @@ const Global = require("../global");
 const roleFn = require("../utils/roleFn");
 const knapsackFn = require("../utils/knapsackFn");
 const KnapsackTable = require("../table/knapsack");
+const effect1Table = require("../table/effect1");
 const Equip = require("../table/equip");
 const router = new express.Router();
 // 两小时时间戳
@@ -21,8 +22,6 @@ router.post("/getKnapsack", async (req, res) => {
         }
     })
 });
-
-
 
 // 获取物品信息
 router.post("/getDetail", async (req, res) => {
@@ -107,7 +106,8 @@ router.post("/equipList", async (req, res) => {
         data: list
     })
 });
-// 物品操作：type 1使用，2出库，3入库，4出售,5购买{考虑是否实现},
+
+// 物品操作：type 1使用，2出库，3入库，4出售, 5购买{考虑是否实现},  
 router.post("/operate", async (req, res) => {
     const { id, in_x, s, p, type, posKey } = req.body;
     const role = Global.getRoleGlobal(req);
@@ -121,21 +121,13 @@ router.post("/operate", async (req, res) => {
         })
         return;
     }
+
+
     let message = '';
     // 使用
     if (type === 1) {
-        message = '无法使用，请前往相应功能界面';
-        // 恢复品
-        if (p === 1) {
-            message = ''
-            const attr = {
-                life: 0,
-                mana: 0
-            }
-            const effect = KnapsackTable[id]['effect'];
-            Object.keys(effect).forEach(key => {
-                attr[key] += effect[key] * s;
-            });
+        // 消耗对应物品
+        if ([1, 2, 4].includes(p)) {
             data[in_x]['s'] -= s;
             if (!data[in_x]['s']) {
                 data.splice(in_x, 1);
@@ -143,37 +135,56 @@ router.post("/operate", async (req, res) => {
             Global.updateknapsackGlobal(req, {
                 data,
             })
-            Global.updateRoleGlobal(req, {
-                life: role.life + attr.life,
-                mana: role.mana + attr.mana,
-            })
+        } else {
+            message = '该物品无法直接使用。';
         }
-        // buff丹药
+
+        // 恢复品与卷轴声望积分等
+        if (p === 1 || p === 4) {
+            const { life, mana, role_integral } = role;
+            const update = {
+                1: { life, mana },
+                4: { ...role_integral }
+            }
+            const { effect1 } = KnapsackTable[id];
+            const [key, type, value] = effect1.split('-');
+            effect1Table.effect1Add([key, type, value * s].join('-'), update[p]);
+            Global.updateRoleGlobal(req, p === 1 ? update[1] : { role_integral: update[4] });
+        }
+        // buff物品
         if (p === 2) {
             message = ''
-            const buffPool = role.buff_pool;
-            const { pellet = {}, vip = {}, } = buffPool;
-            const effect = KnapsackTable[id]['effect'];
-            Object.keys(effect).forEach(key => {
-                const { end, value } = pellet[key] || {};
-                let residue = new Date() * 1;
-                if (value === effect[key]) {
-                    residue = end;
+            let { attr, vip } = role.role_buff;
+            const { effect1, vip: vipKey } = KnapsackTable[id];
+            if (effect1) {
+                let add = true;
+                attr = attr.map((itme) => {
+                    if (itme.e === effect1) {
+                        itme.d = itme.d + DateTitme * s;
+                        add = false;
+                    }
+                    return itme;
+                })
+                if (add) {
+                    attr.push(({
+                        e: effect1,
+                        d: DateTitme * s + new Date() * 1
+                    }))
                 }
-                pellet[key] = {
-                    end: residue + (s * DateTitme),
-                    value: effect[key]
-                };
-            });
-            data[in_x]['s'] -= s;
-            if (!data[in_x]['s']) {
-                data.splice(in_x, 1);
-            }
 
-            Global.updateknapsackGlobal(req, { data });
-            Global.updateRoleInfo(req, {
-                buff_pool: {
-                    pellet,
+            }
+            if (vipKey) {
+                if (vip[vipKey]) {
+                    vip[vipKey]['d'] + DateTitme * s
+                } else {
+                    vip[vipKey] = {
+                        d: DateTitme * s + new Date() * 1
+                    }
+                }
+            }
+            Global.updateRoleGlobal(req, {
+                role_buff: {
+                    attr,
                     vip
                 }
             });
@@ -182,7 +193,22 @@ router.post("/operate", async (req, res) => {
         if (p === 3) {
             message = ''
             const { ext, n } = data[in_x];
-            const { equip_pool: equipPool, addition_pool: addition } = role;
+            const { equip_pool: equipPool, role_attr, role_level } = role;
+            const { level } = Equip[id];
+            if (role_level < level) {
+
+                res.send({
+                    code: 0,
+                    data: {
+                        list: data,
+                        tael: tael,
+                        yuanbao: yuanbao
+                    },
+                    message: `等级不足,无法该佩戴${n}`
+                })
+                return;
+            }
+            const { addition } = role_attr;
             const equipInfo = Equip.computeAttr(Equip[id], ext);
             const addAttr = equipInfo.attr;
             const posName = posKey || equipInfo.posName;
@@ -203,6 +229,7 @@ router.post("/operate", async (req, res) => {
             } else {
                 data.splice(in_x, 1);
             }
+
             Object.keys(addAttr).forEach(key => {
                 if (addition[key]) {
                     addition[key] += addAttr[key];
@@ -219,47 +246,11 @@ router.post("/operate", async (req, res) => {
 
             Global.updateknapsackGlobal(req, { data });
             Global.updateRoleGlobal(req, {
-                addition_pool: addition,
+                role_attr,
                 equip_pool: equipPool
             });
         }
-        // 卷轴
-        if (p === 4) {
-            message = ''
-            const { reputation_pool: reputationPool, buff_pool: buffPool } = role;
-            const { pellet = {}, vip = {}, } = buffPool;
-            const { effect, reputation } = KnapsackTable[id];
-            if (effect) {
-                Object.keys(effect).forEach(key => {
-                    const { end } = vip[key] || {};
-                    let residue = new Date() * 1;
-                    if (end) {
-                        residue = end;
-                    }
-                    vip[key] = {
-                        end: residue + (s * DateTitme)
-                    };
-                });
-            }
-            if (reputation) {
-                Object.keys(reputation).forEach(key => {
-                    let value = reputationPool[key] || 0;
-                    reputationPool[key] = value + (reputation[key] * s)
-                });
-            }
-            data[in_x]['s'] -= s;
-            if (!data[in_x]['s']) {
-                data.splice(in_x, 1);
-            }
-            Global.updateknapsackGlobal(req, { data });
-            Global.updateRoleGlobal(req, {
-                buff_pool: {
-                    pellet,
-                    vip
-                },
-                reputation_pool: reputationPool
-            });
-        }
+
 
     }
     // 入库
@@ -351,7 +342,19 @@ router.post("/operate", async (req, res) => {
             message = '该物品无法出售';
         }
     }
-
+    // 购买
+    if (type === 5) {
+        const { sell } = KnapsackTable[id];
+        if (sell && p !== 3) {
+            data[in_x]['s'] -= s;
+            if (!data[in_x]['s']) {
+                data.splice(in_x, 1);
+            }
+            await knapsackFn.updateKnapsack(req, { tael: tael + (sell * s), data: JSON.stringify(data) });
+        } else {
+            message = '该物品无法出售';
+        }
+    }
     res.send({
         code: 0,
         message,
