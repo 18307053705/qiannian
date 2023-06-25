@@ -5,11 +5,9 @@ import { getEquipName } from '@utils/equip'
 
 
 export const EquipList = ({ pageCheng, posInfo, history }) => {
-    console.log(posInfo,'posInfo...')
     const [list, setList] = useState();
     useEffect(() => {
         getEquipList().then(({ data }) => {
-            console.log(data,'posInfo...')
             setList(data.filter((itme) => itme.pos === posInfo.pos));
         })
 

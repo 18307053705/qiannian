@@ -17,10 +17,12 @@ module.exports = {
                 }
                 await Global.saveRole(user);
                 await Global.saveknapsack(role_id);
+                await Global.savePet(role_id);
                 //释放角色池
                 delete Global.roleGlobal[user];
                 //释放背包池
                 delete Global.knapsackGlobal[role_id];
+                delete Global.petGlobal[role_id];
                 // 减少对应势力在线人员
                 Global.releaseSocializeGlobal(role_id, socialize_pool);
                 resolve(true);

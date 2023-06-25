@@ -460,6 +460,19 @@ const ELEMENT_5 = {
       ...getArticle(1, 46,20),
     ]
   },
+  5000015: {
+    id: 5000015,
+    name: "宠物怪",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 20,
+      attr: 1
+    },
+    article: [
+      ...getArticle(158, 5,20),
+    ]
+  },
 };
 
 module.exports = {

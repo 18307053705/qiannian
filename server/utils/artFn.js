@@ -1,6 +1,8 @@
 const ArtTable = require("../table/art");
 const Attribute = require("../table/attribute");
 const Global = require("../global");
+const KnapsackTable = require("../table/knapsack");
+const knapsackFn = require("../utils/knapsackFn");
 const r_attr = {
     0: 1,
     1: 1.5,
@@ -181,5 +183,92 @@ module.exports = {
             art: skill_pool['art'][id]
         };
     },
+    // 获取升级需要的材料
+    getMaterial: function (req, art) {
+        const { l, r } = art;
+        const up_art = this.artLevelCompute(art);
+        if (!up_art) {
+            return { message: '技能已经满级，无法继续提升。' };
+        }
+        let materialId = undefined;
+        // 升重消耗材料
+        if (up_art.p === 'l') {
+            // 低于13级使用的材料Id
+            materialId = 67 + l;
+            // 13级及以上使用初阶技能升级书
+            if (l >= 13) {
+                materialId = 87
+            }
+            // 30级及以上使用中阶技能升级书
+            if (l >= 30) {
+                materialId = 88
+            }
+            // 50级及以上使用高阶技能升级书
+            if (l >= 50) {
+                materialId = 89
+            }
+        }
+        // 升转消耗材料
+        if (up_art.p === 'r') {
+            materialId = 80 + r;
+        }
+        // 计算消耗材料
+        const article = KnapsackTable[materialId];
+        const { message } = knapsackFn.deleteKnapsack(req, { [materialId]: { ...article, p: article['type'], s: 1 } });
+        return {
+            message,
+            up_art
+        };
+    },
+    // 宠物技能升级属性
+    petArtUpAttrfunction: function (req, old_art, up_art) {
+        const art = ArtTable[old_art.id];
+        // 最新技能属性
+        const artInfo = {
+            ...old_art,
+            ...up_art
+        }
+        // 判断是否为附体技能,最高9级
+        if (art.id === 19) {
+            // 附体属性加成,每级+10
+            artInfo['v'] = art['v'] + 10;
+        }
 
+        // 判断是否为被动,是的话需要额外处理宠物属性
+        const up_attr = {};
+        if (art.p === 4) {
+            const up_v = {};
+            // 判断是否升转
+            const isR = up_art.l === 0 && up_art.r !== old_art.r;
+            Object.keys(art['effect']).forEach((key) => {
+                // 升华保留上次属性的20%
+                const old_v = isR ? old_art['v'][key] * 0.2 : art['v'][key];
+                // 当前等级属性
+                const c_v = art['effect'][key] * r_attr[up_art['r']] * up_art['l'];
+                // 升级属性 = 当前等级属性 + 升华保留属性
+                up_v[key] = c_v + old_v;
+                // 增加属性 = 升级属性 - 原来属性
+                up_attr[key] = up_v[key] - (old_art['v'][key] || 0);
+            });
+            artInfo['v'] = up_v;
+        }
+        const updata = {
+            art: artInfo,
+        };
+        
+        // 判断需要处理宠物额外属性
+        if (JSON.stringify(up_attr) !== '{}') {
+            const { addition } = Global.getPetGlobal(req);
+            Object.keys(up_attr).forEach((key) => {
+                if (key === 'atk' || key === 'dfs') {
+                    addition[`${key}_max`] += up_attr[key];
+                    addition[`${key}_min`] += up_attr[key];
+                    return;
+                }
+                addition[key] = (addition[key] || 0) + up_attr[key];
+            })
+            updata['addition'] = addition;
+        }
+        return updata;
+    },
 };

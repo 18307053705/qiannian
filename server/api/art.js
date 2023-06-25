@@ -10,7 +10,7 @@ const knapsackFn = require("../utils/knapsackFn");
 router.post("/list", (req, res) => {
     const { skill_pool, role_career, role_level } = Global.getRoleGlobal(req);
     let { art } = skill_pool;
-    if (!art) {
+    if (!art || JSON.stringify(art) === '{}') {
         art = {};
         const artIds = ArtTable.getCareerArts(role_career);
         artIds.forEach((id) => {
@@ -119,10 +119,8 @@ router.post("/up", (req, res) => {
         return false;
     }
 
-    const { l, r } = art[id];
+    const { l } = art[id];
     const artInfo = ArtTable[id];
-
-
     // 领悟技能
     if (l === -1) {
         if (artInfo.condition > role_level) {
@@ -140,41 +138,7 @@ router.post("/up", (req, res) => {
         })
         return;
     }
-
-    const up_art = artFn.artLevelCompute(art[id]);
-    if (!up_art) {
-        res.send({
-            code: 0,
-            message: '技能已经满级，无法继续提升。'
-        })
-        return;
-
-    }
-    let materialId = undefined;
-    // 升重消耗材料
-    if (up_art.p === 'l') {
-        // 低于13级使用的材料Id
-        materialId = 67 + l;
-        // 13级及以上使用初阶技能升级书
-        if (l >= 13) {
-            materialId = 87
-        }
-        // 30级及以上使用中阶技能升级书
-        if (l >= 30) {
-            materialId = 88
-        }
-        // 50级及以上使用高阶技能升级书
-        if (l >= 50) {
-            materialId = 89
-        }
-    }
-    // 升转消耗材料
-    if (up_art.p === 'r') {
-        materialId = 80 + r;
-    }
-    // 计算消耗材料
-    const article = KnapsackTable[materialId];
-    const { message } = knapsackFn.deleteKnapsack(req, { [materialId]: { ...article, p: article['type'], s: 1 } });
+    const { up_art, message } = artFn.getMaterial(req,art[id]);
     if (message) {
         res.send({
             code: 0,

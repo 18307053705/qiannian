@@ -1,10 +1,11 @@
 const express = require("express");
 const mysql = require("../mysql");
+const Global = require("../global");
 const roleFn = require("../utils/roleFn");
 const globalFn = require("../utils/globalFn");
 const taskFn = require("../utils/taskFn");
 const { roleAttr } = require("../table/attribute");
-const Global = require("../global");
+
 const { title } = require("../table/title");
 const { realm } = require("../table/realm");
 const { CAREER_TYPE, RACE_TYPE } = require("../meun");
@@ -79,6 +80,7 @@ router.post("/roleLogin", async (req, res) => {
   Global.setRoleGlobal(req, role[0]);
   Global.setknapsackGlobal(req, knapsack[0]);
   Global.setSocializeGlobal(req);
+  Global.setPetGlobal(req);
   // 不存在任务池，即代表今天第一次登录,初始化任务池
   if (!Global.taskLoop[role_id]) {
     taskFn.initTask(req);
@@ -102,7 +104,7 @@ router.post("/createRole", (req, res) => {
       return;
     }
     // 查询账号下角色数量
-    mysql.sqlQuery(`select * from role  where user_id="${user}"`, results => {
+    mysql.sqlQuery(`select * from role  where user_id="${user}"`, async (results) => {
       if (results.length < 3) {
         const role_id = `${user}_${results.length + 1}`;
         let attr = roleAttr['atk'];
@@ -140,10 +142,10 @@ router.post("/createRole", (req, res) => {
           socialize_pool: {},
           equip_pool: {},
           skill_pool: {
-            art:{},
-            fight:[null,null,null,null,null,null]
+            art: {},
+            fight: [null, null, null, null, null, null]
           },
-          
+
           task_pool: {
             main: [1]
           },
@@ -156,7 +158,7 @@ router.post("/createRole", (req, res) => {
           pet_pool: {
             c: {},
             l: [],
-            x: 5
+            x: 10
           }
         }
 
@@ -173,7 +175,7 @@ router.post("/createRole", (req, res) => {
         mysql.asyncAdd(roleSql, value);
         //  背包
         const knapsackSql = "insert into knapsack(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
-        const knapsackData = [user, role_id, 0, 0, '[]', '{}'];
+        const knapsackData = [user, role_id, 1000, 0, '[]', '{}'];
         mysql.asyncAdd(knapsackSql, knapsackData);
         //  仓库
         const warehouseSql = "insert into warehouse(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
@@ -183,6 +185,20 @@ router.post("/createRole", (req, res) => {
         const friendsSql = "insert into friends(user_id,role_id,list,apply) values(?,?,?,?)";
         const friendsData = [user, role_id, '[]', '[]'];
         mysql.asyncAdd(friendsSql, friendsData);
+        // 退出同账号下的其他角色
+        await globalFn.roleExit(req, res);
+        // 保存角色信息,并且记录登录时间
+        Global.roleGlobal[user] = {
+          ...sqlInfo,
+          id: sqlInfo.role_id,
+          time: new Date() * 1, // 角色操作时间，长时间没有操作，即自动下线
+          updateKeys: [],
+        };
+        Global.setknapsackGlobal(req, { user_id: user, role_id, yuanbao: 1000, yuanbao: 0, data: '[]' });
+        Global.setSocializeGlobal(req);
+        // 初始化任务池
+        taskFn.initTask(req);
+
         res.send({
           code: 0,
           data: '角色创建成功'

@@ -208,5 +208,46 @@ module.exports = {
         water_dfs_max: 120,
         fire_dfs_min: 80,
         fire_dfs_max: 120,
+    },
+    petAttr: {
+        1: {
+            life: 20,
+            life_max: 20,
+            mana: 15,
+            mana_max: 15,
+            atk_max: 1.2,
+            atk_min: 1,
+            dfs_max: 0.4,
+            dfs_min: 0.2,
+            hit: 0.2,
+            dodge: 0.1,
+            sudden: 0.1
+        },
+        2: {
+            life: 25,
+            life_max: 25,
+            mana: 18,
+            mana_max: 18,
+            atk_max: 1,
+            atk_min: 0.8,
+            dfs_max: 0.5,
+            dfs_min: 0.3,
+            hit: 0.2,
+            dodge: 0.1,
+            sudden: 0.1
+        },
+        3: {
+            life: 18,
+            life_max: 18,
+            mana: 12,
+            mana_max: 12,
+            atk_max: 0.1,
+            atk_min: 0.8,
+            dfs_max: 0.4,
+            dfs_min: 0.2,
+            hit: 0.4,
+            dodge: 0.2,
+            sudden: 0.2
+        }
     }
 }

@@ -3,6 +3,7 @@ const { realm: Realm } = require("../table/realm");
 const { roleAttr: RoleAttr, getInitAttr } = require("../table/attribute");
 const effect1 = require("../table/effect1");
 const Global = require("../global");
+const petFn = require("./petFn");
 module.exports = {
   // 获取玩家信息
   getRoleInfo: async function (req, role_id) {
@@ -76,6 +77,19 @@ module.exports = {
       // 更新buff
       Global.updateRoleGlobal(req, { role_buff: { attr: attrBuff, vip } });
 
+    }
+    // 最后计算宠物附体
+    const pet = Global.getPetGlobal(req, role_id) || { state: 0 };
+    let petAttr = {
+      life_max: 0,
+      life: 0,
+    }
+    let rate = pet.art[1].l === -1 ? 0 : pet.art[1].v / 100;
+    if (pet.state === 2 && rate) {
+      petAttr = petFn.computeAttr(pet, petAttr);
+      Object.keys(petAttr).forEach(key => {
+        attr[key] += parseInt(petAttr[key] * rate);
+      })
     }
 
     // 返回属性与buff信息

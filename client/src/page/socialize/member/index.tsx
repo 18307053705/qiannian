@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { List } from '@components/index';
+import { List } from '@components';
 const TYPE_MEUN = {
     1: '帮会',
     2: '庄园',
@@ -83,13 +83,14 @@ export const Member = ({ type, pageName, adjustClick, socialize, eixt }) => {
             <List
                 data={socialize.list}
                 prefix_d={true}
+                hiddenFooter={type === 3}
                 prefix={({ id, name, line, level }, index) => (
                     <div key={id}>
                         <span className={line && 'g_u_end'}>
                             {index}.{name}
                             {line && `${line}级`}
                             ({getRoleLevelName(type, level).text})
-                                    </span>
+                        </span>
                     </div>
                 )}
                 active={active}

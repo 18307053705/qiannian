@@ -43,6 +43,7 @@ export const Socialize = ({ history }) => {
             return;
         }
         setIsCreate(false);
+        setUptate(!updata);
     }
 
     useEffect(() => {
@@ -150,7 +151,7 @@ export const Socialize = ({ history }) => {
                 pageName === 'apply' && <List
                     data={socialize.apply}
                     prefix_d={true}
-                    prefix={({ name}, index) => <span key={index}>{index}.{name}</span>}
+                    prefix={({ name }, index) => <span key={index}>{index}.{name}</span>}
                     active={({ id }, index) => (
                         <div key={index}>
                             <span className='g_u'><span onClick={() => { activeClick(id, 1) }}>通过</span></span>
