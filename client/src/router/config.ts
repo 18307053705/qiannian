@@ -112,6 +112,16 @@ export const config: RouterType[] = [
     name: "宠物界面",
     path: "/pet",
     component: lazy(() => import("@page/pet"))
+  },
+  {
+    name: "房屋界面",
+    path: "/house",
+    component: lazy(() => import("@page/house"))
+  },
+  {
+    name: "珍宝界面",
+    path: "/treasure",
+    component: lazy(() => import("@page/treasure"))
   }
 ];
 

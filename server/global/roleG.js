@@ -13,6 +13,7 @@ const JSON_KEYS = [
     'role_buff',
     'pet_pool',
     'role_integral',
+    'treasure_pool'
 ];
 
 module.exports = {

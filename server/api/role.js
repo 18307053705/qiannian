@@ -34,6 +34,7 @@ router.post("/getRoleInfo", async (req, res) => {
     res.send({
       code: 0,
       data: {
+
         role_id: role['role_id'],
         attr: data.attr,
         buff: data.buff,
@@ -54,6 +55,7 @@ router.post("/getRoleInfo", async (req, res) => {
         equip_pool: role['equip_pool'],
         role_integral: role['role_integral'],
         pet_pool: role['pet_pool'],
+        treasure_pool: role['treasure_pool'],
       }
     });
   }
@@ -159,9 +161,15 @@ router.post("/createRole", (req, res) => {
             c: {},
             l: [],
             x: 10
+          },
+          treasure_pool: {
+            fw: { exp: 0, ext: '0_0_0_0_0_0_0', s: 0, g: 0 },
+            xz: { exp: 0, s: 0 },
+            hb: { exp: 0, s: 0 },
+            lp: { exp: 0, s: 0 },
+            jbp: 0
           }
         }
-
         const keys = [];
         const value = [];
         const insert = [];
@@ -198,7 +206,6 @@ router.post("/createRole", (req, res) => {
         Global.setSocializeGlobal(req);
         // 初始化任务池
         taskFn.initTask(req);
-
         res.send({
           code: 0,
           data: '角色创建成功'

@@ -110,8 +110,9 @@ const Grand = ({ history }) => {
                 <span className="g_b_u">天榜</span>
             </div>
             <div>
-                <span className="g_b_u">房屋</span>
-                <span className="g_b_u">勋章</span>
+
+                <span className="g_b_u" onClick={() => { history.push('/house') }}>房屋</span>
+                <span className="g_b_u" onClick={() => { history.push('/treasure') }}>珍宝</span>
                 <span className="g_b_u">活动</span>
             </div>
             <span className="g_b_u" onClick={() => {
