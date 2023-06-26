@@ -473,6 +473,25 @@ const ELEMENT_5 = {
       ...getArticle(158, 5,20),
     ]
   },
+  5000016: {
+    id: 5000016,
+    name: "装备怪",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 20,
+      attr: 1
+    },
+    article: [
+      Equip[1],
+      Equip[2],
+      Equip[3],
+      Equip[4],
+      Equip[5],
+      Equip[120],
+      Equip[121],
+    ]
+  },
 };
 
 module.exports = {

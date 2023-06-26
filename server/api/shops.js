@@ -44,11 +44,12 @@ const KANAPSACK_MEUN = {
     warehouse: 3,
     shopping: 4,
     shops: 5,
+    pet: 6
 }
 
 // 获取物品详情
 router.post("/detail", async (req, res) => {
-    const { id, in_x, kanapsackType, t_roleId } = req.body;
+    const { id, in_x, kanapsackType, t_roleId, petId } = req.body;
     if (!(id && in_x !== undefined && kanapsackType)) {
         res.send({
             code: 100005,
@@ -75,7 +76,7 @@ router.post("/detail", async (req, res) => {
         const { data } = await knapsackFn.getKnapsackInfo(req, 3);
         articleInfo = data[in_x];
     }
-    // 物品在店铺：自身或者其他人店铺
+    // 物品在店铺：自身店铺与其他人店铺(t_roleId)
     if (kanapsackType === KANAPSACK_MEUN.shopping) {
         const { article } = await shoppingFn.getShopInfo(req, t_roleId);
         articleInfo = article ? article[in_x] : undefined;
@@ -83,6 +84,13 @@ router.post("/detail", async (req, res) => {
     // 商城
     if (kanapsackType === KANAPSACK_MEUN.shops) {
         articleInfo = KnapsackTable[id];
+    }
+    // 宠物身上
+    if (kanapsackType === KANAPSACK_MEUN.pet) {
+        // petId
+        const pet = Global.getPetGlobal(req);
+        const equip = pet['equip'][Equip.EQUIP_ATTR[in_x]['pos']];
+        articleInfo = { ...equip, p: 3 };
     }
     if (articleInfo) {
         const { p, id, ext } = articleInfo;

@@ -14,7 +14,7 @@ export async function purchase(data: { id: string }) {
 type DeatilTypeReq = {
   id: string;
   in_x: number;
-  kanapsackType: 1 | 2 | 3 | 4 | 5; // 背包 身上 仓库 店铺 商城
+  kanapsackType: 1 | 2 | 3 | 4 | 5 | 6; // 背包 身上 仓库 店铺 商城 宠物
   t_roleId?: string;
 };
 

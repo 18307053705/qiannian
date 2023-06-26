@@ -1,15 +1,11 @@
 import React from "react";
-
-
-
-
 const petAttr = ({ attr }) => {
     return (
         <div>
             <div><span>生命：{`${attr.life}/${attr.life_max}`}</span></div>
             <div><span>法力：{`${attr.mana}/${attr.mana_max}`}</span></div>
-            <div><span>攻击：{`${attr.atk_min}/${attr.atk_max}`}</span></div>
-            <div><span>防御：{`${attr.dfs_min}/${attr.dfs_max}`}</span></div>
+            <div><span>攻击：{`${attr.atk_min}~${attr.atk_max}`}</span></div>
+            <div><span>防御：{`${attr.dfs_min}~${attr.dfs_max}`}</span></div>
             <div><span>命中：{attr.hit}</span></div>
             <div><span>闪避：{attr.dodge}</span></div>
             <div><span>暴击：{attr.sudden}</span></div>

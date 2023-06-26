@@ -114,7 +114,6 @@ module.exports = {
                     addition_pool[`${key}_min`] += up_attr[key];
                     return;
                 }
-
                 addition_pool[key] = (addition_pool[key] || 0) + up_attr[key];
             })
             updata['addition_pool'] = addition_pool;
@@ -261,9 +260,12 @@ module.exports = {
             const { addition } = Global.getPetGlobal(req);
             Object.keys(up_attr).forEach((key) => {
                 if (key === 'atk' || key === 'dfs') {
-                    addition[`${key}_max`] += up_attr[key];
-                    addition[`${key}_min`] += up_attr[key];
+                    addition[`${key}_max`] = (addition[`${key}_max`] || 0) + up_attr[key];
+                    addition[`${key}_min`] = (addition[`${key}_min`] || 0) + up_attr[key];
                     return;
+                }
+                if (key === 'life' || key === 'mana') {
+                    addition[`${key}_max`] = (addition[`${key}_max`] || 0) + up_attr[key];
                 }
                 addition[key] = (addition[key] || 0) + up_attr[key];
             })

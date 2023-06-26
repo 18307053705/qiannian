@@ -2,15 +2,15 @@ import React from "react";
 
 // 头部操作
 export const HeadActive = ({ query, setIsRename, activeClick }) => {
-    if (query.kanapsackType !== 2) {
+
+    if (![2, 6].includes(query.kanapsackType)) {
         return null;
     }
+
     return (
         <div>
-
             <span className='g_u'><span onClick={activeClick}>卸下</span></span>
-            <span className='g_u_end' onClick={() => { setIsRename(true) }}>改名</span>
-
+            {query.kanapsackType === 1 && <span className='g_u_end' onClick={() => { setIsRename(true) }}>改名</span>}
         </div>
     )
 }

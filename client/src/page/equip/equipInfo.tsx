@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
-import { backGrand } from '@utils/grand';
-import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 
+import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 export const Equip = ({ pageCheng, history }) => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
     useEffect(() => {
@@ -12,10 +11,9 @@ export const Equip = ({ pageCheng, history }) => {
     }, [])
     const equip = roleInfo.equip_pool;
 
-    // const clickEquip = (key) => {
-    //     const { id } = equip[key];
-    //     history.push('/articleDetail', { id, p: 3, posKey: key })
-    // }
+    const equipClick = (equip, in_x) => {
+        history.push('/articleDetail', { id: equip['id'], in_x, kanapsackType: 2, p: 3 });
+    }
 
     return (
         <div>
@@ -31,9 +29,7 @@ export const Equip = ({ pageCheng, history }) => {
                             {equip[value] ? (
                                 <span
                                     className="g_u_end"
-                                    onClick={() => {
-                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2,p:3 });
-                                    }}
+                                    onClick={() => { equipClick(equip[value], index + 1); }}
                                 >
                                     {getEquipName(equip[value].ext, equip[value].name)}
                                 </span>
@@ -44,7 +40,7 @@ export const Equip = ({ pageCheng, history }) => {
                     )
                 })
             }
-            <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
+
         </div>
     )
 }

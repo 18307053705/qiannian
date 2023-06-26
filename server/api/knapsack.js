@@ -196,7 +196,6 @@ router.post("/operate", async (req, res) => {
             const { equip_pool: equipPool, role_attr, role_level } = role;
             const { level } = Equip[id];
             if (role_level < level) {
-
                 res.send({
                     code: 0,
                     data: {

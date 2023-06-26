@@ -3,7 +3,8 @@ import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 import { Input } from '@components';
 import { renameFn, firmFn, forgeFn, unsnatchFn, sigilFn } from '@cgi/equip';
 import { getDetail } from '@cgi/shops';
-import { HeadActive, FirmActive, ForgeActive, SigilActive } from './equipActive'
+import { HeadActive, FirmActive, ForgeActive, SigilActive } from './equipActive';
+import { equipActive } from '@cgi/pet';
 import Style from './index.less';
 
 
@@ -95,14 +96,27 @@ const Equip = ({ history }) => {
 
     // 使用或者卸下
     const unsnatchClick = () => {
-        unsnatchFn({
-            id: query.id,
-            in_x: query.in_x
-        }).then(({ message }) => {
-            if (!message) {
-                history.goBack()
-            }
-        })
+        if (query.kanapsackType === 6) {
+            equipActive({
+                in_x: query.in_x,
+                type: 2
+            }).then(({ message }) => {
+                if (!message) {
+                    history.goBack()
+                }
+            })
+        }else{
+            unsnatchFn({
+                id: query.id,
+                in_x: query.in_x
+            }).then(({ message }) => {
+                if (!message) {
+                    history.goBack()
+                }
+            })
+        }
+
+        
     }
     return (
         <div>

@@ -34,7 +34,7 @@ module.exports = {
 
     },
     // 获取宠物全局信息
-    getPetGlobal: function (req,roleId) {
+    getPetGlobal: function (req, roleId) {
         const { role_id } = this.getRoleGlobal(req);
         const pet = this.petGlobal[roleId || role_id];
         return pet ? JSON.parse(JSON.stringify(pet)) : undefined;
@@ -57,7 +57,11 @@ module.exports = {
 
     // 宠物释放，信息保存到数据库
     savePet: async function (role_id) {
-        const { updateKeys, ...pet } = this.petGlobal[role_id];
+        const petInfo = this.petGlobal[role_id];
+        if (!petInfo) {
+            return;
+        }
+        const { updateKeys, ...pet } = petInfo;
         const data = [];
         [...new Set(updateKeys)].forEach((key) => {
             const value = PET_JSON_KEYS.includes(key) ? JSON.stringify(pet[key]) : pet[key];
@@ -65,6 +69,7 @@ module.exports = {
         })
         if (data.length) {
             await mysql.asyncQuery(`update pet  SET ${data.join(',')}  where id="${pet.id}"`);
+            delete this.petGlobal[role_id];
         }
         return;
     }

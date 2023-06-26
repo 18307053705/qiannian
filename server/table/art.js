@@ -129,7 +129,7 @@ module.exports = {
             life: 500,  // 1.5 2 3 4 5 7 10
         },
         condition: 32,
-        msg: '永久提升&[v]&生命上限。'
+        msg: '提升&[v]&生命上限。'
     },
     9: {
         id: 9,
@@ -142,7 +142,7 @@ module.exports = {
             mana: 500,
         },
         condition: 34,
-        msg: '永久提升&[v]&法力上限。'
+        msg: '提升&[v]&法力上限。'
     },
     10: {
         id: 10,
@@ -155,7 +155,7 @@ module.exports = {
             atk: 50,
         },
         condition: 36,
-        msg: '永久提升&[v]&攻击上限。'
+        msg: '提升&[v]&攻击上限。'
     },
     11: {
         id: 11,
@@ -168,7 +168,7 @@ module.exports = {
             dfs: 20,
         },
         condition: 38,
-        msg: '永久提升&[v]&防御上限。'
+        msg: '提升&[v]&防御上限。'
     },
     12: {
         id: 12,
@@ -181,7 +181,7 @@ module.exports = {
             hit: 10,
         },
         condition: 40,
-        msg: '永久提升&[v]&命中上限。'
+        msg: '提升&[v]&命中上限。'
     },
     13: {
         id: 13,
@@ -194,7 +194,7 @@ module.exports = {
             dodge: 10,
         },
         condition: 40,
-        msg: '永久提升&[v]&闪避上限。'
+        msg: '提升&[v]&闪避上限。'
     },
     14: {
         id: 14,
@@ -207,7 +207,7 @@ module.exports = {
             sudden: 10,
         },
         condition: 40,
-        msg: '永久提升&[v]&暴击上限。'
+        msg: '提升&[v]&暴击上限。'
     },
     15: {
         id: 15,
@@ -245,6 +245,7 @@ module.exports = {
         n: '附体',
         v: 10,
         condition: 1,
-        msg: '将自身&[v]&%属性附加给玩家。'
+        msg: '可提升玩家生命上限,附加值为&[v]&%生命值。'
     },
 }
+

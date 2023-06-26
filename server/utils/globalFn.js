@@ -22,7 +22,6 @@ module.exports = {
                 delete Global.roleGlobal[user];
                 //释放背包池
                 delete Global.knapsackGlobal[role_id];
-                delete Global.petGlobal[role_id];
                 // 减少对应势力在线人员
                 Global.releaseSocializeGlobal(role_id, socialize_pool);
                 resolve(true);

@@ -3,8 +3,6 @@ import { backGrand } from '@utils/grand';
 import { getRoleInfo } from '@cgi/roleInfo';
 import { List } from '@components';
 import Detail from './detail';
-// {c:当前宠物信息(id,n,攻击，暴击，命中,s:状态，技能,id,l,r,),l:宠物房列表id,n,s  x:宠物房最大空间}
-import { addPet, getDetail } from '@cgi/pet';
 
 const PET_STATE = {
     0: '休战',
@@ -26,7 +24,7 @@ const Pet = ({ history }) => {
         setId(id);
         setPageName('detail')
     }
-    const { l, x, c } = pet;
+    const { l, x} = pet;
     const data = [...new Array(x)];
     const prefix = (_, index) => {
         const petInfo = l[index - 1];
@@ -46,27 +44,12 @@ const Pet = ({ history }) => {
             </div>
         )
     }
-    // const active = (_, index) => {
-    //     const petInfo = l[index - 1];
-    //     if (!petInfo) {
-    //         return null;
-    //     }
-    //     return (
-    //         <div key={`${index}_1`}>
-    //             <span className='g_u_end'>{petInfo.s === 1 ? '出战' : '休息'}</span>
-    //         </div>
-    //     )
-
-
-    // }
-
     return (
         <div>
-            {/* <div  onClick={()=>{addPet()}} >点击获取宠物</div> */}
             {
                 pageName === 'list'
                     ? <List data={data} prefix={prefix} hiddenFooter={true} />
-                    : <Detail id={id} history={history} c_id={c.id} />
+                    : <Detail id={id} history={history}/>
             }
             {
                 pageName === 'detail' && (

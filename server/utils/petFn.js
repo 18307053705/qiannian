@@ -61,6 +61,22 @@ module.exports = {
                 return 1;
         }
     },
+    // 获取技能描述
+    getArttips: function (art) {
+        const { v, id, l } = art;
+        const { msg } = ArtTable[id];
+        // 将自身&[v]&%属性附加给玩家
+        if (id === 19) {
+            return {
+                ...art,
+                msg: msg.replace('&[v]&', l * 10 + 10)
+            }
+        }
+        Object.keys(v).forEach((key) => {
+            art['msg'] = msg.replace('&[v]&', v[key]);
+        })
+        return art;
+    },
     // 获取宠物技能
     getPetArt: function (flair_x, id) {
         let artId = id;
@@ -99,7 +115,6 @@ module.exports = {
                 Object.keys(v).forEach(key => {
                     itme['v'][key] = v[key];
                 })
-
             }
             art.push(itme);
         });
@@ -176,7 +191,8 @@ module.exports = {
     // 获取信息
     getPetInfo: async function (id) {
         const { results } = await mysql.asyncQuery(`select * from  pet where id=${id}`);
-        if (results[0]) {
+        const pet = results[0];
+        if (pet) {
             const petInfo = {};
             Object.keys(pet).forEach((key) => {
                 petInfo[key] = Global.PET_JSON_KEYS.includes(key) ? JSON.parse(pet[key]) : pet[key]

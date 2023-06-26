@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { backGrand } from '@utils/grand';
-import { getRoleInfo } from '@cgi/roleInfo';
-import { cheng, getDetail, studyArt } from '@cgi/pet';
-import { List, Tab } from '@components';
-import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
+import { cheng, getDetail, studyArt, addFlair, reborn } from '@cgi/pet';
+import { Tab } from '@components';
 
 import PetAttr from './petAttr';
 import PetEquip from './petEquip';
 import PetArt from './petArt';
-// {c:当前宠物信息(id,n,攻击，暴击，命中,s:状态，技能,id,l,r,),l:宠物房列表id,n,s  x:宠物房最大空间}
-
-const PET_STATE = {
-    0: '休战中',
-    1: '参战中',
-    2: '参战中',
-    3: '出售中',
-}
 
 const tabList = [
     { value: 0, label: "属性" },
@@ -24,53 +13,104 @@ const tabList = [
 ];
 
 
-const detail = ({ id, history, c_id }) => {
+const detail = ({ id, history }) => {
     const [pet, setPet] = useState();
+    const [updata, setUpdata] = useState(false);
     const [pageKey, setPageKey] = useState(0);
     useEffect(() => {
         getDetail({ id }).then(({ data }) => {
-            console.log()
             setPet(data);
         })
-    }, [])
+    }, [updata])
 
     if (!pet) {
         return null;
     }
-    const { attr, art, equip } = pet;
-    console.log(attr)
-    // const attr = JSON.parse(pet.attr);
-    // const art = JSON.parse(pet.art);
-    // const equip = JSON.parse(pet.equip);
 
-    const studyArtClick = (in_x) => {
-        studyArt({ id, in_x }).then((res) => {
-            console.log(res);
-        })
+    const { attr, art, equip } = pet;
+    // resuslt
+    const resuslt = ({ data }) => {
+        if (data) {
+            setUpdata(!updata);
+        }
     }
+    // 学习技能
+    const studyArtClick = (in_x) => {
+        studyArt({ id, in_x }).then(resuslt)
+    }
+    // 状态切换
+    const chengClick = (state) => {
+        cheng({ id: pet.id, state }).then(resuslt)
+    }
+    // 参战或附体，无法进行任何操作
+    const isFight = pet.state === 1 || pet.state === 2;
+    // 是否可附体
+    const appendage = pet.state === 1 && art[1].l !== -1;
+    // 是否转世
+    const reincarnation = pet.flair_x === pet.flair && pet.reborn < 3;
     return (
         <div>
             <div>{pet.name}</div>
-
             <div>
-                <span>状态：{pet.state === 3 ? '出售中' : (c_id !== id ? '休息中' : "出战中")}</span>
+                <span>状态：{pet.state === 3 ? '出售中' : (isFight ? '出战中' : "休战中")}</span>
                 {
                     pet.state !== 3 && <span
                         className='g_u_end'
-                        onClick={() => { cheng({ id: pet.id, state: c_id === id ? 0 : 1 }) }}>
-                        {c_id === id ? '休息' : "出战"}
+                        onClick={() => { chengClick(isFight ? 0 : 1) }}
+                    >
+                        {isFight ? '休战' : "出战"}
                     </span>
+
+                }
+                {
+                    appendage && (
+                        <span>
+                            <span> | </span>
+                            <span className='g_u_end' onClick={() => { chengClick(2) }}>附体</span>
+                        </span>
+                    )
                 }
             </div>
             <div>
                 <span>资质：{`${pet.flair}/${pet.flair_x}`}</span>
-                {(pet.state === 1 || pet.state === 2) && <span className='g_u_end'>+</span>}
+                {isFight && !reincarnation && (
+                    <span
+                        className='g_u_end'
+                        onClick={() => { addFlair().then(resuslt) }}
+                    >
+                        +
+                    </span>
+                )}
+                {isFight && !reincarnation && (
+                    <span
+                        className='g_u_end'
+                        onClick={() => { reborn().then(resuslt) }}
+                    >
+                        转生
+                    </span>
+                )}
             </div>
             <div><span>等级：{`${pet.level}级(${pet.exp})`}</span></div>
             <Tab list={tabList} onCheng={setPageKey} />
             {pageKey === 0 && <PetAttr attr={attr} />}
-            {pageKey === 1 && <PetEquip equip={equip} state={pet.state} level={pet.level} history={history} />}
-            {pageKey === 2 && <PetArt art={art} state={pet.state} level={pet.level} history={history} studyArtClick={studyArtClick} />}
+            {pageKey === 1 && (
+                <PetEquip
+                    id={id}
+                    equip={equip}
+                    isFight={isFight}
+                    level={pet.level}
+                    history={history}
+                    setUpdata={setUpdata}
+                />
+            )}
+            {pageKey === 2 && (
+                <PetArt
+                    art={art}
+                    isFight={isFight}
+                    level={pet.level}
+                    studyArtClick={studyArtClick}
+                />
+            )}
 
         </div>
     )

@@ -10,41 +10,42 @@ const knapsackTable = require("../table/knapsack");
 // kanapsackType: 1 | 2; // 背包 身上
 // 改名
 router.post("/rename", (req, res) => {
-    const { id, in_x, kanapsackType, name } = req.body;
-    if (!id && in_x === undefined && !kanapsackType && name) {
+    const { id, in_x } = req.body;
+    if (!id && in_x === undefined) {
         res.send({
             code: 100005,
             message: '参数有误'
         })
         return;
     }
+    const { data } = Global.getknapsackGlobal(req);
+    const equip = data[in_x] || {};
+
+    if (!(equip['id'] === id && equip['p'] === 3)) {
+        return;
+    }
     // 校验名字是否合法
-    if (!formFn.checkName(name)) {
+    if (!formFn.checkName(name, res)) {
         return;
     }
 
-    const { equip_pool } = Global.getRoleGlobal(req);
-    // 对应部位装备
-    const equip = equip_pool[Equip.EQUIP_ATTR[in_x]['pos']];
-    if (equip) {
-        const { ext } = equip;
-        const [firm, forge] = ext.split('_');
-        let message = '';
-        let success = '';
-        if (firm == 16 && forge == 50) {
-            equip_pool[Equip.EQUIP_ATTR[in_x]['pos']]['name'] = name;
-            Global.updateRoleGlobal(req, { equip_pool });
-            success = '装备改名成功.';
-        } else {
-            message = '不满足改名条件。'
-        }
-        res.send({
-            code: 0,
-            data: name,
-            message,
-            success
-        })
+    const { ext } = equip;
+    const [firm, forge] = ext.split('_');
+    let message = '';
+    let success = '';
+    if (firm == 16 && forge == 50) {
+        data[in_x]['n'] = name;
+        Global.updateknapsackGlobal(req, { data });
+        success = '装备改名成功.';
+    } else {
+        message = '不满足改名条件。'
     }
+    res.send({
+        code: 0,
+        data: name,
+        message,
+        success
+    })
 
 
 });
@@ -174,7 +175,7 @@ router.post("/firm", (req, res) => {
             })
             return;
         }
-        Global.updateknapsackGlobal(req, { role_exp: `${c_exp - exp}/${u_exp}` });
+        Global.updateRoleGlobal(req, { role_exp: `${c_exp - exp}/${u_exp}` });
     }
 
     if (isFirm) {
@@ -361,7 +362,6 @@ router.post("/active", (req, res) => {
         return;
     }
     const { equip_pool, role_attr } = Global.getRoleGlobal(req);
-   
     const { data } = Global.getknapsackGlobal(req);
     // 对应部位装备
     const equip = equip_pool[Equip.EQUIP_ATTR[in_x]['pos']];
