@@ -2,17 +2,17 @@ const Equip = require('./equip');
 const Knapsack = require('./knapsack');
 
 
-const getArticle = (stratId, len,s=5) => {
+const getArticle = (stratId, len, s = 5) => {
   const article = []
   for (let index = 0; index < len; index++) {
     const articleId = stratId + index;
-    if(Knapsack[articleId]){
+    if (Knapsack[articleId]) {
       article.push({
         ...Knapsack[articleId],
         s
       })
     }
-    
+
   }
   return article;
 }
@@ -460,7 +460,7 @@ const ELEMENT_5 = {
       attr: 1
     },
     article: [
-      ...getArticle(1, 46,20),
+      ...getArticle(1, 46, 20),
     ]
   },
   5000015: {
@@ -473,7 +473,7 @@ const ELEMENT_5 = {
       attr: 1
     },
     article: [
-      ...getArticle(158, 5,20),
+      ...getArticle(158, 5, 20),
     ]
   },
   5000016: {
@@ -495,8 +495,20 @@ const ELEMENT_5 = {
       Equip[121],
     ]
   },
+  5000017: {
+    id: 5000017,
+    name: "聚宝盆怪",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 20,
+      attr: 1
+    },
+    article: [
+      ...getArticle(207, 14, 2000),
+    ]
+  }
 };
-
 module.exports = {
   ELEMENT_1,
   ELEMENT_2,

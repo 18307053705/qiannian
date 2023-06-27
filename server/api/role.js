@@ -167,7 +167,7 @@ router.post("/createRole", (req, res) => {
             xz: { exp: 0, s: 0 },
             hb: { exp: 0, s: 0 },
             lp: { exp: 0, s: 0 },
-            jbp: 0
+            jbp: { exp: 0, l: 0, lx: 0, id: 0 },
           }
         }
         const keys = [];

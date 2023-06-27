@@ -81,7 +81,7 @@ const detail = ({ id, history }) => {
                         +
                     </span>
                 )}
-                {isFight && !reincarnation && (
+                {isFight && reincarnation && (
                     <span
                         className='g_u_end'
                         onClick={() => { reborn().then(resuslt) }}

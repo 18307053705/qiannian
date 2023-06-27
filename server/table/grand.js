@@ -46,7 +46,10 @@ const grand = {
         [[ELEMENT_5[5000008]]]
       ],
       [
-        [[ELEMENT_5[5000013],ELEMENT_5[5000012],ELEMENT_5[5000014],ELEMENT_5[5000015],ELEMENT_5[5000016]]],
+        [
+          [ELEMENT_5[5000013], ELEMENT_5[5000012], ELEMENT_5[5000014], ELEMENT_5[5000015]],
+          [ELEMENT_5[5000016], ELEMENT_5[5000017]]
+        ],
         [[ELEMENT_5[5000004]]],
         [[ELEMENT_5[5000005]]],
         [[ELEMENT_5[5000006]]]
@@ -148,5 +151,5 @@ const grand = {
 };
 
 module.exports = {
-    grand,
-  };
+  grand,
+};

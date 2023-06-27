@@ -70,6 +70,7 @@ app.use("/api/shops", require("./api/shops"));
 app.use("/api/equip", require("./api/equip"));
 app.use("/api/pet", require("./api/pet"));
 app.use("/api/treasure", require("./api/treasure"));
+app.use("/api/cornucopia", require("./api/cornucopia"));
 
 // 全局捕获异常
 app.use(errorFn.globalError);
