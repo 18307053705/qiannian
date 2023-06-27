@@ -89,7 +89,7 @@ const getName = (exp, name) => {
 
 }
 
-export const Treasure = () => {
+export const Treasure = ({history}) => {
     const [data, setData] = useState();
     const [key, setKey]: any = useState(2);
 
@@ -142,7 +142,7 @@ export const Treasure = () => {
                     </div>)
             }
             {treasure.getAttrText(exp).map((itme, index) => (<div key={index}>{itme}</div>))}
-
+            <div><span className="g_u_end" onClick={()=>{history.push('./cornucopia')}}>聚宝盆</span></div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )
