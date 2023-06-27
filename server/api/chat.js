@@ -96,7 +96,7 @@ router.post("/get", (req, res) => {
     if ([0, 5, 6].includes(type)) {
         res.send({
             code: 0,
-            data: Global[Global.CHAT_TYPE_MEUN[type]]
+            data: Global['chatGlobal'][Global.CHAT_TYPE_MEUN[type]]
         })
         return;
     }
@@ -115,9 +115,11 @@ router.post("/get", (req, res) => {
         intersectChat && !intersectChat.read.includes(role_id) && readMap.push(3);
         // 判断是否队伍未读
         ranksChat && !ranksChat.read.includes(role_id) && readMap.push(4);
+        // 判断是否有最新系统公告
         res.send({
             code: 0,
-            data: readMap
+            data: readMap,
+            system: Global['chatGlobal']['system'][0]
         })
         return;
     }

@@ -80,7 +80,21 @@ export const Chat = ({ history }) => {
         })
     }
 
+
     const prefix = ({ s, t, n, id }, index) => {
+
+        if (tabKey === 0) {
+            return (
+                <div key={index}>
+                    <div>
+                        <span>{n}</span>
+                        <span>({moment(s).format('hh:mm')})</span>
+                        <span>:{t}</span>
+                    </div>
+                </div>
+            )
+        }
+
         return (
             <div key={index}>
                 <div>

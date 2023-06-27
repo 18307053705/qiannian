@@ -6,6 +6,7 @@ const fightG = require("./fightG");
 const socializeG = require("./socializeG");
 const chatG = require("./chatG");
 const petG = require("./petG");
+const dailyG = require("./dailyG");
 module.exports = {
   ...roleG,
   ...grandG,
@@ -14,6 +15,7 @@ module.exports = {
   ...socializeG,
   ...chatG,
   ...petG,
+  ...dailyG,
   // 任务池,判断角色任务池
   taskLoop: {
     // main 

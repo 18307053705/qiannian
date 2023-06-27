@@ -1,5 +1,5 @@
 module.exports = {
-    effect1Add: function (effect, attr, base) {
+    effect1Fn: function (effect, attr, base) {
         const [key, type, value] = effect.split('-');
         return {
             ...this[key](Number(value), attr, type, base),

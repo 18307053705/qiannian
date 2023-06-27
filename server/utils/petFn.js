@@ -144,11 +144,12 @@ module.exports = {
         return attr;
     },
     // 新增宠物
-    setPet: async function (req, { name, type, flair_x, ele = 0, id = 0 }) {
+    setPet: async function (req, { name, flair_x, ele = 0, id = 0, type: oldType, }) {
         const { pet_pool } = Global.getRoleGlobal(req);
         if (pet_pool['l'].length >= pet_pool['x']) {
             return '宠物房已满,无法获得更多宠物。';
         }
+        const type = oldType || Math.floor(Math.random() * (4 - 1)) + 1;
         const petInfo = {
             name,
             type,

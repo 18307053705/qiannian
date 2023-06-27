@@ -8,21 +8,13 @@ import Cookies from 'js-cookie';
 import { Model, GET_MEUN_LIST } from '@model';
 import { chatGet } from "@cgi/chat";
 
-function RouterGuard({ setUnread, historyRef }) {
+function RouterGuard() {
     let history = useHistory();
 
     let location = useLocation();
     // 拿到路径
     let { pathname } = location;
-    if (pathname !== '/' && pathname !== '/login' && pathname !== '/reactRole') {
-        chatGet().then(({ data }) => {
-            setUnread(data);
-        })
-    } else {
-        setUnread([]);
-    }
     useEffect(() => {
-        historyRef.current = history;
         window.QN.history = history;
     }, [])
 
@@ -52,11 +44,11 @@ function RouterGuard({ setUnread, historyRef }) {
     }
 }
 
-const RouterGuardMemo = memo<{ setUnread: any, historyRef: any }>(({ setUnread, historyRef }) => {
+const RouterGuardMemo = memo(() => {
     return <Router>
         <Suspense fallback={<div>加载中</div>}>
             <Switch>
-                <RouterGuard setUnread={setUnread} historyRef={historyRef} />
+                <RouterGuard />
             </Switch>
         </Suspense>
     </Router>
@@ -70,13 +62,21 @@ const CHAT_TYPE_MEUN = {
     4: '队',
 }
 
+
+const systemText = (system) => {
+    const time = new Date() * 1;
+    if (!system || time - system.s > 60000) {
+        return;
+    }
+    return system.t;
+}
+
 const Root = () => {
     const { state, dispatch } = useContext(Model);
     const [unread, setUnread] = useState([]);
+    const [system, setSystem] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-
-    const historyRef: any = useRef(null);
     useEffect(() => {
         window.QN.setError = (value) => {
             window.QN.error = value;
@@ -88,6 +88,16 @@ const Root = () => {
         };
         // 监听全局点击事件,处理错误信息
         window.addEventListener("click", () => {
+            const { location } = window.QN.history;
+            const { pathname } = location;
+            if (pathname !== '/' && pathname !== '/login' && pathname !== '/reactRole') {
+                chatGet().then(({ data, system }) => {
+                    setUnread(data);
+                    setSystem(system);
+                })
+            } else {
+                setUnread([]);
+            }
             if (window.QN.error) {
                 setError('');
             }
@@ -107,12 +117,16 @@ const Root = () => {
     // goLogin();
     return (
         <div>
+            {/* 系统公告 */}
+            <div>{systemText(system)}</div>
+            {/* 请求成功信息 */}
             <div>{success}</div>
+            {/* 请求失败信息 */}
             {error && <div className='g_error'>提示：{error}</div>}
             <div>{
                 unread.map((id, index) => (
                     <span
-                        onClick={() => { historyRef.current.push('./chat', { type: id }) }}
+                        onClick={() => { window.QN.history.push('./chat', { type: id }) }}
                         className='g_u_end'
                     >
                         {CHAT_TYPE_MEUN[id]}({index + 1})
@@ -120,7 +134,7 @@ const Root = () => {
                 ))
 
             }</div>
-            <RouterGuardMemo setUnread={setUnread} historyRef={historyRef} />
+            <RouterGuardMemo  />
         </div>
     );
 }

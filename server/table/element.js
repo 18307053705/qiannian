@@ -6,10 +6,13 @@ const getArticle = (stratId, len,s=5) => {
   const article = []
   for (let index = 0; index < len; index++) {
     const articleId = stratId + index;
-    article.push({
-      ...Knapsack[articleId],
-      s
-    })
+    if(Knapsack[articleId]){
+      article.push({
+        ...Knapsack[articleId],
+        s
+      })
+    }
+    
   }
   return article;
 }

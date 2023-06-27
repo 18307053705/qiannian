@@ -4,8 +4,7 @@ const Global = require("../global");
 const roleFn = require("../utils/roleFn");
 const globalFn = require("../utils/globalFn");
 const taskFn = require("../utils/taskFn");
-const { roleAttr } = require("../table/attribute");
-
+const { roleAttr, getInitAttr } = require("../table/attribute");
 const { title } = require("../table/title");
 const { realm } = require("../table/realm");
 const { CAREER_TYPE, RACE_TYPE } = require("../meun");
@@ -83,6 +82,7 @@ router.post("/roleLogin", async (req, res) => {
   Global.setknapsackGlobal(req, knapsack[0]);
   Global.setSocializeGlobal(req);
   Global.setPetGlobal(req);
+  Global.initDailyGlobal(role_id);
   // 不存在任务池，即代表今天第一次登录,初始化任务池
   if (!Global.taskLoop[role_id]) {
     taskFn.initTask(req);
@@ -132,7 +132,7 @@ router.post("/createRole", (req, res) => {
           mana: attr.mana,
           role_attr: {
             base: attr,
-            addition: {}
+            addition: getInitAttr(),
           },
           role_buff: {
             attr: [],

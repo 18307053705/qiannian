@@ -65,9 +65,6 @@ module.exports = {
         const { id: gangId, name: gangName } = gang;
         const { id: intersectId, name: intersectName } = intersect;
         const { id: ranksId, name: ranksName } = ranks;
-        // const gangId = gang && gang.id;
-        // const intersectId = intersect && intersect.id;
-        // const ranksId = ranks && ranks.id;
         const gangChat = gangId ? this.chatGlobal['gang'][gangId] : '';
         const intersectIdChat = intersectId ? this.chatGlobal['intersect'][intersectId] : '';
         const ranksChat = ranksId ? this.chatGlobal['ranks'][ranksId] : '';
@@ -99,6 +96,13 @@ module.exports = {
             socializeName
         }
 
+    },
+    snedSystem: function (text) {
+        this.chatGlobal['system'].push({
+            t:text,
+            n:"系统公告",
+            s: new Date() * 1,
+        });
     }
 };
 

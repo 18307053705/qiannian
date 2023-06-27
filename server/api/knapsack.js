@@ -148,7 +148,7 @@ router.post("/operate", async (req, res) => {
             }
             const { effect1 } = KnapsackTable[id];
             const [key, type, value] = effect1.split('-');
-            effect1Table.effect1Add([key, type, value * s].join('-'), update[p]);
+            effect1Table.effect1Fn([key, type, value * s].join('-'), update[p]);
             Global.updateRoleGlobal(req, p === 1 ? update[1] : { role_integral: update[4] });
         }
         // buff物品

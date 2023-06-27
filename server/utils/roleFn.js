@@ -59,7 +59,7 @@ module.exports = {
     const buffs = [];
     attrBuff = attrBuff.filter(({ e, d }) => {
       if (d < new Date() * 1) return false;
-      const { text } = effect1.effect1Add(e, attr, base);
+      const { text } = effect1.effect1Fn(e, attr, base);
       buffs.push({
         text,
         end: d
