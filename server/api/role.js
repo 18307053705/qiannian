@@ -128,6 +128,7 @@ router.post("/createRole", (req, res) => {
           role_exp: '0/200',
           role_realm: 1,
           role_title: 0,
+          role_lx:0,
           life: attr.life,
           mana: attr.mana,
           role_attr: {

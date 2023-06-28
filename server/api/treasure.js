@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const Global = require("../global");
 const knapsackFn = require("../utils/knapsackFn");
-const Effect3 = require("../table/effect3");
+const group1 = require("../table/group1");
 const knapsackTable = require("../table/knapsack");
 
 router.post("/get", (req, res) => {
@@ -127,7 +127,7 @@ router.post("/mosaic", (req, res) => {
             }
         })
         if (!result.message) {
-            result = Effect3.effect3Fn(req, article.effect3)
+            result = group1.groupFn(req, article.value)
         }
         res.send({
             code: 0,

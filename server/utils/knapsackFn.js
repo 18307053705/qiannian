@@ -60,8 +60,14 @@ module.exports = {
             return '参数有误'
         }
         const itme = data[in_x];
-        if (itme && itme.id != id && itme.p != p && itme.s < s && s > KnapsackTable.Maxs) {
+        if (itme && itme.id != id && itme.p != p) {
             return '物品信息有误'
+        }
+        if (s > KnapsackTable.Maxs) {
+            return `物品最大使用数量不可超过${KnapsackTable.Maxs}`
+        }
+        if (itme.s < s) {
+            return '物品数量不足'
         }
         return false;
     },
@@ -118,7 +124,7 @@ module.exports = {
             })
         }
         if (data.length > KnapsackTable.size) {
-            return '背包已满,请先清理背包'
+            return '背包已满,请注意清理背包'
         }
     },
     // 消耗物品

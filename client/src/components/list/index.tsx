@@ -21,7 +21,7 @@ export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFoot
         onCheng && onCheng(page, size)
     }, [page])
 
-    const numPage = [...new Array(Math.floor(total / size) + 1)];
+    const numPage = [...new Array(Math.ceil(total / size))];
     return (
         <div className={Style['g-list-page']}>
             {

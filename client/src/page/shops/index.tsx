@@ -52,9 +52,14 @@ export const Shops = ({ history }) => {
         )
     }
     const active = (row, index) => (<div><span key={index} className='g_u_end' onClick={() => { setId(row.id) }}>购买</span></div>)
+
+    const submit = (num)=>{
+
+    }
+
     return (
         <div>
-            {id ? <Input /> : ''}
+            {id ? <Input label="数量" layout={false}  submit={submit} type='number'/> : ''}
             <Tab list={tabList} currentKey={tabKey} onCheng={setTabKey} />
             <List data={data} prefix={prefix} active={active} />
             <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>

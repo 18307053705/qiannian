@@ -13,7 +13,7 @@ const PET_STATE = {
 
 const Pet = ({ history }) => {
     const [pet, setPet]: any = useState({ c: {}, l: [], x: 10 });
-    const [pageName, setPageName] = useState('detail');
+    const [pageName, setPageName] = useState('list');
     const [id, setId] = useState(13);
     useEffect(() => {
         getRoleInfo().then(({ data }) => {
