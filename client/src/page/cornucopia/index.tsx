@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { backGrand } from '@utils/grand';
-import { getCornucopia, getMaterial } from '@cgi/cornucopia';
+import { getCornucopia, getMaterial, chengId, gather, draw } from '@cgi/cornucopia';
 import MaterialList from './materialList';
 import { unstable_batchedUpdates } from "react-dom";
 const ELE_KEY = {
@@ -17,20 +17,39 @@ const initMaterial = () => ({
     water: [],
     fire: [],
 })
+
+const initValMap = {
+    ice: 0,
+    mine: 0,
+    wind: 0,
+    water: 0,
+    fire: 0,
+}
+
+const getExp = (lx, exp) => {
+    // 计算聚宝盆等级经验等
+    // 每级可获得3次抽奖机会,逆推获得聚宝盆等级
+    // 最大30级
+    const level = lx / 3;
+    let upExp = level * 10 + 10;
+    if (level > 9) {
+        upExp = level % 10 * 1000 + 1000;
+    }
+    if (level > 19) {
+        upExp = level % 10 * 10000 + 10000;
+    }
+    return `${exp}/${upExp}`;
+
+}
+
 export const Cornucopia = ({ history }) => {
     const [materialMap, setMaterialMap] = useState();
-
     const [materialType, setMaterialType] = useState('')
-    const [materialList]: any = useState([]);
-    const [valMap] = useState({
-        ice: 0,
-        mine: 0,
-        wind: 0,
-        water: 0,
-        fire: 0,
-    })
+    const [materialList, setMaterialList]: any = useState([]);
+    const [results, setResults] = useState('');
+    const [valMap, setValMap] = useState(JSON.parse(JSON.stringify(initValMap)));
     const [data, setData] = useState();
-    useEffect(() => {
+    const updata = (text = '') => {
         Promise.all([getCornucopia(), getMaterial()]).then((reslist) => {
             const [cornucopiaRes, materialRes] = reslist;
             const { material, list } = materialRes.data;
@@ -47,9 +66,12 @@ export const Cornucopia = ({ history }) => {
             unstable_batchedUpdates(() => {
                 setData(cornucopiaRes.data);
                 setMaterialMap(materialMap);
+                setResults(text);
             });
+
         })
-    }, [])
+    }
+    useEffect(updata, [])
 
     const materialClick = (ele) => {
         setMaterialType('');
@@ -59,17 +81,65 @@ export const Cornucopia = ({ history }) => {
             if (itme.s == 0) {
                 materialMap[itme.key].splice(in_x, 1);
             } else {
-                materialMap[itme.key][in_x] = itme;
+                materialMap[itme.key][in_x] = { ...itme, id };
             }
             materialList.push({ id, s: num })
         }
 
     }
 
+    const chengIdClick = () => {
+        chengId().then(({ data }) => {
+            if (data) {
+                setData((prev) => {
+                    const { jbp } = prev;
+                    jbp.id = data;
+                    return {
+                        ...prev,
+                        jbp
+                    }
+                })
+            }
+
+        })
+    }
+
+    const gatherClick = () => {
+        gather({ materialIds: materialList }).then((res) => {
+            updata(res.data);
+        })
+    }
+    const drawClick = () => {
+        draw().then(({ data }) => {
+            setResults(data.msg);
+            setData((prev) => {
+                const { jbp } = prev;
+                jbp.l = data.l || 0;
+                return {
+                    ...prev,
+                    jbp
+                }
+            })
+        })
+    }
+
+    const clean = () => {
+        setValMap(JSON.parse(JSON.stringify(initValMap)));
+        setMaterialList([]);
+    }
     if (!data) {
         return null;
     }
-    const { jbp } = data;
+
+    const { id, lx, l, exp } = data['jbp'];
+    if (results) {
+        return (
+            <div>
+                <span>{results}</span>
+                <div><span onClick={() => { setResults('') }} className="g_u_end">继续</span></div>
+            </div>
+        )
+    }
     return (
         <div>
             {
@@ -90,7 +160,7 @@ export const Cornucopia = ({ history }) => {
                     />)
                     : (
                         <div>
-                            <div>提示：成功率10%[各项材料不得少于60]</div>
+                            <div>提示:聚宝成功率随等级提升[各项材料不得少于100]</div>
                             <div>=============</div>
                             {
                                 Object.keys(valMap).map((key) => {
@@ -104,16 +174,18 @@ export const Cornucopia = ({ history }) => {
                                     )
                                 })
                             }
+                            <div><span onClick={clean} className='g_u_end'>清空材料</span></div>
                             <div>=============</div>
+                            <div><span onClick={gatherClick} className='g_u_end'>开始聚宝</span></div>
                             <div>
                                 <span>聚宝盆目标:</span>
-                                <span className="g_u_end">{jbp.id}</span>
+                                <span className="g_u_end">{id}</span>
                                 <span> | </span>
-                                <span className="g_u_end">[换]</span></div>
-                            <div><span>聚宝盆等级:{jbp.l || 0}</span></div>
+                                <span className="g_u_end" onClick={chengIdClick}>[换]</span></div>
+                            <div><span>聚宝盆等级:{lx / 3 || 0}({getExp(lx, exp)})</span></div>
                             <div>
-                                <span>有效抽奖次数:({jbp.lx || 0})</span>
-                                <span className="g_u_end">[抽奖]</span></div>
+                                <span>有效抽奖次数:({lx - l || 0})</span>
+                                <span className="g_u_end" onClick={drawClick}>[抽奖]</span></div>
                             <div>提示:玩家的聚宝盆等级越高,影响获得商城道具的概率以及成功率。</div>
                         </div>
                     )

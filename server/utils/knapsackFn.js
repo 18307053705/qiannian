@@ -123,6 +123,7 @@ module.exports = {
     },
     // 消耗物品
     deleteKnapsack: function (req, article) {
+        // article {id:{p|type,s,n}}
         const delInx = [];
         const { data } = Global.getknapsackGlobal(req);
         let chengData = [];
