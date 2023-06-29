@@ -3,7 +3,6 @@ const router = new express.Router();
 const Global = require("../global");
 const knapsackFn = require("../utils/knapsackFn");
 const cornuconpiaFn = require("../utils/cornuconpiaFn");
-const Effect3 = require("../table/effect3");
 const knapsackTable = require("../table/knapsack");
 
 

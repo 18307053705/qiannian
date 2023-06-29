@@ -23,18 +23,52 @@ router.post("/getList", (req, res) => {
 
 
 router.post("/purchase", (req, res) => {
-    // const { id } = req.body;
-    // const { sell } = KnapsackTable[id];
-    // if (sell && p !== 3) {
-    //     data[in_x]['s'] -= s;
-    //     if (!data[in_x]['s']) {
-    //         data.splice(in_x, 1);
-    //     }
-    //     await knapsackFn.updateKnapsack(req, { tael: tael + (sell * s), data: JSON.stringify(data) });
-    // } else {
-    //     message = '该物品无法出售';
-    // }
+    const { id, s } = req.body;
+    const { price, unit, n, type } = KnapsackTable[id];
+    if (!unit) {
+        res.send({
+            code: 0,
+            message: '物品信息有误'
+        })
+        return;
+    }
+    let { data, yuanbao, tael } = Global.getknapsackGlobal(req);
+    const value = s * price;
+    const updata = {};
+    let message = '';
 
+    if (unit === 'yuanbao') {
+        message = value > yuanbao ? '元宝不足' : ''
+        updata['yuanbao'] = yuanbao - value;
+    }
+    if (unit === 'tael') {
+        message = value > tael ? '银两不足' : '';
+        updata['tael'] = tael - value;
+    }
+    message = message || knapsackFn.addKnapsack({
+        artReward: {
+            [id]: {
+                id,
+                type,
+                n,
+                s
+            }
+        }
+    }, data);
+    if (message) {
+        res.send({
+            code: 0,
+            message
+        })
+        return;
+    }
+    updata['data'] = data;
+    Global.updateknapsackGlobal(req, updata)
+
+    res.send({
+        code: 0,
+        success: '购买成功'
+    })
 });
 
 

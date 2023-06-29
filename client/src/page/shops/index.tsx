@@ -54,7 +54,12 @@ export const Shops = ({ history }) => {
     const active = (row, index) => (<div><span key={index} className='g_u_end' onClick={() => { setId(row.id) }}>购买</span></div>)
 
     const submit = (num)=>{
-
+        purchase({
+            id,
+            s:Number(num)
+        }).then(()=>{
+            setId(0)
+        })
     }
 
     return (

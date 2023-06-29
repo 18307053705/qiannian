@@ -7,7 +7,7 @@ export async function getList() {
   return await post(getShopListUrl);
 }
 
-export async function purchase(data: { id: string }) {
+export async function purchase(data: { id: number,s:number }) {
   return await post(purchaseUrl, data);
 }
 
