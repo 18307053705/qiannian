@@ -245,13 +245,18 @@ router.post("/clean", (req, res) => {
 });
 // 刷怪
 router.post("/continue", (req, res) => {
-    fightFn.creatFight(req, res);
-    res.send({
-        code: 0,
-        data: {
-            path: '/fight'
-        }
-    });
+    // 获取指令池,敌人信息
+    const { extDir } = Global.getDir(req);
+    if (!extDir.ext.boss) {
+        fightFn.creatFight(req, res);
+        res.send({
+            code: 0,
+            data: {
+                path: '/fight'
+            }
+        });
+    }
+
 });
 // 放弃战斗
 router.post("/give", (req, res) => {
@@ -264,3 +269,4 @@ router.post("/give", (req, res) => {
 
 
 module.exports = router;
+

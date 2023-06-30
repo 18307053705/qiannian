@@ -26,7 +26,10 @@ const Result = ({ result, dirClick }) => {
         <div>
             {freak.tip && <div style={{ color: 'red' }}>提示：{freak.tip}</div>}
             <div>
-                <span className="g_u"><span onClick={continueClick}>继续</span></span>
+                {
+                    freak.continue ?  <span className="g_u"><span onClick={continueClick}>继续</span></span> :
+                    <span><span>继续</span><span> | </span></span>
+                }
                 <span className="g_u"><span onClick={backClick}>返回</span></span>
             </div>
             <div>战斗胜利！</div>

@@ -22,6 +22,7 @@ module.exports = {
         Global.fightRoleId[role_id] = role_id;
         // 创建怪物
         const rival = this.creatFreak(extDir);
+        const { ext } = extDir;
         const fight = {
             type: 1,
             rival,
@@ -31,7 +32,9 @@ module.exports = {
             freak: {
                 extDir,
                 statu: 0,
-                num: rival.length
+                num: rival.length,
+                continue: !ext.boss
+
             } // 怪物原型，战斗结束时,获取奖励等信息,或者继续
         }
         const player = this.creatPlayer(req);
@@ -295,13 +298,15 @@ module.exports = {
     normalDir: function (rival, playerAttr, rivalAttr, fightRound) {
         // 计算玩家对怪物的伤害
         let { isHit, dps } = this.computeDps(playerAttr, rivalAttr);
-        rival[0]['attr']['life'] -= dps;
-        // 判断怪物是否死亡，死亡则不记录伤害
-        if (rival[0]['attr']['life'] > 0) {
-            fightRound['dps'] = [-dps]
+        if (isHit && dps > 0) {
+            rival[0]['attr']['life'] -= dps;
+            // 判断怪物是否死亡，死亡则不记录伤害
+            if (rival[0]['attr']['life'] > 0) {
+                fightRound['dps'] = [-dps]
+            }
+            // 将死亡怪物清除
+            rival = rival.filter(({ attr }) => attr.life > 0);
         }
-        // 将死亡怪物清除
-        rival = rival.filter(({ attr }) => attr.life > 0);
         return rival;
     },
     // 技能攻击
@@ -494,7 +499,8 @@ module.exports = {
                     exp: vipExp ? `${exp * freak.num}(${vipExp}倍经验)` : exp * freak.num,
                     tael: vipTael ? `${tael * freak.num}(${vipTael}倍银两)` : tael * freak.num,
                     article: tip ? '' : textReward.join(','),
-                    tip
+                    tip,
+                    continue: freak.continue
                 },
                 tasks
             }
