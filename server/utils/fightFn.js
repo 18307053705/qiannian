@@ -234,14 +234,12 @@ module.exports = {
         const { id } = art[dirIndex];
         art[dirIndex].num = art[dirIndex].num ? art[dirIndex].num + 1 : 1;
         art[dirIndex].s -= 1;
-        const effect = Knapsack[id]['effect'];
-        Object.keys(effect).forEach(key => {
-            attr[key] += effect[key];
-            // 恢复生命不可超过最大生命
-            if (attr[key] > attr[`${key}_max`]) {
-                attr[key] = attr[`${key}_max`]
-            }
-        });
+        const { group1 } = Knapsack[id];
+        const [key, value] = group1.split('-');
+        attr[key] += value;
+        if (attr[key] > attr[`${key}_max`]) {
+            attr[key] = attr[`${key}_max`]
+        }
     },
     // 计算伤害
     computeDps: function (attr1, attr2, rise = 100) {
