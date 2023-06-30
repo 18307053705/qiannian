@@ -6,6 +6,7 @@ const roleFn = require("../utils/roleFn");
 const knapsackFn = require("../utils/knapsackFn");
 const taskFn = require('./taskFn');
 const artFn = require('./artFn');
+const petFn = require('./petFn');
 // 战斗相关api
 module.exports = {
     // 创建战斗
@@ -42,6 +43,7 @@ module.exports = {
     creatPlayer: function (req, res) {
         const roleInfo = Global.getRoleGlobal(req);
         const knapasack = Global.getknapsackGlobal(req);
+        const pet = Global.getPetGlobal(req);
         const { fight = [null, null, null, null, null, null], art } = roleInfo.skill_pool;
         const knapasackId = {};
         fight.forEach((itme, index) => {
@@ -88,6 +90,12 @@ module.exports = {
         Global.updateRoleGlobal(req, { skill_pool: roleInfo.skill_pool });
         // 计算角色属性
         const data = roleFn.computeRoleAttr(req, roleInfo);
+        // 获取宠物信息
+        const petInfo = {
+            name: pet.name,
+            attr: petFn.computeAttr(pet),
+            art: pet['art'][0]
+        }
         return {
             id: roleInfo.role_id,
             attr: {
@@ -97,6 +105,7 @@ module.exports = {
             },
             art: fight,
             name: roleInfo.role_name,
+            pet: petInfo,
             buffs: {} // {role_id:{value:life:5000,atk:500,t:5,text:描述}}
         }
     },
@@ -328,6 +337,33 @@ module.exports = {
         // 将死亡怪物清除
         rival = rival.filter(({ attr }) => attr.life > 0);
         fightRound['dps'] = dpsText;
+        return rival;
+    },
+    petDir: function (pet, rival, rivalAttr, fightRound) {
+        const attr = this.creatAttr(pet.attr);
+        const { v, effect } = pet.art;
+        const [e, ev] = effect.split('-');
+        if (e === 'ignore') {
+            // 无视防御
+            rivalAttr['dfs'] = rivalAttr['dfs'] * (100 - ev) / 100;
+        }
+        let { isHit, dps } = this.computeDps(attr, rivalAttr, v);
+        if (e === 'atk') {
+            // 增伤
+            dps = parseInt(dps * (100 + ev) / 100);
+        }
+        if (e === 'life') {
+            dps += (pet.attr.life_max * ev) / 100;
+        }
+        if (isHit && dps > 0) {
+            rival[0]['attr']['life'] -= dps;
+            // 判断怪物是否死亡，死亡则不记录伤害
+            if (rival[0]['attr']['life'] > 0) {
+                fightRound['dps'][0] = fightRound['dps'][0] ? fightRound['dps'][0] - dps : -dps
+            }
+        }
+        // 将死亡怪物清除
+        rival = rival.filter(({ attr }) => attr.life > 0);
         return rival;
     },
     // 怪物伤害

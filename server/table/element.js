@@ -141,7 +141,7 @@ const ELEMENT_5 = {
     type: 5,
     ext: {
       career: 1,
-      level: 1,
+      level: 100,
       attr: 10,
       boss: true,
     },

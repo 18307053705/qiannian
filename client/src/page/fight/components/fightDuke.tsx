@@ -10,6 +10,10 @@ const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
             backGrand()
         })
     }, [])
+    if(!fightInfo.player.length){
+        return null;
+    }
+    console.log(fightInfo)
     return (
         <div className="duke">
             <div>
@@ -77,6 +81,10 @@ const FightDuke = ({ fightInfo, dirClick, fightDirInfp }) => {
                         <span className="g_u" onClick={() => { dirClick('player', index) }}><span>{name}</span></span>
                     ))
                 }
+            </div>
+            {/* 宠物 */}
+            <div>
+                <div><span className="g_b">宠物</span>：{fightInfo.player[0]['pet'] ? fightInfo.player[0]['pet'].name : '无'}</div>
             </div>
             <div>
                 <span className="g_b">战斗设置</span>：

@@ -12,16 +12,17 @@ router.post("/getFightInfo", (req, res) => {
     const role = [];
     const players = [];
     let arts = undefined;
-    player.forEach(({ id, attr, art, name }) => {
+    player.forEach(({ id, attr, art, name, pet }) => {
         if (id === role_id) {
             role.push({
                 name,
-                attr
+                attr,
+                pet
             })
             arts = art.map((itme) => (itme ? { id: itme.id, name: itme.n, s: itme.s } : { id: 0, name: '普通攻击' }));
             return;
         }
-        players.push({ name, attr });
+        players.push({ name, attr, pet });
     })
     res.send({
         code: 0,
@@ -147,7 +148,7 @@ router.post("/fightDir", async (req, res) => {
         return;
     }
 
-    const { art, attr } = player[in_x];
+    const { art, attr, pet } = player[in_x];
     const { p2 = 0, s, id: artId } = art[index] || {};
     // 我方属性
     const playerAttr = fightFn.creatAttr(attr);
@@ -157,7 +158,7 @@ router.post("/fightDir", async (req, res) => {
     // 定义回合文案
     const fightRound = {
         text: '', // 出招文案
-        rival_text:'', // 怪无出招文案
+        rival_text: '', // 怪无出招文案
         buffText: [], // buff信息
         dps: [], // 造成的伤害
         mana: '', // 消耗的法力
@@ -170,7 +171,7 @@ router.post("/fightDir", async (req, res) => {
         fightFn.drugDir(player, in_x, index);
     }
     if (p2 === 1) {
-        const { message, p, data, art } = artFn.ArtHandler(req, artId, player, in_x,fightRound);
+        const { message, p, data, art } = artFn.ArtHandler(req, artId, player, in_x, fightRound);
         // 法力不足
         if (message) {
             fightRound['text'] = message;
@@ -186,6 +187,12 @@ router.post("/fightDir", async (req, res) => {
     if (p2 === 0) {
         rival = fightFn.normalDir(rival, playerAttr, rivalAttr, fightRound);
     }
+    // 存在宠物
+    if (pet && rival.length) {
+        rival = fightFn.petDir(pet, rival, rivalAttr, fightRound);
+    }
+
+
     // 判断战斗是否结束
     let statu = rival.length ? fightFn.rivalDir(player, in_x, rival, playerAttr, rivalAttr, fightRound) : 1;
     fightFn.computeBuffs(player, in_x, fightRound);
