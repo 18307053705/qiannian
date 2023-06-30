@@ -110,22 +110,18 @@ module.exports = {
     1: {
         id: 1,
         type: 3,
-        name: '新手☆木剑',
+        name: '新手木剑',
         career: 0,
         level: 1,
         pos: 1,
         attr: 5,
         group: 10000,
         tips: '传说中人族道君使用的无上法宝，蕴含大道之力，可镇压诸天一切。'
-        // ext: {
-        //     attr: 'atk'
-        // },
-
     },
     2: {
         id: 2,
         type: 3,
-        name: '新手☆头巾',
+        name: '新手头巾',
         career: 0,
         level: 1,
         pos: 2,
@@ -135,7 +131,7 @@ module.exports = {
     3: {
         id: 3,
         type: 3,
-        name: '新手☆布衣',
+        name: '新手布衣',
         career: 0,
         level: 1,
         pos: 3,
@@ -146,7 +142,7 @@ module.exports = {
     4: {
         id: 4,
         type: 3,
-        name: '新手☆腰带',
+        name: '新手腰带',
         career: 0,
         level: 1,
         pos: 4,
@@ -156,7 +152,7 @@ module.exports = {
     5: {
         id: 5,
         type: 3,
-        name: '新手☆草鞋',
+        name: '新手草鞋',
         career: 0,
         level: 1,
         pos: 5,

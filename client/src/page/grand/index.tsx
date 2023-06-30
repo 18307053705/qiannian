@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { moveDir, initGrandInfo } from '@cgi/grand';
-import { backGrand } from '@utils/grand';
 import { roleExit } from '@cgi/roleInfo';
 import './index.less';
 
 const Grand = ({ history }) => {
     const [grandInfo, setGrandInfo] = useState(initGrandInfo);
+    const [updata, setUpdata] = useState(false);
     const { name, data, x, y, grand } = grandInfo;
     const players = grandInfo.players.slice(0, 4);
     const playersLen = players.length - 1;
@@ -13,7 +13,7 @@ const Grand = ({ history }) => {
         moveDir().then(({ data }: any) => {
             setGrandInfo(data);
         })
-    }, [])
+    }, [updata])
     const dirClick = useCallback((dir) => {
         moveDir({ dir }).then(({ data }: any) => {
             const { path, ext } = data;
@@ -24,11 +24,11 @@ const Grand = ({ history }) => {
         <div className="grand-page">
             <div className="g_b">{`${name}(${x}.${y})`}</div>
             <div>
-                <span className="g_u"><span onClick={backGrand}>刷新</span></span>
+                <span className="g_u"><span onClick={() => { setUpdata(!updata) }}>刷新</span></span>
                 <span className="g_u"><span onClick={() => { history.push('/chat') }}>聊天</span></span>
                 <span className="g_u"><span onClick={() => { history.push('/friends') }}>好友</span></span>
                 <span className="g_u"><span onClick={() => { history.push('/task') }}>任务</span></span>
-                <span className="g_u"><span>腾云</span></span>
+                <span className="g_u"><span onClick={() => { history.push('/worldMap') }}>腾云</span></span>
             </div>
             {/* 地图元素 */}
             <div className="ele-list">

@@ -35,7 +35,7 @@ module.exports = {
 
     const tasks = {};
     Object.keys(task_pool).forEach((type) => {
-      tasks[type] = task_pool[type].map((id) => this.createTask({ req,type, id }))
+      tasks[type] = task_pool[type].map((id) => this.createTask({ req, type, id }))
     })
     Global.taskLoop = {
       [role_id]: {
@@ -280,10 +280,13 @@ module.exports = {
         }
       })
       if (targetNpc.address === address) {
+        // 判断接取任务的npc与交付的npc是否同一人,避免出现重复
+        if (!dirList[targetNpc.id]) {
+          npcEle.push({ name: targetNpc.name, cs: 'g_doubt', dir: targetNpc.id })
+        }
         // 加入指令列表
         dirList[targetNpc.id] = { ...targetNpc, taskId: id, taskType: 'main', dir: '/taskScene', activation: true, targetNpc: true };
-        // 加入元素列表
-        npcEle.push({ name: targetNpc.name, cs: 'g_doubt', dir: targetNpc.id })
+
       }
     })
     canTask.forEach((id) => {

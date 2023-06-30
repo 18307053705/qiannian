@@ -51,32 +51,33 @@ module.exports = {
   },
   // 指令为-2 回城指令
   toBrDir: async function (req, res) {
-    const results = await roleFn.getRoleInfo(req, res);
+    const { role_race, address } = Global.getRoleGlobal(req)
     if (results) {
-      let address = '';
-      switch (results.role_race) {
+      let dir = '';
+      switch (role_race) {
         case 1:
-          address = '10000,0,0';
+          dir = '10000,0,0';
           break;
         case 2:
-          address = '10001,0,0';
+          dir = '10001,0,0';
           break;
         case 3:
-          address = '10002,0,0';
+          dir = '10002,0,0';
           break;
       }
-      const update = await roleFn.updateRoleInfo(req, { address });
-      if (update.changedRows) {
-        this["toDir"](req, res, address);
+      if (address !== dir) {
+        Global.updateRoleGlobal(req, { address });
       }
+      this["toDir"](req, res, address);
     }
   },
   //   传送指令
   tpDir: async function (dir, req, res) {
-    const update = await roleFn.updateRoleInfo(req, { address: dir });
-    if (update.changedRows) {
-      this["toDir"](req, res, dir);
+    const { address } = Global.getRoleGlobal(req)
+    if (address !== dir) {
+      Global.updateRoleGlobal(req, { address:dir });
     }
+    this["toDir"](req, res, dir);
   },
   //   地图指令
   moveDir: async function (dir, req, res) {

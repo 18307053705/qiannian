@@ -28,20 +28,36 @@ const elementType = {
 const ELEMENT_1 = {
   1000000: {
     id: 1000000,
-    name: "送财童子",
+    name: "拎壶冲",
     type: 1,
-    cs: "g_b_u"
   },
   1000001: {
     id: 1000001,
-    name: "天机老人",
-    type: 1
+    name: "胡晶丽",
+    type: 1,
   },
   1000002: {
     id: 1000002,
-    name: "白胡子老人",
+    name: "太白金星",
     type: 1
-  }
+  },
+
+  // 1000001: {
+  //   id: 1000001,
+  //   name: "送财童子",
+  //   type: 1,
+  //   cs: "g_b_u"
+  // },
+  // 1000001: {
+  //   id: 1000001,
+  //   name: "天机老人",
+  //   type: 1
+  // },
+  // 1000002: {
+  //   id: 1000002,
+  //   name: "白胡子老人",
+  //   type: 1
+  // }
 };
 
 const ELEMENT_2 = {
@@ -137,112 +153,34 @@ const ELEMENT_3 = {
 const ELEMENT_5 = {
   5000000: {
     id: 5000000,
-    name: "紫草冰精",
-    type: 5,
-    ext: {
-      career: 1,
-      level: 100,
-      attr: 10,
-      boss: true,
-    },
-    article: [
-      {
-        ...Knapsack[1],
-        s: 5,
-      },
-      Knapsack[2],
-      {
-        ...Equip[1],
-        rate: 20
-      },
-      {
-        ...Equip[2],
-        rate: 40
-      },
-      {
-        ...Equip[3],
-        rate: 80
-      },
-    ]
-  },
-  5000001: {
-    id: 5000001,
-    name: "虾兵蟹将",
-    type: 5,
-    ext: {
-      career: 1,
-      level: 100,
-      attr: 5
-    },
-    article: [
-      {
-        ...Knapsack[5],
-        s: 5,
-      },
-      {
-        ...Knapsack[6],
-        s: 5,
-      },
-      {
-        ...Knapsack[7],
-        s: 5,
-      },
-      {
-        ...Knapsack[8],
-        s: 5,
-      },
-      {
-        ...Knapsack[9],
-        s: 5,
-      },
-      {
-        ...Knapsack[10],
-        s: 5,
-      },
-      {
-        ...Knapsack[11],
-        s: 5,
-      },
-      {
-        ...Knapsack[12],
-        s: 5,
-      },
-      {
-        ...Knapsack[13],
-        s: 5,
-      },
-      {
-        ...Knapsack[14],
-        s: 5,
-      },
-      {
-        ...Knapsack[15],
-        s: 5,
-      },
-      {
-        ...Knapsack[16],
-        s: 5,
-      },
-    ]
-  },
-  5000002: {
-    id: 5000002,
-    name: "九天神龙",
+    name: "持刀山贼",
     type: 5,
     ext: {
       career: 1,
       level: 1,
-      attr: 1
-    },
-    article: [
-      {
-        ...Knapsack[1],
-        s: 5,
-      },
-      Knapsack[2],
-      Equip[120],
-      Equip[121],
-    ]
+      attr: 1,
+    }
+  },
+  5000001: {
+    id: 5000001,
+    name: "持斧山贼",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  5000002: {
+    id: 5000002,
+    name: "大当家",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 5,
+      attr: 1,
+      boss: true
+    }
   },
   5000003: {
     id: 5000003,
@@ -507,7 +445,8 @@ const ELEMENT_5 = {
     article: [
       ...getArticle(207, 14, 2000),
     ]
-  }
+  },
+
 };
 module.exports = {
   ELEMENT_1,

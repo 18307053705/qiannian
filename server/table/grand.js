@@ -147,7 +147,19 @@ const grand = {
       [null, null, null, [[ELEMENT_5[5000009]]]],
       [null, null, null, null]
     ]
-  }
+  },
+  10000: {
+    id: 10000,
+    name: "隐仙村",
+    data: [
+      [
+        [],
+        [[ELEMENT_5[5000000], ELEMENT_5[5000001]]],
+        [],
+        []
+      ]
+    ]
+  },
 };
 
 module.exports = {

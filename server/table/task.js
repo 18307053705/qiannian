@@ -13,18 +13,16 @@ module.exports = {
     main: {
         1: {
             id: 1,
-            title: '斩杀魔尊分身',
-            tips: '前往魔界最深处斩杀魔尊分身(剑舞城2,1),然后回到找天机老人剑舞城(1,1)',
+            title: '序章',
+            tips: '我忘却了修为，只为千年前....',
             reward: {
-                article: [Equip[96]],
-                exp: 100000,
-                world: 200,
+                exp: 200,
+                tael: 1000,
             },
             grand: {
                 npc: {
-                    ...ELEMENT_1[1000001],
+                    ...ELEMENT_1[1000000],
                     address: '10000,0,0',
-
                 },
                 targetNpc: {
                     ...ELEMENT_1[1000000],
