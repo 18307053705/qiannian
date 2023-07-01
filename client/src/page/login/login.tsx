@@ -27,7 +27,7 @@ const Login = ({ setIsLogin, callback }) => {
             </div>
 
             <div className="footer">
-                <div>可以使用手机号或账号登录。</div>
+                {/* <div>可以使用手机号或账号登录。</div> */}
                 <div>
                     <span>没有账号可</span>
                     <span

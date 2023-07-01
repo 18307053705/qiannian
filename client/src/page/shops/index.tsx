@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { List, Tab, Input } from '@components/index';
 import { getList, purchase } from '@cgi/shops';
-import { backGrand } from '@utils/grand'
+import { backGrand } from '@utils/grand';
 
 
 const tabList = [

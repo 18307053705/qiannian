@@ -28,7 +28,6 @@ module.exports = {
                     ...ELEMENT_1[1000000],
                     address: '10000,0,0',
                 },
-
             },
             nextTask: 2,
         },

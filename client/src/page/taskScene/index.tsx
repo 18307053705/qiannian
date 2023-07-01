@@ -16,17 +16,17 @@ export const taskScene = () => {
         size: 1
     })
 
-    useEffect(() => {
-        setScne({
-            page: 1,
-            size: 1
-        })
-        getTaskStory().then(({ data }) => {
-            setInfo(data);
-        }).catch(() => {
-            backGrand();
-        })
-    }, [updata])
+    // useEffect(() => {
+    //     setScne({
+    //         page: 1,
+    //         size: 1
+    //     })
+    //     getTaskStory().then(({ data }) => {
+    //         setInfo(data);
+    //     }).catch(() => {
+    //         backGrand();
+    //     })
+    // }, [updata])
 
     const scneClick = (key: 'size' | 'page', value = 2) => {
         if (key === 'size') {
@@ -56,7 +56,9 @@ export const taskScene = () => {
     const tpClick = () => {
         tpTask({ address: info.tpNpc.address }).finally(backGrand);
     }
-    const { state, reward, tpNpc, taskId, message, taskType } = info;
+    let { state = 0, reward, tpNpc, taskId = 1, message, taskType } = info;
+    state = 1;
+    taskId = 1;
 
     if (state === 0 || state === 1) {
         const { page, size } = scne;
@@ -66,7 +68,7 @@ export const taskScene = () => {
         return (
             <div className={Styles['page-task-scene']}>
                 <div>{reward && reward.split(',').map((itme, index) => (<div key={index}>{itme}</div>))}</div>
-                {Dom && <Dom state={state} scne={scne} scneClick={scneClick} />}
+                {Dom && <Dom state={state} scne={scne} scneClick={scneClick} name={'道君'}/>}
 
                 {keep ? <div><span className="g_u_end" onClick={() => { setUpdata(!updata) }}>继续</span></div> : ''}
                 {tp && <div>任务目标:<span className="g_u_end" onClick={tpClick} >{tpNpc.name}</span></div>}

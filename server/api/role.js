@@ -108,6 +108,7 @@ router.post("/createRole", (req, res) => {
     // 查询账号下角色数量
     mysql.sqlQuery(`select * from role  where user_id="${user}"`, async (results) => {
       if (results.length < 3) {
+    
         const role_id = `${user}_${results.length + 1}`;
         let attr = roleAttr['atk'];
         if (role_career % 3 === 2) {
@@ -116,6 +117,19 @@ router.post("/createRole", (req, res) => {
         if (role_career % 3 === 0) {
           attr = roleAttr['agile']
         }
+        const raceInfo = {
+          1: {
+            address: '10000,0,0',
+          },
+          2: {
+            address: '20000,0,0',
+          },
+          3: {
+            address: '30000,0,0',
+          }
+        }[role_race];
+
+
         //  角色初始属性
         const sqlInfo = {
           user_id: user,
@@ -128,7 +142,7 @@ router.post("/createRole", (req, res) => {
           role_exp: '0/200',
           role_realm: 1,
           role_title: 0,
-          role_lx:0,
+          role_lx: 0,
           life: attr.life,
           mana: attr.mana,
           role_attr: {
@@ -139,7 +153,7 @@ router.post("/createRole", (req, res) => {
             attr: [],
             vip: {}
           },
-          address: '10000,0,0',
+          address: raceInfo.address,
           role_evil: 0,
           role_signature: '',
           socialize_pool: {},
@@ -209,7 +223,10 @@ router.post("/createRole", (req, res) => {
         taskFn.initTask(req);
         res.send({
           code: 0,
-          data: '角色创建成功'
+          data: {
+            role_race,
+            role_name
+          }
         })
         return;
       }

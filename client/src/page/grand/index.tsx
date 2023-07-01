@@ -87,7 +87,7 @@ const Grand = ({ history }) => {
                     ))
                 }
                 {
-                    playersLen > 0 && <span className="g_u"><span>更多</span></span>
+                    playersLen > 4 && <span className="g_u"><span>更多</span></span>
                 }
             </div>
             <div className="g_fgx"></div>
@@ -96,8 +96,6 @@ const Grand = ({ history }) => {
                 <span className="g_b_u" onClick={() => { history.push('/knapsack', { type: 1 }) }}>背包</span>
             </div>
             <div>
-                {/* <span className="g_b_u" onClick={() => { history.push('/warehouse', { type: 3 }) }}>帮会</span>
-                <span className="g_b_u" onClick={() => { history.push('/warehouse', { type: 4 }) }}>庄园</span> */}
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 1 }) }}>帮会</span>
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 2 }) }}>庄园</span>
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 3 }) }}>队伍</span>
