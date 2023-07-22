@@ -48,8 +48,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "antd": "^5.6.1",
-    "antd-mobile": "^5.30.0",
     "axios": "^0.20.0",
     "js-cookie": "^3.0.5",
     "moment": "^2.29.4",
