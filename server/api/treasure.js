@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const Global = require("../global");
+const Global = require("../global/index2");
 const knapsackFn = require("../utils/knapsackFn");
 const group1 = require("../table/group1");
 const knapsackTable = require("../table/knapsack");

@@ -1,4 +1,4 @@
-const Global = require('../global')
+const Global = require('../global/index2')
 
 module.exports = {
     /**

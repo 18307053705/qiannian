@@ -1,5 +1,5 @@
 const tokenFn = require("./tokenFn");
-const Global = require("../global");
+const Global = require("../global/index2");
 // 无需网关验证的请求
 const whiteApiList = [
   "/api/user/login",

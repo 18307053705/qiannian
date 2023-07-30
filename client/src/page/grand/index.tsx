@@ -6,7 +6,7 @@ import './index.less';
 const Grand = ({ history }) => {
     const [grandInfo, setGrandInfo] = useState(initGrandInfo);
     const [updata, setUpdata] = useState(false);
-    const { name, data, x, y, grand } = grandInfo;
+    const { name, eleList, x, y, moveDir:moveList } = grandInfo;
     const players = grandInfo.players.slice(0, 4);
     const playersLen = players.length - 1;
     useEffect(() => {
@@ -20,6 +20,7 @@ const Grand = ({ history }) => {
             path ? history.push(path, { ...ext }) : setGrandInfo(data);
         })
     }, [])
+    console.log(grandInfo)
     return (
         <div className="grand-page">
             <div className="g_b">{`${name}(${x}.${y})`}</div>
@@ -33,7 +34,7 @@ const Grand = ({ history }) => {
             {/* 地图元素 */}
             <div className="ele-list">
                 {
-                    data.map((list, index) => {
+                    eleList.map((list, index) => {
                         return (
                             <div key={index}>
                                 {
@@ -55,7 +56,7 @@ const Grand = ({ history }) => {
             <div className="g_fgx"></div>
             {/* 地图 */}
             {
-                grand.map(({ dir, lable, value }) => {
+                moveList.map(({ dir, lable, value }) => {
                     return (
                         <div key={dir}>
                             <span>{lable}：</span>

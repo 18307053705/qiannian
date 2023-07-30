@@ -1,6 +1,6 @@
 const express = require("express");
 const mysql = require("../mysql");
-const Global = require("../global");
+const Global = require("../global/index2");
 const roleFn = require("../utils/roleFn");
 const router = new express.Router();
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const Global = require("../global");
+const Global = require("../global/index2");
 const knapsackFn = require("../utils/knapsackFn");
 const equipFn = require("../utils/equipFn");
 const KnapsackTable = require("../table/knapsack");

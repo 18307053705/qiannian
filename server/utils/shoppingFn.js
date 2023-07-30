@@ -1,5 +1,5 @@
 const mysql = require("../mysql");
-const Global = require("../global");
+const Global = require("../global/index2");
 module.exports = {
     // 获取店铺信息
     getShopInfo: async function (req, roleId) {

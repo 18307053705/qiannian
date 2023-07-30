@@ -1,5 +1,5 @@
 
-const Attribute = require("./attribute");
+const Attribute = require("./attribute1");
 
 const EQUIP_ATTR = {
     1: {

@@ -1,10 +1,10 @@
 import { post } from "@request";
-const moveDirUrl = `/dir/sendDir`;
-const tpDirUrl = `/dir/tp`;
+const moveDirUrl = `/grand/sendDir`;
+const tpDirUrl = `/grand/tp`;
 
 export interface getGrandRes {
-  data: any[][];
-  grand: {
+  eleList: any[][];
+  moveDir: {
     lable: string;
     value: string;
     dir: string;
@@ -19,8 +19,8 @@ export interface getGrandRes {
 }
 
 export const initGrandInfo: getGrandRes = {
-  data: [],
-  grand: [],
+  eleList: [],
+  moveDir: [],
   name: "",
   players: [],
   x: "",

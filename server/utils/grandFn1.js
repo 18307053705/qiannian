@@ -1,5 +1,5 @@
 const { grand } = require("../table/grand");
-const Global = require("../global");
+const Global = require("../global/index2");
 const taskFn = require('./taskFn');
 
 module.exports = {
@@ -61,7 +61,7 @@ module.exports = {
       y: y + 1,
       data: ele,
       dir: dirList,
-      grand: this.getGrand(id, x, y),
+      movedir: this.getGrand(id, x, y),
       players: players.map(({ role_name, role_id }) => ({ role_name, role_id }))
     };
   }

@@ -1,6 +1,6 @@
 const roleFn = require("./roleFn");
-const grandFn = require("./grandFn");
-const Global = require("../global");
+const grandFn = require("./grandFn1");
+const Global = require("../global/index2");
 const fightFn = require("./fightFn");
 const { ERR_MEUN, error } = require("./errorFn");
 
@@ -75,7 +75,7 @@ module.exports = {
   tpDir: async function (dir, req, res) {
     const { address } = Global.getRoleGlobal(req)
     if (address !== dir) {
-      Global.updateRoleGlobal(req, { address:dir });
+      Global.updateRoleGlobal(req, { address: dir });
     }
     this["toDir"](req, res, dir);
   },

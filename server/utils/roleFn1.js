@@ -2,7 +2,7 @@ const mysql = require("../mysql");
 const { realm: Realm } = require("../table/realm");
 const { roleAttr: RoleAttr, getInitAttr } = require("../table/attribute");
 const effect1 = require("../table/effect1");
-const Global = require("../global");
+const Global = require("../global/index2");
 const petFn = require("./petFn");
 module.exports = {
   // 获取玩家信息

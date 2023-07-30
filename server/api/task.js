@@ -1,10 +1,10 @@
 const express = require("express");
 const router = new express.Router();
-const Global = require('../global')
+const Global = require('../global/index2')
 const knapsackFn = require('../utils/knapsackFn');
 const taskFn = require('../utils/taskFn');
 const roleFn = require('../utils/roleFn');
-const dirFn = require('../utils/dirFn');
+const {grandFn} = require('../utils');
 const taskTable = require('../table/task');
 const TASK_MEUN = {
     main: '主线任务',
@@ -109,7 +109,7 @@ router.post("/doneTask", async (req, res) => {
         const task = tasks[in_x];
         const { npc } = task['grand'];
         if (dir['address'] !== npc['address']) {
-            dirFn.tpDir(npc['address'], req, res);
+            grandFn.tpDir(req,res,npc['address']);
         } else {
             res.send({
                 code: 0,
@@ -240,7 +240,7 @@ router.post("/taskNpc", (req, res) => {
     }
     const { extDir } = Global.getDir(req);
     if (extDir['address'] !== address) {
-        dirFn.tpDir(address, req, res);
+        grandFn.tpDir(req,res,address);
         return;
     }
     res.send({

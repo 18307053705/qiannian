@@ -2,7 +2,7 @@ const express = require("express");
 const formFn = require("../utils/formFn");
 const knapsackFn = require("../utils/knapsackFn");
 const router = new express.Router();
-const Global = require("../global");
+const Global = require("../global/index2");
 const Equip = require("../table/equip");
 const knapsackTable = require("../table/knapsack");
 // id: string;

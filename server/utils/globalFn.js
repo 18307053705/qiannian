@@ -1,5 +1,5 @@
 const fightFn = require("./fightFn");
-const Global = require("../global");
+const Global = require("../global/index2");
 module.exports = {
     // 角色退出，释放全局空间
     roleExit: function (req, res, userid) {

@@ -1,5 +1,8 @@
 // 每日池子,例如副本次数，每日任务，珍宝免费操作次数，及后续其他每日重置的功能
 module.exports = {
+    /**
+     * 
+     */
     treasurePool: {
         // role:{fw:0,xz:0,lp:0,hb:0}
     },
@@ -7,7 +10,6 @@ module.exports = {
         if(!this.treasurePool[role_id]){
             this.treasurePool[role_id] = { fw: 0, xz: 0, lp: 0, hb: 0 };
         }
-        
     },
     getTreasureGlobal(req) {
         const { role_id } = this.getRoleGlobal(req);

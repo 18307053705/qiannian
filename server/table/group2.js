@@ -1,4 +1,4 @@
-const Global = require('../global')
+const Global = require('../global/index2')
 // 两小时时间戳
 const DateTitme = 1000 * 60 * 120;
 module.exports = {

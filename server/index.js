@@ -4,23 +4,24 @@ const cookieParser = require("cookie-parser");
 const gatewayFn = require("./utils/gatewayFn");
 const errorFn = require("./utils/errorFn");
 const globalFn = require("./utils/globalFn");
-const Global = require("./global");
+const Global = require("./global/index2");
+const mysql = require("./mysql");
 
 // // 十分钟时间戳
-const time = 600000;
-// const time = 5000;
-// 定时清楚长时间不访问的角色全局空间
-setInterval(() => {
-  const roleGlobal = Global.roleGlobal;
-  Object.keys(roleGlobal).forEach(user => {
-    const role = roleGlobal[user];
-    // 超过十分钟不访问的角色,释放对应全局空间
-    if (new Date() * 1 - role.time > time) {
-      globalFn.roleExit('', '', user);
-    }
-  })
+// const time = 600000;
+// // const time = 5000;
+// // 定时清楚长时间不访问的角色全局空间
+// setInterval(() => {
+//   const roleGlobal = Global.roleGlobal;
+//   Object.keys(roleGlobal).forEach(user => {
+//     const role = roleGlobal[user];
+//     // 超过十分钟不访问的角色,释放对应全局空间
+//     if (new Date() * 1 - role.time > time) {
+//       globalFn.roleExit('', '', user);
+//     }
+//   })
 
-}, time)
+// }, time)
 
 const app = express();
 // post请求处理
@@ -38,16 +39,19 @@ app.use("*", async function (req, res, next) {
     errorFn.error(res, errorFn.ERR_MEUN.ROLE);
     return;
   }
+  res.asyncQuery =  mysql.asyncQuery;
+  res.asyncAdd =  mysql.asyncAdd;
+ 
   // console.log('验证通过:',req.originalUrl)
   // 更新角色访问时间
-  Global.updateRoleTime(req);
+  // Global.updateRoleTime(req);
   next();
 });
 // 请求路由
 app.use("/api/user", require("./api/user"));
 app.use("/api/role", require("./api/role"));
 app.use("/api/meun", require("./api/meun"));
-app.use("/api/dir", require("./api/dir"));
+app.use("/api/grand", require("./api/grand"));
 app.use("/api/fight", require("./api/fight"));
 app.use("/api/knapsack", require("./api/knapsack"));
 app.use("/api/player", require("./api/player"));

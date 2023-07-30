@@ -2,10 +2,9 @@ const express = require("express");
 const fightFn = require("../utils/fightFn");
 const artFn = require("../utils/artFn");
 const Knapsack = require('../table/knapsack');
-const Global = require("../global");
+const Global = require("../global/index2");
 const { error, ERR_MEUN } = require("../utils/errorFn");
 const router = new express.Router();
-
 router.post("/getFightInfo", (req, res) => {
     const { role_id } = Global.getRoleGlobal(req);
     const { player, ...data } = Global.getFight(req);

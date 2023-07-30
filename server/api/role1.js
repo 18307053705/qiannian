@@ -1,6 +1,6 @@
 const express = require("express");
 const mysql = require("../mysql");
-const Global = require("../global");
+const Global = require("../global/index2");
 const roleFn = require("../utils/roleFn");
 const globalFn = require("../utils/globalFn");
 const taskFn = require("../utils/taskFn");
@@ -10,13 +10,12 @@ const { realm } = require("../table/realm");
 const { CAREER_TYPE, RACE_TYPE } = require("../meun");
 const router = new express.Router();
 // 角色列表 
-router.post("/getRoleList", (req, res) => {
+router.post("/getRoleList", async (req, res) => {
   const user = req.cookies["q_uid"];
-  mysql.sqlQuery(`select * from role  where user_id="${user}"`, results => {
-    res.send({
-      code: 0,
-      data: results
-    });
+  const { results } = await mysql.asyncQuery(`select * from role  where user_id="${user}"`);
+  res.send({
+    code: 0,
+    data: results
   });
 });
 
@@ -108,7 +107,7 @@ router.post("/createRole", (req, res) => {
     // 查询账号下角色数量
     mysql.sqlQuery(`select * from role  where user_id="${user}"`, async (results) => {
       if (results.length < 3) {
-    
+
         const role_id = `${user}_${results.length + 1}`;
         let attr = roleAttr['atk'];
         if (role_career % 3 === 2) {

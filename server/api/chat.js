@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = new express.Router();
 
-const Global = require("../global");
+const Global = require("../global/index2");
 
 
 // const CHAT_TYPE_MEUN = {

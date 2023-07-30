@@ -1,4 +1,4 @@
-const Global = require("../global");
+const Global = require("../global/index2");
 const mysql = require("../mysql");
 const KnapsackTable = require("../table/knapsack");
 

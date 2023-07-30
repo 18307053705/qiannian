@@ -1,5 +1,5 @@
 const mysql = require("../mysql");
-const Global = require("../global");
+const Global = require("../global/index2");
 
 const JOSN_KEYS = ['compose', 'apply'];
 

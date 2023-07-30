@@ -1,5 +1,5 @@
 const express = require("express");
-const dirFn = require("../utils/dirFn");
+const dirFn = require("../utils/dirFn1");
 const router = new express.Router();
 
 router.post("/sendDir", (req, res) => {

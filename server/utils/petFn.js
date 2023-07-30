@@ -1,7 +1,7 @@
 const mysql = require("../mysql");
 const Attribute = require("../table/attribute");
 const ArtTable = require("../table/art");
-const Global = require("../global");
+const Global = require("../global/index2");
 const ELE_MEUN = {
     1: {
         ice_atk_max: 1,

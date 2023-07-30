@@ -1,4 +1,4 @@
-const Global = require('../global');
+const Global = require('../global/index2');
 const roleFn = require('./roleFn');
 const taskTable = require('../table/task');
 const knapsackFn = require('./knapsackFn');

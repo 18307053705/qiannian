@@ -1,6 +1,6 @@
 const express = require("express");
 const mysql = require("../mysql");
-const Global = require("../global");
+const Global = require("../global/index2");
 const KnapsackTable = require("../table/knapsack");
 const knapsackFn = require("../utils/knapsackFn");
 const shoppingFn = require("../utils/shoppingFn");

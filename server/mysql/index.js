@@ -11,61 +11,13 @@ const SQL_INFO = {
 /**
  *
  * @param {string} queryString  查询语句
- * @param {*} callback 查询结过回调
  * @param {*} sqlInfo 接入数据库信息，可不传
  */
-function sqlQuery(queryString, callback, sqlInfo = {}) {
-  const connecttion = mysql.createConnection({
-    ...SQL_INFO,
-    sqlInfo
-  });
-  //  数据库信息
-  connecttion.connect();
-  // 查询数据
-  connecttion.query(queryString, (err, results, fields) => {
-    if (err) {
-      throw err;
-    }
-    //   将结果传入回调函数
-    callback(results, fields);
-    // 关闭连接
-    connecttion.end();
-  });
-}
-
-function sqlAdd(queryString, data, callback, sqlInfo = {}) {
-  const connecttion = mysql.createConnection({
-    ...SQL_INFO,
-    sqlInfo
-  });
-  //  数据库信息
-  connecttion.connect();
-  // 查询数据
-  connecttion.query(queryString, data, (err, results, fields) => {
-    if (err) {
-      throw err;
-    }
-    //   将结果传入回调函数
-    callback(results, fields);
-    // 关闭连接
-    connecttion.end();
-  });
-}
-
-
-/**
- *
- * @param {string} queryString  查询语句
- * @param {*} callback 查询结过回调
- * @param {*} sqlInfo 接入数据库信息，可不传
- */
-
-
-function asyncQuery(queryString, callback, sqlInfo = {}) {
+function asyncQuery(queryString, sqlInfo = {}) {
   return new Promise((resolve, reject) => {
     const connecttion = mysql.createConnection({
       ...SQL_INFO,
-      sqlInfo
+      ...sqlInfo
     });
     //  数据库信息
     connecttion.connect();
@@ -74,7 +26,6 @@ function asyncQuery(queryString, callback, sqlInfo = {}) {
       // 关闭连接
       connecttion.end();
       if (err) {
-        // throw err;
         reject({ err, results, fields });
         return;
       }
@@ -85,20 +36,26 @@ function asyncQuery(queryString, callback, sqlInfo = {}) {
 
 }
 
+/**
+ *
+ * @param {string} queryString  查询语句
+ * @param {*} data 写入数据库的数据
+ * @param {*} sqlInfo 接入数据库信息，可不传
+ */
 function asyncAdd(queryString, data, sqlInfo = {}) {
   return new Promise((resolve) => {
     const connecttion = mysql.createConnection({
       ...SQL_INFO,
-      sqlInfo
+      ...sqlInfo
     });
     //  数据库信息
     connecttion.connect();
     // 查询数据
     connecttion.query(queryString, data, (err, results, fields) => {
       if (err) {
-        throw err;
+        reject({ err, results, fields });
+        return;
       }
-
       // 关闭连接
       connecttion.end();
       resolve({ results, fields })
@@ -108,8 +65,17 @@ function asyncAdd(queryString, data, sqlInfo = {}) {
 }
 
 module.exports = {
-  sqlQuery,
-  sqlAdd,
+  /**
+   *
+   * @param {string} queryString  查询语句
+   * @param {*} sqlInfo 接入数据库信息，可不传
+   */
   asyncQuery,
+  /**
+   *
+   * @param {string} queryString  查询语句
+   * @param {*} data 写入数据库的数据
+   * @param {*} sqlInfo 接入数据库信息，可不传
+   */
   asyncAdd
 };
