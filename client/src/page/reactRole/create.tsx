@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useCallback } from "react";
 import { createRole } from '@cgi/roleInfo';
 import { nameCheck } from '@utils/check';
-import { Model } from '@model';
+import { CAREER_TYPE, RACE_TYPE } from '@meun';
 import './index.less';
 
 
@@ -12,9 +12,6 @@ const ReactRole = ({ submitCallback }) => {
     const [sex, setSex] = useState('1');
     const [name, setName] = useState('');
     const [error, setError] = useState('');
-    const { state } = useContext(Model);
-    const { meun } = state;
-    const { RACE_TYPE = {}, CAREER_TYPE = {} } = meun;
     const rareerList: any[] = [];
     Object.keys(CAREER_TYPE).forEach((key: any) => {
         const max = race * 3;

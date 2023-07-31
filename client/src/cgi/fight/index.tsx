@@ -1,9 +1,13 @@
 import { post } from "@request";
 import { AttrType } from "../base";
+
+const creatFightUrl = '/fight/creatFight';
+const fightDirUrl = '/fight/fightDir';
+
 const getFightInfoUrl = '/fight/getFightInfo';
 const setFightDirUrl = '/fight/setFightDir';
 const getFightDirUrl = '/fight/getFightDir';
-const fightDirUrl = '/fight/fightDir';
+// const fightDirUrl = '/fight/fightDir';
 const fightCleanUrl = '/fight/clean';
 const fightContinueUrl = '/fight/continue';
 const fightGiveUrl = '/fight/give';
@@ -30,6 +34,17 @@ export const initFightInfo: FightInfoType = {
     list: []
 }
 
+// 创建战斗
+export async function creatFight() {
+    return await post(creatFightUrl);
+}
+
+// 发送战斗指令
+export async function fightDir(data: { id: number, p: number }) {
+    return await post(fightDirUrl, data);
+}
+
+
 //获取角色战斗信息
 export async function getFightInfo() {
     return await post(getFightInfoUrl);
@@ -54,10 +69,7 @@ export async function setFightDir(data: setFightDirReq) {
 
 
 
-// 发送战斗指令
-export async function fightDir(data: { index: number }) {
-    return await post(fightDirUrl, data);
-}
+
 
 // 清除战斗元素
 export async function fightClean() {

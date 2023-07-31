@@ -12,7 +12,7 @@ module.exports = {
      * @returns {*} roleInfo[]|undefined
      * 
      */
-    computeRoleAttr: async function (req, res, roleInfo, { role_id, attr = AttributeTable.getInitAttr() }) {
+    computeRoleAttr: function (req, res, roleInfo, { role_id, attr = AttributeTable.getInitAttr() } = {}) {
         const { role_attr, role_buff } = roleInfo;
         const { base, addition } = role_attr;
         // 基础属性与额外属性

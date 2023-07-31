@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { getRoleList, roleLogin } from '@cgi/roleInfo';
-import { Model } from '@model';
+import { CAREER_TYPE } from '@meun';
 import Logo from './img/QianNianLogo.png';
 
 import Style from './index.less';
 const Home = ({ history }) => {
-    const { state } = useContext(Model);
-    const { meun } = state;
     const [roleList, setRoleList] = useState([])
     useEffect(() => {
         getRoleList().then(({ data }: any) => {
@@ -24,7 +22,7 @@ const Home = ({ history }) => {
                     return (
                         <div key={role_id}>
                             <span>{role_name}</span>
-                            <span>{role_level}级{meun['CAREER_TYPE'][role_race]}</span>
+                            <span>{role_level}级{CAREER_TYPE[role_race]}</span>
                             <span className="g_u" >
                                 <span onClick={() => {
                                     roleLogin({ role_id }).then(() => {

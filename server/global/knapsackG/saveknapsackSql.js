@@ -8,7 +8,7 @@ module.exports = {
      * @param {*} res 
      * @param {*} role_id 角色Id,可选
      */
-    getknapsackGlobal: async function (req, res, roleId) {
+    saveknapsackSql: async function (req, res, roleId) {
         const { role_id } = roleG.getRoleGlobal(req, res);
         const { updateKeys, ...knapsack } = KNAPSACK_Global[roleId || role_id];
         const data = [];

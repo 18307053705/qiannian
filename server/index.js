@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const gatewayFn = require("./utils/gatewayFn");
 const errorFn = require("./utils/errorFn");
 const globalFn = require("./utils/globalFn");
-const Global = require("./global/index2");
+const errorG = require("./global/errorG");
 const mysql = require("./mysql");
 
 // // 十分钟时间戳
@@ -32,16 +32,14 @@ app.use(cookieParser());
 app.use("*", async function (req, res, next) {
   // 验证登录态
   if (!gatewayFn.checkApi(req)) {
-    errorFn.error(res, 100000);
-    return;
+    return errorG.loginError(res);
   }
   if (!gatewayFn.roleCheck(req)) {
-    errorFn.error(res, errorFn.ERR_MEUN.ROLE);
-    return;
+    return errorG.roleError(res);
   }
-  res.asyncQuery =  mysql.asyncQuery;
-  res.asyncAdd =  mysql.asyncAdd;
- 
+  res.asyncQuery = mysql.asyncQuery;
+  res.asyncAdd = mysql.asyncAdd;
+
   // console.log('验证通过:',req.originalUrl)
   // 更新角色访问时间
   // Global.updateRoleTime(req);

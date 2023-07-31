@@ -8,10 +8,8 @@ module.exports = {
      * @returns {*} rival 对手信息
      */
     creatFreak: function (req, res, freak) {
-        console.log(freak,'freak...')
         const { name, ext } = freak;
         const { career, level, attr, boss } = ext;
-    
         const attrs = AttributeTable.getFreakBaseAttr(career);
         const addition = level * attr;
         Object.keys(attrs).forEach((key) => {

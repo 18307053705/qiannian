@@ -2,6 +2,7 @@ const express = require("express");
 const { getRoleList } = require('./getRoleList');
 const { getRoleInfo } = require('./getRoleInfo');
 const { roleLogin } = require('./roleLogin');
+const { createRole } = require('./createRole');
 
 
 
@@ -12,5 +13,7 @@ router.post("/getRoleList", getRoleList);
 router.post("/getRoleInfo", getRoleInfo);
 // 角色选择
 router.post("/roleLogin", roleLogin);
+// 创建角色
+router.post("/createRole", createRole);
 
 module.exports = router;

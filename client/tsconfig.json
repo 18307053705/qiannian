@@ -53,7 +53,8 @@
       "@page/*": ["./src/page/*"],
       "@components": ["./src/components/index"],
       "@components/*": ["./src/components/*"],
-      "@model": ["./src/model/index"]
+      "@model": ["./src/model/index"],
+      "@meun": ["./src/meun/index"]
     },
     // "rootDirs": ["src","out"], // 将多个目录放在一个虚拟目录下，用于运行时，即编译后引入文件的位置可能发生变化，这也设置可以虚拟src和out在同一个目录下，不用再去改变路径也不会报错
     // "listEmittedFiles": true, // 打印输出文件

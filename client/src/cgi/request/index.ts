@@ -58,7 +58,7 @@ export async function request<T={}>(
     } else if (res.data.code === 100000) {
       // 登录异常跳转登录页
       goLogin();
-    } else if (res.data.code === 100007 || res.data.code === 100006) {
+    } else if (res.data.code === 100001 || res.data.code === 100006) {
       // 指令异常，返回角色选择页
       window.location.pathname = "/";
     }

@@ -55,7 +55,6 @@ module.exports = {
         }
         // 更新战斗信息
         RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool });
-        // Global.updateRoleGlobal(req, { skill_pool: roleInfo.skill_pool });
         // 计算角色属性
         const data = roleFn.computeRoleAttr(req, res, roleInfo);
         // 获取宠物信息
@@ -65,7 +64,7 @@ module.exports = {
         //     art: pet['art'][0]
         // }
         return {
-            id: roleInfo.role_id,
+            roleId: roleInfo.role_id,
             attr: {
                 ...data.attr,
                 life: roleInfo['life'] > data.attr.life_max ? data.attr.life_max : roleInfo['life'],

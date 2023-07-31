@@ -1,5 +1,5 @@
 const { roleFn } = require('../../utils');
-const { RoleG } = require('../../global');
+const { RoleG, KnapsackG } = require('../../global');
 
 module.exports = {
     /**
@@ -22,6 +22,7 @@ module.exports = {
         await roleFn.roleExit(req, res);
         // 保存角色信息,并且记录登录时间
         RoleG.setRoleGlobal(req, res, role[0]);
+        KnapsackG.setknapsackGlobal(req, res, knapsack[0]);
         // Global.setRoleGlobal(req, role[0]);
         // Global.setknapsackGlobal(req, knapsack[0]);
         // Global.setSocializeGlobal(req);

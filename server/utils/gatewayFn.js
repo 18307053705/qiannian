@@ -22,6 +22,10 @@ module.exports = {
     const token = req.cookies["token"];
     const user = req.cookies["q_uid"];
     const pass = req.cookies["q_m"];
+    console.log(token,'token');
+    console.log(user,'user');
+    console.log(pass,'pass');
+    console.log(tokenFn.analysToken(token, user, pass),'analysToken');
     return token && user && pass && tokenFn.analysToken(token, user, pass);
   },
   // 角色验证

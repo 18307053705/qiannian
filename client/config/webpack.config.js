@@ -24,7 +24,8 @@ module.exports = {
       "@cgi": `${rootPath}/src/cgi`,
       "@page": `${rootPath}/src/page`,
       "@components": `${rootPath}/src/components`,
-      "@model": `${rootPath}/src/model`
+      "@model": `${rootPath}/src/model`,
+      "@meun": `${rootPath}/src/meun`,
     },
   },
   mode: "development",
