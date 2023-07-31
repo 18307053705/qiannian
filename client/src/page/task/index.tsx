@@ -78,3 +78,8 @@ export const Task = () => {
 }
 
 export default Task;
+let cunst = 1;
+function fn() {
+    //请在这里编码
+    console.log(cunst++)
+}

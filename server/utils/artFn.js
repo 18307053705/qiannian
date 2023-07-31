@@ -2,7 +2,7 @@ const ArtTable = require("../table/art");
 const Attribute = require("../table/attribute");
 const Global = require("../global/index2");
 const KnapsackTable = require("../table/knapsack");
-const knapsackFn = require("../utils/knapsackFn");
+const knapsackFn = require("./knapsackFn1");
 const r_attr = {
     0: 1,
     1: 1.5,

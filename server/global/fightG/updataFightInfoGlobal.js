@@ -1,7 +1,6 @@
 const { FIGHT_MAP_Global, FIGHT_INFO_Global } = require('./config');
 const roleG = require('../roleG');
 
-
 module.exports = {
     /**
      * 更新全局战斗信息池
@@ -13,10 +12,12 @@ module.exports = {
         const { role_id } = roleG.getRoleGlobal(req, res);
         const { id } = FIGHT_MAP_Global[role_id];
         if (id) {
-            FIGHT_INFO_Global[fightId] = {
-                ...FIGHT_INFO_Global[fightId],
+            const fightInfo = {
+                ...FIGHT_INFO_Global[id],
                 ...data,
             }
+            FIGHT_INFO_Global[id] = fightInfo
+            return JSON.parse(JSON.stringify(fightInfo));
         }
     }
 

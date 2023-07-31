@@ -157,9 +157,9 @@ router.post("/fightDir", async (req, res) => {
     // 定义回合文案
     const fightRound = {
         text: '', // 出招文案
-        rival_text: '', // 怪无出招文案
+        // rival_text: '', // 怪物出招文案
         buffText: [], // buff信息
-        dps: [], // 造成的伤害
+        dps: 0, // 造成的伤害
         mana: '', // 消耗的法力
         life: '',// 消耗的生命
         statu: 0 // 结果

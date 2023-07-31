@@ -24,9 +24,9 @@ type ResType = {
   success: string;
 };
 
-export async function request<T={}>(
+export async function request<T = {}>(
   url: string,
-  data?: any,
+  params?: any,
   config?: requestConfig
 ): Promise<ResType & T> {
   const newUrl = config && config.baseUrl ? config.baseUrl : URL;
@@ -38,31 +38,33 @@ export async function request<T={}>(
       timeout: 2000
     };
     if (method === "get" || method === "GET") {
-      requestConfig.params = data;
+      requestConfig.params = params;
     }
     if (method === "post" || method === "POST") {
-      requestConfig.data = data;
+      requestConfig.data = params;
     }
 
-    let res = await axios.request(requestConfig);
-
-    const request = res.request;
-    if (request.status === 200 && res.data.code === 0) {
-      if (res.data.message) {
-        window.QN.setError(res.data.message);
+    const { data, request } = await axios.request(requestConfig);
+    // 跳转对应路径
+    if (data.path) {
+      window.location.pathname = data.path;
+    }
+    if (request.status === 200 && data.code === 0) {
+      if (data.message) {
+        window.QN.setError(data.message);
       }
-      if (res.data.success) {
-        window.QN.setSuccess(res.data.success);
+      if (data.success) {
+        window.QN.setSuccess(data.success);
       }
-      return res.data;
-    } else if (res.data.code === 100000) {
+      return data;
+    } else if (data.code === 100000) {
       // 登录异常跳转登录页
       goLogin();
-    } else if (res.data.code === 100001 || res.data.code === 100006) {
+    } else if (data.code === 100001 || data.code === 100006) {
       // 指令异常，返回角色选择页
       window.location.pathname = "/";
     }
-    return Promise.reject(res.data);
+    return Promise.reject(data);
   } catch (err) {
     // 处理失败情况，可用于上报错误日志
     console.log("!!! Error !!!", err);

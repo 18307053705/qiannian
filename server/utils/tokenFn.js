@@ -11,7 +11,6 @@ module.exports = {
   analysToken: function(token, user, pass) {
     const IP = osFn.getIPAdress();
     const analys = cryptoFn.decrypt(token, user, IP);
-    console.log(analys,'analys...')
     return `${user}1.${userFn.analysPass(pass)}2.${IP}` === analys;
   }
 };

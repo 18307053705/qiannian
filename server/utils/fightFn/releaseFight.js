@@ -1,6 +1,4 @@
-const { FightG, GrandG, KnapsackG, RoleG } = require("../../global");
-
-const { AttributeTable } = require("../../table");
+const { FightG, KnapsackG, RoleG } = require("../../global");
 module.exports = {
     /**
      * 放弃战斗
@@ -9,6 +7,8 @@ module.exports = {
      */
     releaseFight: function (req, res) {
         const { fightInfo, fightMap } = FightG.getFightGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
+        const { players } = fightInfo;
         if (fightMap && fightMap.state === 0) {
             // 背包信息
             const { data } = KnapsackG.getknapsackGlobal(req, res);
@@ -47,17 +47,20 @@ module.exports = {
                 KnapsackG.updateknapsackGlobal(req, res, { data });
             }
 
-            // 释放战斗池id
-            delete Global.fightRoleId[role_id];
+
             //  释放战斗信息池
             // 判断是否为本次战斗中最后一个玩家,否则移除自己即可
-            if (player.lenght === 1) {
-                delete Global.fightMap[fightId]
+            if (players.length === 0) {
+                FightG.deleteFightInfoGlobal(req, res);
             } else {
-                Global.fightMap[fightId]['player'] = player.filter(({ id }) => id !== role_id);
-                Global.fightMap[fightId]['id'] = ids.filter(({ id }) => id !== role_id);
+                FightG.updataFightInfoGlobal(req, res, { players: players.filter(({ id }) => id !== role_id) });
             }
+            // 释放战斗池id
+            FightG.deleteFightMapGlobal(req, res);
         }
-
+        res.send({
+            code: 0,
+            path: '/grand'
+        })
     }
 };

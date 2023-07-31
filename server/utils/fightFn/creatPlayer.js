@@ -11,7 +11,7 @@ module.exports = {
         const roleInfo = RoleG.getRoleGlobal(req, res)
         const knapasack = KnapsackG.getknapsackGlobal(req, res);
         // const pet = Global.getPetGlobal(req);
-        const { fight = [null, null, null, null, null, null], art } = roleInfo.skill_pool;
+        const { fight, art } = roleInfo.skill_pool;
         const knapasackId = {};
         fight.forEach((itme, index) => {
             if (itme && itme.p2 == 2) {

@@ -1,7 +1,7 @@
 const Global = require('../global/index2');
 const roleFn = require('./roleFn');
 const taskTable = require('../table/task');
-const knapsackFn = require('./knapsackFn');
+const knapsackFn = require('./knapsackFn1');
 const DAILY_TASK_KEY = ['exp', 'tael', 'world', 'exploit'];
 const REWARD_MEUN = {
   tael: '银两',
