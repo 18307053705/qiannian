@@ -11,7 +11,7 @@ module.exports = {
      * @returns {*} knapsack:{data:[],yuanbao,tael}
      */
     updateknapsackGlobal: function (req, res, updata, roleId) {
-        const { role_id } = roleG.getRoleGlobal(req, res, { role_id });
+        const { role_id } = roleG.getRoleGlobal(req, res, { role_id:roleId });
         const knapsack = KNAPSACK_Global[roleId || role_id];
         let updateKeys = Object.keys(updata);
         if (knapsack) {

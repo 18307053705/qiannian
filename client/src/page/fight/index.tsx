@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { getFightInfo, initFightInfo, fightDir, fightGive, creatFight } from '@cgi/fight';
+import React, { useState, useEffect } from "react";
+import { unstable_batchedUpdates } from "react-dom";
+import { fightDir, creatFight } from '@cgi/fight';
 
 import FightAttr from './components/fightAttr';
 import FightDuke from './components/fightDuke';
@@ -9,35 +10,38 @@ import FightSet from './components/fightSet';
 import './index.less';
 const Fight = ({ history }) => {
 
-    const fightResult = sessionStorage.getItem('fightResult');
-    const [panel, setPanel] = useState(fightResult ? 'result' : 'duke');
+    // const fightResult = sessionStorage.getItem('fightResult');
+    const [panel, setPanel] = useState('duke');
     // 记录结果信息
-    const [result, setResult] = useState(fightResult ? JSON.parse(fightResult) : {});
+    // const [result, setResult] = useState({});
     // 记战斗信息
     const [fight, setFight] = useState();
     // 回合信息
-    const [fightDirInfp, setFightDirInfp] = useState({});
+    // const [fightDirInfp, setFightDirInfp] = useState({});
     // 属性信息
     const [attrInfo, setAttrInfo] = useState();
-    // 更新战斗信息
-    const upFightInfo = useCallback(() => {
-        getFightInfo().then(({ data }) => {
+
+    const fightInfoChang = ({ data }) => {
+        console.log(data, 'data...')
+        const { fightMap } = data;
+        let panelKey = 'duke';
+        if (fightMap.state) {
+            panelKey = 'result';
+        }
+        unstable_batchedUpdates(() => {
             setFight(data);
-            setPanel('duke');
+            setPanel(panelKey);
         })
-    }, [])
+
+    }
+
 
     useEffect(() => {
-        creatFight().then((res) => {
-            setFight(res.data);
-        })
+        creatFight().then(fightInfoChang)
     }, [])
 
     const dirClick = (data) => {
-        fightDir(data).then((res) => {
-            setFight(res.data);
-        })
-
+        fightDir(data).then(fightInfoChang)
     }
 
     console.log(fight, 'fight...')
@@ -45,12 +49,13 @@ const Fight = ({ history }) => {
         return null;
     }
     const { fightInfo, fightMap } = fight;
+    // fightInfo={fightInfo} fightDirInfp={fightDirInfp}
     return (
         <div className="fight-page">
-            {panel === "duke" && <FightDuke fight={fight} dirClick={dirClick} fightInfo={fightInfo} fightDirInfp={fightDirInfp} />}
+            {panel === "duke" && <FightDuke fight={fight} dirClick={dirClick} />}
             {panel === "attr" && <FightAttr attrInfo={attrInfo} dirClick={dirClick} />}
-            {panel === "result" && <FightResult result={result} dirClick={dirClick} />}
-            {panel === "set" && <FightSet art={fightInfo.art} dirClick={dirClick} />}
+            {panel === "result" && <FightResult fight={fight} fightInfoChang={fightInfoChang} />}
+            {panel === "set" && <FightSet fightMap={fightMap} />}
         </div>
     )
 

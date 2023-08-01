@@ -7,9 +7,10 @@ module.exports = {
      */
     releaseFight: function (req, res) {
         const { fightInfo, fightMap } = FightG.getFightGlobal(req, res);
-        const { role_id } = RoleG.getRoleGlobal(req, res);
-        const { players } = fightInfo;
-        if (fightMap && fightMap.state === 0) {
+        if (fightMap) {
+            const { players } = fightInfo
+            // 角色信息
+            const { role_id } = RoleG.getRoleGlobal(req, res);
             // 背包信息
             const { data } = KnapsackG.getknapsackGlobal(req, res);
             const { player } = fightMap;
@@ -58,9 +59,5 @@ module.exports = {
             // 释放战斗池id
             FightG.deleteFightMapGlobal(req, res);
         }
-        res.send({
-            code: 0,
-            path: '/grand'
-        })
     }
 };

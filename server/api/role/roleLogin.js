@@ -1,6 +1,5 @@
-const { roleFn } = require('../../utils');
 const { RoleG, KnapsackG } = require('../../global');
-
+const { roleFn } = require('../../utils');
 module.exports = {
     /**
      * 角色登录

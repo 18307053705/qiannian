@@ -8,14 +8,15 @@ module.exports = {
      * 创建战斗
      * @param {*} req 
      * @param {*} res 
-     * @param {*} type 战斗类型,默认1 1-玩家 VS 人机  2-玩家 VS 玩家 3-多玩家 VS 人机
+     * @param {*} data.type 战斗类型,默认1 1-玩家 VS 人机  2-玩家 VS 玩家 3-多玩家 VS 人机
+     * @param {boolean} data.continueDir 创建战斗
      * @returns {*} fightMap 战斗信息
      * @returns {*} fightInfo 战斗具体信息
      */
-    creatFight: function (req, res, type = 1) {
+    creatFight: function (req, res, { type, continueDir } = {}) {
         const { fightInfo, fightMap } = FightG.getFightGlobal(req, res);
         // 战斗中,直接返回战斗信息
-        if (fightMap && fightMap.state === 0) {
+        if (fightMap && !continueDir) {
             return {
                 fightInfo,
                 fightMap

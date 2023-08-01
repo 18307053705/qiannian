@@ -1,16 +1,19 @@
 const { RoleG, KnapsackG, FightG } = require('../../global');
-const { knapsackFn } = require('../../utils');
+const knapsackFn = require('../../utils/knapsackFn');
 module.exports = {
     /**
      * 获取战斗奖励
      * @param {*} req 
      * @param {*} res
+     * @returns {*} data.results 怪物奖励信息
+     * @returns {*} data.tasks 任务描述信息
      */
     getFightReward: function (req, res) {
         const roleInfo = RoleG.getRoleGlobal(req, res);
         const knapsack = KnapsackG.getknapsackGlobal(req, res);
         const { fightMap } = FightG.getFightGlobal(req, res);
-        const { article = [], ext, num: freakNum } = fightMap.rivalMold;
+        const { rivalMold, num: freakNum } = fightMap;
+        const { article = [], ext } = rivalMold;
         const textReward = [];
         const artReward = {}; // 物品奖励
         const equipReward = {}; // 装备奖励
@@ -60,22 +63,16 @@ module.exports = {
         // 监听任务池
         // const tasks = taskFn.listenTask(req, freak.extDir['id'], freakNum);
         // return
-        const resultsInfo = {
-            textReward: tip ? tip : textReward.join(','),
+        const results = {
+            textReward: tip ? '' : textReward,
             exp: vipExp ? `${exp * freakNum}(${vipExp}倍经验)` : exp * freakNum,
             tael: vipTael ? `${tael * freakNum}(${vipTael}倍银两)` : tael * freakNum,
-            article: tip ? '' : textReward.join(','),
+            tip: tip,
         }
-        const newFightMap = FightG.updataFightMapGlobal(req, res, { results: resultsInfo, state: 1 });
-
-        res.send({
-            code: 0,
-            data: {
-                fightMap: newFightMap,
-                tasks
-            }
-        });
-
+        return {
+            results,
+            tasks: []
+        }
     },
 
 };

@@ -67,7 +67,7 @@ const FightPercent = ({ percent, color = 'red' }) => {
 }
 
 
-const FightDuke = ({ dirClick, fightDirInfp, fight }) => {
+const FightDuke = ({ dirClick, fight }) => {
     // const { dps = [], text, rival_text, mana, life, buffText = [] } = fightDirInfp;
     // const buff = Object.keys(fightInfo.buffs);
     // const backClick = useCallback(() => {

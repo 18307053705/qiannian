@@ -4,6 +4,10 @@ const creatPlayer = require('./creatPlayer');
 const releaseFight = require('./releaseFight');
 const creatFightAttr = require('./creatFightAttr');
 const computeFightDps = require('./computeFightDps');
+const playerNormalDir = require('./playerNormalDir');
+const getIsFightResults = require('./getIsFightResults');
+const getFightReward = require('./getFightReward');
+
 
 module.exports = {
     ...creatFight,
@@ -11,5 +15,8 @@ module.exports = {
     ...creatPlayer,
     ...releaseFight,
     ...creatFightAttr,
-    ...computeFightDps
+    ...computeFightDps,
+    ...playerNormalDir,
+    ...getIsFightResults,
+    ...getFightReward,
 }

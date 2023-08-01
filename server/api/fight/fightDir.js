@@ -8,16 +8,32 @@ module.exports = {
     fightDir: async (req, res) => {
         const { id = 0, p = 0 } = req.body;
         const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
-        const { rivalMold } = fightMap;
+        const { rivalMold, player } = fightMap;
+        const { players, rivals } = fightInfo;
         // 放弃战斗
         if (p === 9 && id === 1) {
-            return fightFn.releaseFight(req, res);
+            fightFn.releaseFight(req, res);
+            res.send({
+                code: 0,
+                path: '/grand'
+            });
+            return
         }
         // 开始计算战斗
+        // 定义回合文案
+        const fightRound = {
+            text: '', // 出招文案
+            // rival_text: '', // 怪物出招文案
+            buffText: [], // buff信息
+            dps: 0, // 造成的伤害
+            mana: '', // 消耗的法力
+            life: '',// 消耗的生命
+            statu: 0 // 结果
+        }
         // 我方属性
-        const playerAttr = fightFn.creatFightAttr(req, res, attr);
+        const playerAttr = fightFn.creatFightAttr(req, res, player.attr);
         // 敌方属性
-        const rivalAttr = fightFn.creatFightAttr(req, res, rival[0].attr);
+        const rivalAttr = fightFn.creatFightAttr(req, res, rivals[0].attr);
 
         // 捉宠物
         if (p === 9 && id === 2) {
@@ -33,27 +49,26 @@ module.exports = {
         }
         // 普通攻击
         if (p === 0 && id === 0) {
-            // fightFn
+            fightFn.playerNormalDir(req, res, playerAttr, rivalAttr, fightRound);
         }
         // 技能攻击
         if (p === 1) {
 
         }
+        // 获取战斗结果
+        if (fightFn.getFightResults(req, res)) {
+            return;
+        }
 
-
-
-
-        // const { fightInfo, fightMap } = fightFn.creatFight(req, res);
-        const { player } = fightMap;
-        const { players } = fightInfo;
+        const { fightMap: dataMap, fightInfo: dataInfo } = FightG.getFightGlobal(req, res);
         res.send({
             code: 0,
             data: {
                 fightInfo: {
-                    ...fightInfo,
-                    players: [player, ...players.filter(({ roleId }) => player.roleId !== roleId)],
+                    ...dataInfo,
+                    players: [fightMap.player, ...dataInfo.players.filter(({ roleId }) => fightMap.player.roleId !== roleId)],
                 },
-                fightMap
+                fightMap: dataMap
             }
         })
 

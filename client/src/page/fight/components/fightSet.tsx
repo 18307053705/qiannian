@@ -7,10 +7,13 @@ const list = [
     { value: 2, label: '药品' },
 ]
 
-const FightSet = ({ dirClick, art }) => {
+const FightSet = ({ dirClick, fightMap }) => {
+  
     const [dirList, setDirList] = useState({ art: [], drug: [] });
     const [type, setType] = useState(0);
     const [index, setIndex] = useState(0);
+    
+    const { art } = fightMap.player;
     const [artlist, setArtlist] = useState(art);
     const chengClick = useCallback((i) => {
         setIndex(i);

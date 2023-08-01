@@ -24,7 +24,7 @@ module.exports = {
                     // 攻击次数大于0
                     if (num > 0) {
                         num--;
-                        const curLife = ife - dps > 0 ? life - dps : 0;
+                        const curLife = life - dps > 0 ? life - dps : 0;
                         victory = curLife === 0
                         rival.attr.life = curLife;
                     }

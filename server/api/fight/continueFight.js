@@ -4,8 +4,8 @@ module.exports = {
     /**
      * 创建战斗
      */
-    creatFight: (req, res) => {
-        const { fightInfo, fightMap } = fightFn.creatFight(req, res);
+    continueFight: (req, res) => {
+        const { fightInfo, fightMap } = fightFn.creatFight(req, res, { continueDir: true });
         const { player } = fightMap;
         const { players } = fightInfo;
         res.send({

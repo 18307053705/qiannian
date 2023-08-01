@@ -1,5 +1,5 @@
-const Global = require("../../global");
-const { ROLE_Global } = require("../../global/roleG");
+const { RoleG, KnapsackG, GrandG } = require("../../global");
+const { releaseFight } = require("../../utils/fightFn/releaseFight");
 module.exports = {
     /**
      * 退出角色
@@ -10,10 +10,23 @@ module.exports = {
      */
     roleExit: async function (req, res, userid) {
         const user = userid || req.cookies["q_uid"];
-        const roleInfo = ROLE_Global[user];
+        const roleInfo = RoleG.getRoleGlobal(req, res);
         if (roleInfo) {
             const { role_id, socialize_pool } = roleInfo;
-            // //释放地图
+            // 释放全局地图缓存
+            GrandG.deleteDirGlobal(req, res);
+            // 释放全局战斗缓存
+            releaseFight(req, res);
+            // 保存角色信息
+            RoleG.saveRoleSql(req, res, user);
+            // 保存背包信息
+            KnapsackG.saveknapsackSql(req, res, role_id);
+            
+            // 释放全局背包缓存
+            KnapsackG.deleteknapsackGlobal(req, res, role_id);
+
+            // 释放全局角色缓存,必须最后释放,其余缓存皆是基于role_id
+            RoleG.deleteRoleGlobal(req, res, user);
             // delete Global.dir[role_id];
             // // 判断是否存战斗,存在则释放
             // const fightId = Global.fightRoleId[role_id];

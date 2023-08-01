@@ -20,7 +20,7 @@ module.exports = {
         const fightMap = FIGHT_MAP_Global[role_id];
         const newFightMap = {
             ...fightMap,
-            data
+            ...data
         }
         FIGHT_MAP_Global[role_id] = newFightMap;
         return JSON.parse(JSON.stringify(newFightMap));

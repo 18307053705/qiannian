@@ -4,7 +4,7 @@ const roleG = require('../roleG');
 
 module.exports = {
     /**
-     * 获取角色全局信息
+     * 获取全局指令信息
      * @param {*} req 
      * @param {*} res 
      * @returns {*} name:地图名称
