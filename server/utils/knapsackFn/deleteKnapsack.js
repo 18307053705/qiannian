@@ -18,6 +18,7 @@ module.exports = {
         const { data } = list ? { data: list } : KnapsackG.getknapsackGlobal(req, res);
         let chengData = [];
         let message = [];
+        let delInx = [];
         data.forEach(({ id, p, s, ...itme }, index) => {
             const articleItme = article[id];
             if (articleItme && (p === articleItme['p'] || p === articleItme['type'])) {

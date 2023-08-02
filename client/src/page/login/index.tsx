@@ -5,7 +5,8 @@ import './index.less';
 export default ({ history }) => {
     const [isLogin, setIsLogin] = useState(true);
     const callback = useCallback(() => {
-        history.push('/')
+        history.push('/');
+        
     }, [])
     return (
         <div className="login-register-page">

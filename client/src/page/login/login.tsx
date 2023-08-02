@@ -14,7 +14,7 @@ const Login = ({ setIsLogin, callback }) => {
 
     return (
         <div>
-            <div className="title">登录千年之战！</div>
+            <div className="title">登录千年！</div>
             {error ? <div className="error">账号密码有误！！！</div> : ''}
             <div>
                 <span>账号：</span>

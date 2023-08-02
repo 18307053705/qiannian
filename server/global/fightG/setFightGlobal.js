@@ -25,7 +25,7 @@ module.exports = {
             ...fightMap
         };
         FIGHT_MAP_Global[role_id] = fightMaps;
-        FIGHT_INFO_Global[fightId] = fightInfo;
+        FIGHT_INFO_Global[fightMaps.id] = fightInfo;
         return {
             fightInfo,
             fightMap: fightMaps

@@ -13,10 +13,6 @@ const JSON_KEYS = [
 
 // key  gang intersect ranks
 module.exports = {
-    JSON_KEYS,
-    socializeGlobal: {
-        // key：soci_id_key { type:1,line:{role_id:level},buff:{text,value},num:1] }
-    },
     // 设置势力全局信息
     setSocializeGlobal: function (req) {
         const { role_id, role_level, socialize_pool } = this.getRoleGlobal(req);

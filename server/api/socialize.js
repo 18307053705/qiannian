@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("../mysql");
 const Global = require("../global/index2");
+const {RoleG} = require("../global");
 const roleFn = require("../utils/roleFn");
 const socializeFn = require("../utils/socializeFn");
 const knapsackTable = require("../table/knapsack");
@@ -72,7 +73,7 @@ router.post("/create", async (req, res) => {
     await mysql.asyncAdd(petSql, petData);
     // 没有令牌消耗银两，反之消耗令牌
     if(!token){
-        Global.updateknapsackGlobal(req, {
+        Global.updateknapsackGlobal(req,res, {
             tael: tael - sumeTael
         })
     }else{
@@ -80,8 +81,8 @@ router.post("/create", async (req, res) => {
             data: chengData
         })
     }
-   
-    Global.updateRoleGlobal(req, {
+    
+    RoleG.updataRoleGlobal(req,res, {
         socialize_pool: {
             ...socialize_pool,
             [TYPE_MEUN_NAME[type]]: {
@@ -141,7 +142,7 @@ router.post("/detail", async (req, res) => {
         })
         const soci = compose.find((itme) => itme.id === role_id);
         socialize_pool[TYPE_MEUN_NAME[type]]['level'] = soci.level;
-        Global.updateRoleGlobal(req, {
+        RoleG.updataRoleGlobal(req,res, {
             socialize_pool
         })
         res.send({

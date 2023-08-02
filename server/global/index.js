@@ -3,6 +3,7 @@ const GrandG = require('./grandG');
 const FightG = require('./fightG');
 const KnapsackG = require('./knapsackG');
 const ErrorG = require('./errorG');
+const SocializeG = require('./socializeG');
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     GrandG,
     FightG,
     KnapsackG,
-    ErrorG
+    ErrorG,
+    SocializeG
 }

@@ -1,6 +1,6 @@
 const express = require("express");
 const fightFn = require("../utils/fightFn");
-const artFn = require("../utils/artFn");
+const artFn = require("../utils/artFn1");
 const Knapsack = require('../table/knapsack');
 const Global = require("../global/index2");
 const { error, ERR_MEUN } = require("../utils/errorFn");

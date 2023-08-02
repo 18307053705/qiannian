@@ -6,6 +6,9 @@ module.exports = {
      */
     creatFight: (req, res) => {
         const { fightInfo, fightMap } = fightFn.creatFight(req, res);
+        if(fightFn.getFightResults(req,res)){
+            return;
+        }
         const { player } = fightMap;
         const { players } = fightInfo;
         res.send({

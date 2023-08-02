@@ -34,7 +34,8 @@ app.use("*", async function (req, res, next) {
   if (!gatewayFn.checkApi(req)) {
     return errorG.loginError(res);
   }
-  if (!gatewayFn.roleCheck(req)) {
+  // 验证角色态
+  if (!gatewayFn.roleCheck(req, res)) {
     return errorG.roleError(res);
   }
   res.asyncQuery = mysql.asyncQuery;

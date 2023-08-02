@@ -159,7 +159,8 @@ const ELEMENT_5 = {
       career: 1,
       level: 1,
       attr: 1,
-    }
+      pet: true
+    },
   },
   5000001: {
     id: 5000001,
@@ -167,8 +168,9 @@ const ELEMENT_5 = {
     type: 5,
     ext: {
       career: 1,
-      level: 1,
+      level: 5,
       attr: 1,
+      pet: true
     }
   },
   5000002: {
@@ -184,8 +186,15 @@ const ELEMENT_5 = {
   },
   5000003: {
     id: 5000003,
-    name: "元素1.0",
-    type: 5
+    name: "组队boss",
+    type: 5,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+      // boss: true,
+      isRanks: true
+    }
   },
   5000004: {
     id: 5000004,

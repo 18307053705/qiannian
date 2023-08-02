@@ -1,5 +1,6 @@
 const { ErrorG, RoleG, KnapsackG } = require('../../global');
 const { AttributeTable } = require('../../table');
+const { roleFn } = require('../../utils');
 const MEUN = require('../../meun');
 module.exports = {
     /**
@@ -64,8 +65,8 @@ module.exports = {
                     { id: 0, n: '普通攻击' },
                     { id: 0, n: '普通攻击' },
                     { id: 0, n: '普通攻击' },
-                    { id: 1, n: '御宠之术', p: 9 },
-                    { id: 2, n: '放弃战斗', p: 9 },
+                    { id: 1, n: '放弃战斗', p: 9 },
+                    { id: 2, n: '御宠之术', p: 9 },
                 ]
             },
             task_pool: {
@@ -113,7 +114,7 @@ module.exports = {
         const friendsRes = res.asyncAdd(friendsSql, friendsData);
         await Promise.all([roleRes, knapsackRes, warehouseRes, friendsRes]);
         // 退出同账号下的其他角色
-        await globalFn.roleExit(req, res);
+        await roleFn.roleExit(req, res);
         // 保存全局角色信息,并且记录登录时间
         RoleG.setRoleGlobal(req, res, sqlInfo);
         // 保存全局背包信息

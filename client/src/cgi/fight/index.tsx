@@ -4,17 +4,9 @@ import { AttrType } from "../base";
 const creatFightUrl = '/fight/creatFight';
 const fightDirUrl = '/fight/fightDir';
 const exitFightUrl = '/fight/exitFight';
-const setFightDirUrl = '/fight/setFightDir';
-const getFightDirUrl = '/fight/getFightDir';
-
-
-
-const getFightInfoUrl = '/fight/getFightInfo';
-
-// const fightDirUrl = '/fight/fightDir';
-const fightCleanUrl = '/fight/clean';
+const getFightConfigUrl = '/fight/getFightConfig';
+const setFightConfigUrl = '/fight/setFightConfig';
 const fightContinueUrl = '/fight/continue';
-const fightGiveUrl = '/fight/give';
 
 type FightInfoType = {
     rival: {
@@ -47,55 +39,29 @@ export async function creatFight() {
 export async function fightDir(data: { id: number, p: number }) {
     return await post(fightDirUrl, data);
 }
-
+// 继续
+export async function fightContinue() {
+    return await post(fightContinueUrl);
+}
 // 退出战斗 
 export async function exitFight() {
     return await post(exitFightUrl);
 }
 
 
-//获取角色战斗指令列表
-export async function getFightDri() {
-    return await post(getFightDirUrl);
+//获取角色战斗指令
+export async function getFightConfig() {
+    return await post(getFightConfigUrl);
 }
 
 
 type setFightDirReq = {
-    index: number, // 下标
-    type: number, // 更换类型 1技能 2 物品
-    dir: number
+    dir_type: number, // 指令类型 1技能 2 物品 
+    dir_inx: number, // 更换的指令下标
+    dir_id: number //替换的指令id
 }
 
 // 更换角色战斗指令
-export async function setFightDir(data: setFightDirReq) {
-    return await post(setFightDirUrl, data);
+export async function setFightConfig(data: setFightDirReq) {
+    return await post(setFightConfigUrl, data);
 }
-
-
-
-
-
-
-// //获取角色战斗信息
-// export async function getFightInfo() {
-//     return await post(getFightInfoUrl);
-// }
-
-
-
-
-
-
-// // 清除战斗元素
-// export async function fightClean() {
-//     return await post(fightCleanUrl);
-// }
-
-// // 清除战斗元素
-// export async function fightContinue() {
-//     return await post(fightContinueUrl);
-// }
-// // 放弃战斗战斗
-// export async function fightGive() {
-//     return await post(fightGiveUrl);
-// }

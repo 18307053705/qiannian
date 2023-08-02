@@ -1,4 +1,4 @@
-const { FightG, RoleG, KnapsackG } = require('../../global');
+const { FightG, RoleG } = require('../../global');
 const { knapsackFn } = require('../../utils');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
      */
     setFightConfig: async (req, res) => {
         const { dir_id, dir_type, dir_inx } = req.body;
-        const { fightMap } = FightG.getFightGlobal(req, res);
+
         const { skill_pool } = RoleG.getRoleGlobal(req, res);
         const { art, fight } = skill_pool;
         // 对应指令列表
@@ -20,7 +20,7 @@ module.exports = {
                 const { n, id, p, l } = art[key]
                 // 1:单攻 2:群攻 3:buff 且已领悟
                 if ([1, 2, 3].includes(p) && l !== -1) {
-                    list.push({ n, id, })
+                    list.push({ n, id })
                 }
             })
         }
@@ -44,29 +44,20 @@ module.exports = {
         if (itme && (fight[dir_inx] === null || fight[dir_inx].id !== dir_id)) {
             fight[dir_inx] = {
                 ...itme,
-                dir_type,
+                p: dir_type,
             };
-            const { player } = Global.getFight(req);
-            player.forEach((itme) => {
-                if (itme.id === role_id) {
-                    itme.art = fight
-                }
-            })
-            const result = Global.updateRoleGlobal(req, { skill_pool });
-            Global.updataFight(req, { player })
-            res.send({
-                code: result ? 0 : 100003,
-                data: result ? fight.map((itme) => (itme ? { id: itme.id, name: itme.n, s: itme.s } : { id: 0, name: '普通攻击' })) : '更新失败'
-            })
-            return;
+            RoleG.updataRoleGlobal(req, res, { skill_pool });
 
+            const { fightMap } = FightG.getFightGlobal(req, res);
+            const { player } = fightMap;
+            player.art = fight;
+            FightG.updataFightMapGlobal(req, res, { player });
             res.send({
                 code: 0,
                 data: {
-                    drug,
-                    art,
-                    config: fightMap.player.art
+                    config: fight
                 }
-            });
+            })
         }
     }
+}

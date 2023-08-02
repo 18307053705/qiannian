@@ -1,5 +1,5 @@
 const tokenFn = require("./tokenFn");
-const Global = require("../global/index2");
+const { RoleG } = require("../global");
 // 无需网关验证的请求
 const whiteApiList = [
   "/api/user/login",
@@ -25,11 +25,11 @@ module.exports = {
     return token && user && pass && tokenFn.analysToken(token, user, pass);
   },
   // 角色验证
-  roleCheck: function (req) {
+  roleCheck: function (req, res) {
     if ([...whiteApiList, ...roleApiList].includes(req.originalUrl)) {
       return true;
     }
-    return Global.getRoleGlobal(req);
+    return RoleG.getRoleGlobal(req, res);
 
   }
 };

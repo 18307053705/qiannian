@@ -5,9 +5,12 @@ module.exports = {
      * @param {*} res 
      */
     loginError: function (res) {
+        res.clearCookie('q_uid');
+        res.clearCookie('token');
+        res.clearCookie('q_m');
         res.send({
-            code: ERROR_MEUN.ROLE_ERROR,
-            message: ERROR_TYPE.ROLE_ERROR
+            code: ERROR_MEUN.LOGIN_ERROR,
+            message: ERROR_TYPE.LOGIN_ERROR
         });
     }
 }

@@ -5,8 +5,14 @@ const releaseFight = require('./releaseFight');
 const creatFightAttr = require('./creatFightAttr');
 const computeFightDps = require('./computeFightDps');
 const playerNormalDir = require('./playerNormalDir');
-const getIsFightResults = require('./getIsFightResults');
+const getFightResults = require('./getFightResults');
 const getFightReward = require('./getFightReward');
+const drugDir = require('./drugDir');
+const playerArtDir = require('./playerArtDir');
+const computeBuffs = require('./computeBuffs');
+const catchPet = require('./catchPet');
+const rivalNormalDir = require('./rivalNormalDir');
+const lingXue = require('./lingXue');
 
 
 module.exports = {
@@ -17,6 +23,12 @@ module.exports = {
     ...creatFightAttr,
     ...computeFightDps,
     ...playerNormalDir,
-    ...getIsFightResults,
+    ...getFightResults,
     ...getFightReward,
+    ...drugDir,
+    ...playerArtDir,
+    ...computeBuffs,
+    ...catchPet,
+    ...rivalNormalDir,
+    ...lingXue
 }

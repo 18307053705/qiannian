@@ -32,7 +32,7 @@ module.exports = {
      * @returns {*} role_integral:各类积分
      * @returns {*} pet_pool:宠物池({c:当前宠物信息(id,n,攻击，暴击，命中,s:状态0:休息1:出战，2附体3上架，技能,id,l,r,),l:宠物房列表id,n,s  x:宠物房最大空间})
      * @returns {*} treasure_pool:聚宝盆，珍宝房屋({fw房屋:{exp:10000000,ext:10_10_10_10_10_10_10,g:0},xz勋章:1000000,hb徽标:10000000,lp令牌:10000000,jbp: 聚宝盆00000})
-     * @returns {*} role_lx:忘记作用
+     * @returns {*} role_lx: 灵血
      */
     getRoleGlobal: function (req, res, { role_id, attr } = {}) {
         const user = req.cookies["q_uid"];

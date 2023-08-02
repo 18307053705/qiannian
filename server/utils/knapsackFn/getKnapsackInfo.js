@@ -7,7 +7,7 @@ module.exports = {
      * @param {*} data.role_id 可选参数
      * @returns {*} Promise(knapsack:{data:[],yuanbao,tael}| undefined)
      */
-    getKnapsackInfo: async function (req, res, { role_id }) {
+    getKnapsackInfo: async function (req, res, { role_id } = {}) {
         const knapsack = KnapsackG.getknapsackGlobal(req, res, role_id);
         if (knapsack) {
             return knapsack;

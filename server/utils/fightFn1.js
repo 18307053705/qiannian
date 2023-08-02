@@ -1,11 +1,11 @@
 const Global = require("../global/index2");
 const Attribute = require("../table/attribute");
-const Knapsack = require('../table/knapsack');
+const Knapsack = require('../table/knapsack1');
 const Art = require("../table/art");
 const roleFn = require("./roleFn");
 const knapsackFn = require("./knapsackFn1");
 const taskFn = require('./taskFn');
-const artFn = require('./artFn');
+const artFn = require('./artFn1');
 const petFn = require('./petFn');
 // 战斗相关api
 module.exports = {

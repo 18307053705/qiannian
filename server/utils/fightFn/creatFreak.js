@@ -9,7 +9,7 @@ module.exports = {
      */
     creatFreak: function (req, res, freak) {
         const { name, ext } = freak;
-        const { career, level, attr, boss } = ext;
+        const { career, level, attr, boss, isRanks } = ext;
         const attrs = AttributeTable.getFreakBaseAttr(career);
         const addition = level * attr;
         Object.keys(attrs).forEach((key) => {
@@ -18,7 +18,7 @@ module.exports = {
                 attrs[`${key}_max`] = attrs[key];
                 return;
             }
-            attrs[key] *= addition;
+            attrs[key] *= isRanks ? 0 : addition;
         });
         // boss只有一个,非boss存在多个
         let num = Math.floor(Math.random() * ((boss ? 1 : 5) - 1)) + 1;

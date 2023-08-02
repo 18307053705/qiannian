@@ -1,6 +1,6 @@
 
 const Equip = require('./equip');
-const knapsack = require('./knapsack');
+const knapsack = require('./knapsack1');
 const { ELEMENT_5, ELEMENT_1 } = require('./element');
 // 全部奖励实例
 // article: [Equip[1], { ...knapsack[1], num: 5 }],

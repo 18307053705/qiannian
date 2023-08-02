@@ -1,6 +1,6 @@
 module.exports = {
     /**
-    * 获取怪物对应基础属性
+    * 获取宠物基础属性
     * @param {*} career 职业1-3
     * @returns {*} attr:对应基础属性,不包含元素属性
     */

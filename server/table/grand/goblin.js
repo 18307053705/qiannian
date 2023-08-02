@@ -16,7 +16,7 @@ const goblinGrand = {
         data: [
             [
                 [],
-                [[ELEMENT_5[5000000], ELEMENT_5[5000001]]],
+                [[ELEMENT_5[5000000], ELEMENT_5[5000001], ELEMENT_5[5000003]]],
                 [],
                 []
             ]

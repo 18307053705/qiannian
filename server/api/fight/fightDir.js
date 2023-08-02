@@ -7,9 +7,10 @@ module.exports = {
      */
     fightDir: async (req, res) => {
         const { id = 0, p = 0 } = req.body;
-        const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
-        const { rivalMold, player } = fightMap;
-        const { players, rivals } = fightInfo;
+        // 组队的情况存在队友击杀,进来计算战斗结果
+        if (fightFn.getFightResults(req, res)) {
+            return;
+        }
         // 放弃战斗
         if (p === 9 && id === 1) {
             fightFn.releaseFight(req, res);
@@ -19,56 +20,84 @@ module.exports = {
             });
             return
         }
+
         // 开始计算战斗
         // 定义回合文案
         const fightRound = {
-            text: '', // 出招文案
-            // rival_text: '', // 怪物出招文案
-            buffText: [], // buff信息
-            dps: 0, // 造成的伤害
-            mana: '', // 消耗的法力
-            life: '',// 消耗的生命
+            message: '', // 错误提示
+            dps: '', // 造成的伤害
+            rivalDps: 0, // 怪物伤害
+            life: 0, // 恢复的生命
+            mana: 0, // 恢复的法力
+            // text: 0, // 出招文案
+            // // rival_text: '', // 怪物出招文案
+            // buffText: [], // buff信息
+
+            // mana: '', // 消耗的法力
+            // life: '',// 消耗的生命
             statu: 0 // 结果
         }
+        // buffs计算
+        fightFn.computeBuffs(req, res);
+        // 获取战斗信息
+        const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
+        const { player } = fightMap;
+        const { rivals } = fightInfo;
         // 我方属性
         const playerAttr = fightFn.creatFightAttr(req, res, player.attr);
         // 敌方属性
         const rivalAttr = fightFn.creatFightAttr(req, res, rivals[0].attr);
-
         // 捉宠物
         if (p === 9 && id === 2) {
-            // 判断是否可捕捉
-            if (rivalMold.pet) {
-
+            fightRound.message = await fightFn.catchPet(req, res);
+            // 无返回即为捕捉成功
+            if (!fightRound.message) {
+                return
             }
         }
 
         // 使用物品
-        if (p === 1) {
-
+        if (p === 2) {
+            fightRound.message = fightFn.drugDir(req, res, id);
         }
+
         // 普通攻击
         if (p === 0 && id === 0) {
             fightFn.playerNormalDir(req, res, playerAttr, rivalAttr, fightRound);
         }
+
         // 技能攻击
         if (p === 1) {
-
+            fightFn.playerArtDir(req, res, playerAttr, rivalAttr, fightRound, id);
         }
+
         // 获取战斗结果
         if (fightFn.getFightResults(req, res)) {
             return;
         }
+        
+        // 怪物出招
+        if (fightFn.rivalNormalDir(req, res, rivalAttr, playerAttr, fightRound)) {
+            return;
+        }
+        // 灵血补充
+        fightFn.lingXue(req, res, fightRound);
 
         const { fightMap: dataMap, fightInfo: dataInfo } = FightG.getFightGlobal(req, res);
+        const { life, mana } = fightRound;
         res.send({
             code: 0,
             data: {
                 fightInfo: {
                     ...dataInfo,
-                    players: [fightMap.player, ...dataInfo.players.filter(({ roleId }) => fightMap.player.roleId !== roleId)],
+                    players: [dataMap.player, ...dataInfo.players.filter(({ roleId }) => fightMap.player.roleId !== roleId)],
                 },
-                fightMap: dataMap
+                fightMap: dataMap,
+                fightRound: {
+                    ...fightRound,
+                    life: life > 0 ? `[+${life}]` : `[${life}]`,
+                    mana: mana > 0 ? `[+${mana}]` : `[${mana}]`,
+                }
             }
         })
 

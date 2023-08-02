@@ -63,14 +63,11 @@ module.exports = {
         // 监听任务池
         // const tasks = taskFn.listenTask(req, freak.extDir['id'], freakNum);
         // return
-        const results = {
+        return {
             textReward: tip ? '' : textReward,
             exp: vipExp ? `${exp * freakNum}(${vipExp}倍经验)` : exp * freakNum,
             tael: vipTael ? `${tael * freakNum}(${vipTael}倍银两)` : tael * freakNum,
             tip: tip,
-        }
-        return {
-            results,
             tasks: []
         }
     },

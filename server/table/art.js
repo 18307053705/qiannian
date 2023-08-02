@@ -1,4 +1,4 @@
-// 技能类型p 1:单攻 2:群攻 3:buff 4:天赋 5 宠物天赋
+// 技能类型p 1:单攻 2:群攻 3:buff 4:天赋 5:宠物天赋
 // 基础数值v 升级增加up 转生rp 消耗d 目标数量t
 // 增伤 atk 吸血 suck 破防 ignore
 module.exports = {

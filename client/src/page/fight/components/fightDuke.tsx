@@ -1,11 +1,10 @@
-import React, { useCallback } from "react";
-import { backGrand } from '@utils/grand';
-import { fightGive } from '@cgi/fight';
+import React from "react";
 
 type fightType = {
     fightInfo: {
         players: any[],
         rivals: { attr: any, name: string }[],
+
     },
     fightMap: {
         player: any
@@ -67,16 +66,9 @@ const FightPercent = ({ percent, color = 'red' }) => {
 }
 
 
-const FightDuke = ({ dirClick, fight }) => {
-    // const { dps = [], text, rival_text, mana, life, buffText = [] } = fightDirInfp;
-    // const buff = Object.keys(fightInfo.buffs);
-    // const backClick = useCallback(() => {
-    //     fightGive().then(() => {
-    //         backGrand()
-    //     })
-    // }, [])
-    const { fightInfo, fightMap }: fightType = fight;
-    const { players, rivals } = fightInfo;
+const FightDuke = ({ dirClick, fight, setPanel }) => {
+    const { fightInfo, fightMap, fightRound = { life: '', mana: '', dps: '',message:'' } } = fight;
+    const { players, rivals, buffs } = fightInfo;
     const { player } = fightMap;
     const artList1 = player.art.slice(0, 3);
     const artList2 = player.art.slice(3, 6);
@@ -87,49 +79,38 @@ const FightDuke = ({ dirClick, fight }) => {
         <div className="duke">
             {/* 技能栏1 */}
             <div>{art(dirClick, artList1)}</div>
-            {/* <div>{text}</div>
-            <div>{rival_text}</div> */}
             {/* 敌方状态 */}
-            <div>
-                <span>敌命:</span>
-                [{rivalAttr.lifeText}]
-            </div>
+            <div>敌命:[{rivalAttr.lifeText}]{fightRound.dps} </div>
             {/* 敌方血量百分比 */}
             {rivalAttr.stateList.map(({ percent }, index) => <FightPercent key={index} percent={percent} />)}
             {/* 我的状态 */}
-            <div>
-                <div>你命:{`${player.attr.life}/${player.attr.life_max}`}</div>
-                {/* 我方血量百分比 */}
-                <FightPercent percent={(player.attr.life / player.attr.life_max * 100).toFixed(0)} />
-                <div>你法:{`${player.attr.mana}/${player.attr.mana_max}`}</div>
-                {/* 我方法力百分比 */}
-                <FightPercent percent={(player.attr.mana / player.attr.mana_max * 100).toFixed(0)} color='blue' />
-            </div>
+            <div>你命:{`${player.attr.life}/${player.attr.life_max}${fightRound.life}`}</div>
+            {/* 我方血量百分比 */}
+            <FightPercent percent={(player.attr.life / player.attr.life_max * 100).toFixed(0)} />
+            <div>你法:{`${player.attr.mana}/${player.attr.mana_max}${fightRound.mana}`}</div>
+            {/* 我方法力百分比 */}
+            <FightPercent percent={(player.attr.mana / player.attr.mana_max * 100).toFixed(0)} color='blue' />
             {/* 技能栏2 */}
             <div>{art(dirClick, artList2)}</div>
             {/* 技能栏3 */}
             <div>{art(dirClick, artList3)}</div>
             {/* buff展示 */}
-            {/* {buffText.length ? <div>----------------战斗buff--------------</div> : ''}
-            {buffText.map((itme, index) => (<div key={index}>{itme}</div>))} */}
+            {
+                Object.values(buffs).map(({ t, text }: any, index) => (<div key={index}>{`${text},剩余${t}回合。`}</div>))
+            }
+
             {/* 我方成员状态 */}
             <div>
                 <span>状态</span>:
                 {
                     playerAttr.stateList.map(({ name, percent }, index) => (
-                        <span
-                            key={index}
-                            className="g_u"
-                            onClick={() => { dirClick('player', index) }
-                            }>
-                            <span>{name}({percent}%)</span>
-                        </span>
+                        <span key={index} >{name}({percent}%)</span>
                     ))
                 }
             </div>
             {/* 宠物 */}
             <div><span>宠物</span>:{player['pet'] ? player['pet'].name : '无'}</div>
-            <div><span>战斗设置:</span><span className="g_u_end">更换设置</span></div>
+            <div><span>战斗设置:</span><span className="g_u_end" onClick={() => { setPanel('set') }}>更换设置</span></div>
 
         </div>
     )
