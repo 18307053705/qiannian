@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
 import { getFriendsList, friendsApply } from '@cgi/friends';
+import { createFightDir } from '@cgi/grand';
 import { getEquipName } from '@utils/equip';
 import { Input } from "@components";
 const Plater = ({ history }) => {
@@ -43,7 +44,7 @@ const Plater = ({ history }) => {
                     <span className="g_u"><span onClick={() => { history.push('/shopping', { role_id: state.role_id }) }}>店铺</span></span>
                     <span className="g_u"><span>赠送</span></span>
                     {!isFriend && <span className="g_u"><span onClick={applyClick}>加好友</span></span>}
-                    <span className="g_u"><span>切磋</span></span>
+                    <span className="g_u"><span onClick={() => { createFightDir({ role_id: state.role_id, type: 3 }) }}>切磋</span></span>
                 </div>
                 <div>
                     <span className="g_u"><span>帮会</span></span>

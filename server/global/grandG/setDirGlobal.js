@@ -12,10 +12,11 @@ module.exports = {
      * @param {*} dirInfo.eleDir:指令信息(完整元素信息)
      * @param {*} dirInfo.address:坐标
      * @param {*} dirInfo.currentDir:当前指令信息,如战斗对手信息,任务信息等
+     * @param {*} data.roleId: 设置目标的指令信息
      */
-    setDirGlobal: function (req, res, dirInfo) {
+    setDirGlobal: function (req, res, dirInfo, { roleId } = {}) {
         const { role_id } = roleG.getRoleGlobal(req, res);
-        GRAND_Global[role_id] = dirInfo
+        GRAND_Global[roleId || role_id] = dirInfo
     }
 
 }

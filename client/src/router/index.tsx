@@ -106,12 +106,12 @@ const Root = () => {
             }
         });
         // 请求枚举列表
-        getMeunList().then(({ data }) => {
-            dispatch({
-                type: GET_MEUN_LIST,
-                data
-            })
-        })
+        // getMeunList().then(({ data }) => {
+        //     dispatch({
+        //         type: GET_MEUN_LIST,
+        //         data
+        //     })
+        // })
     }, [])
     // 登录态验证
     // goLogin();

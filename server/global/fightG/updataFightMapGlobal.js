@@ -15,14 +15,14 @@ module.exports = {
      * @param {*} fightMap.player 我的信息
      * @returns {*} fightMap
      */
-    updataFightMapGlobal: function (req, res, data) {
+    updataFightMapGlobal: function (req, res, data, roleId, jjj) {
         const { role_id } = roleG.getRoleGlobal(req, res);
-        const fightMap = FIGHT_MAP_Global[role_id];
+        const fightMap = FIGHT_MAP_Global[roleId || role_id];
         const newFightMap = {
             ...fightMap,
             ...data
         }
-        FIGHT_MAP_Global[role_id] = newFightMap;
+        FIGHT_MAP_Global[roleId || role_id] = newFightMap;
         return JSON.parse(JSON.stringify(newFightMap));
     }
 

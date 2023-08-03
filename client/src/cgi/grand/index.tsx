@@ -1,6 +1,7 @@
 import { post } from "@request";
-const moveDirUrl = `/grand/sendDir`;
-const tpDirUrl = `/grand/tp`;
+const moveDirUrl = '/grand/sendDir';
+const tpDirUrl = '/grand/tp';
+const createFightDirUrl = '/grand/createFightDir';
 
 export interface getGrandRes {
   eleList: any[][];
@@ -28,11 +29,15 @@ export const initGrandInfo: getGrandRes = {
 };
 
 // 角色移动指令，并获取角色所在地图信息
-export async function moveDir(data = { dir: -1 }) {
-  return await post(moveDirUrl, data);
+export function moveDir(data = { dir: -1 }) {
+  return post(moveDirUrl, data);
 }
 
 // 传送指令
-export async function tpDir(data: { address: string }) {
-  return await post(tpDirUrl, data);
+export function tpDir(data: { address: string }) {
+  return post(tpDirUrl, data);
+}
+// 创建战斗指令
+export function createFightDir(data: { role_id: string, type: 3 | 4 }) {
+  return post(createFightDirUrl, data);
 }

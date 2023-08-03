@@ -5,7 +5,7 @@ interface requestConfig {
   type?: Method;
 }
 
-const URL = "//qiannian.com/api";
+const URL =  window.location.hostname + "/api" || "//qiannian.com/api";
 
 export interface BaseRequstData {
   [key: string]: any;

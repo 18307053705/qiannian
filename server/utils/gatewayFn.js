@@ -1,5 +1,5 @@
 const tokenFn = require("./tokenFn");
-const { RoleG } = require("../global");
+const { RoleG, FightG } = require("../global");
 // 无需网关验证的请求
 const whiteApiList = [
   "/api/user/login",
@@ -11,6 +11,20 @@ const roleApiList = [
   "/api/role/roleLogin",
   "/api/role/getRoleList",
   "/api/role/createRole",
+];
+
+
+// 无需验证战斗的请求
+const roleFightApiList = [
+  "/api/chat/get",
+  "/api/fight/creatFight",
+  "/api/fight/fightDir",
+  "/api/fight/continue",
+  "/api/fight/getFightConfig",
+  "/api/fight/setFightConfig",
+  "/api/player/playerFightDir",
+  "/api/player/creatPlayerFight",
+  "/api/player/exitFight",
 ];
 // 网关验证
 module.exports = {
@@ -30,6 +44,24 @@ module.exports = {
       return true;
     }
     return RoleG.getRoleGlobal(req, res);
-
+  },
+  // 判断是否处于战斗中
+  roleFightCheck: function (req, res) {
+    if (roleFightApiList.includes(req.originalUrl)) {
+      return true;
+    }
+    const { fightMap } = FightG.getFightGlobal(req, res);
+    if (fightMap) {
+      console.log('走到这里了：',req.originalUrl)
+      res.send({
+        code: 0,
+        path: (fightMap.state === 1 || fightMap.state === 2) ? "fight" : "playerFight"
+      })
+      return false
+    }
+    return true;
   }
+
+
+
 };

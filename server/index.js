@@ -38,6 +38,10 @@ app.use("*", async function (req, res, next) {
   if (!gatewayFn.roleCheck(req, res)) {
     return errorG.roleError(res);
   }
+  // 判断角色是否处于战斗状态
+  if (!gatewayFn.roleFightCheck(req, res)) {
+    return;
+  }
   res.asyncQuery = mysql.asyncQuery;
   res.asyncAdd = mysql.asyncAdd;
 
@@ -53,7 +57,7 @@ app.use("/api/meun", require("./api/meun"));
 app.use("/api/grand", require("./api/grand"));
 app.use("/api/fight", require("./api/fight"));
 app.use("/api/knapsack", require("./api/knapsack"));
-app.use("/api/player", require("./api/friends"));
+app.use("/api/player", require("./api/player"));
 app.use("/api/friends", require("./api/friends"));
 app.use("/api/socialize", require("./api/socialize"));
 app.use("/api/shopping", require("./api/shopping"));

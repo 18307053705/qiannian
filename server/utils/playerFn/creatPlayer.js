@@ -9,8 +9,8 @@ module.exports = {
      * @returns {*} player 自身信息
      */
     creatPlayer: function (req, res, type, role_id) {
-        const roleInfo = RoleG.getRoleGlobal(req, res)
-        const knapasack = KnapsackG.getknapsackGlobal(req, res);
+        const roleInfo = RoleG.getRoleGlobal(req, res, { role_id });
+        const knapasack = KnapsackG.getknapsackGlobal(req, res, role_id);
         // const pet = Global.getPetGlobal(req);
         const { fight, art } = roleInfo.skill_pool;
         const knapasackId = {};
@@ -55,7 +55,7 @@ module.exports = {
             }
         }
         // 更新战斗信息
-        RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool });
+        RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool },{role_id});
         // 计算角色属性
         const data = roleFn.computeRoleAttr(req, res, roleInfo);
         // 获取宠物信息

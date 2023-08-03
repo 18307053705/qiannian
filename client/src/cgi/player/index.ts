@@ -1,20 +1,20 @@
 import { post } from "@request";
 
-const playerApplyUrl = "/player/playerApply";
-const playerApplyActiveUrl = "/player/playerApplyActive";
-const playerDeleteUrl = "/player/playerDelete";
+const creatPlayerFightUrl = "/player/creatPlayerFight";
+const playerFightDirUrl = "/player/playerFightDir";
+const exitFightUrl = "/player/exitFight";
 
-// 好友申请
-export const playerApply = data => {
-  return post(playerApplyUrl, data);
+// 玩家战斗
+export const creatPlayerFight = () => {
+  return post(creatPlayerFightUrl);
 };
 
-// 好友申请处理
-export const playerApplyActive = (data: { state: 0 | 1; role_id: string }) => {
-  return post(playerApplyActiveUrl, data);
+// 玩家战斗指令
+export const playerFightDir = (data) => {
+  return post(playerFightDirUrl,data);
 };
 
-// 好友删除
-export const playerDelete = (data: { role_id: string }) => {
-  return post(playerDeleteUrl, data);
+// 退出战斗
+export const exitFight = (data) => {
+  return post(exitFightUrl,data);
 };

@@ -129,9 +129,14 @@ export const config: RouterType[] = [
     component: lazy(() => import("@page/cornucopia"))
   },
   {
-    name: "聚宝盆界面",
+    name: "地图界面",
     path: "/worldMap",
     component: lazy(() => import("@page/worldMap"))
+  },
+  {
+    name: "玩家战斗界面",
+    path: "/playerFight",
+    component: lazy(() => import("@page/playerFight"))
   },
 ];
 

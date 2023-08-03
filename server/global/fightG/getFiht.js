@@ -1,5 +1,4 @@
 const { FIGHT_MAP_Global, FIGHT_INFO_Global } = require('./config');
-const roleG = require('../roleG');
 
 module.exports = {
     /**
@@ -20,26 +19,9 @@ module.exports = {
      * @returns {*} fightInfo.players 队友信息[]
      * @returns {*} fightInfo.buffs buff信息
      */
-    getFightGlobal: function (req, res, roleId) {
+    getFightG: function (req, res, roleId) {
+        return { FIGHT_MAP_Global }
 
-        const roleInfo = roleG.getRoleGlobal(req, res);
-        if (!roleId && !roleInfo) {
-            return {};
-        }
-        const fightMap = FIGHT_MAP_Global[roleId || roleInfo.role_id];
-        // if (roleId && fightMap) {
-        //     console.log(fightMap.rivalId, "fightMap...");
-        //     console.log(roleId, "roleId...");
-        // }
-
-        if (fightMap) {
-            const fightInfo = FIGHT_INFO_Global[fightMap.id];
-            return {
-                fightInfo: JSON.parse(JSON.stringify(fightInfo)),
-                fightMap: JSON.parse(JSON.stringify(fightMap)),
-            }
-        }
-        return {};
     }
 
 }
