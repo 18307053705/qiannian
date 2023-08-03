@@ -3,7 +3,7 @@ require("express-async-errors");
 const cookieParser = require("cookie-parser");
 const gatewayFn = require("./utils/gatewayFn");
 const errorFn = require("./utils/errorFn");
-const globalFn = require("./utils/globalFn");
+// const globalFn = require("./utils/globalFn");
 const errorG = require("./global/errorG");
 const mysql = require("./mysql");
 
@@ -53,7 +53,7 @@ app.use("/api/meun", require("./api/meun"));
 app.use("/api/grand", require("./api/grand"));
 app.use("/api/fight", require("./api/fight"));
 app.use("/api/knapsack", require("./api/knapsack"));
-app.use("/api/player", require("./api/player"));
+app.use("/api/player", require("./api/friends"));
 app.use("/api/friends", require("./api/friends"));
 app.use("/api/socialize", require("./api/socialize"));
 app.use("/api/shopping", require("./api/shopping"));

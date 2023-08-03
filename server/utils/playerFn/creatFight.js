@@ -9,8 +9,8 @@ const { creatPlayer } = require("./creatPlayer");
  * @param {*} currentDir 
  * @returns {boolean} true组队中，无需创建战斗
  */
-function isRanksFight(req, res, currentDir) {
-    const { id } = currentDir;
+function isCreateFight(req, res, currentDir) {
+    const { role_id,add } = currentDir;
     const { line = {} } = SocializeG.getSocializeGlobal(req, res, 'ranks');
     let fight = undefined;
     // 查找是否有队友与自己在击杀相同的组队怪物，未找到方可创建
@@ -37,46 +37,41 @@ function isRanksFight(req, res, currentDir) {
     }
 }
 
-
 module.exports = {
     /**
      * 创建战斗
      * @param {*} req 
      * @param {*} res 
-     * @param {*} data.type 战斗类型(1:玩家VS人机,2:多玩家VS人机家,3:切磋,4:击杀)
+     * @param {*} data.type 战斗类型,默认1 1-玩家 VS 人机  2-玩家 VS 玩家 3-多玩家 VS 人机
      * @param {boolean} data.continueDir 创建战斗
-     * @returns {*} fightMap 战斗信息
-     * @returns {*} fightInfo 战斗具体信息
+     * @returns {Promise} fightMap 战斗信息
+     * @returns {Promise} rivalFightMap 对方战斗信息
      */
-    creatFight: function (req, res, { type, continueDir } = {}) {
-        const { fightInfo, fightMap } = FightG.getFightGlobal(req, res);
+    creatFight: async function (req, res, role_id) {
+        const { fightMap } = FightG.getFightGlobal(req, res);
+        const { rivalMold } = fightMap;
+        const { fightMap: rivalFightMap } = FightG.getFightGlobal(req, res, rivalMold.role_id || role_id);
         // 战斗中,直接返回战斗信息
-        if (fightMap && !continueDir) {
+        if (fightMap) {
             return {
-                fightInfo,
-                fightMap
+                fightMap,
+                rivalFightMap
             };
         }
-
         // 不存在则创建战斗
         const { currentDir } = GrandG.getDirGlobal(req, res);
-        const { ext } = currentDir;
-        const { isRanks } = ext;
+        // 对方的角色id,是否死斗
+        const { role_id, type } = currentDir;
+        const player = creatPlayer(req, res, type);
 
-        if (isRanks) {
-            const data = isRanksFight(req, res, currentDir);
-            if (data) {
-                return data;
-            }
-        }
-
+    
         // 创建怪物属性
         const rivals = creatFreak(req, res, currentDir);
         // 创建玩家属性
         const player = creatPlayer(req, res);
         // 创建化全局战斗
         const fightMaps = {
-            type: isRanks ? 2 : 1,
+            type: isRanks ? 3 : 1,
             rivalMold: currentDir,
             num: rivals.length,
             isContinue: !currentDir.boss,

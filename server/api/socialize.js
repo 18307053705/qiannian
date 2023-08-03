@@ -1,7 +1,7 @@
 const express = require("express");
 const mysql = require("../mysql");
 const Global = require("../global/index2");
-const {RoleG} = require("../global");
+const { RoleG } = require("../global");
 const roleFn = require("../utils/roleFn");
 const socializeFn = require("../utils/socializeFn");
 const knapsackTable = require("../table/knapsack");
@@ -54,9 +54,9 @@ router.post("/create", async (req, res) => {
         })
     }
 
-    const sumeTael =  type === 3 ? 100000 : 5000000;
+    const sumeTael = type === 3 ? 100000 : 5000000;
     // 没有令牌则扣除银两
-    if(!token){
+    if (!token) {
         if (tael < sumeTael) {
             res.send({
                 code: 0,
@@ -72,17 +72,17 @@ router.post("/create", async (req, res) => {
     const petData = [name, 1, JSON.stringify(compose), text || '', type, role_id, '[]', '0/10000'];
     await mysql.asyncAdd(petSql, petData);
     // 没有令牌消耗银两，反之消耗令牌
-    if(!token){
-        Global.updateknapsackGlobal(req,res, {
+    if (!token) {
+        Global.updateknapsackGlobal(req, res, {
             tael: tael - sumeTael
         })
-    }else{
+    } else {
         Global.updateknapsackGlobal(req, {
             data: chengData
         })
     }
-    
-    RoleG.updataRoleGlobal(req,res, {
+
+    RoleG.updataRoleGlobal(req, res, {
         socialize_pool: {
             ...socialize_pool,
             [TYPE_MEUN_NAME[type]]: {
@@ -132,7 +132,7 @@ router.post("/detail", async (req, res) => {
     const socialize = await socializeFn.getSocialize(id, type);
     if (socialize) {
         let { compose } = socialize;
-        const { line = {} } = Global.getSocializeGlobal(socialize.soci_id, keyName) || {};
+        const { line = {} } = Global.getSocializeGlobal(req, res, "ranks", keyName) || {};
         compose = compose.map(itme => {
             return {
                 ...itme,
@@ -142,7 +142,7 @@ router.post("/detail", async (req, res) => {
         })
         const soci = compose.find((itme) => itme.id === role_id);
         socialize_pool[TYPE_MEUN_NAME[type]]['level'] = soci.level;
-        RoleG.updataRoleGlobal(req,res, {
+        RoleG.updataRoleGlobal(req, res, {
             socialize_pool
         })
         res.send({
@@ -363,7 +363,7 @@ router.post("/adjust", async (req, res) => {
 
         // 更新帮会信息
         await socializeFn.updataSocialize(id, type, { compose });
-        const { line = {} } = Global.getSocializeGlobal(socialize.soci_id, keyName) || {};
+        const { line = {} } = Global.getSocializeGlobal(req, res, socialize.soci_id, keyName) || {};
         res.send({
             code: 0,
             data: compose.map(itme => {

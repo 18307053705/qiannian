@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
 import { getFriendsList, friendsApply } from '@cgi/friends';
 import { getEquipName } from '@utils/equip';
+import { Input } from "@components";
 const Plater = ({ history }) => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
     const [isFriend, setIsFriend] = useState(true);
-    const [error, setError] = useState('');
     const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo as any;
     const { state } = history.location;
     useEffect(() => {
@@ -23,24 +23,27 @@ const Plater = ({ history }) => {
     }, [])
 
     const applyClick = useCallback(() => {
-        friendsApply({ role_id: state.role_id }).then(({ message }) => {
-            if (message) {
-                setError(message);
-            } else {
-                setIsFriend(true);
-            }
-        })
+        friendsApply({ role_id: state.role_id });
     }, [])
+    const submit = () => {
 
+    }
     return (
         <>
             <div>
-                {error && <div style={{ color: 'red' }}>提示：{error}</div>}
+                <Input
+                    // label={`私聊${role.name}`}
+                    layout={false}
+                    onText="私聊"
+                    submit={submit}
+                    length={[0, 100]}
+                />
+                {/* <div><span className="g_u"><span onClick={() => { history.push('/chat', { role_id: state.role_id, role_name: roleInfo.role_name }) }}>私聊</span></span></div> */}
                 <div>
-                    <span className="g_u"><span onClick={() => { history.push('/chat', { role_id: state.role_id, role_name: roleInfo.role_name }) }}>私聊</span></span>
                     <span className="g_u"><span onClick={() => { history.push('/shopping', { role_id: state.role_id }) }}>店铺</span></span>
                     <span className="g_u"><span>赠送</span></span>
                     {!isFriend && <span className="g_u"><span onClick={applyClick}>加好友</span></span>}
+                    <span className="g_u"><span>切磋</span></span>
                 </div>
                 <div>
                     <span className="g_u"><span>帮会</span></span>

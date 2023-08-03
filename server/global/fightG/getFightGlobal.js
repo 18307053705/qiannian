@@ -9,7 +9,7 @@ module.exports = {
      * @param {*} roleId 可选参数,用于判断其他人是否在战斗中
      * @returns {*} fightMap.id 战斗池信息Id
      * @returns {*} fightMap.state 战斗状态(0:战斗中,1:胜利,2:失败)
-     * @returns {*} fightMap.type 战斗类型(1:玩家VS人机,2:玩家VS玩家,3:多玩家VS玩家人机)
+     * @returns {*} fightMap.type 战斗类型战斗类型(1:玩家VS人机,2:多玩家VS人机家,3:切磋,4:击杀)
      * @returns {*} fightMap.rivalMold 敌人原型信息
      * @returns {*} fightMap.num 敌人数量
      * @returns {*} fightMap.results 战斗结果(奖励信息)

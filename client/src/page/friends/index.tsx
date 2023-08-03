@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getFriendsList, friendsActive } from "@cgi/friends";
+import { getFriendsList, friendsActive, friendsDelete } from "@cgi/friends";
 import { List, Tab } from "@components/index";
 import Style from "./index.less";
 
@@ -9,9 +9,9 @@ const tabList = [
 ];
 
 export const Friends = ({ history }) => {
+    const [isAdmini, setIsAdmini] = useState(false);
     const [current, setCurrent] = useState(0);
     const [friend, setFriend] = useState({ list: [], apply: [] });
-    const [error, setError] = useState("");
     const updataFriendsList = () => {
         getFriendsList().then(({ data }) => {
             if (data) {
@@ -28,15 +28,11 @@ export const Friends = ({ history }) => {
     const currentCheng = current => {
         setCurrent(current);
     };
-    const activeClick = (id,state=0)=>{
-        friendsActive({role_id:id,state}).then(({message})=>{
-            if(message){
-                setError(message);
-            }else{
-                setError("");
-                updataFriendsList();  
-            }
-        })
+    const activeClick = (id, state = 0) => {
+        friendsActive({ role_id: id, state }).then(updataFriendsList)
+    }
+    const deleteClick = (id) => {
+        friendsDelete({ role_id: id }).then(updataFriendsList)
     }
     const data = current ? friend.apply : friend.list;
 
@@ -54,15 +50,22 @@ export const Friends = ({ history }) => {
             </span>
         );
     };
+
     const active = (row, index) => {
         if (current === 0) {
-            return null;
+            return (
+                <div>
+                    <span className="g_u_end" onClick={() => { setIsAdmini(!isAdmini) }}>{isAdmini ? "关闭" : "管理"}</span>
+                    {' '}
+                    {isAdmini && <span className="g_u_end" onClick={() => { deleteClick(row.id) }}>删除</span>}
+                </div>
+            );
         }
         return (
-            <div>
-                <span>{index}.{row.n}</span>
-                <span onClick={() => { activeClick(row.id, 1) }}>接受</span>|
-                <span onClick={() => { activeClick(row.id) }}>拒绝</span>
+            <div key={index}>
+                <span className="g_u_end" onClick={() => { activeClick(row.id, 1) }}>接受</span>
+                {' '}
+                <span className="g_u_end" onClick={() => { activeClick(row.id) }}>拒绝</span>
             </div>
         )
     }
@@ -70,7 +73,6 @@ export const Friends = ({ history }) => {
 
     return (
         <div className={Style["friend-page"]}>
-            {error && <div style={{ color: "red" }}>提示：{error}</div>}
             <Tab list={tabList} onCheng={currentCheng} />
             <List
                 data={data}
