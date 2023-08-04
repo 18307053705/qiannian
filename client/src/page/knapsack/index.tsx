@@ -99,21 +99,17 @@ const knapsack = ({ history }) => {
         })
     }
 
-    const activeClick = useCallback((id, in_x, s, p) => {
+    const activeClick = useCallback((in_x, s, p) => {
         if (p === 3) {
             operateClick({
-                id,
                 in_x,
                 s: 1,
-                p,
                 type,
             })
         } else {
             setActive({
-                id,
                 in_x,
                 s,
-                p,
                 type,
             })
         }
@@ -125,7 +121,7 @@ const knapsack = ({ history }) => {
                 key={`${id}_1`}
                 className="g_u_end"
                 onClick={() => {
-                    history.push('/articleDetail', { id, in_x, kanapsackType: type === 3 ? 3 : 1,p });
+                    history.push('/articleDetail', { id, in_x, kanapsackType: type === 3 ? 3 : 1, p });
                 }}
             >
                 {index}. {namehandel(n, p, ext)} x {s}
@@ -135,7 +131,7 @@ const knapsack = ({ history }) => {
 
     const activeDom = ({ id, p, s, in_x }) => {
         return (
-            <span key={`${id}_2`} className="g_u_end" onClick={() => { activeClick(id, in_x, s, p) }}>{ACTIVE_TYPE[type]}</span>
+            <span key={`${id}_2`} className="g_u_end" onClick={() => { activeClick(in_x, s, p) }}>{ACTIVE_TYPE[type]}</span>
         )
     }
 

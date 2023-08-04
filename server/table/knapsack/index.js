@@ -1,7 +1,7 @@
-const drugList = require('./drugList');
-const getDrug = require('./getDrug');
+const getArticle = require('./getArticle');
+const getEquip = require('./getEquip');
 
 module.exports = {
-    ...drugList,
-    ...getDrug
+    ...getArticle,
+    ...getEquip
 }

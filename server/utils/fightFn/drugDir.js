@@ -22,7 +22,7 @@ module.exports = {
             }
             return itme;
         })
-        const drug = knapsackTable.getDrug(drugId);
+        const drug = knapsackTable.getArticle(drugId);
         // 战斗指令中存在该物品
         if (success && drug) {
             const article = {

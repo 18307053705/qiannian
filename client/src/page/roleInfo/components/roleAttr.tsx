@@ -36,7 +36,7 @@ const RoleAttr = ({ roleInfo, history }) => {
                                     }}
                                     className="g_u_end"
                                 >
-                                    {getEquipName(equip[value].ext, equip[value].name)}
+                                    {getEquipName(equip[value].ext, equip[value].n)}
                                 </span> : '无'}
                             </div>
                         )

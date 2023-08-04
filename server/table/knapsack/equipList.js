@@ -1,113 +1,4 @@
-
-const Attribute = require("./attribute1");
-
-
-const EQUIP_ATTR = {
-    1: {
-        pos: 'weapon',
-        attr: ['atk_min', 'atk_max']
-    },
-    2: {
-        pos: 'helmet',
-        attr: ['mana']
-    },
-    3: {
-        pos: 'clothing',
-        attr: ['life']
-    },
-    4: {
-        pos: 'belt',
-        attr: ['dfs_min', 'dfs_max']
-    },
-    5: {
-        pos: 'shoe',
-        attr: ['dodge']
-    },
-    6: {
-        pos: 'ring',
-        attr: ['hit']
-    },
-    7: {
-        pos: 'necklace',
-        attr: ['sudden']
-    },
-    8: {
-        pos: 'treasure1',
-        attr: ['atk_min', 'atk_max']
-    },
-    9: {
-        pos: 'treasure2',
-        attr: ['atk_min', 'atk_max']
-    },
-    10: {
-        pos: 'treasure3',
-        attr: ['atk_min', 'atk_max']
-    },
-    11: {
-        pos: 'treasure4',
-        attr: ['atk_min', 'atk_max']
-    },
-};
 module.exports = {
-    EQUIP_ATTR,
-    // 获取装备描述
-    getEquipTip: function (equip, ext) {
-        const { career, level } = equip;
-        const { attr } = this.computeAttr(equip, ext);
-        const { MEUN } = Attribute;
-        const attrMap = {};
-        Object.keys(attr).forEach((key) => {
-            if (['life', 'mana', 'hit', 'dodge', 'sudden'].includes(key)) {
-                attrMap[MEUN[key]] = attr[key]
-            } else {
-                let str = key.replace('_min', '').replace('_max', '');
-                const min = `${str}_min`;
-                const max = `${str}_max`;
-                attrMap[MEUN[str]] = `${attr[min]}~${attr[max]}`;
-            }
-        })
-
-        return {
-            ext,
-            attr: attrMap,
-            level,
-            career
-        }
-    },
-    // 计算装备属性
-    computeAttr: function (equip, ext = '0_0_0_0_0_0_0_0') {
-        const { pos, career, attr, level } = equip
-        // 解析强化，锻造，附魔,宝石
-        const [firm, forge, sigil,...gem] = ext.split('_');
-        // const forge = 50;
-        // const firm = 16;
-        let Increase = 1 + forge * 0.1;
-        if (firm < 6) {
-            Increase += firm * 0.1
-        } else if (firm < 11) {
-            Increase += 0.5 + (firm - 5) * 0.3
-        }
-        else if (firm < 15) {
-            Increase += 2 + (firm - 10) * 0.5
-        }
-        else if (firm < 16) {
-            Increase += 6
-        } else {
-            Increase += 9
-        }
-        const equipAttr = {};
-        const posInfo = pos < 8 ? EQUIP_ATTR[pos] : { pos: 'treasure1', attr: equip['ext'].attr };
-        const base = { ...Attribute.getAttr(career), ...Attribute['eleAttr'] };
-       
-        posInfo.attr.forEach((key) => {
-            equipAttr[key] = parseInt(base[key] * attr * level * Increase);
-        })
-        return {
-            attr: equipAttr,
-            posName: posInfo.pos,
-        }
-
-    },
     1: {
         id: 1,
         type: 3,
@@ -1265,47 +1156,21 @@ module.exports = {
         type: 3,
         name: '★〓道君印〓★',
         career: 0,
-        level: 100,
+        level: 1,
         pos: 8,
         attr: 10,
         group: 10055,
-        ext: {
-            attr: ['ice_atk_min', 'ice_atk_max', 'sudden'],
-        }
+        customAttr: ['ice_atk_min', 'ice_atk_max', 'sudden']
     },
     121: {
         id: 121,
         type: 3,
         name: '★〓青莲造化盏〓★',
         career: 0,
-        level: 100,
+        level: 1,
         pos: 8,
         attr: 10,
         group: 10055,
-        ext: {
-            attr: ['ice_atk_min', 'ice_atk_max', 'dodge'],
-        }
+        customAttr: ['mine_atk_min', 'mine_atk_max', 'dodge']
     },
 }
-// treasure1: {id: 121, name: '新手☆木剑', ext: '0_0_0_0_0_0_0_0'}
-// ☆★〖〗『』〓】
-// life_max-最大生命
-// life-当前生命
-// mana_max-最大法力
-// mana-当前法力
-// atk-攻击
-// dfs-防御
-// hit-命中
-// dodge-闪避
-// sudden-暴击
-// ice_atk-冰攻
-// mine_atk-雷攻,
-// wind_atk-风攻
-// water_atk-水攻,
-// fire_atk-火攻
-// ice_dfs-冰防
-// mine_dfs-雷防
-//  wind_dfs-风防
-//  water_dfs-水防,
-//  fire_dfs-火防
-

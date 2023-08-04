@@ -5,7 +5,7 @@ module.exports = {
      */
     getKnapsack: async (req, res) => {
         const { type } = req.body;
-        const { data = [], tael, yuanbao } = await knapsackFn.getKnapsackInfo(req, res);
+        const { data = [], tael, yuanbao } = await knapsackFn.getKnapsackInfo(req, res, { type });
         res.send({
             code: 0,
             data: {

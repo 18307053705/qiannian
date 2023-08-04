@@ -16,17 +16,25 @@ module.exports = {
         const knapsack = KnapsackG.getknapsackGlobal(req, res);
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { rivalMold, num: freakNum } = fightMap;
-        const { article = [], ext } = rivalMold;
+        const { equip = [], article = [], ext } = rivalMold;
         const textReward = [];
         const artReward = {}; // 物品奖励
         const equipReward = {}; // 装备奖励
-        // id 物品id,s物品数量默认1 rate概率默认100
+        // 物品id,s物品数量默认1 rate概率默认100
+        equip.forEach(({ id, rate = 100 }) => {
+            // 获取物品
+            if (rate > Math.floor(Math.random() * (100 - 0))) {
+                const { type, name } = knapsackTable.getEquip(id);
+                equipReward[id] = { type, n: name, id, s: 1 };
+                textReward.push(`获得[${name}]x1`)
+            }
+        });
+        // 物品id,s物品数量默认1 rate概率默认100
         article.forEach(({ id, s = 1, rate = 100 }) => {
             // 获取物品
             if (rate > Math.floor(Math.random() * (100 - 0))) {
-                const { type, n } = knapsackTable.getDrug(id);
-                const drug = { type, n, id, s };
-                type === 3 ? equipReward[id] = drug : artReward[id] = drug;
+                const { type, n } = knapsackTable.getArticle(id);
+                artReward[id] = { type, n, id, s };
                 textReward.push(`获得[${n}]x${s}`)
             }
         });

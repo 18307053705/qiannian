@@ -5,6 +5,7 @@ const knapsackFn = require('./knapsackFn');
 const artFn = require('./artFn');
 const petFn = require('./petFn');
 const playerFn = require('./playerFn');
+const equipFn = require('./equipFn');
 
 module.exports = {
     roleFn,
@@ -14,4 +15,5 @@ module.exports = {
     artFn,
     petFn,
     playerFn,
+    equipFn,
 }

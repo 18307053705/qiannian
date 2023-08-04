@@ -169,12 +169,12 @@ export const EQUIP_POS_LIST = [
   {
     label: "法宝",
     value: "treasure1",
-    condition: 66
+    // condition: 66
   },
   {
     label: "法宝",
     value: "treasure2",
-    condition: 66
+    // condition: 66
   },
   {
     label: "法宝",

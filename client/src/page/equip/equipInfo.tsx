@@ -31,7 +31,7 @@ export const Equip = ({ pageCheng, history }) => {
                                     className="g_u_end"
                                     onClick={() => { equipClick(equip[value], index + 1); }}
                                 >
-                                    {getEquipName(equip[value].ext, equip[value].name)}
+                                    {getEquipName(equip[value].ext, equip[value].n)}
                                 </span>
                             ) : '无'}
                             <span> | </span>
