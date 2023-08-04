@@ -13,6 +13,7 @@ const computeBuffs = require('./computeBuffs');
 const catchPet = require('./catchPet');
 const rivalNormalDir = require('./rivalNormalDir');
 const lingXue = require('./lingXue');
+const checkContinueFight = require('./checkContinueFight');
 
 
 module.exports = {
@@ -30,5 +31,6 @@ module.exports = {
     ...computeBuffs,
     ...catchPet,
     ...rivalNormalDir,
-    ...lingXue
+    ...lingXue,
+    ...checkContinueFight
 }

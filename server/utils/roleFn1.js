@@ -123,7 +123,6 @@ module.exports = {
       default:
         return 1000000000 + (level % 10 + 1) * 500000000;
     }
-
   },
   // 计算经验
   computeRoleLevel: function (req, res, exp, callback) {

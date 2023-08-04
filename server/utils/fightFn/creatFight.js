@@ -1,6 +1,9 @@
 const { FightG, GrandG, SocializeG } = require("../../global");
 const { creatFreak } = require("./creatFreak");
 const { creatPlayer } = require("./creatPlayer");
+const { checkContinueFight } = require("./checkContinueFight");
+
+
 
 /**
  * 
@@ -15,7 +18,7 @@ function isRanksFight(req, res, currentDir) {
     let fight = undefined;
     // 查找是否有队友与自己在击杀相同的组队怪物，未找到方可创建
     Object.keys(line).forEach((roleId) => {
-        const { fightMap, fightInfo } = FightG.getFightGlobal(res, req, roleId);
+        const { fightMap, fightInfo } = FightG.getFightGlobal(req, res, roleId);
         if (fightMap && fightMap.state === 0 && fightMap.rivalId === id) {
             fight = {
                 fightInfo,
@@ -31,6 +34,7 @@ function isRanksFight(req, res, currentDir) {
         const fightMaps = {
             ...fight.fightMap,
             player,
+            isContinue: checkContinueFight(req, res),
         }
         fight.fightInfo.players.push(player);
         return FightG.setFightGlobal(req, res, fightMaps, fight.fightInfo);
@@ -44,12 +48,13 @@ module.exports = {
      * @param {*} req 
      * @param {*} res 
      * @param {*} data.type 战斗类型(1:玩家VS人机,2:多玩家VS人机家,3:切磋,4:击杀)
-     * @param {boolean} data.continueDir 创建战斗
+     * @param {boolean} data.continueDir 点击继续发起的创建
      * @returns {*} fightMap 战斗信息
      * @returns {*} fightInfo 战斗具体信息
      */
     creatFight: function (req, res, { type, continueDir } = {}) {
         const { fightInfo, fightMap } = FightG.getFightGlobal(req, res);
+
         // 战斗中,直接返回战斗信息
         if (fightMap && !continueDir) {
             return {
@@ -58,10 +63,15 @@ module.exports = {
             };
         }
 
-        // 不存在则创建战斗
+
+        // 战斗指令
         const { currentDir } = GrandG.getDirGlobal(req, res);
         const { ext } = currentDir;
-        const { isRanks } = ext;
+        const { isRanks, num } = ext;
+        if (num) {
+            currentDir.ext.num -= 1;
+            GrandG.setDirGlobal(req, res, { currentDir })
+        }
 
         if (isRanks) {
             const data = isRanksFight(req, res, currentDir);
@@ -69,6 +79,7 @@ module.exports = {
                 return data;
             }
         }
+
 
         // 创建怪物属性
         const rivals = creatFreak(req, res, currentDir);
@@ -79,7 +90,7 @@ module.exports = {
             type: isRanks ? 2 : 1,
             rivalMold: currentDir,
             num: rivals.length,
-            isContinue: !currentDir.boss,
+            isContinue: checkContinueFight(req, res),
             player,
             rivalId: currentDir.id
         }

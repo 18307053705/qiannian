@@ -7,6 +7,7 @@ module.exports = {
      * @returns {*} drug || {}
      * @returns {*} drug.id
      * @returns {*} drug.n
+     * @returns {*} drug.type 
      * @returns {*} drug.group1 || group2
      */
     getDrug: function (drugId) {

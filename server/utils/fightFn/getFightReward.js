@@ -1,5 +1,8 @@
 const { RoleG, KnapsackG, FightG } = require('../../global');
+const { knapsackTable } = require('../../table');
 const knapsackFn = require('../../utils/knapsackFn');
+const roleFn = require('../../utils/roleFn');
+
 module.exports = {
     /**
      * 获取战斗奖励
@@ -17,13 +20,14 @@ module.exports = {
         const textReward = [];
         const artReward = {}; // 物品奖励
         const equipReward = {}; // 装备奖励
-        // 获取物品概率
-        const rate = Math.floor(Math.random() * (100 - 0)) + 0;
-        article.forEach((itme) => {
-            if (!itme.rate || itme.rate > rate) {
-                // 根据类型保存
-                itme.type == 3 ? equipReward[itme.id] = itme : artReward[itme.id] = itme;
-                textReward.push(`获得[${itme.name || itme.n}]x${itme.s || itme.num || 1}`)
+        // id 物品id,s物品数量默认1 rate概率默认100
+        article.forEach(({ id, s = 1, rate = 100 }) => {
+            // 获取物品
+            if (rate > Math.floor(Math.random() * (100 - 0))) {
+                const { type, n } = knapsackTable.getDrug(id);
+                const drug = { type, n, id, s };
+                type === 3 ? equipReward[id] = drug : artReward[id] = drug;
+                textReward.push(`获得[${n}]x${s}`)
             }
         });
         const tip = knapsackFn.addKnapsack(req, res, { article: { artReward, equipReward, data: knapsack.data } });
@@ -53,22 +57,24 @@ module.exports = {
         // 物品可叠加
         const { level, arrt, boss, exps = 0, taels = 0 } = ext;
         // 经验
-        const exp = (exps || level * (parseInt(arrt / 10) || 1) * (boss ? 1000 : 1)) * (vipExp || 1);
+        const exp = (exps || level * (parseInt(arrt / 10) || 1) * (boss ? 1000 : 1)) * (vipExp || 1) * freakNum;
         // 银两
-        const tael = (taels || exp < 100 ? exp : exp / 100) * (vipTael || 1);
+        const tael = (taels || exp < 100 ? exp : exp / 100) * (vipTael || 1) * freakNum;
         // 更新背包
-        KnapsackG.updateknapsackGlobal(req, res, { tael: knapsack.tael - 0 + tael * freakNum });
+        KnapsackG.updateknapsackGlobal(req, res, { tael: knapsack.tael + tael });
         // 更新角色经验等级
-        // roleFn.computeRoleLevel(req, res, exp * freakNum);
+        roleFn.computeRoleLevel(req, res, exp);
         // 监听任务池
         // const tasks = taskFn.listenTask(req, freak.extDir['id'], freakNum);
         // return
+        // knapsack.tael
         return {
             textReward: tip ? '' : textReward,
-            exp: vipExp ? `${exp * freakNum}(${vipExp}倍经验)` : exp * freakNum,
-            tael: vipTael ? `${tael * freakNum}(${vipTael}倍银两)` : tael * freakNum,
+            exp: vipExp ? `${exp}(${vipExp}倍经验)` : exp,
+            tael: vipTael ? `${tael}(${vipTael}倍银两)` : tael,
             tip: tip,
             tasks: []
+
         }
     },
 

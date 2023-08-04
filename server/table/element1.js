@@ -158,8 +158,9 @@ const ELEMENT_5 = {
     ext: {
       career: 1,
       level: 1,
-      attr: 1,
-      pet: true
+      attr: 0.5,
+      pet: true,
+      num:2
     },
   },
   5000001: {

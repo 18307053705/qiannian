@@ -114,7 +114,7 @@ const WorldMap = () => {
     const data = mapList[page];
 
     const tpClick = (address) => {
-        tpDir({ address }).then(() => {
+        tpDir({ dir: address }).then(() => {
             backGrand();
         })
 

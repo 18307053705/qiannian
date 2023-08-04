@@ -12,7 +12,7 @@ module.exports = {
     tpDir: function (req, res, dir) {
         const { address } = RoleG.getRoleGlobal(req, res);
         if (address !== dir) {
-            Global.updateRoleGlobal(req, res, { address: dir });
+            RoleG.updataRoleGlobal(req, res, { address: dir });
         }
         return dir;
     },

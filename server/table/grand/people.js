@@ -1,13 +1,10 @@
-const element = require("../element");
 // [
 //     [ 0.0 , 0.1 , 0.2 , 0.3 ],
 //     [ 1.0 , 1.1 , 1.2 , 1.3 ],
 //     [ 2.0 , 2.1 , 2.2 , 2.3 ],
 //     [ 3.0 , 3.1 , 3.2 , 3.3 ]
 // ]
-//
-const { ELEMENT_1, ELEMENT_2, ELEMENT_3, ELEMENT_5 } = element;
-
+// 地图元素(1开头:NPC元素,2开头:怪物元素,3开头:传送元素,4:面板元素)
 // 人族地图 id1开头
 const peopleGrand = {
     10000: {
@@ -16,12 +13,12 @@ const peopleGrand = {
         data: [
             [
                 [],
-                [[ELEMENT_5[5000000], ELEMENT_5[5000001], ELEMENT_5[5000003]]],
+                [["2000000", "2000001", "2000002",]],
                 [],
                 []
             ]
         ]
-    }
+    },
 };
 
 module.exports = {

@@ -1,4 +1,4 @@
-const { GrandTable } = require("../../table");
+const { GrandTable, ElementTable } = require("../../table");
 // const { Global } = require("../../global");
 // const taskFn = require('./taskFn');
 
@@ -55,9 +55,10 @@ module.exports = {
         const eleList = [];
         grandEle.forEach(info => {
             const eleItme = [];
-            info.forEach((itme) => {
-                eleDir[itme.id] = itme;
-                eleItme.push({ name: itme.name, cs: itme.cs, dir: itme.id });
+            info.forEach((eleId) => {
+                const eleInfo = ElementTable.getElement(eleId);
+                eleDir[eleInfo.id] = eleInfo;
+                eleItme.push({ name: eleInfo.name, cs: eleInfo.cs, dir: eleInfo.id });
             });
             eleList.push(eleItme)
         });

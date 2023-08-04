@@ -25,6 +25,7 @@ const roleFightApiList = [
   "/api/player/playerFightDir",
   "/api/player/creatPlayerFight",
   "/api/player/exitFight",
+  "/api/fight/exitFight"
 ];
 // 网关验证
 module.exports = {

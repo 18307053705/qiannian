@@ -1,7 +1,7 @@
 
 const Equip = require('./equip');
 const knapsack = require('./knapsack1');
-const { ELEMENT_5, ELEMENT_1 } = require('./element');
+const { getElement } = require('./element');
 // 全部奖励实例
 // article: [Equip[1], { ...knapsack[1], num: 5 }],
 // exp: 100000,
@@ -21,11 +21,11 @@ module.exports = {
             },
             grand: {
                 npc: {
-                    ...ELEMENT_1[1000000],
+                    ...getElement(1000000),
                     address: '10000,0,0',
                 },
                 targetNpc: {
-                    ...ELEMENT_1[1000000],
+                    ...getElement(1000000),
                     address: '10000,0,0',
                 },
             },
@@ -41,16 +41,16 @@ module.exports = {
             },
             grand: {
                 npc: {
-                    ...ELEMENT_1[1000001],
+                    ...getElement(1000001),
                     address: '10000,0,0',
                 },
                 freak: [{
-                    ...ELEMENT_5[5000011],
+                    ...getElement(2000001),
                     address: '10000,0,0',
                 }]
             },
             complete: {
-                fight: [{ id: ELEMENT_5[5000011]['id'], name: ELEMENT_5[5000011]['name'], num: 1 }],
+                fight: [{ ...getElement(2000001), num: 1 }],
                 article: [{ id: knapsack[1]['id'], p: knapsack[1]['type'], num: 1 }]
             },
             nextTask: 3
@@ -68,12 +68,12 @@ module.exports = {
             },
             grand: {
                 npc: {
-                    ...ELEMENT_1[1000002],
+                    ...getElement(1000002),
                     address: '10000,0,0',
                 },
                 targetNpc: [
                     {
-                        ...ELEMENT_1[1000000],
+                        ...getElement(1000001),
                         address: '10000,0,0',
                     }
                 ],
@@ -91,7 +91,7 @@ module.exports = {
                 value: '10000,0,1'
             },
             complete: {
-                fight: [{ id: ELEMENT_5[5000000]['id'], name: ELEMENT_5[5000000]['name'], num: 5 }],
+                fight: [{ ...getElement(2000000), num: 5 }],
             }
         },
         2: {
@@ -107,7 +107,7 @@ module.exports = {
                 tael: 100000,
             },
             complete: {
-                fight: [{ id: ELEMENT_5[5000001]['id'], name: ELEMENT_5[5000001]['name'], num: 3 }],
+                fight: [{ ...getElement(2000001), num: 3 }],
             }
         },
     },

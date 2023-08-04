@@ -23,13 +23,15 @@ module.exports = {
             roleInfo = ROLE_Global[user];
         }
         if (roleInfo) {
-            ROLE_Global[roleInfo.user_id] = {
+            const role = {
                 ...roleInfo,
                 ...updata,
                 updateKeys: [...roleInfo.updateKeys, ...updateKeys]
-            };
+            }
+            ROLE_Global[roleInfo.user_id] = role;
+            return JSON.parse(JSON.stringify(role));
         }
-        return roleInfo;
+        return undefined;
     }
 
 }

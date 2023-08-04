@@ -1,6 +1,6 @@
 import { post } from "@request";
 const moveDirUrl = '/grand/sendDir';
-const tpDirUrl = '/grand/tp';
+const tpDirUrl = '/grand/tpDir';
 const createFightDirUrl = '/grand/createFightDir';
 
 export interface getGrandRes {
@@ -34,7 +34,7 @@ export function moveDir(data = { dir: -1 }) {
 }
 
 // 传送指令
-export function tpDir(data: { address: string }) {
+export function tpDir(data: { dir: string }) {
   return post(tpDirUrl, data);
 }
 // 创建战斗指令

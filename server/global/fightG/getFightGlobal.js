@@ -21,7 +21,6 @@ module.exports = {
      * @returns {*} fightInfo.buffs buff信息
      */
     getFightGlobal: function (req, res, roleId) {
-
         const roleInfo = roleG.getRoleGlobal(req, res);
         if (!roleId && !roleInfo) {
             return {};

@@ -9,7 +9,7 @@ module.exports = {
      */
     creatFreak: function (req, res, freak) {
         const { name, ext } = freak;
-        const { career, level, attr, boss, isRanks } = ext;
+        const { career = 1, level, attr = 1, boss, isRanks } = ext;
         const attrs = AttributeTable.getFreakBaseAttr(career);
         const addition = level * attr;
         Object.keys(attrs).forEach((key) => {
