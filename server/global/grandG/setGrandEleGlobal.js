@@ -18,7 +18,7 @@ module.exports = {
         if (!gandEle) {
             GRAND_ELE_Global[address] = {};
         }
-        const { articleEle = [] } = gandEle;
+        const { articleEle = [] } = gandEle || {};
         //   时间戳为秒
         const time = parseInt(new Date / 1000) + 1800;
         // 物品元素{id,s,p,time(过期时间)}

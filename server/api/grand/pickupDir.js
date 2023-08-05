@@ -18,10 +18,8 @@ module.exports = {
             })
             return;
         }
-        const artReward = {
-            [itme.id]: itme
-        }
-        const message = knapsackFn.addKnapsack(req, res, { article: { artReward } });
+        const article = itme.p === 3 ? { equipReward: { [itme.id]: itme } } : { artReward: { [itme.id]: itme } };
+        const message = knapsackFn.addKnapsack(req, res, { article });
         if (message) {
             res.send({
                 code: 0,

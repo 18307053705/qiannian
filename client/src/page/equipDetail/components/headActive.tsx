@@ -32,6 +32,8 @@ export const HeadActive = ({ query, history }) => {
                 <span className='g_u_end' onClick={() => { operateClick(2) }}>入库</span>
                 {" "}
                 <span className='g_u_end' onClick={() => { operateClick(1) }}>装备</span>
+                {" "}
+                <span className='g_u_end' onClick={() => { operateClick(4) }}>丢弃</span>
             </div>
         )
     }

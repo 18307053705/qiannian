@@ -1,6 +1,5 @@
-const { KnapsackG } = require('../../global');
+const { KnapsackG, GrandG } = require('../../global');
 const { knapsackFn, equipFn } = require('../../utils');
-const { knapsackTable } = require('../../table');
 
 
 
@@ -70,6 +69,13 @@ module.exports = {
             } else {
                 message = '背包已满,无法继续取出物品';
             }
+        }
+        // 丢弃
+        if (type === 4) {
+            data[in_x]['s'] -= s;
+            data[in_x]['s'] || data.splice(in_x, 1);
+            KnapsackG.updateknapsackGlobal(req, res, { data });
+            GrandG.setGrandEleGlobal(req, res, { article: [{ id, s, p }] });
         }
         res.send({
             code: 0,

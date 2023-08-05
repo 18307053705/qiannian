@@ -2,11 +2,11 @@
 const { RoleG } = require("../../global");
 
 function dataChang(data) {
-    const list = JSON.parse(JSON.stringify(data))
-    return list.map((itme) => {
+    const list = JSON.parse(JSON.stringify(data));
+    return JSON.stringify(list.map((itme) => {
         delete itme.n;
         return itme
-    });
+    }));
 }
 
 

@@ -4,9 +4,9 @@ import { forgeEquip } from '@cgi/equip';
 
 // 锻造组件
 export const ForgeActive = ({ query, getEquipDetail, equip }) => {
-    const { from, in_x } = query;
-    const {  level, career,forge, firm } = equip;
-    const isForge = (firm === 16 && forge < 50) || (firm < 16 && forge < 20) && from !== 1;
+    const { form, in_x } = query;
+    const { level, career, forge, firm } = equip;
+    const isForge = ((firm === 16 && forge < 50) || (firm < 16 && forge < 20)) && form === 1;
     if (!isForge) {
         return null;
     }

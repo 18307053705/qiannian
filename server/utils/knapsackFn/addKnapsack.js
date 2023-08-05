@@ -62,6 +62,7 @@ module.exports = {
                 delete equipReward[key];
             })
         }
+
        KnapsackG.updateknapsackGlobal(req, res, { data });
         if (data.length > KnapsackG.KNAPSACK_SIZE) {
             return '背包已满,请注意清理背包'

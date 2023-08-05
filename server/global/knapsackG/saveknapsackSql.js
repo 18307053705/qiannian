@@ -3,10 +3,10 @@ const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 function dataChang(data) {
     const list = JSON.parse(JSON.stringify(data))
-    return list.map((itme) => {
+    return JSON.stringify(list.map((itme) => {
         delete itme.n;
         return itme
-    });
+    }))
 }
 
 
