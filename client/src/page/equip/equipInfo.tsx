@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
 
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
+import { jumpDetail } from '@utils/jumpDetail';
 export const Equip = ({ pageCheng, history }) => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
     useEffect(() => {
@@ -11,8 +12,12 @@ export const Equip = ({ pageCheng, history }) => {
     }, [])
     const equip = roleInfo.equip_pool;
 
-    const equipClick = (equip, in_x) => {
-        history.push('/articleDetail', { id: equip['id'], in_x, kanapsackType: 2, p: 3 });
+    const equipClick = (pos) => {
+        jumpDetail(history, {
+            p: 3,
+            form: 2,
+            pos,
+        })
     }
 
     return (
@@ -29,7 +34,7 @@ export const Equip = ({ pageCheng, history }) => {
                             {equip[value] ? (
                                 <span
                                     className="g_u_end"
-                                    onClick={() => { equipClick(equip[value], index + 1); }}
+                                    onClick={() => { equipClick(value); }}
                                 >
                                     {getEquipName(equip[value].ext, equip[value].n)}
                                 </span>

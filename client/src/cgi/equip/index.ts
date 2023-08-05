@@ -1,39 +1,45 @@
 import { post } from "@request";
+const getEquipListUrl = "/equip/getEquipList";
 const renameUrl = "/equip/rename";
 const firmUrl = "/equip/firm";
 const forgeUrl = "/equip/forge";
 const activeUrl = "/equip/active";
 const sigilUrl = "/equip/sigil";
 
+//获取装备列表
+export function getEquipList() {
+  return post(getEquipListUrl);
+}
+
 type EquipReq = {
   id: string;
   in_x: number;
 };
 // 改名
-export async function renameFn(data: EquipReq) {
-  return await post(renameUrl, data);
+export function renameFn(data: EquipReq) {
+  return post(renameUrl, data);
 }
 
 type materialtype = {
   materialtype: 1 | 2 | 3 | 4; // 强化卡 月光石 强化石 经验
 };
 // 强化
-export async function firmFn(data: EquipReq & materialtype) {
-  return await post(firmUrl, data);
+export function firmFn(data: EquipReq & materialtype) {
+  return post(firmUrl, data);
 }
 type materialIdtype = {
   materialtype: 1 | 2; // 石头 元宝
 };
 // 锻造
-export async function forgeFn(data: EquipReq & materialIdtype) {
-  return await post(forgeUrl, data);
+export function forgeFn(data: EquipReq & materialIdtype) {
+  return post(forgeUrl, data);
 }
 
 // 附魔
-export async function sigilFn(data: EquipReq) {
-  return await post(sigilUrl, data);
+export function sigilFn(data: EquipReq) {
+  return post(sigilUrl, data);
 }
 // 卸下
-export async function unsnatchFn(data: EquipReq) {
-  return await post(activeUrl, data);
+export function unsnatchFn(data: EquipReq) {
+  return post(activeUrl, data);
 }

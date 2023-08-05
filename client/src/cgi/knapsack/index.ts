@@ -2,7 +2,7 @@ import { post } from "@request";
 const getKnapsackUrl = "/knapsack/getKnapsack";
 const operateUrl = "/knapsack/operate";
 const equipListUrl = "/knapsack/equipList";
-const getDetailUrl = "/knapsack/getDetail";
+const getArticleDetailUrl = "/knapsack/getArticleDetail";
 
 type KnapsackType = {
   list: {
@@ -39,21 +39,20 @@ export async function getEquipList(): Promise<{ data: any[] }> {
 }
 
 type DetailType = {
-  p: number; // 物品类型
-  id: number; // 物品id
-  in_x?: number; // 物品下标
-  type?: number; // 操作类型 1使用，2出库，3入库，4出售,5购买{考虑是否实现},
-  posKey?: string; // 装备位置
+  in_x: number; // 背包 仓库 店铺 商城 所在下标
+  pos: string; // 装备部位
+  form: 1 | 2 | 3 | 4 | 5 | 6; // 背包 身上 仓库 店铺 商城 宠物
+  t_roleId?: string; // 其他角色
+  petId?: string; // 其他角色
+  id?: string; // 物品id
 };
 
 // 物品详情
-export async function getDetail(data: DetailType) {
-  return await post(getDetailUrl, data);
+export function getArticleDetail(data: DetailType) {
+  return post(getArticleDetailUrl, data);
 }
 
 type operateType = {
-  p: number; // 物品类型
-  id: number; // 物品id
   s: number; // 物品数量
   in_x: number; // 物品下标
   type: number; // 操作类型 1使用，2出库，3入库，4出售,5购买{考虑是否实现},

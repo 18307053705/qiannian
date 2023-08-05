@@ -1,5 +1,6 @@
 import React from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
+import { jumpDetail } from '@utils/jumpDetail';
 const RoleAttr = ({ roleInfo, history }) => {
     const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo;
     return (
@@ -32,7 +33,11 @@ const RoleAttr = ({ roleInfo, history }) => {
                                 <span className="g_b">{label}</span>
                                 {equip[value] ? <span
                                     onClick={() => {
-                                        history.push('/articleDetail', { id: equip[value]['id'], in_x: index + 1, kanapsackType: 2,p:3 });
+                                        jumpDetail(history, {
+                                            pos: value,
+                                            p: 3,
+                                            form: 2
+                                        })
                                     }}
                                     className="g_u_end"
                                 >

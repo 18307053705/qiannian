@@ -7,7 +7,7 @@ module.exports = {
     unknownError: function (res) {
         res.send({
             code: ERROR_MEUN.UNKNOWN_ERROR,
-            message: ERROR_TYPE.UNKNOWN_ERROR
+            message: ERROR_TYPE[ERROR_MEUN.UNKNOWN_ERROR]
         });
     }
 }

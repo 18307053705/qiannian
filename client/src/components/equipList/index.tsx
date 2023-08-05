@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getEquipList } from '@cgi/knapsack';
+import { getEquipList } from '@cgi/equip';
 import { List } from '@components/list'
 import { getEquipName } from '@utils/equip'
+import { jumpDetail } from '@utils/jumpDetail'
 
 
 export const EquipList = ({ operate, pos, history }) => {
@@ -14,19 +15,21 @@ export const EquipList = ({ operate, pos, history }) => {
 
     }, [])
     const prefix = (itme, index) => {
-        return (<span
-            className='g_u_end'
-            key={index}
-            onClick={() => {
-                history.push('/articleDetail', { id: itme['id'], in_x: itme['in_x'], kanapsackType: 1, p: 3 });
-            }}
-        >
-            {index}.{getEquipName(itme.ext, itme.n)}
-        </span>)
+        return (
+            <span
+                className='g_u_end'
+                key={index}
+                onClick={() => {
+                    jumpDetail(history, { form: 1, p: 3, in_x: itme['in_x']})
+                }}
+            >
+                {index}.{getEquipName(itme.ext, itme.n)}
+            </span>
+        )
     }
     const active = (itme, index) => {
         return (
-            <span key={`${index}_1`} className='g_u_end' onClick={() => { operate(itme,pos) }}>换</span>
+            <span key={`${index}_1`} className='g_u_end' onClick={() => { operate(itme, pos) }}>换</span>
         )
     }
 

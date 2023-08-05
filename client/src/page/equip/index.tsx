@@ -17,10 +17,8 @@ export const Equip = ({ history }) => {
     }, []);
     const operateClick = (equip) => {
         operate({
-            id: equip.id,
             in_x: equip.in_x,
             s: 1,
-            p: 3,
             type: 1,
             posKey: posInfo.key
         }).then(() => {

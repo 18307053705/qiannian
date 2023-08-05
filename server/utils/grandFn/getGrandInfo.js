@@ -1,5 +1,5 @@
 const { GrandTable, ElementTable } = require("../../table");
-// const { Global } = require("../../global");
+const { updataRoleGlobal } = require("../../global/roleG/updataRoleGlobal");
 // const taskFn = require('./taskFn');
 
 function getGrand(address) {
@@ -48,7 +48,11 @@ module.exports = {
      * @requires {name:地图名称,x,y,eleLits:元素信息,eleDir:指令,movedir:可移动指令,players:坐标内玩家信息}
      */
     getGrandInfo: function (req, res, address, players) {
-        const { x, y, grand } = GrandTable.getGrandInfo(address);
+        // const gGrandInfo = GrandTable.getGrandInfo(address);
+        // if(gGrandInfo){
+
+        // }
+        const { x, y, grand } = GrandTable.getGrandInfo(address) || updataRoleGlobal(req, res, { address: "40000,0,0" });
         const { name, data } = grand;
         const grandEle = data[x][y];
         const eleDir = {};

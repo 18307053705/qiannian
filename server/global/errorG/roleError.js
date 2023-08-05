@@ -7,7 +7,7 @@ module.exports = {
     roleError: function (res) {
         res.send({
             code: ERROR_MEUN.ROLE_ERROR,
-            message: ERROR_TYPE.ROLE_ERROR
+            message: ERROR_TYPE[ERROR_MEUN.ROLE_ERROR]
         });
     }
 }

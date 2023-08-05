@@ -7,7 +7,7 @@ module.exports = {
     paramsError: function (res) {
         res.send({
             code: ERROR_MEUN.PARAMS_ERROR,
-            message: ERROR_TYPE.PARAMS_ERROR
+            message: ERROR_TYPE[ERROR_MEUN.PARAMS_ERROR]
         });
     }
 }

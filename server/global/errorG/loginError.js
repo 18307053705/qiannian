@@ -10,7 +10,7 @@ module.exports = {
         res.clearCookie('q_m');
         res.send({
             code: ERROR_MEUN.LOGIN_ERROR,
-            message: ERROR_TYPE.LOGIN_ERROR
+            message: ERROR_TYPE[ERROR_MEUN.LOGIN_ERROR]
         });
     }
 }

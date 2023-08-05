@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
+
 import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
-import { Input } from '@components';
+import { backGrand } from '@utils/grand';
+
 import { renameFn, firmFn, forgeFn, unsnatchFn, sigilFn } from '@cgi/equip';
 import { getDetail } from '@cgi/shops';
-import { HeadActive, FirmActive, ForgeActive, SigilActive } from './equipActive';
 import { equipActive } from '@cgi/pet';
+
+import { Input } from '@components';
+import { HeadActive, FirmActive, ForgeActive, SigilActive } from './equipActive';
+
 import Style from './index.less';
 
 
@@ -105,7 +110,7 @@ const Equip = ({ history }) => {
                     history.goBack()
                 }
             })
-        }else{
+        } else {
             unsnatchFn({
                 id: query.id,
                 in_x: query.in_x
@@ -116,7 +121,7 @@ const Equip = ({ history }) => {
             })
         }
 
-        
+
     }
     return (
         <div>
@@ -145,7 +150,8 @@ const Equip = ({ history }) => {
                 <ForgeActive query={query} ext={ext} forgeClick={forgeClick} level={equip.level} career={equip.career} />
                 <SigilActive query={query} sigil={ext.sigil} sigilClick={sigilClick} />
             </div>
-
+            <div><span className="g_u_end" onClick={() => { history.goBack() }}>返回上页</span></div>
+            <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )
 

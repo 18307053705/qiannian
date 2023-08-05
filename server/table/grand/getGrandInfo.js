@@ -1,6 +1,7 @@
 const { peopleGrand } = require('./people');
 const { goblinGrand } = require('./goblin');
 const { immortalGrand } = require('./immortal');
+const { neutralityGrand } = require('./neutrality');
 
 module.exports = {
     /**
@@ -23,6 +24,12 @@ module.exports = {
         }
         if (grandId === '3') {
             grand = immortalGrand[id];
+        }
+        if (grandId === '4') {
+            grand = neutralityGrand[id];
+        }
+        if(!grand){
+            return undefined;
         }
         return {
             grand,
