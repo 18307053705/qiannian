@@ -1,36 +1,42 @@
 const { GrandTable, ElementTable } = require("../../table");
 const { updataRoleGlobal } = require("../../global/roleG/updataRoleGlobal");
+const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
 // const taskFn = require('./taskFn');
 
 function getGrand(address) {
     const { x, y, grand } = GrandTable.getGrandInfo(address);
     const { name, data } = grand;
+    // console.log(data)
     const direction = [];
     if (data[x + 1] && Boolean(data[x + 1][y])) {
+        const { n } = data[x + 1][y]
         direction.push({
             lable: "北",
-            value: `${name}(${x + 2},${y + 1}) ↑`,
+            value: `${n || name}(${x + 2},${y + 1}) ↑`,
             dir: "u"
         });
     }
     if (Boolean(data[x][y + 1])) {
+        const { n } = data[x][y + 1];
         direction.push({
             lable: "东",
-            value: `${name}(${x + 1},${y + 2})→`,
+            value: `${n || name}(${x + 1},${y + 2})→`,
             dir: "r"
         });
     }
     if (Boolean(data[x][y - 1])) {
+        const { n } = data[x][y - 1]
         direction.push({
             lable: "西",
-            value: `${name}(${x + 1},${y})←`,
+            value: `${n || name}(${x + 1},${y})←`,
             dir: "l"
         });
     }
     if (data[x - 1] && Boolean(data[x - 1][y])) {
+        const { n } = data[x - 11][y]
         direction.push({
             lable: "南",
-            value: `${name}(${x},${y + 1}) ↓`,
+            value: `${n || name}(${x},${y + 1}) ↓`,
             dir: "d"
         });
     }
@@ -48,16 +54,16 @@ module.exports = {
      * @requires {name:地图名称,x,y,eleLits:元素信息,eleDir:指令,movedir:可移动指令,players:坐标内玩家信息}
      */
     getGrandInfo: function (req, res, address, players) {
-        // const gGrandInfo = GrandTable.getGrandInfo(address);
-        // if(gGrandInfo){
-
-        // }
-        const { x, y, grand } = GrandTable.getGrandInfo(address) || updataRoleGlobal(req, res, { address: "40000,0,0" });
+        const gGrandInfo = GrandTable.getGrandInfo(address);
+        if (!gGrandInfo) {
+            updataRoleGlobal(req, res, { address: "40000,0,0" })
+        }
+        const { x, y, grand } = gGrandInfo;
         const { name, data } = grand;
-        const grandEle = data[x][y];
+        const { list, n, tip } = data[x][y];
         const eleDir = {};
         const eleList = [];
-        grandEle.forEach(info => {
+        list.forEach(info => {
             const eleItme = [];
             info.forEach((eleId) => {
                 const eleInfo = ElementTable.getElement(eleId);
@@ -70,13 +76,15 @@ module.exports = {
         // 获取任务临时元素
         // taskFn.grandTaskEle(req, address, ele, dirList);
         return {
-            name,
+            name: n || name,
             x: x + 1,
             y: y + 1,
             eleList,
             eleDir,
             moveDir: getGrand(address),
-            players: players.map(({ role_name, role_id }) => ({ role_name, role_id }))
+            players: players.map(({ role_name, role_id }) => ({ role_name, role_id })),
+            tip,
+            ...getGrandEleGlobal(req, res, address)
         };
     }
 };

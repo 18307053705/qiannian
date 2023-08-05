@@ -2,7 +2,7 @@
 // const DOME_FREAK = {
 //   id: 2000000,
 //   name: "持刀山贼",
-//   type: 5,
+//   type: 2,
 //   ext: { // 额外描述
 //     level: 1, // 等级,必填
 //     career: 1, // 职业,可选默认1
@@ -31,7 +31,7 @@ const ELEMENT_2 = {
   2000000: {
     id: 2000000,
     name: "持刀山贼",
-    type: 5,
+    type: 2,
     ext: {
       career: 1,
       level: 1,
@@ -76,7 +76,7 @@ const ELEMENT_2 = {
   2000001: {
     id: 2000001,
     name: "持斧山贼",
-    type: 5,
+    type: 2,
     ext: {
       level: 1
     },
@@ -92,7 +92,7 @@ const ELEMENT_2 = {
   2000002: {
     id: 2000002,
     name: "大当家",
-    type: 5,
+    type: 2,
     ext: {
       career: 1,
       level: 5,
@@ -103,7 +103,7 @@ const ELEMENT_2 = {
   2000003: {
     id: 2000003,
     name: "组队boss",
-    type: 5,
+    type: 2,
     ext: {
       career: 1,
       level: 1,

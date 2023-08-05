@@ -11,6 +11,35 @@ const GRAND_Global = {
     //   currentDir:当前指令信息,如战斗对手信息,任务信息等
     // }
 }
+
+/**
+ * 全局地图元素
+ */
+const GRAND_ELE_Global = {
+    // address: { 
+    //   articleEle: [], 物品元素{id,s,p,time(过期时间)}
+    //   taskEle: [], 任务元素暂不实现
+    // }
+    // 示例
+    // "10001,0,0": {
+    //     articleEle: [
+    //         {
+    //             id: 1,
+    //             p: 3,
+    //             s: 1,
+    //             time: 1691224691
+    //         },
+    //         {
+    //             id: 2,
+    //             p: 3,
+    //             s: 1,
+    //             time: 1691219639
+    //         },
+    //     ]
+    // }
+}
+
 module.exports = {
-    GRAND_Global
+    GRAND_Global,
+    GRAND_ELE_Global
 }

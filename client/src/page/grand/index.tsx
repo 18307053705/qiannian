@@ -1,28 +1,43 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { moveDir, initGrandInfo } from '@cgi/grand';
+import { moveDir, initGrandInfo, pickupDir } from '@cgi/grand';
 import { roleExit } from '@cgi/roleInfo';
-import './index.less';
+import Styles from './index.less';
 
 const Grand = ({ history }) => {
     const [grandInfo, setGrandInfo] = useState(initGrandInfo);
     const [updata, setUpdata] = useState(false);
-    const { name, eleList, x, y, moveDir:moveList } = grandInfo;
+    const { name, eleList, x, y, moveDir: moveList, articleEle } = grandInfo;
     const players = grandInfo.players.slice(0, 4);
     const playersLen = players.length - 1;
+    // 地图移动
     useEffect(() => {
         moveDir().then(({ data }: any) => {
             setGrandInfo(data);
         })
     }, [updata])
+
+    // 点击元素
     const dirClick = useCallback((dir) => {
         moveDir({ dir }).then(({ data }: any) => {
             const { path, ext } = data;
             path ? history.push(path, { ...ext }) : setGrandInfo(data);
         })
     }, [])
+    // 拾取物品
+    const pickupDirClick = (in_x) => {
+        pickupDir({ in_x }).then(({ success }) => {
+            if (success) {
+                articleEle.splice(in_x, 1);
+                setGrandInfo({
+                    ...grandInfo,
+                    articleEle
+                })
+            }
+        })
+    }
     console.log(grandInfo)
     return (
-        <div className="grand-page">
+        <div className={Styles['grand-page']}>
             <div className="g_b">{`${name}(${x}.${y})`}</div>
             <div>
                 <span className="g_u"><span onClick={() => { setUpdata(!updata) }}>刷新</span></span>
@@ -32,7 +47,7 @@ const Grand = ({ history }) => {
                 <span className="g_u"><span onClick={() => { history.push('/worldMap') }}>腾云</span></span>
             </div>
             {/* 地图元素 */}
-            <div className="ele-list">
+            <div className={Styles['ele-list']}>
                 {
                     eleList.map((list, index) => {
                         return (
@@ -53,6 +68,22 @@ const Grand = ({ history }) => {
                     })
                 }
             </div>
+            {/* 物品列表 */}
+            {
+                articleEle.length ? (
+                    <div className={Styles.article}>
+                        {
+                            articleEle.map(({ n, in_x }) => (
+                                <span key={in_x} className="g_u">
+                                    <span onClick={() => { pickupDirClick(in_x) }}>{n}</span>
+                                </span>
+                            ))
+                        }
+                    </div>
+                ) : ''
+            }
+
+
             <div className="g_fgx"></div>
             {/* 地图 */}
             {
@@ -91,7 +122,7 @@ const Grand = ({ history }) => {
                     playersLen > 4 && <span className="g_u"><span>更多</span></span>
                 }
             </div>
-            <div className="g_fgx"></div>
+            <div className={Styles.tip}>{grandInfo.tip}</div>
             <div>
                 <span className="g_b_u" onClick={() => { history.push('/roleInfo') }}>状态</span>
                 <span className="g_b_u" onClick={() => { history.push('/knapsack', { type: 1 }) }}>背包</span>

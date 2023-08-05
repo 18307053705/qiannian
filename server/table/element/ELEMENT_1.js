@@ -29,7 +29,7 @@ const ELEMENT_1 = {
         id: 1000005,
         name: "白胡子老人",
         type: 1
-    }
+    },
 };
 
 module.exports = {
