@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import { Input } from '@components';
 import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 import { backGrand } from '@utils/grand';
-
 import {  renameEquip } from '@cgi/equip';
 import { getArticleDetail } from '@cgi/knapsack';
-import { equipActive } from '@cgi/pet';
 
-import { Input } from '@components';
 import { HeadActive,FirmActive, ForgeActive, SigilActive } from './components';
-// import { HeadActive } from './components/headActive';
 
 import Style from './index.less';
 
@@ -38,11 +34,6 @@ const EquipDetail = ({ history }) => {
     if (!equip) {
         return null;
     }
-    console.log(equip, 'equip...')
-
-    // const equipInfo = getEquipInfo(equip);
-
-    // const { text, ...ext } = getEquipExtInfo(equip.ext, equip.name || equip.n);
 
     const renameBtn = (name) => {
         renameEquip(({ name, pos: query.pos })).then(({ data }) => {
@@ -54,56 +45,6 @@ const EquipDetail = ({ history }) => {
         })
     }
 
-    // // 强化
-    // const firmClick = (materialtype) => {
-    //     firmFn({
-    //         id: query.id,
-    //         in_x: query.in_x,
-    //         materialtype
-    //     }).then(({ data }) => {
-    //         if (data) {
-    //             history.location.state = {
-    //                 ...query,
-    //                 in_x: data
-    //             }
-    //             // update()
-    //         }
-    //     })
-    // }
-
-    // // 锻造
-    // const forgeClick = (materialtype) => {
-    //     forgeFn({
-    //         id: query.id,
-    //         in_x: query.in_x,
-    //         materialtype
-    //     }).then(({ data }) => {
-    //         if (data) {
-    //             history.location.state = {
-    //                 ...query,
-    //                 in_x: data
-    //             }
-    //             // update()
-    //         }
-    //     })
-    // }
-    // // 附魔
-    // const sigilClick = () => {
-    //     sigilFn({
-    //         id: query.id,
-    //         in_x: query.in_x
-    //     }).then(({ data }) => {
-    //         if (data) {
-    //             history.location.state = {
-    //                 ...query,
-    //                 in_x: data
-    //             }
-    //             // update()
-    //         }
-    //     })
-    // }
-
-    console.log(query, 'query...')
     return (
         <div>
             <HeadActive query={query} history={history} />

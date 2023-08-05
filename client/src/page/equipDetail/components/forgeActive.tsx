@@ -6,8 +6,6 @@ import { forgeEquip } from '@cgi/equip';
 export const ForgeActive = ({ query, getEquipDetail, equip }) => {
     const { from, in_x } = query;
     const {  level, career,forge, firm } = equip;
-    // const { forge, firm } = ext;
-    console.log(equip)
     const isForge = (firm === 16 && forge < 50) || (firm < 16 && forge < 20) && from !== 1;
     if (!isForge) {
         return null;
