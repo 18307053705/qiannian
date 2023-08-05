@@ -1,13 +1,14 @@
 const { KNAPSACK_Global } = require('./config');
-const {getRoleGlobal} = require('../roleG/getRoleGlobal');
+const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 function dataChang(data) {
-    const list = data.map((itme) => {
+    const list = JSON.parse(JSON.stringify(data))
+    return list.map((itme) => {
         delete itme.n;
         return itme
     });
-    return JSON.stringify(list);
 }
+
 
 module.exports = {
     /**

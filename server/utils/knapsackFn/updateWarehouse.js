@@ -2,11 +2,11 @@
 const { RoleG } = require("../../global");
 
 function dataChang(data) {
-    const list = data.map((itme) => {
+    const list = JSON.parse(JSON.stringify(data))
+    return list.map((itme) => {
         delete itme.n;
         return itme
     });
-    return JSON.stringify(list);
 }
 
 
@@ -24,8 +24,6 @@ module.exports = {
             const value = key === 'data' ? dataChang(data[key]) : data[key];
             upData.push(`${key}='${value}'`)
         })
-        // await res.asyncQuery(`update knapsack  SET ${data.join(',')}  where role_id="${role_id}"`);
-        
         const { results } = await res.asyncQuery(`update warehouse  SET ${upData.join(',')}  where role_id="${role_id}"`);
         return results;
     },

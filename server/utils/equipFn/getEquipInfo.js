@@ -1,5 +1,5 @@
 
-const { knapsackTable,AttributeTable } = require('../../table');
+const { knapsackTable, AttributeTable } = require('../../table');
 const { computeEquipAttr } = require('./computeEquipAttr');
 
 module.exports = {
@@ -16,14 +16,19 @@ module.exports = {
         const MEUN = AttributeTable.getAttrMeun();
         const attrMap = {};
         Object.keys(attr).forEach((key) => {
-            if (['life', 'mana', 'hit', 'dodge', 'sudden'].includes(key)) {
-                attrMap[MEUN[key]] = attr[key]
-            } else {
+            if (['life_max', 'mana_max'].includes(key)) {
                 let str = key.replace('_min', '').replace('_max', '');
-                const min = `${str}_min`;
-                const max = `${str}_max`;
-                attrMap[MEUN[str]] = `${attr[min]}~${attr[max]}`;
+                attrMap[MEUN[str]] = attr[key]
+                return;
             }
+            if (['hit', 'dodge', 'sudden'].includes(key)) {
+                attrMap[MEUN[key]] = attr[key];
+                return;
+            }
+            let str = key.replace('_min', '').replace('_max', '');
+            const min = `${str}_min`;
+            const max = `${str}_max`;
+            attrMap[MEUN[str]] = `${attr[min]}~${attr[max]}`;
         })
 
         return {

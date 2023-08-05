@@ -52,14 +52,13 @@ export function getArticleDetail(data: DetailType) {
   return post(getArticleDetailUrl, data);
 }
 
-type operateType = {
-  s: number; // 物品数量
-  in_x: number; // 物品下标
-  type: number; // 操作类型 1使用，2出库，3入库，4出售,5购买{考虑是否实现},
-  posKey?: string; // 装备位置
-};
-
-// 使用物品
-export async function operate(data: operateType) {
-  return await post(operateUrl, data);
+/**
+ * 使用物品
+ * @param data.s 物品数量
+ * @param data.in_x 物品下标
+ * @param data.type 操作类型 1:使用物品,2:入库,3:出库,4:丢弃
+ * @param data.posKey 可选
+ */
+export function operate(data) {
+  return post(operateUrl, data);
 }

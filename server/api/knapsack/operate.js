@@ -51,7 +51,7 @@ module.exports = {
             if (!message) {
                 data[in_x]['s'] -= s;
                 data[in_x]['s'] || data.splice(in_x, 1);
-                KnapsackG.updateknapsackGlobal(req, res, data);
+                KnapsackG.updateknapsackGlobal(req, res, { data });
                 await knapsackFn.updateWarehouse(req, res, { data: newWareData });
             } else {
                 message = '仓库已满,无法继续存入物品';

@@ -7,6 +7,7 @@ const petFn = require('./petFn');
 const playerFn = require('./playerFn');
 const equipFn = require('./equipFn');
 const shopFn = require('./shopFn');
+const ruleFn = require('./ruleFn');
 
 module.exports = {
     roleFn,
@@ -18,4 +19,5 @@ module.exports = {
     playerFn,
     equipFn,
     shopFn,
+    ruleFn,
 }
