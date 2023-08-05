@@ -1,6 +1,6 @@
 const { KNAPSACK_Global } = require('./config');
 const { getRoleGlobal } = require('../roleG/getRoleGlobal');
-const { getDataName } = require('../../table/knapsack/getDataName');
+const { dataListChang } = require('./dataListChang');
 
 module.exports = {
     /**
@@ -14,26 +14,7 @@ module.exports = {
         const { role_id } = getRoleGlobal(req, res);
         KNAPSACK_Global[role_id] = {
             ...knapsack,
-            data: JSON.parse(knapsack['data']).map(({ id, p, ext, n2, s }) => {
-                // 装备存在自定义名称
-                if (n2) {
-                    return {
-                        id,
-                        p,
-                        ext,
-                        n: n2,
-                        n2,
-                        s
-                    }
-                }
-                return {
-                    id,
-                    p,
-                    ext,
-                    n: getDataName(id, p),
-                    s
-                }
-            }),
+            data: dataListChang(knapsack['data']),
             updateKeys: [],
             id: role_id
         };

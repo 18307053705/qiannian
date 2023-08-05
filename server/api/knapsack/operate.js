@@ -44,30 +44,29 @@ module.exports = {
         }
         // 入库
         if (type === 2) {
-            const { data: wareData } = await knapsackFn.getKnapsackInfo(req, 3);
+            const { data: wareData } = await knapsackFn.getKnapsackInfo(req, res, { type: 3 });
             const itme = { [id]: { id, p, n, s } }
             const article = p !== 3 ? { artReward: itme } : { equipReward: itme };
-            message = knapsackFn.addKnapsack(article, wareData);
+            const { message, data: newWareData } = knapsackFn.addArticle(article, wareData);
             if (!message) {
                 data[in_x]['s'] -= s;
                 data[in_x]['s'] || data.splice(in_x, 1);
-                Global.updateknapsackGlobal(req, { data });
-                await knapsackFn.updateWarehouse(req, { data: JSON.stringify(wareData) });
+                KnapsackG.updateknapsackGlobal(req, res, data);
+                await knapsackFn.updateWarehouse(req, res, { data: newWareData });
             } else {
                 message = '仓库已满,无法继续存入物品';
             }
         }
         // 出库
         if (type === 3) {
-            const { data: knaData } = await knapsackFn.getKnapsackInfo(req, 1);
+            const { data: knaData } = await knapsackFn.getKnapsackInfo(req, res);
             const itme = { [id]: { id, p, n, s } };
             const article = p !== 3 ? { artReward: itme } : { equipReward: itme };
-            message = knapsackFn.addKnapsack(article, knaData);
+            message = knapsackFn.addKnapsack(req, res, { article, data: knaData });
             if (!message) {
                 data[in_x]['s'] -= s;
                 data[in_x]['s'] || data.splice(in_x, 1);
-                Global.updateknapsackGlobal(req, { data: knaData });
-                await knapsackFn.updateWarehouse(req, { data: JSON.stringify(data) });
+                await knapsackFn.updateWarehouse(req, res, { data });
             } else {
                 message = '背包已满,无法继续取出物品';
             }

@@ -77,14 +77,14 @@ const knapsack = ({ history }) => {
             return data;
         }
         if (current === 1) {
-            list.forEach(({ n, p, ...itme }, index) => {
+            list.forEach(({ n='', p, ...itme }, index) => {
                 if (((p === 1 || p === 2) && n.includes(serchValue))) {
                     data.push({ n, p, ...itme, in_x: index })
                 }
             });
             return data;
         }
-        list.forEach(({ n, p, ...itme }, index) => {
+        list.forEach(({ n='', p, ...itme }, index) => {
             if (p === current && n.includes(serchValue)) {
                 data.push({ n, p, ...itme, in_x: index })
             }
@@ -127,7 +127,6 @@ const knapsack = ({ history }) => {
                         form: type === 3 ? 3 : 1,
                         in_x
                     })
-                    // history.push('/articleDetail', { id, in_x, kanapsackType: type === 3 ? 3 : 1, p });
                 }}
             >
                 {index}. {namehandel(n, p, ext)} x {s}

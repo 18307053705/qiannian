@@ -2,21 +2,22 @@ const { KnapsackG } = require("../../global");
 
 module.exports = {
     /**
-     * 增加物品
-     * @param {*} req 
-     * @param {*} res 
-     * @param {*} data.article 必传
-     * @param {*} data.data 可选
-     * @returns {string}  message | undefined
+     * 增加物品,不会更新背包
+     * @param {*} article 必传
+     * @param {*} data 必传
+     * @returns message 错误信息
+     * @returns data 增加物品后的信息
      */
-    addKnapsack: function (req, res, { article, data: list }) {
+    addArticle: function (article, list) {
         if (!article) {
-            return undefined;
+            return undefined
         }
-        const { data } = list ? { data: list } : KnapsackG.getknapsackGlobal(req, res)
+        const data = JSON.parse(JSON.stringify(list))
         const dataSize = data.length;
         if (dataSize === KnapsackG.KNAPSACK_SIZE) {
-            return '背包已满,请先清理背包'
+            return {
+                message: '背包已满,请先清理背包'
+            }
         }
 
         const { artReward, equipReward } = article;
@@ -43,8 +44,8 @@ module.exports = {
             }
             //  遍历结束还存在物品奖励，说明物品为新增
             Object.keys(artReward).forEach(key => {
-                const { id, type, n, s, num2 } = artReward[key];
-                data.push({ id, n, p: type, s: num2 || s });
+                const { id, p, type, n, s, num2 } = artReward[key];
+                data.push({ id, n, p: p || type, s: num2 || s });
                 delete artReward[key];
             })
         }
@@ -62,9 +63,11 @@ module.exports = {
                 delete equipReward[key];
             })
         }
-       KnapsackG.updateknapsackGlobal(req, res, { data });
         if (data.length > KnapsackG.KNAPSACK_SIZE) {
-            return '背包已满,请注意清理背包'
+            return { message: '背包已满,请先清理背包' }
+        }
+        return {
+            data
         }
     },
 
