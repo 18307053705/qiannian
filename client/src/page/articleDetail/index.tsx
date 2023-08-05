@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { backGrand } from '@utils/grand';
 import { getArticleDetail } from '@cgi/knapsack';
+import { HeadActive } from './headActive';
 
 const ArticleDetail = ({ history }) => {
     const [article, setArticle] = useState();
+    const { state } = history.location;
     useEffect(() => {
-        const { state } = history.location;
         getArticleDetail(state).then(({ data }) => {
             setArticle(data)
         })
@@ -14,7 +15,8 @@ const ArticleDetail = ({ history }) => {
         return null;
     }
     return (
-        <div >
+        <div>
+            <HeadActive query={state} history={history} />
             <div><span>{article.n}</span></div>
             <div><span>数量</span>：<span>{article.s}</span></div>
             {

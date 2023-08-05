@@ -4,7 +4,7 @@ import { nameCheck, areaCheck, numCheck } from '@utils/check'
 
 
 type InputProps = {
-    submit?: (value: string, fn: (value: any) => any) => void;
+    submit?: (value: any, fn: (value: any) => any) => void;
     onChange?: (value: string) => void;
     label?: string;
     onText?: string;
@@ -27,6 +27,8 @@ export const Input = (props: InputProps) => {
                 setError(msg);
                 return msg;
             }
+            submit && submit(Number(value), setValue);
+            return '';
         }
         if (type === 'text') {
             const msg = nameCheck(value, length[0], length[1]);

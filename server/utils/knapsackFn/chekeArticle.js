@@ -10,7 +10,7 @@ module.exports = {
      */
     chekeArticle: function (req, res, data) {
         const { in_x = 0, s = 1, type } = req.body;
-        if (!type) {
+        if (!type || typeof s !== 'number') {
             ErrorG.paramsError(res);
             return true;
         }
