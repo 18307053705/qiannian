@@ -15,7 +15,7 @@ module.exports = {
         const { dir, type } = dirInfo;
         let path = '';
         // 怪物元素，进入战斗界面
-        if (type === 5) {
+        if (type === 2) {
             return {
                 path: '/fight',
                 address

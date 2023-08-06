@@ -1,5 +1,5 @@
 const { RoleG } = require("../../global");
-const { AttributeTable,RealmTable } = require("../../table");
+const { AttributeTable, RealmTable } = require("../../table");
 const { computeUpExp } = require("./computeUpExp");
 const { computeRoleAttr } = require("./computeRoleAttr");
 module.exports = {
@@ -8,11 +8,11 @@ module.exports = {
      * @param {*} req 
      * @param {*} res 
      * @param {*} exp 增加的经验
-     * @param {*} extUpdata 额外需要更新的数据
+     * @param {*} callback 回调函数(isLevel:是否升级,updata:需要更新的对象)=>{}
      * @returns {*} roleInfo |undefined
      * 
      */
-    computeRoleLevel: function (req, res, exp, extUpdata) {
+    computeRoleLevel: function (req, res, exp, callback) {
         const roleInfo = RoleG.getRoleGlobal(req, res);
         let { role_level, role_exp, role_realm, role_career, role_attr } = roleInfo;
         let [oldExp, upExp] = role_exp.split('/');
@@ -24,7 +24,7 @@ module.exports = {
             // 角色升级
             role_level++;
             // 获取境界对应属性增幅
-            const { attr } =  RealmTable.getRealm(role_realm)
+            const { attr } = RealmTable.getRealm(role_realm)
             // 根据职业选择升级属性加成
             base = AttributeTable.getRoleBaseAttr(role_career);
             // 计算新的属性
@@ -36,9 +36,9 @@ module.exports = {
         }
         const update = {
             role_exp: `${current}/${upExp}`,
-            role_level,
-            ...extUpdata
+            role_level
         }
+      
         if (base) {
             role_attr.base = base;
             update['role_attr'] = role_attr;
@@ -47,6 +47,7 @@ module.exports = {
             update['life'] = attr.life_max;
             update['mana'] = attr.mana_max;
         }
+        callback && callback(Boolean(base), update)
         return RoleG.updataRoleGlobal(req, res, update);
 
     }

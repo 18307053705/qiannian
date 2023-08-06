@@ -31,3 +31,8 @@ export const SOCIALIZE_TYPE = {
   6: "师父",
   7: "结义"
 };
+
+export const  SEX_MEUN = {
+  1:"男",
+  2:"女",
+}

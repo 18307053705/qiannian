@@ -1,6 +1,6 @@
 
 const { AttributeTable } = require('../../table');
-
+const { getGemAttr } = require('./getGemAttr')
 const EQUIP_ATTR = {
     1: {
         pos: 'weapon',
@@ -30,23 +30,8 @@ const EQUIP_ATTR = {
         pos: 'necklace',
         attr: ['sudden']
     },
-    // 8: {
-    //     pos: 'treasure1',
-    //     attr: ['atk_min', 'atk_max']
-    // },
-    // 9: {
-    //     pos: 'treasure2',
-    //     attr: ['atk_min', 'atk_max']
-    // },
-    // 10: {
-    //     pos: 'treasure3',
-    //     attr: ['atk_min', 'atk_max']
-    // },
-    // 11: {
-    //     pos: 'treasure4',
-    //     attr: ['atk_min', 'atk_max']
-    // },
 };
+
 module.exports = {
     /**
      * 计算装备的属性
@@ -68,7 +53,7 @@ module.exports = {
     computeEquipAttr: function (equip, ext = '0_0_0_0_0_0_0_0') {
         const { pos, career, attr, level, customAttr } = equip;
         // 解析强化，锻造，附魔,宝石
-        const [firm, forge, sigil, ...gem] = ext.split('_');
+        const [firm, forge, sigil, ...gems] = ext.split('_');
         // const forge = 50;
         // const firm = 16;
         let Increase = 1 + forge * 0.1;
@@ -85,17 +70,51 @@ module.exports = {
         } else {
             Increase += 9
         }
-        const equipAttr = {};
-        const equipInfo = pos < 8 ? EQUIP_ATTR[pos] : { pos: 'treasure1', attr: customAttr };
+        const equipAttr = {
+            life_max: 0,
+            mana_max: 0,
+            atk_min: 0,
+            atk_max: 0,
+            dfs_min: 0,
+            dfs_max: 0,
+            dodge: 0,
+            hit: 0,
+            sudden: 0
+        };
+        const { pos: posName, attr: attrs } = pos < 8 ? EQUIP_ATTR[pos] : { pos: 'treasure1', attr: customAttr };
         const baseAttr = { ...AttributeTable.getRoleBaseAttr(career), ...AttributeTable.getRoleEleBaseAttr() };
         // 属性加成 = 装备自身加成 * 等级 * 强化锻造
         const addAttr = attr * level * Increase;
-        equipInfo.attr.forEach((key) => {
-            equipAttr[key] = parseInt(baseAttr[key] * addAttr);
+        // 计算宝石属性
+        const gemAttr = getGemAttr(gems);
+        Object.keys(equipAttr).forEach(key => {
+            if (attrs.includes(key)) {
+                equipAttr[key] += parseInt(baseAttr[key] * addAttr);
+            }
+            if (gemAttr[key]) {
+                equipAttr[key] += gemAttr[key];
+            }
         })
+        // 附魔属性
+        // 固定增加生命，法力,攻击,防御，
+        if (sigil * 1) {
+            equipAttr['life_max'] += sigil * 9000;
+            equipAttr['mana_max'] += sigil * 9000;
+            equipAttr['atk_max'] += sigil * 200;
+            equipAttr['atk_min'] += sigil * 120;
+            equipAttr['dfs_max'] += sigil * 100;
+            equipAttr['dfs_min'] += sigil * 80;
+        }
+
+        Object.keys(equipAttr).forEach(key => {
+            if (equipAttr[key] == 0) {
+                delete equipAttr[key]
+            }
+        })
+
         return {
             attr: equipAttr,
-            posName: equipInfo.pos,
+            posName
         }
     }
 }

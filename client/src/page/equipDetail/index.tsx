@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Input } from '@components';
 import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 import { backGrand } from '@utils/grand';
-import {  renameEquip } from '@cgi/equip';
+import { renameEquip, unloadGem } from '@cgi/equip';
 import { getArticleDetail } from '@cgi/knapsack';
 
-import { HeadActive,FirmActive, ForgeActive, SigilActive } from './components';
+import { HeadActive, FirmActive, ForgeActive, SigilActive, MosaicActive } from './components';
 
 import Style from './index.less';
 
@@ -14,10 +14,15 @@ const EquipDetail = ({ history }) => {
     const { state: query } = history.location;
     const [isRename, setIsRename] = useState(false);
     const [equip, setEquip] = useState();
+    const [isMosaic, setIsMosaic] = useState(false);
 
     // 获取武器详情
     const getEquipDetail = (params = {}) => {
         const { state } = history.location;
+        history.location.state = {
+            ...state,
+            ...params,
+        }
         getArticleDetail({ ...state, ...params }).then(({ data }) => {
             const equipInfo = getEquipInfo(data);
             const extInfo = getEquipExtInfo(data.ext, data.n);
@@ -28,8 +33,16 @@ const EquipDetail = ({ history }) => {
             })
         })
     }
-
+    // 挂载请求武器详情
     useEffect(getEquipDetail, []);
+
+    // 卸下宝石
+    const unloadGemClick = () => {
+        const { state } = history.location;
+        unloadGem({ in_x: state.in_x }).then(({ message }) => {
+            if (!message) { getEquipDetail() }
+        })
+    }
 
     if (!equip) {
         return null;
@@ -45,6 +58,9 @@ const EquipDetail = ({ history }) => {
         })
     }
 
+    if (isMosaic) {
+        return <MosaicActive query={query} setIsMosaic={setIsMosaic} getEquipDetail={getEquipDetail} />
+    }
     return (
         <div>
             <HeadActive query={query} history={history} />
@@ -67,7 +83,16 @@ const EquipDetail = ({ history }) => {
             }
             <div>强化：{equip.firm}级</div>
             <div>锻造：{equip.forge}次</div>
-            <div>镶嵌：{equip.gemList.length ? equip.gemList.map(({ level }) => level) : '无'}</div>
+            {/* 镶嵌 */}
+            {
+                query.form === 1 ? equip.gemList.map(({ text, active, unload }, index) => (
+                    <div key={index}>
+                        {text}
+                        {active && <span className="g_u_end" onClick={() => { setIsMosaic(true) }}>镶嵌</span>}
+                        {unload && <span className="g_u_end" onClick={unloadGemClick}>卸下</span>}
+                    </div>
+                )) : ''
+            }
             <div>简介：{equip.tips}</div>
             <div className={Style.equipFooter}>
                 <FirmActive query={query} equip={equip} getEquipDetail={getEquipDetail} />

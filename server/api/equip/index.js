@@ -5,6 +5,9 @@ const { renameEquip } = require('./renameEquip');
 const { firmeEquip } = require('./firmeEquip');
 const { forgeEquip } = require('./forgeEquip');
 const { sigilEquip } = require('./sigilEquip');
+const { getGemList } = require('./getGemList');
+const { mosaicEquip } = require('./mosaicEquip');
+const { unloadGem } = require('./unloadGem');
 
 const router = new express.Router();
 
@@ -20,4 +23,11 @@ router.post("/firmeEquip", firmeEquip);
 router.post("/forgeEquip", forgeEquip);
 // 装备强化
 router.post("/sigilEquip", sigilEquip);
+// 获取宝石
+router.post("/getGemList", getGemList);
+// 装备镶嵌
+router.post("/mosaicEquip", mosaicEquip);
+// 卸下宝石
+router.post("/unloadGem", unloadGem);
+
 module.exports = router;

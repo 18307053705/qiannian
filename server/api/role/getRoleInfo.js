@@ -1,6 +1,6 @@
 const { roleFn } = require('../../utils');
 const { ErrorG } = require('../../global');
-const { RealmTable,TitleTable } = require('../../table');
+const { RealmTable, TitleTable } = require('../../table');
 const MEUN = require('../../meun')
 module.exports = {
     /**
@@ -11,14 +11,15 @@ module.exports = {
         const role = await roleFn.getRoleInfo(req, res, { role_id });
         if (role) {
             // 计算角色属性
-            const data = roleFn.computeRoleAttr(req, res, role, {role_id});
+            const data = roleFn.computeRoleAttr(req, res, role, { role_id });
             const realm = RealmTable.getRealm(role['role_realm']);
             const title = TitleTable.getTitle(role['title']);
-            const role_career =  MEUN.CAREER_MEUN[role['role_career']];
-            const role_race =  MEUN.RACE_MEUN[role['role_race']];
+            const role_career = MEUN.CAREER_MEUN[role['role_career']];
+            const role_race = MEUN.RACE_MEUN[role['role_race']];
             return res.send({
                 code: 0,
                 data: {
+                    roles: role,
                     role_id: role['role_id'],
                     attr: data.attr,
                     buff: data.buff,

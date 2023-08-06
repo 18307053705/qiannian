@@ -3,7 +3,7 @@
 // ①②③④⑤⑥⑦⑧⑨⑩
 
 export const getEquipExtInfo = (ext, name) => {
-  const [firm, forge,sigil] = ext.split("_");
+  const [firm, forge, sigil] = ext.split("_");
   // const forge = 10;
   // const firm = 14;
   let increase = 1 + forge * 0.1;
@@ -38,6 +38,25 @@ export const getEquipExtInfo = (ext, name) => {
   // } else {
   //   text = `☆神话☆${name} 强${firm}锻${forge}`;
   // }
+  // if (increase < 1.5) {
+  //   text = `[普通] ${name}+${forge}`;
+  // } else if (increase < 3.1) {
+  //   text = `[精良] ${name}+${forge}`;
+  // } else if (increase < 3.6) {
+  //   text = `(优秀) ${name}+${forge}`;
+  // } else if (increase < 5.1) {
+  //   text = `{杰出} ${name}+${forge}`;
+  // } else if (increase < 6.1) {
+  //   text = `『卓越』${name}+${forge}`;
+  // } else if (increase < 7.1) {
+  //   text = `〖完美〗${name}+${forge}`;
+  // } else if (increase < 7.6) {
+  //   text = `〖史诗〗${name}+${forge}`;
+  // } else if (increase < 15) {
+  //   text = `★传说★${name}+${forge}`;
+  // } else {
+  //   text = `☆神话☆${name}+${forge}`;
+  // }
   if (increase < 1.5) {
     text = `[普通] ${name}`;
   } else if (increase < 3.1) {
@@ -60,15 +79,19 @@ export const getEquipExtInfo = (ext, name) => {
 
   return {
     increase,
-    firm:Number(firm),
-    forge:Number(forge),
-    sigil:Number(sigil),
+    firm: Number(firm),
+    forge: Number(forge),
+    sigil: Number(sigil),
     text
   };
 };
 
-export const getEquipName = (ext, name) => {
-  const { text } = getEquipExtInfo(ext, name);
+export const getEquipName = equip => {
+  if (!equip) {
+    return "无";
+  }
+  const { ext, n } = equip;
+  const { text } = getEquipExtInfo(ext, n);
   return text;
 };
 
@@ -108,17 +131,23 @@ const GEM_LEVEL = {
 
 export const getEquipInfo = equip => {
   const { ext, career } = equip;
-  const [_, __, ...gem] = ext.split("_");
+  const [_, __, ___, ...gem] = ext.split("_");
   // 解析宝石
   const gemList: any[] = [];
+  const gemNoList: any[] = [];
   gem.forEach(itme => {
     if (itme !== "0") {
       const type = itme.substr(itme.length - 1);
       const level = itme.substr(0, itme.length - 1);
-      // gemList.push(`${GEM_LEVEL[level]}级${GEM_TYPE[type]}宝石`);
       gemList.push({
         level: GEM_LEVEL[level],
-        text: `${GEM_LEVEL[level]}级${GEM_TYPE[type]}宝石`
+        text: `${GEM_LEVEL[level]}级${GEM_TYPE[type]}宝石`,
+        unload: !gemList.length
+      });
+    } else {
+      gemNoList.push({
+        text: "[未镶嵌]",
+        active: !gemNoList.length
       });
     }
   });
@@ -133,7 +162,7 @@ export const getEquipInfo = equip => {
 
   return {
     careerName: career === 0 ? "全职" : careerName,
-    gemList
+    gemList: [...gemList, ...gemNoList]
   };
 };
 
@@ -169,12 +198,12 @@ export const EQUIP_POS_LIST = [
   {
     label: "法宝",
     value: "treasure1",
-    // condition: 66
+    condition: 66
   },
   {
     label: "法宝",
     value: "treasure2",
-    // condition: 66
+    condition: 66
   },
   {
     label: "法宝",

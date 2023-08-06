@@ -1,6 +1,7 @@
 import React from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 import { jumpDetail } from '@utils/jumpDetail';
+import { SEX_MEUN } from '@meun';
 const RoleAttr = ({ roleInfo, history }) => {
     const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo;
     return (
@@ -8,9 +9,9 @@ const RoleAttr = ({ roleInfo, history }) => {
             <div>
                 <div><span className="g_b">角色</span>：<span>{`${roleInfo.role_name}(${roleInfo.role_title || '无'})`}</span></div>
                 <div><span className="g_b">等级</span>：<span>{`${roleInfo.role_level}级(${roleInfo.role_exp})`}</span></div>
-                {roleInfo.role_level > 69 && <div><span className="g_b">境界</span>：<span>{roleInfo.role_realm}境</span></div>}
+                {roleInfo.role_level > 69 && <div><span className="g_b">境界</span>：<span>{roleInfo.role_realm}</span></div>}
                 <div><span className="g_b">职业</span>：<span>{roleInfo.role_career}</span></div>
-                <div><span className="g_b">性别</span>：<span>{roleInfo.role_sex}</span></div>
+                <div><span className="g_b">性别</span>：<span>{SEX_MEUN[roleInfo.role_sex]}</span></div>
                 {socialize.spouse && <div><span className="g_b">妻子</span>：<span>{socialize.spouse.name}</span></div>}
                 {socialize.teacher && <div><span className="g_b">师父</span>：<span>{socialize.teacher.name}</span></div>}
                 <div><span className="g_b">生命</span>：<span>{`${roleInfo.life}/${attr.life_max}`}</span></div>
@@ -41,7 +42,7 @@ const RoleAttr = ({ roleInfo, history }) => {
                                     }}
                                     className="g_u_end"
                                 >
-                                    {getEquipName(equip[value].ext, equip[value].n)}
+                                    {getEquipName(equip[value])}
                                 </span> : '无'}
                             </div>
                         )

@@ -5,6 +5,9 @@ const renameEquiptUrl = "/equip/renameEquip";
 const firmeEquiptUrl = "/equip/firmeEquip";
 const forgeEquipUrl = "/equip/forgeEquip";
 const sigilEquipUrl = "/equip/sigilEquip";
+const getGemListUrl = "/equip/getGemList";
+const mosaicEquipUrl = "/equip/mosaicEquip";
+const unloadGemUrl = "/equip/unloadGem";
 
 //获取装备列表
 export function getEquipList() {
@@ -44,4 +47,28 @@ export function forgeEquip(data) {
  */
 export function sigilEquip(data) {
   return post(sigilEquipUrl, data);
+}
+
+/**
+ * 获取宝石列表
+ */
+export function getGemList() {
+  return post(getGemListUrl);
+}
+
+/**
+ * 装备镶嵌
+ * @param req.material_inx 材料在背包内的下标
+ * @param req.in_x 装备在背包内的下标
+ */
+export function mosaicEquip(data) {
+  return post(mosaicEquipUrl, data);
+}
+
+/**
+ * 装备宝石卸下
+ * @param req.in_x 装备在背包内的下标
+ */
+export function unloadGem(data) {
+  return post(unloadGemUrl, data);
 }

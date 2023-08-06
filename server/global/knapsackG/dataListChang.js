@@ -8,24 +8,20 @@ module.exports = {
      */
     dataListChang: function (data) {
         return JSON.parse(data).map(({ id, p, ext, n2, s }) => {
-            // 装备存在自定义名称
-            if (n2) {
-                return {
-                    id,
-                    p,
-                    ext,
-                    n: n2,
-                    n2,
-                    s
-                }
-            }
-            return {
+            const itme = {
                 id,
                 p,
-                ext,
-                n: getDataName(id, p),
-                s
+                s,
+                ext
             }
+            // 装备存在自定义名称
+            if (n2) {
+                itme.n = n2;
+                itme.n2 = n2;
+            } else {
+                itme.n = getDataName(id, p);
+            }
+            return itme;
         })
     }
 }

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
 import { getFriendsList, friendsApply } from '@cgi/friends';
 import { createFightDir } from '@cgi/grand';
-import { getEquipName } from '@utils/equip';
+import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
+import { SEX_MEUN } from '@meun';
 import { Input } from "@components";
 const Plater = ({ history }) => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
@@ -33,13 +34,11 @@ const Plater = ({ history }) => {
         <>
             <div>
                 <Input
-                    // label={`私聊${role.name}`}
                     layout={false}
                     onText="私聊"
                     submit={submit}
                     length={[0, 100]}
                 />
-                {/* <div><span className="g_u"><span onClick={() => { history.push('/chat', { role_id: state.role_id, role_name: roleInfo.role_name }) }}>私聊</span></span></div> */}
                 <div>
                     <span className="g_u"><span onClick={() => { history.push('/shopping', { role_id: state.role_id }) }}>店铺</span></span>
                     <span className="g_u"><span>赠送</span></span>
@@ -58,7 +57,7 @@ const Plater = ({ history }) => {
                 <div><span className="g_b">等级</span>：<span>{`${roleInfo.role_level}级`}</span></div>
                 {roleInfo.role_level > 69 && <div><span className="g_b">境界</span>：<span>{roleInfo.role_realm}境</span></div>}
                 <div><span className="g_b">职业</span>：<span>{roleInfo.role_career}</span></div>
-                <div><span className="g_b">性别</span>：<span>{roleInfo.role_sex}</span></div>
+                <div><span className="g_b">性别</span>：<span>{SEX_MEUN[roleInfo.role_sex]}</span></div>
                 {socialize.spouse && <div><span className="g_b">妻子</span>：<span>{socialize.spouse.name}</span></div>}
                 {socialize.teacher && <div><span className="g_b">师父</span>：<span>{socialize.teacher.name}</span></div>}
             </div>
@@ -70,19 +69,20 @@ const Plater = ({ history }) => {
             <div><span className="g_b">闪避</span>：<span>{attr.dodge}</span></div>
             <div><span className="g_b">暴击</span>：<span>{attr.sudden}</span></div>
             <div>
-                <div>
-                    <span className="g_b">宠物</span>：<span>{equip.pet ? equip.pet.name : '无'}</span></div>
-                <div><span className="g_b">武器</span>：<span>{equip.weapon ? getEquipName(equip.weapon.ext, equip.weapon.name) : '无'}</span></div>
-                <div><span className="g_b">头盔</span>：<span>{equip.helmet ? getEquipName(equip.helmet.ext, equip.helmet.name) : '无'}</span></div>
-                <div><span className="g_b">衣服</span>：<span>{equip.clothing ? getEquipName(equip.clothing.ext, equip.clothing.name) : '无'}</span></div>
-                <div><span className="g_b">腰带</span>：<span>{equip.belt ? getEquipName(equip.belt.ext, equip.belt.name) : '无'}</span></div>
-                <div><span className="g_b">鞋子</span>：<span>{equip.shoe ? getEquipName(equip.shoe.ext, equip.shoe.name) : '无'}</span></div>
-                <div><span className="g_b">戒指</span>：<span>{equip.ring ? getEquipName(equip.ring.ext, equip.ring.name) : '无'}</span></div>
-                <div><span className="g_b">项链</span>：<span>{equip.necklace ? getEquipName(equip.necklace.ext, equip.necklace.name) : '无'}</span></div>
-                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure1 ? getEquipName(equip.treasure1.ext, equip.treasure1.name) : '无'}</span></div>}
-                {roleInfo.role_level > 65 && <div><span className="g_b">法宝</span>：<span>{equip.treasure2 ? getEquipName(equip.treasure2.ext, equip.treasure2.name) : '无'}</span></div>}
-                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure3 ? getEquipName(equip.treasure3.ext, equip.treasure3.name) : '无'}</span></div>}
-                {roleInfo.role_level > 74 && <div><span className="g_b">法宝</span>：<span>{equip.treasure4 ? getEquipName(equip.treasure4.ext, equip.treasure4.name) : '无'}</span></div>}
+                <div><span className="g_b">宠物</span>：<span>{equip.pet ? equip.pet.n : '无'}</span></div>
+                {
+                    EQUIP_POS_LIST.map(({ label, value, condition = 0 }, index) => {
+                        if (roleInfo.role_level < condition) {
+                            return null;
+                        }
+                        return (
+                            <div key={index}>
+                                <span className="g_b">{label}</span>
+                                {getEquipName(equip[value])}
+                            </div>
+                        )
+                    })
+                }
             </div>
             <span className="g_b_u" onClick={() => { history.push('/grand') }}>返回游戏</span>
 

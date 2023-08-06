@@ -15,13 +15,28 @@ module.exports = {
         const roleInfo = RoleG.getRoleGlobal(req, res);
         const knapsack = KnapsackG.getknapsackGlobal(req, res);
         const { fightMap } = FightG.getFightGlobal(req, res);
-        const { rivalMold, num: freakNum } = fightMap;
-        const { equip = [], article = [], ext } = rivalMold;
+        const { rivalMold, num: freakNum, player } = fightMap;
+        const { equip, article, ext } = rivalMold;
+        const equipList = equip ? equip.split(',').map(str => {
+            const [id, rate = 100] = str.split('-');
+            return {
+                id,
+                rate
+            }
+        }) : [];
+        const articleList = article ? article.split(',').map(str => {
+            const [id, s = 1, rate = 100] = str.split('-');
+            return {
+                id,
+                s,
+                rate
+            }
+        }) : [];
         const textReward = [];
         const artReward = {}; // 物品奖励
         const equipReward = {}; // 装备奖励
         // 物品id,s物品数量默认1 rate概率默认100
-        equip.forEach(({ id, rate = 100 }) => {
+        equipList.forEach(({ id, rate }) => {
             // 获取物品
             if (rate > Math.floor(Math.random() * (100 - 0))) {
                 const { type, name } = knapsackTable.getEquip(id);
@@ -30,7 +45,7 @@ module.exports = {
             }
         });
         // 物品id,s物品数量默认1 rate概率默认100
-        article.forEach(({ id, s = 1, rate = 100 }) => {
+        articleList.forEach(({ id, s, rate }) => {
             // 获取物品
             if (rate > Math.floor(Math.random() * (100 - 0))) {
                 const { type, n } = knapsackTable.getArticle(id);
@@ -71,7 +86,14 @@ module.exports = {
         // 更新背包
         KnapsackG.updateknapsackGlobal(req, res, { tael: knapsack.tael + tael });
         // 更新角色经验等级
-        roleFn.computeRoleLevel(req, res, exp);
+        roleFn.computeRoleLevel(req, res, exp, (islevel, updata) => {
+            // 判断角色是否升级
+            if (islevel) {
+                player.attr['life'] = updata.life;
+                player.attr['mana'] = updata.mana;
+                FightG.updataFightMapGlobal(req, res, { player })
+            }
+        });
         // 监听任务池
         // const tasks = taskFn.listenTask(req, freak.extDir['id'], freakNum);
         // return

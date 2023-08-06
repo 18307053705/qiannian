@@ -5,7 +5,7 @@ module.exports = {
      * 增加物品
      * @param {*} req 
      * @param {*} res 
-     * @param {*} data.article 必传
+     * @param {*} data.article 必传({artReward:{id:{p,s,n}}},equipReward:{id:{p,s,n}})
      * @param {*} data.data 可选
      * @returns {string}  message | undefined
      */
@@ -48,16 +48,17 @@ module.exports = {
                 delete artReward[key];
             })
         }
-        // 装备奖励
+        // 新增装备
         if (equipReward) {
             Object.keys(equipReward).forEach(key => {
-                const { id, name, n, ext = '0_0_0_0_0_0_0_0' } = equipReward[key];
+                const { id, name, n, n2,ext = '0_0_0_0_0_0_0_0_0' } = equipReward[key];
                 data.push({
                     id,
                     n: name || n,
                     ext,
                     s: 1,
-                    p: 3
+                    p: 3,
+                    n2
                 });
                 delete equipReward[key];
             })
