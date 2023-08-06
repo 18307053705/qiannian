@@ -37,7 +37,7 @@ const namehandel = (n, p, ext) => {
     if (p !== 3) {
         return n;
     }
-    return getEquipName(ext, n);
+    return getEquipName({ ext, n });
 }
 
 const ACTIVE_TYPE = {
@@ -77,14 +77,14 @@ const knapsack = ({ history }) => {
             return data;
         }
         if (current === 1) {
-            list.forEach(({ n='', p, ...itme }, index) => {
+            list.forEach(({ n = '', p, ...itme }, index) => {
                 if (((p === 1 || p === 2) && n.includes(serchValue))) {
                     data.push({ n, p, ...itme, in_x: index })
                 }
             });
             return data;
         }
-        list.forEach(({ n='', p, ...itme }, index) => {
+        list.forEach(({ n = '', p, ...itme }, index) => {
             if (p === current && n.includes(serchValue)) {
                 data.push({ n, p, ...itme, in_x: index })
             }

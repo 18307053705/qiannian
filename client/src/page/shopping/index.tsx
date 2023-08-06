@@ -14,7 +14,6 @@ export const Shopping = ({ history }) => {
     const { state } = history.location;
     const [key, setKey] = useState<KeyType>('detai');
     const [info, setInfo] = useState();
-
     const [roleId, setRoleId] = useState(state.role_id);
 
     const updataDetail = (roleId) => {
@@ -32,9 +31,13 @@ export const Shopping = ({ history }) => {
     }, [roleId, key]);
     return (
         <div>
+            {/* 店铺详情 */}
             {key === 'detai' && <DetailShop info={info} setInfo={setInfo} setKey={setKey} roleId={roleId} />}
+            {/* 店铺列表 */}
             {key === 'shopList' && <ShopList setRoleId={shopClick} />}
+            {/* 物品上架 */}
             {key === 'article' && <Article history={history} />}
+            {/* 上架物品列表 */}
             {key === 'articleList' && (
                 <ArticleList history={history} data={info['article']} roleId={roleId} updataDetail={updataDetail} />)
             }

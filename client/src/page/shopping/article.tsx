@@ -39,7 +39,7 @@ const namehandel = (n, p, ext) => {
     if (p !== 3) {
         return n;
     }
-    return getEquipName(ext, n);
+    return getEquipName({ext, n});
 }
 const Article = ({ history }) => {
     const [error, setError] = useState('')

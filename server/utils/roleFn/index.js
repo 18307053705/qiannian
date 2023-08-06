@@ -4,6 +4,7 @@ const computeRoleAttr = require('./computeRoleAttr');
 const roleExit = require('./roleExit');
 const computeRoleLevel = require('./computeRoleLevel');
 const computeUpExp = require('./computeUpExp');
+const updataRoleInfo = require('./updataRoleInfo');
 
 module.exports = {
     ...getRoleInfo,
@@ -12,4 +13,5 @@ module.exports = {
     ...roleExit,
     ...computeRoleLevel,
     ...computeUpExp,
+    ...updataRoleInfo
 }

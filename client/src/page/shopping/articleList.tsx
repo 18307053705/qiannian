@@ -6,7 +6,7 @@ const namehandel = (n, p, ext) => {
     if (p !== 3) {
         return n;
     }
-    return getEquipName(ext, n);
+    return getEquipName({ ext, n });
 }
 const ArticleList = ({ history, data, roleId, updataDetail }) => {
     const [error, setError] = useState('')

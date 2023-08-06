@@ -43,7 +43,7 @@ function asyncQuery(queryString, sqlInfo = {}) {
  * @param {*} sqlInfo 接入数据库信息，可不传
  */
 function asyncAdd(queryString, data, sqlInfo = {}) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const connecttion = mysql.createConnection({
       ...SQL_INFO,
       ...sqlInfo
