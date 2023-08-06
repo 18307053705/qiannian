@@ -10,12 +10,12 @@ module.exports = {
      * @param in_x 所在下标(背包,仓库,店铺)
      * @param pos 装备部位(身上,宠物)
      * @param id 物品id商城
-     * @param t_roleId 角色id
+     * @param role_id 角色id
      * @param petId 宠物id
      *
      */
     getArticleDetail: async function (req, res) {
-        const { form, in_x, pos, t_roleId, petId, id } = req.body;
+        const { form, in_x, pos, role_id, petId, id } = req.body;
         // 背包 仓库 店铺 必传下标
         if ([1, 3, 4].includes(form) && in_x === undefined) {
             ErrorG.paramsError(res);
@@ -39,12 +39,12 @@ module.exports = {
         let articleInfo = undefined;
         // 物品在背包
         if (form === 1) {
-            const { data } = await knapsackFn.getKnapsackInfo(req, res, { role_id: t_roleId });
+            const { data } = await knapsackFn.getKnapsackInfo(req, res, { role_id });
             articleInfo = data[in_x];
         }
         // 物品在身上(已穿戴装备)
         if (form === 2) {
-            const { equip_pool } = await roleFn.getRoleInfo(req, res, { role_id: t_roleId });
+            const { equip_pool } = await roleFn.getRoleInfo(req, res, { role_id });
             // 对应部位装备
             const equip = equip_pool[pos];
             articleInfo = { ...equip, p: 3 };
@@ -56,7 +56,7 @@ module.exports = {
         }
         // 物品在店铺：自身店铺与其他人店铺(t_roleId)
         if (form === 4) {
-            const { article } = await shopFn.getShopInfo(req, res, t_roleId);
+            const { article } = await shopFn.getShopInfo(req, res, role_id);
             articleInfo = article ? article[in_x] : undefined;
         }
         // 商城

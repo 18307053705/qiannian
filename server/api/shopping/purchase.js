@@ -3,7 +3,7 @@ const { shopFn, knapsackFn, roleFn } = require("../../utils");
 
 module.exports = {
     /**
-     * 获取店铺详情
+     * 购买物品
      * @param {*} req.role_id 店铺玩家id
      * @param {*} req.type (1:物品,2:宠物)
      * @param {*} req.s 数量
@@ -65,7 +65,6 @@ module.exports = {
                 }
             }
             const message = knapsackFn.addKnapsack(req, res, { article: { artReward } });
-
             if (message) {
                 res.send({
                     code: 0,
@@ -77,9 +76,9 @@ module.exports = {
             durg.s -= s;
             article[in_x] = durg;
             // 物品为零删掉对应信息
-            !durg.s || article.splice(in_x, 1);
+            durg.s || article.splice(in_x, 1);
             // 更新店主店铺信息
-            await shopFn.updataShopInfo(req, res, { article: JSON.stringify(article) });
+            await shopFn.updataShopInfo(req, res, { article: JSON.stringify(article) }, role_id);
             // 计算双方货币
             // 获取店主背包
             let { tael: tael_t, yuanbao: yuanbao_t } = await knapsackFn.getKnapsackInfo(req, res, { role_id });

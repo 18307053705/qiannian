@@ -1,10 +1,3 @@
-type paramType = {
-  p: number;
-  form: number;
-  pos?: string;
-  in_x?: number;
-};
-
 /**
  * 跳转到详情页
  * @param history 路由
@@ -12,11 +5,12 @@ type paramType = {
  * @param param.form 物品所在:1背包,2身上,3仓库,4店铺,5商城,6宠物
  * @param param.pos 装备部位,装备专属字段，指佩戴的位置，可选参数
  * @param param.in_x 所在背包,仓库,店铺等下标,可选参数
+ * @param param.role_id 其他人
  */
-export function jumpDetail(history, { p, form, pos, in_x }:paramType) {
+export function jumpDetail(history, { p, form, pos, in_x, role_id }:any) {
   if (p === 3) {
-    history.push("/equipDetail", { form, in_x, pos });
+    history.push("/equipDetail", { form, in_x, pos, role_id });
   } else {
-    history.push("/articleDetail", { form, in_x, pos });
+    history.push("/articleDetail", { form, in_x, pos, role_id });
   }
 }

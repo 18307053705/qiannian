@@ -11,7 +11,7 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { results } = await mysql.asyncQuery(`select * from shop where name="${name}"`);
+        const { results } = await res.asyncQuery(`select * from shop where name="${name}"`);
         if (results[0]) {
             res.send({
                 code: 0,

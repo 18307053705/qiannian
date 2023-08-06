@@ -3,7 +3,7 @@ import { List } from '@components/index';
 import { getShopList } from '@cgi/shopping';
 
 
-export const Shopping = ({ setRoleId }) => {
+export const Shopping = ({ historyClick }) => {
     const [list, setList] = useState([]);
     useEffect(() => {
         // 店铺列表
@@ -12,13 +12,20 @@ export const Shopping = ({ setRoleId }) => {
         })
     }, [])
 
-
+    const prefix = ({ role_id, name }, index) => (
+        <span className='g_u_end'
+            onClick={() => {
+                historyClick({ page: 'detai', role_id })
+            }}>
+            {index}.{name}
+        </span>
+    )
 
     return (
         <List
             data={list}
             prefix_d={true}
-            prefix={(row, index) => (<span  className='g_u_end' onClick={() => { setRoleId(row.role_id) }}>{index}.{row.name}</span>)}
+            prefix={prefix}
         />
     )
 

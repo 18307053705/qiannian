@@ -8,56 +8,55 @@ import ShopList from './shopList';
 import Article from './article';
 import ArticleList from './articleList';
 
-type KeyType = 'detai' | 'shopList' | 'article' | 'pet' | 'articleList'
+type KeyType = 'detai' | 'shopList' | 'article' | 'pet' | 'articleList';
 
 export const Shopping = ({ history }) => {
-    const { state } = history.location;
-    const [key, setKey] = useState<KeyType>('detai');
-    const [info, setInfo] = useState();
-    const [roleId, setRoleId] = useState(state.role_id);
-
-    const updataDetail = (roleId) => {
-        getDetail({ role_id: roleId }).then(({ data }) => {
-            setInfo(data);
-        })
+    const { state }: any = history.location;
+    const { page = 'detai', role_id = '' } = state || {};
+    const historyClick = (parmas: { page: KeyType, role_id?: string }) => {
+        history.push('./shopping', { ...state, ...parmas });
     }
-    const shopClick = (role_id) => {
-        setKey('detai');
-        setRoleId(role_id);
-    }
-
-    useEffect(() => {
-        updataDetail(roleId);
-    }, [roleId, key]);
+    console.log(state)
     return (
         <div>
             {/* 店铺详情 */}
-            {key === 'detai' && <DetailShop info={info} setInfo={setInfo} setKey={setKey} roleId={roleId} />}
+            {page === 'detai' && <DetailShop historyClick={historyClick} history={history} />}
             {/* 店铺列表 */}
-            {key === 'shopList' && <ShopList setRoleId={shopClick} />}
+            {page === 'shopList' && <ShopList historyClick={historyClick} />}
             {/* 物品上架 */}
-            {key === 'article' && <Article history={history} />}
+            {page === 'article' && <Article history={history} historyClick={historyClick} />}
             {/* 上架物品列表 */}
-            {key === 'articleList' && (
-                <ArticleList history={history} data={info['article']} roleId={roleId} updataDetail={updataDetail} />)
+            {page === 'articleList' && <ArticleList history={history} historyClick={historyClick}  />
             }
-            <div>
-                {key === 'detai' && <span className="g_u_end" onClick={() => { setKey('shopList') }}>店铺列表</span>}
-                {
-                    (key !== 'detai' || roleId) && (
-                        <div>
-                            <span
-                                className="g_u_end"
-                                onClick={() => {
-                                    setKey('detai');
-                                    setRoleId('');
-                                }}>
-                                我的店铺
+
+            {/* 店铺列表  */}
+            {
+                page === 'detai' && (
+                    <div>
+                        <span
+                            className="g_u_end"
+                            onClick={() => {
+                                historyClick({ page: 'shopList' });
+                            }}>
+                            店铺列表
+                        </span>
+                    </div>
+                )
+            }
+            {/* 我的店铺  */}
+            {
+                (page !== 'detai' || role_id) && (
+                    <div>
+                        <span
+                            className="g_u_end"
+                            onClick={() => {
+                                historyClick({ page: 'detai', role_id: '' })
+                            }}>
+                            我的店铺
                             </span>
-                        </div>
-                    )
-                }
-            </div>
+                    </div>
+                )
+            }
             <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>
         </div>
     )

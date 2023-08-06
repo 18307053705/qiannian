@@ -12,18 +12,23 @@ module.exports = {
      * @param {*} req.petId  宠物id
      */
     grounding: async function (req, res) {
-        const { type, in_x, active, s, price, unit } = req.body;
-        if (!active || !type || !price || (unit !== 'tael' && unit !== 'yuanbao')) {
+        const { type, in_x, active, s, price, unit, petId } = req.body;
+        if (!active || !type) {
+            ErrorG.paramsError(res);
+            return;
+        }
+        // 上架必须有单位
+        if (active === 1 && !price && (unit !== 'tael' && unit !== 'yuanbao')) {
             ErrorG.paramsError(res);
             return;
         }
         // 上架物品参数校验
-        if (active === 1 && in_x === undefined) {
+        if (type === 1 && in_x === undefined) {
             ErrorG.paramsError(res);
             return;
         }
         // 上架宠物参数校验
-        if (active === 2 && !petId) {
+        if (type === 2 && !petId) {
             ErrorG.paramsError(res);
             return;
         }
@@ -51,7 +56,7 @@ module.exports = {
                 return;
             }
             durg['s'] -= s;
-            !durg['s'] || data.splice(in_x, 1);
+            durg['s'] || data.splice(in_x, 1);
             article.push({
                 n: durg['n'],
                 id: durg['id'],

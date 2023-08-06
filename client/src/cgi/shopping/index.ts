@@ -6,43 +6,46 @@ const modifyShopUrl = "/shopping/modify";
 const groundingUrl = "/shopping/grounding";
 const purchaseUrl = "/shopping/purchase";
 
-export async function createShop(data: { name: string }) {
-  return await post(createShopUrl, data);
+export function createShop(data: { name: string }) {
+  return post(createShopUrl, data);
 }
 
-export async function modifyShop(data: { name: string }) {
-  return await post(modifyShopUrl, data);
+export function modifyShop(data: { name: string }) {
+  return post(modifyShopUrl, data);
 }
 
 type DetailTypeReq = {
   role_id?: string;
 };
-export async function getDetail(data: DetailTypeReq = {}) {
-  return await post(getDetailUrl, data);
+export function getDetail(data: DetailTypeReq = {}) {
+  return post(getDetailUrl, data);
 }
 
-export async function getShopList() {
-  return await post(getShopListUrl);
+export function getShopList() {
+  return post(getShopListUrl);
 }
-// 上下架
-type groundingType = {
-  active: 1 | 2; // 1上架 2下架
-  type: 1 | 2; // 1 物品 2 宠物
-  in_x: number;
-  s?: number;
-  price?: number;
-};
-export async function grounding(data: groundingType) {
-  return await post(groundingUrl, data);
+/**
+ * 物品上下架
+ * @param {*} req.active (1:上架,2:下架)
+ * @param {*} req.type (1:物品,2:宠物)
+ * @param {*} req.price 价格
+ * @param {*} req.unit 单位(tael,yuanbao)
+ * @param {*} req.s  上架数量
+ * @param {*} req.in_x  物品所在下标(下架,则代表物品所在货架下标)
+ * @param {*} req.petId  宠物id
+ */
+export function grounding(data) {
+  return post(groundingUrl, data);
 }
 
-// 购买
-type purchaseType = {
-  type: 1 | 2; // 1 物品 2 宠物
-  in_x: number;
-  s: number;
-  role_id: string;
-};
-export async function purchase(data: purchaseType) {
-  return await post(purchaseUrl, data);
+/**
+ * 购买物品
+ * @param {*} req.role_id 店铺玩家id
+ * @param {*} req.type (1:物品,2:宠物)
+ * @param {*} req.s 数量
+ * @param {*} req.in_x  物品所在货架下标
+ * @param {*} req.petId  宠物id
+ */
+export function purchase(data) {
+  return post(purchaseUrl, data);
 }
