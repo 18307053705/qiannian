@@ -1,25 +1,24 @@
-const { RoleG, ErrorG, KnapsackG } = require("../../global");
+const { ErrorG, KnapsackG, PetG } = require("../../global");
 const { knapsackTable } = require("../../table");
-const { petFn, equipFn } = require("../../utils");
+const { equipFn } = require("../../utils");
 module.exports = {
     /**
      * 宠物佩戴装备
      * @param {*} posKey 装备部位
      * @param in_x 背包所在下标(背包,仓库,店铺)
-     * @param petId 宠物id
      */
     petWearEquip: async function (req, res) {
         const { posKey, in_x } = req.body;
-        if (!posKey || in_x === undefined || !petId) {
+        if (!posKey || in_x === undefined) {
             ErrorG.paramsError(res);
             return;
         }
-        const { pet_pool } = RoleG.getRoleGlobal(req, res);
-        const pet = pet_pool.l.find(({ id }) => id === petId);
-        if (!pet) {
+        // 获取宠物信息
+        const { id:petId, equip: equip_pool, level, addition, type } = PetG.getPetGlobal(req) || {};
+        if (!petId) {
             res.send({
                 code: 0,
-                message: '宠物信息有误'
+                message: '请先将宠物参战。'
             })
             return;
         }
@@ -32,8 +31,7 @@ module.exports = {
             })
             return;
         }
-        // 获取宠物信息
-        const { level, type, equip: equip_pool, addition } = await petFn.getPetInfo(req, res, petId);
+
         // 需要进行佩戴的装备
         const { id, n, ext } = equip;
         const equipWear = knapsackTable.getEquip(id);
@@ -87,10 +85,13 @@ module.exports = {
             ext
         }
         // 更新宠物装备池
-        petFn.updataPetInfo(req, res, { equip: equip_pool, addition }, petId);
+        PetG.updataPetGlobal(req, res, { equip: equip_pool, addition });
         // 更新背包
         KnapsackG.updateknapsackGlobal(req, res, { data });
-
+        res.send({
+            code: 0,
+            data: ''
+        })
 
     },
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { detailPet } from '@cgi/pet';
 import { Tab } from '@components';
 import { backGrand } from '@utils/grand';
@@ -14,13 +14,6 @@ const tabList = [
 ];
 
 
-const PET_STATE = {
-    0: '休战',
-    1: '参战',
-    2: '附体',
-    3: '出售',
-}
-
 const PetDetail = ({ id, history }) => {
     // const { state } = history.location;
     const { petId, petRoomInfo } = history.location.state;
@@ -31,43 +24,26 @@ const PetDetail = ({ id, history }) => {
         detailPet({ petId }).then(({ data }) => {
             setPetInfo(data);
         })
-    }, [])
+    }, [updata])
+
+    const callback = useCallback(() => {
+        detailPet({ petId }).then(({ data }) => {
+            setPetInfo(data);
+        })
+    }, [petId])
 
     if (!petInfo) {
         return null;
     }
 
     const { attr, art, equip } = petInfo;
-
-
-
-    // resuslt
-    // const resuslt = ({ data }) => {
-    //     if (data) {
-    //         setUpdata(!updata);
-    //     }
-    // }
-    // // 学习技能
-    // const studyArtClick = (in_x) => {
-    //     studyArt({ id, in_x }).then(resuslt)
-    // }
-    // // 状态切换
-    // const chengClick = (state) => {
-    //     cheng({ id: pet.id, state }).then(resuslt)
-    // }
-    // // 参战或附体，无法进行任何操作
-    // const isFight = pet.state === 1 || pet.state === 2;
-    // // 是否可附体
-    // const appendage = pet.state === 1 && art[1].l !== -1;
-    // // 是否转世
-    // const reincarnation = pet.flair_x === pet.flair && pet.reborn < 3;
     const { c, l } = petRoomInfo || {};
     const petRoom = l.find(({ id }) => id === petId);
     return (
         <div>
             <div>{petInfo.name}</div>
-            <PetState petId={petId} petRoom={petRoom} />
-            <PetFlair petRoom={petRoom} petInfo={petInfo} />
+            <PetState petId={petId} petRoom={petRoom} petInfo={petInfo} />
+            <PetFlair petRoom={petRoom} petInfo={petInfo} callback={callback} />
             <div><span>等级：{`${petInfo.level}级(${petInfo.exp})`}</span></div>
             <Tab list={tabList} onCheng={setPageKey} />
             {pageKey === 0 && <PetAttr attr={attr} />}
@@ -75,12 +51,7 @@ const PetDetail = ({ id, history }) => {
                 <PetEquip
                     petRoom={petRoom}
                     petInfo={petInfo}
-                    id={id}
-                    equip={equip}
-                    isFight={true}
-                    level={petInfo.level}
                     history={history}
-                    setUpdata={setUpdata}
                 />
             )}
             {pageKey === 2 && (

@@ -1,10 +1,11 @@
 import React from "react";
 import { operate } from '@cgi/knapsack';
 import { unloadEquipt } from '@cgi/equip';
+import { petUnloadEquip } from '@cgi/pet';
 
 // 头部操作
 export const HeadActive = ({ query, history }) => {
-    const { form, in_x, pos } = query;
+    const { form, in_x, pos, petId } = query;
     const operateClick = (type) => {
         operate({
             s: 1,
@@ -18,7 +19,14 @@ export const HeadActive = ({ query, history }) => {
     }
 
     const unloadEquiptclick = () => {
-        unloadEquipt({ pos }).then(({ message }) => {
+        let requst: any = undefined;
+        if (form === 2) {
+            requst = unloadEquipt({ pos });
+        }
+        if (form === 6) {
+            requst = petUnloadEquip({ posKey: pos, petId });
+        }
+        requst.then(({ message }) => {
             if (!message) {
                 history.goBack()
             }
@@ -38,7 +46,7 @@ export const HeadActive = ({ query, history }) => {
         )
     }
 
-    if (form === 2) {
+    if (form === 2 || form === 6) {
         return (
             <div>
                 <span className='g_u'><span onClick={unloadEquiptclick}>卸下</span></span>

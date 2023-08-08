@@ -1,4 +1,4 @@
-const { ErrorG, RoleG } = require('../../global');
+const { ErrorG, PetG } = require('../../global');
 const { ruleFn } = require('../../utils');
 module.exports = {
     /**
@@ -6,7 +6,7 @@ module.exports = {
      * @param pos 装备部位
      * @param name 名称
      */
-    renameEquip: (req, res) => {
+    renameEquip: async (req, res) => {
         const { name, pos } = req.body;
         if (!pos || !name) {
             ErrorG.paramsError(res);
@@ -16,7 +16,14 @@ module.exports = {
         if (!ruleFn.checkNameRule(res, name)) {
             return;
         }
-        const { equip_pool } = RoleG.getRoleGlobal(req, res);
+        const { id, equip: equip_pool } = PetG.getPetGlobal(req) || {};
+        if (!id) {
+            res.send({
+                code: 0,
+                message: '请先将宠物参战。'
+            })
+            return;
+        }
         const equip = equip_pool[pos];
         if (!equip) {
             res.send({
@@ -33,7 +40,7 @@ module.exports = {
             equip['n'] = name;
             equip['n2'] = name;
             success = '装备改名成功.';
-            RoleG.updataRoleGlobal(req, res, { equip_pool })
+            PetG.updataPetGlobal(req, res, { equip: equip_pool });
         } else {
             message = '不满足改名条件。'
         }

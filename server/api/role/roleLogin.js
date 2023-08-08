@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, SocializeG } = require('../../global');
+const { RoleG, KnapsackG, SocializeG, PetG } = require('../../global');
 const { roleFn } = require('../../utils');
 module.exports = {
     /**
@@ -23,6 +23,7 @@ module.exports = {
         RoleG.setRoleGlobal(req, res, role[0]);
         KnapsackG.setknapsackGlobal(req, res, knapsack[0]);
         SocializeG.setSocializeGlobal(req, res);
+        PetG.setPetGlobal(req, res);
         // Global.setRoleGlobal(req, role[0]);
         // Global.setknapsackGlobal(req, knapsack[0]);
         // Global.setSocializeGlobal(req);

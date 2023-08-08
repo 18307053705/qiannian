@@ -64,7 +64,7 @@ module.exports = {
             articleInfo = knapsackTable.getArticle(id);
         }
         // 宠物身上
-        if (form === 5) {
+        if (form === 6) {
             const { equip: petEquip } = await petFn.getPetInfo(req, res, petId);
             const equip = petEquip[pos];
             articleInfo = { ...equip, p: 3 };

@@ -4,6 +4,10 @@ const { detailPet } = require('./detailPet');
 const { petRoom } = require('./petRoom');
 const { petWearEquip } = require('./petWearEquip');
 const { petUnloadEquip } = require('./petUnloadEquip');
+const { renameEquip } = require('./renameEquip');
+const { petStatu } = require('./petStatu');
+const { petReborn } = require('./petReborn');
+const { petFlair } = require('./petFlair');
 
 const router = new express.Router();
 
@@ -17,4 +21,12 @@ router.post("/petRoom", petRoom);
 router.post("/petWearEquip", petWearEquip);
 // 宠物卸下装备
 router.post("/petUnloadEquip", petUnloadEquip);
+// 宠物装备改名
+router.post("/renameEquip", renameEquip);
+// 宠物状态切换
+router.post("/petStatu", petStatu);
+// 宠物资质
+router.post("/petFlair", petFlair);
+// 宠物转生
+router.post("/petReborn", petReborn);
 module.exports = router;

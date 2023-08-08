@@ -9,7 +9,7 @@ import { jumpDetail } from '@utils/jumpPage'
 
 export const EquipList = ({ history }) => {
     const { state } = history.location;
-    const { posInx, form } = state;
+    const { posInx, form, petId } = state;
     const [list, setList] = useState();
     useEffect(() => {
         getEquipList().then(({ data }) => {
@@ -27,7 +27,8 @@ export const EquipList = ({ history }) => {
             s: 1,
             posKey,
             type: 1,
-            in_x
+            in_x,
+            petId
         }).then(({ message }) => {
             if (!message) {
                 history.goBack();

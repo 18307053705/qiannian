@@ -5,6 +5,10 @@ const detailPetUrl = "/pet/detailPet";
 const petRoomUrl = "/pet/petRoom";
 const petWearEquipUrl = "/pet/petWearEquip";
 const petUnloadEquipUrl = "/pet/petUnloadEquip";
+const renameEquipUrl = "/pet/renameEquip";
+const petStatuUrl = "/pet/petStatu";
+const petRebornUrl = "/pet/petReborn";
+const petFlairUrl = "/pet/petFlair";
 
 /**
  * 灵兽山砸宠
@@ -34,8 +38,8 @@ export function petRoom() {
  * @param in_x 背包所在下标(背包,仓库,店铺)
  * @param petId 宠物id
  */
-export function petWearEquip() {
-  return post(petWearEquipUrl);
+export function petWearEquip(data) {
+  return post(petWearEquipUrl, data);
 }
 
 /**
@@ -43,47 +47,37 @@ export function petWearEquip() {
  * @param {*} posKey 装备部位
  * @param petId 宠物id
  */
-export function petUnloadEquip() {
-  return post(petUnloadEquipUrl);
+export function petUnloadEquip(data) {
+  return post(petUnloadEquipUrl, data);
 }
 
-const addPetUrl = "/pet/add";
-const getDetailUrl = "/pet/detail";
-const chengUrl = "/pet/cheng";
-const studyArtUrl = "/pet/studyArt";
-const equipActiveUrl = "/pet/equip";
-const addFlairUrl = "/pet/flair";
-const rebornUrl = "/pet/reborn";
-
-// 添加宠物
-export async function addPet() {
-  return await post(addPetUrl);
+/**
+ * 宠物装备改名
+ * @param {*} pos 装备部位
+ * @param name 名称
+ * @param petId 宠物id
+ */
+export function petRenameEquip(data) {
+  return post(renameEquipUrl, data);
 }
 
-export async function getDetail(data: { id: number }) {
-  return await post(getDetailUrl, data);
+/**
+ * 切换宠物状态
+ * @param {*} req.state 状态(0:休息,1:出战,2:附体,3:挂售)
+ * @param {*} req.petId
+ */
+export function petStatu(data) {
+  return post(petStatuUrl, data);
 }
-
-export async function cheng(data: { id: number; state: 0 | 1 | 2 | 3 }) {
-  return await post(chengUrl, data);
+/**
+ * 宠物转生
+ */
+export function petReborn() {
+  return post(petRebornUrl);
 }
-
-export async function studyArt(data: { id: number; in_x: number }) {
-  return await post(studyArtUrl, data);
-}
-
-export async function equipActive(data: {
-  in_x: number;
-  type: 1 | 2;
-  posKey?: number;
-}) {
-  return await post(equipActiveUrl, data);
-}
-
-export async function addFlair() {
-  return await post(addFlairUrl);
-}
-
-export async function reborn() {
-  return await post(rebornUrl);
+/**
+ * 宠物资质提升
+ */
+export function petFlair() {
+  return post(petFlairUrl);
 }

@@ -51,7 +51,7 @@ module.exports = {
         // 新增装备
         if (equipReward) {
             Object.keys(equipReward).forEach(key => {
-                const { id, name, n, n2,ext = '0_0_0_0_0_0_0_0_0' } = equipReward[key];
+                const { id, name, n, n2, ext = '0_0_0_0_0_0_0_0_0' } = equipReward[key];
                 data.push({
                     id,
                     n: name || n,
@@ -64,7 +64,7 @@ module.exports = {
             })
         }
 
-       KnapsackG.updateknapsackGlobal(req, res, { data });
+        KnapsackG.updateknapsackGlobal(req, res, { data });
         if (data.length > KnapsackG.KNAPSACK_SIZE) {
             return '背包已满,请注意清理背包'
         }

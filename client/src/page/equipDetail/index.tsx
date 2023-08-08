@@ -3,9 +3,10 @@ import { Input } from '@components';
 import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 import { backGrand } from '@utils/grand';
 import { renameEquip, unloadGem } from '@cgi/equip';
+
 import { getArticleDetail } from '@cgi/knapsack';
 
-import { HeadActive, FirmActive, ForgeActive, SigilActive, MosaicActive } from './components';
+import { HeadActive, FirmActive, ForgeActive, SigilActive, MosaicActive,NameEquip } from './components';
 
 import Style from './index.less';
 
@@ -64,17 +65,8 @@ const EquipDetail = ({ history }) => {
     return (
         <div>
             <HeadActive query={query} history={history} />
-            {/* 重命名 */}
-            {isRename ?
-                <Input
-                    defaultValue={equip.text}
-                    submit={renameBtn}
-                    onText='改名'
-                    close={() => { setIsRename(false); }} />
-                : (
-                    <div>{equip.text} <span className="g_u_end" onClick={() => { setIsRename(true) }}>[改]</span></div>
-                )
-            }
+            <NameEquip query={query} setEquip={setEquip} equip={equip}  />
+           
             <div><span>职业：{equip.level}级{equip.careerName}</span></div>
             {
                 Object.keys(equip.attr).map((key) => (
