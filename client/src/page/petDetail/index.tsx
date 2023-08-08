@@ -2,10 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { detailPet } from '@cgi/pet';
 import { Tab } from '@components';
 import { backGrand } from '@utils/grand';
-import PetAttr from './components/petAttr';
-import PetEquip from './components/petEquip';
-import PetArt from './components/petArt';
-import { PetState, PetFlair } from './components';
+import { PetState, PetFlair, PetEquip, PetAttr, PetArt } from './components';
 
 const tabList = [
     { value: 0, label: "属性" },
@@ -42,23 +39,26 @@ const PetDetail = ({ id, history }) => {
     return (
         <div>
             <div>{petInfo.name}</div>
-            <PetState petId={petId} petRoom={petRoom} petInfo={petInfo} />
+            <PetState petId={petId} callback={callback} petInfo={petInfo} />
             <PetFlair petRoom={petRoom} petInfo={petInfo} callback={callback} />
             <div><span>等级：{`${petInfo.level}级(${petInfo.exp})`}</span></div>
             <Tab list={tabList} onCheng={setPageKey} />
             {pageKey === 0 && <PetAttr attr={attr} />}
             {pageKey === 1 && (
                 <PetEquip
-                    petRoom={petRoom}
+             
                     petInfo={petInfo}
                     history={history}
                 />
             )}
             {pageKey === 2 && (
                 <PetArt
-                    art={art}
+       
+                    petInfo={petInfo}
+                    callback={callback}
+                    // art={art}
                     // isFight={isFight}
-                    level={petInfo.level}
+                    // level={petInfo.level}
                 // studyArtClick={studyArtClick}
                 />
             )}

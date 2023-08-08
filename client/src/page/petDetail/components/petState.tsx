@@ -7,20 +7,20 @@ const PET_STATE = {
     3: '出售中',
 }
 
-export const PetState = ({ petRoom, petId, petInfo }) => {
-    const [state, setState] = useState(petRoom.s)
+export const PetState = ({ petInfo, callback, petId }) => {
+    const { state, isRole } = petInfo;
     const chengClick = (s) => {
         petStatu({
             state: s,
             petId
         }).then(({ data }) => {
             if (data) {
-                setState(data.s);
+                callback();
             }
         })
     }
     // 判断是否为宠物房跳转
-    if (!petRoom) {
+    if (!isRole) {
         return <div>状态：{PET_STATE[0]}</div>
     }
     // 附体技能

@@ -15,7 +15,7 @@ module.exports = {
             data.push(`${key}='${value}'`)
         })
         if (data.length) {
-            await mysql.asyncQuery(`update pet  SET ${data.join(',')}  where id="${pet.id}"`);
+            await res.asyncQuery(`update pet  SET ${data.join(',')}  where id="${pet.id}"`);
             delete petGlobal[role_id];
         }
         return;

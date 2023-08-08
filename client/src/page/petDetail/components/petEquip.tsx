@@ -2,8 +2,9 @@ import React from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 import { jumpDetail, jumpEquipList } from '@utils/jumpPage';
 
-const detail = ({ petRoom, petInfo, history }) => {
-    const { equip, level, id } = petInfo;
+export const PetEquip = ({ petInfo, history }) => {
+    const { equip, level, id ,state} = petInfo;
+    const isFight = state === 1 || state === 2;
     return (
         <div>
             {
@@ -29,7 +30,7 @@ const detail = ({ petRoom, petInfo, history }) => {
                                 }
                             </span>
                             {
-                                petRoom && (
+                                isFight && (
                                     <span className="g_u">
                                         <span onClick={() => {
                                             jumpEquipList({
@@ -50,5 +51,4 @@ const detail = ({ petRoom, petInfo, history }) => {
 
 }
 
-export default detail;
 

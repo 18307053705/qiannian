@@ -1,5 +1,5 @@
 import React from "react";
-const petAttr = ({ attr }) => {
+export const PetAttr = ({ attr }) => {
     return (
         <div>
             <div><span>生命：{`${attr.life}/${attr.life_max}`}</span></div>
@@ -24,5 +24,4 @@ const petAttr = ({ attr }) => {
 
 }
 
-export default petAttr;
 
