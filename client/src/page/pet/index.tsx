@@ -30,7 +30,7 @@ const Pet = ({ history }) => {
         const petInfo = l[index - 1];
         return (
             <div key={index} >
-                <span>宠物房：</span>
+                {/* <span>宠物房：</span> */}
                 {petInfo ?
                     <span
                         className='g_u_end'
@@ -40,12 +40,13 @@ const Pet = ({ history }) => {
                         {petInfo.n}
                         ({PET_STATE[petInfo.s]})
                         </span>
-                    : '可居住'}
+                    : '[空房间]'}
             </div>
         )
     }
     return (
         <div>
+            <div>宠物房目前有10个房间。</div>
             {
                 pageName === 'list'
                     ? <List data={data} prefix={prefix} hiddenFooter={true} />

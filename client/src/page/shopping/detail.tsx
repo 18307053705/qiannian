@@ -35,7 +35,7 @@ export const DetailShop = ({ historyClick, history }) => {
         )
     }
 
-    const { article, pet } = shopInfo;
+    const { article, petList } = shopInfo;
 
     return (
         <div>
@@ -53,14 +53,14 @@ export const DetailShop = ({ historyClick, history }) => {
                 ) : ''
             }
             {
-                pet.length ? (
+                petList.length ? (
                     <div>
                         <span
                             className="g_u_end"
                             onClick={() => {
-                                historyClick({ page: 'articleList' });
+                                historyClick({ page: 'petList' });
                             }}>
-                            {pet.length}只宠物
+                            {petList.length}只宠物
                     </span>
                     </div>
                 ) : ''

@@ -13,7 +13,7 @@ module.exports = {
     updataRoleInfo: async function (req, res, data, role_id) {
         // 判断角色是否在线
         if (RoleG.getRoleGlobal(req, res, { role_id })) {
-            RoleG.updataRoleGlobal(req, res, data)
+            RoleG.updataRoleGlobal(req, res, data, { role_id })
             return;
         }
         // 否则更新数据库
@@ -22,7 +22,7 @@ module.exports = {
             const value = ROLE_JSON_KEYS.includes(key) ? JSON.stringify(data[key]) : data[key];
             updata.push(`${key}='${value}'`)
         })
-        const { results } =  await res.asyncQuery(`update role  SET ${data.join(',')}  where role_id="${role_id}"`);
+        const { results } = await res.asyncQuery(`update role  SET ${updata.join(',')}  where role_id="${role_id}"`);
         return results[0];
     }
 };

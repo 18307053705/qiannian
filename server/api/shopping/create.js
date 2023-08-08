@@ -34,7 +34,7 @@ module.exports = {
             role_id,
             role_name,
             name,
-            pet: '{}',
+            petList: '[]',
             article: '[]',
             date: new Date() * 1
 
@@ -47,8 +47,8 @@ module.exports = {
             datakey.push(key);
             dataValues.push('?');
         })
-        const shopSql = "insert into shop(user_id,role_id,name,pet,article,date,role_name) values(?,?,?,?,?,?,?)";
-        const shopData = [user_id, role_id, name, '{}', '[]', new Date() * 1, role_name];
+        const shopSql = "insert into shop(user_id,role_id,name,petList,article,date,role_name) values(?,?,?,?,?,?,?)";
+        const shopData = [user_id, role_id, name, '[]', '[]', new Date() * 1, role_name];
         await res.asyncAdd(shopSql, shopData);
         KnapsackG.updateknapsackGlobal(req, res, { tael: tael - 500000 });
         res.send({

@@ -14,7 +14,7 @@ module.exports = {
             return {
                 ...results[0],
                 article: JSON.parse(results[0]['article']),
-                pet: JSON.parse(results[0]['pet']),
+                petList: JSON.parse(results[0]['petList']),
             }
         }
         return {};

@@ -7,8 +7,9 @@ import DetailShop from './detail';
 import ShopList from './shopList';
 import Article from './article';
 import ArticleList from './articleList';
-
-type KeyType = 'detai' | 'shopList' | 'article' | 'pet' | 'articleList';
+import Pet from './pet';
+import PetList from './petList';
+type KeyType = 'detai' | 'shopList' | 'article' | 'pet' | 'articleList' | 'petList';
 
 export const Shopping = ({ history }) => {
     const { state }: any = history.location;
@@ -25,10 +26,12 @@ export const Shopping = ({ history }) => {
             {page === 'shopList' && <ShopList historyClick={historyClick} />}
             {/* 物品上架 */}
             {page === 'article' && <Article history={history} historyClick={historyClick} />}
+            {/* 宠物上架 */}
+            {page === 'pet' && <Pet history={history} historyClick={historyClick} />}
             {/* 上架物品列表 */}
-            {page === 'articleList' && <ArticleList history={history} historyClick={historyClick}  />
-            }
-
+            {page === 'articleList' && <ArticleList history={history} historyClick={historyClick} />}
+            {/* 上架宠物列表 */}
+            {page === 'petList' && <PetList history={history} historyClick={historyClick} />}
             {/* 店铺列表  */}
             {
                 page === 'detai' && (

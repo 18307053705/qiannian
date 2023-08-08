@@ -4,38 +4,32 @@ import { getEquipName } from '@utils/equip';
 import { jumpDetail } from '@utils/jumpDetail';
 import { Input, List } from '@components';
 import { UNIT_MEUN } from '@meun';
-const namehandel = (n, p, ext) => {
-    if (p !== 3) {
-        return n;
-    }
-    return getEquipName({ ext, n });
-}
-const ArticleList = ({ history, historyClick }) => {
+
+const PetList = ({ history, historyClick }) => {
     const { state } = history.location;
     const { role_id } = state;
     const [shopInfo, setShopInfo] = useState()
     const [in_x, setInX]: any = useState();
 
 
-    // 下架物品
-    const groundingClick = (index) => {
+    // 下架宠物
+    const groundingClick = (petId) => {
         grounding({
             active: 2,
-            type: 1,
-            in_x: index - 1
+            type: 2,
+            petId
         }).then(({ message }) => {
             if (!message) {
                 historyClick({ page: 'detai' })
             }
         })
     }
-    // 购买物品
-    const purchaseClick = (num, index) => {
+    // 购买宠物
+    const purchaseClick = (petId) => {
         purchase({
-            type: 1,
+            type: 2,
             role_id,
-            in_x: index - 1,
-            s: Number(num),
+            petId
         }).then(({ message }) => {
             if (!message) {
                 historyClick({ page: 'detai' })
@@ -43,20 +37,6 @@ const ArticleList = ({ history, historyClick }) => {
         })
     }
 
-    const activeClick = (itme, index) => {
-        // 下架
-        if (!role_id) {
-            groundingClick(index);
-            return;
-        }
-        // 装备直接购买
-        if (itme.p == 3) {
-            purchaseClick(1, index);
-            return;
-        }
-        // 非装备选择数量
-        setInX(index)
-    }
 
 
     useEffect(() => {
@@ -71,7 +51,7 @@ const ArticleList = ({ history, historyClick }) => {
         return null;
     }
 
-    const prefix = ({ p, ext, s, n, price, unit }, index) => (
+    const prefix = ({ id, p, n, price, unit }, index) => (
         <span
             className='g_u_end'
             onClick={() => {
@@ -82,24 +62,24 @@ const ArticleList = ({ history, historyClick }) => {
                     in_x: index - 1
                 })
             }}>
-            {index}. {namehandel(n, p, ext)} x {s}({price}{UNIT_MEUN[unit]}/件)
+            {n}({price}{UNIT_MEUN[unit]})
         </span>
     )
-    const active = (itme, index) => (
-        <span className='g_u_end' onClick={() => { activeClick(itme, index); }}>{role_id ? '购买' : '下架'}</span>
-    )
-
-
-    const submit = (num) => {
-        purchaseClick(num, in_x);
+    const active = ({ id }) => {
+        if (role_id) {
+            return <span className='g_u_end' onClick={() => { purchaseClick(id); }}>购买</span>
+        }
+        return <span className='g_u_end' onClick={() => { groundingClick(id); }}>下架</span>
     }
+
+
+
     return (
         <div>
-            {in_x ? <Input submit={submit} label='物品数量' type='number' /> : ''}
-            <List data={shopInfo.article} prefix={prefix} active={active} />
+            <List data={shopInfo.petList} prefix={prefix} active={active} />
         </div>
     )
 
 }
 
-export default ArticleList;
+export default PetList;

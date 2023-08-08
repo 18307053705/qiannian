@@ -34,7 +34,7 @@ module.exports = {
         }
 
 
-        const { article, pet } = await shopFn.getShopInfo(req, res);
+        const { article, petList } = await shopFn.getShopInfo(req, res);
         // 物品上架
         if (active === 1 && type === 1) {
             // 判断物品货架是否已满
@@ -77,7 +77,7 @@ module.exports = {
         // 宠物上架
         if (active === 1 && type === 2) {
             // 判断物品货架是否已满
-            if (pet.length === 10) {
+            if (petList.length === 10) {
                 res.send({
                     code: 0,
                     message: '无法上架更多物品'
@@ -111,7 +111,8 @@ module.exports = {
                 return;
             }
             const { name, flair_x } = await petFn.getPetInfo(req, res, petId);
-            pet.push({
+            console.log(petList,'pet...')
+            petList.push({
                 n: name,
                 id: petId,
                 s: 1,
@@ -124,7 +125,7 @@ module.exports = {
                 ...petItme,
                 s: 3
             }
-            await shopFn.updataShopInfo(req, res, { pet: JSON.stringify(pet) });
+            await shopFn.updataShopInfo(req, res, { petList: JSON.stringify(petList) });
             RoleG.updataRoleGlobal(req, res, { pet_pool });
             res.send({
                 code: 0,
@@ -166,7 +167,7 @@ module.exports = {
         }
         // 宠物下架
         if (active === 2 && type === 2) {
-            const index = pet.findIndex(({ id }) => id === petId);
+            const index = petList.findIndex(({ id }) => id === petId);
             if (index === -1) {
                 res.send({
                     code: 0,
@@ -174,7 +175,7 @@ module.exports = {
                 })
                 return;
             }
-            pet.splice(index, 1);
+            petList.splice(index, 1);
             const { pet_pool } = RoleG.getRoleGlobal(req, res);
             pet_pool.l = pet_pool.l.map((itme) => {
                 if (itme.id === petId) {
@@ -183,7 +184,7 @@ module.exports = {
                 return itme;
             });
             RoleG.updataRoleGlobal(req, res, { pet_pool });
-            await shopFn.updataShopInfo(req, res, { pet: JSON.stringify(pet) });
+            await shopFn.updataShopInfo(req, res, { petList: JSON.stringify(petList) });
             res.send({
                 code: 0,
                 data: '下架成功!'

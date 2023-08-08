@@ -32,7 +32,19 @@ export const SOCIALIZE_TYPE = {
   7: "结义"
 };
 
-export const  SEX_MEUN = {
-  1:"男",
-  2:"女",
-}
+export const SEX_MEUN = {
+  1: "男",
+  2: "女"
+};
+
+export const PET_STATE_MEUN = {
+  0: "休息",
+  1: "出战",
+  2: "附体",
+  3: "上架"
+};
+
+export const UNIT_MEUN = {
+  tael: "银两",
+  yuanbao: "元宝"
+};
