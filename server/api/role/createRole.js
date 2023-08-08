@@ -79,7 +79,7 @@ module.exports = {
             pet_pool: {
                 c: {},
                 l: [],
-                x: 10
+                x: 4
             },
             treasure_pool: {
                 fw: { exp: 0, ext: '0_0_0_0_0_0_0', s: 0, g: 0 },

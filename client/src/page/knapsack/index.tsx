@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { getKnapsack, initKnapsack, operate } from '@cgi/knapsack';
 import { getEquipName } from '@utils/equip'
-import { jumpDetail } from '@utils/jumpDetail'
+import { jumpDetail } from '@utils/jumpPage'
 import { List, Tab, Input } from '@components';
 // 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物
 const nva = [

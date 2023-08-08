@@ -1,6 +1,6 @@
 import React from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
-import { jumpDetail } from '@utils/jumpDetail';
+import { jumpDetail } from '@utils/jumpPage';
 import { SEX_MEUN } from '@meun';
 const RoleAttr = ({ roleInfo, history }) => {
     const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo;

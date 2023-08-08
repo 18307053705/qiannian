@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getEquipList } from '@cgi/equip';
 import { List } from '@components/list'
 import { getEquipName } from '@utils/equip'
-import { jumpDetail } from '@utils/jumpDetail'
+import { jumpDetail } from '@utils/jumpPage'
 
 
 export const EquipList = ({ operate, pos, history }) => {
@@ -23,7 +23,7 @@ export const EquipList = ({ operate, pos, history }) => {
                     jumpDetail(history, { form: 1, p: 3, in_x: itme['in_x']})
                 }}
             >
-                {index}.{getEquipName(itme.ext, itme.n)}
+                {index}.{getEquipName(itme)}
             </span>
         )
     }

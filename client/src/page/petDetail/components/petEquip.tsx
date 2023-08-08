@@ -2,8 +2,12 @@ import React, { useState, useCallback } from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 import { EquipList } from '@components';
 import { equipActive } from '@cgi/pet';
+import { } from '@cgi/equip';
 
-const detail = ({ equip, level, isFight, history, setUpdata, id }) => {
+const detail = ({ petRoom, petInfo, history, setUpdata }) => {
+    const { equip, level, id } = petInfo;
+    // console.log(petInfo)
+
     const [page, setPage] = useState('info');
     const [posInfo, setPosInfo] = useState({
         pos: 0,
@@ -34,6 +38,8 @@ const detail = ({ equip, level, isFight, history, setUpdata, id }) => {
         })
     }
 
+    const isFight = petRoom && petRoom.s === 0;
+
 
     return (
         <div>
@@ -45,19 +51,24 @@ const detail = ({ equip, level, isFight, history, setUpdata, id }) => {
                     return (
                         <div key={index}>
                             <span>{label}：</span>
-                            {equip[value] ? <span
-                                onClick={() => { equipClick(equip[value], index + 1); }}
-                                className="g_u_end"
-                            >
-                                {getEquipName(equip[value].ext, equip[value].name)}
-                            </span> : '无'}
-                            {isFight && (
-                                <span><span> | </span>
-                                    <span
-                                        className="g_u_end"
-                                        onClick={() => { pageCheng('list', index + 1, value) }}
-                                    >换</span></span>
-                            )}
+                            <span className="g_u">
+                                {
+                                    equip[value] ? (
+                                        <span onClick={() => {
+                                            equipClick(equip[value], index + 1);
+                                        }}> {getEquipName(equip[value])}</span>
+                                    ) : '无'
+                                }
+                            </span>
+                            {
+                                isFight && (
+                                    <span className="g_u">
+                                        <span onClick={() => {
+                                            pageCheng('list', index >= 7 ? 8 : index + 1, value);
+                                        }}>换</span>
+                                    </span>
+                                )
+                            }
                         </div>
                     )
                 })

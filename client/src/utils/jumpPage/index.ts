@@ -7,10 +7,19 @@
  * @param param.in_x 所在背包,仓库,店铺等下标,可选参数
  * @param param.role_id 其他人
  */
-export function jumpDetail(history, { p, form, pos, in_x, role_id }:any) {
+export function jumpDetail(history, { p, form, pos, in_x, role_id }: any) {
   if (p === 3) {
     history.push("/equipDetail", { form, in_x, pos, role_id });
   } else {
     history.push("/articleDetail", { form, in_x, pos, role_id });
   }
+}
+
+/**
+ * 跳转到装备列表页
+ * @param param.posInx 装备部位:1-12
+ * @param param.form 跳转来源:1人物,2宠物
+ */
+export function jumpEquipList({posInx, form}) {
+  window.QN.history.push("/equipList", { form, posInx });
 }

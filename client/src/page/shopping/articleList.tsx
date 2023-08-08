@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { grounding, purchase, getDetail } from '@cgi/shopping';
 import { getEquipName } from '@utils/equip';
-import { jumpDetail } from '@utils/jumpDetail';
+import { jumpDetail } from '@utils/jumpPage';
 import { Input, List } from '@components';
 import { UNIT_MEUN } from '@meun';
 const namehandel = (n, p, ext) => {

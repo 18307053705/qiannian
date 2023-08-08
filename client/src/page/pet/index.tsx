@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { backGrand } from '@utils/grand';
 import { getRoleInfo } from '@cgi/roleInfo';
+import { petRoom } from '@cgi/pet';
 import { List } from '@components';
-import Detail from './detail';
 
 const PET_STATE = {
     0: '休战',
@@ -12,51 +12,46 @@ const PET_STATE = {
 }
 
 const Pet = ({ history }) => {
-    const [pet, setPet]: any = useState({ c: {}, l: [], x: 10 });
-    const [pageName, setPageName] = useState('list');
-    const [id, setId] = useState(13);
+    const [petRoomInfo, setPetRoomInfo]: any = useState({ c: {}, l: [], x: 4 });
     useEffect(() => {
         getRoleInfo().then(({ data }) => {
-            setPet(data.pet_pool)
+            setPetRoomInfo(data.pet_pool)
         })
-    }, [pageName])
-    const toDetail = (id) => {
-        setId(id);
-        setPageName('detail')
-    }
-    const { l, x} = pet;
+    }, [])
+    const { l, x } = petRoomInfo;
     const data = [...new Array(x)];
+
     const prefix = (_, index) => {
-        const petInfo = l[index - 1];
+        const { id, n, s } = l[index - 1] || {};
+        if (!id) {
+            return '[空房间]';
+        }
         return (
-            <div key={index} >
-                {/* <span>宠物房：</span> */}
-                {petInfo ?
-                    <span
-                        className='g_u_end'
-                        onClick={
-                            () => { toDetail(petInfo.id) }}
-                    >
-                        {petInfo.n}
-                        ({PET_STATE[petInfo.s]})
-                        </span>
-                    : '[空房间]'}
-            </div>
+            <span
+                className='g_u_end'
+                onClick={() => { history.push('/petDetail', { petId: id, petRoomInfo }) }} >
+                {n}
+                ({PET_STATE[s]})
+            </span>
         )
+    }
+    const petRoomClick = () => {
+        petRoom().then(({ data }) => {
+            if (data) {
+                setPetRoomInfo(
+                    {
+                        ...petRoomInfo,
+                        x: x + 1
+                    }
+                )
+            }
+        })
     }
     return (
         <div>
-            <div>宠物房目前有10个房间。</div>
-            {
-                pageName === 'list'
-                    ? <List data={data} prefix={prefix} hiddenFooter={true} />
-                    : <Detail id={id} history={history}/>
-            }
-            {
-                pageName === 'detail' && (
-                    <div><span className="g_u_end" onClick={() => { setPageName('list') }}>宠物列表</span></div>
-                )
-            }
+            <div>宠物房目前有{x}个房间。</div>
+            <List data={data} prefix={prefix} hiddenFooter={true} />
+            <div><span className="g_u_end" onClick={petRoomClick}>扩充宠物房</span></div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )

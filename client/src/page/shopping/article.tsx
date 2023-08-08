@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { getKnapsack } from '@cgi/knapsack';
 import { grounding } from '@cgi/shopping';
 import { getEquipName } from '@utils/equip';
-import { jumpDetail } from '@utils/jumpDetail';
+import { jumpDetail } from '@utils/jumpPage';
 import { Input, Tab, List } from '@components';
 
 // 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物

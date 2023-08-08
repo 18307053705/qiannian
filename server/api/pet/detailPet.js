@@ -7,7 +7,7 @@ module.exports = {
      */
     detailPet: async function (req, res) {
         const { petId } = req.body;
-        const pet = petFn.getPetInfo(req, res, petId);
+        const pet = await petFn.getPetInfo(req, res, petId);
         res.send({
             code: 0,
             data: pet
