@@ -5,6 +5,7 @@ const RealmTable = require('./realm');
 const TitleTable = require('./title');
 const knapsackTable = require('./knapsack');
 const ElementTable = require('./element');
+const ArtTable = require('./art');
 
 module.exports = {
     GrandTable,
@@ -13,5 +14,6 @@ module.exports = {
     RealmTable,
     TitleTable,
     knapsackTable,
-    ElementTable
+    ElementTable,
+    ArtTable
 }

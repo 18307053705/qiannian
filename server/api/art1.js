@@ -53,59 +53,7 @@ router.post("/list", (req, res) => {
     })
 });
 
-router.post("/detail", (req, res) => {
-    const { id } = req.body;
-    const { skill_pool } = Global.getRoleGlobal(req);
-    const { art } = skill_pool;
-    if (!art[id]) {
-        res.send({
-            code: 100007,
-            data: '参数有误'
-        })
-        return false;
-    }
-    const { r, p, e = {}, v, t } = art[id];
-    const { msg } = ArtTable[id];
-    let str = '';
-    if (p === 1) {
 
-        str = msg.replace('&[v]&', v).replace('&[e]&', e['atk'] || e['suck'] || e['ignore'] || 10);
-        if (r > 3) {
-            str = str.replace('四转可领悟', '并');
-        }
-    }
-    if (p === 2) {
-        // msg: '对&[t]&个目标目标造成&[v]&%伤害。'
-        str = msg.replace('&[t]&', t).replace('&[v]&', v);
-        if (r > 3) {
-            str = str.replace('四转后可增加攻击目标', `额外增加${t - 2}个攻击目标`);
-        }
-    }
-
-    if (p === 3) {
-        // '本次战斗提升&[v]&攻击与&[v]&暴击,持续&[t]&回合。'
-        str = msg;
-        Object.keys(v).forEach((key) => {
-            str = str.replace('&[v]&', v[key]);
-        })
-        str = str.replace('&[t]&', t);
-    }
-    if (p === 4) {
-        // msg: '永久提升&[v]&暴击上限。'
-        str = msg;
-        Object.keys(v).forEach((key) => {
-            str = str.replace('&[v]&', v[key]);
-        })
-    }
-
-    res.send({
-        code: 0,
-        data: {
-            ...art[id],
-            msg: str
-        }
-    })
-});
 
 router.post("/up", (req, res) => {
     const { id } = req.body;

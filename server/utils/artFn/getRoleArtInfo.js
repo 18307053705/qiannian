@@ -14,6 +14,7 @@ module.exports = {
      * @retunrs art.t 技能目标数量||回合数
      * @retunrs art.l 技能等级 -1未领悟
      * @retunrs art.r 技能转数
+     * @retunrs art.e 技能特效
      */
     getRoleArtInfo: function (req, res, artId) {
         const { skill_pool } = RoleG.getRoleGlobal(req, res);

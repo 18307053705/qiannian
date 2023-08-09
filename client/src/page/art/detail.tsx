@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { artDetail } from '@cgi/art';
-
+import React from 'react';
 const RP_MEUN = {
     0: '零',
     1: '一',
@@ -12,24 +10,15 @@ const RP_MEUN = {
     7: '七',
 }
 
-export const ArtDetail = ({ id, chengId }) => {
-    const [data, setData] = useState();
-    useEffect(() => {
-        artDetail({ id }).then(({ data }) => {
-            setData(data)
-        })
-    }, [id])
-    if (!data) {
-        return null
-    }
+export const ArtDetail = ({ art }) => {
+    const { n, l, r, d, msg } = art;
     return (
         <div>
-            <div>{data.n}{data.l === -1 && '(未领悟)'}</div>
-            <div>重数：{data.l === -1 ? 0 : data.l}重</div>
-            <div>转数：{RP_MEUN[data.r]}转</div>
-            {data.d && <div>消耗：{data.d}法力</div>}
-            <div>描述：{data.msg}</div>
-            <div><span className='g_u_end' onClick={() => { chengId() }}>返回上页</span></div>
+            <div>{n}{l === -1 && '(未领悟)'}</div>
+            <div>重数：{l === -1 ? 0 : l}重</div>
+            <div>转数：{RP_MEUN[r]}转</div>
+            {d && <div>消耗：{d}法力</div>}
+            <div>描述：{msg}</div>
         </div>
     )
 }

@@ -1,4 +1,9 @@
 module.exports = {
+    /**
+     * 根据职业获取技能iD集
+     * @param {*} career 
+     * @returns ids[]
+     */
     getCareerArts: function (career) {
         // 根据职业获取技能集
         const arts = [4, 8, 9, 10, 11, 12, 13, 14];

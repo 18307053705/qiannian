@@ -9,62 +9,51 @@ const RP_MEUN = {
   7: "七"
 };
 
-const getArtLevel = id => {
-  if (id < 4) {
-    return 1;
-  }
-  if (id < 5) {
-    return 10;
-  }
-  if (id < 8) {
-    return 30;
-  }
-  if (id < 13) {
-    return 32 + (id - 8) * 2;
-  }
-  if (id === 19) {
-    return 10;
-  }
-  return 40;
-};
-
-export const getNameInfo = art => {
-  if (art.l === -1) {
-    return {
-      text: `${art.n}(未领悟)`,
-      digest: false
-    };
-  }
-  return {
-    text: `${art.n}(${RP_MEUN[art.r]}转${art.l === -1 ? 0 : art.l}重)`,
-    digest: true
-  };
+export const getNameInfo = ({ l, n, r }) => {
+  return l === -1
+    ? `${n}(未领悟)`
+    : `${n}(${RP_MEUN[r]}转${l === -1 ? 0 : l}重)`;
 };
 
 export const getSuffix = (art, role_level) => {
-  const { l, r, id } = art;
-  const artLevel = getArtLevel(id);
-  if (l === -1 && artLevel > role_level) {
+  const { l, r, condition = 0 } = art;
+  if (condition > role_level) {
     return {
-      text: `${artLevel}级可领悟`,
-      isDigest: false
+      text: `${condition}级可领悟`,
+      suffixClass: ""
     };
   }
-  let text = l === 13 ? "升华" : "升重";
-  if (r >= 3) {
-    text = l === 30 ? "升华" : "升重";
+  if (l === -1 && condition <= role_level) {
+    return {
+      text: "领悟",
+      suffixClass: "g_color"
+    };
   }
-  if (r >= 5) {
-    text = l === 50 ? "升华" : "升重";
+
+  let text = "升重";
+  if (13 === l && r === 0) {
+    text = "升华";
   }
-  if (r === 7) {
-    text = l === 100 ? "" : "升重";
+  if (32 === l && r === 1) {
+    text = "升华";
   }
-  if (l === -1 && artLevel <= role_level) {
-    text = "领悟";
+  if (50 === l && r === 2) {
+    text = "升华";
+  }
+  if (70 === l && r === 3) {
+    text = "升华";
+  }
+  if (80 === l && r === 4) {
+    text = "升华";
+  }
+  if (90 === l && r === 5) {
+    text = "升华";
+  }
+  if (100 === l && r === 6) {
+    text = "升华";
   }
   return {
     text,
-    isDigest: text ? true : false
+    suffixClass: text ? "g_color" : ""
   };
 };
