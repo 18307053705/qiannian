@@ -15,15 +15,15 @@ export const getNameInfo = ({ l, n, r }) => {
     : `${n}(${RP_MEUN[r]}转${l === -1 ? 0 : l}重)`;
 };
 
-export const getSuffix = (art, role_level) => {
+export const getSuffix = (art, level) => {
   const { l, r, condition = 0 } = art;
-  if (condition > role_level) {
+  if (condition > level) {
     return {
       text: `${condition}级可领悟`,
       suffixClass: ""
     };
   }
-  if (l === -1 && condition <= role_level) {
+  if (l === -1 && condition <= level) {
     return {
       text: "领悟",
       suffixClass: "g_color"

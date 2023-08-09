@@ -8,6 +8,7 @@ const { renameEquip } = require('./renameEquip');
 const { petStatu } = require('./petStatu');
 const { petReborn } = require('./petReborn');
 const { petFlair } = require('./petFlair');
+const { petStudyArt } = require('./petStudyArt');
 
 const router = new express.Router();
 
@@ -29,4 +30,6 @@ router.post("/petStatu", petStatu);
 router.post("/petFlair", petFlair);
 // 宠物转生
 router.post("/petReborn", petReborn);
+// 宠物转生
+router.post("/petStudyArt", petStudyArt);
 module.exports = router;

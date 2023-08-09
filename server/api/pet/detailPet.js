@@ -1,5 +1,6 @@
 const { petFn } = require('../../utils');
 const { PetG, ErrorG, RoleG } = require("../../global");
+const { ArtTable } = require("../../table");
 module.exports = {
     /**
      * 宠物详情
@@ -17,6 +18,14 @@ module.exports = {
         if (petId !== pet.id) {
             pet = await petFn.getPetInfo(req, res, petId);
         }
+        pet.art = pet.art.map(art => {
+            const { condition } = ArtTable.getArt(art.id);
+            art.condition = condition;
+            art.msg = ArtTable.getArtMsg(art);
+            return art;
+        })
+
+
         res.send({
             code: 0,
             data: {

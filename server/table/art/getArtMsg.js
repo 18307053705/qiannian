@@ -5,10 +5,11 @@ module.exports = {
      * @param {*} art
      * @returns msg 描述
      */
-    getArtMsg: function ({ v, p, t, e={}, id, r }) {
+    getArtMsg: function ({ v, p, t, e = '', id, r }) {
         const { msg } = artList[id];
         if (p === 1) {
-            let str = msg.replace('&[v]&', v).replace('&[e]&', e['atk'] || e['suck'] || e['ignore'] || 10);
+            const [_, value] = e.split('-');
+            let str = msg.replace('&[v]&', v).replace('&[e]&', value || 10);
             if (r > 3) {
                 str = str.replace('四转可领悟', '并');
             }
@@ -23,7 +24,6 @@ module.exports = {
         }
         if (p === 3) {
             let str = msg;
-            
             v.split(',').forEach(effct => {
                 const [_, value] = effct.split('-');
                 str = str.replace('&[v]&', value);
@@ -38,6 +38,13 @@ module.exports = {
                 str = str.replace('&[v]&', value);
             })
             return str;
+        }
+        if (p === 5) {
+            const [_, value] = e.split('-');
+            return msg.replace('&[v]&', v).replace('&[e]&', value || 10);
+        }
+        if (p === 6) {
+            return msg.replace('&[v]&', v);
         }
     }
 }

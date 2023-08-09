@@ -1,4 +1,4 @@
-// 技能类型p 1:单攻 2:群攻 3:buff 4:天赋 5:宠物天赋
+// 技能类型p 1:单攻 2:群攻 3:buff 4:天赋 5:宠物天赋 6:附体技能
 // 基础数值v 升级增加up 转生rp 消耗d 目标数量t
 // 增伤 atk 吸血 suck 破防 ignore
 module.exports = {
@@ -11,9 +11,6 @@ module.exports = {
         up: 20,
         rp: 50,
         condition: 1,
-        // effect: {
-        //     atk: 10
-        // },
         effect:'atk-10',
         msg: '对单个目标造成&[v]&%伤害,四转可领悟增幅&[e]&%伤害。'
     },
@@ -26,9 +23,6 @@ module.exports = {
         up: 20,
         rp: 50,
         condition: 1,
-        // effect: {
-        //     suck: 10
-        // },
         effect:'suck-10',
         msg: '对单个目标造成&[v]&%伤害,四转可领悟造成伤害&[e]&%的生命恢复。'
     },
@@ -41,9 +35,6 @@ module.exports = {
         up: 10,
         rp: 20,
         condition: 1,
-        // effect: {
-        //     ignore: 10
-        // },
         effect:'ignore-10',
         msg: '对单个目标造成&[v]&%伤害,四转可领悟无视目标&[e]&%防御。'
     },
@@ -63,17 +54,9 @@ module.exports = {
         id: 5,
         p: 3,
         n: '黄泉天怒',
-        // v: {
-        //     atk: 100,
-        //     sudden: 20
-        // },
         d: 1000,
         t: 5,
         condition: 30,
-        // effect: {
-        //     atk: 100,
-        //     sudden: 20
-        // },
         v:'atk-100,sudden-20',
         msg: '本次战斗提升&[v]&攻击与&[v]&暴击,持续&[t]&回合。'
     },
@@ -81,17 +64,9 @@ module.exports = {
         id: 6,
         p: 3,
         n: '大天造化',
-        // v: {
-        //     life: 1000,
-        //     dfs: 50
-        // },
         d: 1000,
         t: 5,
         condition: 30,
-        // effect: {
-        //     life: 1000,
-        //     dfs: 50
-        // },
         v:'life-1000,dfs-50',
         msg: '本次战斗提升&[v]&生命与&[v]&防御,持续&[t]&回合。'
     },
@@ -99,17 +74,9 @@ module.exports = {
         id: 7,
         p: 3,
         n: '追星逐月',
-        // v: {
-        //     hit: 20,
-        //     dodge: 20,
-        // },
         t: 5,
         d: 1000,
         condition: 30,
-        // effect: {
-        //     hit: 20,
-        //     dodge: 20,
-        // },
         v:'hit-20,dodge-20',
         msg: '本次战斗提升&[v]&命中与&[v]&闪避,持续&[t]&回合。'
     },
@@ -117,12 +84,6 @@ module.exports = {
         id: 8,
         p: 4,
         n: '黄泉诀',
-        // v: {
-        //     life: 1000,
-        // },
-        // effect: {
-        //     life: 500,  // 1.5 2 3 4 5 7 10
-        // },
         v:'life_max-500',
         condition: 32,
         msg: '提升&[v]&生命上限。'
@@ -131,12 +92,6 @@ module.exports = {
         id: 9,
         p: 4,
         n: '圣灵诀',
-        // v: {
-        //     mana: 1000,
-        // },
-        // effect: {
-        //     mana: 500,
-        // },
         v:'mana_max-500',
         condition: 34,
         msg: '提升&[v]&法力上限。'
@@ -145,12 +100,6 @@ module.exports = {
         id: 10,
         p: 4,
         n: '鬼神诀',
-        // v: {
-        //     atk: 100,
-        // },
-        // effect: {
-        //     atk: 50,
-        // },
         v:'atk-50',
         condition: 36,
         msg: '提升&[v]&攻击上限。'
@@ -159,12 +108,6 @@ module.exports = {
         id: 11,
         p: 4,
         n: '琉璃诀',
-        // v: {
-        //     dfs: 40,
-        // },
-        // effect: {
-        //     dfs: 20,
-        // },
         v:'dfs-20',
         condition: 38,
         msg: '提升&[v]&防御上限。'
@@ -173,12 +116,6 @@ module.exports = {
         id: 12,
         p: 4,
         n: '洞虚诀',
-        // v: {
-        //     hit: 20,
-        // },
-        // effect: {
-        //     hit: 10,
-        // },
         v:'hit-10',
         condition: 40,
         msg: '提升&[v]&命中上限。'
@@ -187,12 +124,6 @@ module.exports = {
         id: 13,
         p: 4,
         n: '无影诀',
-        // v: {
-        //     dodge: 20,
-        // },
-        // effect: {
-        //     dodge: 10,
-        // },
         v:'dodge-10',
         condition: 40,
         msg: '提升&[v]&闪避上限。'
@@ -201,12 +132,6 @@ module.exports = {
         id: 14,
         p: 4,
         n: '鬼煞诀',
-        // v: {
-        //     sudden: 20,
-        // },
-        // effect: {
-        //     sudden: 10,
-        // },
         v:'sudden-10',
         condition: 40,
         msg: '提升&[v]&暴击上限。'
@@ -214,6 +139,7 @@ module.exports = {
     15: {
         id: 15,
         n: '青帝雷经',
+        p: 5,
         v: 200,
         d: 100,
         effect:'ignore-10',
@@ -222,6 +148,7 @@ module.exports = {
     16: {
         id: 16,
         n: '太白帝经',
+        p: 5,
         v: 200,
         effect:'atk-10',
         msg: '对单个目标造成&[v]&%伤害,最终伤害+&[e]&%。'
@@ -229,24 +156,24 @@ module.exports = {
     17: {
         id: 17,
         n: '玄武真怒',
+        p: 5,
         v: 200,
-        condition: 1,
         effect:'life-1',
-        msg: '对单个目标造成&[v]&%伤害,附加额外自身生命&[v]&%的伤害。'
+        msg: '对单个目标造成&[v]&%伤害,附加额外自身生命&[e]&%的伤害。'
     },
     18: {
         id: 18,
         n: '白虹贯日',
+        p: 5,
         v: 200,
-        condition: 1,
         msg: '对单个目标造成&[v]&%伤害。'
     },
     19: {
         id: 19,
-        p: 5,
+        p: 6,
         n: '附体',
         v: 10,
-        condition: 1,
+        condition: 10,
         msg: '可提升玩家生命上限,附加值为&[v]&%生命值。'
     },
 }

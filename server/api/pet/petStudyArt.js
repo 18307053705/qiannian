@@ -1,18 +1,19 @@
 const { PetG, ErrorG } = require("../../global");
-const { knapsackFn } = require("../../utils");
+const { knapsackFn, artFn } = require("../../utils");
+const { ArtTable, knapsackTable } = require("../../table");
 module.exports = {
     /**
      * 学习技能
      * @param artId 
      */
-    petReborn: function (req, res) {
-        const { artId } = req.body;
-        if (!artId) {
+    petStudyArt: function (req, res) {
+        const { id } = req.body;
+        if (!id) {
             ErrorG.paramsError(res);
             return;
         }
-        const { id, art, level } = PetG.getPetGlobal(req, res) || {};
-        if (!id) {
+        const { id: petId, art, level, addition: petAddition } = PetG.getPetGlobal(req, res) || {};
+        if (!petId) {
             res.send({
                 code: 0,
                 message: '请先将宠物参战。'
@@ -20,60 +21,78 @@ module.exports = {
             return;
         }
 
-        const artInfo = art.find(({ id }) => id === artId);
-        if(!artInfo){
+        const index = art.findIndex(({ id: artId }) => artId === id);
+        if (index === -1) {
             res.send({
                 code: 0,
-                message: '技能信息有误宠物参战。'
+                message: '技能信息有误。'
             })
             return;
         }
-        const { l } = artInfo;
-        if (artId === 19 && l === 9) {
+        const { l, r } = art[index];
+        if (id === 19 && l === 9) {
             res.send({
                 code: 0,
                 message: '附体技能已经达到最大等级。'
             })
             return;
         }
-        const artInfo = ArtTable[artId];
-        let artRes = {
-            message: '',
-            up_art: '',
-        }
+
+        const artBase = ArtTable.getArt(id);
+
+        // const artInfo = ArtTable[artId];
+        let up_art = undefined;
+        let old_art = { l, r, id };
         // 领悟技能
         if (l === -1) {
-            if (artInfo.condition > level) {
-                artRes.message = '等级不足，无法领悟该技能';
-            } else {
-                // 消耗宠物技能卷
-                artRes.up_art = artFn.artLevelCompute({ l: 0, r: 0 });
-                const article = KnapsackTable[158];
-                const { message } = knapsackFn.deleteKnapsack(req, { [158]: { ...article, p: article['type'], s: 1 } });
-                artRes.message = message;
+            if (artBase.condition > level) {
+                res.send({
+                    code: 0,
+                    message: '宠物等级不足，无法领悟该技能'
+                })
+                return;
             }
-        } else {
-            artRes = artFn.getMaterial(req, art[in_x + 1]);
+            // 消耗宠物技能卷
+            const { type, n } = knapsackTable.getArticle(158);
+            const article = {
+                [158]: {
+                    p: type,
+                    n,
+                    s: artBase.condition
+                }
+            }
+            const { message } = knapsackFn.deleteKnapsack(req, res, { article });
+            if (message) {
+                res.send({
+                    code: 0,
+                    message
+                })
+                return;
+            }
+            up_art = { l: 1, r: 0, id };
+            old_art = { l: 0, r: 0, id };
         }
-        const { up_art, message } = artRes;
-        if (message) {
-            res.send({
-                code: 0,
-                message
-            })
-            return;
+        // 判断是否为领悟
+        if (!up_art) {
+            const result = artFn.getUpArtMaterial(req, res, old_art);
+            if (result.message) {
+                res.send({
+                    code: 0,
+                    message: result.message
+                })
+                return;
+            }
+            up_art = { ...result.up_art, id };
         }
-
-        const data = artFn.petArtUpAttrfunction(req, art[in_x + 1], { l: up_art.l, r: up_art.r });
-        art[in_x + 1] = petFn.getArttips(data.art);
-        const updata = {
+        // 技能升级后属性
+        const { addition, artInfo } = artFn.artUpLevel(old_art, up_art, petAddition);
+        // 更新技能
+        art[index] = { ...art[index], ...artInfo, ...up_art };
+        // 更新宠物信息
+        PetG.updataPetGlobal(req, res, {
             art,
-        }
-
-        if (data.addition) {
-            updata['addition'] = data.addition;
-        }
-        Global.updatePetGlobal(req, updata);
+            addition: addition
+        })
         res.send({
             code: 0,
             data: 'ok',

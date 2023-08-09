@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { backGrand } from '@utils/grand';
 import { getRoleInfo } from '@cgi/roleInfo';
-import { petRoom } from '@cgi/pet';
+import { petRoom, drawPet } from '@cgi/pet';
 import { List } from '@components';
 
 const PET_STATE = {
@@ -50,6 +50,7 @@ const Pet = ({ history }) => {
     return (
         <div>
             <div>宠物房目前有{x}个房间。</div>
+            <div><span className="g_b_u" onClick={()=>{drawPet().then((res)=>{console.log(res)})}}>灵兽山砸宠</span></div>
             <List data={data} prefix={prefix} hiddenFooter={true} />
             <div><span className="g_u_end" onClick={petRoomClick}>扩充宠物房</span></div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>

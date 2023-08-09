@@ -1,4 +1,7 @@
 const { RoleG } = require('../../global');
+const { AttributeTable } = require('../../table');
+const { getPetArt } = require('./getPetArt');
+const { computePetAttr } = require('./computePetAttr');
 
 module.exports = {
     /**
@@ -18,14 +21,15 @@ module.exports = {
             return '宠物房已满,无法获得更多宠物。';
         }
         const type = oldType || Math.floor(Math.random() * (4 - 1)) + 1;
+
         const petInfo = {
             name,
             type,
             flair_x,
             flair: 0,
             level: 1,
-            // art: JSON.stringify(this.getPetArt(flair_x, id)),
-            // attr: JSON.stringify(this.computeAttr({ type, flair_x })),
+            art: JSON.stringify(getPetArt(flair_x, id)),
+            attr: JSON.stringify(AttributeTable.getPetBaseAttr(type)),
             equip: '{}',
             addition: '{}',
             reborn: 0,

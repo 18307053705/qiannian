@@ -9,6 +9,7 @@ const renameEquipUrl = "/pet/renameEquip";
 const petStatuUrl = "/pet/petStatu";
 const petRebornUrl = "/pet/petReborn";
 const petFlairUrl = "/pet/petFlair";
+const petStudyArtUrl = "/pet/petStudyArt";
 
 /**
  * 灵兽山砸宠
@@ -80,4 +81,12 @@ export function petReborn() {
  */
 export function petFlair() {
   return post(petFlairUrl);
+}
+
+/**
+ * 宠物学习技能
+ *@param {*} req.artId 技能id
+ */
+export function petStudyArt(data) {
+  return post(petStudyArtUrl, data);
 }

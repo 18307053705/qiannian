@@ -1,33 +1,40 @@
 import React, { useState } from "react";
 import { getNameInfo, getSuffix } from '@utils/art';
-
-export const PetArt = ({petInfo, callback }) => {
-    console.log(petInfo)
-    const { art, level,state } = petInfo;
+import { petStudyArt } from '@cgi/pet';
+export const PetArt = ({ petInfo, callback }) => {
+    const { art, level, state } = petInfo;
     const isFight = state === 1 || state === 2;
     const [artInx, setArtInx] = useState(-100);
     const talent = art.slice(0, 1)[0];
     const list = art.slice(1);
     // 学习技能
-    const studyArtClick = (in_x)=>{
-
+    const studyArtClick = (id, index) => {
+        petStudyArt({ id }).then(({ message }) => {
+            if (!message) {
+                callback();
+                setArtInx(index);
+            }
+        })
     }
+    const artItme = (art, index) => {
+        const artName = getNameInfo(art);
+        const { text, suffixClass } = getSuffix(art, level);
+        const suffixClick = (isFight && suffixClass) ? () => {
+            studyArtClick(art.id, index);
+        } : undefined
 
-
-    const artItme = (art, in_x) => {
-        const { text, digest } = getNameInfo(art);
-        const { text: suffixTest, isDigest } = getSuffix(art, level);
-        const nameClick = digest ? () => { setArtInx(in_x) } : () => { };
-        const suffixClick = isDigest && isFight ? () => { studyArtClick(in_x) } : () => { };
+        const ArtNameClick = art.l !== -1 ? () => {
+            setArtInx(index);
+        } : undefined;
+        const nameClass = art.l !== -1 ? 'g_color' : '';
         return (
             <div>
                 <div>
-                    <span className={digest ? 'g_u_end' : ''} onClick={nameClick}>{text}</span>
+                    <span className={nameClass} onClick={ArtNameClick}>{artName}</span>
                     <span> | </span>
-                    <span className={isDigest && isFight ? 'g_u_end' : ''} onClick={suffixClick}>{suffixTest}</span>
+                    <span className={isFight ? suffixClass : ''} onClick={suffixClick}>{text}</span>
                 </div>
-                {artInx === in_x && <div>{art.msg}</div>}
-
+                {artInx === index && <div>{art.msg}</div>}
             </div>
         )
     }
