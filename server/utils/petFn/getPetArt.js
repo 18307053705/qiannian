@@ -12,7 +12,7 @@ module.exports = {
     getPetArt: function (flair_x, id) {
         let artId = id;
         if (!artId) {
-            artId = flair_x < 60 ? 18 : Math.floor(Math.random() * (18 - 15)) + 15;
+            artId = flair_x < 75 ? 18 : Math.floor(Math.random() * (18 - 15)) + 15;
         }
 
         const rating = getPetRating(flair_x);
@@ -25,7 +25,6 @@ module.exports = {
         if (effect) {
             const [key, value] = effect.split('-');
             talentArt['e'] = `${key}-${value * rating}`;
-            // talentArt['msg'] = msg.replace('&[v]&', v * rating).replace('&[e]&', value * rating)
         }
         const art = [talentArt];
         const artIds = [19, 8, 9, 10, 11, 12, 13, 14];

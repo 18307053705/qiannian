@@ -23,7 +23,7 @@ module.exports = {
             code: 0,
             data: {
                 ...grandInfo,
-                path
+                path:path || currentDir.path
             }
         });
     },

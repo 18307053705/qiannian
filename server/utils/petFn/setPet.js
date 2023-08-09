@@ -1,7 +1,6 @@
 const { RoleG } = require('../../global');
 const { AttributeTable } = require('../../table');
 const { getPetArt } = require('./getPetArt');
-const { computePetAttr } = require('./computePetAttr');
 
 module.exports = {
     /**
@@ -15,7 +14,7 @@ module.exports = {
      * @param {*} pet.type 可选,宠物类型1攻击2防御3敏捷
      * @returns  message 错误信息
      */
-    setPet: async function (req, res, { name, flair_x, ele = 0, id = 0, type: oldType, }) {
+    setPet: async function (req, res, { name, flair_x, ele = 0, artId = 0, type: oldType, }) {
         const { pet_pool } = RoleG.getRoleGlobal(req, res);
         if (pet_pool['l'].length >= pet_pool['x']) {
             return '宠物房已满,无法获得更多宠物。';
@@ -28,7 +27,7 @@ module.exports = {
             flair_x,
             flair: 0,
             level: 1,
-            art: JSON.stringify(getPetArt(flair_x, id)),
+            art: JSON.stringify(getPetArt(flair_x, artId)),
             attr: JSON.stringify(AttributeTable.getPetBaseAttr(type)),
             equip: '{}',
             addition: '{}',

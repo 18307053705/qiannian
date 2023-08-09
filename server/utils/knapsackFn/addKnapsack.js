@@ -5,7 +5,7 @@ module.exports = {
      * 增加物品
      * @param {*} req 
      * @param {*} res 
-     * @param {*} data.article 必传({artReward:{id:{p,s,n}}},equipReward:{id:{p,s,n}})
+     * @param {*} data.article 必传({artReward:{id:{p,s,n,id}}},equipReward:{id:{p,s,n,id}})
      * @param {*} data.data 可选
      * @returns {string}  message | undefined
      */

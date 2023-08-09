@@ -153,6 +153,11 @@ export const config: RouterType[] = [
     path: "/playerFight",
     component: lazy(() => import("@page/playerFight"))
   },
+  {
+    name: "灵兽山",
+    path: "/lingShouShan",
+    component: lazy(() => import("@page/lingShouShan"))
+  },
 ];
 
 export default config;

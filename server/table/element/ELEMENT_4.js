@@ -38,6 +38,7 @@ const ELEMENT_4 = {
         name: "全民神宠...",
         type: 4,
         cs: "g_b_u",
+        path:'/lingShouShan'
     },
     4000007: {
         id: 4000007,
