@@ -24,8 +24,8 @@ module.exports = {
             return { success: `消耗${s}${n},${text}` };
         }
         if (group2) {
-            EffectTable.group2Fn(req, res, group2, s);
-            return { success: `消耗${s}${n}` };
+            const {  text } =  EffectTable.group2Fn(req, res, group2, s);
+            return { success: `消耗${s}${n},${text}` };
 
         }
         return { message: "该物品无法直接使用。" };

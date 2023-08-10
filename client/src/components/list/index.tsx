@@ -7,21 +7,32 @@ type ListType = {
     prefix_d?: boolean;
     active?: (itme: any, in_x) => any;
     emptyText?: string,
-    hiddenFooter?: boolean
+    hiddenFooter?: boolean,
+    listRef?: { current: any }
 }
 
+const size = 20;
 export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFooter }: ListType) => {
-    const [page, setPage] = useState(0);
-    const [size] = useState(20);
+    const { history } = window.QN;
+    const { state, pathname } = history.location;
+    const [page, setPage] = useState(state.listPage || 0);
     const total = data.length;
     const list = data.slice(page * size, (page + 1) * size);
-    // const list = data.slice(page, size);
-    useEffect(() => { setPage(0) }, [data])
+    const numPage = [...new Array(Math.ceil(total / size))];
     useEffect(() => {
-        onCheng && onCheng(page, size)
+        const pages = Math.ceil(data.length / size);
+        const { listPage } = state;
+        if (pages && listPage >= pages) {
+            setPage(pages - 1);
+        }
+    }, [data]);
+
+    useEffect(() => {
+        history.push(pathname, { ...state, listPage: page });
+        onCheng && onCheng(page, size);
     }, [page])
 
-    const numPage = [...new Array(Math.ceil(total / size))];
+
     return (
         <div className={Style['g-list-page']}>
             {

@@ -5,6 +5,7 @@ module.exports = {
     /**
      * 直接增加玩家属性的物品
      * @param {*} req 
+     * @param {*} res 
      * @param {key_value} group
      * @param {number} s 使用数量
      * @returns { string } message 错误信息,存在则使用失败
@@ -12,7 +13,7 @@ module.exports = {
      */
     group1Fn: function (req, res, group, s = 1) {
         const [key, value] = group.split('-');
-        return this[key](req, res, value * s);
+        return module.exports[key](req, res, value * s);
     },
     fw: function (req, res, value) {
         const { treasure_pool, role_attr, role_level } = getRoleGlobal(req, res);

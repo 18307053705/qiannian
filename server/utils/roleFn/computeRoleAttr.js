@@ -1,7 +1,6 @@
-const { RoleG,PetG } = require("../../global");
-const { AttributeTable, Effect1Table } = require("../../table");
-const effect1 = require("../../table/effect1");
-const {computePetAttr} = require("../petFn/computePetAttr");
+const { RoleG, PetG } = require("../../global");
+const { AttributeTable, EffectTable } = require("../../table");
+const { computePetAttr } = require("../petFn/computePetAttr");
 module.exports = {
     /**
      * 获取坐标内所有玩家
@@ -26,7 +25,10 @@ module.exports = {
         const buffs = [];
         attrBuff = attrBuff.filter(({ e, d }) => {
             if (d < new Date() * 1) return false;
-            const { text } = effect1.effect1Fn(e, attr, base);
+            // Effect1Table.effect1Fn()
+            // Effect1Table.
+
+            const { text } = EffectTable.effect1Fn(e, attr, base);
             buffs.push({
                 text,
                 end: d
@@ -47,8 +49,8 @@ module.exports = {
 
         }
         // 最后计算宠物附体
-        const pet = PetG.getPetGlobal(req,res, role_id);
-        if(pet){
+        const pet = PetG.getPetGlobal(req, res, role_id);
+        if (pet) {
             let petAttr = {
                 life_max: 0,
                 life: 0,
@@ -61,7 +63,7 @@ module.exports = {
                 })
             }
         }
-        
+
 
         // 返回属性与buff信息
         return {

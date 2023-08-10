@@ -1,8 +1,14 @@
 module.exports = {
+    /**
+     * 
+     * @param {*} effect 效果
+     * @param {*} attr 需要增加的属性
+     * @param {*} base 基础属性
+     */
     effect1Fn: function (effect, attr, base) {
         const [key, type, value] = effect.split('-');
         return {
-            ...this[key](Number(value), attr, type, base),
+            ...module.exports[key](Number(value), attr, type, base),
             key
         }
     },

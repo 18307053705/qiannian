@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { getKnapsack, initKnapsack, operate } from '@cgi/knapsack';
 import { getEquipName } from '@utils/equip'
 import { jumpDetail } from '@utils/jumpPage'
@@ -48,15 +48,14 @@ const ACTIVE_TYPE = {
 }
 
 const knapsack = ({ history }) => {
-    const [current, setCurrent] = useState(0);
-    const [knapsack, setKnapsack] = useState(initKnapsack);
-    const [serchValue, setSerchValue] = useState('');
+    const { state, pathname } = history.location;
     const [active, setActive] = useState();
-    const [type, setType] = useState(1)
+    // const listRef: any = useRef();
+    // 缓存处理
+    const { type = 1, serchValue = '', current = 0 } = state;
+    const [knapsack, setKnapsack] = useState(initKnapsack);
     useEffect(() => {
-        const { state } = history.location;
-        setType(state.type);
-        getKnapsack({ type: state.type }).then(({ data }) => {
+        getKnapsack({ type }).then(({ data }) => {
             setKnapsack(data);
         });
     }, [])
@@ -148,11 +147,15 @@ const knapsack = ({ history }) => {
                         label={`${ACTIVE_TYPE[type]}数量`}
                         type='number'
                         layout={false}
-                        submit={(num) => { operateClick({ ...active, s: Number(num) }) }}
+                        submit={(num) => {
+                            operateClick({ ...active, s: Number(num) })
+                        }}
                     />
                 )
             }
-            <Tab list={nva} currentKey={current} onCheng={setCurrent} />
+            <Tab list={nva} currentKey={current} onCheng={(value) => {
+                history.push(pathname, { ...state, current: value, listPage: 1 });
+            }} />
             <List data={data} prefix={prefix} active={activeDom} emptyText="暂无物品" />
             <div className="g_fgx"></div>
             <Input
@@ -160,7 +163,10 @@ const knapsack = ({ history }) => {
                 layout={false}
                 onText='查找'
                 length={[0, 12]}
-                submit={(value) => { setSerchValue(value) }}
+                defaultValue={serchValue}
+                submit={(value) => {
+                    history.push(pathname, { ...state, serchValue: value, listPage: 1 });
+                }}
             />
             <div> 背包：{list.length}/200</div>
             {type === 1 && <div>元宝：{yuanbao}</div>}
