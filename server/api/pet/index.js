@@ -1,5 +1,4 @@
 const express = require("express");
-const { drawPet } = require('./drawPet');
 const { detailPet } = require('./detailPet');
 const { petRoom } = require('./petRoom');
 const { petWearEquip } = require('./petWearEquip');
@@ -12,8 +11,6 @@ const { petStudyArt } = require('./petStudyArt');
 
 const router = new express.Router();
 
-// 灵兽山砸宠
-router.post("/drawPet", drawPet);
 // 宠物详情
 router.post("/detailPet", detailPet);
 // 宠物房扩张

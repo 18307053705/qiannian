@@ -10,10 +10,10 @@ module.exports = {
   entry: {
     mian: `${rootPath}/src/main.tsx`,
   },
-  // output: {
-  //   path: path.resolve(rootPath, "dev"),
-  //   filename: "[name].js",
-  // },
+  output: {
+    path: path.resolve(rootPath, "dev"),
+    filename: "[name].js",
+  },
   resolve: {
     // 处理导入文件格式
     extensions: [".ts", ".tsx", ".json", ".js"],
@@ -48,6 +48,7 @@ module.exports = {
               ],
             },
           }
+          // , 
           // {
           //   loader: "url-loader",
           //   options: {

@@ -21,6 +21,8 @@ function RouterGuard() {
     // 拿到当前路由
     let thisRoute = config.find((el) => el['path'] == pathname);
     let isLogin = Cookies.get("token");
+    console.log(pathname);
+    console.log(thisRoute);
     //如果没登录且页面为登录页的话渲染登录页
     if (pathname == '/login' && !isLogin) {
         return <Route path={pathname} component={thisRoute['component']} exact={thisRoute['component']} />
@@ -31,6 +33,7 @@ function RouterGuard() {
         if (pathname == '/login') {
             return <Redirect to="/" />
         }
+       
         // 判定路由是否存在，如果存在正常渲染
         if (thisRoute) {
             return <Route path={pathname} component={thisRoute['component']} exact />
@@ -72,7 +75,7 @@ const systemText = (system) => {
 }
 
 const Root = () => {
-    const { state, dispatch } = useContext(Model);
+    // const { state, dispatch } = useContext(Model);
     const [unread, setUnread] = useState([]);
     const [system, setSystem] = useState('');
     const [error, setError] = useState('');
@@ -120,7 +123,7 @@ const Root = () => {
             {/* 系统公告 */}
             <div>{systemText(system)}</div>
             {/* 请求成功信息 */}
-            <div>{success}</div>
+            <div className='g_success'>{success}</div>
             {/* 请求失败信息 */}
             {error && <div className='g_error'>提示：{error}</div>}
             <div>{

@@ -67,6 +67,7 @@ app.use("/api/chat", require("./api/chat"));
 app.use("/api/shops", require("./api/shops"));
 app.use("/api/equip", require("./api/equip"));
 app.use("/api/pet", require("./api/pet"));
+app.use("/api/jackpot", require("./api/jackpot"));
 // app.use("/api/treasure", require("./api/treasure"));
 // app.use("/api/cornucopia", require("./api/cornucopia"));
 

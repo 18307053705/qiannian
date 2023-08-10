@@ -1,7 +1,7 @@
 const { RoleG, KnapsackG } = require("../../global");
 const { knapsackTable, PetTable } = require("../../table");
 const { petFn, knapsackFn } = require('../../utils');
-
+const moment = require('moment');
 
 
 // 灵兽山奖励池
@@ -29,9 +29,9 @@ module.exports = {
      * 灵兽山砸宠
      * @param {*} req
      */
-    drawPet: async function (req, res) {
-        const { pet_pool } = RoleG.getRoleGlobal(req, res);
-        const { data, yuanbao } = KnapsackG.getknapsackGlobal(req, res);
+    lingShouShan: async function (req, res) {
+        const { pet_pool, jackpot } = RoleG.getRoleGlobal(req, res);
+        let { data, yuanbao } = KnapsackG.getknapsackGlobal(req, res);
         if (pet_pool['l'].length >= pet_pool['x']) {
             res.send({
                 code: 0,
@@ -105,15 +105,33 @@ module.exports = {
             success = `消耗200元宝,在灵兽山获得${n}x1`;
         } else {
             const pet = PetTable.createPet(id);
-            await petFn.setPet(req, res, pet);
+            // await petFn.setPet(req, res, pet);
             success = `消耗200元宝,在灵兽山获得${pet.flair_x}资质,${pet.name}`;
         }
+        let isActivity = false;
+        // 周六，周日开启活动
+        if ([0, 6, 4].includes(moment().days())) {
+            isActivity = true;
+            jackpot.pet += 1;
+            if (jackpot.pet === 10) {
+                jackpot.pet = 0;
+                const yb = Math.floor(Math.random() * 1000) + 100;
+                yuanbao += yb;
+                success += `,天降鸿运恭喜额外获得${yb}元宝！！！`
+            }
+            RoleG.updataRoleGlobal(req, res, { jackpot })
+        }
+
         // 更新背包信息
         KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao - 200 });
 
         res.send({
             code: 0,
-            data,
+            data: {
+                num: jackpot.pet,
+                isActivity,
+                day: moment().days()
+            },
             success
         })
     }

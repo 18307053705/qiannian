@@ -33,6 +33,7 @@ module.exports = {
      * @returns {*} pet_pool:宠物池({c:当前宠物信息(id,n,攻击，暴击，命中,s:状态0:休息1:出战，2附体3上架，技能,id,l,r,),l:宠物房列表id,n,s  x:宠物房最大空间})
      * @returns {*} treasure_pool:聚宝盆，珍宝房屋({fw房屋:{exp:10000000,ext:10_10_10_10_10_10_10,g:0},xz勋章:1000000,hb徽标:10000000,lp令牌:10000000,jbp: 聚宝盆00000})
      * @returns {*} role_lx: 灵血
+     * @returns {*} jackpot: {equip:神装抽奖次数,pet:灵兽山砸宠次数,art:仙术抽奖次数,level:等级可以抽奖次数,invest:送财童子可领取次数}
      */
     getRoleGlobal: function (req, res, { role_id, attr } = {}) {
         const user = req.cookies["q_uid"];

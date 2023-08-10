@@ -32,6 +32,7 @@ const ELEMENT_4 = {
         name: "全民冲级中...",
         type: 4,
         cs: "g_b_u",
+        path:'/jackpotLevel'
     },
     4000006: {
         id: 4000006,
@@ -45,12 +46,14 @@ const ELEMENT_4 = {
         name: "全民神装...",
         type: 4,
         cs: "g_b_u",
+        path:'/jackpotEquip'
     },
     4000008: {
         id: 4000008,
         name: "全民仙法...",
         type: 4,
         cs: "g_b_u",
+        path:'/jackpotArt'
     },
     4000009: {
         id: 4000009,

@@ -18,7 +18,8 @@ const ELEMENT_1 = {
         id: 1000003,
         name: "送财童子",
         type: 1,
-        cs: "g_b_u"
+        cs: "g_b_u",
+        path:'/jackpotInvest'
     },
     1000004: {
         id: 1000004,

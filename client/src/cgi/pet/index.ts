@@ -1,6 +1,4 @@
 import { post } from "@request";
-
-const drawPetUrl = "/pet/drawPet";
 const detailPetUrl = "/pet/detailPet";
 const petRoomUrl = "/pet/petRoom";
 const petWearEquipUrl = "/pet/petWearEquip";
@@ -10,13 +8,6 @@ const petStatuUrl = "/pet/petStatu";
 const petRebornUrl = "/pet/petReborn";
 const petFlairUrl = "/pet/petFlair";
 const petStudyArtUrl = "/pet/petStudyArt";
-
-/**
- * 灵兽山砸宠
- */
-export function drawPet() {
-  return post(drawPetUrl);
-}
 
 /**
  * 宠物详情

@@ -14,14 +14,15 @@ type ListType = {
 const size = 20;
 export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFooter }: ListType) => {
     const { history } = window.QN;
-    const { state, pathname } = history.location;
+    const { state = { listPage: 0 }, pathname } = history.location;
+    console.log(state, 'state...')
     const [page, setPage] = useState(state.listPage || 0);
     const total = data.length;
     const list = data.slice(page * size, (page + 1) * size);
     const numPage = [...new Array(Math.ceil(total / size))];
     useEffect(() => {
         const pages = Math.ceil(data.length / size);
-        const { listPage } = state;
+        const { listPage = 0 } = state;
         if (pages && listPage >= pages) {
             setPage(pages - 1);
         }
