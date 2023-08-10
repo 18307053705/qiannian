@@ -1,5 +1,5 @@
 const { PetG, FightG,GrandG } = require('../../global');
-const { creatFightAttr } = require('./creatFightAttr');
+const { creatFightAttr } = require('../fightFn/creatFightAttr');
 const { computeFightDps } = require('./computeFightDps');
 const { computePetAttr } = require('../petFn/computePetAttr');
 const { victoryFight } = require('./victoryFight');
