@@ -111,7 +111,6 @@ module.exports = {
                 return;
             }
             const { name, flair_x } = await petFn.getPetInfo(req, res, petId);
-            console.log(petList,'pet...')
             petList.push({
                 n: name,
                 id: petId,

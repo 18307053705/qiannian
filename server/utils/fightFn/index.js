@@ -14,6 +14,7 @@ const catchPet = require('./catchPet');
 const rivalNormalDir = require('./rivalNormalDir');
 const lingXue = require('./lingXue');
 const checkContinueFight = require('./checkContinueFight');
+const petArtDir = require('./petArtDir');
 
 
 module.exports = {
@@ -32,5 +33,6 @@ module.exports = {
     ...catchPet,
     ...rivalNormalDir,
     ...lingXue,
-    ...checkContinueFight
+    ...checkContinueFight,
+    ...petArtDir
 }

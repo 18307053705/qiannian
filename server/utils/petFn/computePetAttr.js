@@ -29,7 +29,7 @@ module.exports = {
         const flairAttr = (flair_x + flair) * level * rating;
         Object.keys(initAttr).forEach((key) => {
             if (attr[key]) {
-                attr[key] = (attr[key] * flairAttr).toFixed(0);
+                attr[key] =  Math.floor(attr[key] * flairAttr);
             }
             if (addition[key]) {
                 attr[key] = attr[key] ? attr[key] + addition[key] : addition[key];

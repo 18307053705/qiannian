@@ -28,7 +28,7 @@ module.exports = {
             const [id, s = 1, rate = 100] = str.split('-');
             return {
                 id,
-                s,
+                s: s - 0,
                 rate
             }
         }) : [];
@@ -99,7 +99,7 @@ module.exports = {
         // return
         // knapsack.tael
         return {
-            textReward: tip ? '' : textReward,
+            textReward: tip ? [] : textReward,
             exp: vipExp ? `${exp}(${vipExp}倍经验)` : exp,
             tael: vipTael ? `${tael}(${vipTael}倍银两)` : tael,
             tip: tip,

@@ -36,7 +36,7 @@ module.exports = {
             RoleG.updataRoleGlobal(req, res, {
                 skill_pool: {
                     ...skill_pool,
-                    art
+                    art: JSON.parse(JSON.stringify(art))
                 }
             });
         }

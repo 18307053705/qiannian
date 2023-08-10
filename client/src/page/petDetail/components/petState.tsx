@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { petStatu } from '@cgi/pet';
 const PET_STATE = {
     0: '休战中',

@@ -46,6 +46,8 @@ module.exports = {
         const { addition, artInfo } = artFn.artUpLevel(old_art, { ...up_art, id }, role_attr.addition);
         // 更新技能
         art[id] = { ...art[id], ...artInfo, ...up_art };
+        delete art[id].msg;
+        delete art[id].condition;
         role_attr.addition = addition;
         // 人物信息
         RoleG.updataRoleGlobal(req, res, {
@@ -55,7 +57,7 @@ module.exports = {
         res.send({
             code: 0,
             data: '',
-            addition
+            art
         })
     }
 };

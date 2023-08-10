@@ -6,6 +6,7 @@ module.exports = {
      * 获取全局宠物信息
      * @param {*} req 
      * @param {*} res 
+     * @param {*} roleId 获取他人出战宠物信息 
      * @returns Promise 
      * @returns petInfo.id 
      * @returns petInfo.name 
@@ -22,9 +23,9 @@ module.exports = {
      * @returns petInfo.ele 元素类型(1:冰,2:雷,3:风,4:水,5:火)
      * @returns petInfo.exp 宠物经验
      */
-    getPetGlobal: function (req, res) {
-        const { role_id } = getRoleGlobal(req, res);
-        const pet =  petGlobal[role_id];
+    getPetGlobal: function (req, res, roleId) {
+        const { role_id } = getRoleGlobal(req, res, { role_id: roleId });
+        const pet = petGlobal[roleId || role_id];
         return pet ? JSON.parse(JSON.stringify(pet)) : undefined;
     }
 }

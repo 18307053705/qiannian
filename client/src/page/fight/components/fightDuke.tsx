@@ -1,16 +1,5 @@
 import React from "react";
 
-type fightType = {
-    fightInfo: {
-        players: any[],
-        rivals: { attr: any, name: string }[],
-
-    },
-    fightMap: {
-        player: any
-    }
-}
-
 const art = (dirClick, artList) => {
     return artList.map(({ n, s, id, p }, index) => (
         <span
@@ -80,7 +69,7 @@ const FightDuke = ({ dirClick, fight, setPanel }) => {
             {/* 技能栏1 */}
             <div>{art(dirClick, artList1)}</div>
             {/* 敌方状态 */}
-            <div>敌命:[{rivalAttr.lifeText}]{fightRound.dps} </div>
+            <div>敌命:[{rivalAttr.lifeText}]{fightRound.dps}{fightRound.peDps}</div>
             {/* 敌方血量百分比 */}
             {rivalAttr.stateList.map(({ percent }, index) => <FightPercent key={index} percent={percent} />)}
             {/* 我的状态 */}

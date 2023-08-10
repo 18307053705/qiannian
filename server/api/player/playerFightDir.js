@@ -36,11 +36,8 @@ module.exports = {
                 return;
             }
         }
-
-
         // buffs计算
         playerFn.computeBuffs(req, res);
-
         // 捉宠物
         if (p === 9 && id === 2) {
             fightRound.message = "无法进行捕捉";

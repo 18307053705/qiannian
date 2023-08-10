@@ -41,6 +41,7 @@ module.exports = {
         const artBase = ArtTable.getArt(id);
 
         // const artInfo = ArtTable[artId];
+        let successText = undefined;
         let up_art = undefined;
         let old_art = { l, r, id };
         // 领悟技能
@@ -61,7 +62,7 @@ module.exports = {
                     s: artBase.condition
                 }
             }
-            const { message } = knapsackFn.deleteKnapsack(req, res, { article });
+            const { message, success } = knapsackFn.deleteKnapsack(req, res, { article });
             if (message) {
                 res.send({
                     code: 0,
@@ -69,6 +70,7 @@ module.exports = {
                 })
                 return;
             }
+            successText = success;
             up_art = { l: 1, r: 0, id };
             old_art = { l: 0, r: 0, id };
         }
@@ -82,6 +84,7 @@ module.exports = {
                 })
                 return;
             }
+            successText = result.success;
             up_art = { ...result.up_art, id };
         }
         // 技能升级后属性
@@ -96,6 +99,7 @@ module.exports = {
         res.send({
             code: 0,
             data: 'ok',
+            success: successText
         })
     },
 }

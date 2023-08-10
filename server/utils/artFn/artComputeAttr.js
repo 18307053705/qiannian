@@ -38,12 +38,12 @@ module.exports = {
             // 技能伤害 = 基础伤害 + 升华加成 + 等级加成
             artInfo['v'] = v + (r * rp) + (l * up);
             if (r >= 4) {
-                artInfo['e'] = {};
+                // artInfo['e'] = {};
                 // 特效信息
-                effect.split(',').forEach((e) => {
+                artInfo['e'] = effect.split(',').map((e) => {
                     const [key] = e.split('-');
-                    artInfo['e'][key] = effect_attr[r];
-                })
+                    return `${key}-${effect_attr[r]}`;
+                }).join(',');
             }
         }
         // 判断是否为群攻,四转可增加攻击数量
@@ -81,6 +81,10 @@ module.exports = {
                 // 被动属性 = 基础值 * 转数加成 * 等级
                 return `${key}-${val}`
             }).join(',');
+        }
+        // 宠物附体技能
+        if (p === 6) {
+            artInfo['v'] = v * l;
         }
         return {
             attr,

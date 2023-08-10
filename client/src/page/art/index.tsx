@@ -43,8 +43,8 @@ export const Art = () => {
         return (
             <div>
                 <span className={nameClass} onClick={ArtNameClick}>{artName}</span>
-                <span> | </span>
-                <span className={suffixClass} onClick={suffixClick}>{text}</span>
+                {text && <span> | </span>}
+                {text && <span className={suffixClass} onClick={suffixClick}>{text}</span>}
             </div>
         )
     }

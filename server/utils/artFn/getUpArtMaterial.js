@@ -24,7 +24,7 @@ module.exports = {
         // 升重消耗材料
         if (p === 'l') {
             // 低于13级使用的材料Id
-            materialId = 67 + l;
+            materialId = 66 + l;
             // 13级及以上使用初阶技能升级书
             if (l > 13) {
                 materialId = 87;
@@ -43,7 +43,7 @@ module.exports = {
         }
         // 升转消耗材料
         if (p === 'r') {
-            materialId = 80 + r;
+            materialId = 79 + r;
             s = r;
         }
         // 计算消耗材料
@@ -55,11 +55,12 @@ module.exports = {
                 s
             }
         }
-        const { message } = deleteKnapsack(req, res, { article });
+        const { message,success } = deleteKnapsack(req, res, { article });
         delete up_art.p;
         return {
             message,
-            up_art
+            up_art,
+            success
         };
     }
 };

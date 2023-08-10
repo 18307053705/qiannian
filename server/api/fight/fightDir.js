@@ -29,12 +29,6 @@ module.exports = {
             rivalDps: 0, // 怪物伤害
             life: 0, // 恢复的生命
             mana: 0, // 恢复的法力
-            // text: 0, // 出招文案
-            // // rival_text: '', // 怪物出招文案
-            // buffText: [], // buff信息
-
-            // mana: '', // 消耗的法力
-            // life: '',// 消耗的生命
             statu: 0 // 结果
         }
         // buffs计算
@@ -71,11 +65,14 @@ module.exports = {
             fightFn.playerArtDir(req, res, playerAttr, rivalAttr, fightRound, id);
         }
 
+        // 宠物攻击
+        fightFn.petArtDir(req, res, rivalAttr, fightRound);
+
         // 获取战斗结果
         if (fightFn.getFightResults(req, res)) {
             return;
         }
-        
+
         // 怪物出招
         if (fightFn.rivalNormalDir(req, res, rivalAttr, playerAttr, fightRound)) {
             return;

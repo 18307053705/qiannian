@@ -31,7 +31,7 @@ const getTating = (flair_x) => {
     return Array(tating).fill('★').join('')
 }
 
-export const PetFlair = ({ petRoom, petInfo, callback }) => {
+export const PetFlair = ({ petInfo, callback }) => {
     const petRebornClick = () => {
         petReborn().then(({ data }) => {
             if (data) {
@@ -46,18 +46,17 @@ export const PetFlair = ({ petRoom, petInfo, callback }) => {
             }
         })
     }
-    const { flair_x, flair, reborn } = petInfo;
-    // 判断是否携带宠物房的信息
-    // 是则代表从宠物房跳转过来
-    // 否则状态固定位休战,且不可操作
-    if (!petRoom) {
+    const { flair_x, flair, reborn,state } = petInfo;
+    // 是否出战
+    const isFight = state === 1 || state === 2;
+    if (!isFight) {
         return <div>资质：{`${flair}/${flair_x}`}</div>
     }
 
     // 是否可提升资质
-    const isFlair = flair_x > flair && petRoom;
+    const isFlair = flair_x > flair && isFight;
     // 是否可转生
-    const isReborn = reborn < 3 && flair_x === flair && petRoom;
+    const isReborn = reborn < 3 && flair_x === flair && isFight;
     // 1:0-29 2:30-49 3:50-69 4:70-79 5:80-89 7:90-99 10:100
     return (
         <div>

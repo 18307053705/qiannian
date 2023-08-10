@@ -30,7 +30,7 @@ module.exports = {
             art: JSON.stringify(getPetArt(flair_x, artId)),
             attr: JSON.stringify(AttributeTable.getPetBaseAttr(type)),
             equip: '{}',
-            addition: '{}',
+            addition: JSON.stringify(AttributeTable.getInitAttr()),
             reborn: 0,
             state: 0,
             ele,

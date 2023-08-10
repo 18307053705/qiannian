@@ -29,6 +29,12 @@ export const getSuffix = (art, level) => {
       suffixClass: "g_color"
     };
   }
+  if (r === 7) {
+    return {
+      text: "",
+      suffixClass: ""
+    };
+  }
 
   let text = "升重";
   if (13 === l && r === 0) {
@@ -52,6 +58,7 @@ export const getSuffix = (art, level) => {
   if (100 === l && r === 6) {
     text = "升华";
   }
+
   return {
     text,
     suffixClass: text ? "g_color" : ""

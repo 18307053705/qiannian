@@ -16,11 +16,12 @@ module.exports = {
         }
 
         const rating = getPetRating(flair_x);
-        const { v, n, effect } = ArtTable.getArt(artId);
+        const { v, n, effect,p } = ArtTable.getArt(artId);
         const talentArt = {
             id: artId,
             n,
             v: v * rating,
+            p
         }
         if (effect) {
             const [key, value] = effect.split('-');
