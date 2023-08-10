@@ -105,7 +105,7 @@ module.exports = {
             success = `消耗200元宝,在灵兽山获得${n}x1`;
         } else {
             const pet = PetTable.createPet(id);
-            // await petFn.setPet(req, res, pet);
+            await petFn.setPet(req, res, pet);
             success = `消耗200元宝,在灵兽山获得${pet.flair_x}资质,${pet.name}`;
         }
         let isActivity = false;
