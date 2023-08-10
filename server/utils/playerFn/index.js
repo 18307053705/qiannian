@@ -5,6 +5,7 @@ const playerArtDir  = require('./playerArtDir');
 const computeTime  = require('./computeTime');
 const computeBuffs  = require('./computeBuffs');
 const escapeFight  = require('./escapeFight');
+const petArtDir  = require('./petArtDir');
 module.exports = {
     ...creatFight,
     ...getDeathResulst,
@@ -12,5 +13,6 @@ module.exports = {
     ...playerArtDir,
     ...computeTime,
     ...computeBuffs,
-    ...escapeFight
+    ...escapeFight,
+    ...petArtDir
 }

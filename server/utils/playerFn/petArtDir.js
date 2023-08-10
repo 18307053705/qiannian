@@ -8,10 +8,9 @@ module.exports = {
      * 
      * @param {*} req 
      * @param {*} res 
-     * @param {*} rivalAttr 怪物属性
      * @param {*} fightRound 
      */
-    petArtDir: function (req, res, rivalAttr, fightRound) {
+    petArtDir: function (req, res, fightRound) {
         const pet = PetG.getPetGlobal(req, res);
         // 没有出战宠物，不计算宠物伤害
         if (!pet) {
