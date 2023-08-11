@@ -48,9 +48,13 @@ module.exports = {
         articleList.forEach(({ id, s, rate }) => {
             // 获取物品
             if (rate > Math.floor(Math.random() * (100 - 0))) {
-                const { type, n } = knapsackTable.getArticle(id);
-                artReward[id] = { type, n, id, s };
-                textReward.push(`获得[${n}]x${s}`)
+                const article = knapsackTable.getArticle(id);
+                if (article) {
+                    const { type, n } = article;
+                    artReward[id] = { type, n, id, s };
+                    textReward.push(`获得[${n}]x${s}`)
+                }
+
             }
         });
         const tip = knapsackFn.addKnapsack(req, res, { article: { artReward, equipReward, data: knapsack.data } });

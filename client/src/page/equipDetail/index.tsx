@@ -49,16 +49,6 @@ const EquipDetail = ({ history }) => {
         return null;
     }
 
-    const renameBtn = (name) => {
-        renameEquip(({ name, pos: query.pos })).then(({ data }) => {
-            setEquip({
-                ...equip,
-                name: data
-            })
-            setIsRename(false);
-        })
-    }
-
     if (isMosaic) {
         return <MosaicActive query={query} setIsMosaic={setIsMosaic} getEquipDetail={getEquipDetail} />
     }
@@ -67,7 +57,8 @@ const EquipDetail = ({ history }) => {
             <HeadActive query={query} history={history} />
             <NameEquip query={query} setEquip={setEquip} equip={equip}  />
            
-            <div><span>职业：{equip.level}级{equip.careerName}</span></div>
+            <div><span>等级：{equip.level}级</span></div>
+            <div><span>职业：{equip.careerName}</span></div>
             {
                 Object.keys(equip.attr).map((key) => (
                     <div key={key}>{key}：{equip.attr[key]}</div>

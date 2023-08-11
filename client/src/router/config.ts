@@ -84,6 +84,11 @@ export const config: RouterType[] = [
     component: lazy(() => import("@page/equipList"))
   },
   {
+    name: "打造装备界面",
+    path: "/equipMake",
+    component: lazy(() => import("@page/equipMake"))
+  },
+  {
     name: "物品详情界面",
     path: "/articleDetail",
     component: lazy(() => import("@page/articleDetail"))

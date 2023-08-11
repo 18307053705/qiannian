@@ -8,6 +8,8 @@ const sigilEquipUrl = "/equip/sigilEquip";
 const getGemListUrl = "/equip/getGemList";
 const mosaicEquipUrl = "/equip/mosaicEquip";
 const unloadGemUrl = "/equip/unloadGem";
+const makeEquipUrl = "/equip/makeEquip";
+const makeEquipInfoUrl = "/equip/makeEquipInfo";
 
 //获取装备列表
 export function getEquipList() {
@@ -71,4 +73,20 @@ export function mosaicEquip(data) {
  */
 export function unloadGem(data) {
   return post(unloadGemUrl, data);
+}
+
+/**
+ * 打造装备
+ * @param req.equipId 装备id
+ */
+export function makeEquip(data) {
+  return post(makeEquipUrl, data);
+}
+
+/**
+ * 打造装备
+ * @param req.equipId 装备id
+ */
+export function makeEquipInfo(data) {
+  return post(makeEquipInfoUrl, data);
 }

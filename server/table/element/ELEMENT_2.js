@@ -55,14 +55,75 @@ const ELEMENT_2 = {
   },
   2000003: {
     id: 2000003,
-    name: "组队boss",
+    name: "一阶装备boss",
     type: 2,
     ext: {
       career: 1,
       level: 1,
       attr: 1,
       isRanks: true
-    }
+    },
+    article: '118-200,122-200,126-200,130-200,134-200,138-200,142-200',
+  },
+  2000004: {
+    id: 2000004,
+    name: "二阶装备boss",
+    type: 2,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+      isRanks: true
+    },
+    article: '119-200,123-200,127-200,131-200,135-200,139-200,143-200',
+  },
+  2000005: {
+    id: 2000005,
+    name: "三阶装备boss",
+    type: 2,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+      isRanks: true
+    },
+    article: '120-200,124-200,128-200,132-200,136-200,140-200,144-200',
+  },
+  2000006: {
+    id: 2000006,
+    name: "四阶装备boss",
+    type: 2,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+      isRanks: true
+    },
+    article: '121-200,125-200,129-200,133-200,137-200,141-200,145-200',
+  },
+  2000007: {
+    id: 2000007,
+    name: "神装boss",
+    type: 2,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+      isRanks: true
+    },
+    article: '309-500,310-500',
+  },
+  2000008: {
+    id: 2000008,
+    name: "声望boss",
+    type: 2,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+      isRanks: true
+    },
+    article: '42-5000,43-5000,45-5000',
   },
 };
 

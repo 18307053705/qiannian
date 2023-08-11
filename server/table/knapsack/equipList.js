@@ -7,8 +7,7 @@ module.exports = {
         level: 1,
         pos: 1,
         attr: 5,
-        group: 10000,
-        tips: '传说中人族道君使用的无上法宝，蕴含大道之力，可镇压诸天一切。'
+        tips: '制作比较粗糙的木剑,佩戴后可提升些许攻击。'
     },
     2: {
         id: 2,
@@ -18,7 +17,7 @@ module.exports = {
         level: 1,
         pos: 2,
         attr: 5,
-        group: 10000
+        tips: '制作比较粗糙的头巾,佩戴后可提升些许法力。'
     },
     3: {
         id: 3,
@@ -28,8 +27,7 @@ module.exports = {
         level: 1,
         pos: 3,
         attr: 5,
-        group: 10000,
-        tips: '传说中人族道君使用的无上法宝，蕴含大道之力，可镇压诸天一切。'
+        tips: '制作比较粗糙的布衣,佩戴后可提升些许生命。'
     },
     4: {
         id: 4,
@@ -39,7 +37,7 @@ module.exports = {
         level: 1,
         pos: 4,
         attr: 5,
-        group: 10000
+        tips: '制作比较粗糙的腰带,佩戴后可提升些许防御。'
     },
     5: {
         id: 5,
@@ -49,7 +47,7 @@ module.exports = {
         level: 1,
         pos: 5,
         attr: 5,
-        group: 10000
+        tips: '制作比较粗糙的草鞋,佩戴后可提升些许闪避。'
     },
     6: {
         id: 6,
@@ -58,8 +56,8 @@ module.exports = {
         career: 0,
         level: 10,
         pos: 1,
-        attr: 3,
-        group: 10001
+        attr: 2,
+        tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的神剑。'
     },
     7: {
         id: 7,
@@ -68,8 +66,8 @@ module.exports = {
         career: 0,
         level: 10,
         pos: 2,
-        attr: 3,
-        group: 10001
+        attr: 2,
+        tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的战盔。'
     },
     8: {
         id: 8,
@@ -78,8 +76,8 @@ module.exports = {
         career: 0,
         level: 10,
         pos: 3,
-        attr: 3,
-        group: 10001
+        attr: 2,
+        tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的战甲。'
     },
     9: {
         id: 9,
@@ -88,8 +86,8 @@ module.exports = {
         career: 0,
         level: 10,
         pos: 4,
-        attr: 3,
-        group: 10001
+        attr: 2,
+        tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的腰带。'
     },
     10: {
         id: 10,
@@ -98,8 +96,8 @@ module.exports = {
         career: 0,
         level: 10,
         pos: 5,
-        attr: 3,
-        group: 10001
+        attr: 2,
+        tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的战靴。'
     },
     11: {
         id: 11,
@@ -109,7 +107,8 @@ module.exports = {
         level: 20,
         pos: 1,
         attr: 1,
-        group: 10002
+        group: 10002,
+        tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
     12: {
         id: 12,
@@ -119,7 +118,8 @@ module.exports = {
         level: 20,
         pos: 2,
         attr: 1,
-        group: 10002
+        group: 10002,
+        tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
     13: {
         id: 13,
@@ -129,7 +129,8 @@ module.exports = {
         level: 20,
         pos: 3,
         attr: 1,
-        group: 10002
+        group: 10002,
+        tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
     14: {
         id: 14,
@@ -139,7 +140,8 @@ module.exports = {
         level: 20,
         pos: 4,
         attr: 1,
-        group: 10002
+        group: 10002,
+        tips: '五大皇极套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
     15: {
         id: 15,
@@ -149,7 +151,8 @@ module.exports = {
         level: 20,
         pos: 5,
         attr: 1,
-        group: 10002
+        group: 10002,
+        tips: '五大皇极套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
     16: {
         id: 16,
@@ -159,7 +162,8 @@ module.exports = {
         level: 20,
         pos: 1,
         attr: 1,
-        group: 10003
+        group: 10003,
+        tips: '五大皇鼎套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
     17: {
         id: 17,
@@ -169,7 +173,8 @@ module.exports = {
         level: 20,
         pos: 2,
         attr: 1,
-        group: 10003
+        group: 10003,
+        tips: '五大皇鼎装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
     18: {
         id: 18,
@@ -179,7 +184,8 @@ module.exports = {
         level: 20,
         pos: 3,
         attr: 1,
-        group: 10003
+        group: 10003,
+        tips: '五大皇鼎套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
     19: {
         id: 19,
@@ -189,7 +195,8 @@ module.exports = {
         level: 20,
         pos: 4,
         attr: 1,
-        group: 10003
+        group: 10003,
+        tips: '五大皇鼎套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
     20: {
         id: 20,
@@ -199,7 +206,8 @@ module.exports = {
         level: 20,
         pos: 5,
         attr: 1,
-        group: 10003
+        group: 10003,
+        tips: '五大皇鼎套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
     21: {
         id: 21,
@@ -209,7 +217,8 @@ module.exports = {
         level: 20,
         pos: 1,
         attr: 1,
-        group: 10004
+        group: 10004,
+        tips: '五大皇泽套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
     22: {
         id: 22,
@@ -219,7 +228,8 @@ module.exports = {
         level: 20,
         pos: 2,
         attr: 1,
-        group: 10004
+        group: 10004,
+        tips: '五大皇泽装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
     23: {
         id: 23,
@@ -229,7 +239,8 @@ module.exports = {
         level: 20,
         pos: 3,
         attr: 1,
-        group: 10004
+        group: 10004,
+        tips: '五大皇泽套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
     24: {
         id: 24,
@@ -239,7 +250,8 @@ module.exports = {
         level: 20,
         pos: 4,
         attr: 1,
-        group: 10004
+        group: 10004,
+        tips: '五大皇泽套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
     25: {
         id: 25,
@@ -249,7 +261,8 @@ module.exports = {
         level: 20,
         pos: 5,
         attr: 1,
-        group: 10004
+        group: 10004,
+        tips: '五大皇泽套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
     26: {
         id: 26,
@@ -259,7 +272,8 @@ module.exports = {
         level: 35,
         pos: 1,
         attr: 2,
-        group: 10005
+        group: 10005,
+        tips: '耗费无数武器晶石与世界声望锻造而成的武器,唯有强者才配拥有。'
     },
     27: {
         id: 27,
@@ -269,7 +283,8 @@ module.exports = {
         level: 35,
         pos: 2,
         attr: 2,
-        group: 10005
+        group: 10005,
+        tips: '耗费无数头盔晶石与世界声望锻造而成的头巾,唯有强者才配拥有。'
     },
     28: {
         id: 28,
@@ -279,7 +294,8 @@ module.exports = {
         level: 35,
         pos: 3,
         attr: 2,
-        group: 10005
+        group: 10005,
+        tips: '耗费无数铠甲晶石与世界声望锻造而成的法袍,唯有强者才配拥有。'
     },
     29: {
         id: 29,
@@ -289,7 +305,8 @@ module.exports = {
         level: 35,
         pos: 4,
         attr: 2,
-        group: 10005
+        group: 10005,
+        tips: '耗费无数腰带晶石与世界声望锻造而成的束带,唯有强者才配拥有。'
     },
     30: {
         id: 30,
@@ -299,7 +316,8 @@ module.exports = {
         level: 35,
         pos: 5,
         attr: 2,
-        group: 10005
+        group: 10005,
+        tips: '耗费无数鞋子晶石与世界声望锻造而成的布鞋,唯有强者才配拥有。'
     },
     31: {
         id: 31,
@@ -309,7 +327,8 @@ module.exports = {
         level: 35,
         pos: 1,
         attr: 2,
-        group: 10006
+        group: 10006,
+        tips: '耗费无数武器晶石与世界声望锻造而成的武器,唯有强者才配拥有。'
     },
     32: {
         id: 32,
@@ -319,7 +338,8 @@ module.exports = {
         level: 35,
         pos: 2,
         attr: 2,
-        group: 10006
+        group: 10006,
+        tips: '耗费无数头盔晶石与世界声望锻造而成的头盔,唯有强者才配拥有。'
     },
     33: {
         id: 33,
@@ -329,7 +349,8 @@ module.exports = {
         level: 35,
         pos: 3,
         attr: 2,
-        group: 10006
+        group: 10006,
+        tips: '耗费无数盔甲晶石与世界声望锻造而成的盔甲,唯有强者才配拥有。'
     },
     34: {
         id: 34,
@@ -339,7 +360,8 @@ module.exports = {
         level: 35,
         pos: 4,
         attr: 2,
-        group: 10006
+        group: 10006,
+        tips: '耗费无数腰带晶石与世界声望锻造而成的腰带,唯有强者才配拥有。'
     },
     35: {
         id: 35,
@@ -349,17 +371,19 @@ module.exports = {
         level: 35,
         pos: 5,
         attr: 2,
-        group: 10006
+        group: 10006,
+        tips: '耗费无数鞋子晶石与世界声望锻造而成的鞋子,唯有强者才配拥有。'
     },
     36: {
         id: 36,
         type: 3,
         name: '凌影长剑',
-        career: 1,
+        career: 3,
         level: 35,
         pos: 1,
-        attr: 1,
-        group: 10007
+        attr: 2,
+        group: 10007,
+        tips: '耗费无数武器晶石与世界声望锻造而成的武器,唯有强者才配拥有。'
     },
     37: {
         id: 37,
@@ -369,7 +393,8 @@ module.exports = {
         level: 35,
         pos: 2,
         attr: 2,
-        group: 10007
+        group: 10007,
+        tips: '耗费无数头盔晶石与世界声望锻造而成的头盔,唯有强者才配拥有。'
     },
     38: {
         id: 38,
@@ -379,7 +404,8 @@ module.exports = {
         level: 35,
         pos: 3,
         attr: 2,
-        group: 10007
+        group: 10007,
+        tips: '耗费无数铠甲晶石与世界声望锻造而成的铠甲,唯有强者才配拥有。'
     },
     39: {
         id: 39,
@@ -389,7 +415,8 @@ module.exports = {
         level: 35,
         pos: 4,
         attr: 2,
-        group: 10007
+        group: 10007,
+        tips: '耗费无数腰带晶石与世界声望锻造而成的腰带,唯有强者才配拥有。'
     },
     40: {
         id: 40,
@@ -399,157 +426,173 @@ module.exports = {
         level: 35,
         pos: 5,
         attr: 2,
-        group: 10007
+        group: 10007,
+        tips: '耗费无数鞋子晶石与世界声望锻造而成的鞋子,唯有强者才配拥有。'
     },
     41: {
         id: 41,
         type: 3,
-        name: '九歌法杖',
+        name: '飞炼法杖',
         career: 1,
         level: 55,
         pos: 1,
-        attr: 2,
-        group: 10008
+        attr: 3,
+        group: 10008,
+        tips: '传说中的飞炼套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     42: {
         id: 42,
         type: 3,
-        name: '九歌头巾',
+        name: '飞炼头巾',
         career: 1,
         level: 55,
         pos: 2,
-        attr: 2,
-        group: 10008
+        attr: 3,
+        group: 10008,
+        tips: '传说中的飞炼套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     43: {
         id: 43,
         type: 3,
-        name: '九歌法袍',
+        name: '飞炼法袍',
         career: 1,
         level: 55,
         pos: 3,
-        attr: 2,
-        group: 10008
+        attr: 3,
+        group: 10008,
+        tips: '传说中的飞炼套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     44: {
         id: 44,
         type: 3,
-        name: '九歌束带',
+        name: '飞炼束带',
         career: 1,
         level: 55,
         pos: 4,
-        attr: 2,
-        group: 10008
+        attr: 3,
+        group: 10008,
+        tips: '传说中的飞炼套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     45: {
         id: 45,
         type: 3,
-        name: '九歌布鞋',
+        name: '飞炼布鞋',
         career: 1,
         level: 55,
         pos: 5,
-        attr: 2,
-        group: 10008
+        attr: 3,
+        group: 10008,
+        tips: '传说中的飞炼套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     46: {
         id: 46,
         type: 3,
-        name: '九衡战戟',
+        name: '飞尊战戟',
         career: 2,
         level: 55,
         pos: 1,
-        attr: 2,
-        group: 10009
+        attr: 3,
+        group: 10009,
+        tips: '传说中的飞尊套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     47: {
         id: 47,
         type: 3,
-        name: '九衡战盔',
+        name: '飞尊战盔',
         career: 2,
         level: 55,
         pos: 2,
-        attr: 2,
-        group: 10009
+        attr: 3,
+        group: 10009,
+        tips: '传说中的飞尊套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     48: {
         id: 48,
         type: 3,
-        name: '九衡战甲',
+        name: '飞尊战甲',
         career: 2,
         level: 55,
         pos: 3,
-        attr: 2,
-        group: 10009
+        attr: 3,
+        group: 10009,
+        tips: '传说中的飞尊套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     49: {
         id: 49,
         type: 3,
-        name: '九衡战带',
+        name: '飞尊战带',
         career: 2,
         level: 55,
         pos: 4,
-        attr: 2,
-        group: 10009
+        attr: 3,
+        group: 10009,
+        tips: '传说中的飞尊套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     50: {
         id: 50,
         type: 3,
-        name: '九衡战靴',
+        name: '飞尊战靴',
         career: 2,
         level: 55,
         pos: 5,
-        attr: 2,
-        group: 10009
+        attr: 3,
+        group: 10009,
+        tips: '传说中的飞尊套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     51: {
         id: 51,
         type: 3,
-        name: '九御长剑',
-        career: 1,
+        name: '飞影长剑',
+        career: 3,
         level: 55,
         pos: 1,
-        attr: 1,
-        group: 10010
+        attr: 3,
+        group: 10010,
+        tips: '传说中的飞影套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     52: {
         id: 52,
         type: 3,
-        name: '九御头巾',
+        name: '飞影头巾',
         career: 3,
         level: 55,
         pos: 2,
-        attr: 2,
-        group: 10010
+        attr: 3,
+        group: 10010,
+        tips: '传说中的飞影套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     53: {
         id: 53,
         type: 3,
-        name: '九御长衣',
+        name: '飞影长衣',
         career: 3,
         level: 55,
         pos: 3,
-        attr: 2,
-        group: 10010
+        attr: 3,
+        group: 10010,
+        tips: '传说中的飞影套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     54: {
         id: 54,
         type: 3,
-        name: '九御玉束',
+        name: '飞影玉束',
         career: 3,
         level: 55,
         pos: 4,
-        attr: 2,
-        group: 10010
+        attr: 3,
+        group: 10010,
+        tips: '传说中的飞影套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     55: {
         id: 55,
         type: 3,
-        name: '九御布鞋',
+        name: '飞影布鞋',
         career: 3,
         level: 55,
         pos: 5,
-        attr: 2,
-        group: 10010
+        attr: 3,
+        group: 10010,
+        tips: '传说中的飞影套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     56: {
         id: 56,
@@ -558,8 +601,9 @@ module.exports = {
         career: 1,
         level: 70,
         pos: 1,
-        attr: 2,
-        group: 10011
+        attr: 4,
+        group: 10011,
+        tips: '70级金光套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     57: {
         id: 57,
@@ -568,8 +612,9 @@ module.exports = {
         career: 1,
         level: 70,
         pos: 2,
-        attr: 2,
-        group: 10011
+        attr: 4,
+        group: 10011,
+        tips: '70级金光套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     58: {
         id: 58,
@@ -578,8 +623,9 @@ module.exports = {
         career: 1,
         level: 70,
         pos: 3,
-        attr: 2,
-        group: 10011
+        attr: 4,
+        group: 10011,
+        tips: '70级金光套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     59: {
         id: 59,
@@ -588,8 +634,9 @@ module.exports = {
         career: 1,
         level: 70,
         pos: 4,
-        attr: 2,
-        group: 10011
+        attr: 4,
+        group: 10011,
+        tips: '70级金光套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     60: {
         id: 60,
@@ -598,579 +645,1733 @@ module.exports = {
         career: 1,
         level: 70,
         pos: 5,
-        attr: 2,
-        group: 10011
+        attr: 4,
+        group: 10011,
+        tips: '70级金光套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     61: {
         id: 61,
         type: 3,
-        name: '御光战戟',
+        name: '金玉战戟',
         career: 2,
         level: 70,
         pos: 1,
-        attr: 2,
-        group: 10012
+        attr: 4,
+        group: 10012,
+        tips: '70级金玉套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     62: {
         id: 62,
         type: 3,
-        name: '御光战盔',
+        name: '金玉战盔',
         career: 2,
         level: 70,
         pos: 2,
-        attr: 2,
-        group: 10012
+        attr: 4,
+        group: 10012,
+        tips: '70级金玉套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     63: {
         id: 63,
         type: 3,
-        name: '御光战甲',
+        name: '金玉战甲',
         career: 2,
         level: 70,
         pos: 3,
-        attr: 2,
-        group: 10012
+        attr: 4,
+        group: 10012,
+        tips: '70级金玉套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     64: {
         id: 64,
         type: 3,
-        name: '御光战带',
+        name: '金玉战带',
         career: 2,
         level: 70,
         pos: 4,
-        attr: 2,
-        group: 10012
+        attr: 4,
+        group: 10012,
+        tips: '70级金玉套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     65: {
         id: 65,
         type: 3,
-        name: '御光战靴',
+        name: '金玉战靴',
         career: 2,
         level: 70,
         pos: 5,
-        attr: 2,
-        group: 10012
+        attr: 4,
+        group: 10012,
+        tips: '70级金玉套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     66: {
         id: 66,
         type: 3,
-        name: '流光长剑',
-        career: 1,
+        name: '金流长剑',
+        career: 3,
         level: 70,
         pos: 1,
-        attr: 1,
-        group: 10013
+        attr: 4,
+        group: 10013,
+        tips: '70级金流套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     67: {
         id: 67,
         type: 3,
-        name: '流光头巾',
+        name: '金流头巾',
         career: 3,
         level: 70,
         pos: 2,
-        attr: 2,
-        group: 10013
+        attr: 4,
+        group: 10013,
+        tips: '70级金流套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     68: {
         id: 68,
         type: 3,
-        name: '流光长衣',
+        name: '金流长衣',
         career: 3,
         level: 70,
         pos: 3,
-        attr: 2,
-        group: 10013
+        attr: 4,
+        group: 10013,
+        tips: '70级金流套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     69: {
         id: 69,
         type: 3,
-        name: '流光玉束',
+        name: '金流玉束',
         career: 3,
         level: 70,
         pos: 4,
-        attr: 2,
-        group: 10013
+        attr: 4,
+        group: 10013,
+        tips: '70级金流套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     70: {
         id: 70,
         type: 3,
-        name: '流光布鞋',
+        name: '金流布鞋',
         career: 3,
         level: 70,
         pos: 5,
-        attr: 2,
-        group: 10013
+        attr: 4,
+        group: 10013,
+        tips: '70级金流套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     71: {
         id: 71,
         type: 3,
-        name: '无极☆法杖',
+        name: '无极の法杖',
         career: 1,
         level: 80,
         pos: 1,
-        attr: 2,
-        group: 10014
+        attr: 5,
+        group: 10014,
+        tips: '顶级声望套装,无极套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     72: {
         id: 72,
         type: 3,
-        name: '无极☆头巾',
+        name: '无极の头巾',
         career: 1,
         level: 80,
         pos: 2,
-        attr: 2,
-        group: 10014
+        attr: 5,
+        group: 10014,
+        tips: '顶级声望套装,无极套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     73: {
         id: 73,
         type: 3,
-        name: '无极☆法袍',
+        name: '无极の法袍',
         career: 1,
         level: 80,
         pos: 3,
-        attr: 2,
-        group: 10014
+        attr: 5,
+        group: 10014,
+        tips: '顶级声望套装,无极套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     74: {
         id: 74,
         type: 3,
-        name: '无极☆束带',
+        name: '无极の束带',
         career: 1,
         level: 80,
         pos: 4,
-        attr: 2,
-        group: 10014
+        attr: 5,
+        group: 10014,
+        tips: '顶级声望套装,无极套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     75: {
         id: 75,
         type: 3,
-        name: '无极☆布鞋',
+        name: '无极の布鞋',
         career: 1,
         level: 80,
         pos: 5,
-        attr: 2,
-        group: 10014
+        attr: 5,
+        group: 10014,
+        tips: '顶级声望套装,无极套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     76: {
         id: 76,
         type: 3,
-        name: '守元☆战戟',
+        name: '守元の战戟',
         career: 2,
         level: 80,
         pos: 1,
-        attr: 2,
-        group: 10015
+        attr: 5,
+        group: 10015,
+        tips: '顶级声望套装,守元套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     77: {
         id: 77,
         type: 3,
-        name: '守元☆战盔',
+        name: '守元の战盔',
         career: 2,
         level: 80,
         pos: 2,
-        attr: 2,
-        group: 10015
+        attr: 5,
+        group: 10015,
+        tips: '顶级声望套装,守元套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     78: {
         id: 78,
         type: 3,
-        name: '守元☆战甲',
+        name: '守元の战甲',
         career: 2,
         level: 80,
         pos: 3,
-        attr: 2,
-        group: 10015
+        attr: 5,
+        group: 10015,
+        tips: '顶级声望套装,守元套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     79: {
         id: 79,
         type: 3,
-        name: '守元☆战带',
+        name: '守元の战带',
         career: 2,
         level: 80,
         pos: 4,
-        attr: 2,
-        group: 10015
+        attr: 5,
+        group: 10015,
+        tips: '顶级声望套装,守元套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     80: {
         id: 80,
         type: 3,
-        name: '守元☆战靴',
+        name: '守元の战靴',
         career: 2,
         level: 80,
         pos: 5,
-        attr: 2,
-        group: 10015
+        attr: 5,
+        group: 10015,
+        tips: '顶级声望套装,守元套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     81: {
         id: 81,
         type: 3,
-        name: '遁一☆长剑',
-        career: 1,
+        name: '遁一の长剑',
+        career: 3,
         level: 80,
         pos: 1,
-        attr: 1,
-        group: 10016
+        attr: 5,
+        group: 10016,
+        tips: '顶级声望套装,遁一套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     82: {
         id: 82,
         type: 3,
-        name: '遁一☆头巾',
+        name: '遁一の头巾',
         career: 3,
         level: 80,
         pos: 2,
-        attr: 2,
-        group: 10016
+        attr: 5,
+        group: 10016,
+        tips: '顶级声望套装,遁一套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     83: {
         id: 83,
         type: 3,
-        name: '遁一☆长衣',
+        name: '遁一の长衣',
         career: 3,
         level: 80,
         pos: 3,
-        attr: 2,
-        group: 10016
+        attr: 5,
+        group: 10016,
+        tips: '顶级声望套装,遁一套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     84: {
         id: 84,
         type: 3,
-        name: '遁一☆玉束',
+        name: '遁一の玉束',
         career: 3,
         level: 80,
         pos: 4,
-        attr: 2,
-        group: 10016
+        attr: 5,
+        group: 10016,
+        tips: '顶级声望套装,遁一套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     85: {
         id: 85,
         type: 3,
-        name: '遁一☆布鞋',
+        name: '遁一の布鞋',
         career: 3,
         level: 80,
         pos: 5,
-        attr: 2,
-        group: 10016
+        attr: 5,
+        group: 10016,
+        tips: '顶级声望套装,遁一套装之一,每个部位都有强大的力量,集齐五件套即可获得大量属性加成。'
     },
     86: {
         id: 86,
         type: 3,
-        name: '生死☆法杖',
+        name: '生死の法杖',
         career: 1,
         level: 90,
         pos: 1,
-        attr: 3,
-        group: 10017
+        attr: 7,
+        group: 10017,
+        tips: '借天地法则铸造的生死套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握生死之道。'
     },
     87: {
         id: 87,
         type: 3,
-        name: '生死☆头巾',
+        name: '生死の头巾',
         career: 1,
         level: 90,
         pos: 2,
-        attr: 3,
-        group: 10017
+        attr: 7,
+        group: 10017,
+        tips: '借天地法则铸造的生死套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握生死之道。'
     },
     88: {
         id: 88,
         type: 3,
-        name: '生死☆法袍',
+        name: '生死の法袍',
         career: 1,
         level: 90,
         pos: 3,
-        attr: 3,
-        group: 10017
+        attr: 7,
+        group: 10017,
+        tips: '借天地法则铸造的生死套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握生死之道。'
     },
     89: {
         id: 89,
         type: 3,
-        name: '生死☆束带',
+        name: '生死の束带',
         career: 1,
         level: 90,
         pos: 4,
-        attr: 3,
-        group: 10017
+        attr: 7,
+        group: 10017,
+        tips: '借天地法则铸造的生死套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握生死之道。'
     },
     90: {
         id: 90,
         type: 3,
-        name: '生死☆布鞋',
+        name: '生死の布鞋',
         career: 1,
         level: 90,
         pos: 5,
-        attr: 3,
-        group: 10017
+        attr: 7,
+        group: 10017,
+        tips: '借天地法则铸造的生死套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握生死之道。'
     },
     91: {
         id: 91,
         type: 3,
-        name: '永恒☆战戟',
+        name: '永恒の战戟',
         career: 2,
         level: 90,
         pos: 1,
-        attr: 3,
-        group: 10018
+        attr: 7,
+        group: 10018,
+        tips: '借天地法则铸造的永恒套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握永恒之道。'
     },
     92: {
         id: 92,
         type: 3,
-        name: '永恒☆战盔',
+        name: '永恒の战盔',
         career: 2,
         level: 90,
         pos: 2,
-        attr: 3,
-        group: 10018
+        attr: 7,
+        group: 10018,
+        tips: '借天地法则铸造的永恒套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握永恒之道。'
     },
     93: {
         id: 93,
         type: 3,
-        name: '永恒☆战甲',
+        name: '永恒の战甲',
         career: 2,
         level: 90,
         pos: 3,
-        attr: 3,
-        group: 10018
+        attr: 7,
+        group: 10018,
+        tips: '借天地法则铸造的永恒套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握永恒之道。'
     },
     94: {
         id: 94,
         type: 3,
-        name: '永恒☆战带',
+        name: '永恒の战带',
         career: 2,
         level: 90,
         pos: 4,
-        attr: 3,
-        group: 10018
+        attr: 7,
+        group: 10018,
+        tips: '借天地法则铸造的永恒套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握永恒之道。'
     },
     95: {
         id: 95,
         type: 3,
-        name: '永恒☆战靴',
+        name: '永恒の战靴',
         career: 2,
         level: 90,
         pos: 5,
-        attr: 3,
-        group: 10018
+        attr: 7,
+        group: 10018,
+        tips: '借天地法则铸造的永恒套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握永恒之道。'
     },
     96: {
         id: 96,
         type: 3,
-        name: '御仙☆古剑',
-        career: 1,
+        name: '太初の古剑',
+        career: 3,
         level: 90,
         pos: 1,
-        attr: 3,
-        group: 10019
+        attr: 7,
+        group: 10019,
+        tips: '借天地法则铸造的太初套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握太初之道。'
     },
     97: {
         id: 97,
         type: 3,
-        name: '御仙☆头巾',
+        name: '太初の头巾',
         career: 3,
         level: 90,
         pos: 2,
-        attr: 3,
-        group: 10019
+        attr: 7,
+        group: 10019,
+        tips: '借天地法则铸造的太初套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握太初之道。'
     },
     98: {
         id: 98,
         type: 3,
-        name: '御仙☆长衣',
+        name: '太初の长衣',
         career: 3,
         level: 90,
         pos: 3,
-        attr: 3,
-        group: 10019
+        attr: 7,
+        group: 10019,
+        tips: '借天地法则铸造的太初套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握太初之道。'
     },
     99: {
         id: 99,
         type: 3,
-        name: '御仙☆玉束',
+        name: '太初の玉束',
         career: 3,
         level: 90,
         pos: 4,
-        attr: 3,
-        group: 10019
+        attr: 7,
+        group: 10019,
+        tips: '借天地法则铸造的太初套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握太初之道。'
     },
     100: {
         id: 100,
         type: 3,
-        name: '御仙☆布鞋',
+        name: '太初の布鞋',
         career: 3,
         level: 90,
         pos: 5,
-        attr: 3,
-        group: 10019
+        attr: 7,
+        group: 10019,
+        tips: '借天地法则铸造的太初套装之一,每个部位都有强大的法则之力,据说集齐五件套者可掌握太初之道。'
     },
     101: {
         id: 101,
         type: 3,
-        name: '黄泉☆法杖',
+        name: '黄泉の法杖',
         career: 1,
         level: 100,
         pos: 1,
-        attr: 5,
-        group: 10020
+        attr: 7,
+        group: 10020,
+        tips: '以黄泉大道铸造的黄泉套装之一,传说乃是太古幽冥地府的神器,拥有掌生死,握轮回的无上伟力。'
     },
     102: {
         id: 102,
         type: 3,
-        name: '黄泉☆头巾',
+        name: '黄泉の头巾',
         career: 1,
         level: 100,
         pos: 2,
-        attr: 5,
-        group: 10020
+        attr: 7,
+        group: 10020,
+        tips: '以黄泉大道铸造的黄泉套装之一,传说乃是太古幽冥地府的神器,拥有掌生死,握轮回的无上伟力。'
     },
     103: {
         id: 103,
         type: 3,
-        name: '黄泉☆法袍',
+        name: '黄泉の法袍',
         career: 1,
         level: 100,
         pos: 3,
-        attr: 5,
-        group: 10020
+        attr: 7,
+        group: 10020,
+        tips: '以黄泉大道铸造的黄泉套装之一,传说乃是太古幽冥地府的神器,拥有掌生死,握轮回的无上伟力。'
     },
     104: {
         id: 104,
         type: 3,
-        name: '黄泉☆束带',
+        name: '黄泉の束带',
         career: 1,
         level: 100,
         pos: 4,
-        attr: 5,
-        group: 10020
+        attr: 7,
+        group: 10020,
+        tips: '以黄泉大道铸造的黄泉套装之一,传说乃是太古幽冥地府的神器,拥有掌生死,握轮回的无上伟力。'
     },
     105: {
         id: 105,
         type: 3,
-        name: '黄泉☆布鞋',
+        name: '黄泉の布鞋',
         career: 1,
         level: 100,
         pos: 5,
-        attr: 5,
-        group: 10020
+        attr: 7,
+        group: 10020,
+        tips: '以黄泉大道铸造的黄泉套装之一,传说乃是太古幽冥地府的神器,拥有掌生死,握轮回的无上伟力。'
     },
     106: {
         id: 106,
         type: 3,
-        name: '碧落☆战戟',
+        name: '阴阳の战戟',
         career: 2,
         level: 100,
         pos: 1,
-        attr: 5,
-        group: 10021
+        attr: 7,
+        group: 10021,
+        tips: '以阴阳大道铸造的阴阳套装之一,传说阴阳大道的天地钟爱,以此道铸造的神器,拥有逆转阴阳的无上造化。'
     },
     107: {
         id: 107,
         type: 3,
-        name: '碧落☆战盔',
+        name: '阴阳の战盔',
         career: 2,
         level: 100,
         pos: 2,
-        attr: 5,
-        group: 10021
+        attr: 7,
+        group: 10021,
+        tips: '以阴阳大道铸造的阴阳套装之一,传说阴阳大道的天地钟爱,以此道铸造的神器,拥有逆转阴阳的无上造化。'
     },
     108: {
         id: 108,
         type: 3,
-        name: '碧落☆战甲',
+        name: '阴阳の战甲',
         career: 2,
         level: 100,
         pos: 3,
-        attr: 5,
-        group: 10021
+        attr: 7,
+        group: 10021,
+        tips: '以阴阳大道铸造的阴阳套装之一,传说阴阳大道的天地钟爱,以此道铸造的神器,拥有逆转阴阳的无上造化。'
     },
     109: {
         id: 109,
         type: 3,
-        name: '碧落☆战带',
+        name: '阴阳の战带',
         career: 2,
         level: 100,
         pos: 4,
-        attr: 5,
-        group: 10021
+        attr: 7,
+        group: 10021,
+        tips: '以阴阳大道铸造的阴阳套装之一,传说阴阳大道的天地钟爱,以此道铸造的神器,拥有逆转阴阳的无上造化。'
     },
     110: {
         id: 110,
         type: 3,
-        name: '碧落☆战靴',
+        name: '阴阳の战靴',
         career: 2,
         level: 100,
         pos: 5,
-        attr: 5,
-        group: 10021
+        attr: 7,
+        group: 10021,
+        tips: '以阴阳大道铸造的阴阳套装之一,传说阴阳大道的天地钟爱,以此道铸造的神器,拥有逆转阴阳的无上造化。'
     },
     111: {
         id: 111,
         type: 3,
-        name: '轮回☆古剑',
-        career: 1,
+        name: '太虚の古剑',
+        career: 3,
         level: 100,
         pos: 1,
-        attr: 5,
-        group: 10022
+        attr: 7,
+        group: 10022,
+        tips: '以空间大道铸造的太虚套装之一,佩戴此道所铸造的神器,可游离于虚空之中,超脱一切。'
     },
     112: {
         id: 112,
         type: 3,
-        name: '轮回☆头巾',
+        name: '太虚の头巾',
         career: 3,
         level: 100,
         pos: 2,
-        attr: 5,
-        group: 10022
+        attr: 7,
+        group: 10022,
+        tips: '以空间大道铸造的太虚套装之一,佩戴此道所铸造的神器,可游离于虚空之中,超脱一切。'
     },
     113: {
         id: 113,
         type: 3,
-        name: '轮回☆长衣',
+        name: '太虚の长衣',
         career: 3,
         level: 100,
         pos: 3,
-        attr: 5,
-        group: 10022
+        attr: 7,
+        group: 10022,
+        tips: '以空间大道铸造的太虚套装之一,佩戴此道所铸造的神器,可游离于虚空之中,超脱一切。'
     },
     114: {
         id: 114,
         type: 3,
-        name: '轮回☆玉束',
+        name: '太虚の玉束',
         career: 3,
         level: 100,
         pos: 4,
-        attr: 5,
-        group: 10022
+        attr: 7,
+        group: 10022,
+        tips: '以空间大道铸造的太虚套装之一,佩戴此道所铸造的神器,可游离于虚空之中,超脱一切。'
     },
     115: {
         id: 115,
         type: 3,
-        name: '轮回☆布鞋',
+        name: '太虚の布鞋',
         career: 3,
         level: 100,
         pos: 5,
-        attr: 5,
-        group: 10022
+        attr: 7,
+        group: 10022,
+        tips: '以空间大道铸造的太虚套装之一,佩戴此道所铸造的神器,可游离于虚空之中,超脱一切。'
+    },
+    116: {
+        id: 116,
+        type: 3,
+        name: '义薄云天刃',
+        career: 0,
+        level: 60,
+        pos: 1,
+        attr: 2,
+        group: 10023,
+        make: 3,
+        tips: '60级帮会套装,需要大量的帮会声望进行锻造,拥有强大的属性增幅。'
+    },
+    117: {
+        id: 117,
+        type: 3,
+        name: '义薄云天盔',
+        career: 0,
+        level: 60,
+        pos: 2,
+        attr: 2,
+        group: 10023,
+        make: 3,
+        tips: '60级帮会套装,需要大量的帮会声望进行锻造,拥有强大的属性增幅。'
+    },
+    118: {
+        id: 118,
+        type: 3,
+        name: '义薄云天甲',
+        career: 0,
+        level: 60,
+        pos: 3,
+        attr: 2,
+        group: 10023,
+        make: 3,
+        tips: '60级帮会套装,需要大量的帮会声望进行锻造,拥有强大的属性增幅。'
+    },
+    119: {
+        id: 119,
+        type: 3,
+        name: '义薄云天带',
+        career: 0,
+        level: 60,
+        pos: 4,
+        attr: 2,
+        group: 10023,
+        make: 3,
+        tips: '60级帮会套装,需要大量的帮会声望进行锻造,拥有强大的属性增幅。'
     },
     120: {
         id: 120,
         type: 3,
-        name: '★〓道君印〓★',
+        name: '义薄云天靴',
         career: 0,
-        level: 1,
-        pos: 8,
-        attr: 10,
-        group: 10055,
-        customAttr: ['ice_atk_min', 'ice_atk_max', 'sudden']
+        level: 60,
+        pos: 5,
+        attr: 2,
+        group: 10023,
+        make: 3,
+        tips: '60级帮会套装,需要大量的帮会声望进行锻造,拥有强大的属性增幅。'
     },
     121: {
         id: 121,
         type: 3,
-        name: '★〓青莲造化盏〓★',
+        name: '气吞山河枪',
         career: 0,
-        level: 1,
+        level: 75,
+        pos: 1,
+        attr: 3,
+        group: 10024,
+        make: 3,
+        tips: '75级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活气吞山河套。'
+    },
+    122: {
+        id: 122,
+        type: 3,
+        name: '气吞山河盔',
+        career: 0,
+        level: 75,
+        pos: 2,
+        attr: 3,
+        group: 10024,
+        make: 3,
+        tips: '75级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活气吞山河套。'
+    },
+    123: {
+        id: 123,
+        type: 3,
+        name: '气吞山河甲',
+        career: 0,
+        level: 75,
+        pos: 3,
+        attr: 3,
+        group: 10024,
+        make: 3,
+        tips: '75级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活气吞山河套。'
+    },
+    124: {
+        id: 124,
+        type: 3,
+        name: '气吞山河带',
+        career: 0,
+        level: 75,
+        pos: 4,
+        attr: 3,
+        group: 10024,
+        make: 3,
+        tips: '75级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活气吞山河套。'
+    },
+    125: {
+        id: 125,
+        type: 3,
+        name: '气吞山河靴',
+        career: 0,
+        level: 75,
+        pos: 5,
+        attr: 3,
+        group: 10024,
+        make: 3,
+        tips: '75级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活气吞山河套。'
+    },
+    126: {
+        id: 126,
+        type: 3,
+        name: '权倾天下の枪',
+        career: 0,
+        level: 85,
+        pos: 1,
+        attr: 7,
+        group: 10025,
+        make: 3,
+        tips: '85级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活权倾天下套。'
+    },
+    127: {
+        id: 127,
+        type: 3,
+        name: '权倾天下の盔',
+        career: 0,
+        level: 85,
+        pos: 2,
+        attr: 7,
+        group: 10025,
+        make: 3,
+        tips: '85级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活权倾天下套。'
+    },
+    128: {
+        id: 128,
+        type: 3,
+        name: '权倾天下の甲',
+        career: 0,
+        level: 85,
+        pos: 3,
+        attr: 7,
+        group: 10025,
+        make: 3,
+        tips: '85级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活权倾天下套。'
+    },
+    129: {
+        id: 129,
+        type: 3,
+        name: '权倾天下の带',
+        career: 0,
+        level: 85,
+        pos: 4,
+        attr: 7,
+        group: 10025,
+        make: 3,
+        tips: '85级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活权倾天下套。'
+    },
+    130: {
+        id: 130,
+        type: 3,
+        name: '权倾天下の靴',
+        career: 0,
+        level: 85,
+        pos: 5,
+        attr: 7,
+        group: 10025,
+        make: 3,
+        tips: '85级帮会套装,需要大量的帮会声望与顶级晶石进行锻造,集齐五件可激活权倾天下套。'
+    },
+    131: {
+        id: 131,
+        type: 3,
+        name: '醉卧沙场の枪',
+        career: 0,
+        level: 65,
+        pos: 1,
+        attr: 7,
+        group: 10026,
+        make: 2,
+        tips: '醉卧沙场君莫笑,古来征战几人回,以无数战场功勋凝聚而出的强大套装,激活后可获得大量属性加成。'
+    },
+    132: {
+        id: 132,
+        type: 3,
+        name: '醉卧沙场の盔',
+        career: 0,
+        level: 65,
+        pos: 2,
+        attr: 7,
+        group: 10026,
+        make: 2,
+        tips: '醉卧沙场君莫笑,古来征战几人回,以无数战场功勋凝聚而出的强大套装,激活后可获得大量属性加成。'
+    },
+    133: {
+        id: 133,
+        type: 3,
+        name: '醉卧沙场の甲',
+        career: 0,
+        level: 65,
+        pos: 3,
+        attr: 7,
+        group: 10026,
+        make: 2,
+        tips: '醉卧沙场君莫笑,古来征战几人回,以无数战场功勋凝聚而出的强大套装,激活后可获得大量属性加成。'
+    },
+    134: {
+        id: 134,
+        type: 3,
+        name: '醉卧沙场の带',
+        career: 0,
+        level: 65,
+        pos: 4,
+        attr: 7,
+        group: 10026,
+        make: 2,
+        tips: '醉卧沙场君莫笑,古来征战几人回,以无数战场功勋凝聚而出的强大套装,激活后可获得大量属性加成。'
+    },
+    135: {
+        id: 135,
+        type: 3,
+        name: '醉卧沙场の靴',
+        career: 0,
+        level: 65,
+        pos: 5,
+        attr: 7,
+        group: 10026,
+        make: 2,
+        tips: '醉卧沙场君莫笑,古来征战几人回,以无数战场功勋凝聚而出的强大套装,激活后可获得大量属性加成。'
+    },
+    136: {
+        id: 136,
+        type: 3,
+        name: '天下无双の枪',
+        career: 0,
+        level: 80,
+        pos: 1,
+        attr: 10,
+        group: 10027,
+        make: 2,
+        tips: '集无尽战场功勋打造而成的五大神器之一,持此任一件便可尽显无敌之姿,若集齐五件当成就天下至尊。'
+    },
+    137: {
+        id: 137,
+        type: 3,
+        name: '天下无双の盔',
+        career: 0,
+        level: 80,
+        pos: 2,
+        attr: 10,
+        group: 10027,
+        make: 2,
+        tips: '集无尽战场功勋打造而成的五大神器之一,持此任一件便可尽显无敌之姿,若集齐五件当成就天下至尊。'
+    },
+    138: {
+        id: 138,
+        type: 3,
+        name: '天下无双の甲',
+        career: 0,
+        level: 80,
+        pos: 3,
+        attr: 10,
+        group: 10027,
+        make: 2,
+        tips: '集无尽战场功勋打造而成的五大神器之一,持此任一件便可尽显无敌之姿,若集齐五件当成就天下至尊。'
+    },
+    139: {
+        id: 139,
+        type: 3,
+        name: '天下无双の带',
+        career: 0,
+        level: 80,
+        pos: 4,
+        attr: 10,
+        group: 10027,
+        make: 2,
+        tips: '集无尽战场功勋打造而成的五大神器之一,持此任一件便可尽显无敌之姿,若集齐五件当成就天下至尊。'
+    },
+    140: {
+        id: 140,
+        type: 3,
+        name: '天下无双の靴',
+        career: 0,
+        level: 80,
+        pos: 5,
+        attr: 10,
+        group: 10027,
+        make: 2,
+        tips: '集无尽战场功勋打造而成的五大神器之一,持此任一件便可尽显无敌之姿,若集齐五件当成就天下至尊。'
+    },
+    141: {
+        id: 141,
+        type: 3,
+        name: '天定姻缘の杖',
+        career: 0,
+        level: 55,
+        pos: 1,
+        attr: 10,
+        group: 10028,
+        make: 4,
+        tips: '你与对方乃是天定姻缘之人,成婚之日,就连上苍都送来了贺礼,蕴含着强大的力量。'
+    },
+    142: {
+        id: 142,
+        type: 3,
+        name: '天定姻缘の冠',
+        career: 0,
+        level: 55,
+        pos: 2,
+        attr: 10,
+        group: 10028,
+        make: 4,
+        tips: '你与对方乃是天定姻缘之人,成婚之日,就连上苍都送来了贺礼,蕴含着强大的力量。'
+    },
+    143: {
+        id: 143,
+        type: 3,
+        name: '天定姻缘の甲',
+        career: 0,
+        level: 55,
+        pos: 3,
+        attr: 10,
+        group: 10028,
+        make: 4,
+        tips: '你与对方乃是天定姻缘之人,成婚之日,就连上苍都送来了贺礼,蕴含着强大的力量。'
+    },
+    144: {
+        id: 144,
+        type: 3,
+        name: '天定姻缘の带',
+        career: 0,
+        level: 55,
+        pos: 4,
+        attr: 10,
+        group: 10028,
+        make: 4,
+        tips: '你与对方乃是天定姻缘之人,成婚之日,就连上苍都送来了贺礼,蕴含着强大的力量。'
+    },
+    145: {
+        id: 145,
+        type: 3,
+        name: '天定姻缘の靴',
+        career: 0,
+        level: 55,
+        pos: 5,
+        attr: 10,
+        group: 10028,
+        make: 4,
+        tips: '你与对方乃是天定姻缘之人,成婚之日,就连上苍都送来了贺礼,蕴含着强大的力量。'
+    },
+    146: {
+        id: 146,
+        type: 3,
+        name: '生死の相契の剑',
+        career: 0,
+        level: 70,
+        pos: 1,
+        attr: 10,
+        group: 10029,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,在无数岁月的见证下,你们再度向彼此许下不离不弃的诺言。'
+    },
+    147: {
+        id: 147,
+        type: 3,
+        name: '生死の相契の冠',
+        career: 0,
+        level: 70,
+        pos: 2,
+        attr: 10,
+        group: 10029,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,在无数岁月的见证下,你们再度向彼此许下不离不弃的诺言。'
+    },
+    148: {
+        id: 148,
+        type: 3,
+        name: '生死の相契の甲',
+        career: 0,
+        level: 70,
+        pos: 3,
+        attr: 10,
+        group: 10029,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,在无数岁月的见证下,你们再度向彼此许下不离不弃的诺言。'
+    },
+    149: {
+        id: 149,
+        type: 3,
+        name: '生死の相契の带',
+        career: 0,
+        level: 70,
+        pos: 4,
+        attr: 10,
+        group: 10029,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,在无数岁月的见证下,你们再度向彼此许下不离不弃的诺言。'
+    },
+    150: {
+        id: 150,
+        type: 3,
+        name: '生死の相契の靴',
+        career: 0,
+        level: 70,
+        pos: 5,
+        attr: 10,
+        group: 10029,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,在无数岁月的见证下,你们再度向彼此许下不离不弃的诺言。'
+    },
+    151: {
+        id: 151,
+        type: 3,
+        name: '三生三世の剑',
+        career: 0,
+        level: 90,
+        pos: 1,
+        attr: 10,
+        group: 10030,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,长久陪伴之下感悟姻缘大道,当初上苍所赐之物沾染此道因果衍生出大道。'
+    },
+    152: {
+        id: 152,
+        type: 3,
+        name: '三生三世の冠',
+        career: 0,
+        level: 90,
+        pos: 2,
+        attr: 10,
+        group: 10030,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,长久陪伴之下感悟姻缘大道,当初上苍所赐之物沾染此道因果衍生出大道。'
+    },
+    153: {
+        id: 153,
+        type: 3,
+        name: '三生三世の甲',
+        career: 0,
+        level: 90,
+        pos: 3,
+        attr: 10,
+        group: 10030,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,长久陪伴之下感悟姻缘大道,当初上苍所赐之物沾染此道因果衍生出大道。'
+    },
+    154: {
+        id: 154,
+        type: 3,
+        name: '三生三世の带',
+        career: 0,
+        level: 90,
+        pos: 4,
+        attr: 10,
+        group: 10030,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,长久陪伴之下感悟姻缘大道,当初上苍所赐之物沾染此道因果衍生出大道。'
+    },
+    155: {
+        id: 155,
+        type: 3,
+        name: '三生三世の靴',
+        career: 0,
+        level: 90,
+        pos: 5,
+        attr: 10,
+        group: 10030,
+        make: 4,
+        tips: '你与对方乃是天地姻缘之人,长久陪伴之下感悟姻缘大道,当初上苍所赐之物沾染此道因果衍生出大道。'
+    },
+    156: {
+        id: 156,
+        type: 3,
+        name: '才子佳人の剑',
+        career: 0,
+        level: 77,
+        pos: 1,
+        attr: 8,
+        group: 10031,
+        make: -1,
+        tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    157: {
+        id: 157,
+        type: 3,
+        name: '才子佳人の冠',
+        career: 0,
+        level: 77,
+        pos: 2,
+        attr: 8,
+        group: 10031,
+        make: -1,
+        tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    158: {
+        id: 158,
+        type: 3,
+        name: '才子佳人の甲',
+        career: 0,
+        level: 77,
+        pos: 3,
+        attr: 8,
+        group: 10031,
+        make: -1,
+        tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    159: {
+        id: 159,
+        type: 3,
+        name: '才子佳人の带',
+        career: 0,
+        level: 77,
+        pos: 4,
+        attr: 8,
+        group: 10031,
+        make: -1,
+        tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    160: {
+        id: 160,
+        type: 3,
+        name: '才子佳人の靴',
+        career: 0,
+        level: 77,
+        pos: 5,
+        attr: 8,
+        group: 10031,
+        make: -1,
+        tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    161: {
+        id: 161,
+        type: 3,
+        name: '君临天下の剑',
+        career: 0,
+        level: 99,
+        pos: 1,
+        attr: 10,
+        group: 10032,
+        make: -1,
+        tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    162: {
+        id: 162,
+        type: 3,
+        name: '君临天下の冠',
+        career: 0,
+        level: 99,
+        pos: 2,
+        attr: 10,
+        group: 10032,
+        make: -1,
+        tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    163: {
+        id: 163,
+        type: 3,
+        name: '君临天下の甲',
+        career: 0,
+        level: 99,
+        pos: 3,
+        attr: 10,
+        group: 10032,
+        make: -1,
+        tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    164: {
+        id: 164,
+        type: 3,
+        name: '君临天下の带',
+        career: 0,
+        level: 99,
+        pos: 4,
+        attr: 10,
+        group: 10032,
+        make: -1,
+        tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    165: {
+        id: 165,
+        type: 3,
+        name: '君临天下の靴',
+        career: 0,
+        level: 99,
+        pos: 5,
+        attr: 10,
+        group: 10032,
+        make: -1,
+        tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    166: {
+        id: 166,
+        type: 3,
+        name: '海誓山盟の戒',
+        career: 0,
+        level: 35,
+        pos: 6,
+        attr: 7,
+        group: 10033,
+        make: -1,
+        tips: '消耗世界声望打造的35级海誓山盟首饰套装,激活后可获得大量属性加成。'
+    },
+    167: {
+        id: 167,
+        type: 3,
+        name: '海誓山盟の项链',
+        career: 0,
+        level: 35,
+        pos: 7,
+        attr: 7,
+        group: 10033,
+        make: -1,
+        tips: '消耗世界声望打造的35级海誓山盟首饰套装,激活后可获得大量属性加成。'
+    },
+    168: {
+        id: 168,
+        type: 3,
+        name: '吉祥如意の戒',
+        career: 0,
+        level: 55,
+        pos: 6,
+        attr: 5,
+        group: 10034,
+        tips: '消耗世界声望打造的55级吉祥如意首饰套装,激活后可获得大量属性加成。'
+    },
+    169: {
+        id: 169,
+        type: 3,
+        name: '吉祥如意の项链',
+        career: 0,
+        level: 55,
+        pos: 7,
+        attr: 5,
+        group: 10034,
+        tips: '消耗世界声望打造的55级吉祥如意首饰套装,激活后可获得大量属性加成。'
+    },
+    170: {
+        id: 170,
+        type: 3,
+        name: '造化五行の戒',
+        career: 0,
+        level: 70,
+        pos: 6,
+        attr: 5,
+        group: 10035,
+        tips: '消耗世界声望打造的70级造化五行首饰套装,激活后可获得大量属性加成。'
+    },
+    171: {
+        id: 171,
+        type: 3,
+        name: '造化五行の项链',
+        career: 0,
+        level: 70,
+        pos: 7,
+        attr: 5,
+        group: 10035,
+        tips: '消耗世界声望打造的70级造化五行首饰套装,激活后可获得大量属性加成。'
+    },
+    172: {
+        id: 172,
+        type: 3,
+        name: '不死不灭の戒',
+        career: 0,
+        level: 70,
+        pos: 6,
+        attr: 10,
+        group: 10036,
+        make: 2,
+        tips: '消耗世界功勋打造的70级不死不灭首饰套装,激活后可获得大量属性加成。'
+    },
+    173: {
+        id: 173,
+        type: 3,
+        name: '不死不灭の项链',
+        career: 0,
+        level: 70,
+        pos: 7,
+        attr: 10,
+        group: 10036,
+        make: 2,
+        tips: '消耗世界功勋打造的70级不死不灭首饰套装,激活后可获得大量属性加成。'
+    },
+    174: {
+        id: 174,
+        type: 3,
+        name: '幽冥碧落の戒',
+        career: 0,
+        level: 80,
+        pos: 6,
+        attr: 7,
+        group: 10037,
+        tips: '消耗世界声望打造的80级幽冥碧落首饰套装,激活后可获得大量属性加成。'
+    },
+    175: {
+        id: 175,
+        type: 3,
+        name: '幽冥碧落の项链',
+        career: 0,
+        level: 80,
+        pos: 7,
+        attr: 7,
+        group: 10037,
+        tips: '消耗世界声望打造的80级幽冥碧落首饰套装,激活后可获得大量属性加成。'
+    },
+    176: {
+        id: 176,
+        type: 3,
+        name: '诸神黄昏の戒',
+        career: 0,
+        level: 90,
+        pos: 6,
+        attr: 7,
+        group: 10038,
+        tips: '消耗世界声望打造的90级诸神黄昏首饰套装,激活后可获得大量属性加成。'
+    },
+    177: {
+        id: 177,
+        type: 3,
+        name: '诸神黄昏の项链',
+        career: 0,
+        level: 90,
+        pos: 7,
+        attr: 7,
+        group: 10038,
+        tips: '消耗世界声望打造的90级诸神黄昏首饰套装,激活后可获得大量属性加成。'
+    },
+    178: {
+        id: 178,
+        type: 3,
+        name: '大道同源の戒',
+        career: 0,
+        level: 99,
+        pos: 6,
+        attr: 7,
+        group: 10039,
+        tips: '消耗世界声望打造的99级大道同源首饰套装,激活后可获得大量属性加成。'
+    },
+    179: {
+        id: 179,
+        type: 3,
+        name: '大道同源の项链',
+        career: 0,
+        level: 99,
+        pos: 7,
+        attr: 7,
+        group: 10039,
+        tips: '消耗世界声望打造的99级大道同源首饰套装,激活后可获得大量属性加成。'
+    },
+    180: {
+        id: 180,
+        type: 3,
+        name: '九歌の戒',
+        career: 0,
+        level: 50,
+        pos: 6,
+        attr: 10,
+        group: 10040,
+        make: -1,
+        tips: '50级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    181: {
+        id: 181,
+        type: 3,
+        name: '九歌の项链',
+        career: 0,
+        level: 50,
+        pos: 7,
+        attr: 10,
+        group: 10040,
+        make: -1,
+        tips: '50级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    182: {
+        id: 182,
+        type: 3,
+        name: '上善若水の戒',
+        career: 0,
+        level: 99,
+        pos: 6,
+        attr: 10,
+        group: 10041,
+        make: -1,
+        tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    183: {
+        id: 183,
+        type: 3,
+        name: '上善若水の项链',
+        career: 0,
+        level: 99,
+        pos: 7,
+        attr: 10,
+        group: 10041,
+        make: -1,
+        tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    184: {
+        id: 184,
+        type: 3,
+        name: '嗜血枪',
+        career: 0,
+        level: 66,
         pos: 8,
         attr: 10,
-        group: 10055,
-        customAttr: ['mine_atk_min', 'mine_atk_max', 'dodge']
+        customAttr: ['atk_min', 'atk_max'],
+        tips: '强大的法宝,拥有极致的毁灭力量,可消耗大量世界声望锻造也可通过某些奇遇获得。'
+    },
+    185: {
+        id: 185,
+        type: 3,
+        name: '水月镜',
+        career: 0,
+        level: 66,
+        pos: 9,
+        attr: 10,
+        customAttr: ['dfs_min', 'dfs_max'],
+        tips: '强大的法宝,极致的防御力量,可消耗大量世界声望锻造也可通过某些奇遇获得。'
+    },
+    186: {
+        id: 186,
+        type: 3,
+        name: '破空枪[冰]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['ice_atk_min', 'ice_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的冰元素伤害。'
+    },
+    187: {
+        id: 187,
+        type: 3,
+        name: '破空枪[雷]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['mine_atk_min', 'mine_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的雷元素伤害。'
+    },
+    188: {
+        id: 188,
+        type: 3,
+        name: '破空枪[风]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['wind_atk_min', 'wind_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的风元素伤害。'
+    },
+    189: {
+        id: 189,
+        type: 3,
+        name: '破空枪[水]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['water_atk_min', 'water_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的水元素伤害。'
+    },
+    190: {
+        id: 190,
+        type: 3,
+        name: '破空枪[火]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['fire_atk_min', 'fire_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的火元素伤害。'
+    },
+    191: {
+        id: 191,
+        type: 3,
+        name: '鬼脸镜[冰]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['ice_dfs_min', 'ice_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的冰元素防御。'
+    },
+    192: {
+        id: 192,
+        type: 3,
+        name: '鬼脸镜[雷]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['mine_dfs_min', 'mine_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的雷元素防御。'
+    },
+    193: {
+        id: 193,
+        type: 3,
+        name: '鬼脸镜[风]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['wind_dfs_min', 'wind_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的风元素防御。'
+    },
+    194: {
+        id: 194,
+        type: 3,
+        name: '鬼脸镜[水]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['water_dfs_min', 'water_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的水元素防御。'
+    },
+    195: {
+        id: 195,
+        type: 3,
+        name: '鬼脸镜[火]',
+        career: 0,
+        level: 66,
+        pos: 8,
+        attr: 5,
+        customAttr: ['fire_dfs_min', 'fire_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的火元素防御。'
+    },
+    196: {
+        id: 196,
+        type: 3,
+        name: '五法霹雳珠[冰]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['ice_atk_min', 'ice_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的冰元素伤害。'
+    },
+    197: {
+        id: 197,
+        type: 3,
+        name: '五法霹雳珠[雷]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['mine_atk_min', 'mine_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的雷元素伤害。'
+    },
+    198: {
+        id: 198,
+        type: 3,
+        name: '五法霹雳珠[风]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['wind_atk_min', 'wind_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的风元素伤害。'
+    },
+    199: {
+        id: 199,
+        type: 3,
+        name: '五法霹雳珠[水]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['water_atk_min', 'water_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的水元素伤害。'
+    },
+    200: {
+        id: 200,
+        type: 3,
+        name: '五法霹雳珠[火]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['fire_atk_min', 'fire_atk_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的火元素伤害。'
+    },
+    201: {
+        id: 201,
+        type: 3,
+        name: '五法乾坤袋[冰]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['ice_dfs_min', 'ice_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的冰元素防御。'
+    },
+    202: {
+        id: 202,
+        type: 3,
+        name: '五法乾坤袋[雷]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['mine_dfs_min', 'mine_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的雷元素防御。'
+    },
+    203: {
+        id: 203,
+        type: 3,
+        name: '五法乾坤袋[风]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['wind_dfs_min', 'wind_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的风元素防御。'
+    },
+    204: {
+        id: 204,
+        type: 3,
+        name: '五法乾坤袋[水]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['water_dfs_min', 'water_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的水元素防御。'
+    },
+    205: {
+        id: 205,
+        type: 3,
+        name: '五法乾坤袋[火]',
+        career: 0,
+        level: 75,
+        pos: 8,
+        attr: 7,
+        customAttr: ['fire_dfs_min', 'fire_dfs_max'],
+        tips: '强大的元素法宝,可对敌人造成大量的火元素防御。'
+    },
+    206: {
+        id: 206,
+        type: 3,
+        name: '山河社稷の图',
+        career: 0,
+        level: 90,
+        pos: 8,
+        attr: 20,
+        customAttr: ['life_max', 'mana_max'],
+        tips: '传说此图内有天地，滋养天人，拥有此法宝者可化生万物，法力浩荡。'
+    },
+    207: {
+        id: 207,
+        type: 3,
+        name: '九纹大道の钟',
+        career: 0,
+        level: 90,
+        pos: 8,
+        attr: 20,
+        customAttr: ['atk_min', 'atk_max', 'dfs_min', 'dfs_max'],
+        tips: '传说此法宝先与天地诞生之前便以存在,蕴含混沌之力,完美无缺。'
+    },
+    208: {
+        id: 208,
+        type: 3,
+        name: '青莲造化の盏',
+        career: 0,
+        level: 99,
+        pos: 8,
+        attr: 10,
+        make: -1,
+        customAttr: ['ice_atk_min', 'ice_atk_max', 'mine_atk_min', 'mine_atk_max', 'wind_atk_min', 'wind_atk_max', 'water_atk_min', 'water_atk_max', 'fire_atk_min', 'fire_atk_max'],
+        tips: '据说乃是一株青莲所化的古灯,无人知晓其来历,神秘无比,可化万千大道。'
+    },
+    209: {
+        id: 209,
+        type: 3,
+        name: '大道轮回の印',
+        career: 0,
+        level: 99,
+        pos: 8,
+        attr: 10,
+        make: -1,
+        customAttr: ['ice_dfs_min', 'ice_dfs_max', 'mine_dfs_min', 'mine_dfs_max', 'wind_dfs_min', 'wind_dfs_max', 'water_dfs_min', 'water_dfs_max', 'fire_dfs_min', 'fire_dfs_max'],
+        tips: '据说持此印者,乃大道所定之人,承载了无尽因果,可包容万物。'
+    },
+    210: {
+        id: 210,
+        type: 3,
+        name: '月华相思の戒',
+        career: 0,
+        level: 99,
+        pos: 6,
+        attr: 10,
+        group: 10042,
+        make: -1,
+        tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
+    },
+    211: {
+        id: 211,
+        type: 3,
+        name: '月华相思の项链',
+        career: 0,
+        level: 99,
+        pos: 7,
+        attr: 10,
+        group: 10042,
+        make: -1,
+        tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
 }
+
+// 彡 の

@@ -70,17 +70,7 @@ module.exports = {
         } else {
             Increase += 9
         }
-        const equipAttr = {
-            life_max: 0,
-            mana_max: 0,
-            atk_min: 0,
-            atk_max: 0,
-            dfs_min: 0,
-            dfs_max: 0,
-            dodge: 0,
-            hit: 0,
-            sudden: 0
-        };
+        const equipAttr = AttributeTable.getInitAttr();
         const { pos: posName, attr: attrs } = pos < 8 ? EQUIP_ATTR[pos] : { pos: 'treasure1', attr: customAttr };
         const baseAttr = { ...AttributeTable.getRoleBaseAttr(career), ...AttributeTable.getRoleEleBaseAttr() };
         // 属性加成 = 装备自身加成 * 等级 * 强化锻造

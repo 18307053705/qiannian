@@ -12,6 +12,9 @@ module.exports = {
      */
     getArticle: function (articleId) {
         const article = articleList[articleId];
+        if(!article){
+            console.log(`未找到物品:${id}`)
+        }
         return article ? JSON.parse(JSON.stringify(article)) : undefined
     }
 }

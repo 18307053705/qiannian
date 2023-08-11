@@ -15,7 +15,7 @@ export function jumpDetail(
   if (p === 3) {
     history.push("/equipDetail", { form, in_x, pos, role_id, petId });
   } else {
-    history.push("/articleDetail", { form, in_x, pos, role_id,petId });
+    history.push("/articleDetail", { form, in_x, pos, role_id, petId });
   }
 }
 
@@ -26,4 +26,16 @@ export function jumpDetail(
  */
 export function jumpEquipList({ posInx, form, petId }: any) {
   window.QN.history.push("/equipList", { form, posInx, petId });
+}
+
+/**
+ * 跳转到装备打造也
+ * @param param.pageKey 打造类型(world,gang,marriage,exploit)
+ * @param param.level 人物等级
+ */
+export function jumpMakeEquip(
+  pageKey: "world" | "gang" | "marriage" | "exploit" | 'faBao',
+  level
+) {
+  window.QN.history.push("/equipMake", { pageKey, level });
 }

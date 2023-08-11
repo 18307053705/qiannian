@@ -8,6 +8,8 @@ const { sigilEquip } = require('./sigilEquip');
 const { getGemList } = require('./getGemList');
 const { mosaicEquip } = require('./mosaicEquip');
 const { unloadGem } = require('./unloadGem');
+const { makeEquip } = require('./makeEquip');
+const { makeEquipInfo } = require('./makeEquipInfo');
 
 const router = new express.Router();
 
@@ -29,5 +31,8 @@ router.post("/getGemList", getGemList);
 router.post("/mosaicEquip", mosaicEquip);
 // 卸下宝石
 router.post("/unloadGem", unloadGem);
-
+// 获得全部装备
+router.post("/makeEquip", makeEquip);
+// 打造装备的信息
+router.post("/makeEquipInfo", makeEquipInfo);
 module.exports = router;

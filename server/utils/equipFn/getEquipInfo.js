@@ -7,7 +7,6 @@ module.exports = {
      * 获取装备描述
      * @param {*} equipId
      * @param {*} ext
-     * @returns {*} posName 装备部位中文
      * @returns {*} attr 装备属性
      */
     getEquipInfo: function (equipId, ext) {
