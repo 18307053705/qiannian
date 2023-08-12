@@ -18,7 +18,6 @@ const TYPE_MEUN = {
 type KeyType = 'detai' | 'list' | 'apply' | 'member' | 'adjust' | 'create' | 'material' | 'tael';
 
 export const Socialize = ({ history }) => {
-    const [error, setError] = useState('');
     const [updata, setUptate] = useState(true);
     const [isCreate, setIsCreate] = useState(false);
     const [type, setType]: any = useState(1);
@@ -38,16 +37,15 @@ export const Socialize = ({ history }) => {
 
     // 创建势力回调
     const createCb = ({ message }) => {
-        if (message) {
-            setError(message);
+        if (!message) {
+            setIsCreate(false);
+            setUptate(!updata);
             return;
         }
-        setIsCreate(false);
-        setUptate(!updata);
+       
     }
 
     useEffect(() => {
-        setError('');
         setOk(false);
     }, [pageName])
     useEffect(() => {
@@ -74,14 +72,11 @@ export const Socialize = ({ history }) => {
     }, [updata])
     // 势力申请
     const applyClick = (id) => {
-        socializeApply({ type, id }).then(({ message }) => {
-            setError(message);
-        })
+        socializeApply({ type, id })
     }
     // 申请处理
     const activeClick = (roleId, state) => {
-        socializeActive({ type, role_id: roleId, state }).then(({ message, data }) => {
-            setError(message);
+        socializeActive({ type, role_id: roleId, state }).then(({  data }) => {
             if (data) {
                 setSocializea({
                     ...socialize,
@@ -92,8 +87,7 @@ export const Socialize = ({ history }) => {
     }
     // 人员调整
     const adjustClick = (role_id, chengLevel) => {
-        socializeAdjust({ role_id, chengLevel, type }).then(({ message, data }) => {
-            setError(message);
+        socializeAdjust({ role_id, chengLevel, type }).then(({ data }) => {
             if (data) {
                 setSocializea({
                     ...socialize,
@@ -106,7 +100,6 @@ export const Socialize = ({ history }) => {
 
     return (
         <div>
-            {error && <div style={{ color: 'red' }}>提示：{error}</div>}
             {/* 创建势力 */}
             {pageName === 'detai' && isCreate && <Create type={type} createCb={createCb} />}
             {/* 捐赠材料 */}
@@ -133,11 +126,11 @@ export const Socialize = ({ history }) => {
                     prefix={(row, index) => (
                         <span key={index}>{index}.{row.name}{type !== 3 && `(${row.level}级)`}</span>
                     )}
-                    active={({ soci_id }, index) => (
+                    active={({ soci_id }) => (
                         isCreate && (
                             <span
                                 className='g_u_end'
-                                key={index}
+                                key={soci_id}
                                 onClick={() => { applyClick(soci_id) }}
                             >
                                 加入{TYPE_MEUN[type]}
@@ -152,8 +145,8 @@ export const Socialize = ({ history }) => {
                     data={socialize.apply}
                     prefix_d={true}
                     prefix={({ name }, index) => <span key={index}>{index}.{name}</span>}
-                    active={({ id }, index) => (
-                        <div key={index}>
+                    active={({ id }) => (
+                        <div key={id}>
                             <span className='g_u'><span onClick={() => { activeClick(id, 1) }}>通过</span></span>
                             <span className='g_u'><span onClick={() => { activeClick(id, 0) }}>拒绝</span></span>
                         </div>

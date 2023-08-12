@@ -1,4 +1,5 @@
 import React from 'react';
+import {jumpMakeEquip} from '@utils/jumpPage'
 export const Detail = ({ socialize, setPageName }) => {
     if (!socialize) {
         return null;
@@ -16,7 +17,7 @@ export const Detail = ({ socialize, setPageName }) => {
             <div>
                 <span className='g_u'><span onClick={() => { setPageName('tael') }}>捐献银两</span></span>
                 <span className='g_u'><span onClick={() => { setPageName('material') }}>捐献材料</span></span>
-                <span className='g_u'><span>帮会装备</span></span>
+                <span className='g_u'><span onClick={() => { jumpMakeEquip('gang') }}>帮会装备</span></span>
                 {socialize.level === 5 && <span className='g_u'><span>修炼房</span></span>}
             </div>
             <div>
@@ -25,7 +26,5 @@ export const Detail = ({ socialize, setPageName }) => {
             </div>
         </div>
     )
-
 }
-
 export default Detail;

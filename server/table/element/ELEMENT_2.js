@@ -149,6 +149,18 @@ const ELEMENT_2 = {
     },
     article: '156-30000,157-5000',
   },
+  2000011: {
+    id: 2000011,
+    name: "帮会材料",
+    type: 2,
+    ext: {
+      career: 1,
+      level: 1,
+      attr: 1,
+      isRanks: true
+    },
+    article: '53-100,54-100,55-100,56-100,57-100,58-100,59-100,60-100',
+  },
 };
 
 module.exports = {

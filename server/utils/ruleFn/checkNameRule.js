@@ -3,6 +3,7 @@ module.exports = {
      * 验证名字是否合法
      * @param {*} res 
      * @param {*} name 
+     * @returns false不合格
      */
     checkNameRule: function (res, name) {
         const reg = /^((?!\\|\/|:|\*|\?|<|>|'|%).){2,8}$/;

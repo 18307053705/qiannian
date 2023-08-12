@@ -35,7 +35,7 @@ export function jumpEquipList({ posInx, form, petId }: any) {
  */
 export function jumpMakeEquip(
   pageKey: "world" | "gang" | "marriage" | "exploit" | 'faBao',
-  level
+  level?:number
 ) {
   window.QN.history.push("/equipMake", { pageKey, level });
 }

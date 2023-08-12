@@ -33,6 +33,7 @@ export const Member = ({ type, pageName, adjustClick, socialize, eixt }) => {
         if (isRole) {
             return null;
         }
+        
         if ((pageName === 'member' || type === 3) && level !== 1) {
             return (
                 <div key={index}>

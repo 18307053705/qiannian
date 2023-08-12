@@ -1,11 +1,12 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { backGrand, goBack } from '@utils/grand';
 import { makeEquip, makeEquipInfo } from '@cgi/equip';
+import { getRoleInfo } from '@cgi/roleInfo';
 import { Tab } from '@components';
 import { MakeInfo } from './makeInfo';
 import { worldConfig, gangConfig, marriageConfig, exploitConfig, faBaoConfig } from './config';
 export const GangEquip = ({ history }) => {
-    const { state = {} } = history.location;
+    const { state = {}, pathname } = history.location;
     const { current: initCurrent, equipMeun, tabList } = useMemo(() => {
         const { pageKey, level = 0 } = state;
         let config: any = {
@@ -28,8 +29,10 @@ export const GangEquip = ({ history }) => {
         if (pageKey === 'exploit') {
             config = faBaoConfig
         }
-        // 过滤当前等级无法打造的装备
-        config.tabList = config.tabList.filter(({ value }) => value <= level);
+        if(level < 80){
+             // 过滤当前等级无法打造的装备
+            config.tabList = config.tabList.filter(({ value }) => value < 80);  
+        }
         return config
     }, [state])
 
@@ -44,7 +47,19 @@ export const GangEquip = ({ history }) => {
             setMaterial(equipId)
         })
     }
-    
+
+    useEffect(() => {
+        const { level } = state;
+        console.log(state)
+        if (!level) {
+            getRoleInfo().then(({ data }) => {
+                console.log(data.role_level,'data.role_level...')
+                history.push(pathname, { ...state, level: data.role_level });
+            })
+        }
+    }, [])
+
+
     if (!tabList.length) {
         return (
             <div>

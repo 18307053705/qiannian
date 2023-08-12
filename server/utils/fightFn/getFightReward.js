@@ -20,14 +20,14 @@ module.exports = {
         const equipList = equip ? equip.split(',').map(str => {
             const [id, rate = 100] = str.split('-');
             return {
-                id,
+                id: id - 0,
                 rate
             }
         }) : [];
         const articleList = article ? article.split(',').map(str => {
             const [id, s = 1, rate = 100] = str.split('-');
             return {
-                id,
+                id: id - 0,
                 s: s - 0,
                 rate
             }
