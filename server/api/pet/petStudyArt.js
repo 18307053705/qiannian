@@ -71,7 +71,7 @@ module.exports = {
                 return;
             }
             successText = success;
-            up_art = { l: 1, r: 0, id };
+            up_art = { l: 0, r: 0, id };
             old_art = { l: 0, r: 0, id };
         }
         // 判断是否为领悟

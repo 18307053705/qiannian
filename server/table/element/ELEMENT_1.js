@@ -19,7 +19,7 @@ const ELEMENT_1 = {
         name: "送财童子",
         type: 1,
         cs: "g_b_u",
-        path:'/jackpotInvest'
+        path: '/jackpotInvest'
     },
     1000004: {
         id: 1000004,
@@ -30,6 +30,12 @@ const ELEMENT_1 = {
         id: 1000005,
         name: "白胡子老人",
         type: 1
+    },
+    1000006: {
+        id: 1000006,
+        name: "欧冶子",
+        type: 1,
+        path: '/equipFreeForge'
     },
 };
 

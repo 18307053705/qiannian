@@ -28,9 +28,9 @@ module.exports = {
     getMakeInfo: (equip) => {
         // const equip = getEquipInfo(equipId);
         const { level, pos, make = 1 } = equip;
-        // if (make === -1) {
-        //     return undefined;
-        // }
+        if (make === -1) {
+            return undefined;
+        }
         // 根据装备等级判断锻造所需材料等级及数量,默认1级35-54,12
         let materiaLevel = 1;
         let materiaNum = 12;

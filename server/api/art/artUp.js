@@ -31,7 +31,8 @@ module.exports = {
                 })
                 return;
             }
-            old_art = { l: 0, r: 0, id };
+
+            old_art = { l: -1, r: 0, id };
         }
 
         const { message, up_art } = artFn.getUpArtMaterial(req, res, old_art);

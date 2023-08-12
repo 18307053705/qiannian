@@ -10,6 +10,8 @@ const { mosaicEquip } = require('./mosaicEquip');
 const { unloadGem } = require('./unloadGem');
 const { makeEquip } = require('./makeEquip');
 const { makeEquipInfo } = require('./makeEquipInfo');
+const { decomposeEquip } = require('./decomposeEquip');
+const { freeForgeEquip } = require('./freeForgeEquip');
 
 const router = new express.Router();
 
@@ -21,9 +23,11 @@ router.post("/unloadEquip", unloadEquip);
 router.post("/renameEquip", renameEquip);
 // 装备强化
 router.post("/firmeEquip", firmeEquip);
-// 装备强化
+// 装备锻造
 router.post("/forgeEquip", forgeEquip);
-// 装备强化
+// 装备免费锻造
+router.post("/freeForgeEquip", freeForgeEquip);
+// 装备附魔
 router.post("/sigilEquip", sigilEquip);
 // 获取宝石
 router.post("/getGemList", getGemList);
@@ -35,4 +39,6 @@ router.post("/unloadGem", unloadGem);
 router.post("/makeEquip", makeEquip);
 // 打造装备的信息
 router.post("/makeEquipInfo", makeEquipInfo);
+// 装备分解
+router.post("/decomposeEquip", decomposeEquip);
 module.exports = router;

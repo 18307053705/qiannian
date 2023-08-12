@@ -28,7 +28,9 @@ module.exports = {
      */
     artComputeAttr: function (art) {
         const { effect, up, rp, v, d, p, t } = ArtTable.getArt(art.id);
-        const { l, r } = art;
+        let { l, r } = art;
+        // 技能最低1级
+        l++;
         // 最新技能信息
         const artInfo = {
             d: d * r_attr[r] * l // 法力消耗

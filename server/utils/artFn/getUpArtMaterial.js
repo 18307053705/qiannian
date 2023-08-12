@@ -21,6 +21,13 @@ module.exports = {
         const { l, r, p } = up_art;
         let materialId = undefined;
         let s = 1;
+        // 领悟技能不消耗材料
+        if (l === 0) {
+            delete up_art.p;
+            return {
+                up_art
+            };
+        }
         // 升重消耗材料
         if (p === 'l') {
             // 低于13级使用的材料Id
@@ -55,7 +62,7 @@ module.exports = {
                 s
             }
         }
-        const { message,success } = deleteKnapsack(req, res, { article });
+        const { message, success } = deleteKnapsack(req, res, { article });
         delete up_art.p;
         return {
             message,

@@ -10,6 +10,8 @@ const mosaicEquipUrl = "/equip/mosaicEquip";
 const unloadGemUrl = "/equip/unloadGem";
 const makeEquipUrl = "/equip/makeEquip";
 const makeEquipInfoUrl = "/equip/makeEquipInfo";
+const decomposeEquipUrl = "/equip/decomposeEquip";
+const freeForgeEquipUrl = "/equip/freeForgeEquip";
 
 //获取装备列表
 export function getEquipList() {
@@ -89,4 +91,21 @@ export function makeEquip(data) {
  */
 export function makeEquipInfo(data) {
   return post(makeEquipInfoUrl, data);
+}
+
+/**
+ * 分解装备
+ * @param req.in_x 装备在背包内的下标
+ */
+export function decomposeEquip(data) {
+  return post(decomposeEquipUrl, data);
+}
+
+
+/**
+ * 免费锻造装备
+ * @param req.in_x 装备在背包内的下标
+ */
+export function freeForgeEquip(data) {
+  return post(freeForgeEquipUrl, data);
 }

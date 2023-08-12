@@ -1,6 +1,6 @@
 import React from "react";
 import { operate } from '@cgi/knapsack';
-import { unloadEquipt } from '@cgi/equip';
+import { unloadEquipt, decomposeEquip } from '@cgi/equip';
 import { petUnloadEquip } from '@cgi/pet';
 
 // 头部操作
@@ -33,6 +33,14 @@ export const HeadActive = ({ query, history }) => {
         })
     }
 
+    const decomposeEquipClick = () => {
+        decomposeEquip({ in_x }).then(({ message }) => {
+            if (!message) {
+                history.goBack()
+            }
+        })
+    }
+
 
     if (form === 1) {
         return (
@@ -41,7 +49,10 @@ export const HeadActive = ({ query, history }) => {
                 {" "}
                 <span className='g_u_end' onClick={() => { operateClick(2) }}>入库</span>
                 {" "}
+                <span className='g_u_end' onClick={decomposeEquipClick}>分解</span>
+                {" "}
                 <span className='g_u_end' onClick={() => { operateClick(4) }}>丢弃</span>
+                
             </div>
         )
     }
