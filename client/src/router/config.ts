@@ -99,6 +99,11 @@ export const config: RouterType[] = [
     component: lazy(() => import("@page/equipDetail"))
   },
   {
+    name: "装备精炼",
+    path: "/equipFreeForge",
+    component: lazy(() => import("@page/equipFreeForge"))
+  },
+  {
     name: "任务界面",
     path: "/task",
     component: lazy(() => import("@page/task"))

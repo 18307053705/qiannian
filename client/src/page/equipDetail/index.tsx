@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Input } from '@components';
 import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 import { backGrand } from '@utils/grand';
-import { renameEquip, unloadGem } from '@cgi/equip';
+import {  unloadGem } from '@cgi/equip';
 
 import { getArticleDetail } from '@cgi/knapsack';
 
@@ -13,7 +12,6 @@ import Style from './index.less';
 
 const EquipDetail = ({ history }) => {
     const { state: query } = history.location;
-    const [isRename, setIsRename] = useState(false);
     const [equip, setEquip] = useState();
     const [isMosaic, setIsMosaic] = useState(false);
 

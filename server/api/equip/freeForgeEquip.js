@@ -36,19 +36,20 @@ module.exports = {
             rate = 100 - forge * 5;
         }
         const num = Math.floor(Math.random() * (100 - 0)) + 1;
-        const isForge = rate === 100 || rate >= num;
-        if (isForge) {
-            const ext = [firm, Number(forge) + 1, ...exts].join('_');
+        let forgeNum = 0;
+        if (rate === 100 || rate >= num) {
+            forgeNum = Math.floor(Math.random() * 3) + 1;
+            const ext = [firm, Number(forge) + forgeNum, ...exts].join('_');
             // 更新锻造等级
-            data[index]['ext'] = ext;
-           
-        }else{
+            data[in_x]['ext'] = ext;
+
+        } else {
             data.splice(in_x, 1)
         }
         KnapsackG.updateknapsackGlobal(req, res, { data });
         res.send({
             code: 0,
-            isForge,
+            data: forgeNum,
         })
     }
 };
