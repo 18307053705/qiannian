@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG } = require('../../global');
+const { RoleG, KnapsackG,ErrorG } = require('../../global');
 const { knapsackTable } = require('../../table');
 const { cornuconpiaFn, knapsackFn } = require('../../utils');
 module.exports = {
@@ -7,6 +7,10 @@ module.exports = {
      */
     gather: function (req, res) {
         const { materialIds = [] } = req.body;
+        if (!materialIds || materialIds.length === 0) {
+            ErrorG.paramsError(res);
+            return;
+        }
         const { treasure_pool, role_level } = RoleG.getRoleGlobal(req, res);
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         // 角色等级未达到50级，为非法操作
