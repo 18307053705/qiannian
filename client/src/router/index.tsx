@@ -1,12 +1,10 @@
 
-import React, { Suspense, useEffect, useContext, useState, memo, useRef } from "react";
+import React, { Suspense, useEffect, useState, memo } from "react";
 import config from "./config";
 // import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route, useHistory, useLocation, Redirect } from "react-router-dom";
-import { getMeunList } from '@cgi/meun';
 import Cookies from 'js-cookie';
-import { Model, GET_MEUN_LIST } from '@model';
-import { chatGet } from "@cgi/chat";
+import { chatGetUnread } from "@cgi/chat";
 
 function RouterGuard() {
     let history = useHistory();
@@ -67,7 +65,7 @@ const CHAT_TYPE_MEUN = {
 
 
 const systemText = (system) => {
-    const time = new Date() * 1;
+    const time = new Date() / 1000;
     if (!system || time - system.s > 60000) {
         return;
     }
@@ -94,7 +92,7 @@ const Root = () => {
             const { location } = window.QN.history;
             const { pathname } = location;
             if (pathname !== '/' && pathname !== '/login' && pathname !== '/reactRole') {
-                chatGet().then(({ data, system }) => {
+                chatGetUnread().then(({ data, system }:any) => {
                     setUnread(data);
                     setSystem(system);
                 })
@@ -108,13 +106,6 @@ const Root = () => {
                 setSuccess('');
             }
         });
-        // 请求枚举列表
-        // getMeunList().then(({ data }) => {
-        //     dispatch({
-        //         type: GET_MEUN_LIST,
-        //         data
-        //     })
-        // })
     }, [])
     // 登录态验证
     // goLogin();

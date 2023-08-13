@@ -1,10 +1,7 @@
 
-const snedSystem = require('./snedSystem');
-const setChatReadGlobal = require('./getChatSocializeGlobal');
-const getChatSocializeGlobal = require('./setChatReadGlobal');
-
+const sendChat = require('./sendChat');
+const getChat = require('./getChat');
 module.exports = {
-    ...snedSystem,
-    ...getChatSocializeGlobal,
-    ...setChatReadGlobal
+    ...sendChat,
+    ...getChat
 }

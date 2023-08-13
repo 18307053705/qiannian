@@ -32,11 +32,11 @@ module.exports = {
         let yuanbaoNum = 0;
         if (rate === 0) {
             yuanbaoNum = 5000;
-            ChatG.snedSystem(`恭喜玩家：${role_name}在聚宝盆中获得5000元宝大奖，快去试一试运气吧。`)
+            ChatG.sendChat(req, res, 0, `恭喜玩家：${role_name}在聚宝盆中获得5000元宝大奖，快去试一试运气吧。`);
         }
         if (rate < 3 && !yuanbaoNum) {
             yuanbaoNum = 2000;
-            ChatG.snedSystem(`恭喜玩家：${role_name}在聚宝盆中获得2000元宝大奖，快去试一试运气吧。`)
+            ChatG.sendChat(req, res, 0, `恭喜玩家：${role_name}在聚宝盆中获得2000元宝大奖，快去试一试运气吧。`);
         }
         if (rate < 50 && !yuanbaoNum) {
             yuanbaoNum = 200;

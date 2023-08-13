@@ -37,7 +37,6 @@ export const Chat = ({ history }) => {
     const { state = {} } = history.location;
     const [list, setList] = useState([]);
     const [tabKey, seTabKey] = useState(state.type || 1);
-    const [text, setText] = useState('');
     const [socializeName, setSocializeName] = useState('');
     const [role, setRole] = useState({
         id: '',
@@ -45,13 +44,13 @@ export const Chat = ({ history }) => {
     });
 
     useEffect(() => {
-        setText('');
         setRole({
             id: '',
             name: '',
         })
-        chatGet({ type: tabKey }).then(({ data, socializeName }) => {
-            setList(data ? data.reverse() : []);
+        chatGet({ type: tabKey }).then(({ data }) => {
+            const { list, socializeName } = data;
+            setList(list.reverse());
             setSocializeName(socializeName);
         })
     }, [tabKey])
@@ -69,12 +68,9 @@ export const Chat = ({ history }) => {
             text: value,
             type: tabKey,
             t_role: role.id
-        })).then(({ data, text, socializeName }) => {
-
-            setText(text)
-            if (data) {
-                setList(data.reverse());
-            }
+        })).then(({ data }) => {
+            const { list, socializeName } = data;
+            setList(list.reverse());
             setSocializeName(socializeName);
             cbllback('');
         })
@@ -82,14 +78,13 @@ export const Chat = ({ history }) => {
 
 
     const prefix = ({ s, t, n, id }, index) => {
-
         if (tabKey === 0) {
             return (
                 <div key={index}>
                     <div>
                         <span>{n}</span>
-                        <span>({moment(s).format('hh:mm')})</span>
                         <span>:{t}</span>
+                        <span>({moment(s * 1000).format('MM-DD hh:mm')})</span>
                     </div>
                 </div>
             )
@@ -99,8 +94,8 @@ export const Chat = ({ history }) => {
             <div key={index}>
                 <div>
                     <span className='g_u_end' onClick={() => { history.push('./player', { role_id: id }) }}>{n}</span>
-                    <span>({moment(s).format('hh:mm')})</span>
                     <span>:{t}</span>
+                    <span>({moment(s * 1000).format('MM-DD hh:mm')})</span>
                     {tabKey === 1 && <span className='g_color' onClick={() => { setRole({ id, name: n }) }}>回复</span>}
                 </div>
             </div>
@@ -108,7 +103,6 @@ export const Chat = ({ history }) => {
     }
     return (
         <div>
-            <div>{text}</div>
             <Tab list={tabList} currentKey={tabKey} onCheng={seTabKey} />
             {
                 tabKey === 1 && role.id && (

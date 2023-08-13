@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
 import { getFriendsList, friendsApply } from '@cgi/friends';
 import { createFightDir } from '@cgi/grand';
+import { chatSet } from "@cgi/chat";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 import { SEX_MEUN } from '@meun';
 import { Input } from "@components";
 const Plater = ({ history }) => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
     const [isFriend, setIsFriend] = useState(true);
+    const [text, setText] = useState('');
     const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo as any;
     const { state } = history.location;
     useEffect(() => {
@@ -27,11 +29,19 @@ const Plater = ({ history }) => {
     const applyClick = useCallback(() => {
         friendsApply({ role_id: state.role_id });
     }, [])
-    const submit = () => {
-
+    const submit = (text, cbllback) => {
+        chatSet({
+            type: 1,
+            text,
+            t_role: state.role_id
+        }).then(({ text }) => {
+            setText(text);
+            cbllback('')
+        })
     }
     return (
         <>
+            <div>{text}</div>
             <div>
                 <Input
                     layout={false}

@@ -19,15 +19,15 @@ module.exports = {
         let rate = Math.floor(Math.random() * (2001 - 0));
         if (rate === 0) {
             rate = 100000;
-            ChatG.snedSystem(`恭喜玩家：${role_name}搏一搏，天降鸿运获得了豪华住宅【青云观】，快去试一试运气吧。`)
+            ChatG.sendChat(req, res, 0, `恭喜玩家：${role_name}搏一搏，天降鸿运获得了豪华住宅【青云观】，快去试一试运气吧。`)
         }
         if (rate < 3) {
             rate = 50000;
-            ChatG.snedSystem(`恭喜玩家：${role_name}搏一搏，天降鸿运获得了顶级住宅【绿柳庄】，快去试一试运气吧。`)
+            ChatG.sendChat(req, res, 0, `恭喜玩家：${role_name}搏一搏，天降鸿运获得了顶级住宅【绿柳庄】，快去试一试运气吧。`)
         }
         if (rate < 10) {
             rate = 10000;
-            ChatG.snedSystem(`恭喜玩家：${role_name}搏一搏，天降鸿运获得了顶级住宅[红砖屋]，快去试一试运气吧。`)
+            ChatG.sendChat(req, res, 0, `恭喜玩家：${role_name}搏一搏，天降鸿运获得了顶级住宅[红砖屋]，快去试一试运气吧。`)
         }
 
         const { message } = EffectTable.group1Fn(req, res, `fw-${rate}`);
