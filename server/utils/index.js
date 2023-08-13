@@ -1,3 +1,5 @@
+const osFn = require('./osFn');
+const userFn = require('./userFn');
 const roleFn = require('./roleFn');
 const grandFn = require('./grandFn');
 const fightFn = require('./fightFn');
@@ -10,8 +12,11 @@ const shopFn = require('./shopFn');
 const ruleFn = require('./ruleFn');
 const socializeFn = require('./socializeFn');
 const cornuconpiaFn = require('./cornuconpiaFn');
+const gatewayFn = require('./gatewayFn');
 
 module.exports = {
+    osFn,
+    userFn,
     roleFn,
     grandFn,
     fightFn,
@@ -23,5 +28,6 @@ module.exports = {
     shopFn,
     ruleFn,
     socializeFn,
-    cornuconpiaFn
+    cornuconpiaFn,
+    gatewayFn
 }
