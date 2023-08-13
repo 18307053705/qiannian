@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, SocializeG, PetG } = require('../../global');
+const { RoleG, KnapsackG, SocializeG, PetG, DailysG } = require('../../global');
 const { roleFn } = require('../../utils');
 module.exports = {
     /**
@@ -21,9 +21,14 @@ module.exports = {
         await roleFn.roleExit(req, res);
         // 保存角色信息,并且记录登录时间
         RoleG.setRoleGlobal(req, res, role[0]);
+        // 全局背包
         KnapsackG.setknapsackGlobal(req, res, knapsack[0]);
+        // 全局势力
         SocializeG.setSocializeGlobal(req, res);
+        // 全局宠物
         PetG.setPetGlobal(req, res);
+        // 全局日常
+        DailysG.initDailysGlobal(req, res);
         // Global.setRoleGlobal(req, role[0]);
         // Global.setknapsackGlobal(req, knapsack[0]);
         // Global.setSocializeGlobal(req);

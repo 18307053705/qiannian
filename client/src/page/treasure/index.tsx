@@ -89,9 +89,9 @@ const getName = (exp, name) => {
 
 }
 
-export const Treasure = ({history}) => {
+export const Treasure = ({ history }) => {
     const [data, setData] = useState();
-    const [key, setKey]: any = useState(2);
+    const [type, setType]: any = useState(2);
 
     const getData = () => {
         getTreasure().then(({ data }) => {
@@ -99,7 +99,7 @@ export const Treasure = ({history}) => {
         })
     }
 
-    const setClick = (type) => {
+    const setClick = (key) => {
         setTreasure({
             type,
             key
@@ -119,11 +119,11 @@ export const Treasure = ({history}) => {
             </div>
         )
     }
-    const treasure = treasure_meun[key];
+    const treasure = treasure_meun[type];
     const { exp, s } = data[treasure.id];
     return (
         <div>
-            <Tab list={tabList} currentKey={key} onCheng={setKey} />
+            <Tab list={tabList} currentKey={type} onCheng={setType} />
             <div>{getName(exp, treasure.name)}</div>
             <div>{treasure.exp}:{exp}</div>
             {
@@ -131,18 +131,18 @@ export const Treasure = ({history}) => {
                     (<div>
                         <div>
                             <span className='g_u_end' onClick={() => { setClick(1) }}>
-                                {treasure.active}({s > 10 ? '25元宝' : `${10 - s}次免费`})
+                                {treasure.active}({s ? `${s}次免费` : '25元宝'})
                             </span>
                         </div>
                         <div>
                             <span className='g_u_end' onClick={() => { setClick(2) }}>
-                                {treasure.active}({s > 10 ? '50声望' : `${10 - s}次免费`})
+                                {treasure.active}({s ? `${s}次免费` : '50声望'})
                             </span>
                         </div>
                     </div>)
             }
             {treasure.getAttrText(exp).map((itme, index) => (<div key={index}>{itme}</div>))}
-            <div><span className="g_u_end" onClick={()=>{history.push('./cornucopia')}}>聚宝盆</span></div>
+            <div><span className="g_u_end" onClick={() => { history.push('./cornucopia') }}>聚宝盆</span></div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )

@@ -6,7 +6,7 @@ module.exports = {
      * 直接增加玩家属性的物品
      * @param {*} req 
      * @param {*} res 
-     * @param {key_value} group
+     * @param {} group key-value
      * @param {number} s 使用数量
      * @returns { string } message 错误信息,存在则使用失败
      * @returns { string } text 使用成功信息,存在则使用成功

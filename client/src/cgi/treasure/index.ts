@@ -10,7 +10,7 @@ export async function getTreasure() {
 }
 
 // 设置珍宝信息
-export async function setTreasure(data: { type: 1 | 2; key: 1 | 2 | 3 | 4 }) {
+export async function setTreasure(data: { type: 1 | 2 | 3 | 4; key: 1 | 2 }) {
   return await post(setTreasureUrl, data);
 }
 

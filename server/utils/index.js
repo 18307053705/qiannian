@@ -9,6 +9,7 @@ const equipFn = require('./equipFn');
 const shopFn = require('./shopFn');
 const ruleFn = require('./ruleFn');
 const socializeFn = require('./socializeFn');
+const cornuconpiaFn = require('./cornuconpiaFn');
 
 module.exports = {
     roleFn,
@@ -21,5 +22,6 @@ module.exports = {
     equipFn,
     shopFn,
     ruleFn,
-    socializeFn
+    socializeFn,
+    cornuconpiaFn
 }

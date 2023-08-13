@@ -93,10 +93,10 @@ export const House = () => {
         !message && setUpdata(!updata);
     }
 
-    const setClick = (type) => {
+    const setClick = (key) => {
         setTreasure({
-            type,
-            key: 1
+            type: 1,
+            key
         }).then(callback)
     }
 
@@ -109,12 +109,12 @@ export const House = () => {
                     <div>
                         <div>
                             <span className='g_u_end' onClick={() => { setClick(1) }}>
-                                清洁({s > 10 ? '25元宝' : `${10 - s}次免费`})
+                                清洁({!s ? '25元宝' : `${s}次免费`})
                             </span>
                         </div>
                         <div>
                             <span className='g_u_end' onClick={() => { setClick(2) }}>
-                                清洁({s > 10 ? '50声望' : `${10 - s}次免费`})
+                                清洁({!s ? '50声望' : `${s}次免费`})
                             </span>
                         </div>
                     </div>
@@ -128,8 +128,8 @@ export const House = () => {
                     return (
                         <div key={index}>
                             <span>{text}({extList[index]})</span>
-                            <span> | </span>
-                            <span className='g_u_end' onClick={() => { mosaic({ id }).then(callback) }}>摆放</span>
+                            {extList[index] < 10 && <span> | </span>}
+                            {extList[index] < 10 && <span className='g_u_end' onClick={() => { mosaic({ id }).then(callback) }}>摆放</span>}
                         </div>
                     )
                 })

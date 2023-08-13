@@ -1,4 +1,4 @@
-const { ErrorG, RoleG, KnapsackG } = require('../../global');
+const { ErrorG, RoleG, KnapsackG,DailysG } = require('../../global');
 const { AttributeTable } = require('../../table');
 const { roleFn } = require('../../utils');
 const MEUN = require('../../meun');
@@ -120,7 +120,7 @@ module.exports = {
         RoleG.setRoleGlobal(req, res, sqlInfo);
         // 保存全局背包信息
         KnapsackG.setknapsackGlobal(req, res, { user_id: user, role_id, yuanbao: 1000, yuanbao: 0, data: '[]' });
-
+        DailysG.initDailysGlobal(req, res);
         // Global.setSocializeGlobal(req);
         // 初始化任务池
         // taskFn.initTask(req);

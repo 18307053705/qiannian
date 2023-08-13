@@ -63,13 +63,13 @@ app.use("/api/socialize", require("./api/socialize"));
 app.use("/api/shopping", require("./api/shopping"));
 app.use("/api/task", require("./api/task"));
 app.use("/api/art", require("./api/art"));
-app.use("/api/chat", require("./api/chat"));
+// app.use("/api/chat", require("./api/chat"));
 app.use("/api/shops", require("./api/shops"));
 app.use("/api/equip", require("./api/equip"));
 app.use("/api/pet", require("./api/pet"));
 app.use("/api/jackpot", require("./api/jackpot"));
-// app.use("/api/treasure", require("./api/treasure"));
-// app.use("/api/cornucopia", require("./api/cornucopia"));
+app.use("/api/treasure", require("./api/treasure"));
+app.use("/api/cornucopia", require("./api/cornucopia"));
 
 // 全局捕获异常
 app.use(errorFn.globalError);

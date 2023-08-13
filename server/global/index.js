@@ -5,6 +5,8 @@ const KnapsackG = require('./knapsackG');
 const ErrorG = require('./errorG');
 const SocializeG = require('./socializeG');
 const PetG = require('./petG');
+const DailysG = require('./dailysG');
+const ChatG = require('./chatG');
 
 
 module.exports = {
@@ -14,5 +16,7 @@ module.exports = {
     KnapsackG,
     ErrorG,
     SocializeG,
-    PetG
+    PetG,
+    DailysG,
+    ChatG
 }
