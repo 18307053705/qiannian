@@ -15,7 +15,6 @@ const size = 20;
 export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFooter }: ListType) => {
     const { history } = window.QN;
     const { state = { listPage: 0 }, pathname } = history.location;
-    console.log(state, 'state...')
     const [page, setPage] = useState(state.listPage || 0);
     const total = data.length;
     const list = data.slice(page * size, (page + 1) * size);
@@ -29,7 +28,7 @@ export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFoot
     }, [data]);
 
     useEffect(() => {
-        history.push(pathname, { ...state, listPage: page });
+        // history.push(pathname, { ...state, listPage: page });
         onCheng && onCheng(page, size);
     }, [page])
 
@@ -55,7 +54,10 @@ export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFoot
                         第{
                             numPage.map((_, index) => (
                                 <span key={index} className={page === index ? '' : 'g_u'}>
-                                    <span onClick={() => { setPage(index) }}>{index + 1}</span>
+                                    <span onClick={() => {
+                                        history.push(pathname, { ...state, listPage: index });
+                                        setPage(index);
+                                    }}>{index + 1}</span>
                                 </span>
                             ))
                         }页

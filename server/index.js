@@ -66,6 +66,7 @@ app.use("/api/cornucopia", require("./api/cornucopia"));
 // 全局捕获异常
 app.use(function (err, req, res, next) {
   if (err) {
+    console.log(err)
     res.json({
       code: 999999,
       message: err

@@ -1,7 +1,7 @@
 const { FightG } = require("../../global");
 // 无需验证战斗的请求
 const roleFightApiList = [
-    "/api/chat/get",
+    "/api/chat/getUnread",
     "/api/fight/creatFight",
     "/api/fight/fightDir",
     "/api/fight/continue",
@@ -26,6 +26,7 @@ module.exports = {
         }
         const { fightMap } = FightG.getFightGlobal(req, res);
         if (fightMap) {
+            console.log(req.originalUrl)
             res.send({
                 code: 0,
                 path: (fightMap.state === 1 || fightMap.state === 2) ? "fight" : "playerFight"

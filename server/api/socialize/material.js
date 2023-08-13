@@ -20,7 +20,7 @@ module.exports = {
     material: async function (req, res) {
         const { type, materialId, materialNum } = req.body;
         const materialIdList = MATERIAL_MEUN[type] || [];
-        const materialError = materialIdList.includes(materialId) || materialId === 'all';
+        const materialError = materialIdList.includes(materialId) || materialId === 'all' || materialId === -1;
         if (materialNum <= 0 || !type || type === 3) {
             ErrorG.paramsError(res);
             return;

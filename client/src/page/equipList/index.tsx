@@ -56,7 +56,11 @@ export const EquipList = ({ history }) => {
     }
 
     return (
-        <List data={list} prefix={prefix} active={active} prefix_d={true} />
+        <div>
+            <List data={list} prefix={prefix} active={active} prefix_d={true} />
+            <div><span className='g_u_end' onClick={() => { history.goBack(); }}>返回上页</span></div>
+        </div>
+
     )
 }
 
