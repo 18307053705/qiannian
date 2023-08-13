@@ -17,7 +17,7 @@ module.exports = {
             return;
         }
         let rate = Math.floor(Math.random() * (2001 - 0));
-        if (rate === 0) {
+        if (rate === 0 || true) {
             rate = 100000;
             ChatG.sendChat(req, res, 0, `恭喜玩家：${role_name}搏一搏，天降鸿运获得了豪华住宅【青云观】，快去试一试运气吧。`)
         }

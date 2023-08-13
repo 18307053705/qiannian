@@ -18,7 +18,7 @@ module.exports = {
         res.send({
             code: 0,
             data: readMap,
-            system: system.list.slice(-1)
+            system: system.list.slice(-1)[0]
         })
     }
 }

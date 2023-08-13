@@ -16,7 +16,7 @@ module.exports = {
      * @param {*} data.name 可选,发送人名称
      * @param {*} data.t_role 可选,目标id(私聊)
      */
-    sendChat: function (req, res, type, text, { name, t_role }) {
+    sendChat: function (req, res, type, text, { name, t_role } = {}) {
         if (type === 0) {
             return sendSystem(text);
         }
