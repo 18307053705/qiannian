@@ -1,12 +1,11 @@
 const { GrandTable, ElementTable } = require("../../table");
 const { updataRoleGlobal } = require("../../global/roleG/updataRoleGlobal");
 const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
-// const taskFn = require('./taskFn');
+const taskFn = require('../taskFn');
 
 function getGrand(address) {
     const { x, y, grand } = GrandTable.getGrandInfo(address);
     const { name, data } = grand;
-    // console.log(data)
     const direction = [];
     if (data[x + 1] && Boolean(data[x + 1][y])) {
         const { n } = data[x + 1][y]
@@ -72,9 +71,8 @@ module.exports = {
             });
             eleList.push(eleItme)
         });
-
         // 获取任务临时元素
-        // taskFn.grandTaskEle(req, address, ele, dirList);
+        taskFn.grandTaskEle(req, res, address, eleList, eleDir);
         return {
             name: n || name,
             x: x + 1,

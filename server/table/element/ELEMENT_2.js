@@ -26,20 +26,19 @@ const ELEMENT_2 = {
       level: 1,
       attr: 0.5,
       pet: true,
-      num: 2,
-      exps: 10000,
     },
-    article: '1-20,2-20,3',
-    equip: '1-50,2-50,3-50,4-50,5-50',
+    article: '1-1,2-1-50',
+    equip: '1',
   },
   2000001: {
     id: 2000001,
     name: "持斧山贼",
     type: 2,
     ext: {
-      level: 1
+      level: 1,
+      pet: true,
     },
-    equip: '121,122',
+    equip: '2',
   },
   2000002: {
     id: 2000002,

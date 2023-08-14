@@ -13,6 +13,7 @@ const ruleFn = require('./ruleFn');
 const socializeFn = require('./socializeFn');
 const cornuconpiaFn = require('./cornuconpiaFn');
 const gatewayFn = require('./gatewayFn');
+const taskFn = require('./taskFn');
 
 module.exports = {
     osFn,
@@ -29,5 +30,6 @@ module.exports = {
     ruleFn,
     socializeFn,
     cornuconpiaFn,
-    gatewayFn
+    gatewayFn,
+    taskFn
 }

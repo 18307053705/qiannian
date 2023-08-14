@@ -7,6 +7,7 @@ const SocializeG = require('./socializeG');
 const PetG = require('./petG');
 const DailysG = require('./dailysG');
 const ChatG = require('./chatG');
+const TaskG = require('./taskG');
 
 
 module.exports = {
@@ -18,5 +19,6 @@ module.exports = {
     SocializeG,
     PetG,
     DailysG,
-    ChatG
+    ChatG,
+    TaskG
 }
