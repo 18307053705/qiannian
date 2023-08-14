@@ -7,10 +7,11 @@ module.exports = {
      * @param {*} req 
      * @param {*} res
      * @returns dailys.exp 经验任务可领取次数
-     * @returns dailys.money 金钱任务可领取次数
-     * @returns dailys.world 金钱任务可领取次数
-     * @returns dailys.gang 帮会任务可领取次数
-     * @returns dailys.intersect 结义任务可领取次数
+     * @returns dailys.tael 金钱任务可领取次数
+     * @returns dailys.world 世界声望任务可领取次数
+     * @returns dailys.exploit 每日功勋可领取次数
+     * @returns dailys.gang  每日帮会任务可领取次数
+     * @returns dailys.intersect 每日结义任务可领取次数
      * @returns dailys.fw 房屋免费操作次数10
      * @returns dailys.xz 勋章免费操作次数10
      * @returns dailys.hb 徽标免费操作次数10

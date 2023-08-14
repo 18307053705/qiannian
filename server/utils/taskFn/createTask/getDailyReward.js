@@ -1,5 +1,6 @@
-const { TaskTable } = require('../../../table');
 const { computeUpExp } = require('../../roleFn/computeUpExp')
+const { TaskG } = require('../../../global')
+const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     /**
      * 获取日常任务奖励
@@ -11,7 +12,6 @@ module.exports = {
      * @returns reward.text 奖励文案[]
      */
     getDailyReward: function (type, level) {
-        const { TASK_TYPE_MEUN } = TaskTable;
         const reward = { role: {} };
         let tael = 0;
         let text = [];
@@ -40,18 +40,33 @@ module.exports = {
                     exp = exps * 0.002;
             }
             reward.role['exp'] = parseInt(exp);
-            text.push(`经验+${role['exp']}`);
+            text.push(`经验+${parseInt(exp)}`);
         }
         // 每日金钱
         if (type === TASK_TYPE_MEUN.tael) {
-            delete  reward.role;
+            delete reward.role;
             reward.tael = level * 1000;
-            text.push(`银两+${tael}`);
+            text.push(`银两+${reward.tael}`);
         }
         // 每日世界声望
         if (type === TASK_TYPE_MEUN.world) {
             reward.role['world'] = 100;
             text.push(`世界声望+${100}`);
+        }
+        // 每日帮会任务
+        if (type === TASK_TYPE_MEUN.gang) {
+            reward.role['gang'] = 100;
+            text.push(`帮会声望+${100}`);
+        }
+        // 每日结义任务
+        if (type === TASK_TYPE_MEUN.intersect) {
+            reward.role['intersect'] = 100;
+            text.push(`结义声望+${100}`);
+        }
+        // 每日功勋任务
+        if (type === TASK_TYPE_MEUN.exploit) {
+            reward.role['exploit'] = 50;
+            text.push(`世界功勋+${50}`);
         }
         reward.text = text;
         return reward;

@@ -1,17 +1,10 @@
-const { RoleG } = require('../../global')
+const express = require("express");
+const router = new express.Router();
+const { getTaskList } = require('./getTaskList');
+const { getTaskInfo } = require('./getTaskInfo');
+// 获取任务列表
+router.post("/getTaskList", getTaskList);
+// 获取任务详情
+router.post("/getTaskInfo", getTaskInfo);
 
-
-router.post("/getTaskList", (req, res) => {
-    const { role_id } = Global.getRoleGlobal(req);
-    const task = Global.taskLoop[role_id];
-    const taskList = Object.keys(task).map(key => {
-        return {
-            text: `${TASK_MEUN[key]}(${task[key].length})`,
-            type: key
-        }
-    })
-    res.send({
-        code: 0,
-        data: taskList
-    })
-});
+module.exports = router;

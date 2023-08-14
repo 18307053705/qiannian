@@ -1,26 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import { backGrand } from '@utils/grand';
-import { getTaskDetail, getTaskList, doneTask } from '@cgi/taks';
+import { getTaskList, doneTask } from '@cgi/taks';
 
+const getSpeedText = (speed) => {
+    const { fight, exist } = speed;
+    const speedArr = [...Object.values(fight || {}), ...Object.values(exist || {})];
+    return speedArr.map(({ n, s, c }: any) => `${n}(${c}/${s})`).join(',');
+}
 
+const DeonTaskBtn = ({ task, dailList, deonTask }) => {
+    const { id, speed, taskType, grand } = task;
+    const { done } = speed;
+    const { npc, tNpc, freak } = grand || {};
+    const { addressName } = tNpc || freak || npc;
+    // 每日任务
+    if (dailList.includes(taskType)) {
+        return done ? (
+            <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div>
+        ) : null;
+    }
+
+    return (
+        <div>
+            <span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>传送到{addressName}</span>
+        </div>
+    );
+}
 
 export const Task = () => {
     const [error, setError] = useState('')
     const [updata, setUpdata]: any[] = useState(false);
-    const [taskList, setTaskList]: any[] = useState([]);
-    const [taskDetail, setTaskDetail]: any = useState([]);
-    const getDetail = (type) => {
-        getTaskDetail({ type }).then(({ data }) => {
-            setTaskDetail(data);
+    const [tasks, setTasks]: any = useState({
+        taskList: [],
+        taskDetail: [],
+        dailList: []
+    })
+    const getTaskInfo = (type = 'exp') => {
+        getTaskList({ type }).then(({ data, message }) => {
+            if (!message) {
+                setTasks({
+                    taskList: data.taskList,
+                    taskDetail: data.task ? [data.task] : [],
+                    dailList: data.DAIL_TYPE_LIST
+                });
+            }
         })
     }
-    useEffect(() => {
-        Promise.all([getTaskList(), getTaskDetail()]).then((res) => {
-            setTaskList(res[0].data);
-            setTaskDetail(res[1].data);
-            setError('');
-        })
-    }, [updata])
+    useEffect(getTaskInfo, [updata])
 
     const deonTask = (type, in_x) => {
         doneTask({
@@ -37,21 +63,20 @@ export const Task = () => {
 
         })
     }
-
+    const { taskDetail, taskList, dailList } = tasks;
     return (
         <div>
             <div>
                 {
-                    taskDetail.map(({ title, tips, reward = [], speed, type, btn }, index) => {
+                    taskDetail.map((itme) => {
+                        const { id, title, tips, reward = { text: [] }, speed } = itme;
                         return (
-                            <div key={index}>
+                            <div key={id}>
                                 <div className='g_b'>{title}</div>
                                 <div>描述：{tips}</div>
-                                <div>奖励：{reward}</div>
-                                <div>进度：{speed} </div>
-                                <span>
-                                    {btn && <span className='g_u_end' onClick={() => { deonTask(type, index) }}>{btn}</span>}
-                                </span>
+                                <div>奖励：{reward.text.join(',')}</div>
+                                <div>进度：{getSpeedText(speed)} </div>
+                                <DeonTaskBtn task={itme} dailList={dailList} deonTask={deonTask} />
                             </div>
                         )
                     })
@@ -64,7 +89,7 @@ export const Task = () => {
                     taskList.map(({ text, type }, index) => {
 
                         return (<div key={index}>
-                            <span className='g_u_end' onClick={() => { getDetail(type) }}>{text}</span>
+                            <span className='g_u_end' onClick={() => { getTaskInfo(type) }}>{text}</span>
                         </div>)
 
                     })
@@ -78,8 +103,3 @@ export const Task = () => {
 }
 
 export default Task;
-let cunst = 1;
-function fn() {
-    //请在这里编码
-    console.log(cunst++)
-}

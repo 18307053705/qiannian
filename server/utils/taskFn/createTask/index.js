@@ -1,13 +1,10 @@
-const { RoleG } = require('../../../global');
+const { RoleG, TaskG } = require('../../../global');
 const { TaskTable } = require('../../../table');
 const { getDailyReward } = require('./getDailyReward');
 const { getReward } = require('./getReward');
 const { getGrand } = require('./getGrand');
 const { getComplete } = require('./getComplete');
-const { TASK_TYPE_MEUN } = TaskTable;
-// 每日任务
-const DAIL_TYPE_YLIST = [TASK_TYPE_MEUN.exp, TASK_TYPE_MEUN.world, TASK_TYPE_MEUN.tael];
-
+const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = TaskG;
 module.exports = {
     /**
      * 创建任务
@@ -21,7 +18,7 @@ module.exports = {
         const task = TaskTable.getTask(req, res, type, id);
         let reward = undefined;
         // 每日任务奖励解析
-        if (DAIL_TYPE_YLIST.includes(type)) {
+        if (DAIL_TYPE_LIST.includes(type)) {
             reward = getDailyReward(type, role_level);
         }
         // 主线任务奖励解析
@@ -32,12 +29,15 @@ module.exports = {
         const { grand, complete } = task;
         // 地图解析
         if (grand) {
-            task.grand = getGrand(grand);
+            getGrand(grand, type, id);
         }
         // 完成条件解析
         if (complete) {
             task.complete = getComplete(complete);
         }
-        return task;
+        return {
+            ...task,
+            taskType: type
+        };
     },
 }

@@ -1,18 +1,9 @@
-const { RoleG } = require('../../global');
+const { RoleG, TaskG } = require('../../global');
 const peopleMian = require('./peopleMian');
+const daily = require('./daily');
 
-const TASK_TYPE_MEUN = {
-    main: 'main',
-    exp: 'exp',
-    tael: 'tael',
-    world: 'world',
-};
+const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = TaskG;
 module.exports = {
-    /**
-     * 任务类型枚举
-     * mian:主线,exp:每日经验,tael:每日金钱,world:每日声望
-     */
-    TASK_TYPE_MEUN,
     /**
      * 获取任务信息
      * @param {*} req 
@@ -45,6 +36,9 @@ module.exports = {
         const { role_race } = RoleG.getRoleGlobal(req, res);
         if (type === TASK_TYPE_MEUN.main && role_race === 1) {
             return peopleMian[id] ? JSON.parse(JSON.stringify(peopleMian[id])) : undefined;
+        }
+        if (DAIL_TYPE_LIST.includes(type)) {
+            return daily[id] ? JSON.parse(JSON.stringify(daily[id])) : undefined;
         }
 
     },

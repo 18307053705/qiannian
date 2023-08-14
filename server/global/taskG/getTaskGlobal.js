@@ -6,7 +6,7 @@ module.exports = {
      * 获取全局已接任务信息
      * @param {*} req 
      * @param {*} res 
-     * @param {*} type mian:主线,exp:每日经验,tael:每日金钱,world:每日声望
+     * @param {*} type all:全部,mian:主线,exp:每日经验,tael:每日金钱,world:每日声望
      * @returns tasks{id:task} || undefined
      * @returns task.id
      * @returns task.title 标题
@@ -29,13 +29,17 @@ module.exports = {
      * @returns task.speed 进度
      * @returns task.speed.done 是否完成
      * @returns task.speed.exist 物品收集信息{id:{id,n,p,s,c}}
-     * @returns task.speed.fight 杀过进度信息{id,n,s,c}
+     * @returns task.speed.fight 杀过进度信息{id:{id,n,s,c}}
      * @returns task.nextTask 下一个任务id
      */
     getTaskGlobal: function (req, res, type) {
         const { role_id } = getRoleGlobal(req, res);
-        if (TASKS_Global[role_id] && TASKS_Global[role_id][type]) {
-            return JSON.parse(JSON.stringify(TASKS_Global[role_id][type]));
+        const tasks = TASKS_Global[role_id];
+        if (type === 'all' && tasks) {
+            return JSON.parse(JSON.stringify(tasks));
+        }
+        if (tasks && tasks[type]) {
+            return JSON.parse(JSON.stringify(tasks[type]));
         }
         return undefined;
     }
