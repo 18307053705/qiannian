@@ -5,14 +5,13 @@ const Result = ({ fight, fightInfoChang }) => {
         fightContinue().then(fightInfoChang)
     }, [])
     const { rivalMold = {}, state, results = {}, isContinue } = fight.fightMap;
-    const { tasks = [], textReward = [], exp, tael, petMsg, tip } = results;
+    const { tasks, textReward = [], exp, tael, petMsg, tip } = results;
     if (state === 2) {
         return (<div>
             <div>你被{rivalMold.name}击杀了,点击传送至云荒大陆！</div>
             <span className="g_b_u" onClick={exitFight}>返回游戏</span>
         </div>)
     }
-
     return (
         <div>
             {tip && <div style={{ color: 'red' }}>提示：{tip}</div>}
@@ -25,7 +24,9 @@ const Result = ({ fight, fightInfoChang }) => {
             </div>
             <div>战斗胜利！</div>
             <div>恭喜玩家，成功击杀{rivalMold.name}。</div>
-            {tasks.map((itme, index) => <div key={index}>任务进度：{itme}</div>)}
+            {
+                Object.values(tasks).map(({title,s,c}:any,index)=><div key={index}>任务进度：{title}({c}/{s})</div>)
+            }
             <div>获得经验：{exp}</div>
             <div>获得银两：{tael}</div>
             <div>{petMsg}</div>

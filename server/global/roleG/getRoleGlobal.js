@@ -25,7 +25,7 @@ module.exports = {
      * @returns {*} equip_pool:装备池({ weapon：武器,helmet：头部, clothing：衣服, weapon：腰带, shoe：鞋子,ring：戒指,necklace：项链,treasure1：法宝1,treasure2：法宝2,treasure3：法宝3,treasure4：法宝4})
      * @returns {*} socialize_pool:势力池({gang(帮会):{nam:名称,id},gang(庄园):{nam:名称,id},gang(队伍):{nam:名称,id}})
      * @returns {*} skill_pool:技能与战斗设置({art(技能池):[],fight(战斗设置):[]})
-     * @returns {*} task_pool:{main:id-s}id:任务id,s:任务状态(0未领取,1未完成,2完成)
+     * @returns {*} task_pool:[{p,id,f}]id:任务id,p:任务类型,f:任务杀怪进度{freakId:c}
      * @returns {*} can_task_pool:可接任务
      * @returns {*} role_attr:角色属性({base:基础属性，addition额外属性(装备，宠物，丹药，潜力，境界，vip)})
      * @returns {*} role_buff:buff池({"attr":{ e:effect,d:结束时间  },"vip":{ key:id,d:结束时间  }})

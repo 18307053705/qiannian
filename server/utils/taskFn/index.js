@@ -1,11 +1,15 @@
 const createTask = require('./createTask');
 const speedTask = require('./speedTask');
 const grandTaskEle = require('./grandTaskEle');
-const getTaskInfo = require('./getTaskInfo');
+const getTasksInfo = require('./getTasksInfo');
+const listenTask = require('./listenTask');
+const getTaskReward = require('./getTaskReward');
 
 module.exports = {
     ...createTask,
     ...speedTask,
     ...grandTaskEle,
-    ...getTaskInfo
+    ...getTasksInfo,
+    ...listenTask,
+    ...getTaskReward
 }

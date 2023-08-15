@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { backGrand } from '@utils/grand';
+import { tpDir } from '@cgi/grand';
 import { getTaskList, doneTask } from '@cgi/taks';
 
-const getSpeedText = (speed) => {
-    const { fight, exist } = speed;
-    const speedArr = [...Object.values(fight || {}), ...Object.values(exist || {})];
-    return speedArr.map(({ n, s, c }: any) => `${n}(${c}/${s})`).join(',');
+const SpeedText = ({ task }) => {
+    const { grand, speed } = task;
+    if (speed) {
+        const { fight, exist } = speed;
+        const speedArr = [...Object.values(fight || {}), ...Object.values(exist || {})];
+        return <div>进度：{speedArr.map(({ n, s, c }: any) => `${n}(${c}/${s})`).join(',')}</div>;
+    }
+    const { name } = grand.tNpc;
+    return <div>进度：{name}对话(未完成)</div>
+
 }
 
 const DeonTaskBtn = ({ task, dailList, deonTask }) => {
     const { id, speed, taskType, grand } = task;
-    const { done } = speed;
+    const { done } = speed || {};
     const { npc, tNpc, freak } = grand || {};
-    const { addressName } = tNpc || freak || npc;
+    const { addressName, address } = tNpc || freak || npc;
+    // 传送到目标位置
+    const tpClick = () => {
+        tpDir({ dir: address }).then(() => {
+            backGrand();
+        })
+
+    }
     // 每日任务
     if (dailList.includes(taskType)) {
         return done ? (
@@ -22,43 +36,37 @@ const DeonTaskBtn = ({ task, dailList, deonTask }) => {
 
     return (
         <div>
-            <span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>传送到{addressName}</span>
+            <span className='g_u_end' onClick={tpClick}>传送到{addressName}</span>
         </div>
     );
 }
 
 export const Task = () => {
-    const [error, setError] = useState('')
-    const [updata, setUpdata]: any[] = useState(false);
     const [tasks, setTasks]: any = useState({
         taskList: [],
         taskDetail: [],
         dailList: []
     })
-    const getTaskInfo = (type = 'exp') => {
+    const getTaskInfo = (type = 'main') => {
         getTaskList({ type }).then(({ data, message }) => {
             if (!message) {
                 setTasks({
                     taskList: data.taskList,
-                    taskDetail: data.task ? [data.task] : [],
+                    taskDetail: data.task ? Object.values(data.task) : [],
                     dailList: data.DAIL_TYPE_LIST
                 });
             }
         })
     }
-    useEffect(getTaskInfo, [updata])
+    useEffect(getTaskInfo, [])
 
-    const deonTask = (type, in_x) => {
+    const deonTask = (id, type) => {
         doneTask({
             type,
-            in_x
-        }).then(({ data, message }) => {
-            if (message) {
-                setError(message);
-            } else if (typeof data === 'string') {
-                setUpdata(!updata);
-            } else {
-                backGrand();
+            id
+        }).then(({ message }) => {
+            if (!message) {
+                getTaskInfo();
             }
 
         })
@@ -69,19 +77,19 @@ export const Task = () => {
             <div>
                 {
                     taskDetail.map((itme) => {
-                        const { id, title, tips, reward = { text: [] }, speed } = itme;
+                        const { id, title, tips, reward = { text: [] } } = itme;
                         return (
                             <div key={id}>
                                 <div className='g_b'>{title}</div>
                                 <div>描述：{tips}</div>
                                 <div>奖励：{reward.text.join(',')}</div>
-                                <div>进度：{getSpeedText(speed)} </div>
+                                <SpeedText task={itme} />
                                 <DeonTaskBtn task={itme} dailList={dailList} deonTask={deonTask} />
                             </div>
                         )
                     })
                 }
-                {error && <div style={{ color: 'red' }}>提示：{error}</div>}
+                {taskDetail.length === 0 && '暂无更多任务'}
             </div>
             <div>
                 <div>===========================</div>

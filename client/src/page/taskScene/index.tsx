@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { getTaskStory, tpTask } from '@cgi/taks';
+import { getTaskStory, tpTask, getTaskScene } from '@cgi/taks';
 import { backGrand } from '@utils/grand';
 
 import { MAIN1_100_SCENE } from './main1_100';
@@ -15,6 +15,32 @@ export const taskScene = () => {
         page: 1,
         size: 1
     })
+    const [taskInfo, setTaskInof] = useState();
+    useEffect(() => {
+        getTaskScene().then(({ data }) => {
+            setTaskInof(data)
+        })
+    }, [])
+    console.log(taskInfo);
+    if (!taskInfo) {
+        return null;
+    }
+    const { neck } = taskInfo;
+    const neckEnd = neck.splice(-1)[0].split('&')
+
+    return (
+        <div className={Styles['page-task-scene']}>
+            {
+                neck.map((text, index) => <div key={index}>{text}</div>)
+            }
+            <div>
+                <span>{neckEnd[0]}</span>
+                <span className='g_u_end'>{neckEnd[1]}</span>
+            </div>
+
+            {/* <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div> */}
+        </div>
+    )
 
     // useEffect(() => {
     //     setScne({
@@ -68,7 +94,7 @@ export const taskScene = () => {
         return (
             <div className={Styles['page-task-scene']}>
                 <div>{reward && reward.split(',').map((itme, index) => (<div key={index}>{itme}</div>))}</div>
-                {Dom && <Dom state={state} scne={scne} scneClick={scneClick} name={'道君'}/>}
+                {Dom && <Dom state={state} scne={scne} scneClick={scneClick} name={'道君'} />}
 
                 {keep ? <div><span className="g_u_end" onClick={() => { setUpdata(!updata) }}>继续</span></div> : ''}
                 {tp && <div>任务目标:<span className="g_u_end" onClick={tpClick} >{tpNpc.name}</span></div>}

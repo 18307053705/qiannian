@@ -11,16 +11,18 @@ module.exports = {
      */
     updataCanTaskGlobal: function (req, res, type, taks) {
         const { role_id } = getRoleGlobal(req, res);
-        if (!CAN_TASKS_Global[role_id]) {
-            CAN_TASKS_Global[role_id] = {};
+        let tasks = CAN_TASKS_Global[role_id];
+        if (!tasks) {
+            tasks = {};
         }
-        if (!CAN_TASKS_Global[role_id][type]) {
-            CAN_TASKS_Global[role_id][type] = {};
+        if (!tasks[type]) {
+            tasks[type] = {};
         }
-        CAN_TASKS_Global[role_id][type] = {
-            ...CAN_TASKS_Global[role_id][type],
+        tasks = {
+            ...tasks[type],
             ...taks
         }
-        return JSON.parse(JSON.stringify(CAN_TASKS_Global[role_id][type]));
+        CAN_TASKS_Global[role_id] = tasks;
+        return JSON.parse(JSON.stringify(tasks[type]));
     }
 }

@@ -1,6 +1,7 @@
 import { post } from "@request";
 const getTaskListUrl = "/task/getTaskList";
 const getTaskInfoUrl = "/task/getTaskInfo";
+const getTaskSceneUrl = "/task/getTaskScene";
 
 export type TaskType =
   | "main"
@@ -24,6 +25,12 @@ export function getTaskInfo(data = { type: "main" }) {
   return post(getTaskInfoUrl, data);
 }
 
+// 获取任务场景信息
+export function getTaskScene() {
+  return post(getTaskSceneUrl);
+}
+
+
 const getTaskDetailUrl = `/task/getTaskDetail`;
 const doneTaskUrl = `/task/doneTask`;
 const getTaskStoryUrl = `/task/getTaskStory`;
@@ -35,7 +42,7 @@ export function getTaskDetail(data = { type: "main" }) {
 }
 
 // 完成任务
-export function doneTask(data: { type: TaskType; in_x: number }) {
+export function doneTask(data: { type: TaskType; id: number }) {
   return post(doneTaskUrl, data);
 }
 

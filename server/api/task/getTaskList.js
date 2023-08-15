@@ -1,4 +1,4 @@
-const { ErrorG, TaskG, DailysG } = require('../../global');
+const { TaskG, DailysG } = require('../../global');
 const { taskFn } = require('../../utils');
 const { DAIL_TYPE_LIST, TASK_TYPE_TEXT_MEUN, TASK_TYPE_MEUN } = TaskG;
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
      */
     getTaskList: function (req, res) {
         const { type = TASK_TYPE_MEUN.main } = req.body;
-        const { task, message } = taskFn.getTaskInfo(req, res, type);
+        const { tasks, message } = taskFn.getTasksInfo(req, res, type);
         const daitys = DailysG.getDailysGlobal(req, res);
         const taskList = [];
         Object.keys(daitys).forEach((key) => {
@@ -24,7 +24,7 @@ module.exports = {
             message,
             data: {
                 taskList,
-                task:task,
+                task:tasks,
                 DAIL_TYPE_LIST
             },
         })

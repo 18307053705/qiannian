@@ -8,7 +8,7 @@ module.exports = {
      * @param {*} complete 完成条件 freak{id,n,s,c} article{id,p,n,s}
      * @returns done true 完成
      * @returns exist 当前物品信息
-     * @returns fight 当前杀过信息
+     * @returns fight 当前杀怪信息
      */
     speedTask: function (req, res, complete) {
         const { freak, article } = complete;

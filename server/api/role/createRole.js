@@ -114,13 +114,15 @@ module.exports = {
         const friendsData = [user, role_id, '[]', '[]'];
         const friendsRes = res.asyncAdd(friendsSql, friendsData);
         await Promise.all([roleRes, knapsackRes, warehouseRes, friendsRes]);
+        // 
+        await roleFn.roleLogin(req,res,sqlInfo,knapsackData);
         // 退出同账号下的其他角色
-        await roleFn.roleExit(req, res);
-        // 保存全局角色信息,并且记录登录时间
-        RoleG.setRoleGlobal(req, res, sqlInfo);
-        // 保存全局背包信息
-        KnapsackG.setknapsackGlobal(req, res, { user_id: user, role_id, yuanbao: 1000, yuanbao: 0, data: '[]' });
-        DailysG.initDailysGlobal(req, res);
+        // await roleFn.roleExit(req, res);
+        // // 保存全局角色信息,并且记录登录时间
+        // RoleG.setRoleGlobal(req, res, sqlInfo);
+        // // 保存全局背包信息
+        // KnapsackG.setknapsackGlobal(req, res, { user_id: user, role_id, yuanbao: 1000, yuanbao: 0, data: '[]' });
+        // DailysG.initDailysGlobal(req, res);
         // Global.setSocializeGlobal(req);
         // 初始化任务池
         // taskFn.initTask(req);

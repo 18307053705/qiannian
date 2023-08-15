@@ -2,6 +2,7 @@ const { RoleG, KnapsackG, FightG } = require('../../global');
 const { knapsackTable } = require('../../table');
 const knapsackFn = require('../../utils/knapsackFn');
 const roleFn = require('../../utils/roleFn');
+const { listenTask } = require('../../utils/taskFn/listenTask');
 
 module.exports = {
     /**
@@ -99,15 +100,13 @@ module.exports = {
             }
         });
         // 监听任务池
-        // const tasks = taskFn.listenTask(req, freak.extDir['id'], freakNum);
-        // return
-        // knapsack.tael
+        const tasks = listenTask(req, res, rivalMold['id'], freakNum);
         return {
             textReward: tip ? [] : textReward,
             exp: vipExp ? `${exp}(${vipExp}倍经验)` : exp,
             tael: vipTael ? `${tael}(${vipTael}倍银两)` : tael,
             tip: tip,
-            tasks: []
+            tasks: tasks
 
         }
     },

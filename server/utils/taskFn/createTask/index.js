@@ -12,8 +12,11 @@ module.exports = {
      * @param {*} res 
      * @param {*} type mian:主线,exp:每日经验,tael:每日金钱,world:每日声望
      * @param {*} id 任务id
+     * @param {*} data.callback 回调函数接收生成的task,操作这个taks会改变全局task
+     * @param {*} data.noUpTaskG 默认false,是否禁止加入到全局
+     * @returns tasks {id:task}
      */
-    createTask: function (req, res, type, id) {
+    createTask: function (req, res, type, id, { callback, noUpTaskG } = {}) {
         const { role_level } = RoleG.getRoleGlobal(req, res);
         const task = TaskTable.getTask(req, res, type, id);
         let reward = undefined;
@@ -35,9 +38,11 @@ module.exports = {
         if (complete) {
             task.complete = getComplete(complete);
         }
-        return {
-            ...task,
-            taskType: type
-        };
+        task.taskType = type;
+        const tasks = { [id]: task };
+        callback && callback(task);
+        // 加入全局任务列表
+        !noUpTaskG && TaskG.updataTaskGlobal(req, res, type, tasks);
+        return JSON.parse(JSON.stringify(tasks));
     },
 }

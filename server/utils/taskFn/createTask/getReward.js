@@ -66,9 +66,9 @@ module.exports = {
             })
             articles['equipReward'] = equipReward;
         }
+        reward.text = text;
         JSON.stringify(articles) !== '{}' && (reward['article'] = articles);
-        const rewardStr = JSON.stringify(reward);
-        return rewardStr !== '{}' ? JSON.parse(rewardStr) : undefined;
+        return reward
     }
 }
 

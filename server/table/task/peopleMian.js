@@ -6,7 +6,7 @@ module.exports = {
         tips: '我忘却了修为，只为千年前....',
         type: 2,
         reward: {
-            exp: 200,
+            attr: 'exp-200',
             tael: 1000,
         },
         grand: {
@@ -37,7 +37,7 @@ module.exports = {
         tips: '到十里坡与胡晶丽对话。',
         type: 2,
         reward: {
-            exp: 200,
+            attr: 'exp-200',
             tael: 1000,
         },
         grand: {
@@ -68,7 +68,7 @@ module.exports = {
         tips: '狠狠的教训一顿十里坡的山贼，让他们不敢再骚扰村子。',
         type: 1,
         reward: {
-            exp: 200,
+            attr: 'exp-100',
             tael: 1000,
         },
         grand: {
@@ -104,7 +104,7 @@ module.exports = {
         tips: '与胡晶丽对话,了解三族大会。',
         type: 2,
         reward: {
-            exp: 200,
+            attr: 'exp-100',
             tael: 1000,
         },
         grand: {

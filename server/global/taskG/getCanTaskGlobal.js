@@ -34,8 +34,12 @@ module.exports = {
      */
     getCanTaskGlobal: function (req, res, type) {
         const { role_id } = getRoleGlobal(req, res);
-        if (CAN_TASKS_Global[role_id] && CAN_TASKS_Global[role_id][type]) {
-            return JSON.parse(JSON.stringify(CAN_TASKS_Global[role_id][type]));
+        const tasks = CAN_TASKS_Global[role_id];
+        if (type === 'all' && tasks) {
+            return JSON.parse(JSON.stringify(tasks));
+        }
+        if (tasks && tasks[type]) {
+            return JSON.parse(JSON.stringify(tasks[type]));
         }
         return undefined;
     }

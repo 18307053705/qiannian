@@ -124,8 +124,6 @@ const WorldMap = () => {
         })
 
     }
-
-
     const prefix = ({ id, label }) => {
         return (
             <span key={id} className="g_u_end" onClick={() => { tpClick(id) }}>{label}</span>
