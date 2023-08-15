@@ -18,7 +18,7 @@ module.exports = {
         if (!tasks[type]) {
             tasks[type] = {};
         }
-        tasks = {
+        tasks[type] = {
             ...tasks[type],
             ...taks
         }
