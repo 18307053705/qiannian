@@ -14,9 +14,10 @@ module.exports = {
      * @param {*} id 任务id
      * @param {*} data.callback 回调函数接收生成的task,操作这个taks会改变全局task
      * @param {*} data.noUpTaskG 默认false,是否禁止加入到全局
+     * @param {*} data.isCan 默认false,是否未未接任务
      * @returns tasks {id:task}
      */
-    createTask: function (req, res, type, id, { callback, noUpTaskG } = {}) {
+    createTask: function (req, res, type, id, { callback, noUpTaskG,isCan } = {}) {
         const { role_level } = RoleG.getRoleGlobal(req, res);
         const task = TaskTable.getTask(req, res, type, id);
         let reward = undefined;
@@ -32,7 +33,7 @@ module.exports = {
         const { grand, complete } = task;
         // 地图解析
         if (grand) {
-            getGrand(grand, type, id);
+            getGrand(grand, type, id,isCan);
         }
         // 完成条件解析
         if (complete) {

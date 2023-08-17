@@ -37,6 +37,11 @@ const ELEMENT_1 = {
         type: 1,
         path: '/equipFreeForge'
     },
+    1000007: {
+        id: 1000007,
+        name: "魔族强者",
+        type: 1,
+    },
 };
 
 module.exports = {

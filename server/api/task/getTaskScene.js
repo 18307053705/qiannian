@@ -9,7 +9,6 @@ module.exports = {
     getTaskScene: function (req, res) {
         const { currentDir } = GrandG.getDirGlobal(req, res);
         const { taskId, taskType, isCan } = currentDir;
-
         let task = undefined;
         // 获取对应任务信息,存在代表未接任务,否则已接任务
         if (isCan) {
@@ -19,48 +18,21 @@ module.exports = {
             const tasks = TaskG.getTaskGlobal(req, res, taskType);
             task = tasks[taskId];
         }
-        // 判断任务是否存在
-        if (!task) {
-            res.send({
-                code: 0,
-                message: '任务信息有误'
-            })
-            return;
-        }
 
         // 接取任务
-        if (isCan) {
-            TaskG.updataTaskGlobal(req, res, taskType, task);
-            TaskG.deleteCanTaskGlobal(req, res, taskType, taskId);
-        } else {
-            // 完成任务 获取任务进度,判断是否有任务条件,没有代表可直接完成
-            if (task.complete) {
-                task.speed = taskFn.speedTask(req, res, task.complete);
-            } else {
-                task.speed = {};
-                task.speed.done = true;
-            }
-            // 判断任务是否完成
-            if (task.speed.done) {
-                const message = taskFn.getTaskReward(req, res, task.reward);
-                if (message) {
-                    res.send({
-                        code: 0,
-                        message
-                    })
-                    return;
-                }
-                // 完成任务后判断是否有下个任务,有则加入未接任务
-                if (task.nextId) {
-                    const nextTask = taskFn.createTask(req, res, taskType, task.nextId, { noUpTaskG: true });
-                    TaskG.updataCanTaskGlobal(req, res, taskType, nextTask);
-                }
-            }
-        }
-
+        // if (isCan) {
+        //     TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
+        //     TaskG.deleteCanTaskGlobal(req, res, taskType, taskId);
+        //     // 当前元素指令更改为 已接取状态
+        //     delete currentDir.isCan;
+        // }
+        
         res.send({
             code: 0,
-            data: task
+            data: {
+                ...task,
+                isCan,
+            }
         })
     }
 }

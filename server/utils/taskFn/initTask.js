@@ -24,7 +24,7 @@ module.exports = {
             })
         })
         can_task_pool.forEach(({ p, id }) => {
-            const tasks = createTask(req, res, p, id, { noUpTaskG: true });
+            const tasks = createTask(req, res, p, id, { noUpTaskG: true, isCan: true });
             TaskG.updataCanTaskGlobal(req, res, p, tasks);
         })
     }

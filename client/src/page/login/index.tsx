@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import Login from "./login";
 import Register from "./register";
 import './index.less';
@@ -16,5 +16,4 @@ export default ({ history }) => {
             }
         </div>
     )
-
 }

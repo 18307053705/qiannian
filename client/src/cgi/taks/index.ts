@@ -2,6 +2,7 @@ import { post } from "@request";
 const getTaskListUrl = "/task/getTaskList";
 const getTaskInfoUrl = "/task/getTaskInfo";
 const getTaskSceneUrl = "/task/getTaskScene";
+const taskSceneActiveUrl = "/task/taskSceneActive";
 
 export type TaskType =
   | "main"
@@ -29,29 +30,7 @@ export function getTaskInfo(data = { type: "main" }) {
 export function getTaskScene() {
   return post(getTaskSceneUrl);
 }
-
-
-const getTaskDetailUrl = `/task/getTaskDetail`;
-const doneTaskUrl = `/task/doneTask`;
-const getTaskStoryUrl = `/task/getTaskStory`;
-const tpTaskUrl = `/task/taskNpc`;
-
-// 获取任务详情
-export function getTaskDetail(data = { type: "main" }) {
-  return post(getTaskDetailUrl, data);
-}
-
-// 完成任务
-export function doneTask(data: { type: TaskType; id: number }) {
-  return post(doneTaskUrl, data);
-}
-
-// 获取任务剧情
-export function getTaskStory() {
-  return post(getTaskStoryUrl);
-}
-
-// 接受任务
-export function tpTask(data: { address: string }) {
-  return post(tpTaskUrl, data);
+// 任务场景操作
+export function taskSceneActive() {
+  return post(taskSceneActiveUrl);
 }

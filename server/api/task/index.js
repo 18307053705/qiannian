@@ -4,6 +4,7 @@ const { getTaskList } = require('./getTaskList');
 const { getTaskInfo } = require('./getTaskInfo');
 const { doneTask } = require('./doneTask');
 const { getTaskScene } = require('./getTaskScene');
+const { taskSceneActive } = require('./taskSceneActive');
 // 获取任务列表
 router.post("/getTaskList", getTaskList);
 // 获取任务详情
@@ -12,4 +13,6 @@ router.post("/getTaskInfo", getTaskInfo);
 router.post("/doneTask", doneTask);
 // 获取任务场景
 router.post("/getTaskScene", getTaskScene);
+// 任务场景操作
+router.post("/taskSceneActive", taskSceneActive);
 module.exports = router;

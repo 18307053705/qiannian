@@ -11,6 +11,9 @@ module.exports = {
      * @returns fight 当前杀怪信息
      */
     speedTask: function (req, res, complete) {
+        if (!complete) {
+            return { done: true }
+        }
         const { freak, article } = complete;
         let done = true;
         let exist = undefined;
