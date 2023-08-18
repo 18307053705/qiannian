@@ -41,6 +41,11 @@ const ELEMENT_1 = {
         id: 1000007,
         name: "魔族强者",
         type: 1,
+        ext: {
+            career: 1,
+            level: 1,
+            attr: 1,
+        }
     },
 };
 

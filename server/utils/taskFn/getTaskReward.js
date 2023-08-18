@@ -12,6 +12,9 @@ module.exports = {
      * @returns message 错误信息
      */
     getTaskReward: function (req, res, reward) {
+        if(!reward){
+            return;
+        }
         const { article, tael, role } = reward;
         if (reward) {
             const message = addKnapsack(req, res, { article });

@@ -8,17 +8,15 @@ module.exports = {
      * @returns grand
      */
     getGrand: function (grand, type, id, isCan) {
-        const { npc, tNpc, freak } = grand;
+        const { npc, tNpc, freak = [] } = grand;
         if (npc) {
-            // eleDir[npc.id] = { ...npc, path: '/taskScene', dir: npc.id, isCan: false, };
             const { name } = ElementTable.getElement(npc.id);
             npc.name = name;
             npc.taskType = type;
             npc.taskId = id;
             npc.path = '/taskScene';
             npc.dir = npc.id;
-            npc.isCan = isCan;
-            npc.repeat = tNpc && npc.id === tNpc.id;
+            npc.repeat = tNpc && npc.id === tNpc.id && npc.address === tNpc.address;
             npc.addressName = GrandTable.getGrandName(npc.address);
         }
         if (tNpc) {
@@ -29,17 +27,23 @@ module.exports = {
             tNpc.path = '/taskScene';
             tNpc.dir = tNpc.id;
             tNpc.isCan = isCan;
-            tNpc.repeat = npc.id === tNpc.id;
+            tNpc.repeat = npc.id === tNpc.id && npc.address === tNpc.address;
             tNpc.addressName = GrandTable.getGrandName(npc.address);
         }
-        if (freak) {
-            const { name } = ElementTable.getElement(freak.id);
-            freak.name = name;
-            freak.taskType = type;
-            freak.taskId = id;
-            freak.addressName = GrandTable.getGrandName(npc.address);
-        }
-
+        grand.freak = freak.map((itme) => {
+            const { name, ext } = ElementTable.getElement(itme.id);
+            return {
+                ...itme,
+                name,
+                taskType: type,
+                taskId: id,
+                addressName: GrandTable.getGrandName(itme.address),
+                ext: {
+                    ...ext,
+                    num: itme.num || 1
+                }
+            }
+        })
     }
 }
 

@@ -17,6 +17,9 @@ module.exports = {
      * @returns reward.text 奖励文案[]
      */
     getReward: function (rewards) {
+        if(!rewards){
+            return undefined;
+        }
         const { article, equip, tael, attr } = rewards;
         const text = [];
         const reward = {};

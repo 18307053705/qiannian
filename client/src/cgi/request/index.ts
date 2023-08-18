@@ -47,6 +47,7 @@ export async function request<T = {}>(
     const { data, request } = await axios.request(requestConfig);
     // 跳转对应路径
     if (data.path) {
+      window.QN.history.push(data.path,data.state || {});
       window.location.pathname = data.path;
     }
     if (request.status === 200 && data.code === 0) {
