@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import Login from "./login";
 import Register from "./register";
 import './index.less';
-import { resolve } from "dns";
 export default ({ history }) => {
     const [isLogin, setIsLogin] = useState(true);
     const callback = useCallback(() => {

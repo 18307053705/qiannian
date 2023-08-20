@@ -7,7 +7,7 @@ module.exports = {
         const npcEle = [];
         // console.log(tasks)
         Object.values(tasks).forEach(({ grand, complete }) => {
-            const { npc, freak = [], tNpc = {} } = grand;
+            const { npc, freak, tNpc = {} } = grand;
             if (npc.address === address) {
                 // 加入指令列表
                 eleDir[npc.id] = { ...npc, isCan: false };
@@ -24,17 +24,27 @@ module.exports = {
                 }
 
             }
+
+            if (freak) {
+                const { s = 1, c = 0 } = complete['freak'][freak.id];
+                if (freak.address === address && s > c) {
+                    // 加入指令列表
+                    eleDir[freak.id] = { ...freak, s, c, path: '/fight', dir: freak.id };
+                    // 加入元素列表
+                    npcEle.push({ name: freak.name, cs: 'g_doubt', dir: freak.id })
+                }
+            }
             // console.log(complete)
             // console.log(freak)
-            freak.forEach(({ id, ...itme }) => {
-                const { s = 1, c = 0 } = complete['freak'][id];
-                if (itme.address === address && s > c) {
-                    // 加入指令列表
-                    eleDir[id] = { ...itme, id, s, c, path: '/fight', dir: id };
-                    // 加入元素列表
-                    npcEle.push({ name: itme.name, cs: 'g_doubt', dir: id })
-                }
-            })
+            // freak.forEach(({ id, ...itme }) => {
+            //     const { s = 1, c = 0 } = complete['freak'][id];
+            //     if (itme.address === address && s > c) {
+            //         // 加入指令列表
+            //         eleDir[id] = { ...itme, id, s, c, path: '/fight', dir: id };
+            //         // 加入元素列表
+            //         npcEle.push({ name: itme.name, cs: 'g_doubt', dir: id })
+            //     }
+            // })
 
         })
         Object.values(canTasks).forEach(({ grand }) => {

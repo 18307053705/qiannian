@@ -8,7 +8,7 @@ module.exports = {
      * @returns grand
      */
     getGrand: function (grand, type, id, isCan) {
-        const { npc, tNpc, freak = [] } = grand;
+        const { npc, tNpc, freak } = grand;
         if (npc) {
             const { name } = ElementTable.getElement(npc.id);
             npc.name = name;
@@ -30,20 +30,17 @@ module.exports = {
             tNpc.repeat = npc.id === tNpc.id && npc.address === tNpc.address;
             tNpc.addressName = GrandTable.getGrandName(npc.address);
         }
-        grand.freak = freak.map((itme) => {
-            const { name, ext } = ElementTable.getElement(itme.id);
-            return {
-                ...itme,
-                name,
-                taskType: type,
-                taskId: id,
-                addressName: GrandTable.getGrandName(itme.address),
-                ext: {
-                    ...ext,
-                    num: itme.num || 1
-                }
+        if (freak) {
+            const { name, ext } = ElementTable.getElement(freak.id);
+            freak.name = name;
+            freak.taskType = type;
+            freak.taskId = id;
+            freak.addressName = GrandTable.getGrandName(freak.address);
+            freak.ext = {
+                ...ext,
+                num: freak.num || 1
             }
-        })
+        }
     }
 }
 

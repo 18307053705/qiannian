@@ -9,12 +9,11 @@ module.exports = {
     taskSceneEnd: function (req, res) {
         const dir = GrandG.getDirGlobal(req, res);
         let { currentDir } = dir;
-        const { taskId, taskType, isCan, repeat } = currentDir;
+        const { taskId, taskType } = currentDir;
         const tasks = TaskG.getTaskGlobal(req, res, taskType);
         let task = tasks[taskId];
-      
+
         const speed = taskFn.speedTask(req, res, task);
-        console.log(speed,'speed...')
         // const { text } = tasks.reward || { text: [] };
         //  完成任务
         if (speed.done) {
@@ -34,6 +33,8 @@ module.exports = {
                 task = nextTasks[task.nextId];
                 const { npc } = task.grand;
                 dir.currentDir = npc;
+            } else {
+                task.isEnd = true;
             }
         }
         res.send({
@@ -41,7 +42,8 @@ module.exports = {
             data: {
                 ...task,
                 isCan: currentDir.isCan,
-                speed
+                speed,
+                npc: dir.currentDir
             },
 
         })
