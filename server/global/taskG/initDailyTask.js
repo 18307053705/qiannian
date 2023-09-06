@@ -23,6 +23,16 @@ module.exports = {
             exploit: exploitNum,
             gang: socialize_pool.gang ? 8 : -1,
             intersect: socialize_pool.intersect ? 8 : -1,
+            lianHunDong: role_level >= 30 ? 2 : 0,
+            heiJiaoYu: role_level >= 40 ? 2 : 0,
+            siHailongGong: role_level >= 50 ? 2 : 0,
+            fengHuangTongMu: role_level >= 60 ? 2 : 0,
+            moShenChuanShuo: role_level >= 70 ? 2 : 0,
+            haiDiMoGong: role_level >= 80 ? 2 : 0,
+            tinaMoYiZhi: role_level >= 90 ? 2 : 0,
+            diFuChuanShuo: role_level >= 100 ? 2 : 0,
+            qunMoLuanWu: role_level >= 100 ? 2 : 0,
+            tianMoJIangLin: role_level >= 100 ? 2 : 0,
         }
     }
 }

@@ -29,7 +29,8 @@ export const taskScene = () => {
     }
     console.log(taskInfo)
 
-    const { talk = [], speed = {}, type, grand, isCan, reward = { text: [] }, isEnd, noLevel, level, treat } = taskInfo || {};
+    const { done = [], receive, speed = {}, status, type, grand, isCan, reward = { text: [] }, isEnd, noLevel, level, treat } = taskInfo || {};
+    const talk = status === 0 ? receive : done;
     const active = talk.length ? talk.splice(-1)[0].split('&') : [];
 
     const doneTask = () => {
@@ -52,10 +53,6 @@ export const taskScene = () => {
     if (isEnd) {
         return (
             <div className={Styles['page-task-scene']}>
-                <TaskResult reward={reward} speed={speed} />
-                {
-                    talk.map((text, index) => <div key={index}>{text}</div>)
-                }
                 <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
             </div>
         )
@@ -63,7 +60,7 @@ export const taskScene = () => {
 
 
     // isCan true:未接任务 展示任务内容
-    if (isCan) {
+    if (status === 0) {
         return (
             <div className={Styles['page-task-scene']}>
                 <TaskResult reward={reward} speed={speed} />
@@ -80,7 +77,7 @@ export const taskScene = () => {
     }
 
     // 完成任务
-    if (speed.done) {
+    if (status === 2 || status === 3) {
         return (
             <div className={Styles['page-task-scene']}>
                 <TaskResult reward={reward} speed={speed} />

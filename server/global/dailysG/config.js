@@ -12,7 +12,7 @@
  * @param {*} dailys.shenYuan 深渊{s:进入次数,l:当前层数}}
  * @param {*} dailys.xiuLian 修炼房{s:进入次数,l:当前层数}}
  * @param {*} dailys.QingYuan 情缘副本
- * @param {*} dailys.lianHunDong 30级炼魂洞副本
+ * @param {*} dailys.lianHunDong 30级炼魂洞副本{s:进入次数}
  * @param {*} dailys.heiJiaoYu 40级黑角域副本
  * @param {*} dailys.siHailongGong 50级四海龙宫副本
  * @param {*} dailys.fengHuangTongMu 60级凤凰桐木副本

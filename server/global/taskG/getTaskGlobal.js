@@ -30,6 +30,7 @@ module.exports = {
      * @returns task.speed.done 是否完成
      * @returns task.speed.exist 物品收集信息{id:{id,n,p,s,c}}
      * @returns task.speed.fight 杀过进度信息{id:{id,n,s,c}}
+     * @returns task.status 任务状态 0未接 1进行中 2完成
      * @returns task.nextId 下一个任务id
      */
     getTaskGlobal: function (req, res, type) {

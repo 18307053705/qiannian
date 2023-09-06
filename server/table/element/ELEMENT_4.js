@@ -139,7 +139,11 @@ const ELEMENT_4 = {
         type: 4,
         cs: "g_b_u"
     },
-    
+    4000024: {
+        id: 4000024,
+        name: "【炼魂洞副本】",
+        type: 4,
+    },
 };
 module.exports = {
     ELEMENT_4

@@ -1,5 +1,6 @@
 const { RoleG, TaskG } = require('../../global');
 const peopleMian = require('./peopleMian');
+const copy = require('./copy');
 const daily = require('./daily');
 
 const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = TaskG;
@@ -36,6 +37,9 @@ module.exports = {
         const { role_race } = RoleG.getRoleGlobal(req, res);
         if (type === TASK_TYPE_MEUN.main && role_race === 1) {
             return peopleMian[id] ? JSON.parse(JSON.stringify(peopleMian[id])) : undefined;
+        }
+        if (type === TASK_TYPE_MEUN.copy) {
+            return copy[id] ? JSON.parse(JSON.stringify(copy[id])) : undefined;
         }
         if (DAIL_TYPE_LIST.includes(type)) {
             return daily[id] ? JSON.parse(JSON.stringify(daily[id])) : undefined;

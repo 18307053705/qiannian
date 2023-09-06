@@ -5,7 +5,7 @@ interface requestConfig {
   type?: Method;
 }
 
-const URL =  window.location.hostname + "/api" || "//qiannian.com/api";
+const URL = window.location.hostname + "/api" || "//qiannian.com/api";
 
 export interface BaseRequstData {
   [key: string]: any;
@@ -47,8 +47,7 @@ export async function request<T = {}>(
     const { data, request } = await axios.request(requestConfig);
     // 跳转对应路径
     if (data.path) {
-      window.QN.history.push(data.path,data.state || {});
-      window.location.pathname = data.path;
+      window.QN.history.push(data.path, data.state || {});
     }
     if (request.status === 200 && data.code === 0) {
       if (data.message) {
@@ -63,7 +62,7 @@ export async function request<T = {}>(
       goLogin();
     } else if (data.code === 100001 || data.code === 100006) {
       // 指令异常，返回角色选择页
-      window.location.pathname = "/";
+      window.QN.history.push('/', data.state || {});
     }
     return Promise.reject(data);
   } catch (err) {

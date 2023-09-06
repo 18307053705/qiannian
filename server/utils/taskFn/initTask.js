@@ -1,6 +1,6 @@
-const { RoleG, TaskG } = require('../../global');
+const { RoleG, TaskG, DailysG } = require('../../global');
 const { createTask } = require('./createTask');
-
+const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     /**
      * 初始化任务池
@@ -8,8 +8,8 @@ module.exports = {
      * @param {*} res 
      */
     initTask: function (req, res) {
-        const { can_task_pool, task_pool } = RoleG.getRoleGlobal(req, res);
-        task_pool.forEach(({ p, id, f }) => {
+        const { task_pool } = RoleG.getRoleGlobal(req, res);
+        task_pool.forEach(({ p, id, f,s }) => {
             createTask(req, res, p, id, {
                 callback: function (task) {
                     if (task.complete) {
@@ -19,13 +19,17 @@ module.exports = {
                             freaks[freakId].c = f[c];
                         })
                     }
-
+                    task.status = s;
                 }
             })
         })
-        can_task_pool.forEach(({ p, id }) => {
-            const tasks = createTask(req, res, p, id, { noUpTaskG: true, isCan: true });
-            TaskG.updataCanTaskGlobal(req, res, p, tasks);
-        })
+        // can_task_pool.forEach(({ p, id }) => {
+        //     const tasks = createTask(req, res, p, id, { noUpTaskG: true, isCan: true });
+        //     TaskG.updataCanTaskGlobal(req, res, p, tasks);
+        // })
+        // const dailys = DailysG.getDailysGlobal(req, res);
+        // if (dailys.lianHunDong) {
+        //    createTask(req, res, TASK_TYPE_MEUN.copy, 1);
+        // }
     }
 }

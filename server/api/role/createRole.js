@@ -1,7 +1,8 @@
-const { ErrorG, RoleG, KnapsackG,DailysG } = require('../../global');
+const { ErrorG, RoleG, KnapsackG, DailysG, TaskG } = require('../../global');
 const { AttributeTable } = require('../../table');
 const { roleFn } = require('../../utils');
 const MEUN = require('../../meun');
+const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     /**
      * 创建角色
@@ -69,12 +70,10 @@ module.exports = {
                     { id: 2, n: '御宠之术', p: 9 },
                 ]
             },
-            task_pool: {
-                main: []
-            },
-            can_task_pool: {
-                main: [1]
-            },
+            task_pool: [{ p: TASK_TYPE_MEUN.main, id: 1, s: 0 }],
+            // can_task_pool: {
+            //     main: [1]
+            // },
             role_integral: {},
             pet_pool: {
                 c: {},
@@ -115,7 +114,7 @@ module.exports = {
         const friendsRes = res.asyncAdd(friendsSql, friendsData);
         await Promise.all([roleRes, knapsackRes, warehouseRes, friendsRes]);
         // 
-        await roleFn.roleLogin(req,res,sqlInfo,knapsackData);
+        await roleFn.roleLogin(req, res, sqlInfo, knapsackData);
         // 退出同账号下的其他角色
         // await roleFn.roleExit(req, res);
         // // 保存全局角色信息,并且记录登录时间

@@ -17,7 +17,7 @@ module.exports = {
      * @param {*} data.isCan 默认false,是否未未接任务
      * @returns tasks {id:task}
      */
-    createTask: function (req, res, type, id, { callback, noUpTaskG,isCan } = {}) {
+    createTask: function (req, res, type, id, { callback, noUpTaskG, isCan } = {}) {
         const { role_level } = RoleG.getRoleGlobal(req, res);
         const task = TaskTable.getTask(req, res, type, id);
         let reward = undefined;
@@ -29,17 +29,22 @@ module.exports = {
         if (type === TASK_TYPE_MEUN.main) {
             reward = getReward(task.reward);
         }
+        // 副本任务奖励解析
+        if (type === TASK_TYPE_MEUN.copy) {
+            reward = getReward(task.reward);
+        }
         task.reward = reward;
         const { grand, complete } = task;
         // 地图解析
         if (grand) {
-            getGrand(grand, type, id,isCan);
+            getGrand(grand, type, id, isCan);
         }
         // 完成条件解析
         if (complete) {
             task.complete = getComplete(complete);
         }
         task.taskType = type;
+        task.status = 0;
         const tasks = { [id]: task };
         callback && callback(task);
         // 加入全局任务列表

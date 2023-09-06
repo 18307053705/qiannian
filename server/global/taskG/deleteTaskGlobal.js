@@ -15,7 +15,11 @@ module.exports = {
         if (!tasks || !tasks[type] || !tasks[type][id]) {
             return;
         }
+        console.log(tasks,'tasks...');
+        console.log(tasks[type],'tasks[type]...');
         delete tasks[type][id];
+        console.log(tasks,'tasks[type]del..');
+
         if(JSON.stringify(tasks[type]) === '{}'){
             delete tasks[type];
         }
