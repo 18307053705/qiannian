@@ -12,10 +12,11 @@ module.exports = {
         const daitys = DailysG.getDailysGlobal(req, res);
         const taskList = [];
         Object.keys(daitys).forEach((key) => {
-            if (TASK_TYPE_TEXT_MEUN[key] && daitys[key] !== -1) {
+            const text = TASK_TYPE_TEXT_MEUN[TASK_TYPE_MEUN[key] || -1]
+            if (text && daitys[key] !== -1) {
                 taskList.push({
-                    text:`${TASK_TYPE_TEXT_MEUN[key]}(${daitys[key]})`,
-                    type:key
+                    text: `${text}(${daitys[key]})`,
+                    type: TASK_TYPE_MEUN[key]
                 })
             }
         })
@@ -24,7 +25,7 @@ module.exports = {
             message,
             data: {
                 taskList,
-                task:tasks,
+                task: tasks,
                 DAIL_TYPE_LIST
             },
         })

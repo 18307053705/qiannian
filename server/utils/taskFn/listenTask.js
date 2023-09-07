@@ -16,9 +16,11 @@ module.exports = {
         Object.keys(taskG || {}).forEach((type) => {
             const tasks = taskG[type];
             let isUpdata = false;
-            Object.keys(tasks).forEach((taskId,index) => {
-                const task = tasks[taskId];
-                const { freak: freaks } = task.complete;
+            Object.values(tasks).forEach(({ title, complete, type: taskType }, index) => {
+                if (taskType !== 1) {
+                    return;
+                }
+                const { freak: freaks } = complete;
                 if (freaks && freaks[freakId]) {
                     const freak = freaks[freakId];
                     freak.c += num;
@@ -26,7 +28,7 @@ module.exports = {
                     isUpdata = true;
                     freakObj[`${type}${index}`] = {
                         ...freak,
-                        title:task.title
+                        title
                     };
                 }
             })

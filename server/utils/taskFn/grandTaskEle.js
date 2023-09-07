@@ -3,14 +3,16 @@ const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     grandTaskEle: function (req, res, address, eleList, eleDir) {
         const tasksMap = {
-            main: TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.main),
-            copy: TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy)
+            [TASK_TYPE_MEUN.main]: TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.main),
+            [TASK_TYPE_MEUN.copy]: TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy)
         };
         const npcEle = [];
-        Object.values(tasksMap).forEach((tasks) => {
+        Object.keys(tasksMap).forEach((type) => {
+            const tasks = tasksMap[type];
             if (tasks) {
-                Object.values(tasks).forEach(({ grand, complete, status }) => {
-                    if(status === 3){
+                Object.values(tasks).forEach(({ grand, complete, status, title, id }) => {
+                    if (status === 3) {
+                        TaskG.deleteTaskGlobal(req, res, type, id);
                         return;
                     }
                     const { npc, freak = [], tNpc = {} } = grand;
@@ -33,6 +35,9 @@ module.exports = {
                         }
                         freak.forEach(({ id, ...itme }) => {
                             const { s = 1, c = 0 } = complete['freak'][id];
+                            if (!complete['freak'][id]) {
+                                console.log('grandTaskEle-错误怪物ID:', id, '任务title:', title)
+                            }
                             if (itme.address === address && s > c) {
                                 // 加入指令列表
                                 eleDir[id] = { ...itme, id, s, c, path: '/fight', dir: id };

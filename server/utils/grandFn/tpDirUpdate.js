@@ -10,7 +10,7 @@ module.exports = {
      */
     tpDirUpdate: function (req, res, dir) {
         const { address } = RoleG.getRoleGlobal(req, res);
-        if (address !== dir) {
+        if (dir && address !== dir) {
             RoleG.updataRoleGlobal(req, res, { address: dir });
         }
         res.send({

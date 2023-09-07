@@ -6,10 +6,7 @@ import { backGrand } from '@utils/grand';
 import Styles from './index.less';
 
 
-const TaskResult = ({ reward, speed }) => {
-    if (!speed.done) {
-        return null;
-    }
+const TaskResult = ({ reward }) => {
     const { text } = reward;
     return (
         text.map((text, index) => <div key={index}>{text}</div>)
@@ -29,7 +26,7 @@ export const taskScene = () => {
     }
     console.log(taskInfo)
 
-    const { done = [], receive, speed = {}, status, type, grand, isCan, reward = { text: [] }, isEnd, noLevel, level, treat } = taskInfo || {};
+    const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, treat } = taskInfo || {};
     const talk = status === 0 ? receive : done;
     const active = talk.length ? talk.splice(-1)[0].split('&') : [];
 
@@ -42,7 +39,6 @@ export const taskScene = () => {
     if (noLevel) {
         return (
             <div className={Styles['page-task-scene']}>
-                <TaskResult reward={reward} speed={speed} />
                 <div>请先将等级提示到{level}</div>
                 <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
             </div>
@@ -63,7 +59,6 @@ export const taskScene = () => {
     if (status === 0) {
         return (
             <div className={Styles['page-task-scene']}>
-                <TaskResult reward={reward} speed={speed} />
                 {
                     talk.map((text, index) => <div key={index}>{text}</div>)
                 }
@@ -80,7 +75,7 @@ export const taskScene = () => {
     if (status === 2 || status === 3) {
         return (
             <div className={Styles['page-task-scene']}>
-                <TaskResult reward={reward} speed={speed} />
+                <TaskResult reward={reward} />
                 {
                     talk.map((text, index) => <div key={index}>{text}</div>)
                 }
@@ -102,7 +97,7 @@ export const taskScene = () => {
     }
     return (
         <div className={Styles['page-task-scene']}>
-            <div>描述：{taskInfo.tips}</div>
+            {/* <div>描述：{taskInfo.tips}</div> */}
             <div>提示：{text}</div>
             <div>
                 <span className='g_u_end' onClick={tpClick}>传送到{name}</span>

@@ -23,25 +23,26 @@ const CAN_TASKS_Global = {
 const TASK_TYPE_MEUN = {
     main: 1,
     exp: 2,
-    tael: 3,
-    exploit: 4,
-    gang: 5,
-    intersect: 6,
-    chance: 7,
-    copy: 8,
+    world: 3,
+    tael: 4,
+    exploit: 5,
+    gang: 6,
+    intersect: 7,
+    chance: 8,
+    copy: 9,
 }
 
-// const TASK_TYPE_MEUN = {
-//     main: 'main',
-//     exp: 'exp',
-//     tael: 'tael',
-//     world: 'world',
-//     exploit: 'exploit',
-//     gang: 'gang',
-//     intersect: 'intersect',
-//     chance: 'chance',
-//     copy: 'copy',
-// };
+const TASK_TYPE_KEY_MEUN = {
+    [TASK_TYPE_MEUN.main]: 'main',
+    [TASK_TYPE_MEUN.exp]: 'exp',
+    [TASK_TYPE_MEUN.tael]: 'tael',
+    [TASK_TYPE_MEUN.world]: 'world',
+    [TASK_TYPE_MEUN.gang]: 'gang',
+    [TASK_TYPE_MEUN.intersect]: 'intersect',
+    [TASK_TYPE_MEUN.exploit]: 'exploit',
+    [TASK_TYPE_MEUN.chance]: 'chance',
+    [TASK_TYPE_MEUN.copy]: 'copy',
+};
 const TASK_TYPE_TEXT_MEUN = {
     [TASK_TYPE_MEUN.main]: '主线任务',
     [TASK_TYPE_MEUN.exp]: '每日经验',
@@ -66,5 +67,6 @@ module.exports = {
     CAN_TASKS_Global,
     TASK_TYPE_MEUN,
     TASK_TYPE_TEXT_MEUN,
-    DAIL_TYPE_LIST
+    DAIL_TYPE_LIST,
+    TASK_TYPE_KEY_MEUN
 }

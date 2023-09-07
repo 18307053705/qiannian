@@ -9,7 +9,12 @@ module.exports = {
      */
     initTask: function (req, res) {
         const { task_pool } = RoleG.getRoleGlobal(req, res);
-        task_pool.forEach(({ p, id, f,s }) => {
+        // 记录在任务中的副本
+        const copyTaskIds = {};
+        task_pool.forEach(({ p, id, f, s }) => {
+            if (p === TASK_TYPE_MEUN.copy) {
+                copyTaskIds[id] = id;
+            }
             createTask(req, res, p, id, {
                 callback: function (task) {
                     if (task.complete) {
@@ -23,13 +28,9 @@ module.exports = {
                 }
             })
         })
-        // can_task_pool.forEach(({ p, id }) => {
-        //     const tasks = createTask(req, res, p, id, { noUpTaskG: true, isCan: true });
-        //     TaskG.updataCanTaskGlobal(req, res, p, tasks);
-        // })
-        // const dailys = DailysG.getDailysGlobal(req, res);
-        // if (dailys.lianHunDong) {
-        //    createTask(req, res, TASK_TYPE_MEUN.copy, 1);
-        // }
+        const dailys = DailysG.getDailysGlobal(req, res);
+        if (dailys.lianHunDong && !copyTaskIds[1]) {
+            createTask(req, res, TASK_TYPE_MEUN.copy, 1);
+        }
     }
 }

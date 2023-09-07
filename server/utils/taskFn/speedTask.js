@@ -40,7 +40,7 @@ module.exports = {
         return {
             done,
             exist,
-            fight: freak
+            fight: JSON.stringify(freak) === '{}' ? undefined : freak
         }
     }
 }

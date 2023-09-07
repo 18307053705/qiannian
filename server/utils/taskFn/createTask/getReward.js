@@ -65,7 +65,7 @@ module.exports = {
                     P: 3,
                     s: s - 0
                 }
-                text.push(`${n}x${s}`);
+                text.push(`${name}x${s}`);
             })
             articles['equipReward'] = equipReward;
         }

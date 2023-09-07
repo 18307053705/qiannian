@@ -40,7 +40,7 @@ function receiveTask(req, res, task) {
     let message = undefined;
 
     // 判断任务是否为对话型，且对话npc就是自身，并且坐标一致
-    if (type === 2 && npc.id === tNpc.id && npc.address === tNpc.address) {
+    if (type === 2 && !tNpc) {
         task.status = 2;
         message = doneTask(req, res, task, taskType);
     }
@@ -90,6 +90,9 @@ module.exports = {
             // 更新为已接状态
             task.status = 1;
             const { message, ...data } = receiveTask(req, res, task);
+            if (task.status === 1) {
+                return grandFn.tpDirUpdate(req, res);
+            }
             res.send({
                 code: 0,
                 data,
@@ -100,23 +103,25 @@ module.exports = {
         // 完成任务
         if (task.status === 1 || task.status === 2) {
             const speed = taskFn.speedTask(req, res, task);
-            let message = undefined;
-            // 更新为进行中
-            task.status = 1;
             if (speed.done) {
                 // 更新为可完成状态
                 task.status = 2;
-                message = doneTask(req, res, task, taskType);
+                const message = doneTask(req, res, task, taskType);
+                TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
+                res.send({
+                    code: 0,
+                    data: {
+                        ...task,
+                        npc: dir.currentDir,
+                    },
+                    message
+                })
+            } else {
+                // 更新为进行中
+                task.status = 1;
+                TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
+                grandFn.tpDirUpdate(req, res);
             }
-            TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-            res.send({
-                code: 0,
-                data: {
-                    ...task,
-                    npc: dir.currentDir,
-                },
-                message
-            })
             return;
         }
         // 任务已完成，传送至下个任务坐标

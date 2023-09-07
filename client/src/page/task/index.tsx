@@ -4,22 +4,33 @@ import { tpDir } from '@cgi/grand';
 import { getTaskList, doneTask } from '@cgi/taks';
 
 const SpeedText = ({ task }) => {
-    const { grand, speed } = task;
+    const { grand, speed, status } = task;
+    if (status === 0) {
+        return <div>进度：{grand.npc.name}(未领取)</div>;
+    }
     if (speed) {
         const { fight, exist } = speed;
         const speedArr = [...Object.values(fight || {}), ...Object.values(exist || {})];
         return <div>进度：{speedArr.map(({ n, s, c }: any) => `${n}(${c}/${s})`).join(',')}</div>;
     }
-    const { name } = grand.tNpc;
+    const { name } = grand.tNpc || grand.npc;
     return <div>进度：{name}对话(未完成)</div>
 
 }
 
 const DeonTaskBtn = ({ task, dailList, deonTask }) => {
-    const { id, speed, taskType, grand } = task;
+    const { id, speed, taskType, grand, status } = task;
     const { done } = speed || {};
     const { npc, tNpc, freak } = grand || {};
-    const { addressName, address } = tNpc || freak || npc;
+    let tpInfo = npc;
+    if (status === 2 && tNpc) {
+        tpInfo = tNpc;
+    }
+    if (status === 1 && freak.length) {
+        tpInfo = freak[0];
+    }
+
+    const { addressName, address } = tpInfo;
     // 传送到目标位置
     const tpClick = () => {
         tpDir({ dir: address }).then(() => {
@@ -47,7 +58,7 @@ export const Task = () => {
         taskDetail: [],
         dailList: []
     })
-    const getTaskInfo = (type = 'main') => {
+    const getTaskInfo = (type = 1) => {
         getTaskList({ type }).then(({ data, message }) => {
             if (!message) {
                 setTasks({
@@ -77,6 +88,7 @@ export const Task = () => {
             <div>
                 {
                     taskDetail.map((itme) => {
+                        console.log(itme)
                         const { id, title, tips, reward = { text: [] } } = itme;
                         return (
                             <div key={id}>

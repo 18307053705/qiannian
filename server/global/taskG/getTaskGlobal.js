@@ -19,7 +19,7 @@ module.exports = {
      * @returns task.reward.role {exp:100,world:100,gang:100,intersect:100,exploit:100}
      * @returns task.grand 地图信息
      * @returns task.grand.npc 领取任务npc{address,id,name}
-     * @returns task.grand.tNpc 目标npc{address,id}(对话型任务)
+     * @returns task.grand.tNpc 完成任务npc{address,id}不存在，则是领取任务npc自身，且坐标一致
      * @returns task.grand.freak 目标怪物{address,id,s:次数}(战斗型任务)
      * @returns task.neck 领任务文案[]
      * @returns task.done 完成任务文案[]

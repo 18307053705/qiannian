@@ -2,7 +2,7 @@
 const { TaskG, DailysG } = require('../../global');
 const { createTask } = require('./createTask');
 const { speedTask } = require('./speedTask');
-const { DAIL_TYPE_LIST, TASK_TYPE_TEXT_MEUN } = TaskG;
+const { DAIL_TYPE_LIST, TASK_TYPE_TEXT_MEUN, TASK_TYPE_KEY_MEUN } = TaskG;
 module.exports = {
     /**
      * 获取任务信息
@@ -15,25 +15,27 @@ module.exports = {
         // 判断是否为每日任务,且不存在
         if (DAIL_TYPE_LIST.includes(type) && !tasks) {
             const daitys = DailysG.getDailysGlobal(req, res);
+            const daitysKey = TASK_TYPE_KEY_MEUN[type];
             // 不可继续领取
-            if (daitys[type] === -1 || !daitys[type]) {
+            if (daitys[daitysKey] === -1 || !daitys[daitysKey]) {
                 return {
                     message: `${TASK_TYPE_TEXT_MEUN[type]}已经达到领取上限。`
                 }
             }
             // 每日任务减-1
-            DailysG.updataDailysGlobal(req, res, { [type]: daitys[type] - 1 });
+            DailysG.updataDailysGlobal(req, res, { [daitysKey]: daitys[daitysKey] - 1 });
             // 创建任务
-            tasks = createTask(req, res, type, Math.floor(Math.random() * 2) + 1);
+            tasks = createTask(req, res, type, Math.floor(Math.random() * 2) + 1, {
+                callback: (task) => {
+                    task.status = 1;
+                }
+            });
         }
-        Object.values(tasks || {}).forEach((task)=>{
-            if(task.complete){
-                task.speed = speedTask(req, res, task.complete);
-            }
-            
+        Object.values(tasks).forEach((task) => {
+            task.speed = speedTask(req, res, task);
         })
         return {
-            tasks
+            tasks: tasks
         }
 
     }
