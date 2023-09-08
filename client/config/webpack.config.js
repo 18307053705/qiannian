@@ -74,15 +74,15 @@ module.exports = {
             }
           },
 
-          {
-            loader: 'px2rem-loader',
-            options: {
-              // 1rem等于75px,适用于750px视觉稿
-              remUnit: 37.5,
-              // px转成rem后小数点的位数
-              remPrecision: 8
-            }
-          },
+          // {
+          //   loader: 'px2rem-loader',
+          //   options: {
+          //     // 1rem等于75px,适用于750px视觉稿
+          //     remUnit: 37.5,
+          //     // px转成rem后小数点的位数
+          //     remPrecision: 8
+          //   }
+          // },
 
           {
             loader: "less-loader",
@@ -93,17 +93,17 @@ module.exports = {
               },
             },
           },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('autoprefixer')({
-                  // 最近两个版本、使用人数所占比例、兼容哪个版本以上
-                  browsers: ['last 2 version', '>1%', 'ios 7']
-                })
-              ]
-            }
-          },
+          // {
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     plugins: () => [
+          //       require('autoprefixer')({
+          //         // 最近两个版本、使用人数所占比例、兼容哪个版本以上
+          //         browsers: ['last 2 version', '>1%', 'ios 7']
+          //       })
+          //     ]
+          //   }
+          // },
 
         ],
       },

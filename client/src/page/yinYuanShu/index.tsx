@@ -4,7 +4,7 @@ import { List } from '@components';
 import { getMarriage, attached } from '@cgi/qingyuan';
 
 export const YinYuanShu = () => {
-    const [info, setInfo]: any = useState({});
+    const [info, setInfo]: any = useState();
     useEffect(() => {
         getMarriage().then(({ data }) => {
             setInfo(data);
@@ -22,7 +22,7 @@ export const YinYuanShu = () => {
 
         })
     }
-    console.log(info)
+    console.log(info,'YinYuanShu...')
     if (!info) {
         return null;
     }

@@ -4,9 +4,6 @@ const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
 const taskFn = require('../taskFn');
 const { getSpecificGrand } = require('./getSpecificGrand');
 
-
-
-
 function getGrand(address) {
     const { x, y, grand } = GrandTable.getGrandInfo(address);
     const { name, data } = grand;
