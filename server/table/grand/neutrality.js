@@ -14,7 +14,7 @@ const neutralityGrand = {
             [
                 {
                     list: [
-                        [1000002]
+                        [12]
                     ],
                 }
             ]
@@ -27,7 +27,7 @@ const neutralityGrand = {
             [
                 {
                     list: [
-                        [1000002]
+                        [12]
                     ],
                 }
             ]
@@ -40,7 +40,7 @@ const neutralityGrand = {
             [
                 {
                     list: [
-                        [1000002]
+                        [12]
                     ],
                 }
             ]
@@ -53,7 +53,7 @@ const neutralityGrand = {
             [
                 {
                     list: [
-                        [1000002]
+                        [12]
                     ],
                 }
             ]
@@ -66,7 +66,7 @@ const neutralityGrand = {
             [
                 {
                     list: [
-                        [1000002]
+                        [12]
                     ],
                 }
             ]

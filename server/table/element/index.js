@@ -30,18 +30,18 @@ module.exports = {
      * @returns {*} ele.path 跳转链接
      */
     getElement: function (eleId) {
-        const eleType = Math.floor(eleId / 1000000);
+        const eleType = (eleId + "")[0];
         let eleMap = undefined;
-        if (eleType === 1) {
+        if (eleType === '1') {
             eleMap = ELEMENT_1;
         }
-        if (eleType === 2) {
+        if (eleType === '2') {
             eleMap = ELEMENT_2;
         }
-        if (eleType === 3) {
+        if (eleType === '3') {
             eleMap = ELEMENT_3;
         }
-        if (eleType === 4) {
+        if (eleType === '4') {
             eleMap = ELEMENT_4;
         }
         return eleMap[eleId] ? JSON.parse(JSON.stringify(eleMap[eleId])) : {};
@@ -54,18 +54,18 @@ module.exports = {
      */
     getElementList: function (startId, endId) {
         const eleList = [];
-        const eleType = Math.floor(startId / 1000000);
         let eleMap = undefined;
-        if (eleType === 1) {
+        const eleType = (startId + "")[0];
+        if (eleType === '1') {
             eleMap = ELEMENT_1;
         }
-        if (eleType === 2) {
+        if (eleType === '2') {
             eleMap = ELEMENT_2;
         }
-        if (eleType === 3) {
+        if (eleType === '3') {
             eleMap = ELEMENT_3;
         }
-        if (eleType === 4) {
+        if (eleType === '4') {
             eleMap = ELEMENT_4;
         }
 

@@ -10,16 +10,10 @@ const TASKS_Global = {
     //     world:{},
     // }
 }
-
-const CAN_TASKS_Global = {
-    // role_id:{
-    //     mian:{},
-    //     exp:{}, 
-    //     tael:{},
-    //     world:{},
-    // }
+const TASK_TYPE = {
+    zhanDou: 1,
+    duiHua: 2,
 }
-
 const TASK_TYPE_MEUN = {
     main: 1,
     exp: 2,
@@ -64,9 +58,9 @@ const DAIL_TYPE_LIST = [
 ];
 module.exports = {
     TASKS_Global,
-    CAN_TASKS_Global,
     TASK_TYPE_MEUN,
     TASK_TYPE_TEXT_MEUN,
     DAIL_TYPE_LIST,
-    TASK_TYPE_KEY_MEUN
+    TASK_TYPE_KEY_MEUN,
+    TASK_TYPE
 }

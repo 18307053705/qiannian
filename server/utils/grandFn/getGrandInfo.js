@@ -2,6 +2,10 @@ const { GrandTable, ElementTable } = require("../../table");
 const { updataRoleGlobal } = require("../../global/roleG/updataRoleGlobal");
 const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
 const taskFn = require('../taskFn');
+const { getSpecificGrand } = require('./getSpecificGrand');
+
+
+
 
 function getGrand(address) {
     const { x, y, grand } = GrandTable.getGrandInfo(address);
@@ -59,7 +63,7 @@ module.exports = {
         }
         const { x, y, grand } = gGrandInfo;
         const { name, data } = grand;
-        const { list, n, tip } = data[x][y];
+        const { list = [], n, tip } = data[x][y];
         const eleDir = {};
         const eleList = [];
         list.forEach(info => {
@@ -71,6 +75,8 @@ module.exports = {
             });
             eleList.push(eleItme)
         });
+        // 获取必须满足某些条件才会出现的特殊元素
+        getSpecificGrand(req, res, address, eleList, eleDir)
         // 获取任务临时元素
         taskFn.grandTaskEle(req, res, address, eleList, eleDir);
         return {

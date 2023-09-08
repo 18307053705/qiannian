@@ -19,15 +19,16 @@ const SpeedText = ({ task }) => {
 }
 
 const DeonTaskBtn = ({ task, dailList, deonTask }) => {
-    const { id, speed, taskType, grand, status } = task;
+    const { id, speed, taskType, grand, status, complete } = task;
     const { done } = speed || {};
-    const { npc, tNpc, freak } = grand || {};
+    const { npc, tNpc, freak = [] } = grand || {};
     let tpInfo = npc;
     if (status === 2 && tNpc) {
         tpInfo = tNpc;
     }
-    if (status === 1 && freak.length) {
-        tpInfo = freak[0];
+    if (status === 1 && freak.length && !done) {
+        const { freak: freakS } = complete;
+        tpInfo = freak.find(({ id }) => freakS[id].s > freakS[id].c);
     }
 
     const { addressName, address } = tpInfo;
@@ -58,8 +59,12 @@ export const Task = () => {
         taskDetail: [],
         dailList: []
     })
-    const getTaskInfo = (type = 1) => {
-        getTaskList({ type }).then(({ data, message }) => {
+    const getTaskInfo = (type?: number) => {
+        if (type) {
+            sessionStorage.setItem('taskType', type.toString())
+        }
+        const taskType = sessionStorage.getItem('taskType') || '1';
+        getTaskList({ type: type || Number(taskType) }).then(({ data, message }) => {
             if (!message) {
                 setTasks({
                     taskList: data.taskList,

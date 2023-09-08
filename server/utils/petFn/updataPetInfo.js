@@ -1,4 +1,3 @@
-const { RoleG } = require('../../global');
 const PET_JSON_KEYS = [
     'art',
     'equip',

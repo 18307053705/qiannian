@@ -131,7 +131,7 @@ const Grand = ({ history }) => {
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 1 }) }}>帮会</span>
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 2 }) }}>庄园</span>
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 3 }) }}>队伍</span>
-                <span className="g_b_u">情缘</span>
+                <span className="g_b_u" onClick={() => { history.push('/qingYuan') }} >情缘</span>
             </div>
             <div>
                 <span className="g_b_u" onClick={() => { history.push('/equip') }}>装备</span>

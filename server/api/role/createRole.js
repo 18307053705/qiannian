@@ -87,7 +87,8 @@ module.exports = {
                 lp: { exp: 0, s: 0 },
                 jbp: { exp: 0, l: 0, lx: 0, id: 0 },
             },
-            jackpot: { equip: 0, pet: 0, art: 0, level: 0, invest: 0 }
+            jackpot: { equip: 0, pet: 0, art: 0, level: 0, invest: 0 },
+            qingyuan:{}
         }
         // 角色信息
         const keys = [];

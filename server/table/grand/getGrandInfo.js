@@ -2,7 +2,8 @@ const { peopleGrand } = require('./people');
 const { goblinGrand } = require('./goblin');
 const { immortalGrand } = require('./immortal');
 const { neutralityGrand } = require('./neutrality');
-
+const { copyGrand } = require('./copy');
+const { differenceGrand } = require('./difference');
 module.exports = {
     /**
      * 获取地图元素信息
@@ -28,7 +29,13 @@ module.exports = {
         if (grandId === '4') {
             grand = neutralityGrand[id];
         }
-        if(!grand){
+        if (grandId === '5') {
+            grand = copyGrand[id];
+        }
+        if (grandId === '6') {
+            grand = differenceGrand[id];
+        }
+        if (!grand) {
             return undefined;
         }
         return {

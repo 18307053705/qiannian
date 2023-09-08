@@ -26,7 +26,7 @@ export const taskScene = () => {
     }
     console.log(taskInfo)
 
-    const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, treat } = taskInfo || {};
+    const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, treat, complete, grand,tips } = taskInfo || {};
     const talk = status === 0 ? receive : done;
     const active = talk.length ? talk.splice(-1)[0].split('&') : [];
 
@@ -87,8 +87,21 @@ export const taskScene = () => {
             </div>
         )
     }
+
+    const { npc, tNpc, freak = [] } = grand || {};
+    let tpInfo = npc;
+    if (status === 2 && tNpc) {
+        tpInfo = tNpc;
+    }
+    if (status === 1 && freak.length) {
+        const { freak: freakS } = complete;
+        tpInfo = freak.find(({ id }) => freakS[id].s > freakS[id].c);
+    }
+
+    const { addressName, address } = tpInfo;
+
     // 未完成任务提示
-    const { address, name, text } = treat;
+    // const { name, text } = treat;
     const tpClick = () => {
         tpDir({ dir: address }).then(() => {
             backGrand();
@@ -98,9 +111,9 @@ export const taskScene = () => {
     return (
         <div className={Styles['page-task-scene']}>
             {/* <div>描述：{taskInfo.tips}</div> */}
-            <div>提示：{text}</div>
+            <div>提示：{tips}</div>
             <div>
-                <span className='g_u_end' onClick={tpClick}>传送到{name}</span>
+                <span className='g_u_end' onClick={tpClick}>传送到{addressName}</span>
             </div>
             <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
         </div>

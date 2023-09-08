@@ -43,13 +43,13 @@ const ROLE_JSON_KEYS = [
     'buff_pool',
     'reputation_pool',
     'task_pool',
-    'can_task_pool',
     'role_attr',
     'role_buff',
     'pet_pool',
     'role_integral',
     'treasure_pool',
     'jackpot',
+    'qingyuan',
 ];
 
 /**

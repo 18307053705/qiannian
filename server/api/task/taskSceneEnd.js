@@ -2,7 +2,7 @@
 
 const { GrandG, TaskG, RoleG } = require('../../global');
 const { taskFn, grandFn } = require('../../utils');
-
+const { TASK_TYPE } = TaskG;
 /**
  * 完成任务逻辑
  * @param {*} req 
@@ -15,7 +15,7 @@ function doneTask(req, res, task, type) {
     if (message) {
         return message;
     }
-    // 完成状态
+    // 更新为已完成状态
     task.status = 3;
     // 完成任务后判断是否有下个任务,有则加入已领取任务
     if (task.nextId) {
@@ -36,21 +36,41 @@ function receiveTask(req, res, task) {
     const { currentDir } = dir;
     const { taskType, taskId } = currentDir;
     const { type, grand } = task;
-    const { npc, tNpc } = grand;
+    const { tNpc } = grand;
     let message = undefined;
-
     // 判断任务是否为对话型，且对话npc就是自身，并且坐标一致
-    if (type === 2 && !tNpc) {
+    if (type === TASK_TYPE.duiHua && !tNpc) {
+        // 更新为可完成状态
         task.status = 2;
         message = doneTask(req, res, task, taskType);
+    } else {
+        // 更新为已接状态
+        task.status = 1;
     }
     TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-    // 当前元素指令更改为 已接取状态
-    return {
-        ...task,
-        npc: dir.currentDir,
-        message
+    // 传送至目标位置
+    // 对话型任务传送目标NPC位置
+    // 战斗型则传送至目标怪物位置
+    if (task.status === 1) {
+        const { grand, complete } = task;
+        const { tNpc, freak } = grand;
+        let tpInfo = tNpc;
+        if (type === TASK_TYPE.zhanDou && freak.length) {
+            const { freak: freakS } = complete;
+            tpInfo = freak.find(({ id }) => freakS[id].s > freakS[id].c);
+        }
+        if (tpInfo) {
+            return grandFn.tpDirUpdate(req, res, tpInfo.address);
+        }
     }
+    res.send({
+        code: 0,
+        data: {
+            ...task,
+            npc: dir.currentDir,
+        },
+        message
+    })
 }
 
 module.exports = {
@@ -74,6 +94,7 @@ module.exports = {
             })
             return;
         }
+
         // 角色等级不足
         if (task.level > role_level) {
             res.send({
@@ -87,18 +108,7 @@ module.exports = {
         }
         // 接任务
         if (task.status === 0) {
-            // 更新为已接状态
-            task.status = 1;
-            const { message, ...data } = receiveTask(req, res, task);
-            if (task.status === 1) {
-                return grandFn.tpDirUpdate(req, res);
-            }
-            res.send({
-                code: 0,
-                data,
-                message
-            })
-            return;
+            return receiveTask(req, res, task);
         }
         // 完成任务
         if (task.status === 1 || task.status === 2) {
