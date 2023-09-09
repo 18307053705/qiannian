@@ -14,6 +14,7 @@ const socializeFn = require('./socializeFn');
 const cornuconpiaFn = require('./cornuconpiaFn');
 const gatewayFn = require('./gatewayFn');
 const taskFn = require('./taskFn');
+const qingyuanFn = require('./qingyuanFn');
 
 module.exports = {
     osFn,
@@ -31,5 +32,6 @@ module.exports = {
     socializeFn,
     cornuconpiaFn,
     gatewayFn,
-    taskFn
+    taskFn,
+    qingyuanFn
 }

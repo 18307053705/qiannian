@@ -13,13 +13,14 @@ module.exports = {
         const { role_id } = getRoleGlobal(req, res);
         if (!DAILYS_Global[role_id]) {
             DAILYS_Global[role_id] = {
-                ...initDailyTask(req,res),
+                ...initDailyTask(req, res),
                 fw: 10,
                 xz: 10,
                 hb: 10,
                 lp: 10,
                 shenYuan: { s: 1, l: 0 },
                 xiuLian: { s: 1, l: 0 },
+                QingYuan: { j: 0, c: 0 }
             }
         }
     }

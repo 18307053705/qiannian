@@ -26,12 +26,12 @@ export const GangEquip = ({ history }) => {
         if (pageKey === 'exploit') {
             config = exploitConfig
         }
-        if (pageKey === 'exploit') {
+        if (pageKey === 'faBao') {
             config = faBaoConfig
         }
-        if(level < 80){
-             // 过滤当前等级无法打造的装备
-            config.tabList = config.tabList.filter(({ value }) => value < 80);  
+        if (level < 80) {
+            // 过滤当前等级无法打造的装备
+            config.tabList = config.tabList.filter(({ value }) => value < 80);
         }
         return config
     }, [state])
@@ -50,11 +50,9 @@ export const GangEquip = ({ history }) => {
 
     useEffect(() => {
         const { level } = state;
-        console.log(state)
         if (!level) {
             getRoleInfo().then(({ data }) => {
-                console.log(data.role_level,'data.role_level...')
-                history.push(pathname, { ...state, level: data.role_level });
+                history.replace(pathname, { ...state, level: data.role_level });
             })
         }
     }, [])

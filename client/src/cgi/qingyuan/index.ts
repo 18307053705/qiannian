@@ -2,6 +2,7 @@ import { post } from "@request";
 const attachedUrl = "/qingyuan/attached";
 const getMarriageUrl = "/qingyuan/getMarriage";
 const finishUrl = "/qingyuan/finish";
+const treeManageUrl = "/qingyuan/treeManage";
 
 /**
  * 缔结姻缘
@@ -25,4 +26,12 @@ export function getMarriage() {
  */
 export function finish() {
   return post(finishUrl);
+}
+
+/**
+ * 树打理
+ * @param type 1:浇水,2:除草
+ */
+export function treeManage(data) {
+  return post(treeManageUrl,data);
 }

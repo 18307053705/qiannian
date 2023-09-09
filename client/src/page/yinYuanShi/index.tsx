@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { backGrand } from '@utils/grand';
 import { List } from '@components';
-import { getMarriage, attached } from '@cgi/qingyuan';
+import { getMarriage, attached, finish } from '@cgi/qingyuan';
 
 export const YinYuanShi = () => {
     const [info, setInfo]: any = useState();
+    const [isAction, setIsAction] = useState(false);
     useEffect(() => {
         getMarriage().then(({ data }) => {
             setInfo(data);
@@ -22,15 +23,42 @@ export const YinYuanShi = () => {
 
         })
     }
+
+    const finishClick = () => {
+        setIsAction(false);
+        finish().then(() => {
+            getMarriage().then(({ data }) => {
+                setInfo(data);
+            })
+        })
+    }
+
     console.log(info)
     if (!info) {
         return null;
     }
     if (info.qingYuan) {
         const { info: base, role_id } = info.qingYuan;
+        const { role1, name1, name2, level, exp } = base;
+        const isRole1 = role1 === role_id;
         return (
             <div>
-                <div>天定姻缘:{base.role1 === role_id ? base.name2 : base.name1}</div>
+
+                <div>
+                    <span>天定姻缘:{isRole1 ? name2 : name1}</span>
+                    {' '}
+                    <span className="g_u_end" onClick={() => { setIsAction(true) }}>解缘</span>
+                </div>
+                <div>姻缘值：{level}({exp})</div>
+                {
+                    isAction && (
+                        <div>
+                            <span className="g_error">解除此份姻缘需要消耗{level * 200}元宝，是否确定解除：</span>
+                            <span className="g_error_bnt" onClick={finishClick}>是</span>
+                            <span className="g_error_bnt" onClick={() => { setIsAction(false) }}>否</span>
+                        </div>
+                    )
+                }
                 <div>你们可以共同培育姻缘树了，不仅仅可以打造强力情缘的装备，更可获得大量的属性加成哟！！！</div>
                 <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>
             </div>

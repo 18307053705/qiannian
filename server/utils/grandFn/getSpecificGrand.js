@@ -17,7 +17,7 @@ module.exports = {
         const { qingyuan } = RoleG.getRoleGlobal(req, res);
         const list = [];
         // 情缘之地-情缘树
-        if (address === '60000,0,1' && qingyuan.id) {
+        if (address === '60000,0,1' && qingyuan.d) {
             const ele = ElementTable.getElement(435);
             list.push({ name: ele.name, cs: 'g_sigh', dir: ele.id });
             eleDir[ele.id] = ele;

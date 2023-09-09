@@ -1,23 +1,24 @@
-const { roleFn } = require('../../utils');
+const { roleFn, qingyuanFn } = require('../../utils');
 const { DailysG, RoleG } = require("../../global");
 module.exports = {
     /**
      * 获取姻缘信息
      */
     getMarriage: async function (req, res) {
-        const { qingyuan, role_sex: irole_sex, address,role_id } = RoleG.getRoleGlobal(req, res)
-        const { id, role } = qingyuan;
+        const { qingyuan, role_sex: irole_sex, address, role_id, role_level } = RoleG.getRoleGlobal(req, res)
+        const { d, role } = qingyuan;
         // 判断是否存在天定姻缘之人
-        if (id) {
-            const { results } = await res.asyncQuery(`select * from qingyuan where id="${id}"`);
+        if (d) {
+            const info = await qingyuanFn.getQingyuanInfo(req, res);
             const { QingYuan } = DailysG.getDailysGlobal(req, res);
             res.send({
                 code: 0,
                 data: {
                     qingYuan: {
-                        info: results[0],
+                        info: info,
                         tree: QingYuan,
-                        role_id
+                        role_id,
+                        role_level
                     }
                 }
             })

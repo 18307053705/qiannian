@@ -1,5 +1,5 @@
 import React from 'react';
-import {jumpMakeEquip} from '@utils/jumpPage'
+import {jumpMakeEquip} from '@utils/jumpPage';
 export const Detail = ({ socialize, setPageName }) => {
     if (!socialize) {
         return null;

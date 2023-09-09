@@ -11,7 +11,7 @@
  * @param {*} dailys.lp 令牌免费操作次数10
  * @param {*} dailys.shenYuan 深渊{s:进入次数,l:当前层数}}
  * @param {*} dailys.xiuLian 修炼房{s:进入次数,l:当前层数}}
- * @param {*} dailys.QingYuan 情缘信息 {j:浇水次数,x:双修次数}
+ * @param {*} dailys.QingYuan 情缘信息 {j:浇水次数,c:除草}
  * @param {*} dailys.lianHunDong 30级炼魂洞副本{s:进入次数}
  * @param {*} dailys.heiJiaoYu 40级黑角域副本
  * @param {*} dailys.siHailongGong 50级四海龙宫副本

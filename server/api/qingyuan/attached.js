@@ -1,4 +1,4 @@
-const { roleFn } = require('../../utils');
+const { roleFn, qingyuanFn } = require('../../utils');
 const { ChatG, RoleG, ErrorG, KnapsackG } = require("../../global");
 const { knapsackTable } = require('../../table');
 
@@ -12,7 +12,7 @@ function addYinYuanEquip(req, res, role_id) {
             n: name,
             p: 3,
             s: 1,
-            ext:"0_0_0_0_0_0_0_0_0"
+            ext: "0_0_0_0_0_0_0_0_0"
         })
     })
     KnapsackG.updateknapsackGlobal(req, res, { data }, role_id);
@@ -61,7 +61,7 @@ module.exports = {
         }
 
         // 申请校验
-        if (type === 0 && (iQingYuan.role || iQingYuan.id || tQingYuan.role || tQingYuan.id)) {
+        if (type === 0 && (iQingYuan.role || iQingYuan.d || tQingYuan.role || tQingYuan.d)) {
             res.send({
                 code: 0,
                 message: '对方已存在结缘，无法结缘。'
@@ -104,18 +104,28 @@ module.exports = {
         }
         // 同意结缘
         if (type === 1) {
-            //  背包
-            const sql = "insert into qingyuan(role1,role2,name1,name2,level,exp,causality) values(?,?,?,?,?,?,?)";
-            const data = [iRoleId, tRoleId, iRoleName, tRoleName, 1, '0/100', 0];
-            const { results } = await res.asyncAdd(sql, data);
-            if(!results){
-                return;
+            const qingyuan = {
+                role1: iRoleId,
+                role2: tRoleId,
+                name1: iRoleName,
+                name2: tRoleName,
+                level: 1,
+                exp: '0/100',
+                causality: 0
             }
+            const results = await qingyuanFn.insertQingYuan(req, res, qingyuan)
+            // //  背包
+            // const sql = "insert into qingyuan(role1,role2,name1,name2,level,exp,causality) values(?,?,?,?,?,?,?)";
+            // const data = [iRoleId, tRoleId, iRoleName, tRoleName, 1, '0/100', 0];
+            // const { results } = await res.asyncAdd(sql, data);
+            // if (!results) {
+            //     return;
+            // }
             const id = results.insertId;
             const iS = iQingYuan.s || 0;
             const tS = tQingYuan.s || 0;
-            RoleG.updataRoleGlobal(req, res, { qingyuan: { id, s: iS + 1 } });
-            RoleG.updataRoleGlobal(req, res, { qingyuan: { id, s: tS + 1 } }, { role_id: tRoleId });
+            RoleG.updataRoleGlobal(req, res, { qingyuan: { d: { id, rId: tRoleId, n: tRoleName }, s: iS + 1 } });
+            RoleG.updataRoleGlobal(req, res, { qingyuan: { d: { id, rId: iRoleId, n: iRoleName }, s: tS + 1 } }, { role_id: tRoleId });
             ChatG.sendChat(req, res, 0, `恭喜玩家${iRoleName}与${tRoleName}喜结良缘，大家快去恭喜他们吧！！`);
             if (!iS) {
                 addYinYuanEquip(req, res);
@@ -129,15 +139,7 @@ module.exports = {
                 code: 0,
                 data: {
                     qingYuan: {
-                        info: {
-                            role1: iRoleId,
-                            role2: tRoleId,
-                            name1: iRoleName,
-                            name2: tRoleName,
-                            level: 1,
-                            exp: '0/100',
-                            causality: 0
-                        },
+                        info: qingyuan,
                         role_id: iRoleId
                     }
                 }
@@ -160,7 +162,7 @@ module.exports = {
             RoleG.updataRoleGlobal(req, res, { qingyuan: iQingYuan });
             await roleFn.updataRoleInfo(req, res, { qingyuan: tRole ? tQingYuan : tQingYuans }, role_id);
             // 可申请情缘列表
-            const players = await roleFn.getAddressPlayers(req, res, address) || [];
+            const players = await roleFn.getAddressPlayers(req, res, address);
             const list = [];
             players.forEach(({ role_sex, role_id, role_name }) => {
                 if (iSex !== role_sex) {
