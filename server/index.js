@@ -63,6 +63,7 @@ app.use("/api/jackpot", require("./api/jackpot"));
 app.use("/api/treasure", require("./api/treasure"));
 app.use("/api/cornucopia", require("./api/cornucopia"));
 app.use("/api/qingyuan", require("./api/qingyuan"));
+app.use("/api/rankTask", require("./api/rankTask"));
 
 // 全局捕获异常
 app.use(function (err, req, res, next) {

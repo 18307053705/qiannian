@@ -183,6 +183,11 @@ export const config: RouterType[] = [
     path: "/yinYuanShu",
     component: lazy(() => import("@page/yinYuanShu"))
   },
+  {
+    name: "组队任务",
+    path: "/rankTask",
+    component: lazy(() => import("@page/rankTask"))
+  },
 ];
 
 export default config;

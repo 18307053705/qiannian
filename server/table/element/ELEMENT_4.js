@@ -201,6 +201,22 @@ const ELEMENT_4 = {
         type: 4,
         path: '/yinYuanShu'
     },
+    436: {
+        id: 436,
+        name: "渡情劫",
+        type: 4,
+        cs: "g_sigh",
+        path: '/rankTask',
+        task: { id: 1, s: 0 }
+    },
+    437: {
+        id: 437,
+        name: "情劫进度",
+        type: 4,
+        cs: "g_sigh",
+        path: '/rankTask',
+        task: { id: 1, s: 1 }
+    },
 };
 module.exports = {
     ELEMENT_4

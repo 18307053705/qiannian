@@ -8,6 +8,7 @@ const PetG = require('./petG');
 const DailysG = require('./dailysG');
 const ChatG = require('./chatG');
 const TaskG = require('./taskG');
+const rankTaskG = require('./rankTaskG');
 
 
 module.exports = {
@@ -20,5 +21,6 @@ module.exports = {
     PetG,
     DailysG,
     ChatG,
-    TaskG
+    TaskG,
+    rankTaskG
 }

@@ -24,6 +24,7 @@ const TASK_TYPE_MEUN = {
     intersect: 7,
     chance: 8,
     copy: 9,
+    zudui: 10,
 }
 
 const TASK_TYPE_KEY_MEUN = {
@@ -36,6 +37,7 @@ const TASK_TYPE_KEY_MEUN = {
     [TASK_TYPE_MEUN.exploit]: 'exploit',
     [TASK_TYPE_MEUN.chance]: 'chance',
     [TASK_TYPE_MEUN.copy]: 'copy',
+    [TASK_TYPE_MEUN.zudui]: 'zudui',
 };
 const TASK_TYPE_TEXT_MEUN = {
     [TASK_TYPE_MEUN.main]: '主线任务',
@@ -47,6 +49,7 @@ const TASK_TYPE_TEXT_MEUN = {
     [TASK_TYPE_MEUN.exploit]: '每日功勋',
     [TASK_TYPE_MEUN.chance]: '奇遇任务',
     [TASK_TYPE_MEUN.copy]: '副本任务',
+    [TASK_TYPE_MEUN.zudui]: '组队副本',
 };
 const DAIL_TYPE_LIST = [
     TASK_TYPE_MEUN.exp,

@@ -19,8 +19,8 @@ const Grand = ({ history }) => {
     // 点击元素
     const dirClick = useCallback((dir) => {
         moveDir({ dir }).then(({ data }: any) => {
-            const { path, ext } = data;
-            path ? history.push(path, { ...ext }) : setGrandInfo(data);
+            const { path, state } = data;
+            path ? history.push(path, state || {}) : setGrandInfo(data);
         })
     }, [])
     // 拾取物品
@@ -131,7 +131,7 @@ const Grand = ({ history }) => {
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 1 }) }}>帮会</span>
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 2 }) }}>庄园</span>
                 <span className="g_b_u" onClick={() => { history.push('/socialize', { type: 3 }) }}>队伍</span>
-                <span className="g_b_u" onClick={() => { history.push('/qingYuan') }} >情缘</span>
+                <span className="g_b_u" onClick={() => { history.push('/rankTask') }} >情缘</span>
             </div>
             <div>
                 <span className="g_b_u" onClick={() => { history.push('/equip') }}>装备</span>

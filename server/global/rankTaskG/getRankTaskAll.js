@@ -1,0 +1,22 @@
+
+
+const { RANK_TASK_Global, RANK_TASK_TYPE, ADDRESS_LIST } = require('./config');
+const { getRoleGlobal } = require('../roleG/getRoleGlobal');
+
+module.exports = {
+    /**
+    * @param {*} req 
+    * @param {*} res 
+    * @return {qingyuan,xiulianfang}
+    */
+    getRankTaskAll: function (req, res) {
+        const { qingyuan, socialize_pool } = getRoleGlobal(req, res);
+        const { id: qyID } = qingyuan.d;
+        const { id: gangID } = socialize_pool.gang;
+        return {
+            [RANK_TASK_TYPE.qingyuan]: RANK_TASK_Global[RANK_TASK_TYPE.qingyuan][qyID],
+            [RANK_TASK_TYPE.xiulianfang]: RANK_TASK_Global[RANK_TASK_TYPE.xiulianfang][gangID],
+        }
+
+    }
+}

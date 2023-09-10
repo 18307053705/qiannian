@@ -304,6 +304,61 @@ const ELEMENT_2 = {
       attr: 1,
     }
   },
+  214: {
+    id: 214,
+    name: "花草精灵",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  215: {
+    id: 215,
+    name: "湖中蛟龙",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  216: {
+    id: 216,
+    name: "竹林小妖",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  217: {
+    id: 217,
+    name: "古神藤龙",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  218: {
+    id: 218,
+    name: "月宫来客",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
   //  以下为测试怪物
   ...TEST,
 };

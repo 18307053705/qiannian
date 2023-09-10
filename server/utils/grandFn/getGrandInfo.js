@@ -1,6 +1,7 @@
 const { GrandTable, ElementTable } = require("../../table");
 const { updataRoleGlobal } = require("../../global/roleG/updataRoleGlobal");
 const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
+const { getRankTaskEle } = require("../../global/rankTaskG/getRankTaskEle");
 const taskFn = require('../taskFn');
 const { getSpecificGrand } = require('./getSpecificGrand');
 
@@ -40,7 +41,6 @@ function getGrand(address) {
             dir: "d"
         });
     }
-
     return direction;
 };
 
@@ -76,6 +76,9 @@ module.exports = {
         getSpecificGrand(req, res, address, eleList, eleDir)
         // 获取任务临时元素
         taskFn.grandTaskEle(req, res, address, eleList, eleDir);
+        // 获取组队任务元素
+        getRankTaskEle(req, res, address, eleList, eleDir);
+
         return {
             name: n || name,
             x: x + 1,
