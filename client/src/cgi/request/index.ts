@@ -50,6 +50,9 @@ export async function request<T = {}>(
     if (history.path) {
       window.QN.history.push(history.path, history.state || {});
     }
+     if (data.path) {
+      window.QN.history.push(data.path, data.state || {});
+    }
     if (request.status === 200 && data.code === 0) {
       if (data.message) {
         window.QN.setError(data.message);
