@@ -45,9 +45,10 @@ export async function request<T = {}>(
     }
 
     const { data, request } = await axios.request(requestConfig);
+    const history = data.data || {};
     // 跳转对应路径
-    if (data.path) {
-      window.QN.history.push(data.path, data.data.state || {});
+    if (history.path) {
+      window.QN.history.push(history.path, history.state || {});
     }
     if (request.status === 200 && data.code === 0) {
       if (data.message) {
@@ -62,7 +63,7 @@ export async function request<T = {}>(
       goLogin();
     } else if (data.code === 100001 || data.code === 100006) {
       // 指令异常，返回角色选择页
-      window.QN.history.push('/', data.state || {});
+      window.QN.history.push("/", history.state || {});
     }
     return Promise.reject(data);
   } catch (err) {

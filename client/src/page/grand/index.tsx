@@ -19,8 +19,7 @@ const Grand = ({ history }) => {
     // 点击元素
     const dirClick = useCallback((dir) => {
         moveDir({ dir }).then(({ data }: any) => {
-            const { path, state } = data;
-            path ? history.push(path, state || {}) : setGrandInfo(data);
+            setGrandInfo(data);
         })
     }, [])
     // 拾取物品
