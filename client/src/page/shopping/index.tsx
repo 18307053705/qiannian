@@ -17,7 +17,6 @@ export const Shopping = ({ history }) => {
     const historyClick = (parmas: { page: KeyType, role_id?: string }) => {
         history.push('./shopping', { ...state, ...parmas });
     }
-    console.log(state)
     return (
         <div>
             {/* 店铺详情 */}

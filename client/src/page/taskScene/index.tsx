@@ -24,9 +24,8 @@ export const taskScene = () => {
     if (!taskInfo) {
         return null;
     }
-    console.log(taskInfo)
 
-    const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, treat, complete, grand,tips } = taskInfo || {};
+    const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, complete, grand,tips } = taskInfo || {};
     const talk = status === 0 ? receive : done;
     const active = talk.length ? talk.splice(-1)[0].split('&') : [];
 

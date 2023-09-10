@@ -93,7 +93,6 @@ export const Task = () => {
             <div>
                 {
                     taskDetail.map((itme) => {
-                        console.log(itme)
                         const { id, title, tips, reward = { text: [] } } = itme;
                         return (
                             <div key={id}>

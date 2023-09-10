@@ -33,7 +33,7 @@ export const YinYuanShi = () => {
         })
     }
 
-    console.log(info)
+
     if (!info) {
         return null;
     }

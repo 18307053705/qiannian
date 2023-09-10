@@ -19,8 +19,6 @@ function RouterGuard() {
     // 拿到当前路由
     let thisRoute = config.find((el) => el['path'] == pathname);
     let isLogin = Cookies.get("token");
-    console.log(pathname);
-    console.log(thisRoute);
     //如果没登录且页面为登录页的话渲染登录页
     if (pathname == '/login' && !isLogin) {
         return <Route path={pathname} component={thisRoute['component']} exact={thisRoute['component']} />
