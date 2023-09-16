@@ -1,4 +1,4 @@
-const { TaskG } = require('../../global');
+const { TaskG, rankTaskG } = require('../../global');
 module.exports = {
     /**
      * 监听任务击杀进度
@@ -35,6 +35,42 @@ module.exports = {
             if (isUpdata) {
                 TaskG.updataTaskGlobal(req, res, type, tasks);
             }
+        })
+        Object.values(rankTaskG.getRankTaskAll(req, res)).forEach((tasks) => {
+            Object.values(tasks || {}).forEach(({ freak, status, ...task }) => {
+                if (!status) {
+                    return;
+                }
+                let isUpdata = false;
+                freak.forEach(({ id, s, c, name, ...itme }, index) => {
+                    if (freakId === id) {
+                        isUpdata = true;
+                        const nums = c + num;
+                        if (nums > s) {
+                            freak[index]['c'] = s;
+
+                        } else {
+                            freak[index]['c'] = nums;
+                        }
+                        freakObj[`${id}${index}`] = {
+                            s,
+                            c:freak[index]['c'],
+                            id,
+                            title: name,
+                            ...itme,
+                        };
+                    }
+                })
+                if (isUpdata) {
+                    rankTaskG.updataRankTask(req, res, {
+                        freak,
+                        status,
+                        ...task,
+                    })
+                }
+
+
+            })
         })
         return freakObj;
     }

@@ -3,10 +3,7 @@ import { backGrand } from '@utils/grand';
 import { getTaskScene, active } from '@cgi/rankTask';
 import { List } from '@components';
 
-
-
-
-export const RankTask = ({ history }) => {
+export const RankTask = () => {
     const [taskInfo, setTaskInfo] = useState();
 
     useEffect(() => {
@@ -24,15 +21,19 @@ export const RankTask = ({ history }) => {
     if (!taskInfo) {
         return null;
     }
-    const { tNpc, task } = taskInfo;
-    const { receive, title, status } = task;
-    const prefix = ({ s, c, name, ...freak }) => {
+    const { tNpc, task, role_id } = taskInfo;
+    const { receive, title, status, done } = task;
+    const prefix = ({ id, s, c, name, text, role }) => {
         const treat = s > c;
+        // 是否已经领取
+        const isDone = role.includes(role_id);
+        // 是否展示领取按钮
+        const isBtn = !isDone && !treat;
         return (
             <div>
-                <div>{name}({treat ? `${c}/${s}` : '已完成'})</div>
-                <div><span>奖励：经验+100000,姻缘树+10,姻缘果+1</span></div>
-                {!treat && <div><span className='g_u_end'>领取奖励</span></div>}
+                <div>{name}({treat ? `${c}/${s}` : (isDone ? '已领取' : '已完成')})</div>
+                <div><span>奖励：{text || done}</span></div>
+                {isBtn && <div><span className='g_u_end' onClick={() => { activeClick({ freakId: id }) }}>领取奖励</span></div>}
             </div>
         )
     }
@@ -41,7 +42,7 @@ export const RankTask = ({ history }) => {
         return (
             <div>
                 <div>{title}</div>
-                <List data={task.freak} prefix={prefix} hiddenFooter={true}/>
+                <List data={task.freak} prefix={prefix} hiddenFooter={true} />
                 <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>
             </div>
         )

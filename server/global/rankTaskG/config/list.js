@@ -17,7 +17,8 @@ const RANK_TASKS = {
             "你今日踏入落叶谷，心有所感。",
             "你决定：&开启情劫",
         ],
-        fun: 'qingYuan',
+        fun: 'qingYuan1',
+        done:'经验+100000,姻缘树+10,姻缘果+1',
         freak: [
             {
                 id: 214,
@@ -37,7 +38,7 @@ const RANK_TASKS = {
             },
             {
                 id: 218,
-                address: '60001,0,5',
+                address: '60001,0,5'
             },
         ],
     }
