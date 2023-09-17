@@ -131,6 +131,7 @@ const ELEMENT_4 = {
         id: 422,
         name: "进入极北深渊...",
         type: 4,
+        path: '/shenYuan',
         cs: "g_b_u"
     },
     423: {
@@ -216,6 +217,22 @@ const ELEMENT_4 = {
         cs: "g_sigh",
         path: '/rankTask',
         task: { id: 1, s: 1 }
+    },
+    438: {
+        id: 438,
+        name: "修炼大阵",
+        type: 4,
+        cs: "g_sigh",
+        path: '/rankTask',
+        task: { id: 2, s: 0 }
+    },
+    439: {
+        id: 439,
+        name: "修炼大阵",
+        type: 4,
+        cs: "g_sigh",
+        path: '/rankTask',
+        task: { id: 2, s: 1 }
     },
 };
 module.exports = {

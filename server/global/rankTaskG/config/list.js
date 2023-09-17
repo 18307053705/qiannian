@@ -4,7 +4,8 @@ const RANK_TASK_TYPE = {
 }
 // 副本坐标
 const ADDRESS_LIST = [
-    '60001'
+    '60001',
+    '60002',
 ]
 
 const RANK_TASKS = {
@@ -18,7 +19,7 @@ const RANK_TASKS = {
             "你决定：&开启情劫",
         ],
         fun: 'qingYuan1',
-        done:'经验+100000,姻缘树+10,姻缘果+1',
+        done: '经验+100000,姻缘树+10,姻缘果+1',
         freak: [
             {
                 id: 214,
@@ -39,6 +40,40 @@ const RANK_TASKS = {
             {
                 id: 218,
                 address: '60001,0,5'
+            },
+        ],
+    },
+    2: {
+        id: 2,
+        title: '修炼房',
+        type: RANK_TASK_TYPE.xiulianfang,
+        receive: [
+            "修炼大阵，据说封印着强大的上古神兽。",
+            "击败它们可获得大量的经验与积分。",
+            "&开启修炼",
+        ],
+        fun: 'gang1',
+        done: '经验+500000,神装积分+1',
+        freak: [
+            {
+                id: 219,
+                address: '60002,0,1',
+            },
+            {
+                id: 220,
+                address: '60002,0,2',
+            },
+            {
+                id: 221,
+                address: '60002,0,3',
+            },
+            {
+                id: 223,
+                address: '60002,0,4',
+            },
+            {
+                id: 224,
+                address: '60002,0,5'
             },
         ],
     }

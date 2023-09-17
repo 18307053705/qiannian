@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, PetG, SocializeG,DailysG } = require("../../global");
+const { RoleG, KnapsackG, PetG, SocializeG, DailysG, ShenYuanG } = require("../../global");
 const { roleExit } = require("./roleExit");
 const { initTask } = require("../taskFn/initTask");
 module.exports = {
@@ -23,6 +23,8 @@ module.exports = {
         PetG.setPetGlobal(req, res);
         // 全局日常
         DailysG.initDailysGlobal(req, res);
+        // 全局深渊
+        ShenYuanG.setShenYuan(req, res);
         //  初始化非日常任务
         initTask(req, res)
     },

@@ -14,7 +14,7 @@ module.exports = {
      * @param {*} eleDir 指令池
      */
     getSpecificGrand: function (req, res, address, eleList, eleDir) {
-        const { qingyuan } = RoleG.getRoleGlobal(req, res);
+        const { qingyuan, socialize_pool} = RoleG.getRoleGlobal(req, res);
         const list = [];
         // 情缘之地-情缘树
         if (address === '60000,0,1' && qingyuan.d) {
@@ -22,7 +22,6 @@ module.exports = {
             list.push({ name: ele.name, cs: 'g_sigh', dir: ele.id });
             eleDir[ele.id] = ele;
         }
-
         list.length && eleList.push(list);
     }
 };

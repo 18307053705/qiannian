@@ -18,12 +18,11 @@ module.exports = {
         }
         const npcEle = [];
         Object.values(getRankTaskAll(req, res)).forEach(tasks => {
-            Object.values(tasks || {}).forEach(({ freak, status, ...task }) => {
+            Object.values(tasks || {}).forEach(({ freak, status }) => {
                 // 未接状态不显示元素
                 if (!status) {
                     return;
                 }
-
                 freak.forEach(({ address, id, s, c, ...itme }) => {
                     if (adr === address && s > c) {
                         // 加入指令列表

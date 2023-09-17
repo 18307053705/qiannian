@@ -83,11 +83,17 @@ module.exports = {
             vipTael += 5
         }
         // 物品可叠加
-        const { level, arrt, boss, exps = 0, taels = 0 } = ext;
+        const { level, arrt, boss, exps, taels } = ext;
         // 经验
-        const exp = (exps || level * (parseInt(arrt / 10) || 1) * (boss ? 1000 : 1)) * (vipExp || 1) * freakNum;
+        let exp = exps;
+        if (exp === undefined) {
+            exp = (level * (parseInt(arrt / 10) || 1) * (boss ? 1000 : 1)) * (vipExp || 1) * freakNum;
+        }
         // 银两
-        const tael = (taels || exp < 100 ? exp : exp / 100) * (vipTael || 1) * freakNum;
+        let tael = taels;
+        if (tael === undefined) {
+            tael = (exp < 100 ? exp : exp / 100) * (vipTael || 1) * freakNum;
+        }
         // 更新背包
         KnapsackG.updateknapsackGlobal(req, res, { tael: knapsack.tael + tael });
         // 更新角色经验等级
@@ -101,14 +107,19 @@ module.exports = {
         });
         // 监听任务池
         const tasks = listenTask(req, res, rivalMold['id'], freakNum);
-        return {
+        const reward = {
             textReward: tip ? [] : textReward,
-            exp: vipExp ? `${exp}(${vipExp}倍经验)` : exp,
-            tael: vipTael ? `${tael}(${vipTael}倍银两)` : tael,
             tip: tip,
             tasks: tasks
 
         }
+        if (exp !== undefined) {
+            reward['exp'] = vipExp && !exps ? `${exp}(${vipExp}倍经验)` : exp;
+        }
+        if (tael !== undefined) {
+            reward['tael'] = vipTael && !taels ? `${tael}(${vipTael}倍银两)` : tael;
+        }
+        return reward;
     },
 
 };

@@ -3,6 +3,7 @@ const getRankTask = require('./getRankTask');
 const updataRankTask = require('./updataRankTask');
 const createRankTask = require('./createRankTask');
 const getRankTaskAll = require('./getRankTaskAll');
+const listenTask = require('./listenTask');
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     ...getRankTask,
     ...updataRankTask,
     ...createRankTask,
-    ...getRankTaskAll
+    ...getRankTaskAll,
+    ...listenTask
 }

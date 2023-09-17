@@ -5,6 +5,7 @@ const deleteDirGlobal = require('./deleteDirGlobal');
 const getGrandEleGlobal = require('./getGrandEleGlobal');
 const setGrandEleGlobal = require('./setGrandEleGlobal');
 const deteleGrandEleGlobal = require('./deteleGrandEleGlobal');
+const setCurrentDir = require('./setCurrentDir');
 module.exports = {
     ...config,
     ...getDirGlobal,
@@ -12,5 +13,6 @@ module.exports = {
     ...deleteDirGlobal,
     ...setGrandEleGlobal,
     ...getGrandEleGlobal,
-    ...deteleGrandEleGlobal
+    ...deteleGrandEleGlobal,
+    ...setCurrentDir
 }

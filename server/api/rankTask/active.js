@@ -1,6 +1,7 @@
 
 const { GrandG, rankTaskG, RoleG } = require('../../global');
-const { getReward } = require('./fun/getReward')
+const { getReward } = require('./fun/getReward');
+const { getTask } = require('./fun/getTask');
 module.exports = {
     /**
      * 任务操作
@@ -16,52 +17,38 @@ module.exports = {
         if (!task) {
             task = rankTaskG.createRankTask(req, res, id);
         }
+        let message = undefined;
         // 领取任务
         if (!freakId) {
-            task.status = 1;
-            rankTaskG.updataRankTask(req, res, task);
+            message = getTask(req, res, task);
         }
         // 领取奖励
         if (freakId) {
             const { freak: freaks, fun } = task;
             const index = freaks.findIndex(({ id }) => id === freakId);
-
             if (index === -1) {
-                res.send({
-                    code: 0,
-                    message: '非法领取奖励'
-                })
-                return;
+                message = '非法领取奖励';
             }
             const freak = freaks[index];
             const { s, c, role } = freak;
             if (s > c) {
-                res.send({
-                    code: 0,
-                    message: '不满足领取条件'
-                })
-                return;
+                message = '不满足领取条件';
             }
             if (role.includes(role_id)) {
-                res.send({
-                    code: 0,
-                    message: '不可重复领取'
-                })
-                return;
+                message = '不可重复领取';
             }
-            const message = await getReward(req, res, fun, freak);
-            if (message) {
-                res.send({
-                    code: 0,
-                    message
-                })
-                return;
+            if (!message) {
+                message = await getReward(req, res, fun, freak);
             }
-            freaks[index].role.push(role_id);
-            rankTaskG.updataRankTask(req, res, task);
+            if (!message) {
+                freaks[index].role.push(role_id);
+                rankTaskG.updataRankTask(req, res, task);
+            }
+
         }
         res.send({
             code: 0,
+            message,
             data: {
                 task,
                 tNpc: s,

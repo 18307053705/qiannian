@@ -1,6 +1,6 @@
 
 
-const { RANK_TASK_Global, RANK_TASK_TYPE, ADDRESS_LIST } = require('./config');
+const { RANK_TASK_Global, RANK_TASK_TYPE } = require('./config');
 const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 module.exports = {

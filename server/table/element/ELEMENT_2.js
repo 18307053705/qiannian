@@ -359,6 +359,82 @@ const ELEMENT_2 = {
       attr: 1,
     }
   },
+  219: {
+    id: 219,
+    name: "上古青龙",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  220: {
+    id: 220,
+    name: "上古朱雀",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  221: {
+    id: 221,
+    name: "上古玄武",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  222: {
+    id: 222,
+    name: "上古白虎",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  223: {
+    id: 223,
+    name: "上古麒麟",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  224: {
+    id: 224,
+    name: "上古阵灵",
+    type: 2,
+    ext: {
+      isRanks: true,
+      career: 1,
+      level: 1,
+      attr: 1,
+    }
+  },
+  // 20000001: {
+  //   id: 20000001,
+  //   name: "深渊怪(深渊模怪物占位)",
+  //   type: 2,
+  //   ext: {
+  //     career: 1,
+  //     level: 1,
+  //     attr: 1,
+  //   }
+  // },
   //  以下为测试怪物
   ...TEST,
 };
