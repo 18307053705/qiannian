@@ -5,16 +5,17 @@ module.exports = {
      * 增加物品,不会更新背包
      * @param {*} article 必传
      * @param {*} data 必传
+     * @param {*} force 强制添加,可选
      * @returns message 错误信息
      * @returns data 增加物品后的信息
      */
-    addArticle: function (article, list) {
+    addArticle: function (article, list, force) {
         if (!article) {
             return undefined
         }
         const data = JSON.parse(JSON.stringify(list))
         const dataSize = data.length;
-        if (dataSize === KnapsackG.KNAPSACK_SIZE) {
+        if (dataSize === KnapsackG.KNAPSACK_SIZE && !force) {
             return {
                 message: '背包已满,请先清理背包'
             }

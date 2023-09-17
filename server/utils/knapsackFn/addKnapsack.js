@@ -7,15 +7,16 @@ module.exports = {
      * @param {*} res 
      * @param {*} data.article 必传({artReward:{id:{p,s,n,id}}},equipReward:{id:{p,s,n,id}})
      * @param {*} data.data 可选
+     * @param {*} data.force 强制添加
      * @returns {string}  message | undefined
      */
-    addKnapsack: function (req, res, { article, data: list }) {
+    addKnapsack: function (req, res, { article, data: list, force }) {
         if (!article) {
             return undefined;
         }
         const { data } = list ? { data: list } : KnapsackG.getknapsackGlobal(req, res)
         const dataSize = data.length;
-        if (dataSize === KnapsackG.KNAPSACK_SIZE) {
+        if (dataSize === KnapsackG.KNAPSACK_SIZE && !force) {
             return '背包已满,请先清理背包'
         }
 

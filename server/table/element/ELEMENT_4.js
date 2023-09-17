@@ -58,25 +58,26 @@ const ELEMENT_4 = {
     49: {
         id: 49,
         name: "拍卖行",
-        type: 2
+        type: 4,
+        path:'/paiMaiHang'
     },
     410: {
         id: 410,
         name: "店铺",
         type: 4,
-        dir: '/shopping',
+        path: '/shopping',
     },
     411: {
         id: 411,
         name: "商城",
         type: 4,
-        dir: '/shops',
+        path: '/shops',
     },
     412: {
         id: 412,
         name: "仓库",
         type: 4,
-        dir: '/warehouse',
+        path: '/warehouse',
         ext: {
             type: 3
         }
@@ -85,7 +86,7 @@ const ELEMENT_4 = {
         id: 413,
         name: "银行",
         type: 4,
-        dir: '/shops',
+        path: '/shops',
     },
     414: {
         id: 414,

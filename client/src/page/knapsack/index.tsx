@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { getKnapsack, initKnapsack, operate } from '@cgi/knapsack';
+import { grounding } from '@cgi/paiMai';
 import { getEquipName } from '@utils/equip'
 import { jumpDetail } from '@utils/jumpPage'
 import { List, Tab, Input } from '@components';
@@ -45,6 +46,7 @@ const ACTIVE_TYPE = {
     2: '入库',
     3: '取出',
     4: '出售',
+    5: '拍卖',
 }
 
 const knapsack = ({ history }) => {
@@ -94,13 +96,21 @@ const knapsack = ({ history }) => {
     }, [current, list, serchValue]);
 
     const operateClick = (parms) => {
+        // 拍卖上架
+        if (type === 5) {
+            grounding({
+                in_x: parms.in_x,
+                price: parms.s,
+            })
+            return;
+        }
         operate(parms).then(({ data }) => {
             setKnapsack(data);
         })
     }
 
     const activeClick = useCallback((in_x, s, p) => {
-        if (p === 3) {
+        if (p === 3 && type !== 5) {
             operateClick({
                 in_x,
                 s: 1,
@@ -144,7 +154,7 @@ const knapsack = ({ history }) => {
             {
                 active && (
                     <Input
-                        label={`${ACTIVE_TYPE[type]}数量`}
+                        label={type === 5 ? '拍卖价格' : `${ACTIVE_TYPE[type]}数量`}
                         type='number'
                         layout={false}
                         submit={(num) => {

@@ -10,11 +10,12 @@ module.exports = {
      * @returns role_id 自身id
      */
     getShenYuanRank: function (req, res) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id, role_level } = getRoleGlobal(req, res);
         const list = Object.values(SHNEYUAN_Global);
         return {
             list,
-            role_id
+            role_id,
+            role_level
         }
     }
 }

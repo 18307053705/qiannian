@@ -22,33 +22,55 @@ const ShenYuanItme = ({ data, index, role_id }) => {
             <div>第{index}名：{n}({level}级{CAREER_TYPE[career]})</div>
             <div>
                 <span>深渊层数({l})：{getIcons(l)}</span>
-                <span className='g_u_end' onClick={() => { shenyuanFight({ roleId: id }) }}>{role_id === id ? '挑战' : '协助'}</span>
+                {
+                    role_id && (
+                        <span className='g_u_end' onClick={() => { shenyuanFight({ roleId: id }) }}>
+                            {role_id === id ? '挑战' : '协助'}
+                        </span>
+                    )
+                }
             </div>
         </div>
     )
 }
-
+const ShenYuanInfo = ({ roleInfo }) => {
+    if (!roleInfo.id) {
+        return (<div>玩家等级不足50,暂未开放极北深渊。</div>)
+    }
+    return (
+        <div>
+            <div>深渊排名：{roleInfo.index}</div>
+            <div>
+                <span>深渊层数({roleInfo.l})：{getIcons(roleInfo.l)}</span>
+                <span className='g_u_end' onClick={() => { shenyuanFight() }}>挑战</span>
+            </div>
+            <div>可助人次数：{roleInfo.s}</div>
+        </div>
+    )
+}
 
 export const ShenYuan = () => {
     const [shenyuan, setShenyuan]: any = useState();
     useEffect(() => {
         getShenRank().then(({ data }) => {
-            const { list, role_id } = data;;
+            const { list, role_id, role_level } = data;;
             const rank = list.sort((a, b) => b.l - a.l);
+            let roleInfo = undefined;
             let index = 0;
-            const roleInfo = rank.filter(({ id }, i) => {
-                if (role_id === id) {
-                    index = i;
-                    return true;
-                }
-            });
+            if (role_level >= 50) {
+                roleInfo = rank.filter(({ id }, i) => {
+                    if (role_id === id) {
+                        index = i;
+                        return true;
+                    }
+                })[0];
+            }
+
             setShenyuan({
                 ...data,
                 list: rank,
-                roleInfo: {
-                    ...roleInfo[0],
-                    index: index + 1
-                },
+                roleInfo,
+                index
             });
         })
     }, [])
@@ -59,7 +81,7 @@ export const ShenYuan = () => {
     }
 
     console.log(shenyuan, ' console.log(shenyuan)...')
-    const { list, roleInfo } = shenyuan;
+    const { list, roleInfo = {}, index } = shenyuan;
     const prefix = (data, index) => (<ShenYuanItme data={data} index={index} role_id={roleInfo.id} />)
     return (
         <div>
@@ -68,12 +90,10 @@ export const ShenYuan = () => {
                     <div>今日挑战人数：{list.length}</div>
                     <div><span className='g_u_end'>积分商店</span></div>
                 </div>
-                <div>深渊排名：{roleInfo.index}</div>
-                <div>
-                    <span>深渊层数({roleInfo.l})：{getIcons(roleInfo.l)}</span>
-                    <span className='g_u_end' onClick={() => { shenyuanFight() }}>挑战</span>
-                </div>
-                <div>可助人次数：{roleInfo.s}</div>
+                <ShenYuanInfo roleInfo={{
+                    ...roleInfo,
+                    index
+                }} />
             </div>
             <div>=======深渊排名信息=======</div>
             <List
