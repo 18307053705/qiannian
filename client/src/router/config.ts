@@ -188,6 +188,12 @@ export const config: RouterType[] = [
     path: "/rankTask",
     component: lazy(() => import("@page/rankTask"))
   },
+  {
+    name: "深渊",
+    path: "/shenYuan",
+    component: lazy(() => import("@page/shenYuan"))
+  },
+  
 ];
 
 export default config;

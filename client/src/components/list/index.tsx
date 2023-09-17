@@ -49,7 +49,7 @@ export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFoot
                     : <div className={Style.empty}>{emptyText || '暂无数据'}</div>
             }
             {
-                total && !hiddenFooter ? (
+                total && !hiddenFooter && numPage.length !== 1 ? (
                     <div>
                         第{
                             numPage.map((_, index) => (
