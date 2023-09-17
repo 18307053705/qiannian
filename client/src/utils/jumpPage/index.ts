@@ -10,12 +10,12 @@
  */
 export function jumpDetail(
   history,
-  { p, form, pos, in_x, role_id, petId }: any
+  { p, form, pos, in_x, role_id, petId, id }: any
 ) {
   if (p === 3) {
-    history.push("/equipDetail", { form, in_x, pos, role_id, petId });
+    history.push("/equipDetail", { form, in_x, pos, role_id, petId, id });
   } else {
-    history.push("/articleDetail", { form, in_x, pos, role_id, petId });
+    history.push("/articleDetail", { form, in_x, pos, role_id, petId, id });
   }
 }
 
@@ -34,8 +34,8 @@ export function jumpEquipList({ posInx, form, petId }: any) {
  * @param param.level 人物等级
  */
 export function jumpMakeEquip(
-  pageKey: "world" | "gang" | "marriage" | "exploit" | 'faBao',
-  level?:number
+  pageKey: "world" | "gang" | "marriage" | "exploit" | "faBao",
+  level?: number
 ) {
   window.QN.history.push("/equipMake", { pageKey, level });
 }

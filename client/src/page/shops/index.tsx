@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { List, Tab, Input } from '@components/index';
 import { getList, purchase } from '@cgi/shops';
 import { backGrand } from '@utils/grand';
-
+import { jumpDetail } from '@utils/jumpPage'
 
 const tabList = [
     { value: 0, label: "道具商店" },
@@ -37,34 +37,40 @@ export const Shops = ({ history }) => {
     })
 
 
-    const prefix = (row, index) => {
+    const prefix = ({ id,type, in_x, price, n }, index) => {
+
         return (
             <div key={index}>
                 <span
                     className='g_u_end'
                     onClick={() => {
-                        history.push('/articleDetail', { id:row.id, in_x: row.in_x, kanapsackType: 5,p: row.type});
+                        jumpDetail(history, {
+                            p: type,
+                            form: 5,
+                            in_x,
+                            id,
+                        })
                     }}
                 >
-                    {row.n}(售价:{row.price}{tabKey === 0 ? '元宝' : '银两'})
+                    {n}(售价:{price}{tabKey === 0 ? '元宝' : '银两'})
                 </span>
             </div>
         )
     }
     const active = (row, index) => (<div><span key={index} className='g_u_end' onClick={() => { setId(row.id) }}>购买</span></div>)
 
-    const submit = (num)=>{
+    const submit = (num) => {
         purchase({
             id,
-            s:Number(num)
-        }).then(()=>{
+            s: Number(num)
+        }).then(() => {
             setId(0)
         })
     }
 
     return (
         <div>
-            {id ? <Input label="数量" layout={false}  submit={submit} type='number'/> : ''}
+            {id ? <Input label="数量" layout={false} submit={submit} type='number' /> : ''}
             <Tab list={tabList} currentKey={tabKey} onCheng={setTabKey} />
             <List data={data} prefix={prefix} active={active} />
             <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>

@@ -54,7 +54,7 @@ export const config: RouterType[] = [
     component: lazy(() => import("@page/shopping"))
   },
   {
-    name: "商店界面",
+    name: "玩家界面",
     path: "/player",
     component: lazy(() => import("@page/player"))
   },
