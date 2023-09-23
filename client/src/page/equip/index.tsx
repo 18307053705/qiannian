@@ -20,6 +20,7 @@ export const EquipList = ({ history }) => {
         })
     }
     const { equip_pool: equip, role_level } = roleInfo;
+    console.log(equip,'equip...')
 
     return (
         <div>
@@ -58,9 +59,6 @@ export const EquipList = ({ history }) => {
             {role_level >= 66 && (
                 <div><span className='g_u_end' onClick={() => { jumpMakeEquip('faBao', role_level) }}>前往打造法宝</span></div>
             )}
-            {/* 
-          
-            <div><span className='g_u_end' onClick={() => { jumpMakeEquip('marriage', role_level) }}>前往打造情缘套装</span></div> */}
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )

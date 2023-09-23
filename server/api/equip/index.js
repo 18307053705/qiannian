@@ -12,6 +12,7 @@ const { makeEquip } = require('./makeEquip');
 const { makeEquipInfo } = require('./makeEquipInfo');
 const { decomposeEquip } = require('./decomposeEquip');
 const { freeForgeEquip } = require('./freeForgeEquip');
+const { suitDetail } = require('./suitDetail');
 
 const router = new express.Router();
 
@@ -41,4 +42,6 @@ router.post("/makeEquip", makeEquip);
 router.post("/makeEquipInfo", makeEquipInfo);
 // 装备分解
 router.post("/decomposeEquip", decomposeEquip);
+// 套装详情
+router.post("/suitDetail", suitDetail);
 module.exports = router;

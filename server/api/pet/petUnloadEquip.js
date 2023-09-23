@@ -14,6 +14,7 @@ module.exports = {
         }
         // 获取宠物信息
         const { id:petId, equip: equip_pool, addition } = PetG.getPetGlobal(req) || {};
+        const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
         if (!petId) {
             res.send({
                 code: 0,
@@ -41,6 +42,17 @@ module.exports = {
         })
         // 需要进行卸下的装备
         delete equip_pool[posKey];
+        const { attrs, suit } = equipFn.computeSuitAttr(equip_pool, old_equip_pool);
+        // 更新套装信息
+        equip_pool['suit'] = suit;
+         // 套装属性
+         Object.keys(attrs).forEach(key => {
+            if (addition[key]) {
+                addition[key] += attrs[key];
+            } else {
+                addition[key] = attrs[key];
+            }
+        })
         // 更新宠物装备池
         PetG.updataPetGlobal(req, res, { equip: equip_pool, addition });
         res.send({

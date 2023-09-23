@@ -198,6 +198,11 @@ export const config: RouterType[] = [
     path: "/paiMaiHang",
     component: lazy(() => import("@page/paiMaiHang"))
   },
+  {
+    name: "套装界面",
+    path: "/suitDetail",
+    component: lazy(() => import("@page/suitDetail"))
+  },
 ];
 
 export default config;

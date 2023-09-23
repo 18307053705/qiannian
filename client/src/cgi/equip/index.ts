@@ -12,6 +12,7 @@ const makeEquipUrl = "/equip/makeEquip";
 const makeEquipInfoUrl = "/equip/makeEquipInfo";
 const decomposeEquipUrl = "/equip/decomposeEquip";
 const freeForgeEquipUrl = "/equip/freeForgeEquip";
+const suitDetailUrl = "/equip/suitDetail";
 
 //获取装备列表
 export function getEquipList() {
@@ -101,11 +102,18 @@ export function decomposeEquip(data) {
   return post(decomposeEquipUrl, data);
 }
 
-
 /**
  * 免费锻造装备
  * @param req.in_x 装备在背包内的下标
  */
 export function freeForgeEquip(data) {
   return post(freeForgeEquipUrl, data);
+}
+
+/**
+ * 套装详情
+ * @param req.id 套装id
+ */
+export function getSuitDetail(data) {
+  return post(suitDetailUrl, data);
 }

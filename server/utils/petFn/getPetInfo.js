@@ -1,9 +1,6 @@
-const PET_JSON_KEYS = [
-    'art',
-    'equip',
-    'addition',
-    'attr',
-];
+const { PetG } = require('../../global');
+
+
 module.exports = {
     /**
      * 
@@ -27,15 +24,16 @@ module.exports = {
      * @returns petInfo.exp 宠物经验
      */
     getPetInfo: async function (req, res, petId) {
-        const { results } = await res.asyncQuery(`select * from  pet where id=${petId}`);
-        const pet = results[0];
-        if (pet) {
-            const petInfo = {};
+        const { PET_JSON_KEYS } = PetG;
+        let petInfo = PetG.getPetGlobal(req, res)
+        if (petInfo.id !== petId) {
+            const { results } = await res.asyncQuery(`select * from  pet where id=${petId}`);
+            pet = results[0];
+            petInfo = {};
             Object.keys(pet).forEach((key) => {
                 petInfo[key] = PET_JSON_KEYS.includes(key) ? JSON.parse(pet[key]) : pet[key]
             })
-            return petInfo;
         }
-        return {}
+        return petInfo;
     }
 }

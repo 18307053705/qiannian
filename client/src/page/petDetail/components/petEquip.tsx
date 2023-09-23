@@ -1,10 +1,11 @@
 import React from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
-import { jumpDetail, jumpEquipList } from '@utils/jumpPage';
+import { jumpDetail, jumpEquipList, jumpSuitDetail } from '@utils/jumpPage';
 
 export const PetEquip = ({ petInfo, history }) => {
-    const { equip, level, id ,state} = petInfo;
+    const { equip, level, id, state } = petInfo;
     const isFight = state === 1 || state === 2;
+    const { suit } = equip;
     return (
         <div>
             {
@@ -44,6 +45,11 @@ export const PetEquip = ({ petInfo, history }) => {
                             }
                         </div>
                     )
+                })
+            }
+            {
+                suit.map(({ n, id }) => {
+                    return <div>套装：<span className="g_u_end" onClick={() => { jumpSuitDetail(id) }}>{n}</span></div>
                 })
             }
         </div>

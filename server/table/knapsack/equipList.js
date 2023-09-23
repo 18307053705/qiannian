@@ -2068,6 +2068,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 10,
+        group: 10042,
         customAttr: ['atk_min', 'atk_max'],
         tips: '强大的法宝,拥有极致的毁灭力量,可消耗大量世界声望锻造也可通过某些奇遇获得。'
     },
@@ -2079,6 +2080,7 @@ module.exports = {
         level: 66,
         pos: 9,
         attr: 10,
+        group: 10042,
         customAttr: ['dfs_min', 'dfs_max'],
         tips: '强大的法宝,极致的防御力量,可消耗大量世界声望锻造也可通过某些奇遇获得。'
     },
@@ -2090,6 +2092,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10043,
         customAttr: ['ice_atk_min', 'ice_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的冰元素伤害。'
     },
@@ -2101,6 +2104,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10044,
         customAttr: ['mine_atk_min', 'mine_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的雷元素伤害。'
     },
@@ -2112,6 +2116,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10045,
         customAttr: ['wind_atk_min', 'wind_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的风元素伤害。'
     },
@@ -2123,6 +2128,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10046,
         customAttr: ['water_atk_min', 'water_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的水元素伤害。'
     },
@@ -2134,6 +2140,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10047,
         customAttr: ['fire_atk_min', 'fire_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的火元素伤害。'
     },
@@ -2145,6 +2152,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10043,
         customAttr: ['ice_dfs_min', 'ice_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的冰元素防御。'
     },
@@ -2156,6 +2164,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10044,
         customAttr: ['mine_dfs_min', 'mine_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的雷元素防御。'
     },
@@ -2167,6 +2176,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10045,
         customAttr: ['wind_dfs_min', 'wind_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的风元素防御。'
     },
@@ -2178,6 +2188,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10046,
         customAttr: ['water_dfs_min', 'water_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的水元素防御。'
     },
@@ -2189,6 +2200,7 @@ module.exports = {
         level: 66,
         pos: 8,
         attr: 5,
+        group: 10047,
         customAttr: ['fire_dfs_min', 'fire_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的火元素防御。'
     },
@@ -2200,6 +2212,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10048,
         customAttr: ['ice_atk_min', 'ice_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的冰元素伤害。'
     },
@@ -2211,6 +2224,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10049,
         customAttr: ['mine_atk_min', 'mine_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的雷元素伤害。'
     },
@@ -2222,6 +2236,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10050,
         customAttr: ['wind_atk_min', 'wind_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的风元素伤害。'
     },
@@ -2233,6 +2248,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10051,
         customAttr: ['water_atk_min', 'water_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的水元素伤害。'
     },
@@ -2244,6 +2260,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10052,
         customAttr: ['fire_atk_min', 'fire_atk_max'],
         tips: '强大的元素法宝,可对敌人造成大量的火元素伤害。'
     },
@@ -2255,6 +2272,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10048,
         customAttr: ['ice_dfs_min', 'ice_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的冰元素防御。'
     },
@@ -2266,6 +2284,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10049,
         customAttr: ['mine_dfs_min', 'mine_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的雷元素防御。'
     },
@@ -2277,6 +2296,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10050,
         customAttr: ['wind_dfs_min', 'wind_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的风元素防御。'
     },
@@ -2288,6 +2308,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10051,
         customAttr: ['water_dfs_min', 'water_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的水元素防御。'
     },
@@ -2299,6 +2320,7 @@ module.exports = {
         level: 75,
         pos: 8,
         attr: 7,
+        group: 10052,
         customAttr: ['fire_dfs_min', 'fire_dfs_max'],
         tips: '强大的元素法宝,可对敌人造成大量的火元素防御。'
     },
@@ -2310,6 +2332,7 @@ module.exports = {
         level: 90,
         pos: 8,
         attr: 20,
+        group: 10053,
         customAttr: ['life_max', 'mana_max'],
         tips: '传说此图内有天地，滋养天人，拥有此法宝者可化生万物，法力浩荡。'
     },
@@ -2321,6 +2344,7 @@ module.exports = {
         level: 90,
         pos: 8,
         attr: 20,
+        group: 10053,
         customAttr: ['atk_min', 'atk_max', 'dfs_min', 'dfs_max'],
         tips: '传说此法宝先与天地诞生之前便以存在,蕴含混沌之力,完美无缺。'
     },
@@ -2333,6 +2357,7 @@ module.exports = {
         pos: 8,
         attr: 10,
         make: -1,
+        group: 10054,
         customAttr: ['ice_atk_min', 'ice_atk_max', 'mine_atk_min', 'mine_atk_max', 'wind_atk_min', 'wind_atk_max', 'water_atk_min', 'water_atk_max', 'fire_atk_min', 'fire_atk_max'],
         tips: '据说乃是一株青莲所化的古灯,无人知晓其来历,神秘无比,可化万千大道。'
     },
@@ -2345,6 +2370,7 @@ module.exports = {
         pos: 8,
         attr: 10,
         make: -1,
+        group: 10054,
         customAttr: ['ice_dfs_min', 'ice_dfs_max', 'mine_dfs_min', 'mine_dfs_max', 'wind_dfs_min', 'wind_dfs_max', 'water_dfs_min', 'water_dfs_max', 'fire_dfs_min', 'fire_dfs_max'],
         tips: '据说持此印者,乃大道所定之人,承载了无尽因果,可包容万物。'
     },
@@ -2356,7 +2382,7 @@ module.exports = {
         level: 99,
         pos: 6,
         attr: 10,
-        group: 10042,
+        group: 10055,
         make: -1,
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
@@ -2368,7 +2394,7 @@ module.exports = {
         level: 99,
         pos: 7,
         attr: 10,
-        group: 10042,
+        group: 10055,
         make: -1,
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },

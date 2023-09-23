@@ -39,3 +39,11 @@ export function jumpMakeEquip(
 ) {
   window.QN.history.push("/equipMake", { pageKey, level });
 }
+
+/**
+ * 跳转到套装详情
+ * @param param.id 套装ID
+ */
+export function jumpSuitDetail(id) {
+  window.QN.history.push("/suitDetail", { id });
+}

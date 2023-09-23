@@ -1,6 +1,7 @@
 const { RoleG } = require("../../global");
 const { knapsackTable } = require("../../table");
 const { computeEquipAttr } = require("./computeEquipAttr");
+const { computeSuitAttr } = require("./computeSuitAttr");
 module.exports = {
     /**
      * 
@@ -13,6 +14,7 @@ module.exports = {
      */
     wearEquip: function (req, res, equip, pos) {
         const { equip_pool, role_attr, role_level, role_career } = RoleG.getRoleGlobal(req, res);
+        const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
         const { id, n, ext } = equip;
         // 需要进行佩戴的装备
         const equipWear = knapsackTable.getEquip(id);
@@ -39,6 +41,7 @@ module.exports = {
         const posKey = pos || posName;
         // 替换装备
         let replaceEquip = equip_pool[posKey];
+
         // 判断该部位是否替换装备
         if (replaceEquip) {
             const { attr: deleteAttr } = computeEquipAttr(knapsackTable.getEquip(replaceEquip.id), replaceEquip.ext, posKey);
@@ -52,6 +55,15 @@ module.exports = {
             // 物品类型标记为装备
             replaceEquip.p = 3;
         }
+        // 更新装备
+        equip_pool[posKey] = {
+            id,
+            n,
+            ext
+        }
+        const { attrs, suit } = computeSuitAttr(equip_pool, old_equip_pool);
+        // 更新套装信息
+        equip_pool['suit'] = suit;
         // 更新佩戴装备后的属性
         const { addition } = role_attr;
         Object.keys(addAttr).forEach(key => {
@@ -61,12 +73,14 @@ module.exports = {
                 addition[key] = addAttr[key];
             }
         })
-
-        equip_pool[posKey] = {
-            id,
-            n,
-            ext
-        }
+        // 套装属性
+        Object.keys(attrs).forEach(key => {
+            if (addition[key]) {
+                addition[key] += attrs[key];
+            } else {
+                addition[key] = attrs[key];
+            }
+        })
         RoleG.updataRoleGlobal(req, res, { equip_pool, role_attr });
         return { replaceEquip }
 

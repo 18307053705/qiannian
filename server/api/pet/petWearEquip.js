@@ -51,7 +51,7 @@ module.exports = {
             })
             return;
         }
-
+        const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
         const { attr: addAttr } = equipFn.computeEquipAttr(equipWear, ext);
         // 替换下装备
         let replaceEquip = equip_pool[posKey];
@@ -84,6 +84,17 @@ module.exports = {
             n,
             ext
         }
+        const { attrs, suit } = equipFn.computeSuitAttr(equip_pool, old_equip_pool);
+        // 更新套装信息
+        equip_pool['suit'] = suit;
+         // 套装属性
+         Object.keys(attrs).forEach(key => {
+            if (addition[key]) {
+                addition[key] += attrs[key];
+            } else {
+                addition[key] = attrs[key];
+            }
+        })
         // 更新宠物装备池
         PetG.updataPetGlobal(req, res, { equip: equip_pool, addition });
         // 更新背包
