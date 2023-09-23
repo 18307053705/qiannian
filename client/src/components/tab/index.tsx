@@ -8,8 +8,6 @@ type TabType = {
 
 export const Tab = ({ list, onCheng, currentKey }: TabType) => {
     const [current, setCurrent] = useState(currentKey || list[0].value);
-    // const { history } = window.QN;
-    // const { state = { listPage: 0 }, pathname } = history.location;
     useEffect(() => {
         onCheng && onCheng(current);
     }, [current])

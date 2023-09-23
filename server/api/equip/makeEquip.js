@@ -36,6 +36,10 @@ module.exports = {
         const getMakeInfo = equipFn.getMakeInfo(equip);
         //  不可打造的装备
         if (!getMakeInfo) {
+            res.send({
+                code: 0,
+                message: `非法打造`
+            })
             return;
         }
         const { materiaInfo, makeNum, make } = getMakeInfo;

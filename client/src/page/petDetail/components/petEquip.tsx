@@ -48,9 +48,9 @@ export const PetEquip = ({ petInfo, history }) => {
                 })
             }
             {
-                suit.map(({ n, id }) => {
-                    return <div>套装：<span className="g_u_end" onClick={() => { jumpSuitDetail(id) }}>{n}</span></div>
-                })
+                suit.map(({ n, id }) => (
+                    <div key={id}>【套装】<span className="g_u_end" onClick={() => { jumpSuitDetail(id) }}>{n}</span></div>
+                ))
             }
         </div>
     )

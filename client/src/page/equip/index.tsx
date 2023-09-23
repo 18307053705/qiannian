@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { backGrand } from '@utils/grand';
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
-import { jumpDetail, jumpEquipList, jumpMakeEquip } from '@utils/jumpPage';
+import { jumpDetail, jumpEquipList, jumpMakeEquip, jumpSuitDetail } from '@utils/jumpPage';
 export const EquipList = ({ history }) => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
     useEffect(() => {
@@ -20,8 +20,7 @@ export const EquipList = ({ history }) => {
         })
     }
     const { equip_pool: equip, role_level } = roleInfo;
-    console.log(equip,'equip...')
-
+    const { suit = [] } = equip as any;
     return (
         <div>
             {
@@ -48,6 +47,11 @@ export const EquipList = ({ history }) => {
                         </div>
                     )
                 })
+            }
+            {
+                suit.map(({ n, id }) => (
+                    <div key={id}>【套装】<span className="g_u_end" onClick={() => { jumpSuitDetail(id) }}>{n}</span></div>
+                ))
             }
             {role_level >= 35 && (
                 <div><span className='g_u_end' onClick={() => { jumpMakeEquip('world', role_level) }}>前往打造声望套装</span></div>

@@ -1,9 +1,10 @@
 import React from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
-import { jumpDetail } from '@utils/jumpPage';
+import { jumpDetail, jumpSuitDetail } from '@utils/jumpPage';
 import { SEX_MEUN } from '@meun';
 const RoleAttr = ({ roleInfo, history }) => {
     const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo;
+    const { suit = [] } = equip;
     return (
         <>
             <div>
@@ -47,6 +48,11 @@ const RoleAttr = ({ roleInfo, history }) => {
                             </div>
                         )
                     })
+                }
+                {
+                    suit.map(({ n, id }) => (
+                        <div key={id}>【套装】<span className="g_u_end" onClick={() => { jumpSuitDetail(id) }}>{n}</span></div>
+                    ))
                 }
             </div>
             <div></div>
