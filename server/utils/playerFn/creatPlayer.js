@@ -1,5 +1,6 @@
-const { RoleG, KnapsackG } = require("../../global");
+const { RoleG, KnapsackG, PetG } = require("../../global");
 const roleFn = require("../roleFn");
+const petFn = require("../petFn");
 module.exports = {
     /**
      * 创建玩家属性
@@ -11,7 +12,7 @@ module.exports = {
     creatPlayer: function (req, res, type, role_id) {
         const roleInfo = RoleG.getRoleGlobal(req, res, { role_id });
         const knapasack = KnapsackG.getknapsackGlobal(req, res, role_id);
-        // const pet = Global.getPetGlobal(req);
+        const pet = PetG.getPetGlobal(req, res);
         const { fight, art } = roleInfo.skill_pool;
         const knapasackId = {};
         fight.forEach((itme, index) => {
@@ -55,15 +56,15 @@ module.exports = {
             }
         }
         // 更新战斗信息
-        RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool },{role_id});
+        RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool }, { role_id });
         // 计算角色属性
         const data = roleFn.computeRoleAttr(req, res, roleInfo);
         // 获取宠物信息
-        // const petInfo = {
-        //     name: pet.name,
-        //     attr: petFn.computeAttr(pet),
-        //     art: pet['art'][0]
-        // }
+        const petInfo = {
+            name: pet.name,
+            attr: petFn.computePetAttr(pet),
+            art: pet['art'][0]
+        }
         // 切磋满状态,非死斗则是真实状态
         const attr = type === 3 ? data.attr : {
             ...data.attr,
@@ -75,7 +76,7 @@ module.exports = {
             attr,
             art: fight,
             name: roleInfo.role_name,
-            // pet: petInfo,
+            pet: petInfo,
             buffs: {} // {role_id:{value:life:5000,atk:500,t:5,text:描述}}
         }
     },

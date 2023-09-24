@@ -26,7 +26,7 @@ module.exports = {
         }
         const { fightMap } = FightG.getFightGlobal(req, res);
         if (fightMap) {
-            console.log(req.originalUrl)
+            console.log(req.originalUrl,'roleFn.roleFightCheck...')
             res.send({
                 code: 0,
                 path: (fightMap.state === 1 || fightMap.state === 2) ? "fight" : "playerFight"

@@ -17,11 +17,11 @@ module.exports = {
         if (type === 4) {
             // 更新自身
             RoleG.updataRoleGlobal(req, res, { life: fightMap.player.attr.life });
-            myFightMap = FightG.updataFightMapGlobal(req, res, { steta: 1, text: `你成功击杀${role_name}！！`, })
+            myFightMap = FightG.updataFightMapGlobal(req, res, { steta: 1, results: { text: `你成功击杀${role_name}！！` }, })
             // 更新对方
             RoleG.updataRoleGlobal(req, res, { life: 0, address: '10000,0,0' }, { role_id });
             FightG.updataFightMapGlobal(req, res, {
-                steta: 2,
+                state: 2,
                 text: `你已经被${fightMap.player.name}击杀！！`,
                 lose: ""
             }, role_id);
@@ -29,10 +29,10 @@ module.exports = {
         // 切磋不改变真实属性
         if (type === 3) {
             // 更新自身
-            myFightMap = FightG.updataFightMapGlobal(req, res, { steta: 1, text: `你成功击败${role_name}！！`, })
+            myFightMap = FightG.updataFightMapGlobal(req, res, { state: 1, results: { text: `你成功击败${role_name}！！` }, })
             // 更新对方
             FightG.updataFightMapGlobal(req, res, {
-                steta: 2,
+                state: 2,
                 text: `你已经被${fightMap.player.name}击败！！`,
                 lose: ""
             }, role_id);
@@ -40,7 +40,9 @@ module.exports = {
 
         res.send({
             code: 0,
-            myFightMap: myFightMap,
+            data: {
+                myFightMap
+            },
         })
     }
 };

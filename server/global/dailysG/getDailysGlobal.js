@@ -17,6 +17,7 @@ module.exports = {
      * @returns dailys.hb 徽标免费操作次数10
      * @returns dailys.lp 令牌免费操作次数10
      * @returns dailys.day 首日登录抽奖次数
+     * @returns dailys.zhanChang 战场{s:死亡次数,v:功勋值}
      * @returns dailys.shenYuan 深渊{s:进入次数,l:当前层数}}
      * @returns dailys.xiuLian 修炼房{s:进入次数,l:当前层数}}
      * @returns dailys.QingYuan 情缘信息 {j:浇水次数,c:除草}
@@ -31,8 +32,8 @@ module.exports = {
      * @returns dailys.qunMoLuanWu 100级群魔乱舞副本
      * @returns dailys.tianMoJIangLin 100级天魔降临副本
      */
-    getDailysGlobal: function (req, res) {
-        const { role_id } = getRoleGlobal(req, res);
+    getDailysGlobal: function (req, res, { roleId } = {}) {
+        const { role_id } = roleId ? { role_id: roleId } : getRoleGlobal(req, res);
         return DAILYS_Global[role_id] ? JSON.parse(JSON.stringify(DAILYS_Global[role_id])) : undefined;
     }
 }

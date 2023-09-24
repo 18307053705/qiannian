@@ -28,7 +28,7 @@ module.exports = {
         }
         // 单攻,群攻
         if (p === 1 || p === 2) {
-            return playerNormalDir(req, res, playerAttr, rivalAttr, fightRound, v, t);
+            return playerNormalDir(req, res, fightRound, v, t);
         }
         // buff技能
         if (p === 3) {

@@ -6,7 +6,7 @@ const FightResult = ({ fight }) => {
     return (
         <div>
             <div>{results.text}</div>
-            <div onClick={exitFight} className="g_u_end">返回地图</div>
+            <div><span onClick={exitFight} className="g_u_end">返回地图</span></div>
         </div>
     )
 }

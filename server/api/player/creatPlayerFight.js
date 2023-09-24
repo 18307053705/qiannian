@@ -16,7 +16,6 @@ module.exports = {
             data: {
                 myFightMap,
                 tFightMap,
-                aa:getFightG()
             }
         })
     }

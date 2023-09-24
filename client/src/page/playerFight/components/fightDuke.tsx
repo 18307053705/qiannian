@@ -80,7 +80,7 @@ const FightDuke = ({ dirClick, fight, setPanel }) => {
             {/* 技能栏1 */}
             <div>{art(dirClick, artList1)}</div>
             {/* 敌方状态 */}
-            <div>{tPalyer.name}(敌):[{tPalyer.attr.life}]{fightRound.dps} </div>
+            <div>{tPalyer.name}(敌):[{tPalyer.attr.life}]{fightRound.dps}{fightRound.peDps}</div>
             {/* 敌方血量百分比 */}
             <FightPercent max={tPalyer.attr.life_max} min={tPalyer.attr.life} />
             {/* buff展示 */}

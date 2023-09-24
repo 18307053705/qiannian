@@ -14,6 +14,7 @@ export interface getGrandRes {
   players: {
     role_id: string;
     role_name: string;
+    zhangChang?: boolean;
   }[];
   name: string;
   x: string;

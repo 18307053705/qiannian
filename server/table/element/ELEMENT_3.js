@@ -29,7 +29,8 @@ const ELEMENT_3 = {
     35: {
         id: 35,
         name: "上古战场",
-        type: 3
+        type: 3,
+        dir: "60003,0,0"
     },
     36: {
         id: 36,

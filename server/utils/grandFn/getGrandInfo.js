@@ -86,7 +86,7 @@ module.exports = {
             eleList,
             eleDir,
             moveDir: getGrand(address),
-            players: players.map(({ role_name, role_id }) => ({ role_name, role_id })),
+            players: players.map(({ role_name, role_id, zhangChang }) => ({ role_name, role_id, zhangChang })),
             tip,
             ...getGrandEleGlobal(req, res, address)
         };

@@ -61,7 +61,9 @@ module.exports = {
                 return;
             }
         }
-        playerFn.petArtDir(req,res,fightRound);
+        if (playerFn.petArtDir(req, res, fightRound)) {
+            return;
+        }
         // 设置出招间隔,每秒可出招一次
         const myFightMap = FightG.updataFightMapGlobal(req, res, { intervalTime: new Date() * 1 });
         const { fightMap: tFightMap } = FightG.getFightGlobal(req, res, currentDir.role_id);

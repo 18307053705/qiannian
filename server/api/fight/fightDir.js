@@ -66,8 +66,9 @@ module.exports = {
         }
 
         // 宠物攻击
-        fightFn.petArtDir(req, res, rivalAttr, fightRound);
-
+        if (fightFn.petArtDir(req, res, rivalAttr, fightRound)) {
+            return;
+        }
         // 获取战斗结果
         if (fightFn.getFightResults(req, res)) {
             return;

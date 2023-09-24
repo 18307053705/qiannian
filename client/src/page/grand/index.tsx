@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { moveDir, initGrandInfo, pickupDir } from '@cgi/grand';
+import { moveDir, initGrandInfo, pickupDir, createFightDir } from '@cgi/grand';
 import { roleExit } from '@cgi/roleInfo';
 import Styles from './index.less';
 
@@ -106,12 +106,16 @@ const Grand = ({ history }) => {
                     playersLen !== -1 && <span>玩友：</span>
                 }
                 {
-                    players.map(({ role_name, role_id }) => (
+                    players.map(({ role_name, role_id, zhangChang }) => (
                         <span
                             key={role_id}
                             className="g_u"
                             onClick={() => {
-                                history.push('/player', { role_id, role_name })
+                                if (zhangChang) {
+                                    createFightDir({ role_id, type: 3 })
+                                } else {
+                                    history.push('/player', { role_id, role_name })
+                                }
                             }}>
                             <span>{role_name}</span>
                         </span>
