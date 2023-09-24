@@ -86,7 +86,7 @@ const ELEMENT_4 = {
         id: 413,
         name: "银行",
         type: 4,
-        path: '/shops',
+        path: '/yinHang',
     },
     414: {
         id: 414,
