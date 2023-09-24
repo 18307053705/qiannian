@@ -24,7 +24,7 @@ const EquipDetail = ({ history }) => {
         }
         getArticleDetail({ ...state, ...params }).then(({ data }) => {
             const equipInfo = getEquipInfo(data);
-            const extInfo = getEquipExtInfo(data.ext, data.n);
+            const extInfo = getEquipExtInfo(data.ext, data.n || data.name);
             setEquip({
                 ...data,
                 ...equipInfo,

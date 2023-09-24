@@ -1744,6 +1744,7 @@ module.exports = {
         attr: 8,
         group: 10031,
         make: -1,
+        integral: 1314,
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     157: {
@@ -1756,6 +1757,7 @@ module.exports = {
         attr: 8,
         group: 10031,
         make: -1,
+        integral: 1314,
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     158: {
@@ -1768,6 +1770,7 @@ module.exports = {
         attr: 8,
         group: 10031,
         make: -1,
+        integral: 1314,
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     159: {
@@ -1780,6 +1783,7 @@ module.exports = {
         attr: 8,
         group: 10031,
         make: -1,
+        integral: 1314,
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     160: {
@@ -1792,6 +1796,7 @@ module.exports = {
         attr: 8,
         group: 10031,
         make: -1,
+        integral: 1314,
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     161: {
@@ -1804,6 +1809,7 @@ module.exports = {
         attr: 10,
         group: 10032,
         make: -1,
+        integral: 3344,
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     162: {
@@ -1816,6 +1822,7 @@ module.exports = {
         attr: 10,
         group: 10032,
         make: -1,
+        integral: 3344,
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     163: {
@@ -1828,6 +1835,7 @@ module.exports = {
         attr: 10,
         group: 10032,
         make: -1,
+        integral: 3344,
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     164: {
@@ -1840,6 +1848,7 @@ module.exports = {
         attr: 10,
         group: 10032,
         make: -1,
+        integral: 3344,
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     165: {
@@ -1852,6 +1861,7 @@ module.exports = {
         attr: 10,
         group: 10032,
         make: -1,
+        integral: 3344,
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     166: {
@@ -2026,18 +2036,20 @@ module.exports = {
         attr: 10,
         group: 10040,
         make: -1,
+        integral: 199,
         tips: '50级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     181: {
         id: 181,
         type: 3,
-        name: '九歌の项链',
+        name: '断魂の项链',
         career: 0,
         level: 50,
         pos: 7,
         attr: 10,
         group: 10040,
         make: -1,
+        integral: 199,
         tips: '50级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     182: {
@@ -2050,6 +2062,7 @@ module.exports = {
         attr: 10,
         group: 10041,
         make: -1,
+        integral: 3344,
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     183: {
@@ -2062,6 +2075,7 @@ module.exports = {
         attr: 10,
         group: 10041,
         make: -1,
+        integral: 3344,
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     184: {
@@ -2362,6 +2376,7 @@ module.exports = {
         attr: 10,
         make: -1,
         group: 10054,
+        integral: 3344,
         customAttr: ['ice_atk_min', 'ice_atk_max', 'mine_atk_min', 'mine_atk_max', 'wind_atk_min', 'wind_atk_max', 'water_atk_min', 'water_atk_max', 'fire_atk_min', 'fire_atk_max'],
         tips: '据说乃是一株青莲所化的古灯,无人知晓其来历,神秘无比,可化万千大道。'
     },
@@ -2375,6 +2390,7 @@ module.exports = {
         attr: 10,
         make: -1,
         group: 10054,
+        integral: 3344,
         customAttr: ['ice_dfs_min', 'ice_dfs_max', 'mine_dfs_min', 'mine_dfs_max', 'wind_dfs_min', 'wind_dfs_max', 'water_dfs_min', 'water_dfs_max', 'fire_dfs_min', 'fire_dfs_max'],
         tips: '据说持此印者,乃大道所定之人,承载了无尽因果,可包容万物。'
     },
@@ -2388,6 +2404,7 @@ module.exports = {
         attr: 10,
         group: 10055,
         make: -1,
+        integral: 3344,
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     211: {
@@ -2400,6 +2417,7 @@ module.exports = {
         attr: 10,
         group: 10055,
         make: -1,
+        integral: 3344,
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
 }

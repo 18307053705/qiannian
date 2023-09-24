@@ -307,7 +307,7 @@ const SUIT_EFFECT = {
     },
     10040: {
         ids: [180, 181],
-        name: '九歌の',
+        name: '九歌の断魂',
         career: 0,
         type: SUIT_TYPE.JEWElRY,
         er: 70,

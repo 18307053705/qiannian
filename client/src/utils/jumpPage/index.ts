@@ -13,9 +13,9 @@ export function jumpDetail(
   { p, form, pos, in_x, role_id, petId, id }: any
 ) {
   if (p === 3) {
-    history.push("/equipDetail", { form, in_x, pos, role_id, petId, id });
+    history.push("/equipDetail", { p,form, in_x, pos, role_id, petId, id });
   } else {
-    history.push("/articleDetail", { form, in_x, pos, role_id, petId, id });
+    history.push("/articleDetail", { p,form, in_x, pos, role_id, petId, id });
   }
 }
 

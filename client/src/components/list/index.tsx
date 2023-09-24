@@ -9,10 +9,11 @@ type ListType = {
     emptyText?: string,
     hiddenFooter?: boolean,
     listRef?: { current: any }
+    size?: number
 }
 
-const size = 20;
-export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFooter }: ListType) => {
+// const size = 20;
+export const List = ({ data = [], onCheng, prefix, active, emptyText, hiddenFooter, size = 20 }: ListType) => {
     const { history } = window.QN;
     const { state = { listPage: 0 }, pathname } = history.location;
     const [page, setPage] = useState(state.listPage || 0);

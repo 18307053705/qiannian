@@ -203,6 +203,11 @@ export const config: RouterType[] = [
     path: "/suitDetail",
     component: lazy(() => import("@page/suitDetail"))
   },
+  {
+    name: "积分商店",
+    path: "/shopIntegral",
+    component: lazy(() => import("@page/shopIntegral"))
+  }
 ];
 
 export default config;

@@ -342,6 +342,7 @@ module.exports = {
         type: 4,
         n: '五倍经验卡',
         group2: 'exp5',
+        integral: 20,
         tips: '使用后打怪可获得五倍经验,持续120分钟。',
     },
     39: {
@@ -365,6 +366,7 @@ module.exports = {
         type: 4,
         n: '五倍银两卡',
         group2: 'money5',
+        integral: 20,
         tips: '使用后打怪可获得五倍银两,持续120分钟。',
     },
     42: {
@@ -453,6 +455,7 @@ module.exports = {
         type: 5,
         n: '1000元宝卡',
         group1: 'yuanbao-1000',
+        integral: 200,
         tips: '可在主城兑换1000元宝。',
     },
     53: {
@@ -781,6 +784,7 @@ module.exports = {
         id: 105,
         type: 5,
         n: '16级强化卡',
+        integral: 1314,
         tips: '装备强化卡,可使强化等级15的装备100%强化到16级。',
     },
     106: {
@@ -1075,6 +1079,7 @@ module.exports = {
         id: 155,
         type: 5,
         n: '九星魔符',
+        integral: 1314,
         tips: '蕴含强大魔力的符文，可对装备进行附魔提升大量的属性。',
     },
     156: {
@@ -1082,12 +1087,14 @@ module.exports = {
         type: 5,
         n: '强化石',
         price: 50,
+        integral: 2,
         tips: '极为稀有的石头，可用于强化装备，强化等级越高成功概率越低。',
     },
     157: {
         id: 157,
         type: 5,
         n: '月光石',
+        integral: 20,
         tips: '极为稀有的石头，可用于提升装备强化概率。',
     },
     158: {

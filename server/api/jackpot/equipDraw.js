@@ -4,41 +4,33 @@ const { petFn, knapsackFn } = require('../../utils');
 const moment = require('moment');
 
 
-// 灵兽山奖励池
-const petPoolMap = {
-    // 宠物技能卷,宠物进化卷,宠物转生卷,宠物扩房卷,宠物转化卷,彩灵蛋,水灵蛋,火灵蛋,风灵蛋,雷灵蛋,冰灵蛋
-    1: [158, 159, 160, 161, 162, 61, 62, 63, 64, 65, 66],
-    // 二级奖励池60资质宠物
-    2: [601, 602, 603, 604, 605, 606, 607, 608, 609, 6010, 6011, 6011],
-    // 三级奖励池千年系列宠物70资质
-    3: [701, 702, 703, 704, 705, 706, 707, 708],
-    // 四级奖励池包 80资质元素宠物
-    4: [801, 802, 803],
-    // 五级奖池 85资质元素宠物
-    5: [851, 852],
-    // 六级奖池 90资质元素宠物
-    6: [901, 902, 903, 904, 905],
-    // 六级奖池 95资质元素宠物
-    7: [951, 952],
-    // 八级奖池 100资质元素宠物
-    8: [1001, 1002, 1003]
+// 装备奖励池
+const equipPoolMap = {
+    // 1级强化卡，1星魔符，40元宝卡
+    1: [90, 147, 47],
+    // 2级强化卡，2星魔符，60元宝卡
+    2: [91, 148, 48],
+    // 3级强化卡，3星魔符，100元宝卡
+    3: [92, 149, 49],
+    // 4级强化卡，4星魔符，200元宝卡
+    4: [93, 150, 50],
+    // 九歌，500元宝卡
+    5: [180, 181, 51],
+    // 才子佳人
+    6: [156, 157, 158, 159, 160],
+    // 君临天下
+    7: [161, 162, 163, 164, 165],
+    // 月华相思,上善若水
+    8: [182, 183, 208, 209, 210, 211]
 }
 
 module.exports = {
     /**
-     * 灵兽山砸宠
-     * @param {*} req
+     * 神装宝箱
      */
-    lingShouShan: async function (req, res) {
-        const { pet_pool, jackpot } = RoleG.getRoleGlobal(req, res);
+    equipDraw: async function (req, res) {
+        const { jackpot } = RoleG.getRoleGlobal(req, res);
         let { data, yuanbao } = KnapsackG.getknapsackGlobal(req, res);
-        if (pet_pool['l'].length >= pet_pool['x']) {
-            res.send({
-                code: 0,
-                message: '宠物房已满,无法获得更多宠物。'
-            })
-            return;
-        }
         if (data.length >= KnapsackG.KNAPSACK_SIZE) {
             res.send({
                 code: 0,
@@ -85,50 +77,55 @@ module.exports = {
             rowid = 2;
         }
         let success = '';
-        const petPool = petPoolMap[rowid];
+        const equipPool = equipPoolMap[rowid];
         // 随机对应奖励池中的id
-        const indxe = Math.floor(Math.random() * petPool.length);
-        const id = petPool[indxe];
-        if (rowid === 1) {
-            const { type, n } = knapsackTable.getArticle(id);
-            const article = {
-                artReward: {
-                    [id]: {
-                        p: type,
-                        n,
-                        s: 1,
-                        id
-                    }
+        const indxe = Math.floor(Math.random() * equipPool.length);
+        const id = equipPool[indxe];
+        const article = {};
+        if ([5, 6, 7, 8].includes(rowid) && 51 !== id) {
+            const { name, type } = knapsackTable.getEquip(id);
+            success = `消耗200元宝,在神装活动中获得${name}`;
+            article['equipReward'] = {
+                [id]: {
+                    p: type,
+                    n: name,
+                    s: 1,
+                    id
                 }
             }
-            knapsackFn.addKnapsack(req, res, { article });
-            success = `消耗200元宝,在灵兽山获得${n}x1`;
         } else {
-            const pet = PetTable.createPet(id);
-            await petFn.setPet(req, res, pet);
-            success = `消耗200元宝,在灵兽山获得${pet.flair_x}资质,${pet.name}`;
+            const { type, n } = knapsackTable.getArticle(id);
+            success = `消耗200元宝,在神装活动中获得${n}`;
+            article['artReward'] = {
+                [id]: {
+                    p: type,
+                    n,
+                    s: 1,
+                    id
+                }
+            }
         }
+        knapsackFn.addKnapsack(req, res, { article });
+
         let isActivity = false;
         // 周六，周日开启活动
         if ([0, 6].includes(moment().days())) {
             isActivity = true;
-            jackpot.pet += 1;
-            if (jackpot.pet === 10) {
-                jackpot.pet = 0;
+            jackpot.equip += 1;
+            if (jackpot.equip === 10) {
+                jackpot.equip = 0;
                 const yb = Math.floor(Math.random() * 1000) + 100;
                 yuanbao += yb;
                 success += `,天降鸿运恭喜额外获得${yb}元宝！！！`
             }
-            RoleG.updataRoleGlobal(req, res, { jackpot })
+            RoleG.updataRoleGlobal(req, res, { jackpot });
         }
-
         // 更新背包信息
         KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao - 200 });
-
         res.send({
             code: 0,
             data: {
-                num: jackpot.pet,
+                num: jackpot.equip,
                 isActivity,
                 day: moment().days()
             },

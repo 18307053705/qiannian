@@ -18,7 +18,14 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { yuanbao, tael } = KnapsackG.getknapsackGlobal(req, res);
+        const { yuanbao, tael, data } = KnapsackG.getknapsackGlobal(req, res);
+        if (data.length >= KnapsackG.KNAPSACK_SIZE) {
+            res.send({
+                code: 0,
+                message: '背包已满,请先清理物品。'
+            })
+            return;
+        }
         const drain = s * price;
         const updata = {};
         let message = '';

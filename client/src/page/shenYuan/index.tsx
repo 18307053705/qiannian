@@ -49,7 +49,7 @@ const ShenYuanInfo = ({ roleInfo }) => {
     )
 }
 
-export const ShenYuan = () => {
+export const ShenYuan = ({ history }) => {
     const [shenyuan, setShenyuan]: any = useState();
     useEffect(() => {
         getShenRank().then(({ data }) => {
@@ -80,7 +80,6 @@ export const ShenYuan = () => {
         return null;
     }
 
-    console.log(shenyuan, ' console.log(shenyuan)...')
     const { list, roleInfo = {}, index } = shenyuan;
     const prefix = (data, index) => (<ShenYuanItme data={data} index={index} role_id={roleInfo.id} />)
     return (
@@ -88,7 +87,7 @@ export const ShenYuan = () => {
             <div>
                 <div className={Styles.title} >
                     <div>今日挑战人数：{list.length}</div>
-                    <div><span className='g_u_end'>积分商店</span></div>
+                    <div><span className='g_u_end' onClick={() => { history.push('/shopIntegral'); }}>积分商店</span></div>
                 </div>
                 <ShenYuanInfo roleInfo={{
                     ...roleInfo,

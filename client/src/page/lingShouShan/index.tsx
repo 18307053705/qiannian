@@ -20,11 +20,9 @@ export const LingShouShan = () => {
         <div>
             <div className={Styles.tips}>
                 全天火热活动,只需200元宝便可获得超高资质宠物,甚至有几率获得自带强大天赋【青帝雷经】【太白帝经】【玄武真怒】的强大神宠
-                ,并且活动期间每抽取十次更有机会获得100-1000元宝奖励
+                ,周六，周日活动期间每抽取十次更有机会获得100-1000元宝奖励
             </div>
-            <div>
-                <span className="g_u_end" onClick={drawPetClick}>{text}</span>
-            </div>
+            <div><span className="g_u_end" onClick={drawPetClick}>{text}</span></div>
             <div className={Styles.tips}>
                 灵兽山,四处都是奇珍异兽,你甚至还看到了远古时代才存在的【★远古鲲鹏★】【★吞天巨蟒★】,
                 不过想要获得想要获得他们的认可还需一点点的运气...

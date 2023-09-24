@@ -11,7 +11,7 @@ module.exports = {
         if (type === 1) {
             return JSON.parse(JSON.stringify(articleList))
         }
-        if (type === 1) {
+        if (type === 2) {
             return JSON.parse(JSON.stringify(equipList))
         }
     }

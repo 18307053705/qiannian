@@ -18,7 +18,7 @@ const ArticleDetail = ({ history }) => {
         <div>
             <HeadActive query={state} history={history} />
             <div><span>{article.n}</span></div>
-            <div><span>数量</span>：<span>{article.s}</span></div>
+            <div><span>数量</span>：<span>{article.s || 1}</span></div>
             {
                 article.price && (
                     <div>
