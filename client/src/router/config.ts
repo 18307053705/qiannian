@@ -44,11 +44,6 @@ export const config: RouterType[] = [
     component: lazy(() => import("@page/knapsack"))
   },
   {
-    name: "仓库界面",
-    path: "/warehouse",
-    component: lazy(() => import("@page/warehouse"))
-  },
-  {
     name: "商店界面",
     path: "/shopping",
     component: lazy(() => import("@page/shopping"))
@@ -227,6 +222,11 @@ export const config: RouterType[] = [
     name: "银行",
     path: "/yinHang",
     component: lazy(() => import("@page/yinHang"))
+  },
+  {
+    name: "送财童子",
+    path: "/songCaiTongZi",
+    component: lazy(() => import("@page/songCaiTongZi"))
   }
 ];
 

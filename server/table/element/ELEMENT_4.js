@@ -73,15 +73,15 @@ const ELEMENT_4 = {
         type: 4,
         path: '/shops',
     },
-    412: {
-        id: 412,
-        name: "仓库",
-        type: 4,
-        path: '/warehouse',
-        ext: {
-            type: 3
-        }
-    },
+    // 412: {
+    //     id: 412,
+    //     name: "仓库",
+    //     type: 4,
+    //     path: '/warehouse',
+    //     ext: {
+    //         type: 3
+    //     }
+    // },
     413: {
         id: 413,
         name: "银行",
@@ -96,14 +96,15 @@ const ELEMENT_4 = {
     },
     415: {
         id: 415,
-        name: "杂货店",
+        name: "【送财童子】",
         type: 4,
+        path: '/songCaiTongZi'
     },
-    416: {
-        id: 416,
-        name: "演武场",
-        type: 4,
-    },
+    // 416: {
+    //     id: 416,
+    //     name: "演武场",
+    //     type: 4,
+    // },
     417: {
         id: 417,
         name: "帮会传送阵",
