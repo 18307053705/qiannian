@@ -2,17 +2,17 @@
 const ELEMENT_4 = {
     40: {
         id: 40,
-        name: "人族气运boss",
+        name: "【人族守护boss】",
         type: 4
     },
     41: {
         id: 41,
-        name: "妖族气运boss",
+        name: "【妖族守护boss】",
         type: 4
     },
     42: {
         id: 42,
-        name: "仙族气运boss",
+        name: "【仙族守护boss】",
         type: 4
     },
     43: {
@@ -20,13 +20,14 @@ const ELEMENT_4 = {
         name: "首次登录抽奖...",
         type: 4,
         cs: "g_b_u",
+        path: '/jackpotDay'
     },
-    44: {
-        id: 44,
-        name: "在线时间抽奖...",
-        type: 4,
-        cs: "g_b_u",
-    },
+    // 44: {
+    //     id: 44,
+    //     name: "在线时间抽奖...",
+    //     type: 4,
+    //     cs: "g_b_u",
+    // },
     45: {
         id: 45,
         name: "全民冲级中...",

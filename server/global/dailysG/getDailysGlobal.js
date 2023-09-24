@@ -16,6 +16,7 @@ module.exports = {
      * @returns dailys.xz 勋章免费操作次数10
      * @returns dailys.hb 徽标免费操作次数10
      * @returns dailys.lp 令牌免费操作次数10
+     * @returns dailys.day 首日登录抽奖次数
      * @returns dailys.shenYuan 深渊{s:进入次数,l:当前层数}}
      * @returns dailys.xiuLian 修炼房{s:进入次数,l:当前层数}}
      * @returns dailys.QingYuan 情缘信息 {j:浇水次数,c:除草}

@@ -1,5 +1,4 @@
 const { getElement } = require('../../../table/element');
-const { getGrandName } = require('../../../table/grand/getGrandName');
 
 module.exports = {
     /**
@@ -18,7 +17,6 @@ module.exports = {
             const { name, ext } = getElement(itme.id);
             return {
                 ...itme,
-                // addressName: getGrandName(itme.address),
                 name,
                 ext: {
                     ...ext,

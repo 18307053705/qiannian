@@ -3,6 +3,7 @@ const lingShouShanUrl = "/jackpot/lingShouShan";
 const equipDrawUrl = "/jackpot/equipDraw";
 const jackpotLevelUrl = "/jackpot/jackpotLevel";
 const jackpotArtUrl = "/jackpot/jackpotArt";
+const jackpotDayUrl = "/jackpot/jackpotDay";
 
 /**
  * 灵兽山砸宠
@@ -31,4 +32,12 @@ export function jackpotLevel() {
  */
 export function jackpotArt(data: { type: number }) {
   return post(jackpotArtUrl, data);
+}
+
+
+/**
+ * 首日登录领奖
+ */
+export function jackpotDay() {
+  return post(jackpotDayUrl);
 }

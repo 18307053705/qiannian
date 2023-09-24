@@ -3,6 +3,7 @@ const { lingShouShan } = require('./lingShouShan');
 const { equipDraw } = require('./equipDraw');
 const { jackpotLevel } = require('./jackpotLevel');
 const { jackpotArt } = require('./jackpotArt');
+const { jackpotDay } = require('./jackpotDay');
 
 const router = new express.Router();
 
@@ -14,4 +15,6 @@ router.post("/equipDraw", equipDraw);
 router.post("/jackpotLevel", jackpotLevel);
 // 仙术抽奖
 router.post("/jackpotArt", jackpotArt);
+// 首日登录领奖
+router.post("/jackpotDay", jackpotDay);
 module.exports = router;

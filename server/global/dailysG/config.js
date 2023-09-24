@@ -9,6 +9,7 @@
  * @param {*} dailys.xz 勋章免费操作次数10
  * @param {*} dailys.hb 徽标免费操作次数10
  * @param {*} dailys.lp 令牌免费操作次数10
+ * @param {*} dailys.day 首日登录抽奖次数
  * @param {*} dailys.shenYuan 深渊{s:进入次数,l:当前层数}}
  * @param {*} dailys.xiuLian 修炼房{s:进入次数,l:当前层数}}
  * @param {*} dailys.QingYuan 情缘信息 {j:浇水次数,c:除草}
