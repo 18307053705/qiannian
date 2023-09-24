@@ -59,7 +59,7 @@ const ELEMENT_4 = {
         id: 49,
         name: "拍卖行",
         type: 4,
-        path:'/paiMaiHang'
+        path: '/paiMaiHang'
     },
     410: {
         id: 410,
@@ -92,6 +92,7 @@ const ELEMENT_4 = {
         id: 414,
         name: "铁匠铺",
         type: 4,
+        path: '/tieJiangPu'
     },
     415: {
         id: 415,

@@ -22,8 +22,8 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        // 商城 必传物品id
-        if (form === 5 && !id) {
+        // 商城与积分商店 必传id与类型
+        if ((form === 5 || form === 7) && !id && !p) {
             ErrorG.paramsError(res);
             return;
         }
@@ -34,11 +34,6 @@ module.exports = {
         }
         // 宠物 必传宠物id
         if (form === 6 && !petId) {
-            ErrorG.paramsError(res);
-            return;
-        }
-        // 积分商店，必传id与类型
-        if (form === 7 && !p && !id) {
             ErrorG.paramsError(res);
             return;
         }
@@ -65,9 +60,9 @@ module.exports = {
             const { article } = await shopFn.getShopInfo(req, res, role_id);
             articleInfo = article ? article[in_x] : undefined;
         }
-        // 商城
-        if (form === 5) {
-            articleInfo = knapsackTable.getArticle(id);
+        // 商城 积分商店
+        if (form === 5 || form === 7) {
+            articleInfo = p === 3 ? knapsackTable.getEquip(id) : knapsackTable.getArticle(id);
         }
         // 宠物身上
         if (form === 6) {
@@ -75,10 +70,10 @@ module.exports = {
             const equip = petEquip[pos];
             articleInfo = { ...equip, p: 3 };
         }
-        // 积分商店
-        if (form === 7) {
-            articleInfo = p === 3 ? knapsackTable.getEquip(id) : knapsackTable.getArticle(id);
-        }
+        // // 积分商店
+        // if (form === 7) {
+        //     articleInfo = p === 3 ? knapsackTable.getEquip(id) : knapsackTable.getArticle(id);
+        // }
         if (articleInfo) {
             const { p, type, id, ext } = articleInfo;
             let data = undefined;

@@ -217,6 +217,11 @@ export const config: RouterType[] = [
     name: "全民冲击",
     path: "/jackpotLevel",
     component: lazy(() => import("@page/jackpotLevel"))
+  },
+  {
+    name: "铁匠铺",
+    path: "/tieJiangPu",
+    component: lazy(() => import("@page/tieJiangPu"))
   }
 ];
 

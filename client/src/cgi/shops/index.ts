@@ -3,6 +3,9 @@ const getShopListUrl = "/shops/getList";
 const purchaseUrl = "/shops/purchase";
 const shopIntegralUrl = "/shops/shopIntegral";
 const getIntegralListUrl = "/shops/getIntegralList";
+const getequipListUrl = "/shops/getequipList";
+const shopEquipUrl = "/shops/shopEquip";
+
 /**
  * 商城物品列表
  */
@@ -34,4 +37,17 @@ export async function getIntegralList() {
  */
 export async function shopIntegral(data: { id: number; p: number }) {
   return await post(shopIntegralUrl, data);
+}
+/**
+ * 获取铁匠铺装备列表
+ */
+export async function getequipList() {
+  return await post(getequipListUrl);
+}
+/**
+ * 购买铁匠铺装备
+ * @param {*} req.id 装备id
+ */
+export async function shopEquip(data: { id: number }) {
+  return await post(shopEquipUrl, data);
 }
