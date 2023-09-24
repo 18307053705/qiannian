@@ -207,6 +207,16 @@ export const config: RouterType[] = [
     name: "积分商店",
     path: "/shopIntegral",
     component: lazy(() => import("@page/shopIntegral"))
+  },
+  {
+    name: "全民仙法",
+    path: "/jackpotArt",
+    component: lazy(() => import("@page/jackpotArt"))
+  },
+  {
+    name: "全民冲击",
+    path: "/jackpotLevel",
+    component: lazy(() => import("@page/jackpotLevel"))
   }
 ];
 

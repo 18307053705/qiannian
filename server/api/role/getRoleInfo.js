@@ -19,7 +19,6 @@ module.exports = {
             return res.send({
                 code: 0,
                 data: {
-                    roles: role,
                     role_id: role['role_id'],
                     attr: data.attr,
                     buff: data.buff,
@@ -41,6 +40,7 @@ module.exports = {
                     role_integral: role['role_integral'],
                     pet_pool: role['pet_pool'],
                     treasure_pool: role['treasure_pool'],
+                    jackpot: role['jackpot'],
                 }
             });
         }

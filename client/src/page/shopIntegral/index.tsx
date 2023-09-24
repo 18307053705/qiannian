@@ -8,7 +8,6 @@ import { List } from '@components';
 export const ShopIntegral = ({ history }) => {
     const [data, setData] = useState([]);
     const [integral, setIntegral] = useState(0);
-
     const getIntegral = useCallback(() => {
         getRoleInfo().then(({ data }) => {
             const { shenZhuang } = data.role_integral;
