@@ -5,7 +5,7 @@ module.exports = {
      * 获取本机mac地址
      * @returns mac地址
      */
-     getMacAdress:function(){
+    getMacAdress: function () {
         var interfaces = os.networkInterfaces();
         for (var devName in interfaces) {
             var iface = interfaces[devName];

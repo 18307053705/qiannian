@@ -16,7 +16,7 @@ module.exports = {
         }
         // 注册账号
         const sqlAdd = "insert into user(user,pass,address) values(?,?,?)";
-        const addDates = [user, pass, osFn.getIPAdress()];
+        const addDates = [user, pass, osFn.getMacAdress()];
         await res.asyncAdd(sqlAdd, addDates)
         res.cookie("q_uid", user);
         res.cookie("token", userFn.creatToken(user, pass));
