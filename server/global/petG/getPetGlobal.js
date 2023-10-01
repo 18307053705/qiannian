@@ -7,7 +7,7 @@ module.exports = {
      * @param {*} req 
      * @param {*} res 
      * @param {*} roleId 获取他人出战宠物信息 
-     * @returns Promise 
+     * @returns petInfo ||  undefined
      * @returns petInfo.id 
      * @returns petInfo.name 
      * @returns petInfo.flair 后天资质

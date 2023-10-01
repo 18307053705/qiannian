@@ -1,4 +1,4 @@
-const { RoleG, FightG, GrandG, KnapsackG,PetG } = require("../../global");
+const { RoleG, FightG, GrandG, KnapsackG, PetG } = require("../../global");
 const roleFn = require("../roleFn");
 const petFn = require("../petFn");
 module.exports = {
@@ -59,10 +59,13 @@ module.exports = {
         // 计算角色属性
         const data = roleFn.computeRoleAttr(req, res, roleInfo);
         // 获取宠物信息
-        const petInfo = {
-            name: pet.name,
-            attr: petFn.computePetAttr(pet),
-            art: pet['art'][0]
+        let petInfo;
+        if (pet) {
+            petInfo = {
+                name: pet.name,
+                attr: petFn.computePetAttr(pet),
+                art: pet['art'][0]
+            }
         }
         return {
             roleId: roleInfo.role_id,

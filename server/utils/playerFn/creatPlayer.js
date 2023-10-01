@@ -60,10 +60,13 @@ module.exports = {
         // 计算角色属性
         const data = roleFn.computeRoleAttr(req, res, roleInfo);
         // 获取宠物信息
-        const petInfo = {
-            name: pet.name,
-            attr: petFn.computePetAttr(pet),
-            art: pet['art'][0]
+        let petInfo;
+        if (pet) {
+            petInfo = {
+                name: pet.name,
+                attr: petFn.computePetAttr(pet),
+                art: pet['art'][0]
+            }
         }
         // 切磋满状态,非死斗则是真实状态
         const attr = type === 3 ? data.attr : {

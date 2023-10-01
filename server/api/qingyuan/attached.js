@@ -114,13 +114,6 @@ module.exports = {
                 causality: 0
             }
             const results = await qingyuanFn.insertQingYuan(req, res, qingyuan)
-            // //  背包
-            // const sql = "insert into qingyuan(role1,role2,name1,name2,level,exp,causality) values(?,?,?,?,?,?,?)";
-            // const data = [iRoleId, tRoleId, iRoleName, tRoleName, 1, '0/100', 0];
-            // const { results } = await res.asyncAdd(sql, data);
-            // if (!results) {
-            //     return;
-            // }
             const id = results.insertId;
             const iS = iQingYuan.s || 0;
             const tS = tQingYuan.s || 0;

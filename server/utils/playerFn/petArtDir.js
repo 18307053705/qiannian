@@ -1,4 +1,4 @@
-const { PetG, FightG,GrandG } = require('../../global');
+const { PetG, FightG, GrandG } = require('../../global');
 const { creatFightAttr } = require('../fightFn/creatFightAttr');
 const { computeFightDps } = require('./computeFightDps');
 const { computePetAttr } = require('../petFn/computePetAttr');
@@ -18,16 +18,17 @@ module.exports = {
         }
         const attr = computePetAttr(pet);
         const petAttr = creatFightAttr(req, res, attr);
-         // 战斗指令信息
-         const { currentDir } = GrandG.getDirGlobal(req, res);
-         const { role_id } = currentDir;
-         // 我的信息
-         const { fightMap } = FightG.getFightGlobal(req, res);
-         // 对手的信息
-         const { fightMap: rivalMap } = FightG.getFightGlobal(req, res, role_id);
-         // 敌方属性
-         const rivalAttr = creatFightAttr(req, res, rivalMap.player.attr);
-        const { v, e } = pet.art[0];
+        // 战斗指令信息
+        const { currentDir } = GrandG.getDirGlobal(req, res);
+        const { role_id } = currentDir;
+        // 我的信息
+        const { fightMap } = FightG.getFightGlobal(req, res);
+        // 对手的信息
+        const { fightMap: rivalMap } = FightG.getFightGlobal(req, res, role_id);
+        // 敌方属性
+        const rivalAttr = creatFightAttr(req, res, rivalMap.player.attr);
+        const { v, e = '' } = pet.art[0];
+        console.log(pet.art)
         const [key, vals] = e.split('-');
         const val = Number(vals);
         if (key === 'ignore') {
@@ -50,7 +51,7 @@ module.exports = {
                 victoryFight(req, res, fightMap, rivalMap, currentDir);
                 return true;
             }
-            FightG.updataFightMapGlobal(req, res, { player: rivalMap.player,dps }, role_id);
+            FightG.updataFightMapGlobal(req, res, { player: rivalMap.player, dps }, role_id);
             FightG.updataFightMapGlobal(req, res);
         }
     }

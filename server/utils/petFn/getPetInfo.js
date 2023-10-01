@@ -25,7 +25,7 @@ module.exports = {
      */
     getPetInfo: async function (req, res, petId) {
         const { PET_JSON_KEYS } = PetG;
-        let petInfo = PetG.getPetGlobal(req, res)
+        let petInfo = PetG.getPetGlobal(req, res) || {};
         if (petInfo.id !== petId) {
             const { results } = await res.asyncQuery(`select * from  pet where id=${petId}`);
             pet = results[0];

@@ -19,7 +19,7 @@ module.exports = {
         }
         const attr = computePetAttr(pet);
         const petAttr = creatFightAttr(req, res, attr);
-        const { v, e } = pet.art[0];
+        const { v, e = '' } = pet.art[0];
         const [key, vals] = e.split('-');
         const val = Number(vals);
         if (key === 'ignore') {
