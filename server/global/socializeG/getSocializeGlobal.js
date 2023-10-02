@@ -17,6 +17,9 @@ module.exports = {
         const { socialize_pool } = roleG.getRoleGlobal(req, res);
         // 角色对应势力信息
         const sociInfo = socialize_pool[key];
+        if (!sociInfo) {
+            return {};
+        }
         const keyName = `${sociInfo.id}_${key}`
         return SOCIALIZE_Global[keyName] || {};
     }

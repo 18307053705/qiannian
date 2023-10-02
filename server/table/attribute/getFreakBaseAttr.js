@@ -1,12 +1,12 @@
 module.exports = {
     /**
     * 获取怪物对应基础属性
-    * @param {*} career 职业1-9
+    * @param {*} career
     * @returns {*} attr:对应基础属性,不包含元素属性
     */
     getFreakBaseAttr: function (career) {
-        // 法皇,血煞,星君 攻击职业
-        if ([1, 4, 7].includes(career)) {
+        // 攻击型怪物
+        if (career === 1) {
             return {
                 life: 200,
                 mana: 150,
@@ -19,8 +19,8 @@ module.exports = {
                 sudden: 1
             }
         }
-        // 战尊,战狂,战神 防御职业
-        if ([2, 5, 8].includes(career)) {
+        // 防御型怪物
+        if (career === 2) {
             return {
                 life: 250,
                 mana: 180,
@@ -33,8 +33,8 @@ module.exports = {
                 sudden: 1
             }
         }
-        // 羽圣,赤魅,剑仙 敏捷职业
-        if ([3, 6, 9].includes(career)) {
+        // 敏捷型怪物
+        if (career === 3) {
             return {
                 life: 180,
                 mana: 120,

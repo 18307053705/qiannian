@@ -66,6 +66,7 @@ module.exports = {
 
         // 战斗指令
         const { currentDir } = GrandG.getDirGlobal(req, res);
+        console.log(currentDir, 'currentDir...')
         const { ext } = currentDir;
         const { isRanks, num } = ext;
         if (num) {

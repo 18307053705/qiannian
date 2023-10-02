@@ -4,6 +4,8 @@ const updataFightInfoGlobal = require('./updataFightInfoGlobal');
 const updataFightMapGlobal = require('./updataFightMapGlobal');
 const deleteFightInfoGlobal = require('./deleteFightInfoGlobal');
 const deleteFightMapGlobal = require('./deleteFightMapGlobal');
+const getFightInfo = require('./getFightInfo');
+const getFightMap = require('./getFightMap');
 module.exports = {
     ...getFightGlobal,
     ...setFightGlobal,
@@ -11,4 +13,6 @@ module.exports = {
     ...updataFightMapGlobal,
     ...deleteFightInfoGlobal,
     ...deleteFightMapGlobal,
+    ...getFightInfo,
+    ...getFightMap,
 }

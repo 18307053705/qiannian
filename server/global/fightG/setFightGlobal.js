@@ -17,20 +17,8 @@ module.exports = {
      */
     setFightGlobal: function (req, res, fightMap, fightInfo, roleId) {
         const { role_id } = roleId ? { role_id: roleId } : roleG.getRoleGlobal(req, res);
-        // 生成唯一战斗id
-        const fightId = new Date() * 1 + role_id;
-        const fightMaps = {
-            id: fightId, // 生成唯一战斗id
-            state: 0,
-            results: {},
-            ...fightMap
-        };
-        FIGHT_MAP_Global[role_id] = fightMaps;
-        FIGHT_INFO_Global[fightMaps.id] = fightInfo;
-        return {
-            fightInfo,
-            fightMap: fightMaps
-        }
+        FIGHT_MAP_Global[role_id] = JSON.parse(JSON.stringify(fightMap));
+        FIGHT_INFO_Global[fightMap.id] = JSON.parse(JSON.stringify(fightInfo));
     }
 
 }

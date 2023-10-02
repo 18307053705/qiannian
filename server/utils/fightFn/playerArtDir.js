@@ -13,7 +13,6 @@ module.exports = {
      * @param {*} artId 技能id
      */
     playerArtDir: function (req, res, playerAttr, rivalAttr, fightRound, artId) {
-
         const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
         const { p, d, v, n, t = 1 } = getRoleArtInfo(req, res, artId);
         // 非单攻,群攻,buff技能

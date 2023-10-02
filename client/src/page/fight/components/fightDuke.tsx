@@ -14,12 +14,13 @@ const art = (dirClick, artList) => {
 const getAttrIfno = (attrs: any[]) => {
     const lifeList: any[] = [];
     const stateList: any[] = [];
-    attrs.forEach(({ attr, name }) => {
-        const { life, life_max } = attr;
-        lifeList.push(life);
+    attrs.forEach(({ attr, life, life_max, name }) => {
+        const lifec = attr ? attr.life : life;
+        const life_maxc = attr ? attr.life_max : life_max;
+        lifeList.push(lifec);
         stateList.push({
-            percent: (life / life_max * 100).toFixed(0),
-            state: life > 0 ? 1 : 0,
+            percent: (lifec / life_maxc * 100).toFixed(0),
+            state: lifec > 0 ? 1 : 0,
             name
         });
     })
@@ -56,7 +57,7 @@ const FightPercent = ({ percent, color = 'red' }) => {
 
 
 const FightDuke = ({ dirClick, fight, setPanel }) => {
-    const { fightInfo, fightMap, fightRound = { life: '', mana: '', dps: '',message:'' } } = fight;
+    const { fightInfo, fightMap, fightRound = { life: '', mana: '', dps: '', message: '' } } = fight;
     const { players, rivals, buffs } = fightInfo;
     const { player } = fightMap;
     const artList1 = player.art.slice(0, 3);

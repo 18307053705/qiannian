@@ -1,7 +1,7 @@
 const { GRAND_Global } = require('./config');
 const roleG = require('../roleG');
 
-
+// 怪物模版-> table-> ELEMENT_2.怪物模型
 module.exports = {
     /**
      * 获取全局指令信息

@@ -1,19 +1,8 @@
 const { ELEMENT_1 } = require('./ELEMENT_1');
-const { ELEMENT_2 } = require('./ELEMENT_2');
+const { getFreak } = require('./ELEMENT_2');
 const { ELEMENT_3 } = require('./ELEMENT_3');
 const { ELEMENT_4 } = require('./ELEMENT_4');
 
-// id: 2000000,
-// name: "持刀山贼",
-// type: 2,
-// ext: {
-//   career: 1,
-//   level: 1,
-//   attr: 0.5,
-//   pet: true,
-// },
-// article: '1-1,2-1-50',
-// equip: '1',
 
 module.exports = {
     /**
@@ -36,7 +25,7 @@ module.exports = {
             eleMap = ELEMENT_1;
         }
         if (eleType === '2') {
-            eleMap = ELEMENT_2;
+            return getFreak(eleId);
         }
         if (eleType === '3') {
             eleMap = ELEMENT_3;
@@ -60,7 +49,10 @@ module.exports = {
             eleMap = ELEMENT_1;
         }
         if (eleType === '2') {
-            eleMap = ELEMENT_2;
+            for (start = startId; start <= endId; start++) {
+                eleList.push(getFreak(start))
+            }
+            return eleList;
         }
         if (eleType === '3') {
             eleMap = ELEMENT_3;

@@ -13,7 +13,7 @@ module.exports = {
         const { currentDir } = GrandG.getDirGlobal(req, res);
         const { ext, boss, role_id } = currentDir;
         const { num } = ext;
-        
+
         // 无法继续刷怪(次数不足,boss,玩家pk)
         if ((num !== undefined && num === 0) || boss || role_id) {
             return false;

@@ -11,7 +11,7 @@ function creatRivalFightMap(req, res, currentDir) {
     const { role_id, type } = currentDir;
     const { fightMap } = FightG.getFightGlobal(req, res, role_id);
     if (!fightMap || fightMap.state !== 0) {
-        const { role_id: i_roleId,role_name } = RoleG.getRoleGlobal(req, res);
+        const { role_id: i_roleId, role_name } = RoleG.getRoleGlobal(req, res);
         // 创建对方属性,
         const player = creatPlayer(req, res, type, role_id);
         const rivalFightMaps = {
@@ -28,7 +28,7 @@ function creatRivalFightMap(req, res, currentDir) {
         }
         FightG.setFightGlobal(req, res, rivalFightMaps, {}, role_id);
         // 保存我方id到对方战斗指令
-        GrandG.setDirGlobal(req, res, { currentDir: { type, role_id: i_roleId,role_name } }, { roleId: role_id });
+        GrandG.setDirGlobal(req, res, { currentDir: { type, role_id: i_roleId, role_name } }, { roleId: role_id });
     }
 }
 
