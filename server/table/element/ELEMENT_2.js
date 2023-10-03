@@ -156,7 +156,8 @@ const ELEMENT_2 = {
     type: 2,
     level: 5,
     pet: true,
-    rank: true
+    rank: true,
+    article: '1-20,2-20,3', 
   },
   23: {
     id: 23,

@@ -6,7 +6,6 @@ const fightFn = require('./fightFn');
 const knapsackFn = require('./knapsackFn');
 const artFn = require('./artFn');
 const petFn = require('./petFn');
-const playerFn = require('./playerFn');
 const equipFn = require('./equipFn');
 const shopFn = require('./shopFn');
 const ruleFn = require('./ruleFn');
@@ -15,7 +14,6 @@ const cornuconpiaFn = require('./cornuconpiaFn');
 const gatewayFn = require('./gatewayFn');
 const taskFn = require('./taskFn');
 const qingyuanFn = require('./qingyuanFn');
-const fightsFn = require('./fightsFn');
 
 module.exports = {
     osFn,
@@ -26,7 +24,6 @@ module.exports = {
     knapsackFn,
     artFn,
     petFn,
-    playerFn,
     equipFn,
     shopFn,
     ruleFn,
@@ -35,5 +32,4 @@ module.exports = {
     gatewayFn,
     taskFn,
     qingyuanFn,
-    fightsFn
 }

@@ -1,14 +1,12 @@
 module.exports = {
     /**
      * 计算伤害
-     * @param {*} req 
-     * @param {*} res 
-     * @param {*} attr1 进攻属性
-     * @param {*} attr2 防御属性
-     * @param {*} rise 伤害加成,默认100
-     * @returns {*} attr 属性
+     * @param attr1 进攻属性
+     * @param attr2 防御属性
+     * @param rise 伤害加成,默认100
+     * @returns dps 伤害
      */
-    computeFightDps: function (req, res, attr1, attr2, rise = 100) {
+    computeFightDps: function (attr1, attr2, rise = 100) {
         const { atk, ice_atk = 0, mine_atk = 0, wind_atk = 0, water_atk = 0, fire_atk = 0, hit, sudden: sudden1 } = attr1;
         const { dfs, ice_dfs = 0, mine_dfs = 0, wind_dfs = 0, water_dfs = 0, fire_dfs = 0, dodge, sudden: sudden2 } = attr2;
         let isHit = hit >= dodge;
@@ -53,10 +51,7 @@ module.exports = {
             }
             dps = parseInt(dps * sudden / 100);
         }
-        return {
-            dps: dps < 0 ? 0 : dps,
-            isHit
-        }
+        return dps < 0 ? 0 : dps
     },
 
 };

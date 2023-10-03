@@ -1,5 +1,5 @@
 const { FIGHT_INFO_Global } = require('./config');
-const roleG = require('../roleG');
+const { getFightGlobal } = require('./getFightGlobal');
 
 
 module.exports = {
@@ -9,8 +9,8 @@ module.exports = {
      * @param {*} res
      */
     deleteFightInfoGlobal: function (req, res) {
-        const { role_id } = roleG.getRoleGlobal(req, res);
-        delete FIGHT_INFO_Global[role_id];
+        const { fightMap } = getFightGlobal(req, res);
+        delete FIGHT_INFO_Global[fightMap.id];
     }
 
 }

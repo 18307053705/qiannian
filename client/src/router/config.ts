@@ -154,11 +154,6 @@ export const config: RouterType[] = [
     component: lazy(() => import("@page/worldMap"))
   },
   {
-    name: "玩家战斗界面",
-    path: "/playerFight",
-    component: lazy(() => import("@page/playerFight"))
-  },
-  {
     name: "灵兽山",
     path: "/lingShouShan",
     component: lazy(() => import("@page/lingShouShan"))

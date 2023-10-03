@@ -1,3 +1,4 @@
+const { FIGHT_TYPE } = require('./config');
 const getFightGlobal = require('./getFightGlobal');
 const setFightGlobal = require('./setFightGlobal');
 const updataFightInfoGlobal = require('./updataFightInfoGlobal');
@@ -15,4 +16,5 @@ module.exports = {
     ...deleteFightMapGlobal,
     ...getFightInfo,
     ...getFightMap,
+    FIGHT_TYPE,
 }

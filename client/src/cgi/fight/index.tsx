@@ -6,7 +6,6 @@ const fightDirUrl = '/fight/fightDir';
 const exitFightUrl = '/fight/exitFight';
 const getFightConfigUrl = '/fight/getFightConfig';
 const setFightConfigUrl = '/fight/setFightConfig';
-const fightContinueUrl = '/fight/continue';
 
 type FightInfoType = {
     rival: {
@@ -31,18 +30,15 @@ export const initFightInfo: FightInfoType = {
 }
 
 // 创建战斗
-export async function creatFight() {
-    return await post(creatFightUrl);
+export async function creatFight(data?: { iscContinue: boolean }) {
+    return await post(creatFightUrl, data);
 }
 
 // 发送战斗指令
 export async function fightDir(data: { id: number, p: number }) {
     return await post(fightDirUrl, data);
 }
-// 继续
-export async function fightContinue() {
-    return await post(fightContinueUrl);
-}
+
 // 退出战斗 
 export async function exitFight() {
     return await post(exitFightUrl);

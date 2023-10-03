@@ -1,4 +1,5 @@
 const { FightG, RoleG } = require("../../global");
+const { updateRoleAttr } = require('./getFightResults/updateRoleAttr');
 module.exports = {
     /**
      * 放弃战斗
@@ -6,26 +7,27 @@ module.exports = {
      * @param {*} res
      */
     releaseFight: function (req, res) {
-        const { fightInfo, fightMap } = FightG.getFightGlobal(req, res);
+        const { fightMap } = FightG.getFightGlobal(req, res);
         if (fightMap) {
-            const { players } = fightInfo
-            // 角色信息
-            const { role_id } = RoleG.getRoleGlobal(req, res);
-            const { player } = fightMap;
-            const { attr } = player;
-            // 更新角色
-            RoleG.updataRoleGlobal(req, res, {
-                life: attr.life,
-                mana: attr.mana
-            })
-            //  释放战斗信息池
-            // 判断是否为本次战斗中最后一个玩家,否则移除自己即可
-            if (players.length === 0) {
-                FightG.deleteFightInfoGlobal(req, res);
-            } else {
-                FightG.updataFightInfoGlobal(req, res, { players: players.filter(({ id }) => id !== role_id) });
+            const { FIGHT_TYPE } = FightG;
+            const { type, id } = fightMap;
+            // 更新角色属性
+            updateRoleAttr(req,res)
+            // 玩家战斗
+            if (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill) {
+                const tFightMap = FightG.getFightMap(id);
+                // 判断对方战斗是否被释放
+                if (tFightMap) {
+                    if (tFightMap.state === 0) {
+                        FightG.updataFightMapGlobal(req, res, { state: 1 }, role_id);
+                    }
+                }
             }
-            // 释放战斗池id
+
+            // 非组队
+            // if (FIGHT_TYPE.rank !== type) {
+            //     FightG.deleteFightInfoGlobal(req, res);
+            // }
             FightG.deleteFightMapGlobal(req, res);
         }
     }

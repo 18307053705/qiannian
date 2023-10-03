@@ -59,7 +59,7 @@ const Plater = ({ history }) => {
                     <span className="g_u"><span>帮会</span></span>
                     <span className="g_u"><span>庄园</span></span>
                     <span className="g_u"><span>队伍</span></span>
-                    <span className="g_u"><span>攻击</span></span>
+                    <span className="g_u"><span onClick={() => { createFightDir({ role_id: state.role_id, type: 4 }) }}>攻击</span></span>
                 </div>
             </div>
             <div>

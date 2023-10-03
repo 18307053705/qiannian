@@ -29,7 +29,7 @@ module.exports = {
             console.log(req.originalUrl,'roleFn.roleFightCheck...')
             res.send({
                 code: 0,
-                path: (fightMap.state === 1 || fightMap.state === 2) ? "fight" : "playerFight"
+                path: '/fight'
             })
             return false
         }

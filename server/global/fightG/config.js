@@ -21,8 +21,15 @@ const FIGHT_INFO_Global = {
     //  }
 }
 
+const FIGHT_TYPE = {
+    pve: 1, // 单人人机
+    rank: 2, // 组队人机
+    duel: 3,  // 玩家切磋
+    kill: 4 // 玩家死斗
+}
 
 module.exports = {
     FIGHT_MAP_Global,
     FIGHT_INFO_Global,
+    FIGHT_TYPE
 }

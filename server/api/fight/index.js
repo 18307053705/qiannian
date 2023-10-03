@@ -1,7 +1,6 @@
 const express = require("express");
 const { creatFight } = require('./creatFight');
 const { fightDir } = require('./fightDir');
-const { continueFight } = require('./continueFight');
 const { exitFight } = require('./exitFight');
 const { getFightConfig } = require('./getFightConfig');
 const { setFightConfig } = require('./setFightConfig');
@@ -13,8 +12,6 @@ const router = new express.Router();
 router.post("/creatFight", creatFight);
 // 战斗指令
 router.post("/fightDir", fightDir);
-// 刷怪
-router.post("/continue", continueFight);
 // 退出战斗
 router.post("/exitFight", exitFight);
 // 获取战斗配置

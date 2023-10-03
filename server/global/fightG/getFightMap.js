@@ -13,6 +13,7 @@ module.exports = {
      * @returns fightMap.roundAttr 战斗属性{role:自身,rival:对方属性,pet:宠物属性}
      * @returns fightMap.roundText 回合文案{dps:造成伤害,pet_dps:宠物伤害,drain_life:消耗生命,drain_mana:法力消耗,restore_life:恢复生命,restore_mana:恢复法力}
      * @returns fightMap.intervalTime 出招时间,玩家pk使用
+     * @returns fightMap.reward 奖励信息,用于判断是否领取过奖励
      */
     getFightMap: function (role_id) {
         return FIGHT_MAP_Global[role_id] ? JSON.parse(JSON.stringify(FIGHT_MAP_Global[role_id])) : undefined;

@@ -7,15 +7,15 @@ import FightResult from './components/fightResult';
 import FightSet from './components/fightSet';
 
 import './index.less';
-const Fight = () => {
+const Fight = ({}) => {
     const [panel, setPanel] = useState('duke');
     // 记战斗信息
     const [fight, setFight] = useState();
 
     const fightInfoChang = ({ data }) => {
-        const { fightMap } = data;
+        // const { fightMap } = data;
         let panelKey = 'duke';
-        if (fightMap.state) {
+        if (data.state) {
             panelKey = 'result';
         }
         unstable_batchedUpdates(() => {
