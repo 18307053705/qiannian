@@ -49,7 +49,6 @@ module.exports = {
             })
             return;
         }
-
         const dailys = DailysG.getDailysGlobalAll();
         const { role_id } = RoleG.getRoleGlobal(req, res);
         let list = [];
@@ -64,18 +63,26 @@ module.exports = {
             }
             return next.j - pre.j;
         })
-        const index = list.findIndex(({ id }) => role_id === id) + 1;
-        if (!index) {
+        const index = list.findIndex(({ id }) => role_id === id);
+        if (index === -1) {
             res.send({
                 code: 0,
                 message: '暂无排名,无法领取奖励'
             })
             return;
         }
+        const { zhanChang } = list[index]
+        if (zhanChang.prize) {
+            res.send({
+                code: 0,
+                message: '无法重复领取奖励'
+            })
+            return;
+        }
 
         const { title_list, role_integral } = RoleG.getRoleGlobal(req, res);
         const { yuanbao, tael } = KnapsackG.getknapsackGlobal(req, res);
-        const data = getPrze(index);
+        const data = getPrze(index + 1);
         role_integral.exploit += data.exploit;
         if (data.titleId) {
             const title = TitleTable.getTitle(data.titleId);
@@ -87,7 +94,7 @@ module.exports = {
         }
         KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao + data.yuanbao, tael: tael + data.tael });
         // 更新为已领取奖励
-        DailysG.updataDailysGlobal(req, res, { prize: true });
+        DailysG.updataDailysGlobal(req, res, { isPrize: true });
         res.send({
             code: 0,
             data
