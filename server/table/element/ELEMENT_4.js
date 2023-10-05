@@ -238,6 +238,12 @@ const ELEMENT_4 = {
         path: '/rankTask',
         task: { id: 2, s: 1 }
     },
+    440: {
+        id: 440,
+        name: "上古战场",
+        type: 4,
+        path: '/zhanChang',
+    },
 };
 module.exports = {
     ELEMENT_4

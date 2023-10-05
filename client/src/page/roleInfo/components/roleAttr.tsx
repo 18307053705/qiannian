@@ -8,7 +8,11 @@ const RoleAttr = ({ roleInfo, history }) => {
     return (
         <>
             <div>
-                <div><span className="g_b">角色</span>：<span>{`${roleInfo.role_name}(${roleInfo.role_title || '无'})`}</span></div>
+                <div>
+                    <span className="g_b">角色</span>：
+                    <span>{`${roleInfo.role_name}(${roleInfo.role_title || '无'})`}</span>
+                    <span className="g_u_end">换</span>
+                </div>
                 <div><span className="g_b">等级</span>：<span>{`${roleInfo.role_level}级(${roleInfo.role_exp})`}</span></div>
                 {roleInfo.role_level > 69 && <div><span className="g_b">境界</span>：<span>{roleInfo.role_realm}</span></div>}
                 <div><span className="g_b">职业</span>：<span>{roleInfo.role_career}</span></div>

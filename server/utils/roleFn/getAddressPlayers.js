@@ -3,16 +3,16 @@ const { RACE_MEUN } = require("../../meun");
 
 
 function title(value) {
-    if (value < 100) {
+    if (value < 200) {
         return '成员';
     }
-    if (value < 300) {
+    if (value < 500) {
         return '精英';
     }
-    if (value < 500) {
+    if (value < 1000) {
         return '霸主';
     }
-    if (value < 1000) {
+    if (value < 2000) {
         return '王者';
     }
     return '至尊';

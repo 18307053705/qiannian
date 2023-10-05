@@ -1,6 +1,5 @@
 const { computeRoleResults } = require('./computeRoleResults');
 const { computeRivalResults } = require('./computeRivalResults');
-const { getFreakReward } = require('./getFreakReward');
 const { getFightResults } = require('../getFightResults');
 module.exports = {
     /**

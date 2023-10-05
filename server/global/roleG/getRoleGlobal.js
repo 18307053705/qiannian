@@ -35,6 +35,7 @@ module.exports = {
      * @returns {*} role_lx: 灵血
      * @returns {*} jackpot: {equip:神装抽奖次数,pet:灵兽山砸宠次数,art:仙术抽奖次数,level:等级可以抽奖次数,invest:送财童子可领取次数}
      * @returns {*} qingyuan: {d:{id:情缘id,rId:对方id,n:对方名称},role:待情缘人信息,s:情缘次数,i:是否为发起者}
+     * @returns {*} title_list: [titleId] 称号ID
      */
     getRoleGlobal: function (req, res, { role_id, attr } = {}) {
         const user = req.cookies["q_uid"];

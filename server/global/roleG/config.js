@@ -50,6 +50,7 @@ const ROLE_JSON_KEYS = [
     'treasure_pool',
     'jackpot',
     'qingyuan',
+    'title_list'
 ];
 
 /**

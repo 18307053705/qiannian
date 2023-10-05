@@ -10,6 +10,7 @@
  * @param {*} dailys.hb 徽标免费操作次数10
  * @param {*} dailys.lp 令牌免费操作次数10
  * @param {*} dailys.day 首日登录抽奖次数
+ * @param {*} dailys.zhanChang 深渊{s:死亡次数,v:功勋值,j:积分,id:角色id,name:角色名称:d:更新时间}
  * @param {*} dailys.shenYuan 深渊{s:进入次数,l:当前层数}}
  * @param {*} dailys.xiuLian 修炼房{s:进入次数,l:当前层数}}
  * @param {*} dailys.QingYuan 情缘信息 {j:浇水次数,c:除草}
@@ -29,6 +30,51 @@ const DAILYS_Global = {
     //     word: 8, // 声望任务,可领取8
     //     money: 8, // 声望任务,可领取8
     // }
+    '50499781_11': {
+        zhanChang: {
+            j: 50,
+            v: 750,
+            id: '50499781_11',
+            name: 'name11',
+            d:new Date() * 1
+        }
+    },
+    '50499781_12': {
+        zhanChang: {
+            j: 5,
+            v: 250,
+            id: '50499781_12',
+            name: 'name12',
+            d:new Date() * 1
+        }
+    },
+    '50499781_13': {
+        zhanChang: {
+            j: 50,
+            v: 750,
+            id: '50499781_13',
+            name: 'name13',
+            d:new Date() * 1 + 5000
+        }
+    },
+    '50499781_14': {
+        zhanChang: {
+            j: 50,
+            v: 750,
+            id: '50499781_14',
+            name: 'name14',
+            d:new Date() * 1 + 600000
+        }
+    },
+    '50499781_15': {
+        zhanChang: {
+            j: 50,
+            v: 750,
+            id: '50499781_15',
+            name: 'name15',
+            d:new Date() * 1 + 60000
+        }
+    },
 }
 
 

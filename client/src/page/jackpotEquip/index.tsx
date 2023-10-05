@@ -17,7 +17,6 @@ export const JackpotEquip = ({ history }) => {
     const text = isActivity ? `200元宝试试运气,再砸${10 - num}次即可获得元宝奖励。` : '200元宝试试运气';
     return (
         <div>
-
             <div className={Styles.tips}>
                 全天火热活动,只需200元宝便可获得【九歌の断魂】【才子の佳人】系列的绝世神装,周六，周日活动期间每抽取十次更有机会获得100-1000元宝奖励。
             </div>

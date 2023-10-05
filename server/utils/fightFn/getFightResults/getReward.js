@@ -1,5 +1,6 @@
 const { FightG } = require('../../../global');
 const { getFreakReward } = require('./getFreakReward');
+const { getDuelReward } = require('./getDuelReward');
 
 module.exports = {
     /**
@@ -13,7 +14,7 @@ module.exports = {
             getFreakReward(req, res);
         }
         if (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill) {
-
+            getDuelReward(req,res);
         }
     },
 

@@ -10,7 +10,7 @@ module.exports = {
      * @param {*} res
      */
     initDailysGlobal: function (req, res) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id, role_name } = getRoleGlobal(req, res);
         if (!DAILYS_Global[role_id]) {
             DAILYS_Global[role_id] = {
                 ...initDailyTask(req, res),
@@ -20,7 +20,8 @@ module.exports = {
                 lp: 10,
                 shenYuan: { s: 1, l: 0 },
                 xiuLian: { s: 1, l: 0 },
-                QingYuan: { j: 0, c: 0 }
+                QingYuan: { j: 0, c: 0 },
+                zhanChang: { s: 0, j: 0, v: 0, id: role_id, name: role_name }
             }
         }
     }

@@ -1,4 +1,4 @@
-const { FightG } = require('../../../global');
+const { FightG, DailysG } = require('../../../global');
 const { getReward } = require('./getReward');
 const { updateRoleAttr } = require('./updateRoleAttr');
 const { getFightFormat } = require('./getFightFormat');
@@ -24,7 +24,9 @@ module.exports = {
         const data = getFightFormat(req, res);
         res.send({
             code: 0,
-            data
+            data,
+            success: res.customSuccess,
+            dailys: DailysG.getDailysGlobal(req, res)
         })
 
     },
