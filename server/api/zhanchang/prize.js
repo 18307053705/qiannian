@@ -84,7 +84,7 @@ module.exports = {
         const { yuanbao, tael } = KnapsackG.getknapsackGlobal(req, res);
         const data = getPrze(index + 1);
         role_integral.exploit += data.exploit;
-        if (data.titleId) {
+        if (data.titleId && !title_list.includes(titleId)) {
             const title = TitleTable.getTitle(data.titleId);
             title_list.push(data.titleId);
             RoleG.updataRoleGlobal(req, res, { title_list, role_integral });

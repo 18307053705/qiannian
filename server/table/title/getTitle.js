@@ -12,6 +12,6 @@ module.exports = {
         }
      */
     getTitle: function (titleId) {
-        return titleMeun[titleId] || { name: '无' }
+        return   titleMeun[titleId] ? JSON.parse(JSON.stringify(titleMeun[titleId])) : { name: '无' }
     }
 }

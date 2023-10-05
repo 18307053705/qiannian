@@ -13,7 +13,7 @@ module.exports = {
             // 计算角色属性
             const data = roleFn.computeRoleAttr(req, res, role, { role_id });
             const realm = RealmTable.getRealm(role['role_realm']);
-            const title = TitleTable.getTitle(role['title']);
+            const title = TitleTable.getTitle(role['role_title']);
             const role_career = MEUN.CAREER_MEUN[role['role_career']];
             const role_race = MEUN.RACE_MEUN[role['role_race']];
             return res.send({

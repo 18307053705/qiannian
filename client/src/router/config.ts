@@ -232,6 +232,11 @@ export const config: RouterType[] = [
     name: "上古战场",
     path: "/zhanChang",
     component: lazy(() => import("@page/zhanChang"))
+  },
+  {
+    name: "称号系统",
+    path: "/title",
+    component: lazy(() => import("@page/title"))
   }
 ];
 
