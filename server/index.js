@@ -69,6 +69,7 @@ app.use("/api/paimai", require("./api/paimai"));
 app.use("/api/yinhang", require("./api/yinhang"));
 app.use("/api/zhanchang", require("./api/zhanchang"));
 app.use("/api/title", require("./api/title"));
+app.use("/api/worldboss", require("./api/worldboss"));
 
 // 全局捕获异常
 app.use(function (err, req, res, next) {

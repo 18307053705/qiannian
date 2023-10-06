@@ -9,7 +9,8 @@ module.exports = {
      * @param {*} roleInfo 角色信息
      * @param {*} data.role_id 角色id,可选参数,传此参数代表非自身
      * @param {*} data.attr 需要计算的属性,可选参数,默认为全部
-     * @returns {*} roleInfo[]|undefined
+     * @returns {*} attr
+     * @returns {*} buff
      * 
      */
     computeRoleAttr: function (req, res, roleInfo, { role_id, attr = AttributeTable.getInitAttr() } = {}) {
