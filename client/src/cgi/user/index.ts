@@ -1,6 +1,6 @@
 import { post } from "@request";
-const loginUrl = `/user/login`;
-const registerUrl = `/user/register`;
+const loginUrl = '/user/login';
+const registerUrl = '/user/register';
 
 export interface loginReq {
   user: string;

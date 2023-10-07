@@ -10,18 +10,19 @@ module.exports = {
      * @returns 
      */
     updateWorldBoss: function (req, res, { dps, ...data }) {
-        const { role_id } = getRoleGlobal(req, res);
-        const { rank: ranks } = WORLD_BOSS;
+        const { role_id, role_name } = getRoleGlobal(req, res);
+        const { rank } = WORLD_BOSS;
         if (dps) {
-            const { v } = ranks[role_id] || { v: 0 };
-            ranks[role_id] = {
+            const { v } = rank[role_id] || { v: 0 };
+            rank[role_id] = {
                 v: v + dps,
-                s: new Date() * 1
+                s: new Date() * 1,
+                n: role_name,
+                id:role_id
             }
         }
-        WORLD_BOSS = {
-            ...WORLD_BOSS,
-            ...data
-        }
+        Object.keys(data).forEach((key) => {
+            WORLD_BOSS[key] = data[key]
+        })
     }
 }

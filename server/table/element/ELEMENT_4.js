@@ -2,8 +2,9 @@
 const ELEMENT_4 = {
     40: {
         id: 40,
-        name: "【人族守护boss】",
-        type: 4
+        name: "【世界BOSS】",
+        type: 4,
+        path: '/worldBoss'
     },
     41: {
         id: 41,

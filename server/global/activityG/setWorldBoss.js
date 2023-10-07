@@ -55,6 +55,7 @@ module.exports = {
         WORLD_BOSS.rank = {};
         WORLD_BOSS.done = [];
         WORLD_BOSS.ids = [];
+        WORLD_BOSS.shed =[];
         WORLD_BOSS.boss = {
             ...boss,
             ...ele

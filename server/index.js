@@ -2,6 +2,7 @@ const express = require("express");
 require("express-async-errors");
 const cookieParser = require("cookie-parser");
 const gatewayFn = require("./utils/gatewayFn");
+const { setWorldBoss } = require("./global/activityG/setWorldBoss");
 // const errorFn = require("./utils/errorFn");
 // const globalFn = require("./utils/globalFn");
 const mysql = require("./mysql");
@@ -34,7 +35,7 @@ app.use("*", async function (req, res, next) {
   if (!gatewayFn.checkGateway(req, res)) {
     return;
   }
-
+  setWorldBoss();
   res.asyncQuery = mysql.asyncQuery;
   res.asyncAdd = mysql.asyncAdd;
   res.customSuccess = '';
