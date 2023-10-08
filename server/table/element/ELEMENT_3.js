@@ -3,7 +3,7 @@ const ELEMENT_3 = {
         id: 30,
         name: "金银岛",
         type: 3,
-        dir: "10000,0,1"
+        dir: "60005,0,0"
     },
     31: {
         id: 31,
@@ -19,7 +19,8 @@ const ELEMENT_3 = {
     33: {
         id: 33,
         name: "彩灵洞",
-        type: 3
+        type: 3,
+        dir: "60004,0,0"
     },
     34: {
         id: 34,

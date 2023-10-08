@@ -34,7 +34,7 @@ function getReward(index) {
 
 module.exports = {
     /**
-     * 捡取BOSS掉落物品
+     * 获取排名奖励
      * @param {*} req.id_x
      */
     getRankReward: function (req, res) {

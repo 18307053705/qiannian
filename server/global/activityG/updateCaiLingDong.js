@@ -17,15 +17,17 @@ module.exports = {
         }
         const { rank } = CAI_LIN_DONG;
         if (integral) {
-            const { v } = rank[ranks.id] || { v: 0 };
-            ranks[ranks.id] = {
+            const { id, name } = ranks;
+            const { v } = rank[id] || { v: 0 };
+            CAI_LIN_DONG.rank[id] = {
                 v: v + integral,
-                s: new Date() * 1
+                s: new Date() * 1,
+                n: name,
+                id
             }
         }
-        CAI_LIN_DONG = {
-            ...CAI_LIN_DONG,
-            ...data
-        }
+        Object.keys(data).forEach((key) => {
+            CAI_LIN_DONG[key] = data[key]
+        })
     }
 }

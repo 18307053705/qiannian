@@ -11,7 +11,7 @@ module.exports = {
             return;
         }
         JIN_YIN_DAO.create = true;
-        JIN_YIN_DAO.ids = [];
+        JIN_YIN_DAO.ids = {};
         JIN_YIN_DAO.done = [];
         JIN_YIN_DAO.rank = {};
     }

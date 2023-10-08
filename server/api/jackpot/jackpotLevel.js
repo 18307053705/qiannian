@@ -1,9 +1,6 @@
 const { RoleG, KnapsackG } = require("../../global");
-const { knapsackTable, PetTable } = require("../../table");
-const { petFn, knapsackFn } = require('../../utils');
-const moment = require('moment');
-
-
+const { knapsackTable } = require("../../table");
+const { knapsackFn } = require('../../utils');
 
 // 奖励池
 // 灵血，银两必出
@@ -92,7 +89,15 @@ module.exports = {
 
         })
 
-        knapsackFn.addKnapsack(req, res, { article: { artReward }, data, force: true })
+        const message = knapsackFn.addKnapsack(req, res, { article: { artReward }, data });
+        if (message) {
+            res.send({
+                code: 0,
+                message
+            })
+            return;
+        }
+
         // 更新背包信息
         KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao + yuanbao_add, tael: tael + tael_add });
         // 更新角色信息

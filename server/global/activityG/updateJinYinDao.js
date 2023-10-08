@@ -17,15 +17,17 @@ module.exports = {
         }
         const { rank } = JIN_YIN_DAO;
         if (integral) {
-            const { v } = rank[gang.id] || { v: 0 };
-            gang[gang.id] = {
+            const { id, name } = gang;
+            const { v } = rank[id] || { v: 0 };
+            JIN_YIN_DAO.rank[id] = {
                 v: v + integral,
-                s: new Date() * 1
+                s: new Date() * 1,
+                n: name,
+                id
             }
         }
-        JIN_YIN_DAO = {
-            ...JIN_YIN_DAO,
-            ...data
-        }
+        Object.keys(data).forEach((key) => {
+            JIN_YIN_DAO[key] = data[key]
+        })
     }
 }

@@ -71,6 +71,8 @@ app.use("/api/yinhang", require("./api/yinhang"));
 app.use("/api/zhanchang", require("./api/zhanchang"));
 app.use("/api/title", require("./api/title"));
 app.use("/api/worldboss", require("./api/worldboss"));
+app.use("/api/cailingdong", require("./api/cailingdong"));
+app.use("/api/jinyindao", require("./api/jinyindao"));
 
 // 全局捕获异常
 app.use(function (err, req, res, next) {

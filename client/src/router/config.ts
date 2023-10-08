@@ -242,6 +242,16 @@ export const config: RouterType[] = [
     name: "世界BOSS",
     path: "/worldBoss",
     component: lazy(() => import("@page/worldBoss"))
+  },
+  {
+    name: "金银岛",
+    path: "/jinYinDao",
+    component: lazy(() => import("@page/jinYinDao"))
+  },
+  {
+    name: "彩灵洞",
+    path: "/caiLingDong",
+    component: lazy(() => import("@page/caiLingDong"))
   }
 ];
 

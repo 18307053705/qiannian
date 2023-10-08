@@ -11,7 +11,7 @@ module.exports = {
             return;
         }
         CAI_LIN_DONG.create = true;
-        CAI_LIN_DONG.ids = [];
+        CAI_LIN_DONG.ids =  {};
         CAI_LIN_DONG.done = [];
         CAI_LIN_DONG.rank = {};
     }

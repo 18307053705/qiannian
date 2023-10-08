@@ -3,10 +3,6 @@ import { backGrand } from '@utils/grand';
 import { atkBoss, getBossInfo, getShedReward, getRankReward } from '@cgi/WorldBoss';
 import { List } from '@components';
 
-console.log(atkBoss, 'atkBoss...');
-console.log(getBossInfo, 'getBossInfo...');
-console.log(getRankReward, 'getRankReward...');
-console.log(getRankReward, 'getRankReward...');
 function getRankList(rank) {
     return Object.values(rank).sort((pre: any, next: any) => {
         if (pre.v === next.v) {
@@ -50,7 +46,6 @@ export const WorldBoss = () => {
     }
 
     const rankReward = () => {
-     
         getRankReward().then(({ data }) => {
             setPrizeInfo(data);
         })

@@ -102,15 +102,17 @@ const ELEMENT_4 = {
         type: 4,
         path: '/songCaiTongZi'
     },
-    // 416: {
-    //     id: 416,
-    //     name: "演武场",
-    //     type: 4,
-    // },
+    416: {
+        id: 416,
+        name: "金银岛",
+        type: 4,
+        path: '/jinYinDao'
+    },
     417: {
         id: 417,
-        name: "帮会传送阵",
+        name: "彩灵洞",
         type: 4,
+        path: '/caiLingDong'
     },
     418: {
         id: 418,

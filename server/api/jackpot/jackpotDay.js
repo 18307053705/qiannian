@@ -1,9 +1,6 @@
 const { RoleG, KnapsackG, DailysG } = require("../../global");
-const { knapsackTable, PetTable } = require("../../table");
-const { petFn, knapsackFn } = require('../../utils');
-const moment = require('moment');
-
-
+const { knapsackTable } = require("../../table");
+const { knapsackFn } = require('../../utils');
 
 // 奖励池
 // 灵血，银两必出
