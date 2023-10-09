@@ -10,7 +10,7 @@ const SHNEYUAN_Global = {
     // }
 }
 
-const SHNEYUAN_FREAK_ID = 'sy_1';
+const SHNEYUAN_FREAK_ID = '20000001';
 module.exports = {
     SHNEYUAN_Global,
     SHNEYUAN_FREAK_ID

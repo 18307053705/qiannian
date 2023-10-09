@@ -11,11 +11,13 @@ module.exports = {
      * @param  res
      */
     getFreakReward: function (req, res) {
+        const { currentDir } = GrandG.getDirGlobal(req, res);
         const { fightMap } = FightG.getFightGlobal(req, res);
         const roleInfo = RoleG.getRoleGlobal(req, res);
         const knapsack = KnapsackG.getknapsackGlobal(req, res);
         const { template, player } = fightMap;
-        const freak = ElementTable.getElement(template.id);
+        // 判断是否为深渊怪,是则使用指令中的信息
+        const freak = currentDir.shenyuan ? currentDir : ElementTable.getElement(template.id);
         const { article, equip, exp: f_exp, tael: f_tael, level, grade } = freak;
 
         // -----------------计算物品奖励--------------------
@@ -103,7 +105,7 @@ module.exports = {
             exp: vipExp && !exps ? `${exp}(${vipExp}倍经验)` : exp,
             tael: vipTael && !taels ? `${tael}(${vipTael}倍银两)` : tael,
         }
-        const { currentDir } = GrandG.getDirGlobal(req, res);
+
         FightG.updataFightMapGlobal(req, res, { reward, continue: currentDir.num === -1 || currentDir.num > 0 });
     },
 

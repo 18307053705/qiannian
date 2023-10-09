@@ -52,14 +52,14 @@ module.exports = {
         // 最大击杀数量，用于任务生成的怪，限制玩家刷怪
         if (num_max !== -1) {
             // 生成怪物不可超过最大数量
-            if (currentDir.num < num) {
-                num =  currentDir.num;
-                currentDir.num = 0;
-            }else{
-                currentDir.num -= num;
+            if (freakTemplate.num < num) {
+                num = freakTemplate.num;
+                freakTemplate.num = 0;
+            } else {
+                freakTemplate.num -= num;
             }
 
-            GrandG.setDirGlobal(req, res, { currentDir });
+            GrandG.setDirGlobal(req, res, { currentDir: freakTemplate });
 
         }
         attrs['life_max'] = attrs['life'];

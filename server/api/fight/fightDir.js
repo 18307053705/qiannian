@@ -30,7 +30,6 @@ module.exports = {
         if (p === 2) {
             fightFn.drugDir(req, res, id);
         }
-
         // 普通攻击
         if (p === 0 || p === 1) {
             fightFn.playerAttack(req, res, id)

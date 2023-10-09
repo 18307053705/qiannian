@@ -35,20 +35,19 @@ module.exports = {
             id: ShenYuanG.SHNEYUAN_FREAK_ID,
             name: "深渊BOSS",
             type: 2,
-            ext: {
-                num: 1,
-                boss: true,
-                career: 1,
-                level: l > 50 ? 100 : l + 50,
-                // 每五层加1倍属性
-                attr: parseInt(l / 5) + 5,
-                // 帮人杀怪仅有经验奖励
-                exps: roleId ? parseInt(exps / 2) : exps,
-                taels: roleId ? parseInt(taels / 2) : taels,
-                // 对方id
-                role_id: roleId,
-                path: '/shenYuan'
-            }
+            num: 1,
+            grade: 3,
+            career: 1,
+            level: l > 50 ? 100 : l + 50,
+            // 每五层加1倍属性
+            attr: parseInt(l / 5) + 5,
+            // 帮人杀怪仅有经验奖励
+            exp: roleId ? parseInt(exps / 2) : exps,
+            tael: roleId ? parseInt(taels / 2) : taels,
+            // 对方id
+            role_id: roleId,
+            path: '/shenYuan',
+            shenyuan: true
         }
         GrandG.setCurrentDir(req, res, currentDir);
         res.send({

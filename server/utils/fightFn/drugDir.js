@@ -13,10 +13,9 @@ module.exports = {
      */
     drugDir: function (req, res, drugId) {
         const { fightMap } = FightG.getFightGlobal(req, res);
-        const { roundText, player } = fightMap;
-        const { art, attr } = player;
+        const { roundText, player,roundAttr } = fightMap;
         let success = false;
-        const newArt = art.map((itme) => {
+        const newArt = player.art.map((itme) => {
             if (itme.p === 2 && itme.id === drugId) {
                 itme.s -= 1;
                 success = true;
@@ -40,17 +39,17 @@ module.exports = {
             // 物品对应效果
             const { group1 } = drug;
             const [key, value] = group1.split('-');
-            attr[key] += Number(value);
+            const { role } = roundAttr;
+            role[key] += Number(value);
             roundText[`restore_${key}`] = Number(value);
-            if (attr[key] > attr[`${key}_max`]) {
-                attr[key] = attr[`${key}_max`]
+            if (role[key] > role[`${key}_max`]) {
+                role[key] = role[`${key}_max`]
             }
+            player.art = newArt;
             FightG.updataFightMapGlobal(req, res, {
-                player: {
-                    ...fightMap.player,
-                    art: newArt,
-                },
-                roundText
+                player,
+                roundText,
+                roundAttr
             })
             const { skill_pool } = RoleG.getRoleGlobal(req, res);
             RoleG.updataRoleGlobal(req, res, { skill_pool: { ...skill_pool, fight: newArt } });

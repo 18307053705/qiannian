@@ -15,8 +15,8 @@ module.exports = {
         // 获取我的信息
         const { role_id: iRoleId, role_integral: iIntegral } = RoleG.getRoleGlobal(req, res);
         const { currentDir } = GrandG.getDirGlobal(req, res);
-        const { ext } = currentDir;
-        const { role_id } = ext;
+        const { shenyuan } = currentDir;
+        const { role_id } = shenyuan;
         // 是否助战
         const isAssist = role_id && role_id !== iRoleId;
         // 是否助人过深渊
