@@ -43,6 +43,20 @@ app.use("*", async function (req, res, next) {
   res.asyncQuery = mysql.asyncQuery;
   res.asyncAdd = mysql.asyncAdd;
   res.customSuccess = '';
+  res.listText = [];
+  const _send = res.send;
+  res.send = function ({ success, message, ...data }) {
+    res.send = _send;
+    return res.send({
+      ...data,
+      exts: {
+        error: message,
+        success,
+        listText: res.listText,
+        customSuccess: res.customSuccess,
+      }
+    })
+  }
   // console.log('验证通过:',req.originalUrl)
   // 更新角色访问时间
   // Global.updateRoleTime(req);

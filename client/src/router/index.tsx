@@ -29,7 +29,7 @@ function RouterGuard() {
         if (pathname == '/login') {
             return <Redirect to="/" />
         }
-       
+
         // 判定路由是否存在，如果存在正常渲染
         if (thisRoute) {
             return <Route path={pathname} component={thisRoute['component']} exact />
@@ -74,45 +74,41 @@ const Root = () => {
     // const { state, dispatch } = useContext(Model);
     const [unread, setUnread] = useState([]);
     const [system, setSystem] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [exts, setExts]: any = useState({});
     useEffect(() => {
-        window.QN.setError = (value) => {
-            window.QN.error = value;
-            setError(value);
-        };
-        window.QN.setSuccess = (value) => {
-            window.QN.success = value;
-            setSuccess(value);
+        window.QN.setExts = (value) => {
+            window.QN.exts = value;
+            setExts(value);
         };
         // 监听全局点击事件,处理错误信息
         window.addEventListener("click", () => {
             const { location } = window.QN.history;
             const { pathname } = location;
             if (pathname !== '/' && pathname !== '/login' && pathname !== '/reactRole') {
-                chatGetUnread().then(({ data, system }:any) => {
+                chatGetUnread().then(({ data, system }: any) => {
                     setUnread(data);
                     setSystem(system);
                 })
             } else {
                 setUnread([]);
             }
-            if (window.QN.error) {
-                setError('');
-            }
-            if (window.QN.success) {
-                setSuccess('');
+            if (window.QN.exts) {
+                setExts({});
             }
         });
     }, [])
     // 登录态验证
     // goLogin();
+    const { success, listText = [], customSuccess, error } = exts;
     return (
         <div>
             {/* 系统公告 */}
             <div>{systemText(system)}</div>
             {/* 请求成功信息 */}
             <div className='g_success'>{success}</div>
+            {
+                listText.map((text, index) => <div key={index}>{text}</div>)
+            }
             {/* 请求失败信息 */}
             {error && <div className='g_error'>提示：{error}</div>}
             <div>{
@@ -126,7 +122,7 @@ const Root = () => {
                 ))
 
             }</div>
-            <RouterGuardMemo  />
+            <RouterGuardMemo />
         </div>
     );
 }

@@ -157,7 +157,7 @@ const ELEMENT_2 = {
     level: 5,
     pet: true,
     rank: true,
-    article: '1-20,2-20,3', 
+    article: '1-20,2-20,3',
   },
   23: {
     id: 23,
@@ -172,6 +172,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   25: {
     id: 25,
@@ -179,6 +180,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   26: {
     id: 26,
@@ -186,6 +188,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   27: {
     id: 27,
@@ -193,6 +196,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   28: {
     id: 28,
@@ -200,6 +204,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   29: {
     id: 29,
@@ -207,6 +212,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   210: {
     id: 210,
@@ -214,6 +220,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   211: {
     id: 211,
@@ -221,6 +228,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 1,
     attr: 1,
+    num: 1,
   },
   212: {
     id: 212,
@@ -243,6 +251,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   215: {
     id: 215,
@@ -251,6 +260,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   216: {
     id: 216,
@@ -259,6 +269,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   217: {
     id: 217,
@@ -267,6 +278,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   218: {
     id: 218,
@@ -275,6 +287,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   219: {
     id: 219,
@@ -283,6 +296,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   220: {
     id: 220,
@@ -291,6 +305,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   221: {
     id: 221,
@@ -299,6 +314,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   222: {
     id: 222,
@@ -307,6 +323,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   223: {
     id: 223,
@@ -315,6 +332,7 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   224: {
     id: 224,
@@ -323,40 +341,52 @@ const ELEMENT_2 = {
     isRanks: true,
     level: 1,
     attr: 1,
+    num: 1,
   },
   225: {
     id: 225,
-    name: "上古阵灵",
+    name: "白灵子",
     type: 2,
-    isRanks: true,
-    level: 1,
+    grade: 2,
+    level: 30,
     attr: 1,
+    integral: 1,
+    num: 1
   },
   226: {
     id: 226,
-    name: "上古阵灵",
+    name: "蓝灵子",
     type: 2,
-    isRanks: true,
-    level: 1,
+    grade: 2,
+    level: 30,
     attr: 1,
+    integral: 3,
+    num: 1
   },
   227: {
     id: 227,
-    name: "上古阵灵",
+    name: "红灵子",
     type: 2,
-    isRanks: true,
-    level: 1,
+    grade: 2,
+    level: 40,
     attr: 1,
+    integral: 5,
+    num: 1,
+  },
+  228: {
+    id: 228,
+    name: "紫灵子",
+    type: 2,
+    grade: 2,
+    level: 50,
+    attr: 1,
+    integral: 10,
+    num: 1,
   },
   20000001: {
     id: 20000001,
     name: "深渊怪(深渊模怪物占位)",
     type: 2,
-    ext: {
-
-      level: 1,
-      attr: 1,
-    }
   },
   //  以下为测试怪物
   ...TEST,

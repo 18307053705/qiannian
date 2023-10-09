@@ -49,7 +49,7 @@ module.exports = {
             if (tFightMap) {
                 res.send({
                     code: 0,
-                    message:`${role.role_name}正在战斗中!`
+                    message: `${role.role_name}正在战斗中!`
                 });
                 return true;
             }
@@ -59,7 +59,7 @@ module.exports = {
             if (!role) {
                 res.send({
                     code: 0,
-                    message:`${role.role_name}不在线!"`
+                    message: `${role.role_name}不在线!"`
                 });
                 return true;
             }

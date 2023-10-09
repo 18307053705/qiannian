@@ -7,6 +7,8 @@ const updateWorldBoss = require('./updateWorldBoss');
 const getWorldBoss = require('./getWorldBoss');
 const getCaiLingDong = require('./getCaiLingDong');
 const getJinYinDao = require('./getJinYinDao');
+const listenCaiLingDong = require('./listenCaiLingDong');
+const listenJinYinDao = require('./listenJinYinDao');
 module.exports = {
     ...setWorldBoss,
     ...setJinYinDao,
@@ -16,5 +18,7 @@ module.exports = {
     ...updateCaiLingDong,
     ...getWorldBoss,
     ...getCaiLingDong,
-    ...getJinYinDao
+    ...getJinYinDao,
+    ...listenCaiLingDong,
+    ...listenJinYinDao
 }

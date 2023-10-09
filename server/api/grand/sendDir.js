@@ -1,5 +1,5 @@
 const { grandFn } = require('../../utils');
-const { GrandG } = require('../../global');
+const { GrandG, ActivityG } = require('../../global');
 
 module.exports = {
     /**
@@ -9,7 +9,6 @@ module.exports = {
         const { dir } = req.body;
         // 获取对应角色指令
         const { eleDir = {}, moveDir = [] } = GrandG.getDirGlobal(req, res);
-        let updataDir = undefined;
         // 选择角色进入地图指令
         if (dir == -1) {
             const address = await grandFn.enterDir(req, res);
@@ -31,6 +30,7 @@ module.exports = {
         }
 
         if (type !== 3) {
+            ActivityG.listenJinYinDao(req, res, currentDir);
             const panelInfo = grandFn.panelDir(req, res, currentDir);
             return grandFn.updataDir(req, res, { ...panelInfo, currentDir });
         }

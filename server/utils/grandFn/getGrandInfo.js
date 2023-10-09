@@ -2,6 +2,7 @@ const { GrandTable, ElementTable } = require("../../table");
 const { updataRoleGlobal } = require("../../global/roleG/updataRoleGlobal");
 const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
 const { getRankTaskEle } = require("../../global/rankTaskG/getRankTaskEle");
+const { getAcivityEle } = require("../../global/activityG/getAcivityEle");
 const taskFn = require('../taskFn');
 const { getSpecificGrand } = require('./getSpecificGrand');
 
@@ -78,8 +79,8 @@ module.exports = {
         taskFn.grandTaskEle(req, res, address, eleList, eleDir);
         // 获取组队任务元素
         getRankTaskEle(req, res, address, eleList, eleDir);
-        // 
-        
+        // 获取活动地图元素
+        getAcivityEle(req, res, address, eleList, eleDir);
 
 
         return {

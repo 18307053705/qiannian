@@ -43,7 +43,6 @@ export async function request<T = {}>(
     if (method === "post" || method === "POST") {
       requestConfig.data = params;
     }
-
     const { data, request } = await axios.request(requestConfig);
     const history = data.data || {};
     // 跳转对应路径
@@ -54,11 +53,8 @@ export async function request<T = {}>(
       window.QN.history.push(data.path, data.state || {});
     }
     if (request.status === 200 && data.code === 0) {
-      if (data.message) {
-        window.QN.setError(data.message);
-      }
-      if (data.success) {
-        window.QN.setSuccess(data.success);
+      if (data.exts && '/chat/getUnread' !== url) {
+        window.QN.setExts(data.exts);
       }
       return data;
     } else if (data.code === 100000) {

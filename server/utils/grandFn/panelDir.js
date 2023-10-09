@@ -12,8 +12,7 @@ module.exports = {
      */
     panelDir: function (req, res, dirInfo) {
         const { address } = RoleG.getRoleGlobal(req, res);
-        const { type } = dirInfo;
-        let path = '';
+        const { type, path } = dirInfo;
         // 怪物元素，进入战斗界面
         if (type === 2) {
             return {
@@ -22,7 +21,7 @@ module.exports = {
             };
         }
         return {
-            path: path || dirInfo.path,
+            path,
             address
         };
     },

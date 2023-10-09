@@ -1,4 +1,4 @@
-const { TaskG, rankTaskG, ShenYuanG } = require('../../global');
+const { TaskG, rankTaskG, ActivityG } = require('../../global');
 const { listenTask: listenTaskShenyuan } = require('../shenyuan/listenTask');
 module.exports = {
     /**
@@ -41,6 +41,9 @@ module.exports = {
         rankTaskG.listenTask(req, res, freakId, num, freakObj);
         // 监听深渊
         listenTaskShenyuan(req, res, freakId);
+        // 监听彩灵洞
+        ActivityG.listenCaiLingDong(req, res, freakId);
+
         return freakObj;
     }
 }
