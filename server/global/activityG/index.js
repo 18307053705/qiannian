@@ -1,6 +1,6 @@
-const setCaiLingDong = require('./setCaiLingDong');
-const setJinYinDao = require('./setJinYinDao');
-const setWorldBoss = require('./setWorldBoss');
+const openCaiLingDong = require('./openCaiLingDong');
+const openJinYinDao = require('./openJinYinDao');
+const openWorldBoss = require('./openWorldBoss');
 const updateCaiLingDong = require('./updateCaiLingDong');
 const updateJinYinDao = require('./updateJinYinDao');
 const updateWorldBoss = require('./updateWorldBoss');
@@ -9,10 +9,14 @@ const getCaiLingDong = require('./getCaiLingDong');
 const getJinYinDao = require('./getJinYinDao');
 const listenCaiLingDong = require('./listenCaiLingDong');
 const listenJinYinDao = require('./listenJinYinDao');
+const closeCaiLingDong = require('./closeCaiLingDong');
+const closeJinYindao = require('./closeJinYindao');
+const closeWorldBoss = require('./closeWorldBoss');
+
 module.exports = {
-    ...setWorldBoss,
-    ...setJinYinDao,
-    ...setCaiLingDong,
+    ...openWorldBoss,
+    ...openJinYinDao,
+    ...openCaiLingDong,
     ...updateWorldBoss,
     ...updateJinYinDao,
     ...updateCaiLingDong,
@@ -20,5 +24,8 @@ module.exports = {
     ...getCaiLingDong,
     ...getJinYinDao,
     ...listenCaiLingDong,
-    ...listenJinYinDao
+    ...listenJinYinDao,
+    ...closeCaiLingDong,
+    ...closeJinYindao,
+    ...closeWorldBoss,
 }

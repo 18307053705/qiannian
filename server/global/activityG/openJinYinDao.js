@@ -4,7 +4,7 @@ module.exports = {
     /**
      * 设置金银岛
      */
-    setJinYinDao: function () {
+    openJinYinDao: function () {
         const { create } = JIN_YIN_DAO;
         // 已创建，避免重复创建
         if (create) {

@@ -4,7 +4,7 @@ module.exports = {
     /**
      * 设置彩铃洞
      */
-    setCaiLingDong: function () {
+    openCaiLingDong: function () {
         const { create } = CAI_LIN_DONG;
         // 已创建，避免重复创建
         if (create) {

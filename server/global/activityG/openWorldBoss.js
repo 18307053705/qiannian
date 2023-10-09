@@ -4,7 +4,7 @@ module.exports = {
     /**
      * 设置世界boss
      */
-    setWorldBoss: function () {
+    openWorldBoss: function () {
         const { level, create } = WORLD_BOSS;
         // 已创建，避免重复创建
         if (create) {
