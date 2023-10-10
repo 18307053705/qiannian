@@ -1,4 +1,4 @@
-const { RoleG, DailysG } = require("../../global");
+const { RoleG, DailysG, ActiveQueueG } = require("../../global");
 const { RACE_MEUN } = require("../../meun");
 
 
@@ -27,7 +27,7 @@ function title(value) {
  */
 function getNameFn(address) {
     const ids = address.split(',')[0];
-    if (ids === '60003') {
+    if (ids === '60003' && ActiveQueueG.getZhanChang()) {
         return (_, role_race, role_id) => {
             // 战场{s:死亡次数,v:功勋值}
             const { zhanChang = { v: 0 } } = DailysG.getDailysGlobal('', '', { roleId: role_id });

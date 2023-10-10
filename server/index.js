@@ -2,33 +2,11 @@ const express = require("express");
 require("express-async-errors");
 const cookieParser = require("cookie-parser");
 const gatewayFn = require("./utils/gatewayFn");
-// const errorFn = require("./utils/errorFn");
-// const globalFn = require("./utils/globalFn");
+const { scheduleCronstyle } = require("./utils/scheduleCronstyleFn");
+const RoleG = require("./global/roleG");
 const mysql = require("./mysql");
-
-// // 十分钟时间戳
-// const time = 600000;
-// // const time = 5000;
-// // 定时清楚长时间不访问的角色全局空间
-// setInterval(() => {
-//   const roleGlobal = Global.roleGlobal;
-//   Object.keys(roleGlobal).forEach(user => {
-//     const role = roleGlobal[user];
-//     // 超过十分钟不访问的角色,释放对应全局空间
-//     if (new Date() * 1 - role.time > time) {
-//       globalFn.roleExit('', '', user);
-//     }
-//   })
-
-// }, time)
-
-function setInterval_queue() {
-  setTimeout(() => {
-
-  }, 1000)
-}
-
-
+// 定时任务
+scheduleCronstyle()
 
 const app = express();
 // post请求处理
@@ -61,7 +39,7 @@ app.use("*", async function (req, res, next) {
   }
   // console.log('验证通过:',req.originalUrl)
   // 更新角色访问时间
-  // Global.updateRoleTime(req);
+  RoleG.updataRoleTime(req, res);
   next();
 });
 // 请求路由

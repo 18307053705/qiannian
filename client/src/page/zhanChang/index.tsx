@@ -69,7 +69,7 @@ const ZhanChang = () => {
     return (
         <div>
             <div className={Styles.tips}>
-                每日20:00开启上古战场,凡是达到50级的玩家即可加入战场,击败异族不仅可获得大量功勋，更可获得丰富奖励。
+                每日19:00开启上古战场,凡是达到50级的玩家即可加入战场,击败异族不仅可获得大量功勋，更可获得丰富奖励。
             </div>
             <div><span className="g_u_end" onClick={() => { tpDir({ dir: '60003,0,0' }).then(backGrand) }}>进入战场</span></div>
             <div><span className="g_u_end" onClick={() => { setPage('rank') }}>战场排名</span></div>

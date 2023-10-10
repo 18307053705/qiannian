@@ -13,7 +13,7 @@ module.exports = {
     },
     JIN_YIN_DAO: {
         create: false, // 是否创建
-        ids: { zhouxiaobing_1: 5, linsuqing_1: 5 }, // 可领奖id
+        ids: {  }, // 可领奖id
         rank: {  // 排名
             // linsuqing_1: {
             //     id: 'linsuqing_1',

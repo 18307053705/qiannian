@@ -1,9 +1,8 @@
-const { RoleG, ActivityG } = require("../../global");
+const { RoleG, ActivityG,ActiveQueueG } = require("../../global");
 const { roleFn, fightFn } = require("../../utils");
 
 
 // 掉落物品
-
 function shedRandom() {
     const list = [
         {
@@ -213,6 +212,13 @@ module.exports = {
      * 攻击BOSS
      */
     atkBoss: function (req, res) {
+        if (!ActiveQueueG.getWorldBoss()) {
+            res.send({
+                code: 0,
+                message: '世界BOSS活动已结束'
+            })
+            return;
+        }
         const { boss } = ActivityG.getWorldBoss(req, res);
         if (boss.life <= 0) {
             res.send({
@@ -242,6 +248,7 @@ module.exports = {
                 boss.life = 0;
                 shed = shedRandom()
                 // 掉落物品
+                ActiveQueueG.closeWorldBoss();
             }
             ActivityG.updateWorldBoss(req, res, { dps, boss, shed });
         }

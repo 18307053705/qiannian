@@ -12,6 +12,7 @@ const rankTaskG = require('./rankTaskG');
 const ShenYuanG = require('./shenYuanG');
 const PaiMaiHangG = require('./paiMaiHangG');
 const ActivityG = require('./activityG');
+const ActiveQueueG = require('./activeQueueG');
 
 
 module.exports = {
@@ -28,5 +29,6 @@ module.exports = {
     rankTaskG,
     ShenYuanG,
     PaiMaiHangG,
-    ActivityG
+    ActivityG,
+    ActiveQueueG
 }

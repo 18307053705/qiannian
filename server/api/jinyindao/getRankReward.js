@@ -1,13 +1,19 @@
-const { ActivityG, RoleG, KnapsackG, ChatG } = require("../../global");
+const { ActivityG, RoleG, KnapsackG, ChatG, ActiveQueueG } = require("../../global");
 const { knapsackFn } = require('../../utils');
 const { knapsackTable } = require('../../table');
 
 module.exports = {
     /**
      * 获取排名奖励
-     * @param {*} req.id_x
      */
     getRankReward: function (req, res) {
+        if (ActiveQueueG.getJinYindao()) {
+            res.send({
+                code: 0,
+                message: '请在活动结束后领取奖励'
+            })
+            return;
+        }
         const { role_id, role_name, socialize_pool } = RoleG.getRoleGlobal(req, res);
         const { ids } = ActivityG.getJinYinDao(req, res);
         const num = ids[role_id];

@@ -1,5 +1,4 @@
-const moment = require('moment');
-const { DailysG, RoleG, KnapsackG } = require("../../global");
+const { DailysG, RoleG, KnapsackG, ActiveQueueG } = require("../../global");
 const { TitleTable } = require('../../table');
 function getPrze(index) {
     // 排名第一
@@ -42,13 +41,20 @@ module.exports = {
      */
     prize: async function (req, res) {
         // const hour = moment().hour();
-        if (moment().hour() < 21) {
+        if (ActiveQueueG.getZhanChang()) {
             res.send({
                 code: 0,
-                message: '上古战场暂未结束'
+                message: '请在活动结束后领取奖励'
             })
             return;
         }
+        // if (moment().hour() < 21) {
+        //     res.send({
+        //         code: 0,
+        //         message: '上古战场暂未结束'
+        //     })
+        //     return;
+        // }
         const dailys = DailysG.getDailysGlobalAll();
         const { role_id } = RoleG.getRoleGlobal(req, res);
         let list = [];

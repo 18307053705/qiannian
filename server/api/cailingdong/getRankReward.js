@@ -1,4 +1,4 @@
-const { ActivityG, RoleG, KnapsackG } = require("../../global");
+const { ActivityG, RoleG, KnapsackG, ActiveQueueG } = require("../../global");
 
 module.exports = {
     /**
@@ -8,6 +8,14 @@ module.exports = {
     getRankReward: function (req, res) {
         const { role_id, role_integral, role_lx } = RoleG.getRoleGlobal(req, res);
         const { ids, done } = ActivityG.getCaiLingDong(req, res);
+        if(ActiveQueueG.getCaiLingDong()){
+            res.send({
+                code: 0,
+                message: '请在活动结束后领取奖励'
+            })
+            return;
+        }
+
         if (done.includes(role_id)) {
             res.send({
                 code: 0,

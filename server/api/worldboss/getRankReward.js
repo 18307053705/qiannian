@@ -1,4 +1,4 @@
-const { ActivityG, RoleG, KnapsackG } = require("../../global");
+const { ActivityG, RoleG, KnapsackG, ActiveQueueG } = require("../../global");
 
 function getReward(index) {
     // 排名第一
@@ -38,6 +38,13 @@ module.exports = {
      * @param {*} req.id_x
      */
     getRankReward: function (req, res) {
+        if (ActiveQueueG.getWorldBoss()) {
+            res.send({
+                code: 0,
+                message: '请在活动结束后领取奖励'
+            })
+            return;
+        }
         const { role_id, role_integral } = RoleG.getRoleGlobal(req, res);
         const { rank, done, boss } = ActivityG.getWorldBoss(req, res);
         if (boss.life) {
@@ -60,7 +67,7 @@ module.exports = {
             }
             return next.v - pre.v;
         })
-        
+
         const index = list.findIndex(({ id }) => id === role_id);
         if (index === -1) {
             res.send({
