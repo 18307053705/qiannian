@@ -28,17 +28,13 @@ module.exports = {
             tNpc.addressName = GrandTable.getGrandName(npc.address);
         }
         grand.freak = freak.map((itme) => {
-            const { name, ext } = ElementTable.getElement(itme.id);
             return {
                 ...itme,
                 taskId: itme.id,
                 taskType: itme.type,
                 addressName: GrandTable.getGrandName(itme.address),
-                name,
-                ext: {
-                    ...ext,
-                    num: itme.num || 1
-                }
+                ...ElementTable.getElement(itme.id),
+                num: itme.num || 1
             }
         })
     }

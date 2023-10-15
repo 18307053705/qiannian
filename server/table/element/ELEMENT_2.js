@@ -9,6 +9,7 @@ const DOME_FREAK = {
   grade: 1, // 默认1，怪物品阶(1:普通,2:精英,3:boss)
   pet: true, // 默认false，是否可捕获
   rank: true, // 默认false，是否可组队
+  creatNum: 4, // 默认4，最大生成数量
   num: -1, // 默认：无限，可击杀次数
   exp: 10000, // 默认随等级，经验
   tael: 10000, // 默认随等级，银两
@@ -164,7 +165,7 @@ const ELEMENT_2 = {
     name: "大当家",
     type: 2,
     level: 5,
-    pet: true,
+    grade: 1,
   },
   24: {
     id: 24,

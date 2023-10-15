@@ -35,7 +35,10 @@ module.exports = {
      */
     getTask: function (req, res, type, id) {
         const { role_race } = RoleG.getRoleGlobal(req, res);
-        if (type === TASK_TYPE_MEUN.main && role_race === 1) {
+        // if (type === TASK_TYPE_MEUN.main && role_race === 1) {
+        //     return peopleMian[id] ? JSON.parse(JSON.stringify(peopleMian[id])) : undefined;
+        // }
+        if (type === TASK_TYPE_MEUN.main) {
             return peopleMian[id] ? JSON.parse(JSON.stringify(peopleMian[id])) : undefined;
         }
         if (type === TASK_TYPE_MEUN.copy) {

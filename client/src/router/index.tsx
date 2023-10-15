@@ -77,8 +77,19 @@ const Root = () => {
     const [exts, setExts]: any = useState({});
     useEffect(() => {
         window.QN.setExts = (value) => {
-            window.QN.exts = value;
-            setExts(value);
+            window.QN.exts = {
+                ...exts,
+                ...value,
+            };
+            setExts((pre)=>({
+                ...pre,
+                ...value,
+            }))
+            // setExts({
+            //     ...exts,
+            //     ...value,
+            // });
+           console.log("setExts赋值",value)
         };
         // 监听全局点击事件,处理错误信息
         window.addEventListener("click", () => {
@@ -92,9 +103,10 @@ const Root = () => {
             } else {
                 setUnread([]);
             }
-            if (window.QN.exts) {
-                setExts({});
-            }
+
+            setExts({});
+            console.log("setExts清除")
+
         });
     }, [])
     // 登录态验证

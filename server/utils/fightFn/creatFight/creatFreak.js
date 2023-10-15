@@ -27,9 +27,9 @@ module.exports = {
     creatFreak: function (req, res) {
         // 怪物模版
         const { currentDir: freakTemplate } = GrandG.getDirGlobal(req, res);
-        const { name, level, type, attr, grade, id, num: num_max } = freakTemplate;
+        const { name, level, type, attr, grade, id, num: num_max, creatNum = 4 } = freakTemplate;
         // 生成怪物数量 1-4
-        let num = Math.floor(Math.random() * 4) + 1;
+        let num = Math.floor(Math.random() * creatNum) + 1;
         const attrs = AttributeTable.getFreakBaseAttr(type);
         const addition = level * attr;
         Object.keys(attrs).forEach((key) => {

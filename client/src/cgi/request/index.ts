@@ -54,7 +54,26 @@ export async function request<T = {}>(
     }
     if (request.status === 200 && data.code === 0) {
       if (data.exts && '/chat/getUnread' !== url) {
-        window.QN.setExts(data.exts);
+        // 解析exts
+        const { listText, success, error, customSuccess } = data.exts;
+        const valus: any = {};
+        if (error) {
+          valus.error = error;
+        }
+        if (success) {
+          valus.success = success;
+        }
+        if (customSuccess) {
+          valus.customSuccess = customSuccess;
+        }
+        if (listText.length) {
+          valus.listText = listText;
+        }
+        // error: message,
+        //       success,
+        //       listText: res.listText,
+        //       customSuccess: res.customSuccess,
+        window.QN.setExts(valus);
       }
       return data;
     } else if (data.code === 100000) {

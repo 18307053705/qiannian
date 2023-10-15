@@ -21,7 +21,7 @@ module.exports = {
                         const freaks = task.complete.freak;
                         // 创建任务时通过回调,处理之前的杀怪任务进度
                         Object.keys(f || {}).forEach((freakId) => {
-                            freaks[freakId].c = f[c];
+                            freaks[freakId].c = f[freakId];
                         })
                     }
                     task.status = s;

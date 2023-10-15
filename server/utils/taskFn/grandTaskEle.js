@@ -10,18 +10,38 @@ module.exports = {
         Object.keys(tasksMap).forEach((type) => {
             const tasks = tasksMap[type];
             if (tasks) {
-                Object.values(tasks).forEach(({ grand, complete, status, title, id }) => {
+                Object.values(tasks).forEach(({ grand, complete, status, title, id, type }) => {
                     if (status === 3) {
                         TaskG.deleteTaskGlobal(req, res, type, id);
                         return;
                     }
-                    const { npc, freak = [], tNpc = {} } = grand;
-                    if (npc.address === address) {
-                        // 加入指令列表
-                        eleDir[npc.id] = npc;
-                        // 加入元素列表
-                        npcEle.push({ name: npc.name, cs: status === 0 ? 'g_sigh' : 'g_doubt', dir: npc.id })
+                    const { npc, freak = [], tNpc } = grand;
+                    // 未接任务
+                    if (status === 0) {
+                        if (npc.address === address) {
+                            // 加入指令列表
+                            eleDir[npc.id] = npc;
+                            // 加入元素列表
+                            npcEle.push({ name: npc.name, cs: 'g_sigh', dir: npc.id })
+                        }
                     }
+                    // 任务且为对话任务 
+                    if (status === 1 && type === 2) {
+                        const ele = tNpc || npc;
+                        if (ele.address === address) {
+                            // 加入指令列表
+                            eleDir[ele.id] = ele;
+                            // 加入元素列表
+                            npcEle.push({ name: ele.name, cs: 'g_doubt', dir: ele.id })
+                        }
+                    }
+
+                    // if (npc.address === address) {
+                    //     // 加入指令列表
+                    //     eleDir[npc.id] = npc;
+                    //     // 加入元素列表
+                    //     npcEle.push({ name: npc.name, cs: status === 0 ? 'g_sigh' : 'g_doubt', dir: npc.id })
+                    // }
                     // 必须已领取的任务才存在目标NPC及目标怪物
                     if (status) {
                         if (tNpc.address === address) {

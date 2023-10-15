@@ -3,8 +3,8 @@ const mysql = require("../../mysql");
 const { RoleG, ActiveQueueG } = require("../../global");
 const roleFn = require("../roleFn");
 // 十分钟时间戳
-// const time = 600000;
-const time = 5000;
+const time = 600000;
+// const time = 5000;
 // 定时清除长时间不访问的角色全局空间
 setInterval(() => {
     const roles = RoleG.ROLE_Global;

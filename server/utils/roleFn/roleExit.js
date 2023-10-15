@@ -1,5 +1,30 @@
-const { RoleG, KnapsackG, GrandG,PetG } = require("../../global");
+const { RoleG, KnapsackG, GrandG, PetG, TaskG } = require("../../global");
 const { releaseFight } = require("../../utils/fightFn/releaseFight");
+
+const { TASK_TYPE_MEUN } = TaskG;
+
+function tasksUpdata(tasks) {
+    return Object.values(tasks).map(({ complete, id, taskType }) => {
+        const task = {
+            id,
+            p: taskType
+        };
+        const { freak } = complete;
+        const values = Object.values(freak || {});
+        if (values.length) {
+            task['f'] = {};
+            values.forEach(({ id, c }) => {
+                if (c) {
+                    task['f'][id] = c;
+                }
+
+            })
+        }
+        return task;
+    })
+
+}
+
 module.exports = {
     /**
      * 退出角色
@@ -12,6 +37,11 @@ module.exports = {
         const user = userid || req.cookies["q_uid"];
         const roleInfo = RoleG.getRoleGlobal(req, res);
         if (roleInfo) {
+            const main = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.main);
+            const chance = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.chance);
+            const copy = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy);
+            console.log(tasksUpdata(main), '  tasksUpdata(main)...');
+            RoleG.updataRoleGlobal(req, res, { task_pool: tasksUpdata(main) })
             const { role_id, socialize_pool } = roleInfo;
             // 释放全局地图缓存
             GrandG.deleteDirGlobal(req, res);
@@ -21,13 +51,11 @@ module.exports = {
             RoleG.saveRoleSql(req, res, user);
             // 保存背包信息
             KnapsackG.saveknapsackSql(req, res, role_id);
-            
             // 释放全局背包缓存
             KnapsackG.deleteknapsackGlobal(req, res, role_id);
             // 释放全局宠物信息
-            PetG.savePetSql(req,res)
+            PetG.savePetSql(req, res);
 
-            
             // 释放全局角色缓存,必须最后释放,其余缓存皆是基于role_id
             RoleG.deleteRoleGlobal(req, res, user);
             // delete Global.dir[role_id];
