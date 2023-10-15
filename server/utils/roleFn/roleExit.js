@@ -4,10 +4,11 @@ const { releaseFight } = require("../../utils/fightFn/releaseFight");
 const { TASK_TYPE_MEUN } = TaskG;
 
 function tasksUpdata(tasks) {
-    return Object.values(tasks).map(({ complete, id, taskType }) => {
+    return Object.values(tasks).map(({ complete, id, taskType, status }) => {
         const task = {
             id,
-            p: taskType
+            p: taskType,
+            s: status
         };
         const { freak } = complete;
         const values = Object.values(freak || {});

@@ -26,9 +26,9 @@ module.exports = {
         let done = true;
         let exist = undefined;
         if (article) {
-            const { exist, result } = chekeKnapsack(req, res, article);
+            const { exist:exists, result } = chekeKnapsack(req, res, article);
             done = result;
-            exist = exist;
+            exist = exists;
         }
         if (freak) {
             Object.values(freak).map(({ s, c }) => {

@@ -13,6 +13,7 @@ const TASKS_Global = {
 const TASK_TYPE = {
     zhanDou: 1,
     duiHua: 2,
+    shouJi: 3
 }
 const TASK_TYPE_MEUN = {
     main: 1,

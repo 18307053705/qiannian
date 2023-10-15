@@ -13,6 +13,10 @@ module.exports = {
      */
     listenTask: function (req, res, freakId, num, freakObj) {
         const { address } = getDirGlobal(req, res);
+        console.log(address, 'address...')
+        if (!address) {
+            return;
+        }
         // 判断是否为多人副本地图
         if (address && !ADDRESS_LIST.includes(address.split(',')[0])) {
             return;

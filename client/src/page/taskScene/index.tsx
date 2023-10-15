@@ -24,99 +24,103 @@ export const taskScene = () => {
     if (!taskInfo) {
         return null;
     }
+    const { connet, complete, grand, noLevel, endText }: any = taskInfo || {};
 
-    const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, complete, grand,tips } = taskInfo || {};
-    const talk = status === 0 ? receive : done;
-    const active = talk.length ? talk.splice(-1)[0].split('&') : [];
+    // const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, complete, grand,tips } = taskInfo || {};
+    // const talk = status === 0 ? receive : done;
+    const active = connet.splice(-1)[0].split('&');
 
     const doneTask = () => {
         taskSceneEnd().then(({ data }) => {
             setTaskInof(data);
         })
     }
-    // 角色等级不足
-    if (noLevel) {
+
+    if (endText || noLevel) {
         return (
             <div className={Styles['page-task-scene']}>
-                <div>请先将等级提示到{level}</div>
+                <div>{endText || noLevel}</div>
                 <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
             </div>
         )
-    }
-
-    // 全部任务结束
-    if (isEnd) {
-        return (
-            <div className={Styles['page-task-scene']}>
-                <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
-            </div>
-        )
-    }
-
-
-    // isCan true:未接任务 展示任务内容
-    if (status === 0) {
-        return (
-            <div className={Styles['page-task-scene']}>
-                {
-                    talk.map((text, index) => <div key={index}>{text}</div>)
-                }
-                <div>
-                    <span>{active[0]}</span>
-                    <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
-                </div>
-                <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
-            </div>
-        )
-    }
-
-    // 完成任务
-    if (status === 2 || status === 3) {
-        return (
-            <div className={Styles['page-task-scene']}>
-                <TaskResult reward={reward} />
-                {
-                    talk.map((text, index) => <div key={index}>{text}</div>)
-                }
-                <div>
-                    <span>{active[0]}</span>
-                    <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
-                </div>
-                <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
-            </div>
-        )
-    }
-
-    const { npc, tNpc, freak = [] } = grand || {};
-    let tpInfo = npc;
-    if (status === 2 && tNpc) {
-        tpInfo = tNpc;
-    }
-    if (status === 1 && freak.length) {
-        const { freak: freakS } = complete;
-        tpInfo = freak.find(({ id }) => freakS[id].s > freakS[id].c);
-    }
-
-    const { addressName, address } = tpInfo;
-
-    // 未完成任务提示
-    // const { name, text } = treat;
-    const tpClick = () => {
-        tpDir({ dir: address }).then(() => {
-            backGrand();
-        })
-
     }
     return (
         <div className={Styles['page-task-scene']}>
-            {/* <div>描述：{taskInfo.tips}</div> */}
-            <div>提示：{tips}</div>
+            { connet.map((text, index) => <div key={index}>{text}</div>) }
             <div>
-                <span className='g_u_end' onClick={tpClick}>传送到{addressName}</span>
+                <span>{active[0]}</span>
+                <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
+            </div>
+            <div>
+                {/* <span className='g_u_end' onClick={tpClick}>传送到{addressName}</span> */}
             </div>
             <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
         </div>
     )
+
+    // isCan true:未接任务 展示任务内容
+    // if (status === 0) {
+    //     return (
+    //         <div className={Styles['page-task-scene']}>
+    //             {
+    //                 talk.map((text, index) => <div key={index}>{text}</div>)
+    //             }
+    //             <div>
+    //                 <span>{active[0]}</span>
+    //                 <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
+    //             </div>
+    //             <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
+    //         </div>
+    //     )
+    // }
+
+    // 完成任务
+    // if (status === 2 || status === 3) {
+    //     return (
+    //         <div className={Styles['page-task-scene']}>
+    //             <TaskResult reward={reward} />
+    //             {
+    //                 talk.map((text, index) => <div key={index}>{text}</div>)
+    //             }
+    //             <div>
+    //                 <span>{active[0]}</span>
+    //                 <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
+    //             </div>
+    //             <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
+    //         </div>
+    //     )
+    // }
+
+    // const { npc, tNpc, freak = [] } = grand || {};
+    // let tpInfo = npc;
+    // if (status === 2 && tNpc) {
+    //     tpInfo = tNpc;
+    // }
+    // if (status === 1 && freak.length) {
+    //     const { freak: freakS } = complete;
+    //     tpInfo = freak.find(({ id }) => freakS[id].s > freakS[id].c);
+    // }
+
+    // const { addressName, address } = tpInfo;
+
+    // // 未完成任务提示
+    // // const { name, text } = treat;
+    // const tpClick = () => {
+    //     tpDir({ dir: address }).then(() => {
+    //         backGrand();
+    //     })
+
+    // }
+    // return (
+    //     <div className={Styles['page-task-scene']}>
+    //         {/* <div>描述：{taskInfo.tips}</div> */}
+    //         {/* <div>提示：{tips}</div> */}
+    //         <div>
+    //             <span className='g_u_end' onClick={tpClick}>传送到{addressName}</span>
+    //         </div>
+    //         <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
+    //     </div>
+    // )
 }
 
 export default taskScene;

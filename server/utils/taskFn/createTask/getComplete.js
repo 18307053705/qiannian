@@ -9,8 +9,8 @@ module.exports = {
     getComplete: function (complete = {}, grand) {
         const { article, equip, freak } = complete
         const { freak: grandFreak } = grand;
-        complete['article'] = {};
         if (article) {
+            complete['article'] = {};
             article.split(',').forEach((itme) => {
                 const [ids, s = 1] = itme.split('-');
                 const { id, n, type } = knapsackTable.getArticle(ids);
@@ -23,10 +23,11 @@ module.exports = {
             })
         }
         if (equip) {
+            complete['equip'] = {};
             equip.split(',').forEach((itme) => {
                 const [ids, s = 1] = itme.split('-');
                 const { id, name } = knapsackTable.getEquip(ids);
-                complete['article'][id] = {
+                complete['equip'][id] = {
                     id,
                     n: name,
                     p: 3,
@@ -34,7 +35,8 @@ module.exports = {
                 }
             })
         }
-        if (grandFreak) {
+
+        if (grandFreak.length) {
             complete['freak'] = {};
             grandFreak.forEach(({ id, s = 1 }) => {
                 const { name } = ElementTable.getElement(id);
@@ -59,10 +61,7 @@ module.exports = {
                 }
             })
         }
-        return {
-            freak: complete['freak'] || undefined,
-            article: JSON.stringify(complete['article']) === '{}' ? undefined : complete['article'],
-        };
+        return JSON.stringify(complete) === '{}' ? undefined : complete;
     }
 }
 

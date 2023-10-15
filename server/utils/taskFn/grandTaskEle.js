@@ -25,34 +25,15 @@ module.exports = {
                             npcEle.push({ name: npc.name, cs: 'g_sigh', dir: npc.id })
                         }
                     }
+                    const ele = tNpc || npc;
                     // 任务且为对话任务 
-                    if (status === 1 && type === 2) {
-                        const ele = tNpc || npc;
-                        if (ele.address === address) {
-                            // 加入指令列表
-                            eleDir[ele.id] = ele;
-                            // 加入元素列表
-                            npcEle.push({ name: ele.name, cs: 'g_doubt', dir: ele.id })
-                        }
+                    if ((status === 1 || status === 2) && ele.address === address) {
+                        // 加入指令列表
+                        eleDir[ele.id] = ele;
+                        // 加入元素列表
+                        npcEle.push({ name: ele.name, cs: 'g_doubt', dir: ele.id });
                     }
-
-                    // if (npc.address === address) {
-                    //     // 加入指令列表
-                    //     eleDir[npc.id] = npc;
-                    //     // 加入元素列表
-                    //     npcEle.push({ name: npc.name, cs: status === 0 ? 'g_sigh' : 'g_doubt', dir: npc.id })
-                    // }
-                    // 必须已领取的任务才存在目标NPC及目标怪物
-                    if (status) {
-                        if (tNpc.address === address) {
-                            // 判断接取任务的npc与交付的npc是否同一人,避免出现重复
-                            // 加入指令列表
-                            eleDir[tNpc.id] = tNpc;
-                            if (!tNpc.repeat) {
-                                // 加入元素列表
-                                npcEle.push({ name: tNpc.name, cs: 'g_doubt', dir: tNpc.id });
-                            }
-                        }
+                    if (status === 1) {
                         freak.forEach(({ id, ...itme }) => {
                             const { s = 1, c = 0 } = complete['freak'][id];
                             if (!complete['freak'][id]) {
@@ -66,8 +47,6 @@ module.exports = {
                             }
                         })
                     }
-
-
                 })
             }
         })
