@@ -18,46 +18,36 @@ const SpeedText = ({ task }) => {
 }
 
 const DeonTaskBtn = ({ task, dailList, deonTask }) => {
-    const { id, speed, taskType, grand, status, complete } = task;
-    const { done } = speed || {};
-    const { npc, tNpc, freak = [] } = grand || {};
-    let tpInfo = npc;
-    if (status === 2 && tNpc) {
-        tpInfo = tNpc;
-    }
-    if (status === 1 && freak.length && !done) {
-        const { freak: freakS } = complete;
-        tpInfo = freak.find(({ id }) => freakS[id].s > freakS[id].c);
-    }
-
-    const { addressName, address } = tpInfo;
+    const { id, speed, taskType, tpInfo } = task;
     // 传送到目标位置
     const tpClick = () => {
-        tpDir({ dir: address }).then(() => {
+        tpDir({ dir: tpInfo.address }).then(() => {
             backGrand();
         })
 
     }
     // 每日任务
     if (dailList.includes(taskType)) {
-        return done ? (
+        return speed.done ? (
             <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div>
         ) : null;
     }
 
     return (
         <div>
-            <span className='g_u_end' onClick={tpClick}>传送到{addressName}</span>
+            <span className='g_u_end' onClick={tpClick}>传送到{tpInfo.addressName}</span>
         </div>
     );
 }
 
 export const Task = () => {
+
     const [tasks, setTasks]: any = useState({
         taskList: [],
         taskDetail: [],
         dailList: []
     })
+
     const getTaskInfo = (type?: number) => {
         if (type) {
             sessionStorage.setItem('taskType', type.toString())
@@ -81,7 +71,7 @@ export const Task = () => {
             id
         }).then(({ message }) => {
             if (!message) {
-                getTaskInfo();
+                getTaskInfo(type);
             }
 
         })
@@ -110,14 +100,11 @@ export const Task = () => {
                 <div>===========================</div>
                 {
                     taskList.map(({ text, type }, index) => {
-
                         return (<div key={index}>
                             <span className='g_u_end' onClick={() => { getTaskInfo(type) }}>{text}</span>
                         </div>)
-
                     })
                 }
-
             </div>
             <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>
         </div>

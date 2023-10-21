@@ -70,7 +70,7 @@ export const taskScene = () => {
     const active = connet.splice(-1)[0].split('&');
     return (
         <div className={Styles['page-task-scene']}>
-            <TaskResult reward={reward} />
+            {status !== 0 && <TaskResult reward={reward} />}
             {connet.map((text, index) => <div key={index}>{text}</div>)}
             <div>
                 <span>{active[0]}</span>

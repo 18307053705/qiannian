@@ -28,6 +28,9 @@ module.exports = {
                 addressName: GrandTable.getGrandName(tp)
             }
         }
+        if (status === 2 || status === 3) {
+            return tNpc || npc
+        }
     },
     /**
      * 任务传送

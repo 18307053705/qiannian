@@ -13,7 +13,6 @@ module.exports = {
      */
     listenTask: function (req, res, freakId, num, freakObj) {
         const { address } = getDirGlobal(req, res);
-        console.log(address, 'address...')
         if (!address) {
             return;
         }

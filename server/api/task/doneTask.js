@@ -22,7 +22,7 @@ module.exports = {
             })
             return;
         }
-        const speed = taskFn.speedTask(req, res, task.complete);
+        const speed = taskFn.speedTask(req, res, task);
         if (!speed.done) {
             res.send({
                 code: 0,
