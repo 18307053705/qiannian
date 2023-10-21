@@ -1,6 +1,7 @@
 
 const { RoleG } = require('../../global');
 const { getTaskTPInfo } = require('./taskTp');
+const { speedTask } = require('./speedTask');
 module.exports = {
     /**
      * 获取任务场景信息
@@ -14,7 +15,8 @@ module.exports = {
                 connet: replace ? receive.map((text) => text.replace('${role_name}', role_name)) : receive,
                 grand,
                 task,
-                tp: getTaskTPInfo(req, res, task)
+                status,
+                tpInfo: getTaskTPInfo(req, res, task)
             }
         }
         // 任务进行中(未完成)
@@ -24,7 +26,10 @@ module.exports = {
                 complete,
                 grand,
                 task,
-                tp: getTaskTPInfo(req, res, task)
+                status,
+                tpInfo: getTaskTPInfo(req, res, task),
+                // 没有任务条件无需计算进度
+                speed: complete ? speedTask(req, res, task) : undefined
             }
         }
         // 已完成
@@ -34,7 +39,8 @@ module.exports = {
                 connet: replace ? done.map((text) => text.replace('${role_name}', role_name)) : done,
                 grand,
                 task,
-                tp: getTaskTPInfo(req, res, task)
+                status,
+                tpInfo: getTaskTPInfo(req, res, task)
             }
         }
     }

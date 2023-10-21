@@ -15,7 +15,6 @@ const SpeedText = ({ task }) => {
     }
     const { name } = grand.tNpc || grand.npc;
     return <div>进度：{name}对话(未完成)</div>
-
 }
 
 const DeonTaskBtn = ({ task, dailList, deonTask }) => {
