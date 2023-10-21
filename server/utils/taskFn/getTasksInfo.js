@@ -31,7 +31,7 @@ module.exports = {
                 }
             });
         }
-        Object.values(tasks).forEach((task) => {
+        Object.values(tasks || {}).forEach((task) => {
             task.speed = speedTask(req, res, task);
         })
         return {

@@ -7,7 +7,7 @@ import Styles from './index.less';
 
 
 const TaskResult = ({ reward }) => {
-    const { text } = reward;
+    const { text = [] } = reward || {};
     return (
         text.map((text, index) => <div key={index}>{text}</div>)
     )
@@ -24,7 +24,7 @@ export const taskScene = () => {
     if (!taskInfo) {
         return null;
     }
-    const { connet, complete, grand, noLevel, endText }: any = taskInfo || {};
+    const { connet, complete, grand, noLevel, endText, reward }: any = taskInfo || {};
 
     // const { done = [], receive, status, reward = { text: [] }, isEnd, noLevel, level, complete, grand,tips } = taskInfo || {};
     // const talk = status === 0 ? receive : done;
@@ -46,13 +46,13 @@ export const taskScene = () => {
     }
     return (
         <div className={Styles['page-task-scene']}>
-            { connet.map((text, index) => <div key={index}>{text}</div>) }
+            <TaskResult reward={reward} />
+            {connet.map((text, index) => <div key={index}>{text}</div>)}
             <div>
                 <span>{active[0]}</span>
                 <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
             </div>
             <div>
-                {/* <span className='g_u_end' onClick={tpClick}>传送到{addressName}</span> */}
             </div>
             <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
         </div>

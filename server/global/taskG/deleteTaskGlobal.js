@@ -13,11 +13,13 @@ module.exports = {
         const { role_id } = getRoleGlobal(req, res);
         const tasks = TASKS_Global[role_id];
         if (!tasks || !tasks[type] || !tasks[type][id]) {
+          
             return;
         }
         delete tasks[type][id];
         if(JSON.stringify(tasks[type]) === '{}'){
             delete tasks[type];
         }
+        TASKS_Global[role_id] = tasks;
     }
 }

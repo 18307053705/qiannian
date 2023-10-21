@@ -9,12 +9,13 @@ module.exports = {
     getComplete: function (complete = {}, grand) {
         const { article, equip, freak } = complete
         const { freak: grandFreak } = grand;
+        const completes = {};
         if (article) {
-            complete['article'] = {};
+            completes['article'] = {};
             article.split(',').forEach((itme) => {
                 const [ids, s = 1] = itme.split('-');
                 const { id, n, type } = knapsackTable.getArticle(ids);
-                complete['article'][id] = {
+                completes['article'][id] = {
                     id,
                     n,
                     p: type,
@@ -23,11 +24,11 @@ module.exports = {
             })
         }
         if (equip) {
-            complete['equip'] = {};
+            completes['equip'] = {};
             equip.split(',').forEach((itme) => {
                 const [ids, s = 1] = itme.split('-');
                 const { id, name } = knapsackTable.getEquip(ids);
-                complete['equip'][id] = {
+                completes['equip'][id] = {
                     id,
                     n: name,
                     p: 3,
@@ -37,10 +38,10 @@ module.exports = {
         }
 
         if (grandFreak.length) {
-            complete['freak'] = {};
+            completes['freak'] = {};
             grandFreak.forEach(({ id, s = 1 }) => {
                 const { name } = ElementTable.getElement(id);
-                complete['freak'][id] = {
+                completes['freak'][id] = {
                     id,
                     n: name,
                     s,
@@ -49,19 +50,21 @@ module.exports = {
             });
         }
         if (freak) {
-            complete['freak'] || (complete['freak'] = {});
+            completes['freak'] || (completes['freak'] = {});
             freak.split(',').forEach((itme) => {
                 const [id, s = 1] = itme.split('-');
                 const { name } = ElementTable.getElement(id);
-                complete['freak'][id] = {
+                completes['freak'][id] = {
                     id,
                     n: name,
                     s: s - 0,
                     c: 0
                 }
             })
+
+
         }
-        return JSON.stringify(complete) === '{}' ? undefined : complete;
+        return JSON.stringify(completes) === '{}' ? undefined : completes;
     }
 }
 

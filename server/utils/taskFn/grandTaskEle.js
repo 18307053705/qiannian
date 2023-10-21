@@ -10,7 +10,7 @@ module.exports = {
         Object.keys(tasksMap).forEach((type) => {
             const tasks = tasksMap[type];
             if (tasks) {
-                Object.values(tasks).forEach(({ grand, complete, status, title, id, type }) => {
+                Object.values(tasks).forEach(({ grand, complete, status, title, id }) => {
                     if (status === 3) {
                         TaskG.deleteTaskGlobal(req, res, type, id);
                         return;

@@ -47,11 +47,6 @@ module.exports = {
             "完成对话任务",
             "你：&完成对话任务"
         ],
-        tp: {
-            // text: "拎壶冲就在隐仙村(1,1),赶紧过去和他聊聊吧。",
-            address: "10000,0,1",
-            name: "十里坡(1,2)"
-        },
         nextId: 2
     },
     2: {
@@ -73,10 +68,6 @@ module.exports = {
                     address: "10000,0,1",
                 }
             ]
-            // tNpc: {
-            //     id: 10,
-            //     address: "10000,0,1"
-            // },
         },
         receive: [
             "你：&接战斗任务？"
@@ -91,7 +82,7 @@ module.exports = {
         id: 3,
         title: "收集任务",
         tips: "收集任务(1,2)",
-        type: 1,
+        type: 3,
         reward: {
             attr: "exp-500"
         },
@@ -109,10 +100,46 @@ module.exports = {
             "完成收集任务",
             "你：&完成收集任务"
         ],
+        treat: [
+            "待收集任务",
+            "你：&待收集任务"
+        ],
         complete: {
             article: '1-1',
-            equip: '1-1'
+            // equip: '1-1'
         },
+        nextId: 4
+    },
+    4: {
+        id: 4,
+        title: "战斗任务2",
+        tips: "战斗任务2(1,2)",
+        type: 1,
+        reward: {
+            attr: "exp-500"
+        },
+        grand: {
+            npc: {
+                id: 10,
+                address: "10000,0,1"
+            },
+        },
+        receive: [
+            "战斗任务2",
+            "你：&战斗任务2",
+        ],
+        done: [
+            "完成战斗任务2",
+            "你：&完成战斗任务2"
+        ],
+        treat: [
+            "待战斗任务2",
+            "你：&待战斗任务2"
+        ],
+        complete: {
+            freak: "23-40"
+        },
+        tp: "10000,0,2"
         // nextId: 4
     },
     // 4: {

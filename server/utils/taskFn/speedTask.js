@@ -12,21 +12,19 @@ module.exports = {
      */
     speedTask: function (req, res, task) {
         // 完成条件 freak{id,n,s,c} article{id,p,n,s}
-        const { complete, type, grand } = task;
+        const { complete, grand } = task;
+        // 对话任务 
         if (!complete) {
-            if (type === 2) {
-                const { currentDir } = GrandG.getDirGlobal(req, res);
-                const { id, address } = currentDir;
-                const { tNpc } = grand;
-                return { done: id === tNpc.id && address === tNpc.address }
-            }
-            return { done: true }
+            const { currentDir } = GrandG.getDirGlobal(req, res);
+            const { tNpc } = grand;
+            // 判断是否为NPC自身，是直接完成任务
+            return { done: !tNpc || currentDir.id === tNpc.id && currentDir.address === tNpc.address }
         }
         const { freak, article } = complete;
         let done = true;
         let exist = undefined;
         if (article) {
-            const { exist:exists, result } = chekeKnapsack(req, res, article);
+            const { exist: exists, result } = chekeKnapsack(req, res, article);
             done = result;
             exist = exists;
         }
