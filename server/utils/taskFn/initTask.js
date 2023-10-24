@@ -8,7 +8,7 @@ module.exports = {
      * @param {*} res 
      */
     initTask: function (req, res) {
-        const { task_pool } = RoleG.getRoleGlobal(req, res);
+        const { task_pool, role_level } = RoleG.getRoleGlobal(req, res);
         // 记录在任务中的副本
         const copyTaskIds = {};
         task_pool.forEach(({ p, id, f, s = 0 }) => {
@@ -31,6 +31,9 @@ module.exports = {
         const dailys = DailysG.getDailysGlobal(req, res);
         if (dailys.lianHunDong && !copyTaskIds[1]) {
             createTask(req, res, TASK_TYPE_MEUN.copy, 1);
+        }
+        if (dailys.heiJiaoYu && !copyTaskIds[2]) {
+            createTask(req, res, TASK_TYPE_MEUN.copy, 2);
         }
     }
 }

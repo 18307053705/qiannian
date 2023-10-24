@@ -6,9 +6,9 @@ module.exports = {
      * @param {*} grand
      * @returns complete
      */
-    getComplete: function (complete = {}, grand) {
-        const { article, equip, freak } = complete
-        const { freak: grandFreak } = grand;
+    getComplete: function (complete, grand) {
+        const { article, equip, freak } = complete || {};
+        const { freak: grandFreak = [] } = grand || {};
         const completes = {};
         if (article) {
             completes['article'] = {};

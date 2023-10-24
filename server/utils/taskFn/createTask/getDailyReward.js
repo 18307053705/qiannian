@@ -24,20 +24,27 @@ module.exports = {
                 case 1:
                 case 2:
                     exp = exps * 0.5;
+                    break;
                 case 3:
                 case 4:
                     exp = exps * 0.2;
+                    break;
                 case 5:
                 case 6:
                     exp = exps * 0.1;
+                    break;
                 case 7:
                     exp = exps * 0.05;
+                    break;
                 case 8:
                     exp = exps * 0.02;
+                    break;
                 case 9:
                     exp = exps * 0.01;
+                    break;
                 default:
                     exp = exps * 0.002;
+                    break;
             }
             reward.role['exp'] = parseInt(exp);
             text.push(`经验+${parseInt(exp)}`);

@@ -27,10 +27,8 @@ const DeonTaskBtn = ({ task, dailList, deonTask }) => {
 
     }
     // 每日任务
-    if (dailList.includes(taskType)) {
-        return speed.done ? (
-            <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div>
-        ) : null;
+    if (dailList.includes(taskType) && speed.done) {
+        return <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div>;
     }
 
     return (

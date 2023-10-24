@@ -4,17 +4,21 @@ const { tpDirUpdate } = require('../grandFn/tpDirUpdate');
 
 module.exports = {
     getTaskTPInfo: function (req, res, task) {
-        const { type, grand, status, tp } = task;
-        const { npc, tNpc, freak } = grand;
+        const { type, grand, status, tp, speed } = task;
+        const { npc, tNpc, freak = [] } = grand || {};
         // 未接任务
         if (status === 0) {
             return npc
         }
         // 未完成 且 战斗任务
         if (status === 1 && type === 1) {
-            return freak[0] || {
+            let tpInfo = speed ? Object.values(speed.fight).find(({ c, s }) => c < s) : freak[0];
+            if (tpInfo) {
+                tpInfo = freak.find(({ id }) => tpInfo.id === id)
+            }
+            return tpInfo || {
                 address: tp,
-                addressName: tp ? GrandTable.getGrandName(tp) : ''
+                addressName: tp ? GrandTable.getGrandName(tp) : '',
             }
         }
         // 未完成 且 对话任务 
