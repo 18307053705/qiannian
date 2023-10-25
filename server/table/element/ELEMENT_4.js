@@ -23,12 +23,13 @@ const ELEMENT_4 = {
         cs: "g_b_u",
         path: '/jackpotDay'
     },
-    // 44: {
-    //     id: 44,
-    //     name: "在线时间抽奖...",
-    //     type: 4,
-    //     cs: "g_b_u",
-    // },
+    44: {
+        id: 44,
+        name: "千年古树",
+        type: 4,
+        cs: "g_b_u",
+        path: '/qianNianGuShu'
+    },
     45: {
         id: 45,
         name: "全民冲级中...",

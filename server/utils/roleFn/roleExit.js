@@ -41,8 +41,7 @@ module.exports = {
             const main = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.main);
             const chance = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.chance);
             const copy = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy);
-            console.log(tasksUpdata(main), '  tasksUpdata(main)...');
-            RoleG.updataRoleGlobal(req, res, { task_pool: tasksUpdata(main) })
+            RoleG.updataRoleGlobal(req, res, { task_pool: [...tasksUpdata(main), ...tasksUpdata(chance), ...tasksUpdata(copy)] });
             const { role_id, socialize_pool } = roleInfo;
             // 释放全局地图缓存
             GrandG.deleteDirGlobal(req, res);
@@ -56,7 +55,6 @@ module.exports = {
             KnapsackG.deleteknapsackGlobal(req, res, role_id);
             // 释放全局宠物信息
             PetG.savePetSql(req, res);
-
             // 释放全局角色缓存,必须最后释放,其余缓存皆是基于role_id
             RoleG.deleteRoleGlobal(req, res, user);
             // delete Global.dir[role_id];
