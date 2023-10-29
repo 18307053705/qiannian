@@ -5,7 +5,7 @@ const DOME_FREAK = {
   level: 1, // 等级
   tag: 1, // 默认1,怪物标签(1:普通地图怪,2:副本任务怪)
   type: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷)
-  attr: 1, // 默认0.5，属性增幅
+  attr: 1, // 默认1，属性增幅
   grade: 1, // 默认1，怪物品阶(1:普通,2:精英,3:boss)
   pet: true, // 默认false，是否可捕获
   rank: true, // 默认false，是否可组队
@@ -143,13 +143,15 @@ const ELEMENT_2 = {
     level: 1,
     pet: true,
     article: '1',
+    creatNum: 2,
   },
   21: {
     id: 21,
-    name: "山贼小头目",
+    name: "山贼头目",
     type: 2,
-    level: 2,
+    level: 3,
     pet: true,
+    creatNum: 2,
   },
   22: {
     id: 22,
@@ -157,15 +159,15 @@ const ELEMENT_2 = {
     type: 2,
     level: 5,
     pet: true,
-    rank: true,
-    article: '1-20,2-20,3',
+    creatNum: 3
   },
   23: {
     id: 23,
     name: "大当家",
     type: 2,
     level: 5,
-    grade: 1,
+    attr: 2,
+    num: 1
   },
   24: {
     id: 24,
@@ -384,6 +386,123 @@ const ELEMENT_2 = {
     integral: 10,
     num: 1,
   },
+  229: {
+    id: 229,
+    name: "魔化大当家",
+    grade: 2,
+    type: 2,
+    level: 5,
+    attr: 1.5,
+    num: 1,
+  },
+  230: {
+    id: 230,
+    name: "妖族探子",
+    type: 2,
+    level: 10,
+  },
+  231: {
+    id: 231,
+    name: "仙族探子",
+    type: 2,
+    level: 10,
+    num: 1,
+  },
+  232: {
+    id: 232,
+    name: "人族探子",
+    type: 2,
+    level: 10,
+  },
+  233: {
+    id: 233,
+    name: "孤魂",
+    type: 2,
+    level: 10,
+    equip: '6-75',
+  },
+  234: {
+    id: 234,
+    name: "野鬼",
+    type: 2,
+    level: 10,
+    equip: '7-75',
+  },
+  235: {
+    id: 235,
+    name: "皮皮猴",
+    type: 2,
+    level: 10,
+    equip: '8-75',
+  },
+  236: {
+    id: 236,
+    name: "树妖",
+    type: 2,
+    level: 10,
+    equip: '9-75',
+  },
+  237: {
+    id: 237,
+    name: "赤炎蜘蛛",
+    type: 2,
+    level: 15,
+    article: '313-1-80',
+    equip: '10-75',
+  },
+  238: {
+    id: 238,
+    name: "灵异小妖",
+    type: 2,
+    level: 15,
+    article: '312-1-80',
+    equip: '214-50,215-50',
+  },
+  239: {
+    id: 239,
+    name: "大泽腾蛇",
+    type: 2,
+    level: 20,
+    equip: '11-50,16-50,21-50',
+  },
+  240: {
+    id: 240,
+    name: "金鳄鱼",
+    type: 2,
+    level: 20,
+    equip: '12-50,17-50,22-50',
+  },
+  241: {
+    id: 241,
+    name: "黑白圣熊",
+    type: 2,
+    level: 20,
+    equip: '13-50,18-50,23-50',
+  },
+  242: {
+    id: 242,
+    name: "大地圣熊",
+    type: 2,
+    level: 20,
+    equip: '14-50,18-50,24-50',
+  },
+  243: {
+    id: 243,
+    name: "迷雾血蚊",
+    type: 2,
+    level: 20,
+    equip: '15-50,19-50,25-50',
+  },
+  244: {
+    id: 244,
+    name: "迷雾蛟蛇",
+    type: 2,
+    level: 20,
+    equip: '212-35,213-35',
+  },
+
+
+
   20000001: {
     id: 20000001,
     name: "深渊怪(深渊模怪物占位)",
@@ -400,7 +519,7 @@ module.exports = {
    */
   getFreak: function (id) {
     if (ELEMENT_2[id]) {
-      const { tag = 1, type = 1, attr = 0.5, grade = 1, num = -1, ...freak } = JSON.parse(JSON.stringify(ELEMENT_2[id]));
+      const { tag = 1, type = 1, attr = 1, grade = 1, num = -1, ...freak } = JSON.parse(JSON.stringify(ELEMENT_2[id]));
       return {
         ...freak,
         tag,

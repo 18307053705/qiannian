@@ -14,7 +14,10 @@ module.exports = {
         const equip = equipFn.getEquipInfo(equipId);
         res.send({
             code: 0,
-            data: equipFn.getMakeInfo(equip)
+            data: {
+                ...equipFn.getMakeInfo(equip),
+                equip
+            }
         })
     }
 };

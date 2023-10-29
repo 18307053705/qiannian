@@ -44,8 +44,8 @@ module.exports = {
             }
             //  遍历结束还存在物品奖励，说明物品为新增
             Object.keys(artReward).forEach(key => {
-                const { id, type, n, s, num2 } = artReward[key];
-                data.push({ id, n, p: type, s: num2 || s });
+                const { id, type, p, n, s, num2 } = artReward[key];
+                data.push({ id, n, p: type || p, s: num2 || s });
                 delete artReward[key];
             })
         }

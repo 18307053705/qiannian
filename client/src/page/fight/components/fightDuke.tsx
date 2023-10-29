@@ -57,16 +57,17 @@ const FightPercent = ({ percent, color = 'red' }) => {
 
 
 const FightDuke = ({ dirClick, fight, setPanel }) => {
-    const { buffs, players, player, rivals, roundText={} } = fight;
+    const { buffs, players, player, rivals, roundText = {} } = fight;
     const artList1 = player.art.slice(0, 3);
     const artList2 = player.art.slice(3, 6);
     const artList3 = player.art.slice(6, 9);
     const rivalAttr = getAttrIfno(rivals);
     const playerAttr = getAttrIfno(players);
-    const { dps, pet_dps, drain_life, restore_life, drain_mana, restore_mana } = roundText;
+    const { dps, pet_dps, drain_life, restore_life, drain_mana, restore_mana, message } = roundText;
 
     return (
         <div className="duke">
+            <div>{message}</div>
             {/* 技能栏1 */}
             <div>{art(dirClick, artList1)}</div>
             {/* 敌方状态 */}

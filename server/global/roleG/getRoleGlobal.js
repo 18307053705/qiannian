@@ -26,7 +26,6 @@ module.exports = {
      * @returns {*} socialize_pool:势力池({gang(帮会):{nam:名称,id},intersect(庄园):{nam:名称,id},ranks(队伍):{nam:名称,id}})
      * @returns {*} skill_pool:技能与战斗设置({art(技能池):[],fight(战斗设置):[]})
      * @returns {*} task_pool:[{p,id,f,s}]id:任务id,p:任务类型,f:任务杀怪进度{freakId:c},s:任务状态(0:未接,1:进行中,2:可完成,3:已完成)
-     * @returns {*} can_task_pool:可接任务
      * @returns {*} role_attr:角色属性({base:基础属性，addition额外属性(装备，宠物，丹药，潜力，境界，vip)})
      * @returns {*} role_buff:buff池({"attr":{ e:effect,d:结束时间  },"vip":{ key:id,d:结束时间  }})
      * @returns {*} role_integral:{exploit:功勋,gang:帮会,world:世界,intersect:结义,shenZhuang:神装}

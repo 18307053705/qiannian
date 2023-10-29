@@ -25,7 +25,7 @@ module.exports = {
             tNpc.taskId = id;
             tNpc.path = '/taskScene';
             tNpc.dir = tNpc.id;
-            tNpc.addressName = GrandTable.getGrandName(npc.address);
+            tNpc.addressName = GrandTable.getGrandName(tNpc.address);
         }
         grand.freak = freak.map((itme) => {
             return {

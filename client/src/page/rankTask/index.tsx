@@ -21,7 +21,7 @@ export const RankTask = () => {
     if (!taskInfo) {
         return null;
     }
-    const { tNpc, task, role_id } = taskInfo;
+    const { tNpc, task, role_id }:any = taskInfo;
     const { receive, title, status, done } = task;
     const prefix = ({ id, s, c, name, text, role }) => {
         const treat = s > c;

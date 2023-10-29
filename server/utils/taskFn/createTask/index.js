@@ -38,7 +38,7 @@ module.exports = {
             getGrand(grand, type, id);
         }
         // 完成条件解析
-        if (complete || grand.freak) {     
+        if (complete || grand.freak) {
             task.complete = getComplete(complete, grand);
         }
 

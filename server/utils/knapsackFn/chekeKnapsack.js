@@ -33,7 +33,7 @@ module.exports = {
         }
         // 可能某物品直接不存在
         if (JSON.stringify(articles) !== '{}') {
-            Object.keys(articles).forEach((itme) => {
+            Object.values(articles).forEach((itme) => {
                 if (!exist[itme.id]) {
                     exist[itme.id] = {
                         ...itme,

@@ -25,6 +25,7 @@ module.exports = {
         if (role.mana < d) {
             roundText.message = '法力不足！';
             FightG.updataFightMapGlobal(req, res, { roundText });
+            attack(req, res, 100, 1);
             return;
         }
 

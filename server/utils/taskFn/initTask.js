@@ -32,8 +32,8 @@ module.exports = {
         if (dailys.lianHunDong && !copyTaskIds[1]) {
             createTask(req, res, TASK_TYPE_MEUN.copy, 1);
         }
-        if (dailys.heiJiaoYu && !copyTaskIds[2]) {
-            createTask(req, res, TASK_TYPE_MEUN.copy, 2);
-        }
+        // if (dailys.heiJiaoYu && !copyTaskIds[2]) {
+        //     createTask(req, res, TASK_TYPE_MEUN.copy, 2);
+        // }
     }
 }

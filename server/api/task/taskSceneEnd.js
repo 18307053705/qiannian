@@ -56,7 +56,7 @@ module.exports = {
                 TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
             }
         }
-       
+
         // 任务未结束
         if (task.status !== 3) {
             res.send({
@@ -97,6 +97,6 @@ module.exports = {
             return;
         }
         // 否则传送至领取任务npc位置
-        grandFn.tpDirUpdate(req, res, grand.npc.address)
+        grandFn.tpDirUpdate(req, res, nextNpc.address)
     }
 }

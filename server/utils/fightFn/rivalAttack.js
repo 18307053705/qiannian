@@ -10,12 +10,13 @@ module.exports = {
     rivalAttack: function (req, res) {
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { roundAttr, roundText, type } = fightMap;
+
         if (type !== 1 && type !== 2) {
             return;
         }
 
         const { role, rival } = roundAttr;
-        const dps = computeFightDps(rival.attr, role.attr);
+        const dps = computeFightDps(rival.attr, role.attr) * (rival.num > 3 ? 3 : rival.num);
         if (dps) {
             role.life = role.life - dps > 0 ? role.life - dps : 0;
         }

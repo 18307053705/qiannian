@@ -35,7 +35,7 @@ function getGrand(address) {
         });
     }
     if (data[x - 1] && Boolean(data[x - 1][y])) {
-        const { n } = data[x - 11][y]
+        const { n } = data[x - 1][y]
         direction.push({
             lable: "南",
             value: `${n || name}(${x},${y + 1}) ↓`,

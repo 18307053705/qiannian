@@ -1,17 +1,22 @@
 
 const { GrandTable } = require('../../table');
 const { tpDirUpdate } = require('../grandFn/tpDirUpdate');
+const { speedTask } = require('./speedTask');
 
 module.exports = {
     getTaskTPInfo: function (req, res, task) {
-        const { type, grand, status, tp, speed } = task;
+        const { type, grand, status, tp } = task;
         const { npc, tNpc, freak = [] } = grand || {};
         // 未接任务
         if (status === 0) {
-            return npc
+            return npc;
         }
         // 未完成 且 战斗任务
         if (status === 1 && type === 1) {
+            const speed = speedTask(req, res, task);
+            if (speed.done) {
+                return tNpc || npc;
+            }
             let tpInfo = speed ? Object.values(speed.fight).find(({ c, s }) => c < s) : freak[0];
             if (tpInfo) {
                 tpInfo = freak.find(({ id }) => tpInfo.id === id)
@@ -19,21 +24,25 @@ module.exports = {
             return tpInfo || {
                 address: tp,
                 addressName: tp ? GrandTable.getGrandName(tp) : '',
-            }
+            };
         }
         // 未完成 且 对话任务 
         if (status === 1 && type === 2) {
-            return tNpc || npc
+            return tNpc || npc;
         }
         // 未完成 且 收集任务
         if (status === 1 && type === 3) {
+            const speed = speedTask(req, res, task);
+            if (speed.done) {
+                return tNpc || npc;
+            }
             return {
                 address: tp,
                 addressName: GrandTable.getGrandName(tp)
-            }
+            };
         }
         if (status === 2 || status === 3) {
-            return tNpc || npc
+            return tNpc || npc;
         }
     },
     /**

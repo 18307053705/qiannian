@@ -33,6 +33,7 @@ module.exports = {
             })
             // 计算下级所需经验
             upExp = computeUpExp(role_level);
+            res.customSuccess = `恭喜玩家升到${role_level}级。`
         }
         const update = {
             role_exp: `${current}/${upExp}`,

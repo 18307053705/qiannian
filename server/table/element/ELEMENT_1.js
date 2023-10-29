@@ -39,13 +39,8 @@ const ELEMENT_1 = {
     },
     17: {
         id: 17,
-        name: "魔族强者",
+        name: "百晓生",
         type: 1,
-        ext: {
-            career: 1,
-            level: 1,
-            attr: 1,
-        }
     },
     18: {
         id: 18,
@@ -65,7 +60,16 @@ const ELEMENT_1 = {
         type: 1,
         jyd: 1
     },
-    
+    111: {
+        id: 111,
+        name: "唐三彩",
+        type: 1,
+    },
+    112: {
+        id: 112,
+        name: "小红",
+        type: 1,
+    },
     // 1000007: {
     //     id: 1000007,
     //     name: "魔族强者",

@@ -13,12 +13,17 @@ module.exports = {
      */
     drugDir: function (req, res, drugId) {
         const { fightMap } = FightG.getFightGlobal(req, res);
-        const { roundText, player,roundAttr } = fightMap;
+        const { roundText, player, roundAttr } = fightMap;
         let success = false;
+        let drugInfo = undefined;
         const newArt = player.art.map((itme) => {
             if (itme.p === 2 && itme.id === drugId) {
+                if (drugInfo) {
+                    return drugInfo;
+                }
                 itme.s -= 1;
                 success = true;
+                drugInfo = itme;
             }
             return itme;
         })

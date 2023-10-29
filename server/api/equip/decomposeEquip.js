@@ -24,7 +24,7 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { data } = KnapsackG.getknapsackGlobal(req, res);
+        const { data, } = KnapsackG.getknapsackGlobal(req, res);
         const equip = data[in_x] || {};
         if (equip['p'] !== 3) {
             res.send({
@@ -59,6 +59,16 @@ module.exports = {
         } else {
             materiaNum = forge > 10 ? forge : 5;
         }
+
+        if(!materiaNum){
+            res.send({
+                code: 0,
+                success: `分解成功,获得银两x${materiaNum}`
+            })
+            return;
+        }
+
+
         const materialIds = materialMap[materiaLevel];
         // 全职使用玄石
         const id = materialIds[career ? career - 1 : 0];

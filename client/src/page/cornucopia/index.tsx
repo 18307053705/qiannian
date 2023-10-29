@@ -43,17 +43,17 @@ const getExp = (lx, exp) => {
 }
 
 export const Cornucopia = ({ history }) => {
-    const [materialMap, setMaterialMap] = useState();
-    const [materialType, setMaterialType] = useState('')
+    const [materialMap, setMaterialMap]: any = useState();
+    const [materialType, setMaterialType]:any = useState('')
     const [materialList, setMaterialList]: any = useState([]);
-    const [results, setResults] = useState('');
-    const [valMap, setValMap] = useState(JSON.parse(JSON.stringify(initValMap)));
-    const [data, setData] = useState();
+    const [results, setResults]: any = useState('');
+    const [valMap, setValMap]: any = useState(JSON.parse(JSON.stringify(initValMap)));
+    const [data, setData]: any = useState();
     const updata = (text = '') => {
         Promise.all([getCornucopia(), getMaterial()]).then((reslist) => {
             const [cornucopiaRes, materialRes] = reslist;
             const { material, list } = materialRes.data;
-            const materialMap = initMaterial();
+            const materialMap: any = initMaterial();
             list.forEach((itme) => {
                 const ele = material[itme.id]
                 if (ele) {

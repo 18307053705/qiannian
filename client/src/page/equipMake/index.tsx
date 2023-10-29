@@ -75,7 +75,7 @@ export const GangEquip = ({ history }) => {
                         <div key={id}>
                             <div>
                                 <span className='g_u'><span onClick={() => { getMaterialInfo(id) }}>【{name}】</span></span>
-                                <span className='g_u_end' onClick={() => { makeEquip({ equipId: id }) }}>打造</span>
+                                <span className='g_u_end' onClick={() => { makeEquip({ equipId: id, type: 1 }) }}>打造</span>
                             </div>
                             {material === id && <MakeInfo material={materialInfo} />}
                         </div>

@@ -117,19 +117,25 @@ const ELEMENT_4 = {
     },
     418: {
         id: 418,
-        name: "庄园传送阵",
+        name: "帮会管理",
         type: 4,
+        path: '/socialize',
+        state: { type: 1 }
     },
     419: {
         id: 419,
+        name: "庄园管理",
+        type: 4,
+        path: '/socialize',
+        state: { type: 2 }
+    },
+    420: {
+        id: 420,
         name: "队伍管理",
         type: 4,
+        path: '/socialize',
+        state: { type: 3 }
     },
-    // 420: {
-    //     id: 420,
-    //     name: "情缘之地",
-    //     type: 4,
-    // },
     421: {
         id: 421,
         name: "洞天福地",
@@ -247,6 +253,12 @@ const ELEMENT_4 = {
         name: "上古战场",
         type: 4,
         path: '/zhanChang',
+    },
+    441: {
+        id: 441,
+        name: "炼器炉",
+        type: 4,
+        path: '/equipFreeForge'
     },
 };
 module.exports = {

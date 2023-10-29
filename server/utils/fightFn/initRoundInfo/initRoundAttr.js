@@ -31,7 +31,13 @@ module.exports = {
         const rival = {};
         // 人机对战
         if (type === 1 || type === 2) {
-            rival['list'] = rivals.map(({ attr }) => ({ life: attr.life, life_max: attr.life_max, mana: attr.mana, mana_max: attr.mana_max }));
+            rival['num'] = 0;
+            rival['list'] = rivals.map(({ attr }) => {
+                if (attr.life > 0) {
+                    rival['num'] += 1;
+                }
+                return { life: attr.life, life_max: attr.life_max, mana: attr.mana, mana_max: attr.mana_max };
+            });
             rival['attr'] = randomAttr(rivals[0].attr);
         }
         // 玩家对战

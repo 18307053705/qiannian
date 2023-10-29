@@ -1,37 +1,32 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
+import { makeEquip } from '@cgi/equip';
 const CAREER_MEUN = {
     1: '法皇,星君,血煞',
     2: '战尊,战神,战狂',
     3: '羽圣,剑仙,赤魅',
 }
 
-const MAKE_MEUN = {
-    1: '世界声望',
-    2: '世界功勋',
-    3: '帮会声望',
-}
-
 export const MakeInfo = ({ material }: any) => {
-    const { equip, materiaInfo, makeNum, make } = material;
-    let text: any[] = [];
-    if (materiaInfo) {
-        text = Object.values(materiaInfo).map(({ n, s }: any) => `${n}x${s}`)
-    }
-    if (makeNum && MAKE_MEUN[make]) {
-        text.push(`${MAKE_MEUN[make]}x${makeNum}`)
-    }
+    const { equip, article, yuanbao, integral } = material;
+    const list = useMemo(() => {
+        const text: string[] = Object.values(article || {}).map(({ n, s }: any) => `${n}x${s}`);
+        text.push(`${integral.name}x${integral.value}`);
+        return text;
+    }, [integral, article])
+    const { level, career, attr, id } = equip;
     return (
         <div>
-            <div><span>装备等级：{equip.level}级</span></div>
-            <div><span>装备职业：{CAREER_MEUN[equip.career] || "全职"}</span></div>
+            <div><span>装备等级：{level}级</span></div>
+            <div><span>装备职业：{CAREER_MEUN[career] || "全职"}</span></div>
             {
-                Object.keys(equip.attr).map((key) => (
-                    <div key={key}>{key}：{equip.attr[key]}</div>
+                Object.keys(attr).map((key) => (
+                    <div key={key}>{key}：{attr[key]}</div>
                 ))
             }
-            <span>打造材料:{text.join(',')}</span>
+            <div><span className='g_u_end' onClick={() => { makeEquip({ equipId: id, type: 1 }) }}>【消耗材料{list.join(',')}】</span></div>
+            <div><span className='g_u_end' onClick={() => { makeEquip({ equipId: id, type: 2 }) }}>【消耗{yuanbao}元宝直接打造】</span></div>
+            <div>--------------------------------</div>
         </div>
     )
-
 }

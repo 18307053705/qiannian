@@ -116,11 +116,13 @@ const Root = () => {
         <div>
             {/* 系统公告 */}
             <div>{systemText(system)}</div>
+            
             {/* 请求成功信息 */}
             <div className='g_success'>{success}</div>
             {
                 listText.map((text, index) => <div key={index}>{text}</div>)
             }
+             <div>{customSuccess}</div>
             {/* 请求失败信息 */}
             {error && <div className='g_error'>提示：{error}</div>}
             <div>{

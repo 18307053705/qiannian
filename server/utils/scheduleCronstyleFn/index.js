@@ -6,17 +6,17 @@ const roleFn = require("../roleFn");
 const time = 6000000;
 // const time = 5000;
 // 定时清除长时间不访问的角色全局空间
-setInterval(() => {
-    const roles = RoleG.ROLE_Global;
-    Object.keys(roles).forEach(user => {
-        const role = roles[user];
-        // 超过十分钟不访问的角色,释放对应全局空间
-        if (new Date() * 1 - role.time > time) {
-            roleFn.roleExit({ cookies: { q_uid: user } }, { asyncQuery: mysql.asyncQuery }, user);
-        }
-    })
+// setInterval(() => {
+//     const roles = RoleG.ROLE_Global;
+//     Object.keys(roles).forEach(user => {
+//         const role = roles[user];
+//         // 超过十分钟不访问的角色,释放对应全局空间
+//         if (new Date() * 1 - role.time > time) {
+//             roleFn.roleExit({ cookies: { q_uid: user } }, { asyncQuery: mysql.asyncQuery }, user);
+//         }
+//     })
 
-}, time)
+// }, time)
 
 // 每分钟的第30秒触发： '30 * * * * *'
 

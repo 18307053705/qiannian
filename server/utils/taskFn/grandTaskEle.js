@@ -1,4 +1,5 @@
 const { TaskG } = require('../../global');
+const { speedTask } = require('./speedTask');
 const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     grandTaskEle: function (req, res, address, eleList, eleDir) {
@@ -10,7 +11,8 @@ module.exports = {
         Object.keys(tasksMap).forEach((type) => {
             const tasks = tasksMap[type];
             if (tasks) {
-                Object.values(tasks).forEach(({ grand, complete, status, title, id }) => {
+
+                Object.values(tasks).forEach(({ grand, complete, status, title, id, }) => {
                     if (status === 3) {
                         TaskG.deleteTaskGlobal(req, res, type, id);
                         return;
@@ -26,8 +28,18 @@ module.exports = {
                         }
                     }
                     const ele = tNpc || npc;
-                    // 任务且为对话任务 
-                    if ((status === 1 || status === 2) && ele.address === address) {
+
+                    if (status === 1 && ele.address === address) {
+                        const { done } = freak.length ? speedTask(req, res, { complete, grand }) : { done: true };
+                        if (done) {
+                            // 加入指令列表
+                            eleDir[ele.id] = ele;
+                            // 加入元素列表
+                            npcEle.push({ name: ele.name, cs: 'g_doubt', dir: ele.id });
+                        }
+
+                    }
+                    if (status === 2 && ele.address === address) {
                         // 加入指令列表
                         eleDir[ele.id] = ele;
                         // 加入元素列表
@@ -47,6 +59,8 @@ module.exports = {
                             }
                         })
                     }
+
+
                 })
             }
         })

@@ -3,7 +3,7 @@ const { releaseFight } = require("../../utils/fightFn/releaseFight");
 
 const { TASK_TYPE_MEUN } = TaskG;
 
-function tasksUpdata(tasks) {
+function tasksUpdata(tasks = {}) {
     return Object.values(tasks).map(({ complete = {}, id, taskType, status }) => {
         const task = {
             id,

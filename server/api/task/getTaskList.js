@@ -48,7 +48,8 @@ module.exports = {
             data: {
                 taskList,
                 task,
-                DAIL_TYPE_LIST
+                DAIL_TYPE_LIST,
+                tasks
             },
         })
 
