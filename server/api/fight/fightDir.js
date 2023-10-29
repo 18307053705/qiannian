@@ -19,6 +19,7 @@ module.exports = {
         }
         // 捉宠物
         if (p === 9 && id === 2) {
+            fightFn.catchPet(req, res)
             // fightRound.message = await fightFn.catchPet(req, res);
             // // 无返回即为捕捉成功
             // if (!fightRound.message) {

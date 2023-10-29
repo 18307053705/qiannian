@@ -15,10 +15,11 @@ module.exports = {
             drain_life: undefined,
             drain_mana: undefined,
             restore_life: undefined,
-            restore_mana: undefined
+            restore_mana: undefined,
+            resultPet: undefined,
         }
         // 计算buff
-        computeBuffs(req,res);
+        computeBuffs(req, res);
         // 回合属性
         const roundAttr = initRoundAttr(req, res);
         // 更新回合信息

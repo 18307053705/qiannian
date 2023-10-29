@@ -423,7 +423,7 @@ module.exports = {
         tips: "了解剑舞城的各个区域。",
         type: 2,
         reward: {
-            attr: "exp-1000",
+            attr: "exp-1500",
         },
         grand: {
             npc: {
@@ -457,7 +457,7 @@ module.exports = {
         tips: "跟着百晓生了解交易区。",
         type: 2,
         reward: {
-            attr: "exp-1000",
+            attr: "exp-1500",
         },
         grand: {
             npc: {
@@ -482,7 +482,7 @@ module.exports = {
         tips: "跟着百晓生了解住宅区。",
         type: 2,
         reward: {
-            attr: "exp-1000",
+            attr: "exp-1500",
         },
         grand: {
             npc: {
@@ -507,7 +507,7 @@ module.exports = {
         tips: "跟着百晓生了解异界裂缝。",
         type: 2,
         reward: {
-            attr: "exp-1000",
+            attr: "exp-1500",
         },
         grand: {
             npc: {
@@ -533,7 +533,7 @@ module.exports = {
         tips: "拎壶冲似乎遇到了危险，赶紧去剑舞城(1,1)看看。",
         type: 2,
         reward: {
-            attr: "exp-1000",
+            attr: "exp-1500",
         },
         grand: {
             npc: {
@@ -565,7 +565,7 @@ module.exports = {
         tips: "孤魂就在云荒大陆(1,2)，快去帮小红教训它们一顿吧。",
         type: 1,
         reward: {
-            attr: "exp-2000",
+            attr: "exp-3000",
         },
         grand: {
             npc: {
@@ -598,7 +598,7 @@ module.exports = {
         tips: "野鬼就在云荒大陆(1,2)，快去帮小红教训它们一顿吧。",
         type: 1,
         reward: {
-            attr: "exp-2000",
+            attr: "exp-3000",
         },
         grand: {
             npc: {
@@ -628,7 +628,7 @@ module.exports = {
         tips: "皮皮猴就在云荒大陆(1,3)，先去警告它们。",
         type: 1,
         reward: {
-            attr: "exp-2000",
+            attr: "exp-3000",
         },
         grand: {
             npc: {
@@ -658,7 +658,7 @@ module.exports = {
         tips: "树妖就在云荒大陆(1,3)，为了避免被它们偷袭最好先下手为强。",
         type: 1,
         reward: {
-            attr: "exp-2000",
+            attr: "exp-3000",
         },
         grand: {
             npc: {
@@ -691,7 +691,7 @@ module.exports = {
         tips: "找到灵异小妖，赶紧收集灵异水去剑舞城找唐三彩。",
         type: 3,
         reward: {
-            attr: "exp-2000",
+            attr: "exp-3000",
         },
         grand: {
             npc: {
@@ -704,7 +704,7 @@ module.exports = {
             },
         },
         complete: {
-            article: "312-5"
+            article: "312-2"
         },
         tp: "40000,0,3",
         receive: [
@@ -754,7 +754,7 @@ module.exports = {
         tips: "前往大泽谷寻找腾蛇血破解藏宝图中的秘密。",
         type: 3,
         reward: {
-            attr: "exp-3000",
+            attr: "exp-5000",
         },
         grand: {
             npc: {
@@ -763,7 +763,7 @@ module.exports = {
             }
         },
         complete: {
-            article: "312-5"
+            article: "313-2"
         },
         tp: "10002,0,0",
         replace: true,

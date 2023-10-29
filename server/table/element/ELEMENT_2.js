@@ -17,9 +17,6 @@ const DOME_FREAK = {
   equip: '1-50,2-50,3-50,4-50,5-50', // 默认无，掉落装备信息(id-s-rate)多个物品使用,分隔 id：装备ID,rate:概率
 }
 
-
-
-
 const TEST = {
   2999988: {
     id: 2999988,
@@ -420,6 +417,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 10,
     equip: '6-75',
+    pet: true,
   },
   234: {
     id: 234,
@@ -427,6 +425,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 10,
     equip: '7-75',
+    pet: true,
   },
   235: {
     id: 235,
@@ -434,6 +433,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 10,
     equip: '8-75',
+    pet: true,
   },
   236: {
     id: 236,
@@ -441,14 +441,15 @@ const ELEMENT_2 = {
     type: 2,
     level: 10,
     equip: '9-75',
+    pet: true,
   },
   237: {
     id: 237,
     name: "赤炎蜘蛛",
     type: 2,
     level: 15,
-    article: '313-1-80',
     equip: '10-75',
+    pet: true,
   },
   238: {
     id: 238,
@@ -457,48 +458,56 @@ const ELEMENT_2 = {
     level: 15,
     article: '312-1-80',
     equip: '214-50,215-50',
+    pet: true,
   },
   239: {
     id: 239,
     name: "大泽腾蛇",
     type: 2,
     level: 20,
-    equip: '11-50,16-50,21-50',
+    article: '313-1-80',
+    equip: '11-35,16-35,21-35',
+    pet: true,
   },
   240: {
     id: 240,
     name: "金鳄鱼",
     type: 2,
-    level: 20,
-    equip: '12-50,17-50,22-50',
+    level: 22,
+    equip: '12-35,17-35,22-35',
+    pet: true,
   },
   241: {
     id: 241,
     name: "黑白圣熊",
     type: 2,
-    level: 20,
-    equip: '13-50,18-50,23-50',
+    level: 24,
+    equip: '13-35,18-35,23-35',
+    pet: true,
   },
   242: {
     id: 242,
     name: "大地圣熊",
     type: 2,
-    level: 20,
-    equip: '14-50,18-50,24-50',
+    level: 26,
+    equip: '14-35,18-35,24-35',
+    pet: true,
   },
   243: {
     id: 243,
     name: "迷雾血蚊",
     type: 2,
-    level: 20,
-    equip: '15-50,19-50,25-50',
+    level: 28,
+    equip: '15-35,19-35,25-35',
+    pet: true,
   },
   244: {
     id: 244,
     name: "迷雾蛟蛇",
     type: 2,
-    level: 20,
-    equip: '212-35,213-35',
+    level: 30,
+    equip: '212-30,213-30',
+    pet: true,
   },
 
 

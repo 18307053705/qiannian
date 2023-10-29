@@ -12,6 +12,7 @@ const lingXue = require('./lingXue');
 const escapeFight = require('./escapeFight');
 const randomAttr = require('./initRoundInfo/randomAttr');
 const computeFightDps = require('./computeFightDps');
+const catchPet = require('./catchPet');
 
 
 module.exports = {
@@ -29,4 +30,5 @@ module.exports = {
     ...escapeFight,
     ...randomAttr,
     ...computeFightDps,
+    ...catchPet
 }

@@ -1,6 +1,6 @@
-const { KnapsackG, ErrorG } = require('../../global');
+const { KnapsackG, ErrorG, RoleG } = require('../../global');
 const { knapsackTable } = require('../../table');
-const { knapsackFn } = require('../../utils');
+const { knapsackFn, equipFn } = require('../../utils');
 
 const materialMap = {
     // 一阶玄石,一阶玉石,一阶云石 50
@@ -24,7 +24,7 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { data, } = KnapsackG.getknapsackGlobal(req, res);
+        const { data, tael } = KnapsackG.getknapsackGlobal(req, res);
         const equip = data[in_x] || {};
         if (equip['p'] !== 3) {
             res.send({
@@ -40,60 +40,73 @@ module.exports = {
             })
             return;
         }
-        const { level, career } = knapsackTable.getEquip(equip['id']);
+
+        const equipInfo = knapsackTable.getEquip(equip['id']);
+        const { level, career } = equipInfo;
         const [_, forge] = equip['ext'].split('_');
         let materiaLevel = 1;
         let materiaNum = 1;
+        let addTael = 100;
         if (level >= 50 && level < 70) {
             materiaLevel = 2;
+            addTael *= 1000;
         }
         if (level >= 70 && level < 80) {
             materiaLevel = 3;
+            addTael *= 5000;
         }
         if (level >= 80) {
             materiaLevel = 4;
+            addTael *= 10000;
         }
         // 小于35的装备可以免费锻造,所有必须10次锻造之后才可分解出石头
         if (level < 35) {
             materiaNum = forge > 10 ? forge - 10 : 0;
+            addTael *= level;
         } else {
             materiaNum = forge > 10 ? forge : 5;
         }
-
-        if(!materiaNum){
-            res.send({
-                code: 0,
-                success: `分解成功,获得银两x${materiaNum}`
-            })
-            return;
-        }
-
-
-        const materialIds = materialMap[materiaLevel];
-        // 全职使用玄石
-        const id = materialIds[career ? career - 1 : 0];
-        const { n, type } = knapsackTable.getArticle(id);
-        const artReward = {
-            [id]: {
-                id,
-                n,
-                s: materiaNum,
-                p: type
+        let list = data;
+        const success = [];
+        if (materiaNum) {
+            success.push(`${n}x${materiaNum}`);
+            const materialIds = materialMap[materiaLevel];
+            // 全职使用玄石
+            const id = materialIds[career ? career - 1 : 0];
+            const { n, type } = knapsackTable.getArticle(id);
+            const artReward = {
+                [id]: {
+                    id,
+                    n,
+                    s: materiaNum,
+                    p: type
+                }
             }
+            const { message, data: newData } = knapsackFn.addArticle({ artReward }, data);
+            if (message) {
+                res.send({
+                    code: 0,
+                    message
+                })
+                return;
+            }
+            list = newData;
         }
-        const { message, data: newData } = knapsackFn.addArticle({ artReward }, data);
-        if (message) {
-            res.send({
-                code: 0,
-                message
-            })
-            return;
+        const { integral } = equipFn.getMakeInfo(equipInfo) || {};
+        if (integral) {
+            const { role_integral } = RoleG.getRoleGlobal(req, res);
+            role_integral[integral.key] += integral.value;
+            RoleG.updataRoleGlobal(req, res, { role_integral });
+            success.push(`${integral.name}+${integral.value}`);
         }
-        newData.splice(in_x, 1)
-        KnapsackG.updateknapsackGlobal(req, res, { data: newData });
+
+        // 删除对应装备
+        list.splice(in_x, 1);
+        KnapsackG.updateknapsackGlobal(req, res, { data: list, tael: tael + addTael });
+        success.push(`银两+${addTael}`);
         res.send({
             code: 0,
-            success: `分解成功,获得${n}x${materiaNum}`
+            success: `分解成功获得${success.join(',')}。`
         })
     }
 };

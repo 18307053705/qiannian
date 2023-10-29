@@ -10,7 +10,7 @@ const Result = ({ fight, fightInfoChang }) => {
         creatFight({ iscContinue: true }).then(fightInfoChang)
     }, [])
     const { state, template, reward = {}, continue: iscContinue, type, escape } = fight;
-    const { tasks, textReward = [], exp, tael, petMsg, tip } = reward;
+    const { tasks, textReward = [], exp, tael, tip, pet } = reward;
 
     if (state === 3) {
         return (
@@ -66,7 +66,7 @@ const Result = ({ fight, fightInfoChang }) => {
             }
             <div>获得经验：{exp}</div>
             <div>获得银两：{tael}</div>
-            <div>{petMsg}</div>
+            <div>{pet}</div>
             {textReward.map((text, index) => <div key={index}>{text}</div>)}
             <span className="g_u_end" onClick={exitFight}>返回游戏</span>
         </div>
