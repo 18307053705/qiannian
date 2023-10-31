@@ -69,7 +69,6 @@ module.exports = {
         let list = data;
         const success = [];
         if (materiaNum) {
-            success.push(`${n}x${materiaNum}`);
             const materialIds = materialMap[materiaLevel];
             // 全职使用玄石
             const id = materialIds[career ? career - 1 : 0];
@@ -91,6 +90,7 @@ module.exports = {
                 return;
             }
             list = newData;
+            success.push(`${n}x${materiaNum}`);
         }
         const { integral } = equipFn.getMakeInfo(equipInfo) || {};
         if (integral) {
@@ -103,7 +103,7 @@ module.exports = {
         // 删除对应装备
         list.splice(in_x, 1);
         KnapsackG.updateknapsackGlobal(req, res, { data: list, tael: tael + addTael });
-        success.push(`银两+${addTael}`);
+        success.push(`银两x${addTael}`);
         res.send({
             code: 0,
             success: `分解成功获得${success.join(',')}。`

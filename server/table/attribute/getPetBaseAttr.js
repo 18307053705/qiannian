@@ -44,7 +44,7 @@ module.exports = {
                 life_max: 18,
                 mana: 12,
                 mana_max: 12,
-                atk_max: 0.1,
+                atk_max: 1,
                 atk_min: 0.8,
                 dfs_max: 0.4,
                 dfs_min: 0.2,

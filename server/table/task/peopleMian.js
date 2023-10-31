@@ -7,6 +7,7 @@
 //  reward.article id-s,多个物品使用,分隔
 //  reward.equip id-s,多个装备使用,分隔
 //  reward.tael 银两奖励tael:100
+//  reward.yuanbao 元宝奖励yuanbao:100
 //  reward.attr 属性奖励('经验:exp-1000,声望:world-100,帮会声望:gang-100,结义声望:intersect-100,功勋:exploit-100')
 //  grand 地图信息
 //  grand.npc 领取任务npc{address,id}
@@ -852,7 +853,7 @@ module.exports = {
         reward: {
             attr: "exp-5000",
             tael: 2000,
-            article: "106-5,107-5,108-5",
+            article: "106-5,110-5,114-5",
         },
         grand: {
             npc: {
@@ -885,7 +886,7 @@ module.exports = {
         type: 1,
         reward: {
             attr: "exp-5000",
-            article: "106-5,107-5,108-5",
+            article: "106-5,110-5,114-5",
         },
         grand: {
             npc: {
@@ -916,7 +917,7 @@ module.exports = {
         type: 1,
         reward: {
             attr: "exp-5000",
-            article: "106-5,107-5,108-5",
+            article: "106-5,110-5,114-5",
         },
         grand: {
             npc: {
@@ -949,7 +950,7 @@ module.exports = {
         type: 1,
         reward: {
             attr: "exp-5000",
-            article: "106-10,107-10,108-10",
+            article: "106-10,110-10,114-10",
         },
         grand: {
             npc: {
@@ -986,7 +987,7 @@ module.exports = {
             attr: "exp-10000",
             tael: 20000,
             yuanbao: 200,
-            article: "3-100,4-100,106-20,107-20,108-20",
+            article: "3-100,4-100,106-10,110-10,114-10",
         },
         grand: {
             npc: {
@@ -1046,7 +1047,7 @@ module.exports = {
         tips: "前往云荒大陆赤炎蛛丝伪造藏宝图分散妖族与仙族的注意。",
         type: 3,
         reward: {
-            attr: "exp-3000",
+            attr: "exp-5000",
         },
         grand: {
             npc: {
@@ -1078,7 +1079,7 @@ module.exports = {
         tips: "将伪造的藏宝图送给隐藏在剑舞城的仙族探子。",
         type: 2,
         reward: {
-            attr: "exp-3000",
+            attr: "exp-5000",
             tael: 1000,
         },
         grand: {
@@ -1106,7 +1107,7 @@ module.exports = {
         tips: "将伪造的藏宝图送给隐藏在剑舞城的妖族探子。",
         type: 2,
         reward: {
-            attr: "exp-3000",
+            attr: "exp-5000",
         },
         grand: {
             npc: {
@@ -1133,7 +1134,7 @@ module.exports = {
         tips: "一切准备就绪，前往无妄海与拎壶冲汇合。",
         type: 2,
         reward: {
-            attr: "exp-3000",
+            attr: "exp-5000",
         },
         grand: {
             npc: {
@@ -1142,19 +1143,45 @@ module.exports = {
             },
             tNpc: {
                 id: 10,
-                address: "10001,0,1",
+                address: "40001,0,1",
             }
         },
         receive: [
             "拎壶冲：好了，伪造的藏宝图已经送出去了，妖族与仙族估计接下来估计要想办法破解其中秘密。",
             "你：终于可以前往无妄海了。",
+            "拎壶冲：虽然现在妖族与仙族目光没有全部在我们身上，不过为了谨慎起见我们还是分开行动，我先去无妄海等你。",
+            "你：&好。",
+        ],
+        done: [
+            "拎壶冲：你来了，这无妄海似乎发生了巨变。",
+            "你：&又出事了?",
+        ],
+        nextId: 36,
+    },
+    36: {
+        id: 36,
+        title: "无妄海暴动",
+        tips: "一切准备就绪，前往无妄海与拎壶冲汇合。",
+        type: 2,
+        reward: {
+            attr: "exp-5000",
+        },
+        grand: {
+            npc: {
+                id: 10,
+                dress: "40001,0,1",
+            }
+        },
+        receive: [
+            "拎壶冲没有回答，只是指了指远处一片漆黑的大海。",
+            "你顺着拎壶冲所指方向看去，只见无妄海中竟然存在无数散发着地狱气息的骷髅亡灵。",
+            "你瞬：难道没有办法让它们安静。",
             "拎壶冲：虽然现在妖族与仙族目光没有全部在我们身上，不过为了谨慎起见，我们还是分开行动，我先去无妄海等你。",
             "你：&好。",
         ],
         done: [
             "拎壶冲：你来了，我们这运气似乎不太好。",
-            "你：为什么?",
-            "&继续",
+            "你：&又出事了?",
         ],
         nextId: 36,
     }

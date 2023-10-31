@@ -16,17 +16,18 @@ module.exports = {
         if (!reward) {
             return;
         }
-        const { article, tael, role } = reward;
+        const { article, tael = 0, role, yuanbao = 0 } = reward;
         if (reward) {
             const message = addKnapsack(req, res, { article });
             if (message) {
                 return message
             }
         }
-        if (tael) {
-            const { tael: oldTael } = KnapsackG.getknapsackGlobal(req, res);
-            KnapsackG.updateknapsackGlobal(req, res, { tael: oldTael + tael });
+        if (tael || yuanbao) {
+            const { tael: oldTael, yuanbao: oldYuanbao } = KnapsackG.getknapsackGlobal(req, res);
+            KnapsackG.updateknapsackGlobal(req, res, { tael: oldTael + tael, yuanbao: oldYuanbao + yuanbao });
         }
+
         if (role) {
             const { role_integral } = RoleG.getRoleGlobal(req, res);
             let isIntegral = false;

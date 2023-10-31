@@ -19,8 +19,8 @@ module.exports = {
     const { num } = currentDir;
     // 人机校验
     const isPve = (fightType === FIGHT_TYPE.pve || fightType === FIGHT_TYPE.rank) && num !== -1 && num === 0;
-    // 存在战斗 战斗状态为战斗中 且非刷怪 
-    if (fightMap && fightMap.state !== 0 && !iscContinue) {
+    // 存在战斗 战斗状态为战斗中 且非刷怪    
+    if (fightMap && fightMap.state === 0 && !iscContinue) {
       return;
     }
     if (isPve) {

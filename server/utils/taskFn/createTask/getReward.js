@@ -17,10 +17,10 @@ module.exports = {
      * @returns reward.text 奖励文案[]
      */
     getReward: function (rewards) {
-        if(!rewards){
+        if (!rewards) {
             return undefined;
         }
-        const { article, equip, tael, attr } = rewards;
+        const { article, equip, tael, attr, yuanbao } = rewards;
         const text = [];
         const reward = {};
         const articles = {};
@@ -38,7 +38,10 @@ module.exports = {
             reward['tael'] = tael;
             text.push(`银两x${tael}`);
         }
-
+        if (yuanbao) {
+            reward['yuanbao'] = yuanbao;
+            text.push(`元宝x${yuanbao}`);
+        }
         if (article) {
             const artReward = {};
             article.split(',').forEach((itme) => {

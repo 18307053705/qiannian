@@ -6,7 +6,7 @@ const { GrandG } = require("../../../global");
 //     name: "怪物名称",
 //     level: 1, // 等级
 //     tag: 1, // 默认1,怪物标签(1:普通地图怪,2:副本任务怪)
-//     type: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷)
+//     attrType: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷)
 //     attr: 1, // 默认0.5，属性增幅
 //     grade: 1, // 默认1，怪物品阶(1:普通,2:精英,3:boss)
 //     num: -1, // 默认无限，可击杀次数
@@ -27,10 +27,10 @@ module.exports = {
     creatFreak: function (req, res) {
         // 怪物模版
         const { currentDir: freakTemplate } = GrandG.getDirGlobal(req, res);
-        const { name, level, type, attr, grade, id, num: num_max, creatNum = 4 } = freakTemplate;
+        const { name, level, attrType, attr, grade, id, num: num_max, creatNum = 4 } = freakTemplate;
         // 生成怪物数量 1-4
         let num = Math.floor(Math.random() * creatNum) + 1;
-        const attrs = AttributeTable.getFreakBaseAttr(type);
+        const attrs = AttributeTable.getFreakBaseAttr(attrType);
         const addition = level * attr;
         Object.keys(attrs).forEach((key) => {
             attrs[key] *= addition;

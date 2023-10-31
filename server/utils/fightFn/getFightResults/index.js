@@ -26,7 +26,7 @@ module.exports = {
             code: 0,
             data,
             success: res.customSuccess,
-            dailys: DailysG.getDailysGlobal(req, res)
+            // dailys: DailysG.getDailysGlobal(req, res)
         })
 
     },

@@ -4,7 +4,7 @@ const DOME_FREAK = {
   name: "怪物名称",
   level: 1, // 等级
   tag: 1, // 默认1,怪物标签(1:普通地图怪,2:副本任务怪)
-  type: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷)
+  attrType: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷),
   attr: 1, // 默认1，属性增幅
   grade: 1, // 默认1，怪物品阶(1:普通,2:精英,3:boss)
   pet: true, // 默认false，是否可捕获
@@ -515,6 +515,7 @@ const ELEMENT_2 = {
     name: "骷髅剑客",
     type: 2,
     level: 32,
+    attr: 2,
     pet: true,
   },
   246: {
@@ -522,6 +523,8 @@ const ELEMENT_2 = {
     name: "骷髅刀客 ",
     type: 2,
     level: 32,
+    attr: 3,
+    attr: 2,
     pet: true,
   },
   247: {
@@ -529,6 +532,7 @@ const ELEMENT_2 = {
     name: "骷髅骑士",
     type: 2,
     level: 35,
+    attr: 3,
     pet: true,
   },
   248: {
@@ -536,6 +540,7 @@ const ELEMENT_2 = {
     name: "骷髅战士",
     type: 2,
     level: 35,
+    attr: 3,
     pet: true,
   },
   249: {
@@ -543,6 +548,7 @@ const ELEMENT_2 = {
     name: "骷髅护卫",
     type: 2,
     level: 38,
+    attr: 3,
     pet: true,
   },
   250: {
@@ -550,6 +556,7 @@ const ELEMENT_2 = {
     name: "骷髅精英",
     type: 2,
     level: 38,
+    attr: 3,
     pet: true,
   },
   251: {
@@ -558,6 +565,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 40,
     grade: 2,
+    attr: 4,
     pet: true,
   },
   252: {
@@ -565,6 +573,7 @@ const ELEMENT_2 = {
     name: "蚌精",
     type: 2,
     level: 50,
+    attr: 10,
     grade: 2,
   },
   253: {
@@ -572,6 +581,7 @@ const ELEMENT_2 = {
     name: "老龟",
     type: 2,
     level: 50,
+    attr: 10,
     grade: 2,
   },
   254: {
@@ -580,6 +590,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 50,
     grade: 2,
+    attr: 10,
   },
   255: {
     id: 255,
@@ -587,6 +598,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 50,
     grade: 2,
+    attr: 10,
   },
   256: {
     id: 256,
@@ -594,6 +606,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 50,
     grade: 2,
+    attr: 10,
   },
   257: {
     id: 257,
@@ -601,6 +614,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 50,
     grade: 2,
+    attr: 10,
   },
   258: {
     id: 258,
@@ -608,6 +622,7 @@ const ELEMENT_2 = {
     type: 2,
     level: 50,
     grade: 2,
+    attr: 10,
   },
   20000001: {
     id: 20000001,
@@ -625,13 +640,15 @@ module.exports = {
    */
   getFreak: function (id) {
     if (ELEMENT_2[id]) {
-      const { tag = 1, type = 1, attr = 1, grade = 1, num = -1, ...freak } = JSON.parse(JSON.stringify(ELEMENT_2[id]));
+      const { tag = 1, attrType = 1, attr = 1, grade = 1, num = -1, level, ...freak } = JSON.parse(JSON.stringify(ELEMENT_2[id]));
       return {
         ...freak,
         tag,
-        type, attr,
+        attrType,
+        attr,
         grade,
-        num
+        num,
+        level
       }
 
     }

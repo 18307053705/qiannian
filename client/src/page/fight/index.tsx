@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import { fightDir, creatFight } from '@cgi/fight';
+import { backGrand } from '@utils/grand';
 
 import FightDuke from './components/fightDuke';
 import FightResult from './components/fightResult';
@@ -36,7 +37,7 @@ const Fight = ({}) => {
     }
 
     if (!fight) {
-        return null;
+        return <div><span className="g_u_end" onClick={backGrand}>返回游戏</span></div>;
     }
     
     return (

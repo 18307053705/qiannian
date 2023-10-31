@@ -79,12 +79,12 @@ module.exports = {
         // 经验
         let exp = f_exp;
         if (exp === undefined) {
-            exp = (level * (grade === 3 ? 1000 : (grade === 2 ? 50 : 1))) * (vipExp || 1) * freakNum;
+            exp = Math.floor((level * (grade === 3 ? 1000 : (grade === 2 ? 50 : 1))) * (vipExp || 1) * freakNum);
         }
         // 银两
         let tael = f_tael;
         if (tael === undefined) {
-            tael = (exp < 100 ? exp : exp / 100) * (vipTael || 1) * freakNum;
+            tael = Math.floor((exp < 100 ? exp : exp / 100) * (vipTael || 1) * freakNum);
         }
 
         // 更新背包
@@ -111,7 +111,7 @@ module.exports = {
             petExp: player.pet ? `${player.pet.name}经验：${expText}` : '',
         }
         // 更新宠物经验等级
-        computePetLevel(req, res, exp, (islevel, update,) => {
+        computePetLevel(req, res, exp, (islevel, update, name) => {
             if (islevel) {
                 reward['petLevel'] = `${name}升到${update.level}级。`;
             }

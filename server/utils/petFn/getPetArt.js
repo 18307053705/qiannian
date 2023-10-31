@@ -16,7 +16,8 @@ module.exports = {
         }
 
         const rating = getPetRating(flair_x);
-        const { v, n, effect,p } = ArtTable.getArt(artId);
+        // 天赋技能
+        const { v, n, effect, p } = ArtTable.getArt(artId);
         const talentArt = {
             id: artId,
             n,
@@ -28,7 +29,18 @@ module.exports = {
             talentArt['e'] = `${key}-${value * rating}`;
         }
         const art = [talentArt];
-        const artIds = [19, 8, 9, 10, 11, 12, 13, 14];
+        // 附体技能
+        const petArt = ArtTable.getArt(19);
+        art.push({
+            id,
+            p: petArt.p,
+            n: petArt.n,
+            l: 0,
+            r: 0,
+            v: petArt.v,
+        });
+        // 天赋被动
+        const artIds = [8, 9, 10, 11, 12, 13, 14];
         artIds.forEach((id) => {
             const { p, n, v } = ArtTable.getArt(id);
             const itme = {

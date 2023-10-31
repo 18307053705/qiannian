@@ -8,13 +8,6 @@ module.exports = {
         const { role_level, jackpot } = RoleG.getRoleGlobal(req, res);
         const { yuanbao } = KnapsackG.getknapsackGlobal(req, res);
         const { invest } = jackpot;
-        if (yuanbao < 200) {
-            res.send({
-                code: 0,
-                message: '元宝不足200,投资失败！'
-            })
-            return;
-        }
         if (!invest) {
             res.send({
                 code: 0,
