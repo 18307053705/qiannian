@@ -28,7 +28,8 @@ const ELEMENT_4 = {
         name: "千年古树",
         type: 4,
         cs: "g_b_u",
-        path: '/qianNianGuShu'
+        path: '/unknownCapability',
+        state: { id: 44 }
     },
     45: {
         id: 45,
@@ -259,6 +260,20 @@ const ELEMENT_4 = {
         name: "炼器炉",
         type: 4,
         path: '/equipFreeForge'
+    },
+    442: {
+        id: 442,
+        name: "南海渔村",
+        type: 4,
+        path: '/unknownCapability',
+        state: { id: 442 }
+    },
+    443: {
+        id: 443,
+        name: "幽冥阵眼",
+        type: 4,
+        path: '/unknownCapability',
+        state: { id: 443 }
     },
 };
 module.exports = {

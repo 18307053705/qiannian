@@ -24,11 +24,11 @@ const neutralityGrand = {
         name: "无妄海",
         data: [
             [
-                {
-                    list: [
-                        [12]
-                    ],
-                }
+                { list: [[443]] },
+                { list: [[245, 246]] },
+                { list: [[247, 248]] },
+                { list: [[249, 250]] },
+                { list: [[251]] },
             ]
         ]
     },
@@ -37,11 +37,11 @@ const neutralityGrand = {
         name: "南海琉璃宫",
         data: [
             [
-                {
-                    list: [
-                        [12]
-                    ],
-                }
+                { list: [[442]] },
+                { list: [[252, 253]] },
+                { list: [[254, 255]] },
+                { list: [[256, 257]] },
+                { list: [[258]] },
             ]
         ]
     },

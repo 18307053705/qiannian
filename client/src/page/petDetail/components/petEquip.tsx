@@ -5,7 +5,7 @@ import { jumpDetail, jumpEquipList, jumpSuitDetail } from '@utils/jumpPage';
 export const PetEquip = ({ petInfo, history }) => {
     const { equip, level, id, state } = petInfo;
     const isFight = state === 1 || state === 2;
-    const { suit } = equip;
+    const { suit = [] } = equip;
     return (
         <div>
             {

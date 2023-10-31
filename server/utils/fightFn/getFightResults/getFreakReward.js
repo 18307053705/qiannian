@@ -2,6 +2,7 @@ const { RoleG, KnapsackG, FightG, GrandG } = require('../../../global');
 const { knapsackTable, ElementTable } = require('../../../table');
 const knapsackFn = require('../../knapsackFn');
 const roleFn = require('../../roleFn');
+const { computePetLevel } = require('../../petFn/computePetLevel');
 const { listenTask } = require('../../taskFn/listenTask');
 
 module.exports = {
@@ -85,6 +86,7 @@ module.exports = {
         if (tael === undefined) {
             tael = (exp < 100 ? exp : exp / 100) * (vipTael || 1) * freakNum;
         }
+
         // 更新背包
         KnapsackG.updateknapsackGlobal(req, res, { tael: knapsack.tael + tael });
         // 更新角色经验等级
@@ -98,15 +100,22 @@ module.exports = {
         });
         // 监听任务池
         const tasks = listenTask(req, res, template.id, freakNum);
+        const expText = vipExp && !exps ? `${exp}(${vipExp}倍经验)` : exp;
         const reward = {
             textReward: tip ? [] : textReward,
             tip: tip,
             tasks: tasks,
-            exp: vipExp && !exps ? `${exp}(${vipExp}倍经验)` : exp,
+            exp: expText,
             tael: vipTael && !taels ? `${tael}(${vipTael}倍银两)` : tael,
-            pet: roundText.resultPet
+            pet: roundText.resultPet,
+            petExp: player.pet ? `${player.pet.name}经验：${expText}` : '',
         }
-        
+        // 更新宠物经验等级
+        computePetLevel(req, res, exp, (islevel, update,) => {
+            if (islevel) {
+                reward['petLevel'] = `${name}升到${update.level}级。`;
+            }
+        })
         FightG.updataFightMapGlobal(req, res, { reward, continue: currentDir.num === -1 || currentDir.num > 0 });
     },
 

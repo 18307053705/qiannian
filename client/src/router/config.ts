@@ -255,8 +255,8 @@ export const config: RouterType[] = [
   },
   {
     name: "古树",
-    path: "/qianNianGuShu",
-    component: lazy(() => import("@page/qianNianGuShu"))
+    path: "/unknownCapability",
+    component: lazy(() => import("@page/unknownCapability"))
   }
 ];
 

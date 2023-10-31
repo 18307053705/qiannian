@@ -2,6 +2,7 @@
 const { KnapsackG, RoleG } = require('../../global');
 const { addKnapsack } = require('../knapsackFn/addKnapsack');
 const { computeRoleLevel } = require('../roleFn/computeRoleLevel');
+const { computePetLevel } = require('../petFn/computePetLevel');
 const { integralMeun } = RoleG;
 module.exports = {
     /**
@@ -12,7 +13,7 @@ module.exports = {
      * @returns message 错误信息
      */
     getTaskReward: function (req, res, reward) {
-        if(!reward){
+        if (!reward) {
             return;
         }
         const { article, tael, role } = reward;
@@ -37,6 +38,7 @@ module.exports = {
             })
             if (role.exp) {
                 computeRoleLevel(req, res, role.exp);
+                computePetLevel(req, res, role.exp);
             }
             if (isIntegral) {
                 RoleG.updataRoleGlobal(req, res, { role_integral });

@@ -34,7 +34,7 @@ module.exports = {
             reborn: 0,
             state: 0,
             ele,
-            exp: '0/200'
+            exp: '0/100'
         };
         const dataKey = [];
         const dataValue = [];
