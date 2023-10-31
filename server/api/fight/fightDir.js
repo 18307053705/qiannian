@@ -1,5 +1,4 @@
 const { fightFn } = require('../../utils');
-// const { FightG } = require('../../global');
 
 module.exports = {
     /**
@@ -20,11 +19,6 @@ module.exports = {
         // 捉宠物
         if (p === 9 && id === 2) {
             fightFn.catchPet(req, res)
-            // fightRound.message = await fightFn.catchPet(req, res);
-            // // 无返回即为捕捉成功
-            // if (!fightRound.message) {
-            //     return
-            // }
         }
 
         // 使用物品
@@ -48,7 +42,7 @@ module.exports = {
             return;
         }
         // 灵血
-        fightFn.lingXue(req,res);
+        fightFn.lingXue(req, res);
 
         fightFn.getFightResults(req, res);
 

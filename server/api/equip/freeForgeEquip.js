@@ -29,9 +29,9 @@ module.exports = {
         }
         let rate = 0;
         if (forge > 10) {
-            rate = 25 - (forge - 10) * 2
+            rate = 50 - (forge - 10) * 3
         } else if (forge > 5) {
-            rate = 75 - (forge - 5) * 10
+            rate = 75 - (forge - 5) * 5
         } else {
             rate = 100 - forge * 5;
         }

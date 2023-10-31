@@ -20,16 +20,19 @@ module.exports = {
         // 非人机不可捕捉
         if (FIGHT_TYPE.pve !== type || !pet) {
             roundText.message = '目标不可被捕捉。';
+            FightG.updataFightMapGlobal(req, res, { roundText });
             return;
         }
         if (role_level + 10 < level) {
-             roundText.message = '低于目标10级,无法捕捉。';
+            roundText.message = '低于目标10级,无法捕捉。';
+            FightG.updataFightMapGlobal(req, res, { roundText });
             return;
         }
         // 计算概率
         const rate = Math.floor(Math.random() * 101) + (role_level - level) - (num * 10);
         if (rate < 60) {
-             roundText.message = '捕捉失败。';
+            roundText.message = '捕捉失败。';
+            FightG.updataFightMapGlobal(req, res, { roundText });
             return;
         }
         roundText.resultPet = `捕捉宠物[${name}]`;

@@ -59,9 +59,9 @@ module.exports = {
             materiaLevel = 4;
             addTael *= 10000;
         }
-        // 小于35的装备可以免费锻造,所有必须10次锻造之后才可分解出石头
+        // 小于35的装备可以免费锻造,所有必须10次锻造且装备等级不低于10级之后才可分解出石头
         if (level < 35) {
-            materiaNum = forge > 10 ? forge - 10 : 0;
+            materiaNum = forge > 10 && level > 10 ? forge - 10 : 0;
             addTael *= level;
         } else {
             materiaNum = forge > 10 ? forge : 5;

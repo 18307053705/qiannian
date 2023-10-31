@@ -1,8 +1,6 @@
-const { FightG, RoleG } = require("../../global");
+const { FightG, RoleG, KnapsackG } = require("../../global");
 const { knapsackTable } = require("../../table");
 const deleteKnapsack = require("../knapsackFn/deleteKnapsack");
-
-
 
 module.exports = {
     /**
@@ -13,6 +11,9 @@ module.exports = {
      */
     drugDir: function (req, res, drugId) {
         const { fightMap } = FightG.getFightGlobal(req, res);
+        const { data } = KnapsackG.getknapsackGlobal(req, res);
+        // 查找目标物品
+        const drugItme = data.find(({ id, p }) => id === drugId && p !== 3)
         const { roundText, player, roundAttr } = fightMap;
         let success = false;
         let drugInfo = undefined;
@@ -21,7 +22,7 @@ module.exports = {
                 if (drugInfo) {
                     return drugInfo;
                 }
-                itme.s -= 1;
+                itme.s = drugItme.s - 1;
                 success = true;
                 drugInfo = itme;
             }
