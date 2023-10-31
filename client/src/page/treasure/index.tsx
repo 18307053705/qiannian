@@ -90,7 +90,7 @@ const getName = (exp, name) => {
 }
 
 export const Treasure = ({ history }) => {
-    const [data, setData] = useState();
+    const [data, setData]: any = useState();
     const [type, setType]: any = useState(2);
 
     const getData = () => {
@@ -111,10 +111,10 @@ export const Treasure = ({ history }) => {
     if (!data) {
         return null;
     }
-    if (!data.limits) {
+    if (data.role_level < 30) {
         return (
             <div>
-                <span>50级后可以开启珍宝功能,赶快去练级吧。</span>
+                <span>30级后可以开启珍宝功能,赶快去练级吧。</span>
                 <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
             </div>
         )
@@ -142,7 +142,7 @@ export const Treasure = ({ history }) => {
                     </div>)
             }
             {treasure.getAttrText(exp).map((itme, index) => (<div key={index}>{itme}</div>))}
-            <div><span className="g_u_end" onClick={() => { history.push('./cornucopia') }}>聚宝盆</span></div>
+            <div>{data.role_level >= 50 && <span className="g_u_end" onClick={() => { history.push('./cornucopia') }}>聚宝盆</span>}</div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )

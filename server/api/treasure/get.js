@@ -23,8 +23,8 @@ module.exports = {
             code: 0,
             data: {
                 ...data,
-                limits: role_level >= 50,
-                dailys
+                dailys,
+                role_level
             }
         })
 

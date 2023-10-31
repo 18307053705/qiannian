@@ -17,7 +17,7 @@ module.exports = {
     },
     fw: function (req, res, value) {
         const { treasure_pool, role_attr, role_level } = getRoleGlobal(req, res);
-        if (role_level < 50) {
+        if (role_level < 15) {
             return { message: '房屋暂未开启。' };
         }
         const { fw } = treasure_pool;
@@ -43,8 +43,8 @@ module.exports = {
     xz: function (req, res, value) {
         const { treasure_pool, role_attr, role_level } = getRoleGlobal(req, res);
         const { xz } = treasure_pool;
-        if (role_level < 50) {
-            return { message: '房屋暂未开启。' };
+        if (role_level < 30) {
+            return { message: '勋章暂未开启。' };
         }
         if (xz.exp >= 10000000) {
             return { message: '勋章已达最顶级。' };
@@ -73,8 +73,8 @@ module.exports = {
     lp: function (req, res, value) {
         const { treasure_pool, role_attr, role_level } = getRoleGlobal(req, res);
         const { lp } = treasure_pool;
-        if (role_level < 50) {
-            return { message: '房屋暂未开启。' };
+        if (role_level < 30) {
+            return { message: '令牌暂未开启。' };
         }
         if (lp.exp >= 10000000) {
             return { message: '令牌已达最顶级。' };
@@ -103,8 +103,8 @@ module.exports = {
     hb: function (req, res, value) {
         const { treasure_pool, role_attr, role_level } = getRoleGlobal(req, res);
         const { hb } = treasure_pool;
-        if (role_level < 50) {
-            return { message: '房屋暂未开启。' };
+        if (role_level < 30) {
+            return { message: '徽标暂未开启。' };
         }
         if (hb.exp >= 10000000) {
             return { message: '徽标已达最顶级。' };

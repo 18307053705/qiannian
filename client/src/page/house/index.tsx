@@ -65,22 +65,22 @@ const getName = (exp) => {
 export const House = () => {
     const [data, setData] = useState();
     const [updata, setUpdata] = useState(false);
-    const [limits, setlimits] = useState(false);
+    const [level, setLevel] = useState(0);
 
     useEffect(() => {
         getTreasure().then(({ data }) => {
             setData(data.fw);
-            setlimits(data.limits)
+            setLevel(data.level)
         })
     }, [updata])
 
     if (!data) {
         return null;
     }
-    if (!limits) {
+    if (level < 15) {
         return (
             <div>
-                <span>50级后可以开启房屋功能,赶快去练级吧。</span>
+                <span>15级后可以开启房屋功能,赶快去练级吧。</span>
                 <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
             </div>
         )

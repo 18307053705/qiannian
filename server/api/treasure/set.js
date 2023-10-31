@@ -42,11 +42,19 @@ module.exports = {
             return;
         }
         const { treasureKey, treasureName, reputationKey, reputationName } = treasureConfig;
-        const { role_integral, treasure_pool } = RoleG.getRoleGlobal(req, res);
+        const { role_integral, treasure_pool, role_level } = RoleG.getRoleGlobal(req, res);
 
         const { exp } = treasure_pool[treasureKey];
         if (exp >= 10000000) {
             res.send({ code: 0, message: `${treasureName}已达最顶级。` });
+            return;
+        }
+        if (role_level < 15) {
+            res.send({ code: 0, message: `15级后可以开启${treasureName}功能,赶快去练级吧。。` });
+            return;
+        }
+        if (role_level < 30) {
+            res.send({ code: 0, message: `30级后可以开启${treasureName}功能,赶快去练级吧。。` });
             return;
         }
         const dailys = DailysG.getDailysGlobal(req, res);
