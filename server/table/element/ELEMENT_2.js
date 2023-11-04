@@ -224,7 +224,7 @@ const ELEMENT_2 = {
   },
   211: {
     id: 211,
-    name: "炼魂郎君",
+    name: "幽毒郎君",
     type: 2,
     level: 1,
     attr: 1,
@@ -239,7 +239,7 @@ const ELEMENT_2 = {
   },
   213: {
     id: 213,
-    name: "幽冥凶魂",
+    name: "幽冥怨魂",
     type: 2,
     level: 1,
     attr: 1,
@@ -520,10 +520,9 @@ const ELEMENT_2 = {
   },
   246: {
     id: 246,
-    name: "骷髅刀客 ",
+    name: "八爪章鱼",
     type: 2,
     level: 32,
-    attr: 3,
     attr: 2,
     pet: true,
   },

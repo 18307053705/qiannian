@@ -1,8 +1,8 @@
 
 
-const { GrandG, TaskG, RoleG } = require('../../global');
+const { GrandG, TaskG, RoleG, DailysG } = require('../../global');
 const { taskFn, grandFn, knapsackFn } = require('../../utils');
-const { TASK_TYPE } = TaskG;
+const { TASK_TYPE, TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     /**
      * 任务场景结束,即完成任务
@@ -12,24 +12,46 @@ module.exports = {
         const dir = GrandG.getDirGlobal(req, res);
         const { currentDir } = dir;
         const { taskId, taskType } = currentDir;
-        const tasks = TaskG.getTaskGlobal(req, res, taskType);
+        const tasks = taskFn.getTaskGlobal(req, res, taskType, taskId);
         const task = tasks[taskId];
         // 不存在任务
         if (!task) {
-            return {
-                endText: '暂无更多任务！',
-            };
+            return res.send({
+                code: 0,
+                data: {
+                    endText: '暂无更多任务！',
+                }
+            })
         }
-        const { type, grand, level, complete, reward, } = task;
+        const { type, grand, level, complete, reward, levelText } = task;
 
         if (level > role_level) {
-            return {
-                levelText: `等级不足${level},先去升级吧！`,
-            };
+            return res.send({
+                code: 0,
+                data: {
+                    levelText: levelText || `等级不足${level},先去升级吧！`,
+                }
+            })
         }
 
         // 记录最初状态
         const oldStatus = task.status;
+        // 判断是否为接任务且为副本 
+        if (oldStatus === 0 && taskType === TASK_TYPE_MEUN.copy) {
+            const { copyTask } = DailysG.getDailysGlobal(req, res);
+            if (copyTask[taskId] <= 0) {
+                return res.send({
+                    code: 0,
+                    data: {
+                        levelText: '今日领取次数已用完！',
+                    }
+                })
+            }
+            copyTask[taskId] -= 1;
+            DailysG.updataDailysGlobal(req, res, { copyTask });
+        }
+
+
         // 计算是否完成任务
         if (task.status === 0 || task.status === 1 || task.status === 2) {
             const speed = taskFn.speedTask(req, res, task);

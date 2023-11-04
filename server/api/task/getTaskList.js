@@ -35,7 +35,7 @@ module.exports = {
             })
         }
         const task = {};
-        Object.keys(tasks).forEach((taskId) => {
+        Object.keys(tasks || {}).forEach((taskId) => {
             task[taskId] = {
                 ...taskFn.getTaskSceneInfo(req, res, tasks[taskId]),
                 taskType: type
@@ -48,8 +48,7 @@ module.exports = {
             data: {
                 taskList,
                 task,
-                DAIL_TYPE_LIST,
-                tasks
+                DAIL_TYPE_LIST
             },
         })
 

@@ -1,4 +1,16 @@
 
+const TASK_TYPE_MEUN = {
+    main: 1,
+    exp: 2,
+    world: 3,
+    tael: 4,
+    exploit: 5,
+    gang: 6,
+    intersect: 7,
+    chance: 8,
+    copy: 9,
+    zudui: 10,
+}
 const ELEMENT_4 = {
     40: {
         id: 40,
@@ -159,21 +171,33 @@ const ELEMENT_4 = {
         id: 424,
         name: "【炼魂洞】",
         type: 4,
+        path: '/taskScene',
+        taskId: 1,
+        taskType: TASK_TYPE_MEUN.copy,
     },
     425: {
         id: 425,
         name: "【黑角域】",
         type: 4,
+        path: '/taskScene',
+        taskId: 2,
+        taskType: TASK_TYPE_MEUN.copy
     },
     426: {
         id: 426,
         name: "【四海龙宫】",
         type: 4,
+        path: '/taskScene',
+        taskId: 3,
+        taskType: TASK_TYPE_MEUN.copy
     },
     427: {
         id: 427,
         name: "【凤凰桐木】",
         type: 4,
+        path: '/taskScene',
+        taskId: 4,
+        taskType: TASK_TYPE_MEUN.copy
     },
     428: {
         id: 428,

@@ -21,6 +21,7 @@ module.exports = {
      * @returns dailys.shenYuan 深渊{s:进入次数,l:当前层数}}
      * @returns dailys.xiuLian 修炼房{s:进入次数,l:当前层数}}
      * @returns dailys.QingYuan 情缘信息 {j:浇水次数,c:除草}
+     * @returns dailys.copyTask 副本任务{id：次数}
      * @returns dailys.lianHunDong 30级炼魂洞副本
      * @returns dailys.heiJiaoYu 40级黑角域副本
      * @returns dailys.siHailongGong 50级四海龙宫副本

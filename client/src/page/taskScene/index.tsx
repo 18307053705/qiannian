@@ -33,7 +33,7 @@ export const taskScene = () => {
     if (!taskInfo) {
         return null;
     }
-    const { connet, speed, noLevel, endText, reward, status, tpInfo }: any = taskInfo || {};
+    const { connet, speed, levelText, endText, reward, status, tpInfo }: any = taskInfo || {};
 
     const doneTask = () => {
         taskSceneEnd().then(({ data }) => {
@@ -41,10 +41,10 @@ export const taskScene = () => {
         })
     }
     // 等级不足 或者 无更多任务
-    if (endText || noLevel) {
+    if (endText || levelText) {
         return (
             <div className={Styles['page-task-scene']}>
-                <div>{endText || noLevel}</div>
+                <div>{endText || levelText}</div>
                 <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
             </div>
         )

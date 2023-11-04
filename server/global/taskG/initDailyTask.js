@@ -1,4 +1,5 @@
 const { getRoleGlobal } = require('../roleG/getRoleGlobal');
+const copyTable = require('../../table/task/copy');
 module.exports = {
     /**
      * 初始化每日任务数量
@@ -16,6 +17,11 @@ module.exports = {
             exploitNum = 8;
             taskNum = 15;
         }
+        // 处理副本任务
+        const copyTask = {};
+        Object.keys(copyTable).forEach((id) => {
+            copyTask[id] = 2;
+        })
         return {
             exp: taskNum,
             tael: taskNum,
@@ -23,16 +29,17 @@ module.exports = {
             exploit: exploitNum,
             gang: socialize_pool.gang ? 8 : -1,
             intersect: socialize_pool.intersect ? 8 : -1,
-            lianHunDong: role_level >= 30 ? 2 : 0,
-            heiJiaoYu: role_level >= 40 ? 2 : 0,
-            siHailongGong: role_level >= 50 ? 2 : 0,
-            fengHuangTongMu: role_level >= 60 ? 2 : 0,
-            moShenChuanShuo: role_level >= 70 ? 2 : 0,
-            haiDiMoGong: role_level >= 80 ? 2 : 0,
-            tinaMoYiZhi: role_level >= 90 ? 2 : 0,
-            diFuChuanShuo: role_level >= 100 ? 2 : 0,
-            qunMoLuanWu: role_level >= 100 ? 2 : 0,
-            tianMoJIangLin: role_level >= 100 ? 2 : 0,
+            copyTask,
+            // lianHunDong: 2,
+            // heiJiaoYu: 2,
+            // siHailongGong: 2,
+            // fengHuangTongMu: 2,
+            // moShenChuanShuo: 2,
+            // haiDiMoGong: 2,
+            // tinaMoYiZhi: 2,
+            // diFuChuanShuo: 2,
+            // qunMoLuanWu: 2,
+            // tianMoJIangLin: 2,
         }
     }
 }

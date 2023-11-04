@@ -1,4 +1,4 @@
-const { knapsackTable } = require('../../../table');
+const { knapsackTable, TaskTable } = require('../../../table');
 const ATTR_NAME_MEUN = {
     exp: '经验',
     world: '世界声望',
@@ -20,7 +20,10 @@ module.exports = {
         if (!rewards) {
             return undefined;
         }
-        const { article, equip, tael, attr, yuanbao } = rewards;
+        const { article, equip, tael, attr, yuanbao, fun } = rewards;
+        if (fun) {
+            return TaskTable.rewardFun[fun]();
+        }
         const text = [];
         const reward = {};
         const articles = {};
@@ -60,13 +63,13 @@ module.exports = {
         if (equip) {
             const equipReward = {};
             equip.split(',').forEach((itme) => {
-                const [ids, s = 1] = itme.split('-');
+                const [ids] = itme.split('-');
                 const { id, name } = knapsackTable.getEquip(ids);
                 equipReward[id] = {
                     id,
                     n: name,
                     P: 3,
-                    s: s - 0
+                    s: 1
                 }
                 text.push(`${name}x${s}`);
             })

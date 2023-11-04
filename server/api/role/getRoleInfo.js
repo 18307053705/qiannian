@@ -41,6 +41,7 @@ module.exports = {
                     pet_pool: role['pet_pool'],
                     treasure_pool: role['treasure_pool'],
                     jackpot: role['jackpot'],
+                    role_lx: role['role_lx'],
                 }
             });
         }

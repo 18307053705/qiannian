@@ -3,7 +3,7 @@ import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 import { jumpDetail, jumpSuitDetail } from '@utils/jumpPage';
 import { SEX_MEUN } from '@meun';
 const RoleAttr = ({ roleInfo, history }) => {
-    const { attr, socialize_pool: socialize, equip_pool: equip } = roleInfo;
+    const { attr, socialize_pool: socialize, equip_pool: equip, pet_pool: pet = { c: {} } } = roleInfo;
     const { suit = [] } = equip;
     return (
         <>
@@ -11,7 +11,7 @@ const RoleAttr = ({ roleInfo, history }) => {
                 <div>
                     <span className="g_b">角色</span>：
                     <span>{`${roleInfo.role_name}(${roleInfo.role_title || '无'})`}</span>
-                    <span className="g_u_end" onClick={()=>{history.push('./title')}}>换</span>
+                    <span className="g_u_end" onClick={() => { history.push('./title') }}>换</span>
                 </div>
                 <div><span className="g_b">等级</span>：<span>{`${roleInfo.role_level}级(${roleInfo.role_exp})`}</span></div>
                 {roleInfo.role_level > 69 && <div><span className="g_b">境界</span>：<span>{roleInfo.role_realm}</span></div>}
@@ -19,6 +19,7 @@ const RoleAttr = ({ roleInfo, history }) => {
                 <div><span className="g_b">性别</span>：<span>{SEX_MEUN[roleInfo.role_sex]}</span></div>
                 {socialize.spouse && <div><span className="g_b">妻子</span>：<span>{socialize.spouse.name}</span></div>}
                 {socialize.teacher && <div><span className="g_b">师父</span>：<span>{socialize.teacher.name}</span></div>}
+                <div><span className="g_b">灵血</span>：<span>{roleInfo.role_lx}</span></div>
                 <div><span className="g_b">生命</span>：<span>{`${roleInfo.life}/${attr.life_max}`}</span></div>
                 <div><span className="g_b">法力</span>：<span>{`${roleInfo.mana}/${attr.mana_max}`}</span></div>
                 <div><span className="g_b">攻击</span>：<span>{`${attr.atk_min}~${attr.atk_max}`}</span></div>
@@ -28,7 +29,7 @@ const RoleAttr = ({ roleInfo, history }) => {
                 <div><span className="g_b">暴击</span>：<span>{attr.sudden}</span></div>
             </div>
             <div>
-                <div><span className="g_b">宠物</span>：<span>{equip.pet ? equip.pet.name : '无'}</span></div>
+                <div><span className="g_b">宠物</span>：<span>{pet.c.n || '无'}</span></div>
                 {
                     EQUIP_POS_LIST.map(({ label, value, condition = 0 }, index) => {
                         if (roleInfo.role_level < condition) {
