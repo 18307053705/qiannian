@@ -38,8 +38,8 @@ module.exports = {
 
         // 精英 
         if (grade === 2) {
-            attrs['life'] *= 10;
-            attrs['mana'] *= 10;
+            attrs['life'] *= 5;
+            attrs['mana'] *= 5;
             num = 1;
         }
 

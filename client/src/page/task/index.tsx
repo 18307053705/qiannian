@@ -80,12 +80,12 @@ export const Task = () => {
             <div>
                 {
                     taskDetail.map((itme) => {
-                        const { id, title, tips, reward = { text: [] } } = itme;
+                        const { id, title, tips, reward = { text: [], hide: true } } = itme;
                         return (
                             <div key={id}>
                                 <div className='g_b'>{title}</div>
                                 <div>描述：{tips}</div>
-                                <div>奖励：{reward.text.join(',')}</div>
+                                {!reward.hide && <div>奖励：{reward.text.join(',')}</div>}
                                 <SpeedText task={itme} />
                                 <DeonTaskBtn task={itme} dailList={dailList} deonTask={deonTask} />
                             </div>

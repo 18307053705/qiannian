@@ -20,9 +20,18 @@ module.exports = {
         let base = undefined;
         // 当前经验大于升级经验,处理升级逻辑
         if (current >= upExp && role_level < 100) {
-            current -= upExp;
-            // 角色升级
-            role_level++;
+            while (current >= upExp && role_level < 100) {
+                // 扣除升级经验
+                current -= upExp;
+                // 角色升级
+                role_level++;
+                // 计算下级所需经验
+                upExp = computeUpExp(role_level);
+                // // 升到25 激活炼魂洞副本
+                // if (role_level === 25) {
+
+                // }
+            }
             // 获取境界对应属性增幅
             const { attr } = RealmTable.getRealm(role_realm)
             // 根据职业选择升级属性加成
@@ -31,19 +40,15 @@ module.exports = {
             Object.keys(base).forEach(key => {
                 base[key] *= attr * role_level;
             })
-            // 计算下级所需经验
-            upExp = computeUpExp(role_level);
+
             res.customSuccess = `恭喜玩家升到${role_level}级。`
-            // 升到25 激活炼魂洞副本
-            if(role_level === 25){
-                
-            }
+
         }
         const update = {
             role_exp: `${current}/${upExp}`,
             role_level
         }
-      
+
         if (base) {
             role_attr.base = base;
             update['role_attr'] = role_attr;

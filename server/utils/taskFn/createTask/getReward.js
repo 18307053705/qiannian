@@ -20,12 +20,9 @@ module.exports = {
         if (!rewards) {
             return undefined;
         }
-        const { article, equip, tael, attr, yuanbao, fun } = rewards;
-        if (fun) {
-            return TaskTable.rewardFun[fun]();
-        }
+        const { article, equip, tael, attr, yuanbao, hide } = rewards.fun ? TaskTable.rewardFun[rewards.fun]() : rewards;
         const text = [];
-        const reward = {};
+        const reward = { hide };
         const articles = {};
         // 属性奖励
         if (attr) {
