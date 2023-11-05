@@ -165,8 +165,6 @@ const ELEMENT_2 = {
     level: 5,
     attr: 2,
     num: 1,
-    exp: 50000,
-    tael: 5000
   },
   24: {
     id: 24,

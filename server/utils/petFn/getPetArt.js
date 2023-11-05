@@ -32,7 +32,7 @@ module.exports = {
         // 附体技能
         const petArt = ArtTable.getArt(19);
         art.push({
-            id,
+            id: 19,
             p: petArt.p,
             n: petArt.n,
             l: 0,

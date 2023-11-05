@@ -31,8 +31,8 @@ module.exports = {
                 const [id, s = 1, rate = 100] = reward.split('-');
                 // 获取物品
                 if (rate > Math.floor(Math.random() * 100)) {
-                    const { type, n } = knapsackTable.getArticle(id);
-                    artReward[id] = { type, n, id, s: Number(s) };
+                    const { type, n, id: articleId } = knapsackTable.getArticle(id);
+                    artReward[articleId] = { type, n, id: articleId, s: Number(s) };
                     textReward.push(`获得[${n}]x${s}`)
                 }
             })
@@ -43,8 +43,8 @@ module.exports = {
                 const [id, rate = 100] = reward.split('-');
                 // 获取物品
                 if (rate > Math.floor(Math.random() * 100)) {
-                    const { type, name } = knapsackTable.getEquip(id);
-                    equipReward[id] = { type, n: name, id, s: 1 };
+                    const { type, name, id: EquipId } = knapsackTable.getEquip(id);
+                    equipReward[EquipId] = { type, n: name, id: EquipId, s: 1 };
                     textReward.push(`获得[${name}]x1`)
                 }
             })

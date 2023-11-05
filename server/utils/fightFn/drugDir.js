@@ -13,7 +13,7 @@ module.exports = {
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         // 查找目标物品
-        const drugItme = data.find(({ id, p }) => id === drugId && p !== 3)
+        const drugItme = data.find(({ id, p }) => id == drugId && p != 3)
         const { roundText, player, roundAttr } = fightMap;
         let success = false;
         let drugInfo = undefined;

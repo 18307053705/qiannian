@@ -11,12 +11,16 @@ module.exports = {
      * 
      */
     computePetLevel: function (req, res, addExp, callback) {
-        let { exp, level, name } = PetG.getPetGlobal(req, res)
+        const pet = PetG.getPetGlobal(req, res);
+        if (!pet) {
+            return undefined;
+        }
+        let { exp, level, name } = pet;
         let [oldExp, upExp] = exp.split('/');
         let current = Number(oldExp) + addExp;
         let isLevel = false;
         // 当前经验大于升级经验,处理升级逻辑
-        if (current >= upExp && level < 100) {
+        while (current >= upExp && level < 100) {
             isLevel = true;
             current -= upExp;
             // 角色升级

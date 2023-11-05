@@ -8,13 +8,62 @@ const { knapsackFn } = require('../../utils');
 // 丹药，材料
 // 25,26,27,28,42,43,44,45
 
+function getList(level) {
+    let list = [
+        { id: 1 },
+        { id: 2 },
+        { id: 3 },
+        { id: 4 }
+    ];
+    if (level >= 10) {
+        list.push({ id: 5 }, { id: 6 });
+    }
+    if (level >= 30) {
+        list = [
+            { id: 5 },
+            { id: 6 },
+            { id: 7 },
+            { id: 8 },
+            { id: 13, min: 1, max: 5, r: 20 },
+            { id: 14, min: 1, max: 5, r: 20 },
+            { id: 15, min: 1, max: 5, r: 20 },
+            { id: 16, min: 1, max: 5, r: 20 },
+        ];
+    }
+    if (level >= 50) {
+        list = [
+            { id: 7 },
+            { id: 8 },
+            { id: 9 },
+            { id: 10 },
+            { id: 17, min: 1, max: 5, r: 20 },
+            { id: 18, min: 1, max: 5, r: 20 },
+            { id: 19, min: 1, max: 5, r: 20 },
+            { id: 20, min: 1, max: 5, r: 20 },
+        ];
+    }
+    if (level >= 70) {
+        list = [
+            { id: 9 },
+            { id: 10 },
+            { id: 11 },
+            { id: 12 },
+            { id: 21, min: 1, max: 5, r: 20 },
+            { id: 22, min: 1, max: 5, r: 20 },
+            { id: 23, min: 1, max: 5, r: 20 },
+            { id: 24, min: 1, max: 5, r: 20 },
+        ];
+    }
+    return list;
+}
+
 module.exports = {
     /**
      * 玩家首次登录抽奖
      */
     jackpotDay: async function (req, res) {
         const { day } = DailysG.getDailysGlobal(req, res)
-        const { role_lx } = RoleG.getRoleGlobal(req, res);
+        const { role_lx, role_level } = RoleG.getRoleGlobal(req, res);
         const { data, yuanbao, tael } = KnapsackG.getknapsackGlobal(req, res);
         if (day) {
             res.send({
@@ -52,10 +101,11 @@ module.exports = {
         }
         // 全部50%几率
         const artReward = {};
-        [5, 6, 11, 12, 17, 18, 19, 20].forEach((id) => {
-            if (Math.floor(Math.random() * 2) === 1) {
+        getList(role_level).forEach(({ id, min = 20, max = 100, r = 50 }) => {
+            const rate = Math.floor(Math.random() * 100);
+            if (rate < r) {
                 const { n, type } = knapsackTable.getArticle(id);
-                const s = Math.floor(Math.random() * 10) + 1;
+                const s = Math.floor(Math.random() * (max - min)) + min;
                 textList.push({
                     name: n,
                     value: s,
