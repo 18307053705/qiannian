@@ -18,11 +18,11 @@ const Home = ({ history }) => {
             <div>------------------------------------</div>
             <div>请选择角色：</div>
             {
-                roleList.map(({ role_name, role_race, role_level, role_id }) => {
+                roleList.map(({ role_name, role_race, role_level, role_id, role_career }) => {
                     return (
                         <div key={role_id}>
                             <span>{role_name}</span>
-                            <span>{role_level}级{CAREER_TYPE[role_race]}</span>
+                            <span>{role_level}级{CAREER_TYPE[role_career]}</span>
                             <span className="g_u" >
                                 <span onClick={() => {
                                     roleLogin({ role_id }).then(() => {

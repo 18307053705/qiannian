@@ -53,11 +53,11 @@ export const EquipList = ({ history }) => {
                     <div key={id}>【套装】<span className="g_u_end" onClick={() => { jumpSuitDetail(id) }}>{n}</span></div>
                 ))
             }
-            {role_level >= 35 && (
+            {role_level >= 30 && (
                 <div><span className='g_u_end' onClick={() => { jumpMakeEquip('world', role_level) }}>前往打造声望套装</span></div>
             )}
 
-            {role_level >= 65 && (
+            {role_level >= 60 && (
                 <div><span className='g_u_end' onClick={() => { jumpMakeEquip('exploit', role_level) }}>前往打造功勋套装</span></div>
             )}
             {role_level >= 66 && (

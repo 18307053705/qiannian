@@ -25,11 +25,11 @@ module.exports = {
         }
         // 主线任务奖励解析
         if (type === TASK_TYPE_MEUN.main) {
-            reward = getReward(task.reward);
+            reward = getReward(task.reward, req, res);
         }
         // 副本任务奖励解析
         if (type === TASK_TYPE_MEUN.copy) {
-            reward = getReward(task.reward);
+            reward = getReward(task.reward, req, res);
         }
         task.reward = reward;
         const { grand, complete } = task;

@@ -10,8 +10,8 @@ module.exports = {
         const npcEle = [];
         Object.keys(tasksMap).forEach((type) => {
             const tasks = tasksMap[type];
+            const noCopy = TASK_TYPE_MEUN.copy != type;
             if (tasks) {
-
                 Object.values(tasks).forEach(({ grand, complete, status, title, id, }) => {
                     if (status === 3) {
                         TaskG.deleteTaskGlobal(req, res, type, id);
@@ -19,7 +19,7 @@ module.exports = {
                     }
                     const { npc, freak = [], tNpc } = grand;
                     // 未接任务
-                    if (status === 0) {
+                    if (status === 0 && noCopy) {
                         if (npc.address === address) {
                             // 加入指令列表
                             eleDir[npc.id] = npc;
@@ -29,7 +29,7 @@ module.exports = {
                     }
                     const ele = tNpc || npc;
 
-                    if (status === 1 && ele.address === address) {
+                    if (status === 1 && ele.address === address && noCopy) {
                         const { done } = freak.length ? speedTask(req, res, { complete, grand }) : { done: true };
                         if (done) {
                             // 加入指令列表
@@ -39,7 +39,7 @@ module.exports = {
                         }
 
                     }
-                    if (status === 2 && ele.address === address) {
+                    if (status === 2 && ele.address === address && noCopy) {
                         // 加入指令列表
                         eleDir[ele.id] = ele;
                         // 加入元素列表

@@ -14,7 +14,7 @@ module.exports = {
         grand: {
             npc: {
                 id: 424,
-                address: '10000,0,0',
+                address: '40001,1,0',
             },
             freak: [
                 {
@@ -46,7 +46,7 @@ module.exports = {
                     address: '50000,0,6',
                 },
                 {
-                    id: 211,
+                    id: 262,
                     address: '50000,0,7',
                 },
             ],

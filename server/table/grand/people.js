@@ -112,11 +112,7 @@ const peopleGrand = {
         name: "映月崖",
         data: [
             [
-                {
-                    list: [
-                        [12]
-                    ],
-                }
+                { list: [[259, 260]] },
             ]
         ]
     },

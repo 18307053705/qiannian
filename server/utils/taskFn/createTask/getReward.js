@@ -16,11 +16,11 @@ module.exports = {
      * @returns reward.tael
      * @returns reward.text 奖励文案[]
      */
-    getReward: function (rewards) {
+    getReward: function (rewards, req, res) {
         if (!rewards) {
             return undefined;
         }
-        const { article, equip, tael, attr, yuanbao, hide } = rewards.fun ? TaskTable.rewardFun[rewards.fun]() : rewards;
+        const { article, equip, tael, attr, yuanbao, hide } = rewards.fun ? TaskTable.rewardFun[rewards.fun](req, res) : rewards;
         const text = [];
         const reward = { hide };
         const articles = {};

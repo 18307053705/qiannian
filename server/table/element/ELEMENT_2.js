@@ -243,6 +243,7 @@ const ELEMENT_2 = {
     exp: 50000,
     tael: 5000
   },
+  // 主线任务中的幽毒郎君
   211: {
     id: 211,
     name: "幽毒郎君",
@@ -250,9 +251,6 @@ const ELEMENT_2 = {
     grade: 2,
     level: 25,
     attr: 2,
-    num: 1,
-    exp: 50000,
-    tael: 5000
   },
   212: {
     id: 212,
@@ -560,7 +558,7 @@ const ELEMENT_2 = {
   },
   248: {
     id: 248,
-    name: "骷髅战士",
+    name: "九头大蛇",
     type: 2,
     level: 35,
     attr: 3,
@@ -576,7 +574,7 @@ const ELEMENT_2 = {
   },
   250: {
     id: 250,
-    name: "骷髅精英",
+    name: "龙鹰剑士",
     type: 2,
     level: 38,
     attr: 3,
@@ -584,7 +582,7 @@ const ELEMENT_2 = {
   },
   251: {
     id: 251,
-    name: "骷髅大将军",
+    name: "御龙大将军",
     type: 2,
     level: 40,
     grade: 2,
@@ -646,6 +644,41 @@ const ELEMENT_2 = {
     level: 50,
     grade: 2,
     attr: 10,
+  },
+  259: {
+    id: 259,
+    name: "腐肉行尸",
+    type: 2,
+    level: 40,
+    attr: 5,
+    pet: true,
+  },
+  260: {
+    id: 260,
+    name: "八眼魔蛛",
+    type: 2,
+    level: 40,
+    attr: 5,
+    pet: true,
+  },
+  261: {
+    id: 261,
+    name: "蓑衣老者",
+    type: 2,
+    level: 42,
+    attr: 5,
+    grade: 2,
+  },
+  262: {
+    id: 262,
+    name: "幽毒郎君",
+    type: 2,
+    grade: 2,
+    level: 25,
+    attr: 2,
+    num: 1,
+    exp: 50000,
+    tael: 5000
   },
   20000001: {
     id: 20000001,
