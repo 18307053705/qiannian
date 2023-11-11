@@ -680,6 +680,14 @@ const ELEMENT_2 = {
     exp: 50000,
     tael: 5000
   },
+  263: {
+    id: 263,
+    name: "守崖人",
+    type: 2,
+    level: 50,
+    attr: 5,
+    grade: 2,
+  },
   20000001: {
     id: 20000001,
     name: "深渊怪(深渊模怪物占位)",

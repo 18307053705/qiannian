@@ -29,7 +29,14 @@ const RoleAttr = ({ roleInfo, history }) => {
                 <div><span className="g_b">暴击</span>：<span>{attr.sudden}</span></div>
             </div>
             <div>
-                <div><span className="g_b">宠物</span>：<span>{pet.c.n || '无'}</span></div>
+                <div>
+                    <span className="g_b">宠物</span>：
+                    {
+                        pet.c.n ?
+                            <span className="g_u_end" onClick={() => { history.push('/petDetail', { petId: pet.c.id }) }}>{pet.c.n}</span>
+                            : "无"
+                    }
+                </div>
                 {
                     EQUIP_POS_LIST.map(({ label, value, condition = 0 }, index) => {
                         if (roleInfo.role_level < condition) {

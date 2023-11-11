@@ -13,7 +13,7 @@ const tabList = [
 
 const PetDetail = ({ history }) => {
     const { petId } = history.location.state;
-    const [petInfo, setPetInfo] = useState();
+    const [petInfo, setPetInfo]:any = useState();
     const [pageKey, setPageKey] = useState(0);
     useEffect(() => {
         detailPet({ petId }).then(({ data }) => {

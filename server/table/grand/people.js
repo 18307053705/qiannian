@@ -113,6 +113,9 @@ const peopleGrand = {
         data: [
             [
                 { list: [[259, 260]] },
+            ],
+            [
+                { list: [[259, 260]] },
             ]
         ]
     },
