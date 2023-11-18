@@ -6,6 +6,7 @@ const deleteRoleGlobal = require('./deleteRoleGlobal');
 const saveRoleSql = require('./saveRoleSql');
 const getRoleAllGlobal = require('./getRoleAllGlobal');
 const updataRoleTime = require('./updataRoleTime');
+const getRoleBase = require('./getRoleBase');
 
 
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
     ...deleteRoleGlobal,
     ...saveRoleSql,
     ...getRoleAllGlobal,
-    ...updataRoleTime
+    ...updataRoleTime,
+    ...getRoleBase
 }

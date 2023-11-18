@@ -53,28 +53,7 @@ export async function request<T = {}>(
       window.QN.history.push(data.path, data.state || {});
     }
     if (request.status === 200 && data.code === 0) {
-      if (data.exts && '/chat/getUnread' !== url) {
-        // 解析exts
-        const { listText, success, error, customSuccess } = data.exts;
-        const valus: any = {};
-        if (error) {
-          valus.error = error;
-        }
-        if (success) {
-          valus.success = success;
-        }
-        if (customSuccess) {
-          valus.customSuccess = customSuccess;
-        }
-        if (listText.length) {
-          valus.listText = listText;
-        }
-        // error: message,
-        //       success,
-        //       listText: res.listText,
-        //       customSuccess: res.customSuccess,
-        window.QN.setExts(valus);
-      }
+      window.QN.setTips(data);
       return data;
     } else if (data.code === 100000) {
       // 登录异常跳转登录页

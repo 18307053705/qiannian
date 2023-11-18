@@ -81,5 +81,6 @@ module.exports = {
     getZhanChang: function () {
         return ACTIVE_QUEUE.ZhanChang;
     },
+    ACTIVE_QUEUE,
 };
 
