@@ -38,7 +38,7 @@ const Active = ({ ACTIVE_QUEUE }) => {
         return null;
     }
     return (
-        <div className="g_u_end" onClick={() => { window.QN.history.push(info.path) }} >{info.text}</div>
+        <div><span className="g_u_end" onClick={() => { window.QN.history.push(info.path) }}>{info.text}</span></div>
     );
 }
 
