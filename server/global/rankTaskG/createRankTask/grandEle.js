@@ -14,14 +14,9 @@ module.exports = {
      */
     grandEle: function (freak) {
         return freak.map((itme) => {
-            const { name, ext } = getElement(itme.id);
             return {
                 ...itme,
-                name,
-                ext: {
-                    ...ext,
-                    num: itme.num || 1
-                },
+                ...getElement(itme.id),
                 c: 0,
                 s: itme.num || 1,
                 role: []

@@ -2,13 +2,13 @@ const express = require("express");
 require("express-async-errors");
 const cookieParser = require("cookie-parser");
 const gatewayFn = require("./utils/gatewayFn");
-const { scheduleCronstyle, ACTIVE_QUEUE } = require("./utils/scheduleCronstyleFn");
+const { scheduleCronstyle } = require("./utils/scheduleCronstyleFn");
 const RoleG = require("./global/roleG");
-const mysql = require("./mysql");
 const { customRes } = require("./useFun/customRes");
+
 // 定时任务
 scheduleCronstyle()
-
+// 创建应用
 const app = express();
 // post请求处理
 app.use(express.json());
@@ -21,35 +21,13 @@ app.use("*", async function (req, res, next) {
   if (!gatewayFn.checkGateway(req, res)) {
     return;
   }
-  // req,res 处理
+  // 重写req res
   customRes(req, res);
-  // res.asyncQuery = mysql.asyncQuery;
-  // res.asyncAdd = mysql.asyncAdd;
-  // res.customSuccess = '';
-  // res.listText = [];
-  // const _send = res.send;
-  // res.send = function ({ success, message, ...data }) {
-  //   res.send = _send;
-  //   return res.send({
-  //     ...data,
-  //     // 提示信息
-  //     tips: {
-  //       error: message,
-  //       success,
-  //       listText: res.listText,
-  //       customSuccess: res.customSuccess,
-  //     },
-  //     // 扩展信息
-  //     exts: {
-  //       activeQueue: ACTIVE_QUEUE,
-  //       roleBase: RoleG.getRoleBase(req, res)
-  //     },
-  //   })
-  // }
   // 更新角色访问时间
   RoleG.updataRoleTime(req, res);
   next();
 });
+
 // 请求路由
 app.use("/api/user", require("./api/user"));
 app.use("/api/role", require("./api/role"));

@@ -1,4 +1,4 @@
-const { ELEMENT_1 } = require('./ELEMENT_1');
+const { getNpc } = require('./ELEMENT_1');
 const { getFreak } = require('./ELEMENT_2');
 const { ELEMENT_3 } = require('./ELEMENT_3');
 const { ELEMENT_4 } = require('./ELEMENT_4');
@@ -22,7 +22,7 @@ module.exports = {
         const eleType = (eleId + "")[0];
         let eleMap = undefined;
         if (eleType === '1') {
-            eleMap = ELEMENT_1;
+            return getNpc(eleId);
         }
         if (eleType === '2') {
             return getFreak(eleId);
