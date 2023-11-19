@@ -6,12 +6,20 @@
   "scripts": {
     "server": "node index.js"
   },
+  "_moduleAliases": {
+    "@global": "./global",
+    "@mysql": "./mysql",
+    "@meun": "./meun",
+    "@table": "./table",
+    "@utils": "./utils"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "module-alias": "^2.2.3",
     "moment": "^2.29.4",
     "mysql2": "^3.3.3",
     "node-schedule": "^2.1.1"

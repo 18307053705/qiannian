@@ -5,8 +5,6 @@ const SUIT_TYPE = {
     // ELE_ALL: 4, // 全部元素属性
 }
 
-
-
 const SUIT_EFFECT = {
     10002: {
         ids: [11, 12, 13, 14, 15],

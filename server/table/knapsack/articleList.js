@@ -3,15 +3,22 @@
 // group 2 buff类型 如双倍经验卡，临时提升属性的丹药
 
 module.exports = {
-    1: {
-        id: 1,
-        type: 1,
+    100:{
         n: '小血瓶',
         price: 2000,
         unit: 'tael',
         group1: 'life-5000',
         tips: '使用后可以恢复5000生命值。',
     },
+    // 1: {
+    //     id: 1,
+    //     type: 1,
+    //     n: '小血瓶',
+    //     price: 2000,
+    //     unit: 'tael',
+    //     group1: 'life-5000',
+    //     tips: '使用后可以恢复5000生命值。',
+    // },
     2: {
         id: 2,
         type: 1,
@@ -111,6 +118,8 @@ module.exports = {
         group1: 'mana-200000',
         tips: '使用后可以恢复200000法力值。',
     },
+
+
     13: {
         id: 13,
         type: 2,
@@ -1371,6 +1380,7 @@ module.exports = {
         value: 50,
         tips: '一株充满神秘色彩的花朵，传说它是水中神仙，亦为水葬者，赠送给好友可获得50点亲密度。',
     },
+    
     192: {
         id: 192,
         type: 5,

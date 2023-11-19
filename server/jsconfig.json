@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@global": [
+                "./global/index"
+            ],
+            "@global/*": [
+                "./global/*"
+            ],
+            "@meun": [
+                "./meun/index"
+            ],
+            "@meun/*": [
+                "./meun/*"
+            ],
+            "@mysql": [
+                "./mysql/index"
+            ],
+            "@mysql/*": [
+                "./mysql/*"
+            ],
+            "@table": [
+                "./table/index"
+            ],
+            "@table/*": [
+                "./table/*"
+            ],
+            "@utils": [
+                "./utils/index"
+            ],
+            "@utils/*": [
+                "./utils/*"
+            ],
+        }
+    },
+    "exclude": [
+        "node_modules",
+    ]
+}

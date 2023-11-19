@@ -53,7 +53,7 @@ module.exports = {
                 sudden: 0.2
             }
         }
-        return {}
+        return undefined;
         // // 默认均衡职业，目前不存在
         // return {
         //     life: 225,
