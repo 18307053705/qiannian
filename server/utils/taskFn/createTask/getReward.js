@@ -1,4 +1,4 @@
-const { knapsackTable, TaskTable } = require('../../../table');
+const { knapsackTable, TaskTable } = require('@table');
 const ATTR_NAME_MEUN = {
     exp: '经验',
     world: '世界声望',
@@ -17,6 +17,7 @@ module.exports = {
      * @returns reward.text 奖励文案[]
      */
     getReward: function (rewards, req, res) {
+        console.log(rewards,'rewards...')
         if (!rewards) {
             return undefined;
         }

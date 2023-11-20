@@ -1,4 +1,4 @@
-const { knapsackTable } = require('../../table');
+const { knapsackTable } = require('@table');
 
 // const materialMap = {
 //     // 一阶武器晶石,一阶头盔晶石,一阶铠甲晶石,一阶腰带晶石,一阶鞋子晶石,一阶戒指晶石,一阶项链晶石 35

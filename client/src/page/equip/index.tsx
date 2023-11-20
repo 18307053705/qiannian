@@ -63,6 +63,8 @@ export const EquipList = ({ history }) => {
             {role_level >= 66 && (
                 <div><span className='g_u_end' onClick={() => { jumpMakeEquip('faBao', role_level) }}>前往打造法宝</span></div>
             )}
+             <span className='g_u'><span onClick={() => { jumpMakeEquip('gang') }}>帮会装备</span></span>
+             <div><span className="g_u_end" onClick={() => { jumpMakeEquip('marriage') }}>情缘装备</span></div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )

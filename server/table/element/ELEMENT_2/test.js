@@ -1,3 +1,9 @@
+const gemstone = require('../../knapsack/article/17_gemstone');
+const equipMaterial = require('../../knapsack/article/18_equipMaterial');
+const reel = require('../../knapsack/article/12_reel');
+const reply = require('../../knapsack/article/10_reply');
+const buff = require('../../knapsack/article/11_buff');
+
 const TEST = {
     2999988: {
         id: 2999988,
@@ -5,7 +11,8 @@ const TEST = {
         type: 2,
         level: 1,
         isRanks: true,
-        article: '230-20,235-20,240-20,245-20,250-20,255-20,260-20,265-20,270-20,275-20,280-20,285-20,290-20,295-20',
+        // article: '230-20,235-20,240-20,245-20,250-20,255-20,260-20,265-20,270-20,275-20,280-20,285-20,290-20,295-20',
+        article: gemstone.getArticleList().map(({ id }) => `${id}-20`).join(','),
     },
     2999989: {
         id: 2999989,
@@ -15,7 +22,7 @@ const TEST = {
         level: 1,
         attr: 1,
         isRanks: true,
-        article: '118-200,122-200,126-200,130-200,134-200,138-200,142-200',
+        article: equipMaterial.getArticleList().map(({ id }) => `${id}-200`).join(','),
     },
     2999990: {
         id: 2999990,
@@ -25,7 +32,7 @@ const TEST = {
         level: 1,
         attr: 1,
         isRanks: true,
-        article: '119-200,123-200,127-200,131-200,135-200,139-200,143-200',
+        article: reel.getArticleList().map(({ id }) => `${id}-9900`).join(','),
     },
     2999991: {
         id: 2999991,
@@ -35,7 +42,7 @@ const TEST = {
         level: 1,
         attr: 1,
         isRanks: true,
-        article: '120-200,124-200,128-200,132-200,136-200,140-200,144-200',
+        article: reply.getArticleList().map(({ id }) => `${id}-9900`).join(','),
     },
     2999992: {
         id: 2999992,
@@ -45,7 +52,7 @@ const TEST = {
         level: 1,
         attr: 1,
         isRanks: true,
-        article: '121-200,125-200,129-200,133-200,137-200,141-200,145-200',
+        article: buff.getArticleList().map(({ id }) => `${id}-9900`).join(','),
     },
     2999993: {
         id: 2999993,

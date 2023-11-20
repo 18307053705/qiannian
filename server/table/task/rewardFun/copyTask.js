@@ -19,7 +19,7 @@ module.exports = {
             attr: "exp-50000,world-100",
             tael: 20000,
             yuanbao: 50,
-            article: getArticle([118, 122, 126, 130, 134, 138, 142]),
+            // article: getArticle([118, 122, 126, 130, 134, 138, 142]),
             hide: true
         }
     },
@@ -29,7 +29,7 @@ module.exports = {
             attr: "exp-200000,world-200",
             tael: 50000,
             yuanbao: 50,
-            article: getArticle([118, 122, 126, 130, 134, 138, 142], { minNum: 2, maxNum: 7 }),
+            // article: getArticle([118, 122, 126, 130, 134, 138, 142], { minNum: 2, maxNum: 7 }),
             hide: true
         }
     },

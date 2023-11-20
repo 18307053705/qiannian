@@ -7,7 +7,7 @@ const getArticleDetailUrl = "/knapsack/getArticleDetail";
 type KnapsackType = {
   list: {
     id: number;
-    n: string;
+    name: string;
     p: number;
     s: number;
     ext: string;

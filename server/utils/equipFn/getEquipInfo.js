@@ -1,5 +1,5 @@
 
-const { knapsackTable, AttributeTable } = require('../../table');
+const { knapsackTable, AttributeTable } = require('@table');
 const { computeEquipAttr } = require('./computeEquipAttr');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
      * @returns {*} attr 装备属性
      */
     getEquipInfo: function (equipId, ext) {
-        const equip = knapsackTable.getEquip(equipId);
+        const equip = knapsackTable.getArticle(equipId);
         const { attr } = computeEquipAttr(equip, ext);
         const MEUN = AttributeTable.getAttrMeun();
         const attrMap = {};

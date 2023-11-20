@@ -1,7 +1,3 @@
-// 技能类型type 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物
-// group 1 直接改变某属性（例如恢复药，声望卷轴,元宝卡,银票，勋章宝石一类)
-// group 2 buff类型 如双倍经验卡，临时提升属性的丹药
-
 const articleMap = {
     100: {
         n: '小血瓶',
@@ -79,15 +75,18 @@ const articleMap = {
 
 module.exports = {
     getArticleList: function () {
-        Object.keys(articleMap).map((id) => ({
-            ...articleMap[id],
-            id,
-            unit: 'tael',
-        }))
+        return Object.keys(articleMap).map((id) => {
+            const idNum = Number(id);
+            return {
+                ...articleMap[id],
+                id: idNum,
+                unit: 'tael',
+            }
+        })
     },
-    getArticle: function (articleId) {
-        if (!articleMap[articleId]) {
-            console.log('未找到物品：', articleId);
+    getArticle: function (id) {
+        if (!articleMap[id]) {
+            console.log('未找到物品：', id);
             return;
         }
         return JSON.parse(JSON.stringify({

@@ -23,8 +23,19 @@ module.exports = {
                 return 300000000 + (level % 10 + 1) * 20000000;
             case 9:
                 return 500000000 + (level % 10 + 1) * 50000000;
+            case 10:
+            case 11:
+                return 1000000000 + (level - 100) * 500000000;
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 17:
+            case 18:
+                return 50000000000 + (level - 120) * 1000000000;
             default:
-                return 1000000000 + (level % 10 + 1) * 500000000;
+                return 100000000000 + (level - 180) * 50000000000;
         }
     }
 };

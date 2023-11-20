@@ -1,5 +1,5 @@
-const { getDataName } = require('../../table/knapsack/getDataName');
-
+const { getDataName } = require('@table/knapsack/getDataName');
+const { isEquip } = require('@table/knapsack/article');
 module.exports = {
     /**
      * 设置背包信息
@@ -7,21 +7,17 @@ module.exports = {
      * @returns {*} data
      */
     dataListChang: function (data) {
-        return JSON.parse(data).map(({ id, p, ext, n2, s }) => {
-            const itme = {
-                id,
-                p,
-                s,
-                ext
-            }
-            // 装备存在自定义名称
-            if (n2) {
-                itme.n = n2;
-                itme.n2 = n2;
-            } else {
-                itme.n = getDataName(id, p);
-            }
-            return itme;
-        })
+        try {
+            return JSON.parse(data).map((itme) => {
+                itme.name = itme.n || getDataName(itme.id);
+                if (isEquip(itme.id)) {
+                    itme.s = 1;
+                }
+                return itme;
+            })
+        } catch (error) {
+            console.log('背包JSON解析报错：', data)
+            return [];
+        }
     }
 }

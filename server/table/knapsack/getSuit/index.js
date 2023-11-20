@@ -1,9 +1,5 @@
 const { SUIT_TYPE, SUIT_EFFECT } = require('./suitJosn');
 const { getRoleEleBaseAttr,getRoleBaseAttr } = require('@table/attribute');
-// const { getRoleBaseAttr } = require('../attribute/getRoleBaseAttr');
-// const { getRoleEleBaseAttr } = require('../attribute/getRoleEleBaseAttr');
-
-// const { getRoleEleBaseAttr } = require('@table/attribute/getRoleBaseAttr');
 
 const suitFn = {
     /**

@@ -32,7 +32,7 @@ module.exports = {
                 // 获取物品
                 if (rate > Math.floor(Math.random() * 100)) {
                     const { type, n, id: articleId } = knapsackTable.getArticle(id);
-                    artReward[articleId] = { type, n, id: articleId, s: Number(s) };
+                    artReward[articleId] = { type, name:n, id: articleId, s: Number(s) };
                     textReward.push(`获得[${n}]x${s}`)
                 }
             })

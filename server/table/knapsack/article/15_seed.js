@@ -183,14 +183,17 @@ const articleMap = {
 
 module.exports = {
     getArticleList: function () {
-        Object.keys(articleMap).map((id) => ({
-            ...articleMap[id],
-            id,
-        }))
+        return Object.keys(articleMap).map((id) => {
+            const idNum = Number(id);
+            return {
+                ...articleMap[id],
+                id: idNum,
+            }
+        })
     },
-    getArticle: function (articleId) {
-        if (!articleMap[articleId]) {
-            console.log('未找到物品：', articleId);
+    getArticle: function (id) {
+        if (!articleMap[id]) {
+            console.log('未找到物品：', id);
             return;
         }
         return JSON.parse(JSON.stringify({

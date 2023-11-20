@@ -1,5 +1,4 @@
-const articleList = require('./articleList');
-const equipList = require('./equipList');
+const { getArticle } = require('./article');
 
 module.exports = {
     /**
@@ -8,10 +7,8 @@ module.exports = {
      * @param {*} p 物品类型
      * @returns {*} n 物品名称
      */
-    getDataName: function (articleId, p) {
-        if (p === 3) {
-            return equipList[articleId]['name'];
-        }
-        return articleList[articleId]['n'];
+    getDataName: function (articleId) {
+        const article = getArticle(articleId);
+        return article ? article.n : '';
     }
 }

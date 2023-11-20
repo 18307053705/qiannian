@@ -1,7 +1,3 @@
-// 技能类型type 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物
-// group 1 直接改变某属性（例如恢复药，声望卷轴,元宝卡,银票，勋章宝石一类)
-// group 2 buff类型 如双倍经验卡，临时提升属性的丹药
-
 const articleMap = {
     160: {
         n: '1级房屋宝石',
@@ -104,45 +100,6 @@ const articleMap = {
         tips: '5级徽标宝石，使用后可增加1000点徽标名望。',
     },
     1620: {
-        n: '玉瓷百花瓶',
-        value: 'fw-1000',
-        tips: '摆放在房屋之中可获得1000清洁度,通过炼魂洞副本概率掉落',
-    },
-    1621: {
-        n: '檀木花纹桌',
-        value: 'fw-2000',
-        tips: '摆放在房屋之中可获得2000清洁度,通过炼魂洞副本概率掉落',
-    },
-    1622: {
-        n: '红杏闹春帘',
-        value: 'fw-3000',
-        tips: '摆放在房屋之中可获得3000清洁度,通过炼魂洞副本概率掉落',
-    },
-    1623: {
-        n: '日月春秋床',
-        value: 'fw-5000',
-        tips: '摆放在房屋之中可获得5000清洁度,通过炼魂洞副本概率掉落',
-    },
-    1624: {
-        n: '锦绣山河画',
-        value: 'fw-10000',
-        tips: '摆放在房屋之中可获得10000清洁度,通过炼魂洞副本概率掉落',
-    },
-    1625: {
-        n: '江山社稷图',
-        value: 'fw-20000',
-        tips: '摆放在房屋之中可获得20000清洁度,通过炼魂洞副本概率掉落',
-    },
-    1626: {
-        n: '九州观星台',
-        value: 'fw-50000',
-        tips: '摆放在房屋之中可获得50000清洁度,通过炼魂洞副本概率掉落',
-    },
-    1627: {
-        n: '玄机符',
-        tips: '蕴含神秘力量，可以用来更换聚宝盆目标奖励。',
-    },
-    1628: {
         n: '经验丹',
         price: 100,
         unit: 'yuanbao',
@@ -152,7 +109,7 @@ const articleMap = {
         },
         tips: '角色等级低于30级时使用，等级直接+1，30级及以上可获得100000经验。',
     },
-    1629: {
+    1621: {
         n: '人参果',
         price: 200,
         unit: 'yuanbao',
@@ -162,7 +119,7 @@ const articleMap = {
         },
         tips: '角色等级低于50级时使用，等级直接+1，50级及以上可获得10000000经验。',
     },
-    1630: {
+    1622: {
         n: '猫耳朵',
         price: 500,
         unit: 'yuanbao',
@@ -172,7 +129,7 @@ const articleMap = {
         },
         tips: '角色等级低于70级时使用，等级直接+1，70级及以上可获得100000000经验。',
     },
-    1631: {
+    1623: {
         n: '洗髓丹',
         price: 100,
         unit: 'yuanbao',
@@ -182,18 +139,52 @@ const articleMap = {
         },
         tips: '可重新分配自身的潜力。',
     },
+    1624: {
+        n: '40元宝卡',
+        group1: 'yuanbao-40',
+        value: 40,
+        tips: '可在主城兑换40元宝。',
+    },
+    1625: {
+        n: '60元宝卡',
+        group1: 'yuanbao-60',
+        tips: '可在主城兑换60元宝。',
+    },
+    1626: {
+        n: '100元宝卡',
+        group1: 'yuanbao-100',
+        tips: '可在主城兑换100元宝。',
+    },
+    1627: {
+        n: '200元宝卡',
+        group1: 'yuanbao-200',
+        tips: '可在主城兑换200元宝。',
+    },
+    1628: {
+        n: '500元宝卡',
+        group1: 'yuanbao-500',
+        tips: '可在主城兑换500元宝。',
+    },
+    1629: {
+        n: '1000元宝卡',
+        group1: 'yuanbao-1000',
+        tips: '可在主城兑换1000元宝。',
+    },
 }
 
 module.exports = {
     getArticleList: function () {
-        Object.keys(articleMap).map((id) => ({
-            ...articleMap[id],
-            id,
-        }))
+        return Object.keys(articleMap).map((id) => {
+            const idNum = Number(id);
+            return {
+                ...articleMap[id],
+                id: idNum,
+            }
+        })
     },
-    getArticle: function (articleId) {
-        if (!articleMap[articleId]) {
-            console.log('未找到物品：', articleId);
+    getArticle: function (id) {
+        if (!articleMap[id]) {
+            console.log('未找到物品：', id);
             return;
         }
         return JSON.parse(JSON.stringify({

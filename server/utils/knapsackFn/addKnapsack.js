@@ -5,7 +5,7 @@ module.exports = {
      * 增加物品
      * @param {*} req 
      * @param {*} res 
-     * @param {*} data.article 必传({artReward:{id:{p,s,n,id}}},equipReward:{id:{p,s,n,id}})
+     * @param {*} data.article 必传({id:{s,n}})
      * @param {*} data.data 可选
      * @param {*} data.force 强制添加
      * @returns {string}  message | undefined
@@ -19,6 +19,8 @@ module.exports = {
         if (dataSize === KnapsackG.KNAPSACK_SIZE && !force) {
             return '背包已满,请先清理背包'
         }
+
+        // const addLen = Object.key(article)
 
         const { artReward, equipReward } = article;
         // 物品奖励
@@ -44,22 +46,21 @@ module.exports = {
             }
             //  遍历结束还存在物品奖励，说明物品为新增
             Object.keys(artReward).forEach(key => {
-                const { id, type, p, n, s, num2 } = artReward[key];
-                data.push({ id, n, p: type || p, s: num2 || s });
+                const { id, type, p, name, s, num2 } = artReward[key];
+                data.push({ id, name, p: type || p, s: num2 || s });
                 delete artReward[key];
             })
         }
         // 新增装备
         if (equipReward) {
             Object.keys(equipReward).forEach(key => {
-                const { id, name, n, n2, ext = '0_0_0_0_0_0_0_0_0' } = equipReward[key];
+                const { id, name, n, ext = '0_0_0_0_0_0_0_0_0' } = equipReward[key];
                 data.push({
                     id,
-                    n: name || n,
+                    name,
+                    n,
                     ext,
                     s: 1,
-                    p: 3,
-                    n2
                 });
                 delete equipReward[key];
             })

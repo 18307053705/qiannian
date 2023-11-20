@@ -6,7 +6,7 @@ module.exports = {
         type: 2,
         reward: {
             attr: "exp-200",
-            article: "1-20,2-20",
+            article: "101-20,102-20",
             tael: 1000,
         },
         grand: {

@@ -1,6 +1,4 @@
-const articleList = require('./articleList');
-const equipList = require('./equipList');
-
+const { getArticleList } = require('./article/17_gemstone');
 module.exports = {
     /**
      * 根据某个字段值逆推物品信息
@@ -13,8 +11,7 @@ module.exports = {
      * @returns {*} article.type 
      * @returns {*} article.group1 || group2
      */
-    getKeyBackArticle: function (key, value, p) {
-        const article = p === 3 ? Object.values(equipList) : Object.values(articleList);
-        return article.find((itme) => (itme[key] == value))
+    getKeyBackArticle: function (value) {
+        return getArticleList().find((itme) => (itme['gem'] == value))
     }
 }

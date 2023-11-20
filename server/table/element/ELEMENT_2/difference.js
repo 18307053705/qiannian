@@ -93,6 +93,55 @@ const freakMap = {
         attr: 1,
         integral: 10,
     },
+
+    20615: {
+        name: "黄阶魔将",
+        level: 120,
+        grade: 3,
+        attr: 10,
+    },
+    20616: {
+        name: "玄阶魔将",
+        level: 120,
+        grade: 3,
+        attr: 10,
+    },
+    20617: {
+        name: "地阶魔将",
+        level: 120,
+        grade: 3,
+        attr: 10,
+    },
+    20618: {
+        name: "天阶魔将",
+        level: 120,
+        grade: 3,
+        attr: 10,
+    },
+    20619: {
+        name: "海魔",
+        level: 140,
+        grade: 3,
+        attr: 12,
+    },
+    20620: {
+        name: "地魔",
+        level: 150,
+        attr: 13,
+        grade: 3,
+    },
+    20621: {
+        name: "天魔",
+        level: 150,
+        attr: 14,
+        grade: 3,
+    },
+    20622: {
+        name: "魔尊",
+        level: 180,
+        attr: 15,
+        grade: 3,
+    },
 }
 
 module.exports = {

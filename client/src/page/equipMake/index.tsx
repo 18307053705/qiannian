@@ -7,8 +7,8 @@ import { MakeInfo } from './makeInfo';
 import { worldConfig, gangConfig, marriageConfig, exploitConfig, faBaoConfig } from './config';
 export const GangEquip = ({ history }) => {
     const { state = {}, pathname } = history.location;
+    const { pageKey, level = 0 } = state;
     const { current: initCurrent, equipMeun, tabList } = useMemo(() => {
-        const { pageKey, level = 0 } = state;
         let config: any = {
             current: 0,
             equipMeun: {},
@@ -34,7 +34,7 @@ export const GangEquip = ({ history }) => {
             config.tabList = config.tabList.filter(({ value }) => value < 80);
         }
         return config
-    }, [state])
+    }, [pageKey, level])
 
     const [current, setCurrent] = useState(initCurrent);
     const [material, setMaterial] = useState(0);

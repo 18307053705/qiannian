@@ -70,24 +70,24 @@ const knapsack = ({ history }) => {
         setActive(null);
         const data: any = [];
         if (current === 0) {
-            list.forEach(({ n, ...itme }, index) => {
-                if (n.includes(serchValue)) {
-                    data.push({ n, ...itme, in_x: index })
+            list.forEach(({ name, ...itme }, index) => {
+                if (name.includes(serchValue)) {
+                    data.push({ name, ...itme, in_x: index })
                 }
             });
             return data;
         }
         if (current === 1) {
-            list.forEach(({ n = '', p, ...itme }, index) => {
-                if (((p === 1 || p === 2) && n.includes(serchValue))) {
-                    data.push({ n, p, ...itme, in_x: index })
+            list.forEach(({ name = '', p, ...itme }, index) => {
+                if (((p === 1 || p === 2) && name.includes(serchValue))) {
+                    data.push({ name, p, ...itme, in_x: index })
                 }
             });
             return data;
         }
-        list.forEach(({ n = '', p, ...itme }, index) => {
-            if (p === current && n.includes(serchValue)) {
-                data.push({ n, p, ...itme, in_x: index })
+        list.forEach(({ name = '', p, ...itme }, index) => {
+            if (p === current && name.includes(serchValue)) {
+                data.push({ name, p, ...itme, in_x: index })
             }
         });
 
@@ -125,7 +125,7 @@ const knapsack = ({ history }) => {
         }
     }, [type])
 
-    const prefix = ({ id, n, p, s, ext, in_x }, index) => {
+    const prefix = ({ id, name, p, s, ext, in_x }, index) => {
         return (
             <span
                 key={`${id}_1`}
@@ -138,7 +138,7 @@ const knapsack = ({ history }) => {
                     })
                 }}
             >
-                {index}. {namehandel(n, p, ext)} x {s}
+                {index}. {namehandel(name, p, ext)} x {s}
             </span>
         )
     }

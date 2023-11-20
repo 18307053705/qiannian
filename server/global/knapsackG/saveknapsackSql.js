@@ -1,10 +1,13 @@
 const { KNAPSACK_Global } = require('./config');
 const { getRoleGlobal } = require('../roleG/getRoleGlobal');
-
+const { isEquip } = require('@table/knapsack/article');
 function dataChang(data) {
     const list = JSON.parse(JSON.stringify(data))
     return JSON.stringify(list.map((itme) => {
-        delete itme.n;
+        delete itme.name;
+        if (isEquip(itme.id)) {
+            delete itme.s;
+        }
         return itme
     }))
 }
