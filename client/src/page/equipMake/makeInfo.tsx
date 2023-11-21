@@ -10,7 +10,7 @@ const CAREER_MEUN = {
 export const MakeInfo = ({ material }: any) => {
     const { equip, article, yuanbao, integral } = material;
     const list = useMemo(() => {
-        const text: string[] = Object.values(article || {}).map(({ n, s }: any) => `${n}x${s}`);
+        const text: string[] = Object.values(article || {}).map(({ name, s }: any) => `${name}x${s}`);
         text.push(`${integral.name}x${integral.value}`);
         return text;
     }, [integral, article])

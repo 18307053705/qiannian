@@ -142,6 +142,42 @@ const freakMap = {
         attr: 15,
         grade: 3,
     },
+    20623: {
+        name: "一层守护BOSS",
+        level: 30,
+        attr: 5,
+        grade: 3,
+    },
+    20624: {
+        name: "二层守护BOSS",
+        level: 50,
+        attr: 7,
+        grade: 3,
+    },
+    20625: {
+        name: "三层守护BOSS",
+        level: 70,
+        attr: 8,
+        grade: 3,
+    },
+    20626: {
+        name: "四层守护BOSS",
+        level: 80,
+        attr: 10,
+        grade: 3,
+    },
+    20627: {
+        name: "五层守护BOSS",
+        level: 90,
+        attr: 12,
+        grade: 3,
+    },
+    20628: {
+        name: "六层守护BOSS",
+        level: 100,
+        attr: 15,
+        grade: 3,
+    },
 }
 
 module.exports = {

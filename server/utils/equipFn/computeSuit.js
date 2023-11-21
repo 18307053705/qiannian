@@ -10,7 +10,7 @@ module.exports = {
         const suitIdMap = {};
         const { suit, ...equip } = equip_pool;
         Object.values(equip).forEach(({ id }) => {
-            const { group } = knapsackTable.getEquip(id);
+            const { group } = knapsackTable.getArticle(id);
             if (group) {
                 suitIdMap[group] = suitIdMap[group] ? suitIdMap[group] + 1 : 1;
             }

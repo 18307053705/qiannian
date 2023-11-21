@@ -1,8 +1,6 @@
-const { KnapsackG, GrandG } = require('../../global');
-const { knapsackFn, equipFn } = require('../../utils');
-
-
-
+const { KnapsackG, GrandG } = require('@global');
+const { knapsackFn, equipFn } = require('@utils');
+const { knapsackTable } = require('@table');
 module.exports = {
     /**
      * 物品操作
@@ -15,11 +13,12 @@ module.exports = {
         if (knapsackFn.chekeArticle(req, res, data)) {
             return;
         }
-        const { id, p, n } = data[in_x];
+        const { id, name } = data[in_x];
+        const isEquip = knapsackTable.isEquip(id);
         let message = '';
         let success = '';
         //  使用物品
-        if (type === 1 && p !== 3) {
+        if (type === 1 && !isEquip) {
             const results = knapsackFn.eatArticle(req, res, id, s);
             if (results.success) {
                 success = results.success;
@@ -32,7 +31,7 @@ module.exports = {
 
         }
         // 佩戴装备
-        if (type === 1 && p === 3) {
+        if (type === 1 && isEquip) {
             const results = equipFn.wearEquip(req, res, data[in_x]);
             if (!results.message) {
                 results.replaceEquip ? (data[in_x] = results.replaceEquip) : data.splice(in_x, 1);
@@ -44,8 +43,7 @@ module.exports = {
         // 入库
         if (type === 2) {
             const { data: wareData } = await knapsackFn.getKnapsackInfo(req, res, { type: 3 });
-            const itme = { [id]: { id, p, n, s } }
-            const article = p !== 3 ? { artReward: itme } : { equipReward: itme };
+            const article = { [id]: { id, name, s } };
             const { message, data: newWareData } = knapsackFn.addArticle(article, wareData);
             if (!message) {
                 data[in_x]['s'] -= s;
@@ -59,9 +57,8 @@ module.exports = {
         // 出库
         if (type === 3) {
             const { data: knaData } = await knapsackFn.getKnapsackInfo(req, res);
-            const itme = { [id]: { id, p, n, s } };
-            const article = p !== 3 ? { artReward: itme } : { equipReward: itme };
-            message = knapsackFn.addKnapsack(req, res, { article, data: knaData });
+            const article = { [id]: { id, name, s } }
+            message = knapsackFn.addKnapsack(req, res, article, knaData);
             if (!message) {
                 data[in_x]['s'] -= s;
                 data[in_x]['s'] || data.splice(in_x, 1);
@@ -75,7 +72,7 @@ module.exports = {
             data[in_x]['s'] -= s;
             data[in_x]['s'] || data.splice(in_x, 1);
             KnapsackG.updateknapsackGlobal(req, res, { data });
-            GrandG.setGrandEleGlobal(req, res, { article: [{ id, s, p }] });
+            GrandG.setGrandEleGlobal(req, res, { article: [{ id, s }] });
         }
         res.send({
             code: 0,

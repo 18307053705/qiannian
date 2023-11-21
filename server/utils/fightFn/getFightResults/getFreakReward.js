@@ -19,37 +19,24 @@ module.exports = {
         const { template, player, roundText } = fightMap;
         // 判断是否为深渊怪,是则使用指令中的信息
         const freak = currentDir.shenyuan ? currentDir : ElementTable.getElement(template.id);
-        const { article, equip, exp: f_exp, tael: f_tael, level, grade } = freak;
+        const { article, exp: f_exp, tael: f_tael, level, grade } = freak;
 
         // -----------------计算物品奖励--------------------
         const textReward = [];
         const artReward = {}; // 物品奖励
-        const equipReward = {}; // 装备奖励
         if (article) {
             article.split(',').map(reward => {
                 // 掉落概率默认100
-                const [id, s = 1, rate = 100] = reward.split('-');
+                const [articleId, s = 1, rate = 100] = reward.split('-');
                 // 获取物品
                 if (rate > Math.floor(Math.random() * 100)) {
-                    const { type, n, id: articleId } = knapsackTable.getArticle(id);
-                    artReward[articleId] = { type, name:n, id: articleId, s: Number(s) };
-                    textReward.push(`获得[${n}]x${s}`)
+                    const { name, id } = knapsackTable.getArticle(articleId);
+                    artReward[id] = { name, id, s: Number(s) };
+                    textReward.push(`获得[${name}]x${s}`)
                 }
             })
         }
-        if (equip) {
-            equip.split(',').map(reward => {
-                // 掉落概率默认100
-                const [id, rate = 100] = reward.split('-');
-                // 获取物品
-                if (rate > Math.floor(Math.random() * 100)) {
-                    const { type, name, id: EquipId } = knapsackTable.getEquip(id);
-                    equipReward[EquipId] = { type, n: name, id: EquipId, s: 1 };
-                    textReward.push(`获得[${name}]x1`)
-                }
-            })
-        }
-        const tip = knapsackFn.addKnapsack(req, res, { article: { artReward, equipReward, data: knapsack.data, } });
+        const tip = knapsackFn.addKnapsack(req, res, artReward, { data: knapsack.data });
 
         // -----------------计算经验银两--------------------
         // 获取人物buff

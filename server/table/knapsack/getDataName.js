@@ -9,6 +9,6 @@ module.exports = {
      */
     getDataName: function (articleId) {
         const article = getArticle(articleId);
-        return article ? article.n : '';
+        return article ? article.name : '';
     }
 }

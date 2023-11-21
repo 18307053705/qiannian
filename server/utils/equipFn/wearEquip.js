@@ -15,36 +15,39 @@ module.exports = {
     wearEquip: function (req, res, equip, pos) {
         const { equip_pool, role_attr, role_level, role_career } = RoleG.getRoleGlobal(req, res);
         const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
-        const { id, n, ext } = equip;
+        const { id, name, ext } = equip;
         // 需要进行佩戴的装备
-        const equipWear = knapsackTable.getEquip(id);
+        const equipWear = knapsackTable.getArticle(id);
         // 判断等级是否满足
         if (equipWear.level > role_level) {
             return {
-                message: `等级不足,无法该佩戴${n}`
+                message: `等级不足,无法该佩戴${name}`
             }
         }
         // 判断职业是否满足
         if (equipWear.career) {
             if (equipWear.career === 1 && !([1, 4, 7].includes(role_career))) {
-                return { message: `职业不符合,无法该佩戴${n}` }
+                return { message: `职业不符合,无法该佩戴${name}` }
             }
             if (equipWear.career === 2 && !([2, 5, 8].includes(role_career))) {
-                return { message: `职业不符合,无法该佩戴${n}` }
+                return { message: `职业不符合,无法该佩戴${name}` }
             }
             if (equipWear.career === 3 && !([3, 6, 9].includes(role_career))) {
-                return { message: `职业不符合,无法该佩戴${n}` }
+                return { message: `职业不符合,无法该佩戴${name}` }
             }
         }
 
         const { attr: addAttr, posName } = computeEquipAttr(equipWear, ext);
         const posKey = pos || posName;
         // 替换装备
-        let replaceEquip = equip_pool[posKey];
+        const replaceEquip = equip_pool[posKey];
 
         // 判断该部位是否替换装备
         if (replaceEquip) {
-            const { attr: deleteAttr } = computeEquipAttr(knapsackTable.getEquip(replaceEquip.id), replaceEquip.ext, posKey);
+            replaceEquip.name = replaceEquip.n;
+            replaceEquip.s = 1;
+            delete replaceEquip.n;
+            const { attr: deleteAttr } = computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), replaceEquip.ext, posKey);
             Object.keys(deleteAttr).forEach(key => {
                 if (addAttr[key]) {
                     addAttr[key] -= deleteAttr[key];
@@ -52,13 +55,11 @@ module.exports = {
                     addAttr[key] = deleteAttr[key] * -1
                 }
             })
-            // 物品类型标记为装备
-            replaceEquip.p = 3;
         }
         // 更新装备
         equip_pool[posKey] = {
             id,
-            n,
+            n: name,
             ext
         }
         const { attrs, suit } = computeSuitAttr(equip_pool, old_equip_pool);

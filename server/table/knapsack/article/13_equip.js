@@ -1,6 +1,6 @@
 const articleMap = {
     131: {
-        n: '新手木剑',
+        name: '新手木剑',
         price: 1000,
         unit: 'tael',
         career: 0,
@@ -10,7 +10,7 @@ const articleMap = {
         tips: '制作比较粗糙的木剑,佩戴后可提升些许攻击。'
     },
     132: {
-        n: '新手头巾',
+        name: '新手头巾',
         price: 1000,
         unit: 'tael',
         career: 0,
@@ -20,7 +20,7 @@ const articleMap = {
         tips: '制作比较粗糙的头巾,佩戴后可提升些许法力。'
     },
     133: {
-        n: '新手布衣',
+        name: '新手布衣',
         price: 1000,
         unit: 'tael',
         career: 0,
@@ -30,7 +30,7 @@ const articleMap = {
         tips: '制作比较粗糙的布衣,佩戴后可提升些许生命。'
     },
     134: {
-        n: '新手腰带',
+        name: '新手腰带',
         price: 1000,
         unit: 'tael',
         career: 0,
@@ -40,7 +40,7 @@ const articleMap = {
         tips: '制作比较粗糙的腰带,佩戴后可提升些许防御。'
     },
     135: {
-        n: '新手草鞋',
+        name: '新手草鞋',
         price: 1000,
         unit: 'tael',
         career: 0,
@@ -50,7 +50,7 @@ const articleMap = {
         tips: '制作比较粗糙的草鞋,佩戴后可提升些许闪避。'
     },
     136: {
-        n: '紫金剑',
+        name: '紫金剑',
         price: 5000,
         unit: 'tael',
         career: 0,
@@ -60,7 +60,7 @@ const articleMap = {
         tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的神剑。'
     },
     137: {
-        n: '紫金盔',
+        name: '紫金盔',
         price: 5000,
         unit: 'tael',
         career: 0,
@@ -70,7 +70,7 @@ const articleMap = {
         tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的战盔。'
     },
     138: {
-        n: '紫金甲',
+        name: '紫金甲',
         price: 5000,
         unit: 'tael',
         career: 0,
@@ -80,7 +80,7 @@ const articleMap = {
         tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的战甲。'
     },
     139: {
-        n: '紫金带',
+        name: '紫金带',
         price: 5000,
         unit: 'tael',
         career: 0,
@@ -90,7 +90,7 @@ const articleMap = {
         tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的腰带。'
     },
     1310: {
-        n: '紫金靴',
+        name: '紫金靴',
         price: 5000,
         unit: 'tael',
         career: 0,
@@ -100,7 +100,7 @@ const articleMap = {
         tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的战靴。'
     },
     1311: {
-        n: '皇极法杖',
+        name: '皇极法杖',
         price: 20000,
         unit: 'tael',
         career: 1,
@@ -111,7 +111,7 @@ const articleMap = {
         tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
     1312: {
-        n: '皇极头巾',
+        name: '皇极头巾',
         price: 20000,
         unit: 'tael',
         career: 1,
@@ -122,7 +122,7 @@ const articleMap = {
         tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
     1313: {
-        n: '皇极法袍',
+        name: '皇极法袍',
         price: 20000,
         unit: 'tael',
         career: 1,
@@ -133,7 +133,7 @@ const articleMap = {
         tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
     1314: {
-        n: '皇极束带',
+        name: '皇极束带',
         price: 20000,
         unit: 'tael',
         career: 1,
@@ -144,7 +144,7 @@ const articleMap = {
         tips: '五大皇极套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
     1315: {
-        n: '皇极布鞋',
+        name: '皇极布鞋',
         price: 20000,
         unit: 'tael',
         career: 1,
@@ -155,7 +155,7 @@ const articleMap = {
         tips: '五大皇极套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
     1316: {
-        n: '皇鼎长枪',
+        name: '皇鼎长枪',
         price: 20000,
         unit: 'tael',
         career: 2,
@@ -166,7 +166,7 @@ const articleMap = {
         tips: '五大皇鼎套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
     1317: {
-        n: '皇鼎头盔',
+        name: '皇鼎头盔',
         price: 20000,
         unit: 'tael',
         career: 2,
@@ -177,7 +177,7 @@ const articleMap = {
         tips: '五大皇鼎装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
     1318: {
-        n: '皇鼎战恺',
+        name: '皇鼎战恺',
         price: 20000,
         unit: 'tael',
         career: 2,
@@ -188,7 +188,7 @@ const articleMap = {
         tips: '五大皇鼎套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
     1319: {
-        n: '皇鼎腰带',
+        name: '皇鼎腰带',
         price: 20000,
         unit: 'tael',
         career: 2,
@@ -199,7 +199,7 @@ const articleMap = {
         tips: '五大皇鼎套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
     1320: {
-        n: '皇鼎战靴',
+        name: '皇鼎战靴',
         price: 20000,
         unit: 'tael',
         career: 2,
@@ -210,7 +210,7 @@ const articleMap = {
         tips: '五大皇鼎套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
     1321: {
-        n: '皇泽长弓',
+        name: '皇泽长弓',
         price: 20000,
         unit: 'tael',
         career: 3,
@@ -221,7 +221,7 @@ const articleMap = {
         tips: '五大皇泽套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
     1322: {
-        n: '皇泽头巾',
+        name: '皇泽头巾',
         price: 20000,
         unit: 'tael',
         career: 3,
@@ -232,7 +232,7 @@ const articleMap = {
         tips: '五大皇泽装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
     1323: {
-        n: '皇泽皮衣',
+        name: '皇泽皮衣',
         price: 20000,
         unit: 'tael',
         career: 3,
@@ -243,7 +243,7 @@ const articleMap = {
         tips: '五大皇泽套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
     1324: {
-        n: '皇泽腰带',
+        name: '皇泽腰带',
         price: 20000,
         unit: 'tael',
         career: 3,
@@ -254,7 +254,7 @@ const articleMap = {
         tips: '五大皇泽套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
     1325: {
-        n: '皇泽长靴',
+        name: '皇泽长靴',
         price: 20000,
         unit: 'tael',
         career: 3,
@@ -265,7 +265,7 @@ const articleMap = {
         tips: '五大皇泽套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
     1326: {
-        n: '星辰法杖',
+        name: '星辰法杖',
         career: 1,
         level: 35,
         pos: 1,
@@ -279,7 +279,7 @@ const articleMap = {
         },
     },
     1327: {
-        n: '星辰头巾',
+        name: '星辰头巾',
         career: 1,
         level: 35,
         pos: 2,
@@ -293,7 +293,7 @@ const articleMap = {
         },
     },
     1328: {
-        n: '星辰法袍',
+        name: '星辰法袍',
         career: 1,
         level: 35,
         pos: 3,
@@ -307,7 +307,7 @@ const articleMap = {
         },
     },
     1329: {
-        n: '星辰束带',
+        name: '星辰束带',
         career: 1,
         level: 35,
         pos: 4,
@@ -321,7 +321,7 @@ const articleMap = {
         },
     },
     1330: {
-        n: '星辰布鞋',
+        name: '星辰布鞋',
         career: 1,
         level: 35,
         pos: 5,
@@ -335,7 +335,7 @@ const articleMap = {
         },
     },
     1331: {
-        n: '玉尊战戟',
+        name: '玉尊战戟',
         career: 2,
         level: 35,
         pos: 1,
@@ -349,7 +349,7 @@ const articleMap = {
         },
     },
     1332: {
-        n: '玉尊战盔',
+        name: '玉尊战盔',
         career: 2,
         level: 35,
         pos: 2,
@@ -363,7 +363,7 @@ const articleMap = {
         },
     },
     1333: {
-        n: '玉尊战甲',
+        name: '玉尊战甲',
         career: 2,
         level: 35,
         pos: 3,
@@ -377,7 +377,7 @@ const articleMap = {
         },
     },
     1334: {
-        n: '玉尊战带',
+        name: '玉尊战带',
         career: 2,
         level: 35,
         pos: 4,
@@ -391,7 +391,7 @@ const articleMap = {
         },
     },
     1335: {
-        n: '玉尊战靴',
+        name: '玉尊战靴',
         career: 2,
         level: 35,
         pos: 5,
@@ -405,7 +405,7 @@ const articleMap = {
         },
     },
     1336: {
-        n: '凌影长剑',
+        name: '凌影长剑',
         career: 3,
         level: 35,
         pos: 1,
@@ -419,7 +419,7 @@ const articleMap = {
         },
     },
     1337: {
-        n: '凌影头巾',
+        name: '凌影头巾',
         career: 3,
         level: 35,
         pos: 2,
@@ -433,7 +433,7 @@ const articleMap = {
         },
     },
     1338: {
-        n: '凌影长衣',
+        name: '凌影长衣',
         career: 3,
         level: 35,
         pos: 3,
@@ -447,7 +447,7 @@ const articleMap = {
         },
     },
     1339: {
-        n: '凌影玉束',
+        name: '凌影玉束',
         career: 3,
         level: 35,
         pos: 4,
@@ -461,7 +461,7 @@ const articleMap = {
         },
     },
     1340: {
-        n: '凌影布鞋',
+        name: '凌影布鞋',
         career: 3,
         level: 35,
         pos: 5,
@@ -475,7 +475,7 @@ const articleMap = {
         },
     },
     1341: {
-        n: '飞炼法杖',
+        name: '飞炼法杖',
         career: 1,
         level: 55,
         pos: 1,
@@ -489,7 +489,7 @@ const articleMap = {
         },
     },
     1342: {
-        n: '飞炼头巾',
+        name: '飞炼头巾',
         career: 1,
         level: 55,
         pos: 2,
@@ -503,7 +503,7 @@ const articleMap = {
         },
     },
     1343: {
-        n: '飞炼法袍',
+        name: '飞炼法袍',
         career: 1,
         level: 55,
         pos: 3,
@@ -517,7 +517,7 @@ const articleMap = {
         },
     },
     1344: {
-        n: '飞炼束带',
+        name: '飞炼束带',
         career: 1,
         level: 55,
         pos: 4,
@@ -531,7 +531,7 @@ const articleMap = {
         },
     },
     1345: {
-        n: '飞炼布鞋',
+        name: '飞炼布鞋',
         career: 1,
         level: 55,
         pos: 5,
@@ -545,7 +545,7 @@ const articleMap = {
         },
     },
     1346: {
-        n: '飞尊战戟',
+        name: '飞尊战戟',
         career: 2,
         level: 55,
         pos: 1,
@@ -559,7 +559,7 @@ const articleMap = {
         },
     },
     1347: {
-        n: '飞尊战盔',
+        name: '飞尊战盔',
         career: 2,
         level: 55,
         pos: 2,
@@ -573,7 +573,7 @@ const articleMap = {
         },
     },
     1348: {
-        n: '飞尊战甲',
+        name: '飞尊战甲',
         career: 2,
         level: 55,
         pos: 3,
@@ -587,7 +587,7 @@ const articleMap = {
         },
     },
     1349: {
-        n: '飞尊战带',
+        name: '飞尊战带',
         career: 2,
         level: 55,
         pos: 4,
@@ -601,7 +601,7 @@ const articleMap = {
         },
     },
     1350: {
-        n: '飞尊战靴',
+        name: '飞尊战靴',
         career: 2,
         level: 55,
         pos: 5,
@@ -615,7 +615,7 @@ const articleMap = {
         },
     },
     1351: {
-        n: '飞影长剑',
+        name: '飞影长剑',
         career: 3,
         level: 55,
         pos: 1,
@@ -629,7 +629,7 @@ const articleMap = {
         },
     },
     1352: {
-        n: '飞影头巾',
+        name: '飞影头巾',
         career: 3,
         level: 55,
         pos: 2,
@@ -643,7 +643,7 @@ const articleMap = {
         },
     },
     1353: {
-        n: '飞影长衣',
+        name: '飞影长衣',
         career: 3,
         level: 55,
         pos: 3,
@@ -657,7 +657,7 @@ const articleMap = {
         },
     },
     1354: {
-        n: '飞影玉束',
+        name: '飞影玉束',
         career: 3,
         level: 55,
         pos: 4,
@@ -671,7 +671,7 @@ const articleMap = {
         },
     },
     1355: {
-        n: '飞影布鞋',
+        name: '飞影布鞋',
         career: 3,
         level: 55,
         pos: 5,
@@ -685,7 +685,7 @@ const articleMap = {
         },
     },
     1356: {
-        n: '金光法杖',
+        name: '金光法杖',
         career: 1,
         level: 70,
         pos: 1,
@@ -699,7 +699,7 @@ const articleMap = {
         },
     },
     1357: {
-        n: '金光头巾',
+        name: '金光头巾',
         career: 1,
         level: 70,
         pos: 2,
@@ -713,7 +713,7 @@ const articleMap = {
         },
     },
     1358: {
-        n: '金光法袍',
+        name: '金光法袍',
         career: 1,
         level: 70,
         pos: 3,
@@ -727,7 +727,7 @@ const articleMap = {
         },
     },
     1359: {
-        n: '金光束带',
+        name: '金光束带',
         career: 1,
         level: 70,
         pos: 4,
@@ -741,7 +741,7 @@ const articleMap = {
         },
     },
     1360: {
-        n: '金光布鞋',
+        name: '金光布鞋',
         career: 1,
         level: 70,
         pos: 5,
@@ -755,7 +755,7 @@ const articleMap = {
         },
     },
     1361: {
-        n: '金玉战戟',
+        name: '金玉战戟',
         career: 2,
         level: 70,
         pos: 1,
@@ -769,7 +769,7 @@ const articleMap = {
         },
     },
     1362: {
-        n: '金玉战盔',
+        name: '金玉战盔',
         career: 2,
         level: 70,
         pos: 2,
@@ -783,7 +783,7 @@ const articleMap = {
         },
     },
     1363: {
-        n: '金玉战甲',
+        name: '金玉战甲',
         career: 2,
         level: 70,
         pos: 3,
@@ -797,7 +797,7 @@ const articleMap = {
         },
     },
     1364: {
-        n: '金玉战带',
+        name: '金玉战带',
         career: 2,
         level: 70,
         pos: 4,
@@ -811,7 +811,7 @@ const articleMap = {
         },
     },
     1365: {
-        n: '金玉战靴',
+        name: '金玉战靴',
         career: 2,
         level: 70,
         pos: 5,
@@ -825,7 +825,7 @@ const articleMap = {
         },
     },
     1366: {
-        n: '金流长剑',
+        name: '金流长剑',
         career: 3,
         level: 70,
         pos: 1,
@@ -839,7 +839,7 @@ const articleMap = {
         },
     },
     1367: {
-        n: '金流头巾',
+        name: '金流头巾',
         career: 3,
         level: 70,
         pos: 2,
@@ -853,7 +853,7 @@ const articleMap = {
         },
     },
     1368: {
-        n: '金流长衣',
+        name: '金流长衣',
         career: 3,
         level: 70,
         pos: 3,
@@ -867,7 +867,7 @@ const articleMap = {
         },
     },
     1369: {
-        n: '金流玉束',
+        name: '金流玉束',
         career: 3,
         level: 70,
         pos: 4,
@@ -881,7 +881,7 @@ const articleMap = {
         },
     },
     1370: {
-        n: '金流布鞋',
+        name: '金流布鞋',
         career: 3,
         level: 70,
         pos: 5,
@@ -895,7 +895,7 @@ const articleMap = {
         },
     },
     1371: {
-        n: '无极の法杖',
+        name: '无极の法杖',
         career: 1,
         level: 80,
         pos: 1,
@@ -909,7 +909,7 @@ const articleMap = {
         },
     },
     1372: {
-        n: '无极の头巾',
+        name: '无极の头巾',
         career: 1,
         level: 80,
         pos: 2,
@@ -923,7 +923,7 @@ const articleMap = {
         },
     },
     1373: {
-        n: '无极の法袍',
+        name: '无极の法袍',
         career: 1,
         level: 80,
         pos: 3,
@@ -937,7 +937,7 @@ const articleMap = {
         },
     },
     1374: {
-        n: '无极の束带',
+        name: '无极の束带',
         career: 1,
         level: 80,
         pos: 4,
@@ -951,7 +951,7 @@ const articleMap = {
         },
     },
     1375: {
-        n: '无极の布鞋',
+        name: '无极の布鞋',
         career: 1,
         level: 80,
         pos: 5,
@@ -965,7 +965,7 @@ const articleMap = {
         },
     },
     1376: {
-        n: '守元の战戟',
+        name: '守元の战戟',
         career: 2,
         level: 80,
         pos: 1,
@@ -979,7 +979,7 @@ const articleMap = {
         },
     },
     1377: {
-        n: '守元の战盔',
+        name: '守元の战盔',
         career: 2,
         level: 80,
         pos: 2,
@@ -993,7 +993,7 @@ const articleMap = {
         },
     },
     1378: {
-        n: '守元の战甲',
+        name: '守元の战甲',
         career: 2,
         level: 80,
         pos: 3,
@@ -1007,7 +1007,7 @@ const articleMap = {
         },
     },
     1379: {
-        n: '守元の战带',
+        name: '守元の战带',
         career: 2,
         level: 80,
         pos: 4,
@@ -1021,7 +1021,7 @@ const articleMap = {
         },
     },
     1380: {
-        n: '守元の战靴',
+        name: '守元の战靴',
         career: 2,
         level: 80,
         pos: 5,
@@ -1035,7 +1035,7 @@ const articleMap = {
         },
     },
     1381: {
-        n: '遁一の长剑',
+        name: '遁一の长剑',
         career: 3,
         level: 80,
         pos: 1,
@@ -1049,7 +1049,7 @@ const articleMap = {
         },
     },
     1382: {
-        n: '遁一の头巾',
+        name: '遁一の头巾',
         career: 3,
         level: 80,
         pos: 2,
@@ -1063,7 +1063,7 @@ const articleMap = {
         },
     },
     1383: {
-        n: '遁一の长衣',
+        name: '遁一の长衣',
         career: 3,
         level: 80,
         pos: 3,
@@ -1077,7 +1077,7 @@ const articleMap = {
         },
     },
     1384: {
-        n: '遁一の玉束',
+        name: '遁一の玉束',
         career: 3,
         level: 80,
         pos: 4,
@@ -1091,7 +1091,7 @@ const articleMap = {
         },
     },
     1385: {
-        n: '遁一の布鞋',
+        name: '遁一の布鞋',
         career: 3,
         level: 80,
         pos: 5,
@@ -1105,7 +1105,7 @@ const articleMap = {
         },
     },
     1386: {
-        n: '生死の法杖',
+        name: '生死の法杖',
         career: 1,
         level: 90,
         pos: 1,
@@ -1119,7 +1119,7 @@ const articleMap = {
         },
     },
     1387: {
-        n: '生死の头巾',
+        name: '生死の头巾',
         career: 1,
         level: 90,
         pos: 2,
@@ -1133,7 +1133,7 @@ const articleMap = {
         },
     },
     1388: {
-        n: '生死の法袍',
+        name: '生死の法袍',
         career: 1,
         level: 90,
         pos: 3,
@@ -1147,7 +1147,7 @@ const articleMap = {
         },
     },
     1389: {
-        n: '生死の束带',
+        name: '生死の束带',
         career: 1,
         level: 90,
         pos: 4,
@@ -1161,7 +1161,7 @@ const articleMap = {
         },
     },
     1390: {
-        n: '生死の布鞋',
+        name: '生死の布鞋',
         career: 1,
         level: 90,
         pos: 5,
@@ -1175,7 +1175,7 @@ const articleMap = {
         },
     },
     1391: {
-        n: '永恒の战戟',
+        name: '永恒の战戟',
         career: 2,
         level: 90,
         pos: 1,
@@ -1189,7 +1189,7 @@ const articleMap = {
         },
     },
     1392: {
-        n: '永恒の战盔',
+        name: '永恒の战盔',
         career: 2,
         level: 90,
         pos: 2,
@@ -1203,7 +1203,7 @@ const articleMap = {
         },
     },
     1393: {
-        n: '永恒の战甲',
+        name: '永恒の战甲',
         career: 2,
         level: 90,
         pos: 3,
@@ -1217,7 +1217,7 @@ const articleMap = {
         },
     },
     1394: {
-        n: '永恒の战带',
+        name: '永恒の战带',
         career: 2,
         level: 90,
         pos: 4,
@@ -1231,7 +1231,7 @@ const articleMap = {
         },
     },
     1395: {
-        n: '永恒の战靴',
+        name: '永恒の战靴',
         career: 2,
         level: 90,
         pos: 5,
@@ -1245,7 +1245,7 @@ const articleMap = {
         },
     },
     1396: {
-        n: '太初の古剑',
+        name: '太初の古剑',
         career: 3,
         level: 90,
         pos: 1,
@@ -1259,7 +1259,7 @@ const articleMap = {
         },
     },
     1397: {
-        n: '太初の头巾',
+        name: '太初の头巾',
         career: 3,
         level: 90,
         pos: 2,
@@ -1273,7 +1273,7 @@ const articleMap = {
         },
     },
     1398: {
-        n: '太初の长衣',
+        name: '太初の长衣',
         career: 3,
         level: 90,
         pos: 3,
@@ -1287,7 +1287,7 @@ const articleMap = {
         },
     },
     1399: {
-        n: '太初の玉束',
+        name: '太初の玉束',
         career: 3,
         level: 90,
         pos: 4,
@@ -1301,7 +1301,7 @@ const articleMap = {
         },
     },
     13100: {
-        n: '太初の布鞋',
+        name: '太初の布鞋',
         career: 3,
         level: 90,
         pos: 5,
@@ -1315,7 +1315,7 @@ const articleMap = {
         },
     },
     13101: {
-        n: '黄泉の法杖',
+        name: '黄泉の法杖',
         career: 1,
         level: 100,
         pos: 1,
@@ -1329,7 +1329,7 @@ const articleMap = {
         },
     },
     13102: {
-        n: '黄泉の头巾',
+        name: '黄泉の头巾',
         career: 1,
         level: 100,
         pos: 2,
@@ -1343,7 +1343,7 @@ const articleMap = {
         },
     },
     13103: {
-        n: '黄泉の法袍',
+        name: '黄泉の法袍',
         career: 1,
         level: 100,
         pos: 3,
@@ -1357,7 +1357,7 @@ const articleMap = {
         },
     },
     13104: {
-        n: '黄泉の束带',
+        name: '黄泉の束带',
         career: 1,
         level: 100,
         pos: 4,
@@ -1371,7 +1371,7 @@ const articleMap = {
         },
     },
     13105: {
-        n: '黄泉の布鞋',
+        name: '黄泉の布鞋',
         career: 1,
         level: 100,
         pos: 5,
@@ -1385,7 +1385,7 @@ const articleMap = {
         },
     },
     13106: {
-        n: '阴阳の战戟',
+        name: '阴阳の战戟',
         career: 2,
         level: 100,
         pos: 1,
@@ -1399,7 +1399,7 @@ const articleMap = {
         },
     },
     13107: {
-        n: '阴阳の战盔',
+        name: '阴阳の战盔',
         career: 2,
         level: 100,
         pos: 2,
@@ -1413,7 +1413,7 @@ const articleMap = {
         },
     },
     13108: {
-        n: '阴阳の战甲',
+        name: '阴阳の战甲',
         career: 2,
         level: 100,
         pos: 3,
@@ -1427,7 +1427,7 @@ const articleMap = {
         },
     },
     13109: {
-        n: '阴阳の战带',
+        name: '阴阳の战带',
         career: 2,
         level: 100,
         pos: 4,
@@ -1441,7 +1441,7 @@ const articleMap = {
         },
     },
     13110: {
-        n: '阴阳の战靴',
+        name: '阴阳の战靴',
         career: 2,
         level: 100,
         pos: 5,
@@ -1455,7 +1455,7 @@ const articleMap = {
         },
     },
     13111: {
-        n: '太虚の古剑',
+        name: '太虚の古剑',
         career: 3,
         level: 100,
         pos: 1,
@@ -1469,7 +1469,7 @@ const articleMap = {
         },
     },
     13112: {
-        n: '太虚の头巾',
+        name: '太虚の头巾',
         career: 3,
         level: 100,
         pos: 2,
@@ -1483,7 +1483,7 @@ const articleMap = {
         },
     },
     13113: {
-        n: '太虚の长衣',
+        name: '太虚の长衣',
         career: 3,
         level: 100,
         pos: 3,
@@ -1497,7 +1497,7 @@ const articleMap = {
         },
     },
     13114: {
-        n: '太虚の玉束',
+        name: '太虚の玉束',
         career: 3,
         level: 100,
         pos: 4,
@@ -1511,7 +1511,7 @@ const articleMap = {
         },
     },
     13115: {
-        n: '太虚の布鞋',
+        name: '太虚の布鞋',
         career: 3,
         level: 100,
         pos: 5,
@@ -1525,7 +1525,7 @@ const articleMap = {
         },
     },
     13116: {
-        n: '义薄云天刃',
+        name: '义薄云天刃',
         career: 0,
         level: 60,
         pos: 1,
@@ -1540,7 +1540,7 @@ const articleMap = {
         },
     },
     13117: {
-        n: '义薄云天盔',
+        name: '义薄云天盔',
         career: 0,
         level: 60,
         pos: 2,
@@ -1555,7 +1555,7 @@ const articleMap = {
         },
     },
     13118: {
-        n: '义薄云天甲',
+        name: '义薄云天甲',
         career: 0,
         level: 60,
         pos: 3,
@@ -1570,7 +1570,7 @@ const articleMap = {
         },
     },
     13119: {
-        n: '义薄云天带',
+        name: '义薄云天带',
         career: 0,
         level: 60,
         pos: 4,
@@ -1585,7 +1585,7 @@ const articleMap = {
         },
     },
     13120: {
-        n: '义薄云天靴',
+        name: '义薄云天靴',
         career: 0,
         level: 60,
         pos: 5,
@@ -1600,7 +1600,7 @@ const articleMap = {
         },
     },
     13121: {
-        n: '气吞山河枪',
+        name: '气吞山河枪',
         career: 0,
         level: 75,
         pos: 1,
@@ -1615,7 +1615,7 @@ const articleMap = {
         },
     },
     13122: {
-        n: '气吞山河盔',
+        name: '气吞山河盔',
         career: 0,
         level: 75,
         pos: 2,
@@ -1630,7 +1630,7 @@ const articleMap = {
         },
     },
     13123: {
-        n: '气吞山河甲',
+        name: '气吞山河甲',
         career: 0,
         level: 75,
         pos: 3,
@@ -1645,7 +1645,7 @@ const articleMap = {
         },
     },
     13124: {
-        n: '气吞山河带',
+        name: '气吞山河带',
         career: 0,
         level: 75,
         pos: 4,
@@ -1660,7 +1660,7 @@ const articleMap = {
         },
     },
     13125: {
-        n: '气吞山河靴',
+        name: '气吞山河靴',
         career: 0,
         level: 75,
         pos: 5,
@@ -1675,7 +1675,7 @@ const articleMap = {
         },
     },
     13126: {
-        n: '权倾天下の枪',
+        name: '权倾天下の枪',
         career: 0,
         level: 85,
         pos: 1,
@@ -1690,7 +1690,7 @@ const articleMap = {
         },
     },
     13127: {
-        n: '权倾天下の盔',
+        name: '权倾天下の盔',
         career: 0,
         level: 85,
         pos: 2,
@@ -1705,7 +1705,7 @@ const articleMap = {
         },
     },
     13128: {
-        n: '权倾天下の甲',
+        name: '权倾天下の甲',
         career: 0,
         level: 85,
         pos: 3,
@@ -1720,7 +1720,7 @@ const articleMap = {
         },
     },
     13129: {
-        n: '权倾天下の带',
+        name: '权倾天下の带',
         career: 0,
         level: 85,
         pos: 4,
@@ -1735,7 +1735,7 @@ const articleMap = {
         },
     },
     13130: {
-        n: '权倾天下の靴',
+        name: '权倾天下の靴',
         career: 0,
         level: 85,
         pos: 5,
@@ -1750,7 +1750,7 @@ const articleMap = {
         },
     },
     13131: {
-        n: '醉卧沙场の枪',
+        name: '醉卧沙场の枪',
         career: 0,
         level: 65,
         pos: 1,
@@ -1765,7 +1765,7 @@ const articleMap = {
         },
     },
     13132: {
-        n: '醉卧沙场の盔',
+        name: '醉卧沙场の盔',
         career: 0,
         level: 65,
         pos: 2,
@@ -1780,7 +1780,7 @@ const articleMap = {
         },
     },
     13133: {
-        n: '醉卧沙场の甲',
+        name: '醉卧沙场の甲',
         career: 0,
         level: 65,
         pos: 3,
@@ -1795,7 +1795,7 @@ const articleMap = {
         },
     },
     13134: {
-        n: '醉卧沙场の带',
+        name: '醉卧沙场の带',
         career: 0,
         level: 65,
         pos: 4,
@@ -1810,7 +1810,7 @@ const articleMap = {
         },
     },
     13135: {
-        n: '醉卧沙场の靴',
+        name: '醉卧沙场の靴',
         career: 0,
         level: 65,
         pos: 5,
@@ -1825,7 +1825,7 @@ const articleMap = {
         },
     },
     13136: {
-        n: '天下无双の枪',
+        name: '天下无双の枪',
         career: 0,
         level: 80,
         pos: 1,
@@ -1840,7 +1840,7 @@ const articleMap = {
         },
     },
     13137: {
-        n: '天下无双の盔',
+        name: '天下无双の盔',
         career: 0,
         level: 80,
         pos: 2,
@@ -1855,7 +1855,7 @@ const articleMap = {
         },
     },
     13138: {
-        n: '天下无双の甲',
+        name: '天下无双の甲',
         career: 0,
         level: 80,
         pos: 3,
@@ -1870,7 +1870,7 @@ const articleMap = {
         },
     },
     13139: {
-        n: '天下无双の带',
+        name: '天下无双の带',
         career: 0,
         level: 80,
         pos: 4,
@@ -1885,7 +1885,7 @@ const articleMap = {
         },
     },
     13140: {
-        n: '天下无双の靴',
+        name: '天下无双の靴',
         career: 0,
         level: 80,
         pos: 5,
@@ -1900,7 +1900,7 @@ const articleMap = {
         },
     },
     13141: {
-        n: '天定姻缘の杖',
+        name: '天定姻缘の杖',
         career: 0,
         level: 55,
         pos: 1,
@@ -1915,7 +1915,7 @@ const articleMap = {
         },
     },
     13142: {
-        n: '天定姻缘の冠',
+        name: '天定姻缘の冠',
         career: 0,
         level: 55,
         pos: 2,
@@ -1930,7 +1930,7 @@ const articleMap = {
         },
     },
     13143: {
-        n: '天定姻缘の甲',
+        name: '天定姻缘の甲',
         career: 0,
         level: 55,
         pos: 3,
@@ -1945,7 +1945,7 @@ const articleMap = {
         },
     },
     13144: {
-        n: '天定姻缘の带',
+        name: '天定姻缘の带',
         career: 0,
         level: 55,
         pos: 4,
@@ -1960,7 +1960,7 @@ const articleMap = {
         },
     },
     13145: {
-        n: '天定姻缘の靴',
+        name: '天定姻缘の靴',
         career: 0,
         level: 55,
         pos: 5,
@@ -1975,7 +1975,7 @@ const articleMap = {
         },
     },
     13146: {
-        n: '生死の相契の剑',
+        name: '生死の相契の剑',
         career: 0,
         level: 70,
         pos: 1,
@@ -1990,7 +1990,7 @@ const articleMap = {
         },
     },
     13147: {
-        n: '生死の相契の冠',
+        name: '生死の相契の冠',
         career: 0,
         level: 70,
         pos: 2,
@@ -2005,7 +2005,7 @@ const articleMap = {
         },
     },
     13148: {
-        n: '生死の相契の甲',
+        name: '生死の相契の甲',
         career: 0,
         level: 70,
         pos: 3,
@@ -2020,7 +2020,7 @@ const articleMap = {
         },
     },
     13149: {
-        n: '生死の相契の带',
+        name: '生死の相契の带',
         career: 0,
         level: 70,
         pos: 4,
@@ -2035,7 +2035,7 @@ const articleMap = {
         },
     },
     13150: {
-        n: '生死の相契の靴',
+        name: '生死の相契の靴',
         career: 0,
         level: 70,
         pos: 5,
@@ -2050,7 +2050,7 @@ const articleMap = {
         },
     },
     13151: {
-        n: '三生三世の剑',
+        name: '三生三世の剑',
         career: 0,
         level: 90,
         pos: 1,
@@ -2065,7 +2065,7 @@ const articleMap = {
         },
     },
     13152: {
-        n: '三生三世の冠',
+        name: '三生三世の冠',
         career: 0,
         level: 90,
         pos: 2,
@@ -2080,7 +2080,7 @@ const articleMap = {
         },
     },
     13153: {
-        n: '三生三世の甲',
+        name: '三生三世の甲',
         career: 0,
         level: 90,
         pos: 3,
@@ -2095,7 +2095,7 @@ const articleMap = {
         },
     },
     13154: {
-        n: '三生三世の带',
+        name: '三生三世の带',
         career: 0,
         level: 90,
         pos: 4,
@@ -2110,7 +2110,7 @@ const articleMap = {
         },
     },
     13155: {
-        n: '三生三世の靴',
+        name: '三生三世の靴',
         career: 0,
         level: 90,
         pos: 5,
@@ -2125,7 +2125,7 @@ const articleMap = {
         },
     },
     13156: {
-        n: '才子佳人の剑',
+        name: '才子佳人の剑',
         career: 0,
         level: 77,
         pos: 1,
@@ -2135,7 +2135,7 @@ const articleMap = {
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13157: {
-        n: '才子佳人の冠',
+        name: '才子佳人の冠',
         career: 0,
         level: 77,
         pos: 2,
@@ -2145,7 +2145,7 @@ const articleMap = {
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13158: {
-        n: '才子佳人の甲',
+        name: '才子佳人の甲',
         career: 0,
         level: 77,
         pos: 3,
@@ -2155,7 +2155,7 @@ const articleMap = {
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13159: {
-        n: '才子佳人の带',
+        name: '才子佳人の带',
         career: 0,
         level: 77,
         pos: 4,
@@ -2165,7 +2165,7 @@ const articleMap = {
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13160: {
-        n: '才子佳人の靴',
+        name: '才子佳人の靴',
         career: 0,
         level: 77,
         pos: 5,
@@ -2175,7 +2175,7 @@ const articleMap = {
         tips: '77级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13161: {
-        n: '君临天下の剑',
+        name: '君临天下の剑',
         career: 0,
         level: 99,
         pos: 1,
@@ -2185,7 +2185,7 @@ const articleMap = {
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13162: {
-        n: '君临天下の冠',
+        name: '君临天下の冠',
         career: 0,
         level: 99,
         pos: 2,
@@ -2195,7 +2195,7 @@ const articleMap = {
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13163: {
-        n: '君临天下の甲',
+        name: '君临天下の甲',
         career: 0,
         level: 99,
         pos: 3,
@@ -2205,7 +2205,7 @@ const articleMap = {
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13164: {
-        n: '君临天下の带',
+        name: '君临天下の带',
         career: 0,
         level: 99,
         pos: 4,
@@ -2215,7 +2215,7 @@ const articleMap = {
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13165: {
-        n: '君临天下の靴',
+        name: '君临天下の靴',
         career: 0,
         level: 99,
         pos: 5,
@@ -2225,7 +2225,7 @@ const articleMap = {
         tips: '99级全职业活动套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13166: {
-        n: '海誓山盟の戒',
+        name: '海誓山盟の戒',
         career: 0,
         level: 35,
         pos: 6,
@@ -2240,7 +2240,7 @@ const articleMap = {
         },
     },
     13167: {
-        n: '海誓山盟の项链',
+        name: '海誓山盟の项链',
         career: 0,
         level: 35,
         pos: 7,
@@ -2255,7 +2255,7 @@ const articleMap = {
         },
     },
     13168: {
-        n: '吉祥如意の戒',
+        name: '吉祥如意の戒',
         career: 0,
         level: 55,
         pos: 6,
@@ -2270,7 +2270,7 @@ const articleMap = {
         },
     },
     13169: {
-        n: '吉祥如意の项链',
+        name: '吉祥如意の项链',
         career: 0,
         level: 55,
         pos: 7,
@@ -2285,7 +2285,7 @@ const articleMap = {
         },
     },
     13170: {
-        n: '造化五行の戒',
+        name: '造化五行の戒',
         career: 0,
         level: 70,
         pos: 6,
@@ -2300,7 +2300,7 @@ const articleMap = {
         },
     },
     13171: {
-        n: '造化五行の项链',
+        name: '造化五行の项链',
         career: 0,
         level: 70,
         pos: 7,
@@ -2315,7 +2315,7 @@ const articleMap = {
         },
     },
     13172: {
-        n: '不死不灭の戒',
+        name: '不死不灭の戒',
         career: 0,
         level: 70,
         pos: 6,
@@ -2330,7 +2330,7 @@ const articleMap = {
         },
     },
     13173: {
-        n: '不死不灭の项链',
+        name: '不死不灭の项链',
         career: 0,
         level: 70,
         pos: 7,
@@ -2345,7 +2345,7 @@ const articleMap = {
         },
     },
     13174: {
-        n: '幽冥碧落の戒',
+        name: '幽冥碧落の戒',
         career: 0,
         level: 80,
         pos: 6,
@@ -2359,7 +2359,7 @@ const articleMap = {
         },
     },
     13175: {
-        n: '幽冥碧落の项链',
+        name: '幽冥碧落の项链',
         career: 0,
         level: 80,
         pos: 7,
@@ -2373,7 +2373,7 @@ const articleMap = {
         },
     },
     13176: {
-        n: '诸神黄昏の戒',
+        name: '诸神黄昏の戒',
         career: 0,
         level: 90,
         pos: 6,
@@ -2387,7 +2387,7 @@ const articleMap = {
         },
     },
     13177: {
-        n: '诸神黄昏の项链',
+        name: '诸神黄昏の项链',
         career: 0,
         level: 90,
         pos: 7,
@@ -2401,7 +2401,7 @@ const articleMap = {
         },
     },
     13178: {
-        n: '大道同源の戒',
+        name: '大道同源の戒',
         career: 0,
         level: 99,
         pos: 6,
@@ -2415,7 +2415,7 @@ const articleMap = {
         },
     },
     13179: {
-        n: '大道同源の项链',
+        name: '大道同源の项链',
         career: 0,
         level: 99,
         pos: 7,
@@ -2429,7 +2429,7 @@ const articleMap = {
         },
     },
     13180: {
-        n: '九歌の戒',
+        name: '九歌の戒',
         career: 0,
         level: 50,
         pos: 6,
@@ -2439,7 +2439,7 @@ const articleMap = {
         tips: '50级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13181: {
-        n: '断魂の项链',
+        name: '断魂の项链',
         career: 0,
         level: 50,
         pos: 7,
@@ -2449,7 +2449,7 @@ const articleMap = {
         tips: '50级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13182: {
-        n: '上善若水の戒',
+        name: '上善若水の戒',
         career: 0,
         level: 99,
         pos: 6,
@@ -2459,7 +2459,7 @@ const articleMap = {
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13183: {
-        n: '上善若水の项链',
+        name: '上善若水の项链',
         career: 0,
         level: 99,
         pos: 7,
@@ -2469,7 +2469,7 @@ const articleMap = {
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13184: {
-        n: '嗜血枪',
+        name: '嗜血枪',
         career: 0,
         level: 66,
         pos: 8,
@@ -2483,7 +2483,7 @@ const articleMap = {
         },
     },
     13185: {
-        n: '水月镜',
+        name: '水月镜',
         career: 0,
         level: 66,
         pos: 9,
@@ -2497,7 +2497,7 @@ const articleMap = {
         },
     },
     13186: {
-        n: '破空枪[冰]',
+        name: '破空枪[冰]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2511,7 +2511,7 @@ const articleMap = {
         },
     },
     13187: {
-        n: '破空枪[雷]',
+        name: '破空枪[雷]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2525,7 +2525,7 @@ const articleMap = {
         },
     },
     13188: {
-        n: '破空枪[风]',
+        name: '破空枪[风]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2539,7 +2539,7 @@ const articleMap = {
         },
     },
     13189: {
-        n: '破空枪[水]',
+        name: '破空枪[水]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2553,7 +2553,7 @@ const articleMap = {
         },
     },
     13190: {
-        n: '破空枪[火]',
+        name: '破空枪[火]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2567,7 +2567,7 @@ const articleMap = {
         },
     },
     13191: {
-        n: '鬼脸镜[冰]',
+        name: '鬼脸镜[冰]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2581,7 +2581,7 @@ const articleMap = {
         },
     },
     13192: {
-        n: '鬼脸镜[雷]',
+        name: '鬼脸镜[雷]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2595,7 +2595,7 @@ const articleMap = {
         },
     },
     13193: {
-        n: '鬼脸镜[风]',
+        name: '鬼脸镜[风]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2609,7 +2609,7 @@ const articleMap = {
         },
     },
     13194: {
-        n: '鬼脸镜[水]',
+        name: '鬼脸镜[水]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2623,7 +2623,7 @@ const articleMap = {
         },
     },
     13195: {
-        n: '鬼脸镜[火]',
+        name: '鬼脸镜[火]',
         career: 0,
         level: 66,
         pos: 8,
@@ -2637,7 +2637,7 @@ const articleMap = {
         },
     },
     13196: {
-        n: '五法霹雳珠[冰]',
+        name: '五法霹雳珠[冰]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2651,7 +2651,7 @@ const articleMap = {
         },
     },
     13197: {
-        n: '五法霹雳珠[雷]',
+        name: '五法霹雳珠[雷]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2665,7 +2665,7 @@ const articleMap = {
         },
     },
     13198: {
-        n: '五法霹雳珠[风]',
+        name: '五法霹雳珠[风]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2679,7 +2679,7 @@ const articleMap = {
         },
     },
     13199: {
-        n: '五法霹雳珠[水]',
+        name: '五法霹雳珠[水]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2693,7 +2693,7 @@ const articleMap = {
         },
     },
     13200: {
-        n: '五法霹雳珠[火]',
+        name: '五法霹雳珠[火]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2707,7 +2707,7 @@ const articleMap = {
         },
     },
     13201: {
-        n: '五法乾坤袋[冰]',
+        name: '五法乾坤袋[冰]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2721,7 +2721,7 @@ const articleMap = {
         },
     },
     13202: {
-        n: '五法乾坤袋[雷]',
+        name: '五法乾坤袋[雷]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2735,7 +2735,7 @@ const articleMap = {
         },
     },
     13203: {
-        n: '五法乾坤袋[风]',
+        name: '五法乾坤袋[风]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2749,7 +2749,7 @@ const articleMap = {
         },
     },
     13204: {
-        n: '五法乾坤袋[水]',
+        name: '五法乾坤袋[水]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2763,7 +2763,7 @@ const articleMap = {
         },
     },
     13205: {
-        n: '五法乾坤袋[火]',
+        name: '五法乾坤袋[火]',
         career: 0,
         level: 75,
         pos: 8,
@@ -2777,7 +2777,7 @@ const articleMap = {
         },
     },
     13206: {
-        n: '山河社稷の图',
+        name: '山河社稷の图',
         career: 0,
         level: 90,
         pos: 8,
@@ -2792,7 +2792,7 @@ const articleMap = {
         },
     },
     13207: {
-        n: '九纹大道の钟',
+        name: '九纹大道の钟',
         career: 0,
         level: 90,
         pos: 8,
@@ -2807,7 +2807,7 @@ const articleMap = {
         },
     },
     13208: {
-        n: '青莲造化の盏',
+        name: '青莲造化の盏',
         career: 0,
         level: 99,
         pos: 8,
@@ -2823,7 +2823,7 @@ const articleMap = {
         },
     },
     13209: {
-        n: '大道轮回の印',
+        name: '大道轮回の印',
         career: 0,
         level: 99,
         pos: 8,
@@ -2839,7 +2839,7 @@ const articleMap = {
         },
     },
     13210: {
-        n: '月华相思の戒',
+        name: '月华相思の戒',
         career: 0,
         level: 99,
         pos: 6,
@@ -2849,7 +2849,7 @@ const articleMap = {
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13211: {
-        n: '月华相思の项链',
+        name: '月华相思の项链',
         career: 0,
         level: 99,
         pos: 7,
@@ -2859,7 +2859,7 @@ const articleMap = {
         tips: '99级活动首饰套装,佩戴后可提供强大的属性加成,可以在神装活动内兑换成积分。'
     },
     13212: {
-        n: '玄炎戒',
+        name: '玄炎戒',
         career: 0,
         level: 25,
         pos: 6,
@@ -2867,7 +2867,7 @@ const articleMap = {
         tips: '蕴含一缕奇异火焰的戒指，佩戴后可获得大幅度增加命中。'
     },
     13213: {
-        n: '青木镯',
+        name: '青木镯',
         career: 0,
         level: 25,
         pos: 7,
@@ -2875,7 +2875,7 @@ const articleMap = {
         tips: '使用青木所铸造的手镯，佩戴后可获得极端的毁灭。'
     },
     13214: {
-        n: '紫气戒',
+        name: '紫气戒',
         career: 0,
         level: 10,
         pos: 6,
@@ -2883,7 +2883,7 @@ const articleMap = {
         tips: '每日初晨采集紫霞之气,足足七七四十九日方铸造而成的戒指。'
     },
     13215: {
-        n: '紫气镯',
+        name: '紫气镯',
         career: 0,
         level: 10,
         pos: 7,

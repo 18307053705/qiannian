@@ -11,7 +11,7 @@ module.exports = {
      * @returns {string}  success 成功信息
      */
     eatArticle: function (req, res, id, s) {
-        const { group1, group2, n } = knapsackTable.getArticle(id);
+        const { group1, group2, name } = knapsackTable.getArticle(id);
         if (group1) {
             const { message, text } = EffectTable.group1Fn(req, res, group1, s);
             if (message) {
@@ -21,11 +21,11 @@ module.exports = {
                 })
                 return false;
             }
-            return { success: `消耗${s}${n},${text}` };
+            return { success: `消耗${s}${name},${text}` };
         }
         if (group2) {
-            const {  text } =  EffectTable.group2Fn(req, res, group2, s);
-            return { success: `消耗${s}${n},${text}` };
+            const { text } = EffectTable.group2Fn(req, res, group2, s);
+            return { success: `消耗${s}${name},${text}` };
 
         }
         return { message: "该物品无法直接使用。" };

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { getKnapsack, initKnapsack, operate } from '@cgi/knapsack';
 import { grounding } from '@cgi/paiMai';
-import { getEquipName } from '@utils/equip'
+import { getEquipName } from '@utils/equip';
 import { jumpDetail } from '@utils/jumpPage'
 import { List, Tab, Input } from '@components';
+import { dataChange } from './useData';
 // 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物
 const nva = [
     {
@@ -12,30 +13,30 @@ const nva = [
     },
     {
         label: '装备',
-        value: 3
-    }, {
-        label: '药品',
         value: 1
     }, {
+        label: '药品',
+        value: 2
+    }, {
         label: '卷轴',
-        value: 4
+        value: 3
     },
     {
         label: '材料',
-        value: 5
+        value: 4
     },
     {
         label: '任务',
-        value: 6
+        value: 5
     },
     {
         label: '杂物',
-        value: 7
+        value: 6
     }];
 
 
 const namehandel = (n, p, ext) => {
-    if (p !== 3) {
+    if (p !== 1) {
         return n;
     }
     return getEquipName({ ext, n });
@@ -51,47 +52,24 @@ const ACTIVE_TYPE = {
 
 const knapsack = ({ history }) => {
     const { state, pathname } = history.location;
-    const [active, setActive] = useState();
-    // const listRef: any = useRef();
+    const [active, setActive]: any = useState();
     // 缓存处理
     const { type = 1, serchValue = '', current = 0 } = state;
     const [knapsack, setKnapsack] = useState(initKnapsack);
     useEffect(() => {
         getKnapsack({ type }).then(({ data }) => {
-            setKnapsack(data);
+            setKnapsack(dataChange(data));
         });
     }, [])
-
-
 
     const { list, tael, yuanbao } = knapsack;
     const data = useMemo(() => {
         // 初始化表格配置
         setActive(null);
-        const data: any = [];
         if (current === 0) {
-            list.forEach(({ name, ...itme }, index) => {
-                if (name.includes(serchValue)) {
-                    data.push({ name, ...itme, in_x: index })
-                }
-            });
-            return data;
+            return list.filter(({ name }) => name.includes(serchValue));
         }
-        if (current === 1) {
-            list.forEach(({ name = '', p, ...itme }, index) => {
-                if (((p === 1 || p === 2) && name.includes(serchValue))) {
-                    data.push({ name, p, ...itme, in_x: index })
-                }
-            });
-            return data;
-        }
-        list.forEach(({ name = '', p, ...itme }, index) => {
-            if (p === current && name.includes(serchValue)) {
-                data.push({ name, p, ...itme, in_x: index })
-            }
-        });
-
-        return data;
+        return list.filter(({ name, p }) => p === current && name.includes(serchValue));
 
     }, [current, list, serchValue]);
 
@@ -105,12 +83,12 @@ const knapsack = ({ history }) => {
             return;
         }
         operate(parms).then(({ data }) => {
-            setKnapsack(data);
+            setKnapsack(dataChange(data));
         })
     }
 
     const activeClick = useCallback((in_x, s, p) => {
-        if (p === 3 && type !== 5) {
+        if (p === 1 && type !== 5) {
             operateClick({
                 in_x,
                 s: 1,
