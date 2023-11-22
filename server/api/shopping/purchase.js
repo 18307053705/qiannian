@@ -60,11 +60,13 @@ module.exports = {
             }
             const artReward = {
                 [durg.id]: {
-                    ...durg,
-                    s
+                    s,
+                    id: durg.id,
+                    name: durg.n,
+                    ext: durg.ext
                 }
             }
-            const message = knapsackFn.addKnapsack(req, res, { article: { artReward } });
+            const message = knapsackFn.addKnapsack(req, res, artReward);
             if (message) {
                 res.send({
                     code: 0,

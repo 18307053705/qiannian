@@ -1,5 +1,6 @@
 import React from "react";
-export const PetAttr = ({ attr }) => {
+import { PET_TYPE_MEUN } from '@meun';
+export const PetAttr = ({ attr, type }) => {
     return (
         <div>
             <div><span>生命：{`${attr.life}/${attr.life_max}`}</span></div>
@@ -19,6 +20,8 @@ export const PetAttr = ({ attr }) => {
             <div><span>水防：{`${attr.water_dfs_min || 0}~${attr.water_dfs_max || 0}`}</span></div>
             <div><span>火攻：{`${attr.fire_atk_min || 0}~${attr.fire_atk_max || 0}`}</span></div>
             <div><span>火防：{`${attr.fire_dfs_min || 0}~${attr.fire_dfs_max || 0}`}</span></div>
+            <div><span>火防：{`${attr.fire_dfs_min || 0}~${attr.fire_dfs_max || 0}`}</span></div>
+            <div><span>性格：{PET_TYPE_MEUN[type]}</span></div>
         </div>
     )
 

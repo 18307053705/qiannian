@@ -75,9 +75,9 @@ module.exports = {
         //     articleInfo = p === 3 ? knapsackTable.getEquip(id) : knapsackTable.getArticle(id);
         // }
         if (articleInfo) {
-            const { p, type, id, ext } = articleInfo;
+            const { id, ext } = articleInfo;
             let data = undefined;
-            if (p === 3 || type === 3) {
+            if (knapsackTable.isEquip(id)) {
                 let exts = form === 7 ? '16_50_9_0_0_0_0_0_0' : (ext || '0_0_0_0_0_0_0_0_0');
                 data = equipFn.getEquipInfo(id, exts);
                 data.ext = exts;

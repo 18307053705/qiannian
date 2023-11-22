@@ -17,7 +17,7 @@ module.exports = {
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const equip = data[in_x] || {};
-        if (equip['p'] !== 3) {
+        if (!knapsackTable.isEquip(equip.id)) {
             res.send({
                 code: 0,
                 message: '物品信息有误'
@@ -33,19 +33,19 @@ module.exports = {
             return;
         }
         let isForge = false;
-        const { level, career } = knapsackTable.getEquip(equip['id']);
-        let materialId = [106, 106, 110, 114][career];
+        const { level, career } = knapsackTable.getArticle(equip['id']);
+        let materialId = [1849, 1849, 1853, 1857][career];
         let y_b = 20;
         if (level > 35) {
-            materialId = [107, 107, 111, 115][career];
+            materialId = [1850, 1850, 1854, 1858][career];
             y_b = 50;
         }
         if (level > 69) {
-            materialId = [108, 108, 112, 116][career];
+            materialId = [1851, 1851, 1855, 1859][career];
             y_b = 100;
         }
         if (level > 74) {
-            materialId = [109, 109, 113, 117][career];
+            materialId = [1852, 1852, 1856, 1860][career];
             y_b = 200;
         }
         let result = {
@@ -54,16 +54,8 @@ module.exports = {
         };
         if (materialtype === 1) {
             isForge = true;
-            const { type: p, n, } = knapsackTable.getArticle(materialId);
-            const { message, data: chengData, delInx } = knapsackFn.deleteKnapsack(req, res, {
-                article: {
-                    [materialId]: {
-                        p,
-                        n,
-                        s: 1
-                    }
-                }
-            });
+            const { name } = knapsackTable.getArticle(materialId);
+            const { message, data: chengData, delInx } = knapsackFn.deleteKnapsack(req, res, { [materialId]: { name, s: 1 } });
             if (message) {
                 res.send({
                     code: 0,

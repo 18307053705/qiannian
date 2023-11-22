@@ -12,7 +12,7 @@ module.exports = {
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const equip = data[in_x] || {};
-        if (equip['p'] !== 3) {
+        if (!knapsackTable.isEquip(equip.id)) {
             res.send({
                 code: 0,
                 message: '物品信息有误'

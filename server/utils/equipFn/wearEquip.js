@@ -62,6 +62,9 @@ module.exports = {
             n: name,
             ext
         }
+        if (equip.n) {
+            equip_pool[posKey]['n2'] = equip.n;
+        }
         const { attrs, suit } = computeSuitAttr(equip_pool, old_equip_pool);
         // 更新套装信息
         equip_pool['suit'] = suit;

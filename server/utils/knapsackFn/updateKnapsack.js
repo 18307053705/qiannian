@@ -1,15 +1,5 @@
 
 const { KnapsackG } = require("../../global");
-
-function dataChang(data) {
-    const list = JSON.parse(JSON.stringify(data));
-    return JSON.stringify(list.map((itme) => {
-        delete itme.n;
-        return itme
-    }));
-}
-
-
 module.exports = {
     /**
      * 更新背包
@@ -27,7 +17,7 @@ module.exports = {
         // 否则直接更新sql
         const upData = [];
         Object.keys(data).forEach(key => {
-            const value = key === 'data' ? dataChang(data[key]) : data[key];
+            const value = key === 'data' ? KnapsackG.saveSqlChang(data[key]) : data[key];
             upData.push(`${key}='${value}'`)
         })
         const { results } = await res.asyncQuery(`update knapsack  SET ${upData.join(',')}  where role_id="${role_id}"`);

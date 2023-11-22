@@ -1,13 +1,13 @@
 const article = require('./article');
 const getDataName = require('./getDataName');
-const getKeyBackArticle = require('./getKeyBackArticle');
+const getGemInfo = require('./getGemInfo');
 const getArticleListAll = require('./getArticleListAll');
 const getSuit = require('./getSuit');
 
 module.exports = {
     ...article,
     ...getDataName,
-    ...getKeyBackArticle,
+    ...getGemInfo,
     ...getArticleListAll,
     ...getSuit
 }

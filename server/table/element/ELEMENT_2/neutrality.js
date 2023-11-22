@@ -12,64 +12,64 @@ const freakMap = {
         level: 12,
     },
     2043: {
-        name: "树妖",
+        name: "鹰眼猴",
         level: 12,
     },
     2044: {
+        name: "蛇妖",
+        level: 12,
+    },
+    2045: {
+        name: "树妖",
+        level: 12,
+    },
+    2046: {
         name: "赤炎蜘蛛",
         level: 15,
     },
-    2045: {
+    2047: {
         name: "灵异小妖",
         level: 15,
     },
-    2047: {
+    2048: {
         name: "骷髅剑客",
         level: 32,
         attr: 2,
     },
-    2048: {
+    2049: {
+        name: "骷髅刀客",
+        level: 32,
+        attr: 2,
+    },
+    20410: {
         name: "八爪章鱼",
         level: 32,
         attr: 2,
     },
-    2049: {
-        name: "骷髅骑士",
-        level: 35,
-        attr: 3,
-    },
-    20410: {
+    20411: {
         name: "九头大蛇",
         level: 35,
         attr: 3,
     },
-    20411: {
-        name: "骷髅护卫",
-        level: 38,
-        attr: 3,
-    },
     20412: {
-        name: "龙鹰剑士",
-        level: 38,
-        attr: 3,
+        name: "海底幽灵",
+        level: 32,
+        attr: 2,
     },
     20413: {
-        name: "御龙大将军",
-        level: 40,
-        grade: 2,
-        attr: 4,
+        name: "海底幽魂",
+        level: 35,
+        attr: 3,
     },
     20414: {
-        name: "蚌精",
-        level: 50,
-        attr: 10,
-        grade: 2,
+        name: "骷髅骑士",
+        level: 32,
+        attr: 2,
     },
     20415: {
-        name: "老龟",
-        level: 50,
-        attr: 10,
-        grade: 2,
+        name: "骷髅护卫",
+        level: 35,
+        attr: 3,
     },
     20416: {
         name: "虾兵",
@@ -96,115 +96,145 @@ const freakMap = {
         attr: 10,
     },
     20420: {
-        name: "千年蛟龙",
+        name: "深海巨鲸",
         level: 50,
         grade: 2,
         attr: 10,
     },
     20421: {
-        name: "火蟒虎",
-        level: 70,
+        name: "深海白鲨",
+        level: 50,
         grade: 2,
         attr: 10,
     },
     20422: {
-        name: "冰晶狼",
-        level: 70,
+        name: "深海蚌精",
+        level: 50,
         grade: 2,
         attr: 10,
     },
     20423: {
-        name: "上古巨蟒",
-        level: 70,
+        name: "深海螺精",
+        level: 50,
         grade: 2,
         attr: 10,
     },
     20424: {
-        name: "五色巨蟒",
+        name: "千眼魔蛛",
         level: 70,
         grade: 2,
         attr: 10,
     },
     20425: {
-        name: "上古泰坦",
-        level: 80,
+        name: "万足蜈蚣",
+        level: 70,
         grade: 2,
         attr: 10,
     },
     20426: {
-        name: "上古神猿",
-        level: 80,
+        name: "千臂魔猿",
+        level: 70,
         grade: 2,
         attr: 10,
     },
     20427: {
-        name: "万年孤魂",
-        level: 90,
+        name: "泰坦魔猿",
+        level: 70,
         grade: 2,
         attr: 10,
     },
     20428: {
-        name: "万年野鬼",
-        level: 90,
+        name: "万年蛟龙",
+        level: 80,
         grade: 2,
         attr: 10,
     },
     20429: {
+        name: "化龙天劫",
+        level: 80,
+        grade: 2,
+        attr: 10,
+    },
+    20430: {
+        name: "九色神鹿",
+        level: 80,
+        grade: 2,
+        attr: 10,
+    },
+    20431: {
+        name: "烛龙气息",
+        level: 80,
+        grade: 2,
+        attr: 10,
+    },
+    20432: {
+        name: "黄泉孤魂",
+        level: 90,
+        grade: 2,
+        attr: 10,
+    },
+    20433: {
+        name: "黄泉野鬼",
+        level: 90,
+        grade: 2,
+        attr: 10,
+    },
+    20434: {
         name: "彼岸花妖",
         level: 100,
         grade: 2,
         attr: 10,
     },
-    20430: {
+    20435: {
         name: "彼岸花灵",
         level: 100,
         grade: 2,
         attr: 10,
     },
-    20431: {
-        name: "万年情执",
+    20436: {
+        name: "情执",
         level: 110,
         grade: 2,
         attr: 10,
     },
-    20432: {
-        name: "万年恨执",
+    20437: {
+        name: "恨执",
         level: 110,
         grade: 2,
         attr: 10,
     },
-    20433: {
+    20438: {
         name: "过去因果",
         level: 120,
         grade: 2,
         attr: 10,
     },
-    20434: {
+    20439: {
         name: "未来因果",
         level: 120,
         grade: 2,
         attr: 10,
     },
-    20435: {
+    20440: {
         name: "恶念",
         level: 120,
         grade: 2,
         attr: 10,
     },
-    20436: {
+    20441: {
         name: "善念",
         level: 120,
         grade: 2,
         attr: 10,
     },
-    20437: {
+    20442: {
         name: "孟婆化身",
         level: 120,
         grade: 2,
         attr: 10,
     },
-    20438: {
-        name: "魂河古龙",
+    20443: {
+        name: "魂河冥龙",
         level: 120,
         grade: 2,
         attr: 10,

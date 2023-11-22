@@ -4,13 +4,12 @@ const { knapsackFn } = require('../../utils');
 const materialIdMap = {
     // 强化卡初始id 90-105 1-16
     1: function (firm) {
-        const id = 90 + firm;
-        const { type: p, n, } = knapsackTable.getArticle(id);
+        const id = 1833 + firm;
+        const { name } = knapsackTable.getArticle(id);
         return {
             article: {
                 [id]: {
-                    p,
-                    n,
+                    name,
                     s: 1
                 }
             },
@@ -19,12 +18,11 @@ const materialIdMap = {
     },
     2: function (firm) {
         const s = 2 ** firm;
-        const { type: p, n, } = knapsackTable.getArticle(157);
+        const { name } = knapsackTable.getArticle(1899);
         return {
             article: {
-                [157]: {
-                    p,
-                    n,
+                [1899]: {
+                    name,
                     s
                 }
             },
@@ -41,12 +39,11 @@ const materialIdMap = {
         if (upFirm > 12) {
             rate = 5 - (upFirm - 12)
         }
-        const { type: p, n, } = knapsackTable.getArticle(156);
+        const { name } = knapsackTable.getArticle(1899);
         return {
             article: {
-                [156]: {
-                    p,
-                    n,
+                [1899]: {
+                    name,
                     s
                 }
             },
@@ -84,7 +81,7 @@ module.exports = {
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const equip = data[in_x] || {};
-        if (equip['p'] !== 3) {
+        if (!knapsackTable.isEquip(equip.id)) {
             res.send({
                 code: 0,
                 message: '物品信息有误'
@@ -110,7 +107,7 @@ module.exports = {
         };
         if (article) {
             isFirm = true;
-            const { message, data: chengData, delInx } = knapsackFn.deleteKnapsack(req, res, { article });
+            const { message, data: chengData, delInx } = knapsackFn.deleteKnapsack(req, res, article);
             if (message) {
                 res.send({
                     code: 0,

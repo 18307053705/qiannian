@@ -9,5 +9,8 @@ const KNAPSACK_Global = {
     // }
 }
 module.exports = {
-    KNAPSACK_Global
+    KNAPSACK_Global,
+    EQUIP_INIT_EXT: '0_0_0_0_0_0_0_0_0',
+    KNAPSACK_SIZE: 200,
+    KNAPSACK_LIMIT: 999999,
 }

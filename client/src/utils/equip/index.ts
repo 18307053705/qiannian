@@ -90,8 +90,8 @@ export const getEquipName = equip => {
   if (!equip) {
     return "无";
   }
-  const { ext, n } = equip;
-  const { text } = getEquipExtInfo(ext, n);
+  const { ext, name, n } = equip;
+  const { text } = getEquipExtInfo(ext, name || n);
   return text;
 };
 
@@ -107,13 +107,13 @@ export const getEquipName = equip => {
 //
 
 const GEM_TYPE = {
-  1: "生命",
-  2: "法力",
-  3: "攻击",
-  4: "防御",
-  5: "命中",
-  6: "闪避",
-  7: "暴击"
+  10: "生命",
+  11: "法力",
+  12: "攻击",
+  13: "防御",
+  14: "命中",
+  15: "闪避",
+  16: "暴击"
 };
 
 const GEM_LEVEL = {
@@ -137,8 +137,8 @@ export const getEquipInfo = equip => {
   const gemNoList: any[] = [];
   gem.forEach(itme => {
     if (itme !== "0") {
-      const type = itme.substr(itme.length - 1);
-      const level = itme.substr(0, itme.length - 1);
+      const type = itme.substr(0, 2);
+      const level = itme.substr(2, 2);
       gemList.push({
         level: GEM_LEVEL[level],
         text: `${GEM_LEVEL[level]}级${GEM_TYPE[type]}宝石`,

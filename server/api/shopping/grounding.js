@@ -57,13 +57,14 @@ module.exports = {
             }
             durg['s'] -= s;
             durg['s'] || data.splice(in_x, 1);
+
             article.push({
-                n: durg['n'],
-                id: durg['id'],
-                p: durg['p'],
+                n: durg.name,
+                id: durg.id,
                 s,
                 price,
-                unit
+                unit,
+                ext: durg.ext
             })
             await shopFn.updataShopInfo(req, res, { article: JSON.stringify(article) });
             KnapsackG.updateknapsackGlobal(req, res, { data });
@@ -143,12 +144,15 @@ module.exports = {
                 })
                 return;
             }
-            const artReward = {
+
+            const message = knapsackFn.addKnapsack(req, res, {
                 [durg.id]: {
-                    ...durg
+                    id: durg.id,
+                    name: durg.n,
+                    s: durg.s,
+                    ext: durg.ext
                 }
-            }
-            const message = knapsackFn.addKnapsack(req, res, { article: { artReward } })
+            });
             if (message) {
                 res.send({
                     code: 0,

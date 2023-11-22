@@ -14,7 +14,7 @@ module.exports = {
             return;
         }
         // 获取宠物信息
-        const { id:petId, equip: equip_pool, level, addition, type } = PetG.getPetGlobal(req) || {};
+        const { id: petId, equip: equip_pool, level, addition, type } = PetG.getPetGlobal(req) || {};
         if (!petId) {
             res.send({
                 code: 0,
@@ -33,13 +33,13 @@ module.exports = {
         }
 
         // 需要进行佩戴的装备
-        const { id, n, ext } = equip;
-        const equipWear = knapsackTable.getEquip(id);
+        const { id, name, ext } = equip;
+        const equipWear = knapsackTable.getArticle(id);
         // 判断等级是否满足
         if (equipWear.level > level) {
             res.send({
                 code: 0,
-                message: `宠物等级不足,无法该佩戴${n}`
+                message: `宠物等级不足,无法该佩戴${name}`
             })
             return;
         }
@@ -47,7 +47,7 @@ module.exports = {
         if (equipWear.career !== type && equipWear.career) {
             res.send({
                 code: 0,
-                message: `宠物职业不符合,无法该佩戴${n}`
+                message: `宠物职业不符合,无法该佩戴${name}`
             })
             return;
         }
@@ -57,7 +57,8 @@ module.exports = {
         let replaceEquip = equip_pool[posKey];
         // 判断该部位是否替换装备
         if (replaceEquip) {
-            const { attr: deleteAttr } = equipFn.computeEquipAttr(knapsackTable.getEquip(replaceEquip.id), replaceEquip.ext, posKey);
+            const { id, ext, n } = replaceEquip;
+            const { attr: deleteAttr } = equipFn.computeEquipAttr(knapsackTable.getArticle(id), ext, posKey);
             Object.keys(deleteAttr).forEach(key => {
                 if (addAttr[key]) {
                     addAttr[key] -= deleteAttr[key];
@@ -65,9 +66,12 @@ module.exports = {
                     addAttr[key] = deleteAttr[key] * -1
                 }
             })
-            // 物品类型标记为装备
-            replaceEquip.p = 3;
-            data[in_x] = replaceEquip;
+            data[in_x] = {
+                id,
+                ext,
+                name: n,
+                s: 1
+            };
         } else {
             data.splice(in_x, 1)
         }
@@ -81,14 +85,17 @@ module.exports = {
         })
         equip_pool[posKey] = {
             id,
-            n,
+            n: name,
             ext
+        }
+        if (equip.n) {
+            equip_pool[posKey]['n2'] = equip.n;
         }
         const { attrs, suit } = equipFn.computeSuitAttr(equip_pool, old_equip_pool);
         // 更新套装信息
         equip_pool['suit'] = suit;
-         // 套装属性
-         Object.keys(attrs).forEach(key => {
+        // 套装属性
+        Object.keys(attrs).forEach(key => {
             if (addition[key]) {
                 addition[key] += attrs[key];
             } else {

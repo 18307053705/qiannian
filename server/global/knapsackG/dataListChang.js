@@ -1,5 +1,6 @@
 const { getDataName } = require('@table/knapsack/getDataName');
 const { isEquip } = require('@table/knapsack/article');
+const { EQUIP_INIT_EXT } = require('./config');
 module.exports = {
     /**
      * 设置背包信息
@@ -12,6 +13,7 @@ module.exports = {
                 itme.name = itme.n || getDataName(itme.id);
                 if (isEquip(itme.id)) {
                     itme.s = 1;
+                    itme.ext = itme.ext || EQUIP_INIT_EXT;
                 }
                 return itme;
             })

@@ -15,13 +15,14 @@ module.exports = {
         if (!article || JSON.stringify(article) === '{}') {
             return undefined;
         }
+        const { EQUIP_INIT_EXT, KNAPSACK_SIZE, KNAPSACK_LIMIT } = KnapsackG;
         const { data } = list ? { data: list } : KnapsackG.getknapsackGlobal(req, res);
         const artReward = {};
         const equipReward = {};
         const dataSize = data.length;
         let equipNum = 0;
         Object.keys(article).forEach((id) => {
-            const { name, n, ext = '0_0_0_0_0_0_0_0_0', s = 1 } = article[id];
+            const { name, n, ext = EQUIP_INIT_EXT, s = 1 } = article[id];
             if (knapsackTable.isEquip(id)) {
                 equipNum++;
                 equipReward[id] = {
@@ -39,7 +40,7 @@ module.exports = {
                 }
             }
         })
-        if (dataSize + equipNum >= KnapsackG.KNAPSACK_SIZE && !force) {
+        if (dataSize + equipNum >= KNAPSACK_SIZE && !force) {
             return '背包已满,请先清理背包'
         }
         // 物品奖励
@@ -50,12 +51,12 @@ module.exports = {
                 if (artReward[id]) {
                     const { s: num = 1 } = artReward[id];
                     // 找到对应id,判断是否可以继续叠加
-                    if (s + num <= KnapsackG.KNAPSACK_LIMIT) {
+                    if (s + num <= KNAPSACK_LIMIT) {
                         data[index]['s'] += num;
                         delete artReward[id];
                     } else {
-                        artReward[id]['num2'] = data[index]['s'] + num - KnapsackG.KNAPSACK_LIMIT;
-                        data[index]['s'] = KnapsackG.KNAPSACK_LIMIT;
+                        artReward[id]['num2'] = data[index]['s'] + num - KNAPSACK_LIMIT;
+                        data[index]['s'] = KNAPSACK_LIMIT;
                     }
                 }
                 // 全部处理完,结束循环
@@ -79,7 +80,7 @@ module.exports = {
         }
 
         KnapsackG.updateknapsackGlobal(req, res, { data });
-        if (data.length > KnapsackG.KNAPSACK_SIZE) {
+        if (data.length > KNAPSACK_SIZE) {
             return '背包已满,请注意清理背包'
         }
     },

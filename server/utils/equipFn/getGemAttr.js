@@ -11,7 +11,7 @@ module.exports = {
         const gemsAttr = {};
         gems.forEach(gem => {
             if (gem == 0) return;
-            const gemInfo = knapsackTable.getKeyBackArticle('gem', gem);
+            const gemInfo = knapsackTable.getGemInfo(gem);
             const [attrKey, value] = gemInfo.value.split('-');
             const attrValue = Number(value);
             if (attrKey === 'atk' || attrKey === 'dfs') {

@@ -14,13 +14,13 @@ module.exports = {
         }
         const { data, yuanbao } = KnapsackG.getknapsackGlobal(req, res);
 
-        // if (data.length >= KnapsackG.KNAPSACK_SIZE) {
-        //     res.send({
-        //         code: 0,
-        //         message: '背包已满,请先清理！'
-        //     })
-        //     return;
-        // }
+        if (data.length >= KnapsackG.KNAPSACK_SIZE) {
+            res.send({
+                code: 0,
+                message: '背包已满,请先清理！'
+            })
+            return;
+        }
         const { name: equipName, ...equip } = knapsackTable.getArticle(equipId);
         const getMakeInfo = equipFn.getMakeInfo(equip);
         //  不可打造的装备

@@ -1,4 +1,5 @@
 const { KnapsackG } = require('../../global');
+const { knapsackTable } = require('@table');
 // 宝石id 226 - 295
 module.exports = {
     /**
@@ -7,11 +8,12 @@ module.exports = {
     getGemList: (req, res) => {
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const gemList = [];
-        data.forEach(({ id, s, p, n }, in_x) => {
-            if (id > 225 && id < 296 && p !== 3) {
+        data.forEach(({ id, s, name }, in_x) => {
+            if (knapsackTable.isGemstone(id)) {
                 gemList.push({
+                    id,
                     s,
-                    n,
+                    name,
                     in_x
                 })
             }

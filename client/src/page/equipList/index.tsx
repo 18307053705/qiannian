@@ -42,7 +42,7 @@ export const EquipList = ({ history }) => {
                 className='g_u_end'
                 key={index}
                 onClick={() => {
-                    jumpDetail(history, { form: 1, p: 3, in_x: itme['in_x'] })
+                    jumpDetail(history, { form: 1, p: 1, in_x: itme['in_x'] })
                 }}
             >
                 {index}.{getEquipName(itme)}

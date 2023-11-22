@@ -3,7 +3,7 @@ import { mosaicEquip, getGemList } from '@cgi/equip';
 import { List } from '@components';
 
 
-// 强化组件
+// 宝石组件
 export const MosaicActive = ({ query, getEquipDetail, setIsMosaic }) => {
     const [gemList, setGemList] = useState([]);
     // const { firm } = equip;
@@ -25,11 +25,11 @@ export const MosaicActive = ({ query, getEquipDetail, setIsMosaic }) => {
         })
     }
 
-    const prefix = ({ in_x, s, n }, index) => {
+    const prefix = ({ in_x, s, name }, index) => {
         return (
             <div key={in_x}>
                 {index}.
-                <span>{n}x{s}</span>
+                <span>{name}x{s}</span>
                 {' | '}
                 <span className="g_u_end" onClick={() => { mosaicEquipClick(in_x) }}>镶嵌</span>
             </div>

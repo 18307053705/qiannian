@@ -1,8 +1,9 @@
-
 const { getCopyFreak } = require('./copy');
 const { getDifferenceFreak } = require('./difference');
 const { getNeutralityFreak } = require('./neutrality');
 const { getPeopleFreak } = require('./people');
+const { getGoblinFreak } = require('./goblin');
+const { getImmortalFreak } = require('./immortal');
 const { TEST_FREAK } = require('./test');
 // 怪物模型
 const DOME_FREAK = {
@@ -47,6 +48,12 @@ module.exports = {
         switch (eleType) {
             case '200':
                 freak = getPeopleFreak(freakId);
+                break;
+            case '201':
+                freak = getImmortalFreak(freakId);
+                break;
+            case '202':
+                freak = getGoblinFreak(freakId);
                 break;
             case '205':
                 freak = getCopyFreak(freakId);

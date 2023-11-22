@@ -28,29 +28,20 @@ module.exports = {
             })
             return;
         }
-
+        const createDte = new Date() * 1;
+        const shopSql = "insert into shop(user_id,role_id,name,petList,article,date,role_name) values(?,?,?,?,?,?,?)";
+        const shopData = [user_id, role_id, name, '[]', '[]', createDte, role_name];
+        await res.asyncAdd(shopSql, shopData);
+        KnapsackG.updateknapsackGlobal(req, res, { tael: tael - 500000 });
         const shop = {
             user_id,
             role_id,
             role_name,
             name,
-            petList: '[]',
-            article: '[]',
-            date: new Date() * 1
-
+            petList: [],
+            article: [],
+            date: createDte
         }
-        const dataList = [];
-        const datakey = [];
-        const dataValues = [];
-        Object.keys(shop).forEach((key) => {
-            dataList.push(shop[key]);
-            datakey.push(key);
-            dataValues.push('?');
-        })
-        const shopSql = "insert into shop(user_id,role_id,name,petList,article,date,role_name) values(?,?,?,?,?,?,?)";
-        const shopData = [user_id, role_id, name, '[]', '[]', new Date() * 1, role_name];
-        await res.asyncAdd(shopSql, shopData);
-        KnapsackG.updateknapsackGlobal(req, res, { tael: tael - 500000 });
         res.send({
             code: 0,
             data: shop

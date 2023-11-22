@@ -15,7 +15,7 @@ module.exports = {
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const equip = data[in_x] || {};
-        if (equip['p'] !== 3) {
+        if (!knapsackTable.isEquip(equip.id)) {
             res.send({
                 code: 0,
                 message: '物品信息有误'
@@ -33,19 +33,9 @@ module.exports = {
             return;
         }
         // 附魔材料id 魔符
-        let materialId = 147 + sigil;
-        const { type: p, n, } = knapsackTable.getArticle(materialId);
-        const { message, data: newData, delInx } = knapsackFn.deleteKnapsack(req, res, {
-            article: {
-                [materialId]: {
-                    p,
-                    n,
-                    s: 1
-                }
-            }
-        });
-
-
+        let materialId = 1889 + sigil;
+        const { name } = knapsackTable.getArticle(materialId);
+        const { message, data: newData, delInx } = knapsackFn.deleteKnapsack(req, res, { [materialId]: { name, s: 1 } });
         if (message) {
             res.send({
                 code: 0,

@@ -13,7 +13,7 @@ const namehandel = (n, p, ext) => {
 const ArticleList = ({ history, historyClick }) => {
     const { state } = history.location;
     const { role_id } = state;
-    const [shopInfo, setShopInfo] = useState()
+    const [shopInfo, setShopInfo]:any = useState();
     const [in_x, setInX]: any = useState();
 
 

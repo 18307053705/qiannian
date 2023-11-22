@@ -58,6 +58,12 @@ module.exports = {
      * 判断物品是否为装备
      */
     isEquip: function (id) {
-        return (id + "").slice(0, 2) === '13'
+        return (id + "").slice(0, 2) === '13';
+    },
+     /**
+     * 判断物品是否为宝石
+     */
+     isGemstone: function (id) {
+        return (id + "").slice(0, 2) === '17';
     }
 }

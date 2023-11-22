@@ -1,19 +1,22 @@
-const { KNAPSACK_Global } = require('./config');
+const { KNAPSACK_Global, EQUIP_INIT_EXT } = require('./config');
 const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 const { isEquip } = require('@table/knapsack/article');
-function dataChang(data) {
-    const list = JSON.parse(JSON.stringify(data))
+
+function saveSqlChang(data) {
+    const list = JSON.parse(JSON.stringify(data));
     return JSON.stringify(list.map((itme) => {
         delete itme.name;
         if (isEquip(itme.id)) {
             delete itme.s;
         }
+        if (itme.ext === EQUIP_INIT_EXT) {
+            delete itme.ext;
+        }
         return itme
     }))
 }
-
-
 module.exports = {
+    saveSqlChang,
     /**
      * 保存背包信息至数据库
      * @param {*} req 
@@ -25,7 +28,7 @@ module.exports = {
         const { updateKeys, ...knapsack } = KNAPSACK_Global[roleId || role_id];
         const data = [];
         [...new Set(updateKeys)].forEach((key) => {
-            const value = key === 'data' ? dataChang(knapsack[key]) : knapsack[key];
+            const value = key === 'data' ? saveSqlChang(knapsack[key]) : knapsack[key];
             data.push(`${key}='${value}'`)
         })
         if (data.length) {

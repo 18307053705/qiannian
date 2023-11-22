@@ -49,7 +49,7 @@ const RoleAttr = ({ roleInfo, history }) => {
                                     onClick={() => {
                                         jumpDetail(history, {
                                             pos: value,
-                                            p: 3,
+                                            p: 1,
                                             form: 2
                                         })
                                     }}

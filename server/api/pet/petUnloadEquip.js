@@ -13,7 +13,7 @@ module.exports = {
             return;
         }
         // 获取宠物信息
-        const { id:petId, equip: equip_pool, addition } = PetG.getPetGlobal(req) || {};
+        const { id: petId, equip: equip_pool, addition } = PetG.getPetGlobal(req) || {};
         const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
         if (!petId) {
             res.send({
@@ -22,11 +22,11 @@ module.exports = {
             })
             return;
         }
-        const { id, ext } = equip_pool[posKey];
-        const equipReward = {
-            [id]: equip_pool[posKey]
+        const { id, ext, n, n2 } = equip_pool[posKey];
+        const article = {
+            [id]: { id, ext, name: n, n: n2, }
         }
-        const message = knapsackFn.addKnapsack(req, res, { article: { equipReward } });
+        const message = knapsackFn.addKnapsack(req, res, article);
         if (message) {
             res.send({
                 code: 0,
@@ -34,7 +34,7 @@ module.exports = {
             })
             return;
         }
-        const equipWear = knapsackTable.getEquip(id);
+        const equipWear = knapsackTable.getArticle(id);
         const { attr: deleteAttr } = equipFn.computeEquipAttr(equipWear, ext);
         // 更新卸下装备后的属性
         Object.keys(deleteAttr).forEach(key => {
@@ -45,8 +45,8 @@ module.exports = {
         const { attrs, suit } = equipFn.computeSuitAttr(equip_pool, old_equip_pool);
         // 更新套装信息
         equip_pool['suit'] = suit;
-         // 套装属性
-         Object.keys(attrs).forEach(key => {
+        // 套装属性
+        Object.keys(attrs).forEach(key => {
             if (addition[key]) {
                 addition[key] += attrs[key];
             } else {

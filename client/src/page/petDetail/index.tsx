@@ -39,7 +39,7 @@ const PetDetail = ({ history }) => {
             <PetFlair petInfo={petInfo} callback={callback} />
             <div><span>等级：{`${petInfo.level}级(${petInfo.exp})`}</span></div>
             <Tab list={tabList} onCheng={setPageKey} />
-            {pageKey === 0 && <PetAttr attr={attr} />}
+            {pageKey === 0 && <PetAttr attr={attr} type={petInfo.type} />}
             {pageKey === 1 && (
                 <PetEquip
 

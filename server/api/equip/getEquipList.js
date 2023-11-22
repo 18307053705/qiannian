@@ -7,10 +7,11 @@ module.exports = {
     getEquipList: (req, res) => {
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const list = [];
-        data.forEach(((itme, index) => {
-            if (itme.p === 3) {
-                const { pos } = knapsackTable.getEquip(itme.id)
+        data.forEach((({ id, ...itme }, index) => {
+            if (knapsackTable.isEquip(id)) {
+                const { pos } = knapsackTable.getArticle(id);
                 list.push({
+                    id,
                     ...itme,
                     in_x: index,
                     pos

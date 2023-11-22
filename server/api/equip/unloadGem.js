@@ -17,10 +17,10 @@ module.exports = {
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         // 验证装备信息
         const equip = data[in_x] || {};
-        if (equip['p'] !== 3) {
+        if (!knapsackTable.isEquip(equip.id)) {
             res.send({
                 code: 0,
-                message: '装备信息有误'
+                message: '物品信息有误'
             })
             return;
         }
@@ -36,7 +36,7 @@ module.exports = {
             return;
         }
         // 查找对应宝石信息
-        const gemInfo = knapsackTable.getKeyBackArticle('gem', gem);
+        const gemInfo = knapsackTable.getGemInfo(gem);
         if (!gemInfo) {
             res.send({
                 code: 0,
@@ -44,17 +44,16 @@ module.exports = {
             })
             return;
         }
-        const { id, type, n } = gemInfo;
-        const artReward = {
+        const { id, name } = gemInfo;
+        const article = {
             [id]: {
                 id,
-                p: type,
-                n,
+                name,
                 s: 1
             }
         }
         // 背包增加物品
-        const { message, data: newData } = knapsackFn.addArticle({ artReward }, data);
+        const { message, data: newData } = knapsackFn.addArticle(article, data);
         if (message) {
             res.send({
                 code: 0,

@@ -5,7 +5,7 @@ import { createShop, modifyShop, getDetail } from '@cgi/shopping';
 
 export const DetailShop = ({ historyClick, history }) => {
     const { state } = history.location;
-    const [shopInfo, setShopInfo] = useState()
+    const [shopInfo, setShopInfo]: any = useState();
     const [modify, setModify] = useState(false);
     // 创建店铺或者更换招聘
     const create = (name) => {
@@ -61,7 +61,7 @@ export const DetailShop = ({ historyClick, history }) => {
                                 historyClick({ page: 'petList' });
                             }}>
                             {petList.length}只宠物
-                    </span>
+                        </span>
                     </div>
                 ) : ''
             }

@@ -16,9 +16,10 @@ module.exports = {
         const artReward = {};
         const equipReward = {};
         let equipNum = 0;
-        const data = JSON.parse(JSON.stringify(list))
+        const data = JSON.parse(JSON.stringify(list));
+        const { EQUIP_INIT_EXT, KNAPSACK_SIZE, KNAPSACK_LIMIT } = KnapsackG;
         Object.keys(article).forEach((id) => {
-            const { name, n, ext = '0_0_0_0_0_0_0_0_0', s = 1 } = article[id];
+            const { name, n, ext = EQUIP_INIT_EXT, s = 1 } = article[id];
             if (knapsackTable.isEquip(id)) {
                 equipNum++;
                 equipReward[id] = {
@@ -37,7 +38,7 @@ module.exports = {
             }
         })
         const dataSize = data.length + equipNum;
-        if (dataSize === KnapsackG.KNAPSACK_SIZE) {
+        if (dataSize === KNAPSACK_SIZE) {
             return {
                 message: '背包已满,请先清理背包'
             }
@@ -50,12 +51,12 @@ module.exports = {
                 if (artReward[id]) {
                     const { s: num = 1 } = artReward[id];
                     // 找到对应id,判断是否可以继续叠加
-                    if (s + num <= KnapsackG.KNAPSACK_LIMIT) {
+                    if (s + num <= KNAPSACK_LIMIT) {
                         data[index]['s'] += num;
                         delete artReward[id];
                     } else {
-                        artReward[id]['num2'] = data[index]['s'] + num - KnapsackG.KNAPSACK_LIMIT;
-                        data[index]['s'] = KnapsackG.KNAPSACK_LIMIT;
+                        artReward[id]['num2'] = data[index]['s'] + num - KNAPSACK_LIMIT;
+                        data[index]['s'] = KNAPSACK_LIMIT;
                     }
                 }
                 // 全部处理完,结束循环
@@ -77,7 +78,7 @@ module.exports = {
                 delete equipReward[key];
             })
         }
-        if (data.length > KnapsackG.KNAPSACK_SIZE) {
+        if (data.length > KNAPSACK_SIZE) {
             return { message: '背包已满,请先清理背包' }
         }
         return {

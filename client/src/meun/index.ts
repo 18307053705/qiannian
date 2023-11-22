@@ -68,3 +68,9 @@ export const ATTR_TEXT = {
   water_dfs: "水防",
   fire_dfs: "火防"
 };
+
+export const PET_TYPE_MEUN = {
+  1: "勇敢",
+  2: "憨厚",
+  3: "活泼",
+};

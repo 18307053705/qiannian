@@ -20,10 +20,17 @@ module.exports = {
         let message = '未找到装备';
         if (equip) {
             delete equip_pool[pos];
-            const { id, ext } = equip;
+            const { id, ext, n2 } = equip;
             // 背包增加物品
-            const article = { equipReward: { [id]: equip } }
-            message = knapsackFn.addKnapsack(req, res, { article, data })
+            const article = {
+                [id]: {
+                    id,
+                    name: equip.n,
+                    n: n2,
+                    ext
+                }
+            }
+            message = knapsackFn.addKnapsack(req, res, article, { data })
             if (message) {
                 res.send({
                     code: 0,
@@ -35,7 +42,7 @@ module.exports = {
             // 更新套装信息
             equip_pool['suit'] = suit;
             // 计算属性
-            const { attr } = equipFn.computeEquipAttr(knapsackTable.getEquip(id), ext);
+            const { attr } = equipFn.computeEquipAttr(knapsackTable.getArticle(id), ext);
             const { addition } = role_attr;
             Object.keys(attr).forEach(key => {
                 addition[key] -= attr[key];

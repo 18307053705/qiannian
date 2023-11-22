@@ -18,16 +18,16 @@ module.exports = {
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         // 验证装备信息
         const equip = data[in_x] || {};
-        if (equip['p'] !== 3) {
+        if (!knapsackTable.isEquip(equip.id)) {
             res.send({
                 code: 0,
-                message: '装备信息有误'
+                message: '物品信息有误'
             })
             return;
         }
         // 验证宝石信息
-        const { id, p, n } = data[material_inx] || {};
-        if (id < 226 || id > 295 || p === 3) {
+        const { id, name } = data[material_inx] || {};
+        if (!knapsackTable.isGemstone(id)) {
             res.send({
                 code: 0,
                 message: '物品信息有误'
@@ -45,9 +45,9 @@ module.exports = {
             })
             return;
         }
-        const article = { [id]: { p, s: 1, n } };
+        const article = { [id]: { s: 1, name, in_x: material_inx } };
         // 消耗对应的宝石
-        const { message, delInx,data:newData } = knapsackFn.deleteKnapsack(req, res, { article });
+        const { message, delInx, data: newData } = knapsackFn.deleteKnapsack(req, res, article);
         if (message) {
             res.send({
                 code: 0,

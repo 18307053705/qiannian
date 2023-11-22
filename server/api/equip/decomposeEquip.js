@@ -4,13 +4,13 @@ const { knapsackFn, equipFn } = require('../../utils');
 
 const materialMap = {
     // 一阶玄石,一阶玉石,一阶云石 50
-    1: [106, 110, 114],
+    1: [1849, 1853, 1857],
     // 二阶玄石,二阶玉石,二阶云石 
-    2: [107, 111, 115],
+    2: [1850, 1854, 1858],
     // 三阶玄石,三阶玉石,三阶云石 50
-    3: [108, 112, 116],
+    3: [1851, 1855, 1859],
     // 顶阶玄石,顶阶玉石,顶阶云石 50
-    4: [109, 113, 117]
+    4: [1852, 1856, 1860]
 }
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
         }
         const { data, tael } = KnapsackG.getknapsackGlobal(req, res);
         const equip = data[in_x] || {};
-        if (equip['p'] !== 3) {
+        if (!knapsackTable.isEquip(equip.id)) {
             res.send({
                 code: 0,
                 message: '物品信息有误'
@@ -41,7 +41,7 @@ module.exports = {
             return;
         }
 
-        const equipInfo = knapsackTable.getEquip(equip['id']);
+        const equipInfo = knapsackTable.getArticle(equip['id']);
         const { level, career } = equipInfo;
         const [_, forge] = equip['ext'].split('_');
         let materiaLevel = 1;
@@ -61,10 +61,10 @@ module.exports = {
         }
         // 小于35的装备可以免费锻造,所有必须10次锻造且装备等级不低于10级之后才可分解出石头
         if (level < 35) {
-            materiaNum = forge > 10 && level > 10 ? forge - 10 : 0;
+            materiaNum = forge > 10 && level > 8 ? (Math.floor((forge - 5) / 5) + 1) : 0;
             addTael *= level;
         } else {
-            materiaNum = forge > 10 ? forge : 5;
+            materiaNum = Math.floor(forge / 5) + 5;
         }
         let list = data;
         const success = [];
@@ -72,16 +72,15 @@ module.exports = {
             const materialIds = materialMap[materiaLevel];
             // 全职使用玄石
             const id = materialIds[career ? career - 1 : 0];
-            const { n, type } = knapsackTable.getArticle(id);
+            const { name } = knapsackTable.getArticle(id);
             const artReward = {
                 [id]: {
                     id,
-                    n,
-                    s: materiaNum,
-                    p: type
+                    name,
+                    s: materiaNum
                 }
             }
-            const { message, data: newData } = knapsackFn.addArticle({ artReward }, data);
+            const { message, data: newData } = knapsackFn.addArticle(artReward, data);
             if (message) {
                 res.send({
                     code: 0,
@@ -90,7 +89,7 @@ module.exports = {
                 return;
             }
             list = newData;
-            success.push(`${n}x${materiaNum}`);
+            success.push(`${name}x${materiaNum}`);
         }
         const { integral } = equipFn.getMakeInfo(equipInfo) || {};
         if (integral) {

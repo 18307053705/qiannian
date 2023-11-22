@@ -21,7 +21,7 @@ export const PetEquip = ({ petInfo, history }) => {
                                     equip[value] ? (
                                         <span onClick={() => {
                                             jumpDetail(history, {
-                                                p: 3,
+                                                isEquip: true,
                                                 form: 6,
                                                 pos: value,
                                                 petId: id
