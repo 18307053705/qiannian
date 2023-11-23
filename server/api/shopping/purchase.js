@@ -7,17 +7,17 @@ module.exports = {
      * @param {*} req.role_id 店铺玩家id
      * @param {*} req.type (1:物品,2:宠物)
      * @param {*} req.s 数量
-     * @param {*} req.in_x  物品所在货架下标
+     * @param {*} req.uid  物品所在货架下标
      * @param {*} req.petId  宠物id
      */
     purchase: async function (req, res) {
-        const { type, in_x, s = 1, role_id, petId } = req.body;
+        const { type, uid, s = 1, role_id, petId } = req.body;
         if (!type || !role_id) {
             ErrorG.paramsError(res);
             return;
         }
         // 购买物品参数校验
-        if (type === 1 && in_x === undefined && !s) {
+        if (type === 1 && !uid && !s) {
             ErrorG.paramsError(res);
             return;
         }
@@ -27,11 +27,12 @@ module.exports = {
             return;
         }
         // 获取店主店铺信息
-        const { article, petList } = await shopFn.getShopInfo(req, res, role_id);
+        const { article, petList } = await shopFn.asyncGetShopInfo(req, res, role_id);
         // 获取背包内货币
         let { tael, yuanbao } = KnapsackG.getknapsackGlobal(req, res);
         // 购买物品
         if (type === 1) {
+            const in_x = article.findIndex((itme) => itme.uid === uid);
             const durg = article[in_x];
             // 校验物品或者数量是否足够
             if (!durg || durg.s < s) {
@@ -58,15 +59,7 @@ module.exports = {
                 })
                 return;
             }
-            const artReward = {
-                [durg.id]: {
-                    s,
-                    id: durg.id,
-                    name: durg.n,
-                    ext: durg.ext
-                }
-            }
-            const message = knapsackFn.addKnapsack(req, res, artReward);
+            const message = knapsackFn.addKnapsack(req, res, { [durg.id]: durg});
             if (message) {
                 res.send({
                     code: 0,
@@ -80,7 +73,7 @@ module.exports = {
             // 物品为零删掉对应信息
             durg.s || article.splice(in_x, 1);
             // 更新店主店铺信息
-            await shopFn.updataShopInfo(req, res, { article: JSON.stringify(article) }, role_id);
+            await shopFn.asyncUpdataShopInfo(req, res, { article }, role_id);
             // 计算双方货币
             // 获取店主背包
             let { tael: tael_t, yuanbao: yuanbao_t } = await knapsackFn.getKnapsackInfo(req, res, { role_id });
@@ -150,7 +143,7 @@ module.exports = {
             // 店铺删除该宠物信息
             petList.splice(index, 1);
             // 更新店主店铺信息
-            shopFn.updataShopInfo(req, res, { petList: JSON.stringify(petList) }, role_id);
+            shopFn.asyncUpdataShopInfo(req, res, { petList }, role_id);
             // 更新店主宠物信息
             const { pet_pool: pet_pool_t } = await roleFn.getRoleInfo(req, res, { role_id });
             pet_pool_t['l'] = pet_pool_t['l'].filter(({ id }) => id !== petId);

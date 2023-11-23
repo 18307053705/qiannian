@@ -1,11 +1,12 @@
 const { KNAPSACK_Global, EQUIP_INIT_EXT } = require('./config');
 const { getRoleGlobal } = require('../roleG/getRoleGlobal');
-const { isEquip } = require('@table/knapsack/article');
+const { isEquip } = require('@/table/knapsack/article');
 
 function saveSqlChang(data) {
     const list = JSON.parse(JSON.stringify(data));
     return JSON.stringify(list.map((itme) => {
         delete itme.name;
+        delete itme.uid;
         if (isEquip(itme.id)) {
             delete itme.s;
         }

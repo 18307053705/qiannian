@@ -134,7 +134,8 @@ module.exports = {
         if (freakMap[freakId]) {
             return {
                 id: freakId,
-                ...JSON.parse(JSON.stringify(freakMap[freakId]))
+                ...JSON.parse(JSON.stringify(freakMap[freakId])),
+                pet: true
             }
         }
         return undefined;

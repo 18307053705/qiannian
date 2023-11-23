@@ -1,4 +1,5 @@
-const { ErrorG, RoleG, KnapsackG } = require("../../global");
+const { ErrorG, RoleG, KnapsackG } = require("@/global");
+const { ShopSql } = require("@/mysql");
 
 module.exports = {
     /**
@@ -12,7 +13,7 @@ module.exports = {
             return;
         }
         const { role_id, role_name, user_id } = RoleG.getRoleGlobal(req, res);
-        const { results } = await res.asyncQuery(`select * from shop where role_id="${role_id}" or name="${name}"`);
+        const results = await ShopSql.asyncIdOrNameToShop(role_id, name);
         if (results[0]) {
             res.send({
                 code: 0,
@@ -28,20 +29,8 @@ module.exports = {
             })
             return;
         }
-        const createDte = new Date() * 1;
-        const shopSql = "insert into shop(user_id,role_id,name,petList,article,date,role_name) values(?,?,?,?,?,?,?)";
-        const shopData = [user_id, role_id, name, '[]', '[]', createDte, role_name];
-        await res.asyncAdd(shopSql, shopData);
-        KnapsackG.updateknapsackGlobal(req, res, { tael: tael - 500000 });
-        const shop = {
-            user_id,
-            role_id,
-            role_name,
-            name,
-            petList: [],
-            article: [],
-            date: createDte
-        }
+        const shop = await ShopSql.asyncCreateShop({ user_id, role_id, role_name, name });
+
         res.send({
             code: 0,
             data: shop

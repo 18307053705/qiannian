@@ -1,5 +1,5 @@
 
-const { knapsackTable, AttributeTable } = require('@table');
+const { knapsackTable, AttributeTable } = require('@/table');
 const { computeEquipAttr } = require('./computeEquipAttr');
 
 module.exports = {

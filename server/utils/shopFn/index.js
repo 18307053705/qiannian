@@ -1,7 +1,7 @@
-const getShopInfo = require('./getShopInfo');
-const updataShopInfo = require('./updataShopInfo');
+const asyncGetShopInfo = require('./asyncGetShopInfo');
+const asyncUpdataShopInfo = require('./asyncUpdataShopInfo');
 
 module.exports = {
-    ...getShopInfo,
-    ...updataShopInfo
+    ...asyncGetShopInfo,
+    ...asyncUpdataShopInfo
 }

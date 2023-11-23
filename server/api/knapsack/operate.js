@@ -1,6 +1,6 @@
-const { KnapsackG, GrandG } = require('@global');
-const { knapsackFn, equipFn } = require('@utils');
-const { knapsackTable } = require('@table');
+const { KnapsackG, GrandG } = require('@/global');
+const { knapsackFn, equipFn } = require('@/utils');
+const { knapsackTable } = require('@/table');
 module.exports = {
     /**
      * 物品操作

@@ -1,5 +1,5 @@
-const { getDataName } = require('@table/knapsack/getDataName');
-const { isEquip } = require('@table/knapsack/article');
+const { getDataName } = require('@/table/knapsack/getDataName');
+const { isEquip } = require('@/table/knapsack/article');
 const { EQUIP_INIT_EXT } = require('./config');
 module.exports = {
     /**
@@ -9,12 +9,14 @@ module.exports = {
      */
     dataListChang: function (data) {
         try {
-            return JSON.parse(data).map((itme) => {
+            const date = new Date() * 1;
+            return JSON.parse(data).map((itme, index) => {
                 itme.name = itme.n || getDataName(itme.id);
                 if (isEquip(itme.id)) {
                     itme.s = 1;
                     itme.ext = itme.ext || EQUIP_INIT_EXT;
                 }
+                itme.uid = `${date}${index}`;
                 return itme;
             })
         } catch (error) {

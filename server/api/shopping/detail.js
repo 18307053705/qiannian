@@ -1,4 +1,4 @@
-const { shopFn } = require("../../utils");
+const { shopFn } = require("@/utils");
 
 module.exports = {
     /**
@@ -7,10 +7,10 @@ module.exports = {
      */
     detail: async function (req, res) {
         const { role_id } = req.body;
-        const data = await shopFn.getShopInfo(req, res, role_id);
+        const data = await shopFn.asyncGetShopInfo(req, res, role_id);
         res.send({
             code: 0,
-            data: JSON.stringify(data) === '{}' ? '' : data
+            data
         })
     }
 }

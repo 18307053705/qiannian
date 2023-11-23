@@ -7,11 +7,7 @@
     "server": "node index.js"
   },
   "_moduleAliases": {
-    "@global": "./global",
-    "@mysql": "./mysql",
-    "@meun": "./meun",
-    "@table": "./table",
-    "@utils": "./utils"
+    "@": "./"
   },
   "author": "",
   "license": "ISC",

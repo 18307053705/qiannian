@@ -1,5 +1,6 @@
-const { ErrorG, KnapsackG } = require("../../global");
-const { shopFn } = require("../../utils");
+const { ErrorG, KnapsackG } = require("@/global");
+const { shopFn } = require("@/utils");
+const { ShopSql } = require("@/mysql");
 module.exports = {
     /**
      * 修改店铺名称
@@ -11,7 +12,7 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { results } = await res.asyncQuery(`select * from shop where name="${name}"`);
+        const results = await ShopSql.asyncNameToShop(name);
         if (results[0]) {
             res.send({
                 code: 0,
@@ -28,9 +29,9 @@ module.exports = {
             return;
         }
 
-        await shopFn.updataShopInfo(req, res, { name });
+        await shopFn.asyncUpdataShopInfo(req, res, { name });
         KnapsackG.updateknapsackGlobal(req, res, { tael: tael - 500000 });
-        const data = await shopFn.getShopInfo(req, res);
+        const data = await shopFn.asyncGetShopInfo(req, res);
         res.send({
             code: 0,
             data: data

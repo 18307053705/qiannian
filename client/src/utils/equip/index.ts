@@ -72,9 +72,9 @@ export const getEquipExtInfo = (ext, name) => {
   } else if (increase < 7.6) {
     text = `〖史诗〗${name}`;
   } else if (increase < 15) {
-    text = `★传说★${name}`;
+    text = `★传说★${name}★★`;
   } else {
-    text = `☆神话☆${name}`;
+    text = `☆神话☆${name}☆☆`;
   }
 
   return {

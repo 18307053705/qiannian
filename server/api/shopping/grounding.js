@@ -1,5 +1,5 @@
-const { ErrorG, KnapsackG, RoleG } = require("../../global");
-const { shopFn, petFn, knapsackFn } = require("../../utils");
+const { ErrorG, KnapsackG, RoleG } = require("@/global");
+const { shopFn, petFn, knapsackFn } = require("@/utils");
 module.exports = {
     /**
      * 物品上下架
@@ -8,11 +8,11 @@ module.exports = {
      * @param {*} req.price 价格
      * @param {*} req.unit 单位(tael,yuanbao)
      * @param {*} req.s  上架数量
-     * @param {*} req.in_x  物品所在下标(下架,则代表物品所在货架下标)
+     * @param {*} req.uid  物品uid
      * @param {*} req.petId  宠物id
      */
     grounding: async function (req, res) {
-        const { type, in_x, active, s, price, unit, petId } = req.body;
+        const { type, uid, active, s, price, unit, petId } = req.body;
         if (!active || !type) {
             ErrorG.paramsError(res);
             return;
@@ -22,19 +22,19 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        // 上架物品参数校验
-        if (type === 1 && in_x === undefined) {
+        // 物品参数校验
+        if (type === 1 && !uid) {
             ErrorG.paramsError(res);
             return;
         }
-        // 上架宠物参数校验
+        // 宠物参数校验
         if (type === 2 && !petId) {
             ErrorG.paramsError(res);
             return;
         }
 
 
-        const { article, petList } = await shopFn.getShopInfo(req, res);
+        const { article, petList } = await shopFn.asyncGetShopInfo(req, res);
         // 物品上架
         if (active === 1 && type === 1) {
             // 判断物品货架是否已满
@@ -47,6 +47,7 @@ module.exports = {
             }
             const { data } = KnapsackG.getknapsackGlobal(req, res);
             // 验证上架物品信息
+            const in_x = data.findIndex((itme) => itme.uid === uid);
             const durg = data[in_x];
             if (!durg || durg['s'] < s) {
                 res.send({
@@ -59,14 +60,15 @@ module.exports = {
             durg['s'] || data.splice(in_x, 1);
 
             article.push({
-                n: durg.name,
+                name: durg.name,
                 id: durg.id,
                 s,
                 price,
                 unit,
-                ext: durg.ext
+                ext: durg.ext,
+                n: durg.n,
             })
-            await shopFn.updataShopInfo(req, res, { article: JSON.stringify(article) });
+            await shopFn.asyncUpdataShopInfo(req, res, { article });
             KnapsackG.updateknapsackGlobal(req, res, { data });
             res.send({
                 code: 0,
@@ -125,7 +127,7 @@ module.exports = {
                 ...petItme,
                 s: 3
             }
-            await shopFn.updataShopInfo(req, res, { petList: JSON.stringify(petList) });
+            await shopFn.asyncUpdataShopInfo(req, res, { petList });
             RoleG.updataRoleGlobal(req, res, { pet_pool });
             res.send({
                 code: 0,
@@ -136,6 +138,7 @@ module.exports = {
 
         // 物品下架
         if (active === 2 && type === 1) {
+            const in_x = article.findIndex((itme) => itme.uid === uid);
             const durg = article[in_x];
             if (!durg) {
                 res.send({
@@ -145,14 +148,7 @@ module.exports = {
                 return;
             }
 
-            const message = knapsackFn.addKnapsack(req, res, {
-                [durg.id]: {
-                    id: durg.id,
-                    name: durg.n,
-                    s: durg.s,
-                    ext: durg.ext
-                }
-            });
+            const message = knapsackFn.addKnapsack(req, res, { [durg.id]: durg });
             if (message) {
                 res.send({
                     code: 0,
@@ -161,7 +157,7 @@ module.exports = {
                 return;
             }
             article.splice(in_x, 1);
-            await shopFn.updataShopInfo(req, res, { article: JSON.stringify(article) });
+            await shopFn.asyncUpdataShopInfo(req, res, { article });
             res.send({
                 code: 0,
                 data: '下架成功!'
@@ -187,7 +183,7 @@ module.exports = {
                 return itme;
             });
             RoleG.updataRoleGlobal(req, res, { pet_pool });
-            await shopFn.updataShopInfo(req, res, { petList: JSON.stringify(petList) });
+            await shopFn.asyncUpdataShopInfo(req, res, { petList });
             res.send({
                 code: 0,
                 data: '下架成功!'

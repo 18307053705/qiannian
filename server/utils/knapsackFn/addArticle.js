@@ -1,5 +1,5 @@
-const { KnapsackG } = require("@global");
-const { knapsackTable } = require("@table");
+const { KnapsackG } = require("@/global");
+const { knapsackTable } = require("@/table");
 module.exports = {
     /**
      * 增加物品,不会更新背包
@@ -18,7 +18,8 @@ module.exports = {
         let equipNum = 0;
         const data = JSON.parse(JSON.stringify(list));
         const { EQUIP_INIT_EXT, KNAPSACK_SIZE, KNAPSACK_LIMIT } = KnapsackG;
-        Object.keys(article).forEach((id) => {
+        const date = new Date() * 1;
+        Object.keys(article).forEach((id, index) => {
             const { name, n, ext = EQUIP_INIT_EXT, s = 1 } = article[id];
             if (knapsackTable.isEquip(id)) {
                 equipNum++;
@@ -27,13 +28,15 @@ module.exports = {
                     n,
                     id,
                     s,
-                    ext
+                    ext,
+                    uid: `${date}${index}`
                 }
             } else {
                 artReward[id] = {
                     id,
                     name,
                     s,
+                    uid: `${date}${index}`
                 }
             }
         })
@@ -66,8 +69,8 @@ module.exports = {
             }
             //  遍历结束还存在物品奖励，说明物品为新增
             Object.keys(artReward).forEach(key => {
-                const { id, name, s, num2 } = artReward[key];
-                data.push({ id, name, s: num2 || s });
+                const { s, num2, ...itme } = artReward[key];
+                data.push({ ...itme, s: num2 || s });
                 delete artReward[key];
             })
         }

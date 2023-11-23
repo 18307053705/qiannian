@@ -74,8 +74,8 @@ const Article = ({ history, historyClick }) => {
             {index}. {namehandel(name, p, ext)} x {s}
         </span>
     )
-    const active = ({ in_x, p, s }) => (
-        <span className='g_u_end' onClick={() => { setInfo({ in_x, p, s }); }}>上架</span>
+    const active = ({ uid, p, s }) => (
+        <span className='g_u_end' onClick={() => { setInfo({ uid, p, s }); }}>上架</span>
     )
 
     const submit = (price) => {
@@ -84,7 +84,7 @@ const Article = ({ history, historyClick }) => {
             active: 1,
             price: Number(price),
             s: info.p !== 1 ? Number(num) : 1,
-            in_x: info.in_x,
+            uid: info.uid,
             unit: 'tael'
         }).then(({ message }) => {
             if (!message) {

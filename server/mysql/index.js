@@ -1,3 +1,5 @@
+const ShopSql = require('./shopSql');
+
 const mysql = require("mysql2");
 
 // 接入数据库信息
@@ -77,5 +79,6 @@ module.exports = {
    * @param {*} data 写入数据库的数据
    * @param {*} sqlInfo 接入数据库信息，可不传
    */
-  asyncAdd
+  asyncAdd,
+  ShopSql
 };

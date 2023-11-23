@@ -1,4 +1,4 @@
-const { knapsackTable } = require('@table');
+const { knapsackTable } = require('@/table');
 // role_integral:{exploit:功勋,gang:帮会,world:世界,intersect:结义,shenZhuang:神装}
 const TEXT_MEUN = {
     world: '世界功勋声望',

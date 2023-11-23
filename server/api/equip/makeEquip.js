@@ -1,6 +1,6 @@
-const { ErrorG, KnapsackG, RoleG } = require('@global');
-const { knapsackTable } = require('@table');
-const { equipFn, knapsackFn } = require('@utils');
+const { ErrorG, KnapsackG, RoleG } = require('@/global');
+const { knapsackTable } = require('@/table');
+const { equipFn, knapsackFn } = require('@/utils');
 
 module.exports = {
     /**

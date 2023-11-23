@@ -1,4 +1,5 @@
-const { RoleG } = require("../../global");
+const { RoleG } = require("@/global");
+const { ShopSql } = require("@/mysql");
 
 module.exports = {
     /**
@@ -6,7 +7,7 @@ module.exports = {
      */
     list: async function (req, res) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
-        const { results } = await res.asyncQuery(`select * from shop where role_id<>"${role_id}"`);
+        const { results } = await ShopSql.asyncShopList(role_id);
         res.send({
             code: 0,
             data: results
