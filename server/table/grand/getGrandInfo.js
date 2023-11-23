@@ -13,7 +13,6 @@ module.exports = {
      * @returns {number} y y坐标
      */
     getGrandInfo: function (address) {
-        // if(id < 20000)
         const [id, strX, strY] = address.split(",");
         const grandId = id[0];
         let grand = undefined;
