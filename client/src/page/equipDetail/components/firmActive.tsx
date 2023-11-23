@@ -4,7 +4,7 @@ import { firmeEquip } from '@cgi/equip';
 
 // 强化组件
 export const FirmActive = ({ query, getEquipDetail, equip }) => {
-    const { form, in_x } = query;
+    const { form, uid } = query;
     const { firm } = equip;
     if (form !== 1 || firm === 16) {
         return null;
@@ -27,10 +27,10 @@ export const FirmActive = ({ query, getEquipDetail, equip }) => {
     const firmClick = (type) => {
         firmeEquip({
             materialtype: type,
-            in_x
+            uid
         }).then(({data})=>{
             if(data){
-                getEquipDetail({in_x: data})
+                getEquipDetail()
             }
         })
     }

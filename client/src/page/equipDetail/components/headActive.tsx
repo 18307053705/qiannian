@@ -5,11 +5,11 @@ import { petUnloadEquip } from '@cgi/pet';
 
 // 头部操作
 export const HeadActive = ({ query, history }) => {
-    const { form, in_x, pos, petId } = query;
+    const { form,  pos, petId, uid } = query;
     const operateClick = (type) => {
         operate({
             s: 1,
-            in_x,
+            uid,
             type
         }).then(({ message }) => {
             if (!message) {
@@ -34,7 +34,7 @@ export const HeadActive = ({ query, history }) => {
     }
 
     const decomposeEquipClick = () => {
-        decomposeEquip({ in_x }).then(({ message }) => {
+        decomposeEquip({ uid }).then(({ message }) => {
             if (!message) {
                 history.goBack()
             }
@@ -52,7 +52,7 @@ export const HeadActive = ({ query, history }) => {
                 <span className='g_u_end' onClick={decomposeEquipClick}>分解</span>
                 {" "}
                 <span className='g_u_end' onClick={() => { operateClick(4) }}>丢弃</span>
-                
+
             </div>
         )
     }

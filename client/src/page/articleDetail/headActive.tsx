@@ -13,11 +13,11 @@ const TYPE_TEXT = {
 // 头部操作
 export const HeadActive = ({ query, history }) => {
     const [type, setType] = useState(0);
-    const { form, in_x } = query;
+    const { form, uid } = query;
     const operateClick = (s) => {
         operate({
             s,
-            in_x,
+            uid,
             type
         }).then(({ message }) => {
             if (!message) {

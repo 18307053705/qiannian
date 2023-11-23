@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 import { backGrand } from '@utils/grand';
-import {  unloadGem } from '@cgi/equip';
+import { unloadGem } from '@cgi/equip';
 
 import { getArticleDetail } from '@cgi/knapsack';
 
-import { HeadActive, FirmActive, ForgeActive, SigilActive, MosaicActive,NameEquip } from './components';
+import { HeadActive, FirmActive, ForgeActive, SigilActive, MosaicActive, NameEquip } from './components';
 
 import Style from './index.less';
 
@@ -24,7 +24,7 @@ const EquipDetail = ({ history }) => {
         }
         getArticleDetail({ ...state, ...params }).then(({ data }) => {
             const equipInfo = getEquipInfo(data);
-            const extInfo = getEquipExtInfo(data.ext, data.n || data.name);
+            const extInfo = getEquipExtInfo(data.name, data.ext);
             setEquip({
                 ...data,
                 ...equipInfo,
@@ -38,7 +38,7 @@ const EquipDetail = ({ history }) => {
     // 卸下宝石
     const unloadGemClick = () => {
         const { state } = history.location;
-        unloadGem({ in_x: state.in_x }).then(({ message }) => {
+        unloadGem({ uid: state.uid }).then(({ message }) => {
             if (!message) { getEquipDetail() }
         })
     }
@@ -53,8 +53,8 @@ const EquipDetail = ({ history }) => {
     return (
         <div>
             <HeadActive query={query} history={history} />
-            <NameEquip query={query} setEquip={setEquip} equip={equip}  />
-           
+            <NameEquip query={query} setEquip={setEquip} equip={equip} />
+
             <div><span>等级：{equip.level}级</span></div>
             <div><span>职业：{equip.careerName}</span></div>
             {

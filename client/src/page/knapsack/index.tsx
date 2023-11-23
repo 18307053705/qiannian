@@ -77,7 +77,7 @@ const knapsack = ({ history }) => {
         // 拍卖上架
         if (type === 5) {
             grounding({
-                in_x: parms.in_x,
+                uid: parms.uid,
                 price: parms.s,
             })
             return;
@@ -92,16 +92,16 @@ const knapsack = ({ history }) => {
         })
     }
 
-    const activeClick = useCallback(({ isEquip, s, uid, in_x }) => {
+    const activeClick = useCallback(({ isEquip, s, uid }) => {
         if (isEquip && type !== 5) {
             operateClick({
-                in_x,
+                uid,
                 s: 1,
                 type,
             })
         } else {
             setActive({
-                in_x,
+                uid,
                 s,
                 type,
             })

@@ -1,7 +1,7 @@
 
-const { ErrorG, KnapsackG } = require('../../global');
-const { knapsackTable } = require('../../table');
-const { knapsackFn } = require('../../utils');
+const { ErrorG, KnapsackG } = require('@/global');
+const { knapsackTable } = require('@/table');
+const { knapsackFn } = require('@/utils');
 
 module.exports = {
     /**
@@ -15,7 +15,7 @@ module.exports = {
             return;
         }
 
-        const { price, unit, name } = knapsackTable.getEquip(id);
+        const { price, unit, name } = knapsackTable.getArticle(id);
         if (!unit) {
             res.send({
                 code: 0,
@@ -31,16 +31,15 @@ module.exports = {
             })
             return;
         }
-        const equipReward = {
+        const article = {
             [id]: {
                 id,
                 s: 1,
-                n: name,
-                p: 3
+                name,
             }
         }
 
-        const message = knapsackFn.addKnapsack(req, res, { article: { equipReward }, data });
+        const message = knapsackFn.addKnapsack(req, res, article, { data });
         if (message) {
             res.send({
                 code: 0,
@@ -51,7 +50,7 @@ module.exports = {
         KnapsackG.updateknapsackGlobal(req, res, { tael: tael - price });
         res.send({
             code: 0,
-            success: `消耗${price}银两,购买${name}`
+            success: `花费${price}银两成功购买${name}`
         })
     }
 }

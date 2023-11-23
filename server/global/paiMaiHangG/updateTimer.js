@@ -30,18 +30,19 @@ module.exports = {
                 idP = id_p;
             }
         })
-        TIMER_CPNFIG.index = setTimeout(() => {
-            getPaimaiHang(req, res, idP);
-            paiMaiEnd(req, res, getPaimaiHang(req, res, idP), () => {
-                TIMER_CPNFIG.index = undefined;
-                const indxe = PAI_MAI_HANG_Global.findIndex(({ id_p }) => idP === id_p);
-                // 删除拍卖相应拍卖品
-                PAI_MAI_HANG_Global.splice(indxe, 1);
-                // 监听下个拍卖品
-                _this.updateTimer(req, res);
 
-            })
-        }, outTimer - new Date());
+        const timer = outTimer - new Date();
+        TIMER_CPNFIG.index = setTimeout( async () => {
+            // paiMaiEnd 函数处理拍卖结束逻辑
+            const indxe = PAI_MAI_HANG_Global.findIndex(({ id_p }) => idP === id_p);
+            TIMER_CPNFIG.index = undefined;
+            // 删除拍卖相应拍卖品
+            const data = JSON.parse(JSON.stringify(PAI_MAI_HANG_Global[indxe]));
+            PAI_MAI_HANG_Global.splice(indxe, 1);
+            await paiMaiEnd(req, res, data);
+            // 监听下个拍卖品
+            _this.updateTimer(req, res);
+        }, timer < 0 ? 0 : timer);
         TIMER_CPNFIG.id_p = idP;
     }
 }

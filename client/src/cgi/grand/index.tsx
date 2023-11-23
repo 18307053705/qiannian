@@ -20,7 +20,7 @@ export interface getGrandRes {
   x: string;
   y: string;
   tip?: string;
-  articleEle: { n: string, in_x: number }[]
+  articleEle: { name: string, in_x: number }[]
 }
 
 export const initGrandInfo: getGrandRes = {

@@ -15,7 +15,7 @@ export function getList() {
  * @param {*} req.in_x 上架物品下标
  * @param {*} req.price 上架物品价格
  */
-export function grounding(data: { in_x: number; price: number }) {
+export function grounding(data: { uid: number; price: number }) {
   return post(groundingUrl, data);
 }
 /**

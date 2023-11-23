@@ -1,6 +1,4 @@
-
-const { knapsackTable } = require('../../table');
-
+const { knapsackTable } = require('@/table');
 module.exports = {
     /**
      * 获取可兑换物品列表
@@ -9,22 +7,11 @@ module.exports = {
      */
     getIntegralList: function (req, res) {
         const list = [];
-        Object.values(knapsackTable.getArticleListAll(1)).forEach(({ id, integral, type, n }) => {
+        Object.values(knapsackTable.getArticleList()).forEach(({ id, integral, name }) => {
             if (integral) {
                 list.push({
                     id,
                     integral,
-                    type,
-                    name: n
-                })
-            }
-        })
-        Object.values(knapsackTable.getArticleListAll(2)).forEach(({ id, integral, type, name }) => {
-            if (integral) {
-                list.push({
-                    id,
-                    integral,
-                    type,
                     name
                 })
             }

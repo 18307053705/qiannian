@@ -21,13 +21,13 @@ module.exports = {
         const list = articleEle.filter(({ time }) => time > curTime)
         GRAND_ELE_Global[address]['articleEle'] = list;
         return {
-            articleEle: list.map(({ id, p, s }, in_x) => {
+            articleEle: list.map(({ id, s, n, ext }) => {
                 return {
-                    n: getDataName(id, p),
+                    name: n || getDataName(id),
                     id,
-                    p,
                     s,
-                    in_x
+                    n,
+                    ext
                 }
             })
         }

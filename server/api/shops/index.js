@@ -4,7 +4,7 @@ const { getList } = require('./getList');
 const { purchase } = require('./purchase');
 const { shopIntegral } = require('./shopIntegral');
 const { getIntegralList } = require('./getIntegralList');
-const { getequipList } = require('./getequipList');
+const { getEquipList } = require('./getequipList');
 const { shopEquip } = require('./shopEquip');
 // 获取商城物品列表
 router.post("/getList", getList);
@@ -15,7 +15,7 @@ router.post("/shopIntegral", shopIntegral);
 // 获取可兑换物品列表
 router.post("/getIntegralList", getIntegralList);
 // 获取铁匠铺装备列表
-router.post("/getequipList", getequipList);
+router.post("/getequipList", getEquipList);
 // 购买装备
 router.post("/shopEquip", shopEquip);
 module.exports = router;

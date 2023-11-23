@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { List, Tab, Input } from '@components/index';
 import { getList, purchase } from '@cgi/shops';
-import { backGrand } from '@utils/grand';
-import { jumpDetail } from '@utils/jumpPage'
+import { backGrand, jumpDetail, isBuff, isSundries, isReply } from '@utils';
 
 const tabList = [
     { value: 0, label: "道具商店" },
     { value: 1, label: "恢复商店" },
     { value: 2, label: "丹药商店" },
-    { value: 3, label: "材料商店" },
+    { value: 3, label: "杂物商店" },
 ];
-export const Shops = ({ history }) => {
+export const Shops = () => {
     const [tabKey, setTabKey] = useState(0);
     const [id, setId] = useState(0);
     const [list, setList] = useState([]);
@@ -20,39 +19,37 @@ export const Shops = ({ history }) => {
             setList(data)
         })
     }, []);
-    const data = list.filter(({ unit, type }) => {
+    const data = list.filter(({ unit, id }) => {
         if (tabKey === 0 && unit === 'yuanbao') {
             return true;
         }
-        if (tabKey === 1 && unit === 'tael' && type === 1) {
+        if (tabKey === 1 && unit === 'tael' && isReply(id)) {
             return true;
         }
-        if (tabKey === 2 && unit === 'tael' && type === 2) {
+        if (tabKey === 2 && unit === 'tael' && isBuff(id)) {
             return true;
         }
-        if (tabKey === 3 && unit === 'tael' && type === 5) {
+        if (tabKey === 3 && unit === 'tael' && isSundries(id)) {
             return true;
         }
         return false;
     })
 
 
-    const prefix = ({ id,type, in_x, price, n }, index) => {
+    const prefix = ({ id, price, name }, index) => {
 
         return (
             <div key={index}>
                 <span
                     className='g_u_end'
                     onClick={() => {
-                        jumpDetail(history, {
-                            p: type,
+                        jumpDetail({
                             form: 5,
-                            in_x,
                             id,
                         })
                     }}
                 >
-                    {n}(售价:{price}{tabKey === 0 ? '元宝' : '银两'})
+                    {name}(售价:{price}{tabKey === 0 ? '元宝' : '银两'})
                 </span>
             </div>
         )

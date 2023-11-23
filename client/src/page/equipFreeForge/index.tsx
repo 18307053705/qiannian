@@ -7,11 +7,11 @@ import { EquipHome } from './equipHome';
 export const equipFreeForge = ({ history }) => {
     const { state, pathname } = history.location;
     const { pageKey='home' } = state;
-    const historyClick = ({ in_x, pageKey }) => {
-        if (in_x === -1) {
+    const historyClick = ({ uid, pageKey }) => {
+        if (uid === -1) {
             pageKey = 'home';
         }
-        history.push(pathname, { in_x, pageKey: pageKey || state.pageKey });
+        history.push(pathname, { uid, pageKey: pageKey || state.pageKey });
     }
     return (
         <div>

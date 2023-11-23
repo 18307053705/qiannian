@@ -5,7 +5,7 @@ import { getList, auction } from '@cgi/paiMai';
 
 
 const getUinxDay = (out_timer) => {
-    const time =  Math.floor(out_timer - new Date()) / 1000;
+    const time = Math.floor(out_timer - new Date()) / 1000;
     const m = Math.floor(time / 60);
     const s = Math.floor(time % 60);
     let text = "剩余竞拍时间:";
@@ -28,14 +28,17 @@ export const PaiMaiHang = ({ history }) => {
 
 
 
-    const prefix = ({ id_p, info, role_name, price,out_timer }) => {
+    const prefix = ({ id_p, info, price, out_timer }) => {
         return (
             <div>
-                <span>{role_name}:{info.n}x1,当前竞价:{price}银两,{getUinxDay(out_timer)}</span>
-                <span className='g_u_end' onClick={() => {
-                    setIdP(id_p);
-                    setPrice(price);
-                }}>竞拍</span>
+                <div>竞拍品：{info.name}</div>
+                <div>当前竞价:{price}银两</div>
+                <div>
+                    <span> {getUinxDay(out_timer)}</span>
+                    <span className='g_u_end' onClick={() => {
+                        setIdP(id_p);
+                        setPrice(price);
+                    }}>竞拍</span></div>
             </div>
         )
     }

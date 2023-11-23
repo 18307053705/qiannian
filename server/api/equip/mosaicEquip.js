@@ -10,12 +10,14 @@ module.exports = {
      * @param req.in_x 装备在背包内的下标
      */
     mosaicEquip: (req, res) => {
-        const { material_inx, in_x } = req.body;
-        if (material_inx === undefined || in_x === undefined) {
+        const { material_uid, uid } = req.body;
+        if (material_uid === undefined || uid === undefined) {
             ErrorG.paramsError(res);
             return;
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
+        const in_x = data.findIndex((itme) => itme.uid === uid);
+        const material_inx = data.findIndex((itme) => itme.uid === material_uid);
         // 验证装备信息
         const equip = data[in_x] || {};
         if (!knapsackTable.isEquip(equip.id)) {

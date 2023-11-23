@@ -3,8 +3,8 @@ const TIMER_CPNFIG = {
     offer_id: '', // 对应拍卖物品唯一标识
     index: undefined, // 延时器标识,
 };
-const OUT_TIME = 600000;
-// const OUT_TIME = 40000;
+// const OUT_TIME = 600000;
+const OUT_TIME = 30000;
 const PAI_MAI_HANG_Global = [
     // {
     //  id: 1, // 物品id

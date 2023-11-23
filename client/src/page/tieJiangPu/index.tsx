@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { jumpDetail } from '@utils/jumpPage';
 import { getequipList, shopEquip } from '@cgi/shops';
 import { List } from '@components';
-import { backGrand } from '@utils/grand';
+import { jumpDetail, backGrand, getEquipName } from '@utils';
 
 
-export const TieJiangPu = ({ history }) => {
+export const TieJiangPu = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         getequipList().then(({ data }) => {
-            setData(data);
+            setData(data.map((item) => ({ ...item, name: getEquipName({ name: item.name }) })));
         })
     }, [])
 
@@ -19,7 +18,7 @@ export const TieJiangPu = ({ history }) => {
     }
 
     const prefix = ({ name, id }) => (
-        <span className="g_u_end" onClick={() => { jumpDetail(history, { p: 3, form: 5, id }) }}>{name}</span>
+        <span className="g_u_end" onClick={() => { jumpDetail({ isEquip: true, form: 5, id }) }}>{name}</span>
     );
     const active = ({ id, price }) => {
         return <span className="g_u_end" onClick={() => { shopEquipClick(id) }}>购买({price}银两)</span>

@@ -6,18 +6,18 @@ import { getEquipInfo, getEquipExtInfo } from '@utils/equip';
 export const ForgeEquip = ({ history, historyClick }) => {
     const { state, pathname } = history.location;
 
-    const { in_x } = state;
+    const { uid } = state;
     const [equip, setEquip] = useState();
     const [forgeNum, setForgeNum] = useState(0);
     const [isContinue, setIsContinue] = useState(false);
     // 获取武器详情
     const getEquipDetail = () => {
         getArticleDetail({
-            in_x,
+            uid,
             form: 1,
         }).then(({ data }) => {
             const equipInfo = getEquipInfo(data);
-            const extInfo = getEquipExtInfo(data.ext, data.n);
+            const extInfo = getEquipExtInfo(data.name, data.ext);
             setEquip({
                 ...data,
                 ...equipInfo,
@@ -27,19 +27,19 @@ export const ForgeEquip = ({ history, historyClick }) => {
     }
     // 挂载请求武器详情
     useEffect(() => {
-        if (in_x !== -1) {
+        if (uid !== -1) {
             getEquipDetail()
         }
 
     }, []);
     const freeForgeEquipClick = () => {
         setIsContinue(true);
-        freeForgeEquip({ in_x }).then(({ data }) => {
+        freeForgeEquip({ uid }).then(({ data }) => {
             if (data) {
                 setForgeNum(data);
                 getEquipDetail();
             } else {
-                history.push(pathname, { in_x: -1, pageKey: state.pageKey });
+                history.push(pathname, { uid: -1, pageKey: state.pageKey });
                 setForgeNum(0);
             }
         })
@@ -47,7 +47,7 @@ export const ForgeEquip = ({ history, historyClick }) => {
 
 
 
-    if (!forgeNum && in_x === -1) {
+    if (!forgeNum && uid === -1) {
         return (
             <div>
                 <div>精炼失败,装备已损坏</div>

@@ -4,7 +4,7 @@ import { forgeEquip } from '@cgi/equip';
 
 // 锻造组件
 export const ForgeActive = ({ query, getEquipDetail, equip }) => {
-    const { form, in_x } = query;
+    const { form, uid } = query;
     const { level, career, forge, firm } = equip;
     const isForge = ((firm === 16 && forge < 50) || (firm < 16 && forge < 20)) && form === 1;
     if (!isForge) {
@@ -27,10 +27,10 @@ export const ForgeActive = ({ query, getEquipDetail, equip }) => {
     const forgeClick = (type) => {
         forgeEquip({
             materialtype: type,
-            in_x
+            uid
         }).then(({ data }) => {
             if (data) {
-                getEquipDetail({ in_x: data })
+                getEquipDetail()
             }
         })
     }

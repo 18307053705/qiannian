@@ -19,12 +19,13 @@ module.exports = {
      * @param req.in_x 装备在背包内的下标
      */
     decomposeEquip: (req, res) => {
-        const { in_x } = req.body;
-        if (in_x === undefined) {
+        const { uid } = req.body;
+        if (!uid) {
             ErrorG.paramsError(res);
             return;
         }
         const { data, tael } = KnapsackG.getknapsackGlobal(req, res);
+        const in_x = data.findIndex((itme) => itme.uid === uid);
         const equip = data[in_x] || {};
         if (!knapsackTable.isEquip(equip.id)) {
             res.send({

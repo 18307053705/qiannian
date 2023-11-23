@@ -1,5 +1,5 @@
 
-const { knapsackTable } = require('../../table');
+const { knapsackTable } = require('@/table');
 
 module.exports = {
     /**
@@ -7,9 +7,9 @@ module.exports = {
      * @param {*} req 
      * @param {*} res
      */
-    getequipList: function (req, res) {
+    getEquipList: function (req, res) {
         const list = [];
-        Object.values(knapsackTable.getArticleListAll(2)).forEach(({ id, price, unit, name }) => {
+        knapsackTable.getAllEquipList().forEach(({ id, price, unit, name }) => {
             if (price) {
                 list.push({
                     id,

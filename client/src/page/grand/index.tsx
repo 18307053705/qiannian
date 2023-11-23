@@ -72,9 +72,9 @@ const Grand = ({ history }) => {
                 articleEle.length ? (
                     <div className={Styles.article}>
                         {
-                            articleEle.map(({ n, in_x }) => (
+                            articleEle.map(({ name, in_x }) => (
                                 <span key={in_x} className="g_u">
-                                    <span onClick={() => { pickupDirClick(in_x) }}>{n}</span>
+                                    <span onClick={() => { pickupDirClick(in_x) }}>{name}</span>
                                 </span>
                             ))
                         }

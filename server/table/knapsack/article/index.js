@@ -14,6 +14,22 @@ const dongTian = require('./20_dongTian');
 
 module.exports = {
     /**
+     * 获取全部商城物品
+     */
+    getArticleList: function () {
+        return [
+            ...reply.getArticleList(),
+            ...buff.getArticleList(),
+            ...reel.getArticleList(),
+            ...equip.getArticleList(),
+            ...material.getArticleList(),
+            ...seed.getArticleList(),
+            ...sundries.getArticleList(),
+            ...gemstone.getArticleList(),
+            ...equipMaterial.getArticleList(),
+        ]
+    },
+    /**
      * 获取物品
      * @param {*} id 物品id
      * @returns {*} article || undefined
@@ -60,10 +76,14 @@ module.exports = {
     isEquip: function (id) {
         return (id + "").slice(0, 2) === '13';
     },
-     /**
-     * 判断物品是否为宝石
-     */
-     isGemstone: function (id) {
+    /**
+    * 判断物品是否为宝石
+    */
+    isGemstone: function (id) {
         return (id + "").slice(0, 2) === '17';
-    }
+    },
+    /**
+     * 获取全部装备
+     */
+    getAllEquipList: equip.getArticleList
 }

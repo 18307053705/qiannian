@@ -10,12 +10,13 @@ module.exports = {
      * @param req.in_x 装备在背包内的下标
      */
     forgeEquip: (req, res) => {
-        const { in_x, materialtype } = req.body;
-        if (!materialtype || in_x === undefined) {
+        const { uid, materialtype } = req.body;
+        if (!materialtype || !uid) {
             ErrorG.paramsError(res);
             return;
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
+        const in_x = data.findIndex((itme) => itme.uid === uid);
         const equip = data[in_x] || {};
         if (!knapsackTable.isEquip(equip.id)) {
             res.send({

@@ -1,5 +1,5 @@
-const { knapsackFn } = require('../../utils');
-const { GrandG, KnapsackG } = require('../../global');
+const { knapsackFn } = require('@/utils');
+const { GrandG } = require('@/global');
 
 module.exports = {
     /**
@@ -18,8 +18,8 @@ module.exports = {
             })
             return;
         }
-        const article = itme.p === 3 ? { equipReward: { [itme.id]: itme } } : { artReward: { [itme.id]: itme } };
-        const message = knapsackFn.addKnapsack(req, res, { article });
+        const article = { [itme.id]: itme };
+        const message = knapsackFn.addKnapsack(req, res, article);
         if (message) {
             res.send({
                 code: 0,
@@ -32,7 +32,7 @@ module.exports = {
 
         res.send({
             code: 0,
-            success: `你捡起[${itme.n}]x${itme.s}`
+            success: `你捡起[${itme.name}]x${itme.s}`
         })
 
     }

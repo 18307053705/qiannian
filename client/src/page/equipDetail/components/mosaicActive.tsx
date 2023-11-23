@@ -13,10 +13,10 @@ export const MosaicActive = ({ query, getEquipDetail, setIsMosaic }) => {
         }))
     }, []);
 
-    const mosaicEquipClick = (material_inx) => {
+    const mosaicEquipClick = (uid) => {
         mosaicEquip({
-            material_inx,
-            in_x: query.in_x
+            material_uid: uid,
+            uid: query.uid
         }).then(({ data }) => {
             if (data !== undefined) {
                 getEquipDetail(data);
@@ -25,13 +25,13 @@ export const MosaicActive = ({ query, getEquipDetail, setIsMosaic }) => {
         })
     }
 
-    const prefix = ({ in_x, s, name }, index) => {
+    const prefix = ({ uid, s, name }, index) => {
         return (
-            <div key={in_x}>
+            <div key={uid}>
                 {index}.
                 <span>{name}x{s}</span>
                 {' | '}
-                <span className="g_u_end" onClick={() => { mosaicEquipClick(in_x) }}>镶嵌</span>
+                <span className="g_u_end" onClick={() => { mosaicEquipClick(uid) }}>镶嵌</span>
             </div>
         )
     }

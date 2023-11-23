@@ -1,9 +1,8 @@
 // 解析强化，锻造，宝石
 // ☆★〖〗『』〓】
 // ①②③④⑤⑥⑦⑧⑨⑩
-
-export const getEquipExtInfo = (ext, name) => {
-  const [firm, forge, sigil] = ext.split("_");
+export const getEquipExtInfo = (name: string, ext = '0_0_0_0_0_0_0_0_0') => {
+  const [firm, forge, sigil]: any = ext.split("_");
   // const forge = 10;
   // const firm = 14;
   let increase = 1 + forge * 0.1;
@@ -91,7 +90,7 @@ export const getEquipName = equip => {
     return "无";
   }
   const { ext, name, n } = equip;
-  const { text } = getEquipExtInfo(ext, name || n);
+  const { text } = getEquipExtInfo(name || n, ext);
   return text;
 };
 

@@ -11,13 +11,13 @@ module.exports = {
      * @param {*} req.price 上架物品价格
      */
     groundingActive: function (req, res) {
-        const { in_x, price } = req.body;
-        if (!price) {
+        const { uid, price } = req.body;
+        if (!price || !uid) {
             ErrorG.paramsError(res);
             return;
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
-
+        const in_x = data.findIndex((itme) => itme.uid === uid);
         // 验证物品信息
         if (!data[in_x]) {
             res.send({
@@ -26,17 +26,16 @@ module.exports = {
             })
             return;
         }
-        const { id, p, n, ext } = data[in_x];
+        const { id, name, ext } = data[in_x];
         const info = {
             id,
-            p,
-            n,
+            name,
             s: 1,
             ext
         }
         const { message, id_p } = PaiMaiHangG.setPaimaiHang(req, res, info, price);
         if (!message) {
-            knapsackFn.deleteKnapsack(req, res, { article: { [id]: info }, data });
+            knapsackFn.deleteKnapsack(req, res, { [id]: info }, data);
             updateTimer(req, res, id_p);
         }
         res.send({

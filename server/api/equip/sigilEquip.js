@@ -8,12 +8,13 @@ module.exports = {
      * @param req.in_x 装备在背包内的下标
      */
     sigilEquip: (req, res) => {
-        const { in_x } = req.body;
-        if (in_x === undefined) {
+        const { uid } = req.body;
+        if (uid === undefined) {
             ErrorG.paramsError(res);
             return;
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
+        const in_x = data.findIndex((itme) => itme.uid === uid);
         const equip = data[in_x] || {};
         if (!knapsackTable.isEquip(equip.id)) {
             res.send({

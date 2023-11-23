@@ -32,12 +32,14 @@ const articleMap = {
     146: {
         name: '帮会创建令',
         price: 1000,
+        unit: 'yuanbao',
         value: 500,
         tips: '可使用此物创建帮会,或者捐赠可获得500点帮会贡献与帮会声望。',
     },
     147: {
         name: '庄园创建令',
         price: 1000,
+        unit: 'yuanbao',
         value: 500,
         tips: '可使用此物创建庄园,或者捐赠可获得500点庄园贡献与结义声望。',
     },

@@ -7,13 +7,14 @@ module.exports = {
      * @param {*} type 1:使用物品,2:入库,3:出库,4:丢弃
      */
     operate: async (req, res) => {
-        const { in_x, s, type } = req.body;
+        const { uid, s, type } = req.body;
         const { data, tael, yuanbao } = await knapsackFn.getKnapsackInfo(req, res, { type });
         // 验证物品信息
         if (knapsackFn.chekeArticle(req, res, data)) {
             return;
         }
-        const { id, name } = data[in_x];
+        const in_x = data.findIndex((itme) => itme.uid === uid);
+        const { id, name, ext, n } = data[in_x];
         const isEquip = knapsackTable.isEquip(id);
         let message = '';
         let success = '';
@@ -58,7 +59,7 @@ module.exports = {
         if (type === 3) {
             const { data: knaData } = await knapsackFn.getKnapsackInfo(req, res);
             const article = { [id]: { id, name, s } }
-            message = knapsackFn.addKnapsack(req, res, article, knaData);
+            message = knapsackFn.addKnapsack(req, res, article, { data: knaData });
             if (!message) {
                 data[in_x]['s'] -= s;
                 data[in_x]['s'] || data.splice(in_x, 1);
@@ -72,7 +73,7 @@ module.exports = {
             data[in_x]['s'] -= s;
             data[in_x]['s'] || data.splice(in_x, 1);
             KnapsackG.updateknapsackGlobal(req, res, { data });
-            GrandG.setGrandEleGlobal(req, res, { article: [{ id, s }] });
+            GrandG.setGrandEleGlobal(req, res, { article: [{ id, s, ext, n }] });
         }
         res.send({
             code: 0,

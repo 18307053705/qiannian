@@ -396,6 +396,7 @@ const articleMap = {
     1898: {
         name: '强化石',
         price: 50,
+        unit: 'yuanbao',
         integral: 2,
         tips: '极为稀有的石头，可用于强化装备，强化等级越高成功概率越低。',
     },

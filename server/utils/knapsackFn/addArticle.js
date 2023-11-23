@@ -9,7 +9,7 @@ module.exports = {
      * @returns message 错误信息
      * @returns data 增加物品后的信息
      */
-    addArticle: function (article, list) {
+    addArticle: function (article, list, force) {
         if (!article) {
             return undefined
         }
@@ -41,7 +41,7 @@ module.exports = {
             }
         })
         const dataSize = data.length + equipNum;
-        if (dataSize === KNAPSACK_SIZE) {
+        if (dataSize === KNAPSACK_SIZE && !force) {
             return {
                 message: '背包已满,请先清理背包'
             }
@@ -81,7 +81,7 @@ module.exports = {
                 delete equipReward[key];
             })
         }
-        if (data.length > KNAPSACK_SIZE) {
+        if (data.length > KNAPSACK_SIZE && !force) {
             return { message: '背包已满,请先清理背包' }
         }
         return {

@@ -8,13 +8,13 @@ module.exports = {
     getGemList: (req, res) => {
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const gemList = [];
-        data.forEach(({ id, s, name }, in_x) => {
+        data.forEach(({ id, s, name ,uid}) => {
             if (knapsackTable.isGemstone(id)) {
                 gemList.push({
                     id,
                     s,
                     name,
-                    in_x
+                    uid
                 })
             }
         })
