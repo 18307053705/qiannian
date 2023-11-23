@@ -39,22 +39,23 @@ export async function getEquipList(): Promise<{ data: any[] }> {
 }
 
 type DetailType = {
-  in_x: number; // 背包 仓库 店铺 商城 所在下标
   form: 1 | 2 | 3 | 4 | 5 | 6; // 背包 身上 仓库 店铺 商城 宠物
   pos?: string; // 装备部位
   t_roleId?: string; // 其他角色
   petId?: string; // 其他角色
   id?: string; // 物品id
+  uid?: string // 物品uid
 };
 
+
 /**
- * 物品详情
- * @param data.in_x 背包 仓库 店铺 商城 所在下标
- * @param data.form 1:背包2:身上3:仓库4:店铺5:商城6:宠物
- * @param data.pos 可选,装备部位
- * @param data.t_roleId 可选,其他角色
- * @param data.petId 可选,宠物id
- * @param data.id 可选,物品id
+ * 获取物品详情
+ * @param form 物品所在1:背包,2:身上,3,:仓库4:店铺,5:商城,6:宠物，7积分商店
+ * @param uid 所在下标(背包,仓库,店铺)
+ * @param pos 装备部位(身上,宠物)
+ * @param id 物品id
+ * @param role_id 角色id
+ * @param petId 宠物id
  */
 export function getArticleDetail(data: DetailType) {
   return post(getArticleDetailUrl, data);

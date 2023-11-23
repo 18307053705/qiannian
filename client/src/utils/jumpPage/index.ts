@@ -1,21 +1,28 @@
+
+interface JumpDetailRParams {
+  form: number,
+  pos?: string,
+  role_id?: string,
+  petId?: string,
+  id?: string,
+  uid?: string,
+  isEquip?: boolean,
+}
+
 /**
  * 跳转到详情页
- * @param history 路由
- * @param param.p 物品类型,p3跳转装备详情,其余物品详情
  * @param param.form 物品所在:1背包,2身上,3仓库,4店铺,5商城,6宠物
  * @param param.pos 装备部位,装备专属字段，指佩戴的位置，可选参数
- * @param param.in_x 所在背包,仓库,店铺等下标,可选参数
+ * @param param.id 物品id
+ * @param param.uid 物品uid
  * @param param.role_id 其他人
  * @param param.petId 其他人
  */
-export function jumpDetail(
-  history,
-  { p, form, pos, in_x, role_id, petId, id, isEquip }: any
-) {
-  if (isEquip || p === 1) {
-    history.push("/equipDetail", { p, form, in_x, pos, role_id, petId, id });
+export function jumpDetail({ form, pos, role_id, petId, id, isEquip, uid }: JumpDetailRParams) {
+  if (isEquip) {
+    window.QN.history.push("/equipDetail", { form, pos, role_id, petId, id, uid });
   } else {
-    history.push("/articleDetail", { p, form, in_x, pos, role_id, petId, id });
+    window.QN.history.push("/articleDetail", { form, pos, role_id, petId, id, uid });
   }
 }
 

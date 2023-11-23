@@ -35,8 +35,8 @@ const nva = [
     }];
 
 
-const namehandel = (n, p, ext) => {
-    if (p !== 1) {
+const namehandel = (n, isEquip, ext) => {
+    if (!isEquip) {
         return n;
     }
     return getEquipName({ ext, n });
@@ -82,13 +82,18 @@ const knapsack = ({ history }) => {
             })
             return;
         }
-        operate(parms).then(({ data }) => {
-            setKnapsack(dataChange(data));
+        operate(parms).then(({ code }) => {
+            if (code === 0) {
+                getKnapsack({ type }).then(({ data }) => {
+                    setKnapsack(dataChange(data));
+                });
+            }
+
         })
     }
 
-    const activeClick = useCallback((in_x, s, p) => {
-        if (p === 1 && type !== 5) {
+    const activeClick = useCallback(({ isEquip, s, uid, in_x }) => {
+        if (isEquip && type !== 5) {
             operateClick({
                 in_x,
                 s: 1,
@@ -103,27 +108,27 @@ const knapsack = ({ history }) => {
         }
     }, [type])
 
-    const prefix = ({ id, name, p, s, ext, in_x }, index) => {
+    const prefix = ({ id, name, s, ext, uid, isEquip }, index) => {
         return (
             <span
                 key={`${id}_1`}
                 className="g_u_end"
                 onClick={() => {
-                    jumpDetail(history, {
-                        p,
+                    jumpDetail({
+                        isEquip,
                         form: type === 3 ? 3 : 1,
-                        in_x
+                        uid
                     })
                 }}
             >
-                {index}. {namehandel(name, p, ext)} x {s}
+                {index}. {namehandel(name, isEquip, ext)} x {s}
             </span>
         )
     }
 
-    const activeDom = ({ id, p, s, in_x }) => {
+    const activeDom = (itme) => {
         return (
-            <span key={`${id}_2`} className="g_u_end" onClick={() => { activeClick(in_x, s, p) }}>{ACTIVE_TYPE[type]}</span>
+            <span key={`${itme.id}_2`} className="g_u_end" onClick={() => { activeClick(itme) }}>{ACTIVE_TYPE[type]}</span>
         )
     }
 

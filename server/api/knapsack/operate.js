@@ -78,11 +78,6 @@ module.exports = {
             code: 0,
             message,
             success,
-            data: {
-                list: data,
-                tael: tael,
-                yuanbao: yuanbao
-            }
         })
     }
 };

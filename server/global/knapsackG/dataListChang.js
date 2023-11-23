@@ -7,7 +7,7 @@ module.exports = {
      * @param {*} data
      * @returns {*} data
      */
-    dataListChang: function (data) {
+    dataListChang: function (data, uidFromt) {
         try {
             const date = new Date() * 1;
             return JSON.parse(data).map((itme, index) => {
@@ -16,7 +16,7 @@ module.exports = {
                     itme.s = 1;
                     itme.ext = itme.ext || EQUIP_INIT_EXT;
                 }
-                itme.uid = `${date}${index}`;
+                itme.uid = `${uidFromt ? itme.id : date}${index}`;
                 return itme;
             })
         } catch (error) {

@@ -47,9 +47,9 @@ const RoleAttr = ({ roleInfo, history }) => {
                                 <span className="g_b">{label}</span>
                                 {equip[value] ? <span
                                     onClick={() => {
-                                        jumpDetail(history, {
+                                        jumpDetail({
                                             pos: value,
-                                            p: 1,
+                                            isEquip: true,
                                             form: 2
                                         })
                                     }}

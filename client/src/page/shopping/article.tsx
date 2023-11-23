@@ -35,14 +35,14 @@ const nva = [
     }];
 
 
-const namehandel = (n, p, ext) => {
-    if (p !== 1) {
-        return n;
+const namehandel = (n, isEquip, ext) => {
+    if (isEquip) {
+        return getEquipName({ ext, n });
     }
-    return getEquipName({ ext, n });
+    return n;
 }
 
-const Article = ({ history, historyClick }) => {
+const Article = ({ historyClick }) => {
     const [num, setNum]: any = useState(1);
     const [info, setInfo]: any = useState(undefined);
     const [current, setCurrent] = useState(0);
@@ -61,21 +61,20 @@ const Article = ({ history, historyClick }) => {
 
     }, [current, list]);
 
-    const prefix = ({ in_x, p, ext, s, name }, index) => (
+    const prefix = ({ uid, isEquip, ext, s, name, i }, index) => (
         <span
             className='g_u_end'
             onClick={() => {
-                jumpDetail(history, {
-                    p,
+                jumpDetail({
                     form: 1,
-                    in_x
+                    uid
                 })
             }}>
-            {index}. {namehandel(name, p, ext)} x {s}
+            {index}. {namehandel(name, isEquip, ext)} x {s}
         </span>
     )
-    const active = ({ uid, p, s }) => (
-        <span className='g_u_end' onClick={() => { setInfo({ uid, p, s }); }}>上架</span>
+    const active = ({ uid, isEquip, s }) => (
+        <span className='g_u_end' onClick={() => { setInfo({ uid, isEquip, s }); }}>上架</span>
     )
 
     const submit = (price) => {
@@ -83,7 +82,7 @@ const Article = ({ history, historyClick }) => {
             type: 1,
             active: 1,
             price: Number(price),
-            s: info.p !== 1 ? Number(num) : 1,
+            s: info.isEquip ? 1 : Number(num),
             uid: info.uid,
             unit: 'tael'
         }).then(({ message }) => {
@@ -96,7 +95,7 @@ const Article = ({ history, historyClick }) => {
     }
     return (
         <div>
-            {info && info.p !== 1 && <Input onChange={setNum} label='物品数量' type='number' />}
+            {info && !info.isEquip && <Input onChange={setNum} label='物品数量' type='number' />}
             {info && <Input submit={submit} label='物品单价' type='number' />}
             <Tab list={nva} onCheng={setCurrent} currentKey={0} />
             <List data={data} prefix={prefix} active={active} />

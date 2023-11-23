@@ -7,7 +7,8 @@ export function dataChange(data) {
                 ...item,
                 id,
                 p: 1,
-                in_x: index
+                in_x: index,
+                isEquip:true
             }
         }
         if (isDanYao(id)) {

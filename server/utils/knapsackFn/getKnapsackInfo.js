@@ -14,7 +14,7 @@ module.exports = {
             // 仓库不存在获取其他人
             const { role_id: roleId } = RoleG.getRoleGlobal(req, res);
             const { results } = await res.asyncQuery(`select * from warehouse  where role_id="${roleId}"`);
-            const data = dataListChang(results[0].data);
+            const data = dataListChang(results[0].data, true);
             return {
                 ...results[0],
                 data

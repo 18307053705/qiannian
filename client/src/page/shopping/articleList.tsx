@@ -5,11 +5,11 @@ import { jumpDetail } from '@utils/jumpPage';
 import { isEquip } from '@utils';
 import { Input, List } from '@components';
 import { UNIT_MEUN } from '@meun';
-const namehandel = (n, p, ext) => {
-    if (p !== 3) {
-        return n;
+const namehandel = (n, id, ext) => {
+    if (isEquip(id)) {
+        return getEquipName({ ext, n });
     }
-    return getEquipName({ ext, n });
+    return n;
 }
 const ArticleList = ({ history, historyClick }) => {
     const { state } = history.location;
@@ -72,18 +72,17 @@ const ArticleList = ({ history, historyClick }) => {
         return null;
     }
 
-    const prefix = ({ p, ext, s, name, price, unit }, index) => (
+    const prefix = ({ uid, ext, s, name, price, unit, id }, index) => (
         <span
             className='g_u_end'
             onClick={() => {
-                jumpDetail(history, {
-                    p,
+                jumpDetail({
                     role_id,
                     form: 4,
-                    in_x: index - 1
+                    uid
                 })
             }}>
-            {index}. {namehandel(name, p, ext)} x {s}({price}{UNIT_MEUN[unit]}/件)
+            {index}. {namehandel(name, id, ext)} x {s}({price}{UNIT_MEUN[unit]}/件)
         </span>
     )
     const active = (itme) => (

@@ -3,7 +3,7 @@ import { backGrand } from '@utils/grand';
 import { getRoleInfo, initRoleInfo } from '@cgi/roleInfo';
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 import { jumpDetail, jumpEquipList, jumpMakeEquip, jumpSuitDetail } from '@utils/jumpPage';
-export const EquipList = ({ history }) => {
+export const EquipList = () => {
     const [roleInfo, setRoleInfo] = useState(initRoleInfo);
     useEffect(() => {
         getRoleInfo().then(({ data }) => {
@@ -13,8 +13,8 @@ export const EquipList = ({ history }) => {
 
 
     const equipClick = (pos) => {
-        jumpDetail(history, {
-            p: 3,
+        jumpDetail({
+            isEquip: true,
             form: 2,
             pos,
         })
@@ -63,8 +63,8 @@ export const EquipList = ({ history }) => {
             {role_level >= 66 && (
                 <div><span className='g_u_end' onClick={() => { jumpMakeEquip('faBao', role_level) }}>前往打造法宝</span></div>
             )}
-             <span className='g_u'><span onClick={() => { jumpMakeEquip('gang') }}>帮会装备</span></span>
-             <div><span className="g_u_end" onClick={() => { jumpMakeEquip('marriage') }}>情缘装备</span></div>
+            <span className='g_u'><span onClick={() => { jumpMakeEquip('gang') }}>帮会装备</span></span>
+            <div><span className="g_u_end" onClick={() => { jumpMakeEquip('marriage') }}>情缘装备</span></div>
             <div><span onClick={backGrand} className="g_u_end">返回游戏</span></div>
         </div>
     )
