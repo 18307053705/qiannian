@@ -32,10 +32,10 @@ const roleFn = require("../roleFn");
 // 每周1的1点1分30秒触发 ：'30 1 1 * * 1'
 
 const scheduleCronstyle = () => {
-    ActiveQueueG.openZhanChang();
-    ActiveQueueG.openWorldBoss();
-    ActiveQueueG.openCaiLingDong();
-    ActiveQueueG.openJinYindao();
+    // ActiveQueueG.openZhanChang();
+    // ActiveQueueG.openWorldBoss();
+    // ActiveQueueG.openCaiLingDong();
+    // ActiveQueueG.openJinYindao();
     // 每天19点 开启上古战场
     schedule.scheduleJob('0 0 19 * * *', () => {
         ActiveQueueG.openZhanChang();
