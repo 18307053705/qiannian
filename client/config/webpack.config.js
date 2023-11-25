@@ -11,8 +11,8 @@ module.exports = {
     mian: `${rootPath}/src/main.tsx`,
   },
   output: {
-    path: path.resolve(rootPath, "dev"),
-    filename: "[name].js",
+    path: path.resolve(rootPath, "dist"),
+    filename: "static/js/[name].js",
   },
   resolve: {
     // 处理导入文件格式
@@ -48,14 +48,6 @@ module.exports = {
               ],
             },
           }
-          // , 
-          // {
-          //   loader: "url-loader",
-          //   options: {
-          //     outputPath: 'js/',
-          //     // name: "js/",
-          //   },
-          // }
         ],
       },
       // 处理less
@@ -122,7 +114,7 @@ module.exports = {
         loader: "url-loader",
         options: {
           limit: 1000,
-          name: "img/[name].[ext]",
+          name: "static/img/[name].[ext]",
         },
       },
     ],

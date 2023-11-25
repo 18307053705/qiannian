@@ -12,7 +12,7 @@ module.exports = {
         const level = lx / 3;
 
         let rowid = 0;
-        let rate = Math.floor(Math.random() * (100 - 0));
+        let rate = Math.floor(Math.random() * 100);
         // 1-2级奖池
         if (level < 5) {
             rowid = (rate + level * 5) > 50 ? 2 : 1;
