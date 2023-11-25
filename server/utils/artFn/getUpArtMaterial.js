@@ -31,38 +31,38 @@ module.exports = {
         // 升重消耗材料
         if (p === 'l') {
             // 低于13级使用的材料Id
-            materialId = 66 + l;
+            materialId = 1809 + l;
             // 13级及以上使用初阶技能升级书
             if (l > 13) {
-                materialId = 87;
+                materialId = 1830;
                 s = l - 13;
             }
             // 30级及以上使用中阶技能升级书
             if (l > 30) {
-                materialId = 88;
+                materialId = 1831;
                 s = l - 30;
             }
             // 50级及以上使用高阶技能升级书
             if (l > 50) {
-                materialId = 89;
+                materialId = 1832;
                 s = l - 50;
             }
         }
         // 升转消耗材料
         if (p === 'r') {
-            materialId = 79 + r;
+            materialId = 1822 + r;
             s = r;
         }
         // 计算消耗材料
-        const { type, n, } = knapsackTable.getArticle(materialId);
+        const { name } = knapsackTable.getArticle(materialId);
         const article = {
             [materialId]: {
-                p: type,
-                n,
+                id: materialId,
+                name,
                 s
             }
         }
-        const { message, success } = deleteKnapsack(req, res, { article });
+        const { message, success } = deleteKnapsack(req, res, article);
         delete up_art.p;
         return {
             message,

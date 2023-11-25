@@ -1,4 +1,4 @@
-const { RoleG } = require('../../global');
+const { RoleG } = require('@/global');
 const { knapsackTable } = require('../../table');
 const { cornuconpiaFn, knapsackFn } = require('../../utils');
 module.exports = {
@@ -10,12 +10,12 @@ module.exports = {
     chengId: function (req, res) {
         // 玄机符
         const article = {
-            [308]: {
-                ...knapsackTable.getArticle(308),
+            [1415]: {
+                ...knapsackTable.getArticle(1415),
                 s: 1
             }
         }
-        const { message } = knapsackFn.deleteKnapsack(req, res, { article });
+        const { message } = knapsackFn.deleteKnapsack(req, res, article);
         if (message) {
             res.send({
                 code: 0,
@@ -24,12 +24,12 @@ module.exports = {
             return;
         }
         const { treasure_pool } = RoleG.getRoleGlobal(req, res);
-        const { id, n } = cornuconpiaFn.getPrize(treasure_pool['jbp']);
+        const { id, name } = cornuconpiaFn.getPrize(treasure_pool['jbp']);
         treasure_pool['jbp'].id = id;
-        RoleG.updateRoleGlobal(req, res, { treasure_pool });
+        RoleG.updataRoleGlobal(req, res, { treasure_pool });
         res.send({
             code: 0,
-            data: n
+            data: name
         })
     }
 }

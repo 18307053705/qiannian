@@ -3,6 +3,8 @@ const equipMaterial = require('../../knapsack/article/18_equipMaterial');
 const reel = require('../../knapsack/article/12_reel');
 const reply = require('../../knapsack/article/10_reply');
 const buff = require('../../knapsack/article/11_buff');
+const treasure = require('../../knapsack/article/19_treasure');
+const material = require('../../knapsack/article/14_material');
 
 const TEST = {
     2999988: {
@@ -16,7 +18,7 @@ const TEST = {
     },
     2999989: {
         id: 2999989,
-        name: "一阶装备boss",
+        name: "装备材料",
         type: 2,
 
         level: 1,
@@ -107,7 +109,7 @@ const TEST = {
         level: 1,
         attr: 1,
         isRanks: true,
-        article: '296-100,297-100,298-100,299-100,300-100,301-100,302-100',
+        article: material.getArticleList().map(({ id }) => `${id}-2000`).join(','),
     },
     2999999: {
         id: 2999999,
@@ -116,7 +118,7 @@ const TEST = {
         level: 1,
         attr: 1,
         isRanks: true,
-        article: '207-100,208-100,209-100,210-100,211-100,212-100,213-100,214-100,215-100,216-100,217-100,218-100,219-100,220-100,221-100',
+        article: treasure.getArticleList().map(({ id }) => `${id}-2000`).join(','),
     },
 }
 

@@ -35,9 +35,8 @@ export const WorldBoss = () => {
         })
     }
 
-    const pickupClick = (id_x) => {
-       
-        getShedReward({ id_x }).then(({ data }) => {
+    const pickupClick = (uid) => {
+        getShedReward({ uid }).then(({ data }) => {
             setBossInfo({
                 ...bossInfo,
                 ...data,
@@ -76,7 +75,7 @@ export const WorldBoss = () => {
                     <div>
                         BOSS掉落：
                         {
-                            shed.map(({ id_x, n, s }) => <span><span key={id_x} className='g_u_end' onClick={() => { pickupClick(id_x) }} >{n}x{s}</span>{' '}</span>)
+                            shed.map(({ uid, name, s }) => <span><span key={uid} className='g_u_end' onClick={() => { pickupClick(uid) }} >{name}x{s}</span>{' '}</span>)
                         }
                     </div>
                 )

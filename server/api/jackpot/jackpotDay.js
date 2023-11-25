@@ -10,48 +10,48 @@ const { knapsackFn } = require('../../utils');
 
 function getList(level) {
     let list = [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 },
-        { id: 4 }
+        { id: 100 },
+        { id: 101 },
+        { id: 102 },
+        { id: 103 }
     ];
     if (level >= 10) {
-        list.push({ id: 5 }, { id: 6 });
+        list.push({ id: 104 }, { id: 105 });
     }
     if (level >= 30) {
         list = [
-            { id: 5 },
-            { id: 6 },
-            { id: 7 },
-            { id: 8 },
-            { id: 13, min: 1, max: 5, r: 20 },
-            { id: 14, min: 1, max: 5, r: 20 },
-            { id: 15, min: 1, max: 5, r: 20 },
-            { id: 16, min: 1, max: 5, r: 20 },
+            { id: 104 },
+            { id: 105 },
+            { id: 106 },
+            { id: 107 },
+            { id: 110, min: 1, max: 3, r: 20 },
+            { id: 111, min: 1, max: 3, r: 20 },
+            { id: 112, min: 1, max: 3, r: 20 },
+            { id: 113, min: 1, max: 3, r: 20 },
         ];
     }
     if (level >= 50) {
         list = [
-            { id: 7 },
-            { id: 8 },
-            { id: 9 },
-            { id: 10 },
-            { id: 17, min: 1, max: 5, r: 20 },
-            { id: 18, min: 1, max: 5, r: 20 },
-            { id: 19, min: 1, max: 5, r: 20 },
-            { id: 20, min: 1, max: 5, r: 20 },
+            { id: 106 },
+            { id: 107 },
+            { id: 108 },
+            { id: 109 },
+            { id: 114, min: 1, max: 3, r: 20 },
+            { id: 115, min: 1, max: 3, r: 20 },
+            { id: 116, min: 1, max: 3, r: 20 },
+            { id: 117, min: 1, max: 3, r: 20 },
         ];
     }
     if (level >= 70) {
         list = [
-            { id: 9 },
-            { id: 10 },
-            { id: 11 },
-            { id: 12 },
-            { id: 21, min: 1, max: 5, r: 20 },
-            { id: 22, min: 1, max: 5, r: 20 },
-            { id: 23, min: 1, max: 5, r: 20 },
-            { id: 24, min: 1, max: 5, r: 20 },
+            { id: 108 },
+            { id: 109 },
+            { id: 1010 },
+            { id: 1011 },
+            { id: 118, min: 1, max: 3, r: 20 },
+            { id: 119, min: 1, max: 3, r: 20 },
+            { id: 1110, min: 1, max: 3, r: 20 },
+            { id: 1111, min: 1, max: 3, r: 20 },
         ];
     }
     return list;
@@ -100,26 +100,32 @@ module.exports = {
             textList.unshift({ name: '元宝', value: yuanbao_add })
         }
         // 全部50%几率
-        const artReward = {};
-        getList(role_level).forEach(({ id, min = 20, max = 100, r = 50 }) => {
+        const article = {};
+        getList(role_level).forEach(({ id, min = 50, max = 100, r = 50 }) => {
             const rate = Math.floor(Math.random() * 100);
             if (rate < r) {
-                const { n, type } = knapsackTable.getArticle(id);
+                const { name } = knapsackTable.getArticle(id);
                 const s = Math.floor(Math.random() * (max - min)) + min;
                 textList.push({
-                    name: n,
+                    name,
                     value: s,
                 })
-                artReward[id] = {
+                article[id] = {
                     id,
-                    n,
-                    p: type,
+                    name,
                     s
                 }
             }
         })
 
-        knapsackFn.addKnapsack(req, res, { article: { artReward }, data, force: true })
+        const message = knapsackFn.addKnapsack(req, res, article, { data });
+        if (message) {
+            res.send({
+                code: 0,
+                message
+            })
+            return;
+        }
         // 更新背包信息
         KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao + yuanbao_add, tael: tael + tael_add });
         RoleG.updataRoleGlobal(req, res, { role_lx: lx_add + role_lx })

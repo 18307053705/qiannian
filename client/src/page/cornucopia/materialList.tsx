@@ -10,27 +10,14 @@ export const MaterialList = ({ materialClick, materialType, setMaterialMap }) =>
 
     const list = setMaterialMap[materialType];
 
-    const activeClick = (index) => {
-        setEle({
-            ...list[index],
-            in_x: index
-        })
-    }
-    const prefix = (row) => <span>{row.n}[{row['value']}]x{row.s}</span>;
-    const active = (_, index) => <span className='g_u_end' onClick={() => { activeClick(index - 1) }}>[投]</span>;
-
-    const submit = (num) => {
-        if (ele.s < num) {
-            setError(`${ele.n}数量不足`);
+    const prefix = (row) => <span>{row.name}[{row['value']}]x{row.s}</span>;
+    const active = (row) => <span className='g_u_end' onClick={() => { setEle(row); submit(row) }}>[投]</span>;
+    const submit = (ele) => {
+        if (ele.s < 10) {
+            setError(`${ele.name}数量不足`);
             return;
         }
-
-        materialClick({
-            ...ele,
-            s: ele.s - num,
-            val: num * ele.value,
-            num
-        })
+        materialClick(ele, 10);
 
     }
     return (

@@ -4,11 +4,11 @@ const { knapsackFn } = require("../../utils");
 module.exports = {
     /**
      * 捡取BOSS掉落物品
-     * @param {*} req.id_x
+     * @param {*} req.uid
      */
     getShedReward: function (req, res) {
-        const { id_x: idX } = req.body;
-        if (idX === undefined) {
+        const { uid } = req.body;
+        if (!uid) {
             ErrorG.paramsError(res);
             return;
         }
@@ -16,7 +16,7 @@ module.exports = {
 
         const { shed } = ActivityG.getWorldBoss(req, res);
 
-        const index = shed.findIndex(({ id_x }) => idX === id_x);
+        const index = shed.findIndex((itme) => uid === itme.uid);
         if (index === -1) {
             res.send({
                 code: 0,
@@ -25,9 +25,8 @@ module.exports = {
             return;
         }
         const { id, s } = shed[index];
-        const { n, type } = knapsackTable.getArticle(id);
-        const artReward = { [id]: { p: type, s, n, id } };
-        const message = knapsackFn.addKnapsack(req, res, { article: { artReward } });
+        const { name } = knapsackTable.getArticle(id);
+        const message = knapsackFn.addKnapsack(req, res, { [id]: { s, name, id } });
         if (message) {
             res.send({
                 code: 0,
@@ -40,7 +39,7 @@ module.exports = {
         res.send({
             code: 0,
             data: { shed },
-            success: `恭喜你捡到${n}x${s}`
+            success: `恭喜你捡到${name}x${s}`
         })
     }
 };

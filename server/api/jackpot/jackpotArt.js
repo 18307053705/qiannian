@@ -5,14 +5,14 @@ const moment = require('moment');
 
 // 技能奖励池
 const artPoolMap = {
-    1: [67, 67, 68],
-    2: [67, 67, 67, 70, 70, 71],
-    3: [72, 72, 72, 73, 73, 74],
-    4: [75, 75, 76],
+    1: [1810, 1810, 1810, 1811, 1811],
+    2: [1810, 1811, 1811, 1812, 1812, 1812, 1813, 1813, 1814],
+    3: [1815, 1815, 1815, 1815, 1816, 1816, 1817],
+    4: [1818, 1818, 1818, 1819],
     // 风云，逍遥，天地
-    5: [77, 77, 77, 78, 78, 79],
+    5: [1820, 1820, 1820, 1820, 1821, 1821, 1822],
     // 一转-四转
-    6: [80, 80, 80, 80, 81, 81, 81, 82, 82, 83],
+    6: [1822, 1822, 1822, 1822, 1822, 1822, 1823, 1823, 1823, 1824, 1824, 1825],
 }
 
 module.exports = {
@@ -86,30 +86,36 @@ module.exports = {
         // 随机对应奖励池中的id
         const indxe = Math.floor(Math.random() * artPool.length);
         const id = artPool[indxe];
-        const { type:p, n } = knapsackTable.getArticle(id);
-        const artReward = {
+        const { name } = knapsackTable.getArticle(id);
+        const article = {
             [id]: {
                 id,
-                n,
-                p,
+                name,
                 s: 1
             }
         };
-        knapsackFn.addKnapsack(req, res, { article: { artReward }, data, force: true });
+        const message = knapsackFn.addKnapsack(req, res, article, { data });
+        if (message) {
+            res.send({
+                code: 0,
+                message
+            })
+            return;
+        }
         if (type === 1) {
             role_integral.world -= 199;
-            success = `消耗199世界声望,获得${n}`;
+            success = `消耗199世界声望,获得${name}`;
         }
         if (type === 2) {
             role_integral.gang -= 199;
-            success = `消耗199帮会声望,获得${n}`;
+            success = `消耗199帮会声望,获得${name}`;
         }
         if (type === 3) {
             role_integral.intersect -= 199;
-            success = `消耗199结义声望,获得${n}`;
+            success = `消耗199结义声望,获得${name}`;
         }
         if (type === 4) {
-            success = `消耗49元宝,获得${n}`;
+            success = `消耗49元宝,获得${name}`;
             KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao - 49 });
         } else {
             RoleG.updataRoleGlobal(req, res, { role_integral });

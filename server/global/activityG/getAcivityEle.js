@@ -1,5 +1,5 @@
-const { getFreak } = require('../../table/element/ELEMENT_2');
-const { ELEMENT_1 } = require('../../table/element/ELEMENT_1');
+const { getFreak } = require('@/table/element/ELEMENT_2');
+const { ELEMENT_1 } = require('@/table/element/ELEMENT_1');
 const { getCaiLingDong, getJinYindao } = require('../activeQueueG');
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         if (addressId === '60004' && getCaiLingDong()) {
             const eleItme = [];
             // 白灵子，蓝灵子，红灵子，紫灵子
-            const list = [{ id: 225, r: 30 }, { id: 226, r: 20 }, { id: 227, r: 10 }, { id: 228, r: 5 }];
+            const list = [{ id: 20611, r: 30 }, { id: 20612, r: 20 }, { id: 20613, r: 10 }, { id: 20614, r: 5 }];
             list.forEach(({ id, r }) => {
                 if (eleItme.length < 3) {
                     const rate = Math.floor(Math.random() * 101);
@@ -30,7 +30,7 @@ module.exports = {
         if (addressId === '60005' && getJinYindao()) {
             const eleItme = [];
             // 金宝箱，银宝箱，铜宝箱
-            const list = [{ id: 18, r: 5 }, { id: 19, r: 10 }, { id: 110, r: 20 }];
+            const list = [{ id: 107, r: 5 }, { id: 108, r: 10 }, { id: 109, r: 20 }];
             list.forEach(({ id, r }) => {
                 const rate = Math.floor(Math.random() * 101);
                 if (rate <= r) {

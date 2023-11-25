@@ -3,7 +3,7 @@ const { knapsackTable, EffectTable } = require('../../table');
 const { knapsackFn } = require('../../utils');
 
 
-const materialIds = [296, 297, 298, 299, 300, 301, 302];
+const materialIds = [148, 149, 1410, 1411, 1412, 1413, 1414];
 module.exports = {
     /**
      * 房屋家具镶嵌
@@ -27,18 +27,11 @@ module.exports = {
             })
             return;
         }
-        const article = knapsackTable.getArticle(id);
-        let result = knapsackFn.deleteKnapsack(req, res, {
-            article: {
-                [id]: {
-                    ...article,
-                    s: 1
-                }
-            }
-        })
+        const { name, value } = knapsackTable.getArticle(id);
+        let result = knapsackFn.deleteKnapsack(req, res, { [id]: { id, name, s: 1 } })
 
         if (!result.message) {
-            result = EffectTable.group1Fn(req, res, article.value)
+            result = EffectTable.group1Fn(req, res, value)
         }
         // EffectTable会改变全局房屋信息,所有需要拉取最新房屋信息
         const { treasure_pool: treasure } = RoleG.getRoleGlobal(req, res);

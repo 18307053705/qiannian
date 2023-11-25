@@ -3,27 +3,28 @@ import { backGrand } from '@utils/grand';
 import { getCornucopia, getMaterial, chengId, gather, draw } from '@cgi/cornucopia';
 import MaterialList from './materialList';
 import { unstable_batchedUpdates } from "react-dom";
+
 const ELE_KEY = {
-    ice: '冰',
-    mine: '雷',
-    wind: '风',
-    water: '水',
-    fire: '火',
+    1: '风',
+    2: '雷',
+    3: '冰',
+    4: '水',
+    5: '火',
 }
 const initMaterial = () => ({
-    ice: [],
-    mine: [],
-    wind: [],
-    water: [],
-    fire: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
 })
 
 const initValMap = {
-    ice: 0,
-    mine: 0,
-    wind: 0,
-    water: 0,
-    fire: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
 }
 
 const getExp = (lx, exp) => {
@@ -44,8 +45,8 @@ const getExp = (lx, exp) => {
 
 export const Cornucopia = ({ history }) => {
     const [materialMap, setMaterialMap]: any = useState();
-    const [materialType, setMaterialType]:any = useState('')
-    const [materialList, setMaterialList]: any = useState([]);
+    const [materialType, setMaterialType]: any = useState('');
+    const [materialReq, setMaterialReq]: any = useState({});
     const [results, setResults]: any = useState('');
     const [valMap, setValMap]: any = useState(JSON.parse(JSON.stringify(initValMap)));
     const [data, setData]: any = useState();
@@ -57,7 +58,7 @@ export const Cornucopia = ({ history }) => {
             list.forEach((itme) => {
                 const ele = material[itme.id]
                 if (ele) {
-                    materialMap[ele['key']].push({
+                    materialMap[ele['ele']].push({
                         ...itme,
                         ...ele
                     })
@@ -71,21 +72,26 @@ export const Cornucopia = ({ history }) => {
 
         })
     }
-    useEffect(updata, [])
-
-    const materialClick = (ele) => {
+    useEffect(updata, []);
+    const materialClick = (material, num) => {
         setMaterialType('');
-        if (ele) {
-            const { num, val, in_x, id, ...itme } = ele;
-            valMap[itme.key] += val;
-            if (itme.s == 0) {
-                materialMap[itme.key].splice(in_x, 1);
-            } else {
-                materialMap[itme.key][in_x] = { ...itme, id };
-            }
-            materialList.push({ id, s: num })
+        if (!num) {
+            return;
         }
+        material.s -= num;
+        const in_x = materialMap[material.ele].findIndex(({ id }) => material.id === id);
+        // 判断材料是否全部消耗
+        if (!material.s) {
+            materialMap[material.ele].splice(in_x, 1);
+        } else {
+            materialMap[material.ele][in_x] = material;
+        }
+        valMap[material.ele] += material.value * num;
+        materialReq[material.id] = (materialReq[material.id] || 0) + num;
 
+        setMaterialReq(materialReq);
+        setMaterialMap(materialMap);
+        setValMap(valMap);
     }
 
     const chengIdClick = () => {
@@ -105,7 +111,7 @@ export const Cornucopia = ({ history }) => {
     }
 
     const gatherClick = () => {
-        gather({ materialIds: materialList }).then((res) => {
+        gather({ materialIds: materialReq }).then((res) => {
             updata(res.data);
         })
     }
@@ -123,10 +129,6 @@ export const Cornucopia = ({ history }) => {
         })
     }
 
-    const clean = () => {
-        setValMap(JSON.parse(JSON.stringify(initValMap)));
-        setMaterialList([]);
-    }
     if (!data) {
         return null;
     }
@@ -174,7 +176,11 @@ export const Cornucopia = ({ history }) => {
                                     )
                                 })
                             }
-                            <div><span onClick={clean} className='g_u_end'>清空材料</span></div>
+                            <div><span onClick={() => {
+                                setMaterialReq({});
+                                setValMap(JSON.parse(JSON.stringify(initValMap)));
+                                updata();
+                            }} className='g_u_end'>清空材料</span></div>
                             <div>=============</div>
                             <div><span onClick={gatherClick} className='g_u_end'>开始聚宝</span></div>
                             <div>

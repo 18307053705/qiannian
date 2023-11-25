@@ -1,5 +1,5 @@
-const { KnapsackG } = require('../../global');
-const { cornuconpiaFn } = require('../../utils');
+const { KnapsackG } = require('@/global');
+const { knapsackTable } = require('@/table');
 module.exports = {
     /**
      * 获取元素材料列表
@@ -11,7 +11,7 @@ module.exports = {
         res.send({
             code: 0,
             data: {
-                material:cornuconpiaFn.getMaterialMeun(),
+                material:knapsackTable.geAllTreasureMap(),
                 list: data
             }
         })

@@ -1,13 +1,13 @@
-const { RoleG, KnapsackG,ErrorG } = require('../../global');
-const { knapsackTable } = require('../../table');
-const { cornuconpiaFn, knapsackFn } = require('../../utils');
+const { RoleG, KnapsackG, ErrorG } = require('@/global');
+const { knapsackTable } = require('@/table');
+const { cornuconpiaFn, knapsackFn } = require('@/utils');
 module.exports = {
     /**
      * 开始聚宝
      */
     gather: function (req, res) {
-        const { materialIds = [] } = req.body;
-        if (!materialIds || materialIds.length === 0) {
+        const { materialIds } = req.body;
+        if (!materialIds) {
             ErrorG.paramsError(res);
             return;
         }
@@ -25,24 +25,24 @@ module.exports = {
             return;
         }
         // 计算消耗材料
-        const MATERIAL_ID_MEUN = cornuconpiaFn.getMaterialMeun()
+        const AllTreasureMap = knapsackTable.geAllTreasureMap()
         const eleVal = {};
         const article = {};
-        materialIds.forEach(({ id, s }) => {
-            if (MATERIAL_ID_MEUN[id]) {
-                const { value, key, n, type } = MATERIAL_ID_MEUN[id];
-                eleVal[key] = eleVal[key] ? eleVal[key] + value * s : value * s;
-                if (article[id]) {
-                    article[id].s += s;
-                } else {
-                    article[id] = {
-                        n,
-                        type,
-                        s
-                    }
-                }
+        Object.keys(materialIds).forEach((id) => {
+            const material = AllTreasureMap[id];
+            const num = Number(materialIds[id]);
+            if (!material) {
+                return
             }
-        });
+            const { value, ele, name } = material;
+            eleVal[ele] = (eleVal[ele] || 0) + value * num;
+            article[id] = {
+                name,
+                id: Number(id),
+                s: num
+            }
+        })
+
         const eleValueList = Object.values(eleVal);
         const itme = eleValueList.find((value) => value < 100);
         if (eleValueList < 5 || itme) {
@@ -53,11 +53,11 @@ module.exports = {
             return;
         }
         // 消耗对应材料
-        const { message } = knapsackFn.deleteKnapsack(req, req, { article });
+        const { message } = knapsackFn.deleteKnapsack(req, req, article);
         if (message) {
             res.send({
                 code: 0,
-                message
+                message: '材料不足,聚宝失败!'
             })
             return;
         }
@@ -68,19 +68,10 @@ module.exports = {
         exp += 1;
         // 是否成功,背包增加对应物品
         if (rate) {
-            const { n, type } = knapsackTable.getArticle(id);
-            msg = `恭喜玩家成功聚宝,获得:聚宝经验+2,${n}`;
+            const { name } = knapsackTable.getArticle(id);
+            msg = `恭喜玩家成功聚宝,获得:聚宝经验+2,${name}`;
             exp += 1;
-            const artReward = {
-                [id]: {
-                    id,
-                    n,
-                    type,
-                    s: 1
-                }
-            };
-
-            knapsackFn.addKnapsack(req, res, { article: { artReward } });
+            knapsackFn.addKnapsack(req, res, { [id]: { id, name, s: 1 } });
         }
         // 计算聚宝盆等级经验等
         // 每级可获得3次抽奖机会,逆推获得聚宝盆等级

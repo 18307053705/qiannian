@@ -5,7 +5,7 @@ import { getIntegralList, shopIntegral } from '@cgi/shops';
 import { getRoleInfo } from '@cgi/roleInfo';
 import { List } from '@components';
 
-export const ShopIntegral = ({ history }) => {
+export const ShopIntegral = () => {
     const [data, setData] = useState([]);
     const [integral, setIntegral] = useState(0);
     const getIntegral = useCallback(() => {
@@ -29,17 +29,17 @@ export const ShopIntegral = ({ history }) => {
 
     }, []);
 
-    const shopIntegralClick = (id, type) => {
-        shopIntegral({ id, p: type }).then(({ success }) => {
+    const shopIntegralClick = (id) => {
+        shopIntegral({ id }).then(({ success }) => {
             if (success) { getIntegral() }
         })
     }
-    const prefix = ({ name, type,id }) => (
-        <span className="g_u_end" onClick={() => { jumpDetail(history, { p: type, form: 7,id }) }}>{name}</span>
+    const prefix = ({ name, id }) => (
+        <span className="g_u_end" onClick={() => { jumpDetail({ form: 7, id }) }}>{name}</span>
     );
 
-    const active = ({ id, type, integral }) => {
-        return <span className="g_u_end" onClick={() => { shopIntegralClick(id, type) }}>兑换({integral})</span>
+    const active = ({ id, integral }) => {
+        return <span className="g_u_end" onClick={() => { shopIntegralClick(id) }}>兑换({integral})</span>
     }
     return (
         <div>

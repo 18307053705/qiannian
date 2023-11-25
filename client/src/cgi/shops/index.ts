@@ -33,9 +33,8 @@ export async function getIntegralList() {
  * @param {*} req
  * @param {*} res
  * @param {*} req.id 物品id
- * @param {*} req.p 物品类型
  */
-export async function shopIntegral(data: { id: number; p: number }) {
+export async function shopIntegral(data: { id: number }) {
   return await post(shopIntegralUrl, data);
 }
 /**

@@ -103,17 +103,15 @@ const articleMap = {
         name: '经验丹',
         price: 100,
         unit: 'yuanbao',
-        effect: {
-            exp: 100000,
-            conditioname: 30
-        },
+        group3: 'jingYanDan',
         tips: '角色等级低于30级时使用，等级直接+1，30级及以上可获得100000经验。',
     },
     1621: {
         name: '人参果',
         price: 200,
         unit: 'yuanbao',
-        effect: {
+        group3: 'renShenGuo',
+        group3: {
             exp: 10000000,
             conditioname: 50
         },
@@ -123,7 +121,8 @@ const articleMap = {
         name: '猫耳朵',
         price: 500,
         unit: 'yuanbao',
-        effect: {
+        group3: 'maoErDuo',
+        group3: {
             exp: 100000000,
             conditioname: 70,
         },
@@ -133,10 +132,7 @@ const articleMap = {
         name: '洗髓丹',
         price: 100,
         unit: 'yuanbao',
-        effect: {
-            exp: 100000000,
-            conditioname: 70
-        },
+        group3: 'xiSuiDan',
         tips: '可重新分配自身的潜力。',
     },
     1624: {

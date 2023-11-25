@@ -3,11 +3,10 @@ const { knapsackTable, PetTable } = require("../../table");
 const { petFn, knapsackFn } = require('../../utils');
 const moment = require('moment');
 
-
-// 灵兽山奖励池
+// 灵兽山奖{励池
 const petPoolMap = {
     // 宠物技能卷,宠物进化卷,宠物转生卷,宠物扩房卷,宠物转化卷,彩灵蛋,水灵蛋,火灵蛋,风灵蛋,雷灵蛋,冰灵蛋
-    1: [158, 159, 160, 161, 162, 61, 62, 63, 64, 65, 66],
+    1: [180, 181, 182, 183, 18103, 184, 185, 186, 187, 188, 189],
     // 二级奖励池60资质宠物
     2: [601, 602, 603, 604, 605, 606, 607, 608, 609, 6010, 6011, 6011],
     // 三级奖励池千年系列宠物70资质
@@ -30,7 +29,7 @@ module.exports = {
      * @param {*} req
      */
     lingShouShan: async function (req, res) {
-        const { pet_pool, jackpot } = RoleG.getRoleGlobal(req, res);
+        const { pet_pool, jackpot, role_level } = RoleG.getRoleGlobal(req, res);
         let { data, yuanbao } = KnapsackG.getknapsackGlobal(req, res);
         if (pet_pool['l'].length >= pet_pool['x']) {
             res.send({
@@ -84,29 +83,27 @@ module.exports = {
         if (rate < 98740 && rate >= 58740) {
             rowid = 2;
         }
+        // 根据等级限制最大奖励池
+        if (role_level < 50 && rowid > 3) {
+            rowid = 3;
+        }
+        if (role_level < 80 && rowid > 5) {
+            rowid = 5;
+        }
         let success = '';
         const petPool = petPoolMap[rowid];
         // 随机对应奖励池中的id
         const indxe = Math.floor(Math.random() * petPool.length);
         const id = petPool[indxe];
         if (rowid === 1) {
-            const { type, n } = knapsackTable.getArticle(id);
-            const article = {
-                artReward: {
-                    [id]: {
-                        p: type,
-                        n,
-                        s: 1,
-                        id
-                    }
-                }
-            }
-            knapsackFn.addKnapsack(req, res, { article });
-            success = `消耗200元宝,在灵兽山获得${n}x1`;
+            const { name } = knapsackTable.getArticle(id);
+            knapsackFn.addKnapsack(req, res, { [id]: { name, s: 1, id } });
+            success = `消耗200元宝,在灵兽山获得${name}x1`;
         } else {
             const pet = PetTable.createPet(id);
             await petFn.setPet(req, res, pet);
-            success = `消耗200元宝,在灵兽山获得${pet.flair_x}资质,${pet.name}`;
+            success = `消耗200元宝,在灵兽山获得${pet.name}`;
+           
         }
         let isActivity = false;
         // 周六，周日开启活动
@@ -132,7 +129,7 @@ module.exports = {
                 isActivity,
                 day: moment().days()
             },
-            success
+            success,
         })
     }
 }

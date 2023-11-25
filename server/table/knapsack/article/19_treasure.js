@@ -20,61 +20,73 @@ const articleMap = {
     193: {
         name: '壶嘴',
         value: 50,
+        ele: 2,
         tips: '壶嘴，蕴含了雷元素的材料,可用于聚宝盆进行聚宝。',
     },
     194: {
         name: '神马皮',
         value: 100,
+        ele: 2,
         tips: '神马皮，蕴含了雷元素的材料,可用于聚宝盆进行聚宝。',
     },
     195: {
         name: '紫霄雷',
         value: 200,
+        ele: 2,
         tips: '紫霄雷，蕴含了雷元素的材料,可用于聚宝盆进行聚宝。',
     },
     196: {
         name: '寒灵',
         value: 50,
+        ele: 3,
         tips: '寒灵，蕴含了冰元素的材料,可用于聚宝盆进行聚宝。',
     },
     197: {
         name: '冰凌晶',
         value: 100,
+        ele: 3,
         tips: '冰凌晶，蕴含了冰元素的材料,可用于聚宝盆进行聚宝。',
     },
     198: {
         name: '黄泉水',
         value: 200,
+        ele: 3,
         tips: '黄泉水，蕴含了冰元素的材料,可用于聚宝盆进行聚宝。',
     },
     199: {
         name: '避水皮',
         value: 50,
+        ele: 4,
         tips: '避水皮，蕴含了水元素的材料,可用于聚宝盆进行聚宝。',
     },
     1910: {
         name: '蟹壳',
         value: 100,
+        ele: 4,
         tips: '蟹壳，蕴含了水元素的材料,可用于聚宝盆进行聚宝。',
     },
     1911: {
         name: '无根水',
         value: 200,
+        ele: 4,
         tips: '无根水，蕴含了水元素的材料,可用于聚宝盆进行聚宝。',
     },
     1912: {
         name: '赤炎',
         value: 50,
+        ele: 5,
         tips: '赤炎，蕴含了火元素的材料,可用于聚宝盆进行聚宝。',
     },
     1913: {
         name: '凤羽',
         value: 100,
+        ele: 5,
         tips: '凤羽，蕴含了火元素的材料,可用于聚宝盆进行聚宝。',
     },
     1914: {
         name: '地狱火',
         value: 200,
+        ele: 5,
         tips: '地狱火，蕴含了火元素的材料,可用于聚宝盆进行聚宝。',
     },
 }
@@ -98,6 +110,9 @@ module.exports = {
             ...articleMap[id],
             id,
         }))
+    },
+    getArticleMap:function(){
+        return JSON.parse(JSON.stringify(articleMap))
     }
 
 }

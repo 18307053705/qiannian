@@ -83,7 +83,17 @@ module.exports = {
         return (id + "").slice(0, 2) === '17';
     },
     /**
+    * 判断物品是否为元素材料
+    */
+    isEleMaterial: function (id) {
+        return (id + "").slice(0, 2) === '19';
+    },
+    /**
      * 获取全部装备
      */
-    getAllEquipList: equip.getArticleList
+    getAllEquipList: equip.getArticleList,
+    /**
+    * 获取全部聚宝材料
+    */
+    geAllTreasureMap: treasure.getArticleMap
 }

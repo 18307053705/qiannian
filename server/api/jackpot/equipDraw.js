@@ -7,21 +7,21 @@ const moment = require('moment');
 // 装备奖励池
 const equipPoolMap = {
     // 1级强化卡，1星魔符，40元宝卡
-    1: [90, 147, 47],
+    1: [1833, 1889, 1624],
     // 2级强化卡，2星魔符，60元宝卡
-    2: [91, 148, 48],
+    2: [1834, 1890, 1625],
     // 3级强化卡，3星魔符，100元宝卡
-    3: [92, 149, 49],
+    3: [1835, 1891, 1626],
     // 4级强化卡，4星魔符，200元宝卡
-    4: [93, 150, 50],
+    4: [1836, 1892, 1627],
     // 九歌，500元宝卡
-    5: [180, 181, 51],
+    5: [13180, 13181, 1628],
     // 才子佳人
-    6: [156, 157, 158, 159, 160],
+    6: [13156, 13157, 13158, 13159, 13160],
     // 君临天下
-    7: [161, 162, 163, 164, 165],
-    // 月华相思,上善若水
-    8: [182, 183, 208, 209, 210, 211]
+    7: [13161, 13162, 13163, 13164, 13165],
+    // 月华相思,青莲造化,上善若水
+    8: [13210, 13211, 13208, 13209, 13182, 13183]
 }
 
 module.exports = {
@@ -76,36 +76,20 @@ module.exports = {
         if (rate < 98740 && rate >= 58740) {
             rowid = 2;
         }
-        let success = '';
+        
         const equipPool = equipPoolMap[rowid];
         // 随机对应奖励池中的id
         const indxe = Math.floor(Math.random() * equipPool.length);
         const id = equipPool[indxe];
-        const article = {};
-        if ([5, 6, 7, 8].includes(rowid) && 51 !== id) {
-            const { name, type } = knapsackTable.getEquip(id);
-            success = `消耗200元宝,在神装活动中获得${name}`;
-            article['equipReward'] = {
-                [id]: {
-                    p: type,
-                    n: name,
-                    s: 1,
-                    id
-                }
+        const { name } = knapsackTable.getArticle(id);
+        const success = `消耗200元宝,在神装活动中获得${name}`;
+        const article = {
+            [id]:{
+                name,
+                id,
             }
-        } else {
-            const { type, n } = knapsackTable.getArticle(id);
-            success = `消耗200元宝,在神装活动中获得${n}`;
-            article['artReward'] = {
-                [id]: {
-                    p: type,
-                    n,
-                    s: 1,
-                    id
-                }
-            }
-        }
-        knapsackFn.addKnapsack(req, res, { article });
+        };
+        knapsackFn.addKnapsack(req, res, article);
 
         let isActivity = false;
         // 周六，周日开启活动

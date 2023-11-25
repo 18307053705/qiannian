@@ -13,7 +13,7 @@ export const LingShouShan = () => {
             setData(data)
         })
     }
-    const { num, isActivity } = data;
+    const { num, isActivity } = data || { isActivity: false };
     const text = isActivity ? `200元宝试试运气,再砸${10 - num}次即可获得元宝奖励。` : '200元宝试试运气';
 
     return (

@@ -46,17 +46,9 @@ module.exports = {
             msg = `恭喜玩家获得${yuanbaoNum}元宝。`
             KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao + yuanbaoNum });
         } else {
-            const { id, type, n } = cornuconpiaFn.getPrize(treasure_pool['jbp']);
-            msg = `恭喜玩家获得${n}。`
-            const artReward = {
-                [id]: {
-                    id,
-                    n,
-                    type,
-                    s: 1
-                }
-            };
-            knapsackFn.addKnapsack(req, res, { article: { artReward } });
+            const { id, name } = cornuconpiaFn.getPrize(treasure_pool['jbp']);
+            msg = `恭喜玩家获得${name}。`;
+            knapsackFn.addKnapsack(req, res, { [id]: { id, name, s: 1 } });
         }
 
         treasure_pool['jbp'].l = l + 1;

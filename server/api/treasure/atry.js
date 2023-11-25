@@ -17,7 +17,7 @@ module.exports = {
             return;
         }
         let rate = Math.floor(Math.random() * (2001 - 0));
-        if (rate === 0 || true) {
+        if (rate === 0) {
             rate = 100000;
             ChatG.sendChat(req, res, 0, `恭喜玩家：${role_name}搏一搏，天降鸿运获得了豪华住宅【青云观】，快去试一试运气吧。`);
         }
@@ -31,6 +31,13 @@ module.exports = {
         }
 
         const { message } = EffectTable.group1Fn(req, res, `fw-${rate}`);
+        if(message){
+            res.send({
+                code: 0,
+                message
+            })
+            return;
+        }
         // EffectTable会改变全局房屋信息,所有需要拉取最新房屋信息
         const { treasure_pool: treasure } = RoleG.getRoleGlobal(req, res);
         treasure['fw']['g'] = 1;
@@ -38,7 +45,6 @@ module.exports = {
         KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao - 200 });
         res.send({
             code: 0,
-            message
         })
     }
 }

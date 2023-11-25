@@ -5,31 +5,31 @@ import { getTreasure, setTreasure, mosaic, atry } from '@cgi/treasure';
 const decoration = [
     {
         text: '玉瓷百花瓶',
-        id: 296,
+        id: 148,
     },
     {
         text: '檀木花纹桌',
-        id: 297,
+        id: 149,
     },
     {
         text: '红杏闹春帘',
-        id: 298,
+        id: 1410,
     },
     {
         text: '日月春秋床',
-        id: 299,
+        id: 1411,
     },
     {
         text: '锦绣山河画',
-        id: 300,
+        id: 1412,
     },
     {
         text: '江山社稷图',
-        id: 301,
+        id: 1413,
     },
     {
         text: '九州观星台',
-        id: 302,
+        id: 1414,
     }
 ]
 

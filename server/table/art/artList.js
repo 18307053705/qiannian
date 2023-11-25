@@ -54,7 +54,7 @@ module.exports = {
         id: 5,
         p: 3,
         n: '黄泉天怒',
-        d: 1000,
+        d: 500,
         t: 5,
         condition: 30,
         v:'atk-100,sudden-20',
@@ -64,7 +64,7 @@ module.exports = {
         id: 6,
         p: 3,
         n: '大天造化',
-        d: 1000,
+        d: 500,
         t: 5,
         condition: 30,
         v:'life-1000,dfs-50',
@@ -75,7 +75,7 @@ module.exports = {
         p: 3,
         n: '追星逐月',
         t: 5,
-        d: 1000,
+        d: 500,
         condition: 30,
         v:'hit-20,dodge-20',
         msg: '本次战斗提升&[v]&命中与&[v]&闪避,持续&[t]&回合。'
@@ -84,7 +84,7 @@ module.exports = {
         id: 8,
         p: 4,
         n: '黄泉诀',
-        v:'life_max-500',
+        v:'life_max-1000',
         condition: 32,
         msg: '提升&[v]&生命上限。'
     },
@@ -92,7 +92,7 @@ module.exports = {
         id: 9,
         p: 4,
         n: '圣灵诀',
-        v:'mana_max-500',
+        v:'mana_max-1000',
         condition: 34,
         msg: '提升&[v]&法力上限。'
     },
@@ -108,7 +108,7 @@ module.exports = {
         id: 11,
         p: 4,
         n: '琉璃诀',
-        v:'dfs-20',
+        v:'dfs-30',
         condition: 38,
         msg: '提升&[v]&防御上限。'
     },

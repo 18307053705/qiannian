@@ -3,23 +3,30 @@ const { knapsackTable } = require('../../table');
 const { ErrorG, RoleG, KnapsackG } = require('../../global');
 const { knapsackFn } = require('../../utils');
 
+
+const ids = [1141, 1144, 13156, 13157, 13158, 13159, 13160, 13161, 13162, 13163, 13164, 13165, 13180, 13181,]
 module.exports = {
     /**
      * 兑换物品
      * @param {*} req 
      * @param {*} res 
      * @param {*} req.id 物品id
-     * @param {*} req.p 兑换类型
      */
     shopIntegral: function (req, res) {
-        const { id, p } = req.body;
-
-        if (!id || !p) {
+        const { id } = req.body;
+        if (!id) {
             ErrorG.paramsError(res);
             return;
         }
 
-        const { name, n, integral } = p === 3 ? knapsackTable.getEquip(id) : knapsackTable.getArticle(id);
+        const { name, integral } = knapsackTable.getArticle(id);
+        if (!integral) {
+            res.send({
+                code: 0,
+                message: '兑换物品异常'
+            })
+            return;
+        }
         const { role_integral } = RoleG.getRoleGlobal(req, res);
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         if (data.length >= KnapsackG.KNAPSACK_SIZE) {
@@ -29,37 +36,23 @@ module.exports = {
             })
             return;
         }
-        if (integral > role_integral.shenZhuang) {
+
+        if (!role_integral.shenZhuang || integral > role_integral.shenZhuang) {
             res.send({
                 code: 0,
                 message: '积分不足,兑换失败'
             })
             return;
         }
-        const article = {};
-        if (p === 3) {
-            article['equipReward'] = {
-                [id]: {
-                    id,
-                    p,
-                    n: name,
-                    s: 1
-                }
+        const article = {
+            [id]: {
+                id,
+                name,
+                s: 1
             }
+        };
 
-        } else {
-            article['artReward'] = {
-                [id]: {
-                    id,
-                    p,
-                    n,
-                    s: 1
-                }
-            }
-        }
-
-
-       const message = knapsackFn.addKnapsack(req, res, { article, data });
+        const message = knapsackFn.addKnapsack(req, res, article, { data });
         if (message) {
             res.send({
                 code: 0,
@@ -72,7 +65,7 @@ module.exports = {
         RoleG.updataRoleGlobal(req, res, { role_integral });
         res.send({
             code: 0,
-            success: '兑换成功'
+            success: `消耗${integral}积分,成功兑换${name}`
         })
     }
 }

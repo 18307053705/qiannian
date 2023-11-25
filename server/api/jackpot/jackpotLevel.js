@@ -70,26 +70,25 @@ module.exports = {
 
         // 超级体力丹,超级法力丹,超级攻击丹,超级防御丹,世界声望卷,帮会声望卷,结义声望卷,世界功勋卷
         // 全部50%几率
-        const artReward = {};
-        [25, 26, 27, 28, 42, 43, 44, 45].forEach((id) => {
+        const article = {};
+        [1112, 1113, 1114, 1115, 120, 121, 122, 123].forEach((id) => {
             if (Math.floor(Math.random() * 2) === 1) {
-                const { n, type } = knapsackTable.getArticle(id);
+                const { name } = knapsackTable.getArticle(id);
                 const s = Math.floor(Math.random() * 10) + 1;
                 textList.push({
-                    name: n,
+                    name,
                     value: s,
                 })
-                artReward[id] = {
+                article[id] = {
                     id,
-                    n,
-                    p: type,
+                    name,
                     s
                 }
             }
 
         })
 
-        const message = knapsackFn.addKnapsack(req, res, { article: { artReward }, data });
+        const message = knapsackFn.addKnapsack(req, res, article, { data });
         if (message) {
             res.send({
                 code: 0,

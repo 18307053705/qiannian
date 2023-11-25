@@ -16,8 +16,9 @@ module.exports = {
             treasure_pool['jbp']['id'] = jbpId;
             name = n;
             RoleG.updataRoleGlobal(req, res, { treasure_pool });
+           
         } else {
-            name = knapsackTable.getArticle(id).n;
+            name = knapsackTable.getArticle(id).name;
         }
 
         res.send({
@@ -25,7 +26,7 @@ module.exports = {
             data: {
                 jbp: {
                     ...treasure_pool['jbp'],
-                    id: name
+                    id: name,
                 },
                 limits: role_level >= 50
             }

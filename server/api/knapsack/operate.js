@@ -8,7 +8,7 @@ module.exports = {
      */
     operate: async (req, res) => {
         const { uid, s, type } = req.body;
-        const { data, tael, yuanbao } = await knapsackFn.getKnapsackInfo(req, res, { type });
+        const { data } = await knapsackFn.getKnapsackInfo(req, res, { type });
         // 验证物品信息
         if (knapsackFn.chekeArticle(req, res, data)) {
             return;
@@ -25,7 +25,8 @@ module.exports = {
                 success = results.success;
                 data[in_x]['s'] -= s;
                 data[in_x]['s'] || data.splice(in_x, 1);
-                KnapsackG.updateknapsackGlobal(req, res, { data });
+                
+                KnapsackG.updateknapsackGlobal(req, res, { data: results.data || data });
             } else {
                 message = results.message;
             }

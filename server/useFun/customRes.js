@@ -19,6 +19,8 @@ module.exports = {
             }
             return res.send({
                 ...data,
+                message,
+                success,
                 // 提示信息
                 tips,
                 // 扩展信息

@@ -1,5 +1,6 @@
 const {group1Fn} = require('./group1Fn');
 const {group2Fn} = require('./group2Fn');
+const {group3Fn} = require('./group3Fn');
 const { effect1Fn } = require('./effect1Fn');
 
 
@@ -24,6 +25,7 @@ module.exports = {
     * @returns { string } text 使用成功信息,存在则使用成功
     */
     group2Fn,
+    group3Fn,
     /**
      * 
      * @param {*} effect 效果

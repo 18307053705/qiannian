@@ -35,7 +35,7 @@ module.exports = {
             old_art = { l: -1, r: 0, id };
         }
 
-        const { message, up_art } = artFn.getUpArtMaterial(req, res, old_art);
+        const { message, up_art, success } = artFn.getUpArtMaterial(req, res, old_art);
         if (message) {
             res.send({
                 code: 0,
@@ -58,7 +58,8 @@ module.exports = {
         res.send({
             code: 0,
             data: '',
-            art
+            art,
+            success
         })
     }
 };

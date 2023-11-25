@@ -1,4 +1,4 @@
-
+import { isEquip as sEquipFnu } from '../article';
 interface JumpDetailRParams {
   form: number,
   pos?: string,
@@ -19,7 +19,7 @@ interface JumpDetailRParams {
  * @param param.petId 其他人
  */
 export function jumpDetail({ form, pos, role_id, petId, id, isEquip, uid }: JumpDetailRParams) {
-  if (isEquip) {
+  if (isEquip || sEquipFnu(id)) {
     window.QN.history.push("/equipDetail", { form, pos, role_id, petId, id, uid });
   } else {
     window.QN.history.push("/articleDetail", { form, pos, role_id, petId, id, uid });

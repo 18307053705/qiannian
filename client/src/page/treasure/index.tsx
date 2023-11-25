@@ -13,7 +13,7 @@ const treasure_meun = {
     2: {
         name: '勋章',
         active: '打磨',
-        integral: '帮会声望',
+        integral: '50帮会声望',
         exp: '荣誉',
         id: 'xz',
         getAttrText: (exp) => {
@@ -29,7 +29,7 @@ const treasure_meun = {
     3: {
         name: '令牌',
         active: '精磨',
-        integral: '结义声望',
+        integral: '50结义声望',
         exp: '忠义',
         id: 'lp',
         getAttrText: (exp) => {
@@ -45,7 +45,7 @@ const treasure_meun = {
     4: {
         name: '徽标',
         active: '雕刻',
-        integral: '世界功勋',
+        integral: '50世界功勋',
         exp: '名望',
         id: 'hb',
         getAttrText: (exp) => {
@@ -136,7 +136,7 @@ export const Treasure = ({ history }) => {
                         </div>
                         <div>
                             <span className='g_u_end' onClick={() => { setClick(2) }}>
-                                {treasure.active}({s ? `${s}次免费` : '50声望'})
+                                {treasure.active}({s ? `${s}次免费` : treasure.integral})
                             </span>
                         </div>
                     </div>)
