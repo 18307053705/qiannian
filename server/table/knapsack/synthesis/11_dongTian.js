@@ -1,6 +1,6 @@
 
 
-const { getArticle } = require('../article');
+const { getArticle } = require('../article/20_dongTian');
 const dongTian = {
     110: {
         id: 201,

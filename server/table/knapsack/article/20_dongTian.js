@@ -2,7 +2,7 @@ const articleMap = {
     200: {
         name: '太阴石碎片',
         tips: '从太阴石矿中获取到的太阴石碎片，每100枚可合成1枚一阶太阴石。',
-        level: 1,
+        level: 0,
     },
     201: {
         name: '一阶太阴石',
@@ -42,7 +42,7 @@ const articleMap = {
     208: {
         name: '太阳石碎片',
         tips: '从太阳石矿中获取到的太阳石碎片，每100枚可合成1枚一阶太阳石。',
-        level: 1,
+        level: 0,
     },
     209: {
         name: '一阶太阳石',
@@ -82,7 +82,7 @@ const articleMap = {
     2016: {
         name: '造化石碎片',
         tips: '从造化石矿中获取到的造化石碎片，每100枚可合成1枚一阶造化石。',
-        level: 1,
+        level: 0,
     },
     2017: {
         name: '一阶造化石',
@@ -122,7 +122,7 @@ const articleMap = {
     2024: {
         name: '低劣凝血草',
         tips: '从凝血草圃中获取到的低劣凝血草，每100株可合成1株一阶凝血草。',
-        level: 1,
+        level: 0,
     },
     2025: {
         name: '一阶凝血草',
@@ -162,7 +162,7 @@ const articleMap = {
     2032: {
         name: '低劣聚灵草',
         tips: '从聚灵草圃中获取到的低劣聚灵草，每100株可合成1株一阶聚灵草。',
-        level: 1,
+        level: 0,
     },
     2033: {
         name: '一阶聚灵草',
@@ -202,7 +202,7 @@ const articleMap = {
     2040: {
         name: '浑浊不死泉',
         tips: '从不死泉流中获取到的浑浊不死泉，每100道可合成1道一阶不死泉。',
-        level: 1,
+        level: 0,
     },
     2041: {
         name: '一阶不死泉',
@@ -242,7 +242,7 @@ const articleMap = {
     2048: {
         name: '浑浊无根水',
         tips: '从无根水池中获取到的浑浊无根水，每100道可合成1道一阶无根水。',
-        level: 1,
+        level: 0,
     },
     2049: {
         name: '一阶无根水',
@@ -280,32 +280,39 @@ const articleMap = {
         level: 7,
     },
     2056: {
-        name: '先天水灵石',
+        name: '〖先天水灵石〗',
         tips: '天地诞生之时，一缕水系法则落入灵石矿脉中经过数万年凝聚而出。',
+        level: 100,
     },
     2057: {
-        name: '先天火灵石',
+        name: '〖先天火灵石〗',
         tips: '天地诞生之时，一缕火系法则落入灵石矿脉中经过数万年凝聚而出。',
+        level: 100,
     },
     2058: {
-        name: '先天风灵石',
+        name: '〖先天风灵石〗',
         tips: '天地诞生之时，一缕风系法则落入灵石矿脉中经过数万年凝聚而出。',
+        level: 100,
     },
     2059: {
-        name: '先天雷灵石',
+        name: '〖先天雷灵石〗',
         tips: '天地诞生之时，一缕雷系法则落入灵石矿脉中经过数万年凝聚而出。',
+        level: 100,
     },
     2060: {
-        name: '先天冰灵石',
+        name: '〖先天冰灵石〗',
         tips: '天地诞生之时，一缕冰系法则落入灵石矿脉中经过数万年凝聚而出。',
+        level: 100,
     },
     2061: {
-        name: '秘银矿石',
+        name: '〖秘银矿石〗',
         tips: '从秘银石矿中获取到的稀有矿石，价值不菲。',
+        level: 100,
     },
     2062: {
-        name: '紫金矿石',
+        name: '〖紫金矿石〗',
         tips: '从紫金石矿中获取到的稀有矿石，价值不菲。',
+        level: 100,
     },
 }
 
@@ -328,6 +335,22 @@ module.exports = {
             ...articleMap[id],
             id,
         }))
-    }
+    },
+    getLevelIds: function () {
+        const levels = {};
+        Object.keys(articleMap).forEach((id) => {
+            const idNum = Number(id);
+            const { level, itme } = articleMap[idNum];
+            if (!levels[level]) {
+                levels[level] = []
+            }
+            levels[level].push({
+                level,
+                id: idNum,
+                ...itme,
+            })
 
+        })
+        return levels
+    }
 }

@@ -95,5 +95,9 @@ module.exports = {
     /**
     * 获取全部聚宝材料
     */
-    geAllTreasureMap: treasure.getArticleMap
+    geAllTreasureMap: treasure.getArticleMap,
+    /**
+     * 获取对应等级的天材地宝
+     */
+    getLevelIds: dongTian.getLevelIds
 }

@@ -42,7 +42,6 @@ module.exports = {
             chengData.push(itme)
         })
         if (JSON.stringify(article) !== '{}') {
-            console.log(article, 'article..')
             Object.values(article).forEach(({ name }) => {
                 message.push(`${name}数量不足`);
             })

@@ -1,4 +1,5 @@
 const { GrandG } = require("../../global");
+const { ElementTable } = require("../../table");
 const roleFn = require("../roleFn");
 const grandFn = require("./getGrandInfo");
 
@@ -13,6 +14,21 @@ module.exports = {
      * @returns {*} grandInfo 返回坐标
      */
     updataDir: async function (req, res, { address, currentDir = {}, path }) {
+
+
+        // 移动拦截
+        // if (address.split(',')[0] === '60006') {
+        //     if (address === '60006,0,5') {
+        //         GrandG.setCurrentDir(req, res, ElementTable.getElement(20623));
+        //         res.send({
+        //             code: 0,
+        //             path: '/fight'
+        //         })
+        //         return;
+        //     }
+        // }
+
+
         // 获取地图玩家信息
         const players = await roleFn.getAddressPlayers(req, res, address);
         // 获取地图元素信息

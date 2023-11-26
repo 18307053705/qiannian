@@ -146,7 +146,7 @@ const Grand = ({ history }) => {
 
                 <span className="g_b_u" onClick={() => { history.push('/house') }}>房屋</span>
                 <span className="g_b_u" onClick={() => { history.push('/treasure') }}>珍宝</span>
-                <span className="g_b_u">活动</span>
+                <span className="g_b_u" onClick={() => { history.push('/synthesis') }}>合成</span>
             </div>
             <span className="g_b_u" onClick={() => {
                 roleExit().then(() => {

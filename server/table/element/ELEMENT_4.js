@@ -299,6 +299,13 @@ const ELEMENT_4 = {
         path: '/unknownCapability',
         state: { id: 443 }
     },
+    444: {
+        id: 444,
+        name: "采集天材地宝",
+        type: 4,
+        path: '/tianCaiDiBao',
+        state: { id: 443 }
+    },
 };
 module.exports = {
     ELEMENT_4

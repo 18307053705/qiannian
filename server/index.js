@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // 请求网关验证
-app.use("*", async function (req, res, next) {
+app.use("/api", async function (req, res, next) {
   // 网关验证
   if (!gatewayFn.checkGateway(req, res)) {
     return;
@@ -58,6 +58,17 @@ app.use("/api/title", require("./api/title"));
 app.use("/api/worldboss", require("./api/worldboss"));
 app.use("/api/cailingdong", require("./api/cailingdong"));
 app.use("/api/jinyindao", require("./api/jinyindao"));
+app.use("/api/synthesis", require("./api/synthesis"));
+
+
+// 静态文件 js img
+app.use("/static", async function (req, res, next) {
+  res.sendFile( `F:/qiannian/client/dist${req.originalUrl}`);
+});
+// html文件
+app.use("/", async function (req, res, next) {
+  res.sendFile('F:/qiannian/client/dist/index.html');
+});
 
 // 全局捕获异常
 app.use(function (err, req, res, next) {
