@@ -1,5 +1,4 @@
 function randomId(LevelIds, level) {
-    console.log(LevelIds,'LevelIds..')
     const index = Math.floor(Math.random() * LevelIds[level].length);
     return {
         id: LevelIds[level][index].id,

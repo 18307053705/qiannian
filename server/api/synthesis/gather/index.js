@@ -1,4 +1,3 @@
-
 const { RoleG, GrandG } = require('@/global');
 const { knapsackTable, ElementTable } = require('@/table');
 const { knapsackFn } = require('@/utils');
@@ -17,9 +16,7 @@ module.exports = {
         if (time < 10000) {
             res.send(({
                 code: 0,
-                data: {
-                    time
-                }
+                data: 10000 - time
             }))
             return;
         }

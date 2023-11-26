@@ -62,3 +62,11 @@ export function isSundries(id) {
     return type === '17' || type === '16' || type === '15';
 }
 
+/**
+* 判断物品是否为洞天
+*/
+export function isDongTian(id) {
+    const type = (id + "").slice(0, 2);
+    return type === '20';
+}
+

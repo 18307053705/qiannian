@@ -1,4 +1,4 @@
-const { getArticle } = require('../article/20_dongTian');
+const { getArticle } = require('../article');
 const pellet = {
     // 1-9品凝血散
     100: {

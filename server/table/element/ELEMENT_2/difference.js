@@ -147,36 +147,48 @@ const freakMap = {
         level: 30,
         attr: 5,
         grade: 3,
+        article: '2056-3,2057-3,2058-3,2059-3,2060-3',
+        fun: 'dognTian'
     },
     20624: {
         name: "二层守护BOSS",
         level: 50,
         attr: 7,
         grade: 3,
+        article: '2056-5,2057-5,2058-5,2059-5,2060-5',
+        fun: 'dognTian'
     },
     20625: {
         name: "三层守护BOSS",
         level: 70,
         attr: 8,
         grade: 3,
+        article: '2056-10,2057-10,2058-10,2059-10,2060-10',
+        fun: 'dognTian'
     },
     20626: {
         name: "四层守护BOSS",
         level: 80,
         attr: 10,
         grade: 3,
+        article: '2056-15,2057-15,2058-15,2059-15,2060-15',
+        fun: 'dognTian'
     },
     20627: {
         name: "五层守护BOSS",
         level: 90,
         attr: 12,
         grade: 3,
+        article: '2056-20,2057-20,2058-20,2059-20,2060-20',
+        fun: 'dognTian'
     },
     20628: {
         name: "六层守护BOSS",
         level: 100,
         attr: 15,
         grade: 3,
+        article: '2056-30,2057-30,2058-30,2059-30,2060-30',
+        fun: 'dognTian'
     },
     20629: {
         name: "守护妖兽",

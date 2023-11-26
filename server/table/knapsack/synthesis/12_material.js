@@ -1,5 +1,5 @@
-const { getArticle } = require('../article/20_dongTian');
-const pellet = {
+const { getArticle } = require('../article');
+const materialMap = {
     120: {
         id: 120,
         material: '2056-10,2057-10,2058-10,2059-10,2060-10',
@@ -50,29 +50,43 @@ const pellet = {
         material: '2056-10,2057-10,2058-10,2059-10,2060-10',
         tael: 10000,
     },
-    // 1210: {
-    //     id: 1810,
-    //     material: '201-50,209-50,2017-50',
-    //     tael: 10000,
-    // },
-    // 1211: {
-    //     id: 1811,
-    //     material: '201-140,209-140,2017-140',
-    //     tael: 10000,
-    // },
-    // 1212: {
-    //     id: 1812,
-    //     material: '201-400,209-400,2017-400',
-    //     tael: 10000,
-    // },
-    
+    1210: {
+        id: 1634,
+        material: '2061-1',
+        tael: 10000,
+    },
+    1211: {
+        id: 1635,
+        material: '2061-4',
+        tael: 10000,
+    },
+    1212: {
+        id: 1636,
+        material: '2061-7',
+        tael: 10000,
+    },
+    1213: {
+        id: 1624,
+        material: '2062-3',
+        tael: 10000,
+    },
+    1214: {
+        id: 1626,
+        material: '2062-5',
+        tael: 10000,
+    },
+    1215: {
+        id: 1627,
+        material: '2062-8',
+        tael: 10000,
+    },
 }
 
 
 module.exports = {
-    getAllPellet: function () {
-        return Object.keys(pellet).map(uid => {
-            const { id, ...item } = pellet[uid];
+    getAllMaterialMap: function () {
+        return Object.keys(materialMap).map(uid => {
+            const { id, ...item } = materialMap[uid];
             return JSON.parse(JSON.stringify({
                 uid,
                 id,
@@ -81,12 +95,12 @@ module.exports = {
             }))
         })
     },
-    getPellet: function (uid) {
-        if (!pellet[uid]) {
+    getMaterial: function (uid) {
+        if (!materialMap[uid]) {
             console.log('合成物品异常::', uid)
             return;
         }
-        const { id, ...item } = pellet[uid];
+        const { id, ...item } = materialMap[uid];
         return JSON.parse(JSON.stringify({
             uid,
             id,
