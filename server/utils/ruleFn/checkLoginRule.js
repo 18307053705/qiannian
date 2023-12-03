@@ -7,18 +7,18 @@ module.exports = {
      * @returns false不合格
      */
     checkLoginRule: function (res, user, pass) {
-        const reg = /^[A-Za-z0-9]{9,12}$/;
+        const reg = /^[A-Za-z0-9]{8,12}$/;
         if (!reg.test(user)) {
             res.send({
                 code: 0,
-                message: "账号需要9-12位数字或字母组成"
+                message: "账号需要8-12位数字或字母组成"
             });
             return false;
         }
         if (!reg.test(pass)) {
             res.send({
                 code: 0,
-                message: "密码需要9-12位数字或字母组成"
+                message: "密码需要8-12位数字或字母组成"
             });
             return false;
         }

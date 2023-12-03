@@ -1,9 +1,10 @@
-const { RoleG, KnapsackG, FightG, GrandG } = require('../../../global');
+const { RoleG, KnapsackG, FightG, GrandG, PetG } = require('../../../global');
 const { knapsackTable, ElementTable } = require('../../../table');
 const knapsackFn = require('../../knapsackFn');
 const roleFn = require('../../roleFn');
 const { computePetLevel } = require('../../petFn/computePetLevel');
 const { listenTask } = require('../../taskFn/listenTask');
+
 
 module.exports = {
     /**
@@ -76,7 +77,7 @@ module.exports = {
 
         // 更新背包
         KnapsackG.updateknapsackGlobal(req, res, { tael: knapsack.tael + tael });
-        // 更新角色经验等级
+        // 更新角色经验等级s
         roleFn.computeRoleLevel(req, res, exp, (islevel, updata) => {
             // 判断角色是否升级
             if (islevel) {

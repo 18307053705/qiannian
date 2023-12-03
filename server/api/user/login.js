@@ -1,4 +1,5 @@
 const { ruleFn, userFn } = require('../../utils');
+const userSql = require('@/mysql/userSql');
 module.exports = {
     login: async function (req, res) {
         const { user, pass } = req.body;
@@ -6,7 +7,7 @@ module.exports = {
         if (!ruleFn.checkLoginRule(res, user, pass)) {
             return;
         };
-        const { results } = await res.asyncQuery(`select * from user  where user="${user}" and pass="${pass}"`);
+        const results = await userSql.asyncGetUserInfo(user,pass);
         if (results[0]) {
             res.cookie("q_uid", user);
             res.cookie("token", userFn.creatToken(user, pass));

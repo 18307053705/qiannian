@@ -1,22 +1,5 @@
-const { AttributeTable } = require("../../../table");
-const { GrandG } = require("../../../global");
-// // 怪物模型
-// const freakTemplate = {
-//     id: 1,
-//     name: "怪物名称",
-//     level: 1, // 等级
-//     tag: 1, // 默认1,怪物标签(1:普通地图怪,2:副本任务怪)
-//     attrType: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷)
-//     attr: 1, // 默认0.5，属性增幅
-//     grade: 1, // 默认1，怪物品阶(1:普通,2:精英,3:boss)
-//     num: -1, // 默认无限，可击杀次数
-//     pet: true, // 默认不可捕获
-//     rank: true, // 默认不可组队
-//     exp: 10000, // 默认随等级，经验
-//     tael: 10000, // 默认随等级，银两
-//     article: '1-20,2-20,3', // 默认无，掉落物品信息(id-s-rate)多个物品使用,分隔 id：物品ID,s:数量,rate:概率
-//     equip: '1-50,2-50,3-50,4-50,5-50', // 默认无，掉落装备信息(id-s-rate)多个物品使用,分隔 id：装备ID,rate:概率
-// }
+const AttrSystem = require("@/system/AttrSystem");
+const { GrandG } = require("@/global");
 module.exports = {
     /**
      * 创建怪物
@@ -27,15 +10,11 @@ module.exports = {
     creatFreak: function (req, res) {
         // 怪物模版
         const { currentDir: freakTemplate } = GrandG.getDirGlobal(req, res);
-        const { name, level, attrType, attr, grade, id, num: num_max, creatNum = 4 } = freakTemplate;
+        const { name, level, career = 1, attr, grade, id, num: num_max, creatNum = 4, ele } = freakTemplate;
         // 生成怪物数量 1-4
         let num = Math.floor(Math.random() * creatNum) + 1;
-        const attrs = AttributeTable.getFreakBaseAttr(attrType);
-        const addition = level * attr;
-        Object.keys(attrs).forEach((key) => {
-            attrs[key] *= addition;
-        })
-
+        const attrs = AttrSystem.computeFreakAttr({ level, career, ele, attr })
+       
         // 精英 
         if (grade === 2) {
             attrs['life'] *= 5;
@@ -58,9 +37,7 @@ module.exports = {
             } else {
                 freakTemplate.num -= num;
             }
-
             GrandG.setDirGlobal(req, res, { currentDir: freakTemplate });
-
         }
         attrs['life_max'] = attrs['life'];
         attrs['mana_max'] = attrs['mana'];

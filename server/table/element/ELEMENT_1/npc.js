@@ -33,7 +33,7 @@ const NpcMap = {
         jyd: 1
     },
     1010: {
-        name: "唐三彩",
+        name: "灰色古籍",
     },
     1011: {
         name: "小红",

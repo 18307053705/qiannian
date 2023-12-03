@@ -1,6 +1,8 @@
-const { RoleG, KnapsackG, PetG, FightG } = require("../../../global");
-const roleFn = require("../../roleFn");
-const petFn = require("../../petFn");
+const { RoleG, KnapsackG, PetG, FightG } = require("@/global");
+const { knapsackTable } = require("@/table");
+// const roleFn = require("@/roleFn");
+// const petFn = require("@/petFn");
+const AttrSystem = require("@/system/AttrSystem");
 module.exports = {
   /**
    * 创建玩家属性
@@ -10,17 +12,21 @@ module.exports = {
    */
   creatPlayer: function (req, res, type, role_id) {
     const { FIGHT_TYPE } = FightG;
-    const roleInfo = RoleG.getRoleGlobal(req, res, { role_id });
+    const roleInfo = RoleG.getRoleGlobal(req, res, role_id);
     const knapasack = KnapsackG.getknapsackGlobal(req, res, role_id);
     const pet = PetG.getPetGlobal(req, res, role_id);
     const { fight } = roleInfo.skill_pool;
     const knapasackId = {};
     fight.forEach((itme, index) => {
-      if (itme && itme.p2 == 2) {
-        knapasackId[itme.id] = {
-          id: itme.id,
-          index,
-        };
+      if (itme.p == 2) {
+        if (knapasackId[itme.id]) {
+          knapasackId[itme.id][index].push(index);
+        } else {
+          knapasackId[itme.id] = {
+            id: itme.id,
+            index: [index]
+          };
+        }
       }
     });
     // 判断战斗设置中是否有消耗物品
@@ -28,13 +34,15 @@ module.exports = {
       const { data } = knapasack;
       const len = data.length;
       for (let i = 0; i < len; i++) {
-        const { id, p } = data[i];
+        const { id } = data[i];
         // Id存在战斗设置中,且为消耗品
-        if (knapasackId[id] && p == 1) {
-          fight[knapasackId[id]["index"]] = {
-            ...data[i],
-            p2: 2,
-          };
+        if (knapasackId[id] && knapsackTable.isReply(id)) {
+          knapasackId[id]["index"].forEach((index) => {
+            fight[index] = {
+              ...data[i],
+              p: 2,
+            };
+          })
           // 删除该项
           delete knapasackId[id];
         }
@@ -47,23 +55,25 @@ module.exports = {
       // 还存在的物品,为消耗殆尽
       if (JSON.stringify(knapasackId) !== "{}") {
         Object.keys(knapasackId).forEach((key) => {
-          fight[knapasackId[key]["index"]] = {
-            ...fight[knapasackId[key]["index"]],
-            s: 0,
-          };
+          knapasackId[key]["index"].forEach((index) => {
+            fight[index] = {
+              ...fight[index],
+              s: 0,
+            };
+          })
         });
       }
     }
     // 更新战斗信息
-    RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool }, { role_id });
+    RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool }, role_id);
     // 计算角色属性
-    const data = roleFn.computeRoleAttr(req, res, roleInfo, { role_id });
+    const data = AttrSystem.computeRoleAttr(roleInfo, { pet });
     // 获取宠物信息
     let petInfo;
     if (pet) {
       petInfo = {
         name: pet.name,
-        attr: petFn.computePetAttr(pet),
+        attr: AttrSystem.computePetAttr(pet),
         art: pet["art"][0],
       };
     }

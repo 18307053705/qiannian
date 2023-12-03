@@ -1,4 +1,4 @@
-const getRoleInfo = require('./getRoleInfo');
+const asyncGetRoleInfo = require('./asyncGetRoleInfo');
 const getAddressPlayers = require('./getAddressPlayers');
 const computeRoleAttr = require('./computeRoleAttr');
 const roleExit = require('./roleExit');
@@ -8,7 +8,7 @@ const computeUpExp = require('./computeUpExp');
 const updataRoleInfo = require('./updataRoleInfo');
 
 module.exports = {
-    ...getRoleInfo,
+    ...asyncGetRoleInfo,
     ...getAddressPlayers,
     ...computeRoleAttr,
     ...roleExit,

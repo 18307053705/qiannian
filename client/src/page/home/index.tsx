@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Cookies from 'js-cookie';
 import { getRoleList, roleLogin } from '@cgi/roleInfo';
 import { CAREER_TYPE } from '@meun';
 import Logo from './img/QianNianLogo.png';
@@ -11,6 +12,13 @@ const Home = ({ history }) => {
             setRoleList(data)
         })
     }, [])
+
+    const exit = () => {
+        Cookies.remove('q_uid');
+        Cookies.remove('token');
+        Cookies.remove('q_m');
+    }
+
     return (
         <div className={Style['home-page']}>
             <img className={Style.logo} src={Logo} />
@@ -36,7 +44,7 @@ const Home = ({ history }) => {
             }
             {roleList.length < 3 && <span className="g_b_u" onClick={() => { history.push('/reactRole'); }}>创建角色</span>}
             <div className="g_fgx"></div>
-            <span className="g_b">退出登录</span>
+            <span className="g_b_u" onClick={exit}>退出登录</span>
 
         </div>
     )

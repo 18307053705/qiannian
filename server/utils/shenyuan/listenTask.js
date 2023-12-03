@@ -1,5 +1,5 @@
 const { ShenYuanG, RoleG, GrandG } = require('../../global');
-const { getRoleInfo } = require('../roleFn/getRoleInfo');
+const { getRoleInfo } = require('../roleFn/asyncGetRoleInfo');
 const { updataRoleInfo } = require('../roleFn//updataRoleInfo');
 module.exports = {
     /**

@@ -8,7 +8,7 @@ module.exports = {
      */
     operate: async (req, res) => {
         const { uid, s, type } = req.body;
-        const { data } = await knapsackFn.getKnapsackInfo(req, res, { type });
+        const { data } = await knapsackFn.asyncGetKnapsack(req, res, { type });
         // 验证物品信息
         if (knapsackFn.chekeArticle(req, res, data)) {
             return;
@@ -44,7 +44,7 @@ module.exports = {
         }
         // 入库
         if (type === 2) {
-            const { data: wareData } = await knapsackFn.getKnapsackInfo(req, res, { type: 3 });
+            const { data: wareData } = await knapsackFn.asyncGetKnapsack(req, res, { type: 3 });
             const article = { [id]: { id, name, s } };
             const { message, data: newWareData } = knapsackFn.addArticle(article, wareData);
             if (!message) {
@@ -58,7 +58,7 @@ module.exports = {
         }
         // 出库
         if (type === 3) {
-            const { data: knaData } = await knapsackFn.getKnapsackInfo(req, res);
+            const { data: knaData } = await knapsackFn.asyncGetKnapsack(req, res);
             const article = { [id]: { id, name, s } }
             message = knapsackFn.addKnapsack(req, res, article, { data: knaData });
             if (!message) {

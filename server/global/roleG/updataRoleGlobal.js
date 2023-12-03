@@ -11,7 +11,7 @@ module.exports = {
      * @param {*} data.attr 需要的属性
      * @returns {*} role|undefined
      */
-    updataRoleGlobal: function (req, res, updata, { role_id, attr } = {}) {
+    updataRoleGlobal: function (req, res, updata, role_id) {
         const user = req.cookies["q_uid"];
         let updateKeys = Object.keys(updata);
         let roleInfo = undefined;

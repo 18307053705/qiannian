@@ -13,7 +13,7 @@ module.exports = {
      */
     artUp: function (req, res) {
         const { id } = req.body;
-        const { skill_pool, role_level, role_attr } = RoleG.getRoleGlobal(req, res);
+        const { skill_pool, role_level, addition } = RoleG.getRoleGlobal(req, res);
         const { art } = skill_pool;
         if (!art[id]) {
             ErrorG.paramsError(res);
@@ -44,16 +44,15 @@ module.exports = {
             return;
         }
         // 技能升级后属性
-        const { addition, artInfo } = artFn.artUpLevel(old_art, { ...up_art, id }, role_attr.addition);
+        const { addition: upAddition, artInfo } = artFn.artUpLevel(old_art, { ...up_art, id }, addition);
         // 更新技能
         art[id] = { ...art[id], ...artInfo, ...up_art };
         delete art[id].msg;
         delete art[id].condition;
-        role_attr.addition = addition;
         // 人物信息
         RoleG.updataRoleGlobal(req, res, {
-            role_attr,
-            skill_pool
+            skill_pool,
+            addition: upAddition
         })
         res.send({
             code: 0,

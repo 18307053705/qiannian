@@ -1,14 +1,14 @@
 const freakMap = {
     2000: {
-        name: "持刀山贼",
+        name: "巡逻山贼",
         level: 1,
     },
     2001: {
-        name: "持斧山贼",
+        name: "持刀山贼",
         level: 3,
     },
     2002: {
-        name: "巡逻山贼",
+        name: "持斧山贼",
         level: 5,
     },
     2003: {

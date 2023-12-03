@@ -2,16 +2,22 @@ const { roleFn } = require('../../utils');
 const { ErrorG } = require('../../global');
 const { RealmTable, TitleTable } = require('../../table');
 const MEUN = require('../../meun')
+const AttrSystem = require('@/system/AttrSystem')
 module.exports = {
     /**
      * 获取角色信息
      */
     getRoleInfo: async (req, res) => {
         const { role_id } = req.body;
-        const role = await roleFn.getRoleInfo(req, res, { role_id });
+        const role = await roleFn.asyncGetRoleInfo(req, res, role_id);
+        if(!role){
+            ErrorG.roleError(res);
+            return;
+        }
         if (role) {
             // 计算角色属性
-            const data = roleFn.computeRoleAttr(req, res, role, { role_id });
+           
+            const data =  AttrSystem.computeRoleAttr(role)
             const realm = RealmTable.getRealm(role['role_realm']);
             const title = TitleTable.getTitle(role['role_title']);
             const role_career = MEUN.CAREER_MEUN[role['role_career']];
@@ -45,6 +51,6 @@ module.exports = {
                 }
             });
         }
-        ErrorG.roleError(res);
+       
     }
 };

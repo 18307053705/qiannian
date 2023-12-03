@@ -1,9 +1,9 @@
-const { RoleG } = require("@/global");
+const { RoleG, PetG } = require("@/global");
 // const { AttributeTable, RealmTable } = require("@/table");
 const { computeUpExp } = require("../computeUpExp");
 // const { computeRoleAttr } = require("../computeRoleAttr");
 const { pushTask } = require("./pushTask");
-
+const AttrSystem = require('@/system/AttrSystem');
 module.exports = {
     /**
      * 计算人物等级
@@ -16,10 +16,10 @@ module.exports = {
      */
     computeRoleLevel: function (req, res, exp, callback) {
         const roleInfo = RoleG.getRoleGlobal(req, res);
-        let { role_level, role_exp, role_realm, role_career, role_attr } = roleInfo;
+        let { role_level, role_exp } = roleInfo;
         let [oldExp, upExp] = role_exp.split('/');
         let current = Number(oldExp) + exp;
-        let base = undefined;
+        let islevel = false;
         // 当前经验大于升级经验,处理升级逻辑
         if (current >= upExp && role_level < 240) {
             while (current >= upExp && role_level < 240) {
@@ -41,6 +41,7 @@ module.exports = {
             //     base[key] *= attr * role_level;
             // })
             res.customSuccess = `恭喜玩家升到${role_level}级。`
+            islevel = true;
 
         }
         const update = {
@@ -48,15 +49,14 @@ module.exports = {
             role_level
         }
 
-        if (base) {
-            role_attr.base = base;
-            update['role_attr'] = role_attr;
-            // 计算最新属性,升级后恢复满状态
-            // const { attr } = computeRoleAttr(req, res, roleInfo, { life_max: 0, mana_max: 0 });
+        if (islevel) {
+            const pet = PetG.getPetGlobal(req, res, roleInfo.role_id);
+            const { attr } = AttrSystem.computeRoleAttr({ ...roleInfo, role_level }, { pet, keys: ['life_max', 'mana_max'] });
+            console.log(attr, 'attr...')
             update['life'] = attr.life_max;
             update['mana'] = attr.mana_max;
+            callback && callback(Boolean(base), update)
         }
-        callback && callback(Boolean(base), update)
         return RoleG.updataRoleGlobal(req, res, update);
 
     }

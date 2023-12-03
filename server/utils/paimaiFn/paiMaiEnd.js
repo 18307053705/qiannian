@@ -1,5 +1,5 @@
 const { addArticle } = require('../knapsackFn/addArticle');
-const { getKnapsackInfo } = require('../knapsackFn/getKnapsackInfo');
+const { getKnapsackInfo } = require('../knapsackFn/asyncGetKnapsack');
 const { updateKnapsack } = require('../knapsackFn/updateKnapsack');
 const { sendChat } = require('../../global/chatG/sendChat');
 module.exports = {

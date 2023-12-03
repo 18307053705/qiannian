@@ -1,6 +1,6 @@
 const addKnapsack = require('./addKnapsack');
 const deleteKnapsack = require('./deleteKnapsack');
-const getKnapsackInfo = require('./getKnapsackInfo');
+const asyncGetKnapsack = require('./asyncGetKnapsack');
 const chekeArticle = require('./chekeArticle');
 const eatArticle = require('./eatArticle');
 const addArticle = require('./addArticle');
@@ -11,7 +11,7 @@ const chekeKnapsack = require('./chekeKnapsack');
 module.exports = {
     ...addKnapsack,
     ...deleteKnapsack,
-    ...getKnapsackInfo,
+    ...asyncGetKnapsack,
     ...chekeArticle,
     ...eatArticle,
     ...addArticle,

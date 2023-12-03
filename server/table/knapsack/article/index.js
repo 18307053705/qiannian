@@ -89,6 +89,12 @@ module.exports = {
         return (id + "").slice(0, 2) === '19';
     },
     /**
+    * 判断物品是否为恢复药品
+    */
+    isReply: function (id) {
+        return (id + "").slice(0, 2) === '1';
+    },
+    /**
      * 获取全部装备
      */
     getAllEquipList: equip.getArticleList,

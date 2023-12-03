@@ -9,7 +9,7 @@ module.exports = {
      * @returns {*} Promise address 返回坐标
      */
     enterDir: async function (req, res) {
-        const { address } = await roleFn.getRoleInfo(req, res);
+        const { address } = await roleFn.asyncGetRoleInfo(req, res);
         return address;
     },
 

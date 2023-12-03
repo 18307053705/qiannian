@@ -40,6 +40,7 @@ const ROLE_JSON_KEYS = [
     'skill_pool',
     'base_pool',
     'addition_pool',
+    'addition',
     'buff_pool',
     'reputation_pool',
     'task_pool',

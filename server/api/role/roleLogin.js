@@ -1,5 +1,6 @@
-const { RoleG, KnapsackG, SocializeG, PetG, DailysG } = require('../../global');
+const { RoleG, KnapsackG, SocializeG, PetG, DailysG, ErrorG } = require('../../global');
 const { roleFn } = require('../../utils');
+const { roleSql, knapsackSql } = require('@/mysql')
 module.exports = {
     /**
      * 角色登录
@@ -7,38 +8,21 @@ module.exports = {
     roleLogin: async (req, res) => {
         const user = req.cookies["q_uid"];
         const { role_id } = req.body;
-        const { results: role } = await res.asyncQuery(`select * from role  where user_id="${user}" and role_id="${role_id}"`);
-        const { results: knapsack } = await res.asyncQuery(`select * from knapsack  where user_id="${user}" and role_id="${role_id}"`);
-
-        if (!role[0] && !knapsack[0]) {
+        if (!user || !role_id) {
+            ErrorG.paramsError(res);
+            return;
+        }
+        const role = await roleSql.asyncGetSelfRoleInfo(req);
+        const knapsack = await knapsackSql.asyncGetSelfKnapsack(req);
+        if (!role && !knapsack) {
             res.send({
                 code: 100006,
                 data: '角色信息异常'
             });
             return;
         }
-        await roleFn.roleLogin(req,res,role[0],knapsack[0]);
-        // 退出同账号下的其他角色
-        // await roleFn.roleExit(req, res);
-        // // 保存角色信息,并且记录登录时间
-        // RoleG.setRoleGlobal(req, res, role[0]);
-        // // 全局背包
-        // KnapsackG.setknapsackGlobal(req, res, knapsack[0]);
-        // // 全局势力
-        // SocializeG.setSocializeGlobal(req, res);
-        // // 全局宠物
-        // PetG.setPetGlobal(req, res);
-        // // 全局日常
-        // DailysG.initDailysGlobal(req, res);
-        // Global.setRoleGlobal(req, role[0]);
-        // Global.setknapsackGlobal(req, knapsack[0]);
-        // Global.setSocializeGlobal(req);
-        // Global.setPetGlobal(req);
-        // Global.initDailyGlobal(role_id);
-        // 不存在任务池，即代表今天第一次登录,初始化任务池
-        // if (!Global.taskLoop[role_id]) {
-        //     taskFn.initTask(req);
-        // }
+        await roleFn.roleLogin(req, res, role, knapsack);
+
         res.send({
             code: 0,
             data: '角色选择成功'

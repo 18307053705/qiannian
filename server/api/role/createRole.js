@@ -1,12 +1,7 @@
-const { ErrorG, RoleG, KnapsackG, DailysG, TaskG } = require('../../global');
-const { AttributeTable } = require('../../table');
-const { roleFn } = require('../../utils');
-const MEUN = require('../../meun');
-const { TASK_TYPE_MEUN } = TaskG;
-
-function dataJson(data) {
-
-}
+const { AttributeTable } = require('@/table');
+const { roleFn } = require('@/utils');
+const { roleSql, knapsackSql, warehouseSql, friendsSql } = require('@/mysql');
+const AttrSystem = require('@/system/AttrSystem');
 
 module.exports = {
     /**
@@ -15,29 +10,29 @@ module.exports = {
     createRole: async (req, res) => {
         const user = req.cookies["q_uid"];
         const { role_name, role_sex, role_career, role_race } = req.body;
-        const { results } = await res.asyncQuery(`select * from role  where role_name="${role_name}"`);
-        if (results[0]) {
-            return res.send({
+        const isName = await roleSql.asyncGetRoleName(role_name);
+        if (isName) {
+            res.send({
                 code: 0,
                 message: '角色名重复'
             })
+            return;
         }
-        const { results: RoleList } = await res.asyncQuery(`select * from role  where user_id="${user}"`);
-        let ids = [`${user}_1`, `${user}_2`, `${user}_3`];
+
+        const RoleList = await roleSql.asyncGetRoleList(user) || [];
+        let ids = [`${user}1`, `${user}2`, `${user}3`];
         RoleList.forEach(({ role_id }) => {
             ids = ids.filter((id) => role_id !== id)
         })
         // 数量已满,无法继续创建
         if (!ids.length) {
-            return ErrorG.unknownError(res);
+            res.send({
+                code: 0,
+                message: '该账号可注册角色已满'
+            })
+            return;
         }
-
-        // 开始创建角色
-        // 基础属性
-        const attr = AttributeTable.getRoleBaseAttr(role_career);
-        // 坐标
-        const address = MEUN.ADDRESS_MEUN[role_race];
-        // 角色id
+        const attr = AttrSystem.getRoleBaseAttr(role_career);
         const role_id = ids[0];
         const roleInfo = {
             user_id: user,
@@ -53,16 +48,12 @@ module.exports = {
             role_lx: 0,
             life: attr.life,
             mana: attr.mana,
-            role_attr: {
-                base: attr,
-                addition: AttributeTable.getInitAttr(),
-            },
+            addition: AttributeTable.getInitAttr(),
             role_buff: {
                 attr: [],
                 vip: {}
             },
-            address,
-            role_evil: 0,
+            address: '10000,0,0',
             role_signature: '',
             socialize_pool: {},
             equip_pool: {},
@@ -80,7 +71,7 @@ module.exports = {
                     { id: 2, n: '御宠之术', p: 9 },
                 ]
             },
-            task_pool: [{ p: TASK_TYPE_MEUN.main, id: 1, s: 0 }],
+            task_pool: [{ id: 100, s: 0 }],
             role_integral: {},
             pet_pool: {
                 c: {},
@@ -110,33 +101,14 @@ module.exports = {
             value.push(roleInfo[key]);
             insert.push('?');
         })
-        const roleSql = `insert into role(${keys.join(',')}) values(${insert.join(',')})`;
-        await res.asyncAdd(roleSql, value);
-        //  背包
-        const knapsackSql = "insert into knapsack(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
-        const knapsackData = [user, role_id, 1000, 0, '[]'];
-        const knapsackRes = res.asyncAdd(knapsackSql, knapsackData);
-        //  仓库
-        const warehouseSql = "insert into warehouse(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
-        const warehouseData = [user, role_id, 0, 0, '[]'];
-        const warehouseRes = res.asyncAdd(warehouseSql, warehouseData);
-        //  好友
-        const friendsSql = "insert into friends(user_id,role_id,list,apply) values(?,?,?,?)";
-        const friendsData = [user, role_id, '[]', '[]'];
-        const friendsRes = res.asyncAdd(friendsSql, friendsData);
-        // await Promise.all([knapsackRes, warehouseRes, friendsRes]);
-        // // 
-        // await roleFn.roleLogin(req, res, roleInfo, { user_id: user, role_id, tael: 1000, yuanbao: 0, data: '[]' });
-        // 退出同账号下的其他角色
-        // await roleFn.roleExit(req, res);
-        // // 保存全局角色信息,并且记录登录时间
-        // RoleG.setRoleGlobal(req, res, sqlInfo);
-        // // 保存全局背包信息
-        // KnapsackG.setknapsackGlobal(req, res, { user_id: user, role_id, yuanbao: 1000, yuanbao: 0, data: '[]' });
-        // DailysG.initDailysGlobal(req, res);
-        // Global.setSocializeGlobal(req);
-        // 初始化任务池
-        // taskFn.initTask(req);
+        const roleSqlstr = `insert into role(${keys.join(',')}) values(${insert.join(',')})`;
+        await res.asyncAdd(roleSqlstr, value);
+        await Promise.all([
+            knapsackSql.asyncAddKnapsack(user, role_id),
+            warehouseSql.asyncAddWarehouse(user, role_id),
+            friendsSql.asyncAddFriends(user, role_id)]
+        );
+        await roleFn.roleLogin(req, res, roleInfo, { user_id: user, role_id, tael: 1000, yuanbao: 0, data: '[]' });
         res.send({
             code: 0,
             data: '创建角色成功'

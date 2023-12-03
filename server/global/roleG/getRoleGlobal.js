@@ -37,7 +37,7 @@ module.exports = {
      * @returns {*} title_list: [titleId] 称号ID
      * @returns {*} upper_limit: {} 历史上限，如洞天福地层数 
      */
-    getRoleGlobal: function (req, res, { role_id, attr } = {}) {
+    getRoleGlobal: function (req, res, role_id) {
         const user = req.cookies["q_uid"];
         let role = undefined;
         // 获取其他玩家信息

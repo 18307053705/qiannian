@@ -4,7 +4,7 @@ import Styles from './index.less';
 const Login = ({ setIsLogin, callback }) => {
     const [user, setUser] = useState('');
     const [pass, setPass] = useState('');
-    const loginClick: any = () => {
+    const loginClick = () => {
         register({ user, pass }).then(({ data }) => {
             if (data) {
                 callback()
@@ -16,6 +16,7 @@ const Login = ({ setIsLogin, callback }) => {
         <div>
             <div className={Styles.title}>账号注册</div>
             <div>
+               
                 <span>账号：</span>
                 <input type="text" value={user} onChange={(e) => { setUser(e.target.value) }} />
             </div>

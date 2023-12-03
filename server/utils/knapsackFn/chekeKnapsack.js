@@ -1,5 +1,5 @@
 
-const { getKnapsackInfo } = require('./getKnapsackInfo');
+const { getKnapsackInfo } = require('./asyncGetKnapsack');
 const { KnapsackG } = require('../../global');
 module.exports = {
     /**

@@ -15,6 +15,7 @@ const TEST = {
         isRanks: true,
         // article: '230-20,235-20,240-20,245-20,250-20,255-20,260-20,265-20,270-20,275-20,280-20,285-20,290-20,295-20',
         article: gemstone.getArticleList().map(({ id }) => `${id}-20`).join(','),
+       
     },
     2999989: {
         id: 2999989,
@@ -38,19 +39,18 @@ const TEST = {
     },
     2999991: {
         id: 2999991,
-        name: "三阶装备boss",
-        type: 2,
-
+        name: "药品",
+        exp: 100, 
         level: 1,
-        attr: 1,
+        attr: 0.5,
         isRanks: true,
-        article: reply.getArticleList().map(({ id }) => `${id}-9900`).join(','),
+        creatNum:1,
+        article: reply.getArticleList().map(({ id }) => `${id}-10`).join(','),
     },
     2999992: {
         id: 2999992,
         name: "四阶装备boss",
         type: 2,
-
         level: 1,
         attr: 1,
         isRanks: true,
