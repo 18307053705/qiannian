@@ -26,6 +26,6 @@ module.exports = {
         // 全局深渊
         ShenYuanG.setShenYuan(req, res);
         //  初始化非日常任务
-        // initTask(req, res)
+        initTask(req, res)
     },
 };

@@ -5,7 +5,7 @@ import Styles from './index.less';
 export default ({ history }) => {
     const [isLogin, setIsLogin] = useState(true);
     const callback = useCallback(() => {
-        history.push('/');
+        history.push('/constituency');
     }, [])
     return (
         <div className={Styles['login-register-page']}>

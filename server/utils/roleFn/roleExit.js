@@ -41,6 +41,7 @@ module.exports = {
             const main = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.main);
             const chance = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.chance);
             const copy = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy);
+          
             RoleG.updataRoleGlobal(req, res, { task_pool: [...tasksUpdata(main), ...tasksUpdata(chance), ...tasksUpdata(copy)] });
             const { role_id, socialize_pool } = roleInfo;
             // 释放全局地图缓存

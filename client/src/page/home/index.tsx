@@ -9,7 +9,7 @@ const Home = ({ history }) => {
     const [roleList, setRoleList] = useState([])
     useEffect(() => {
         getRoleList().then(({ data }: any) => {
-            setRoleList(data)
+            setRoleList(data);
         })
     }, [])
 

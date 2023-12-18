@@ -1,5 +1,6 @@
 const library = require("../0library");
 const { computePetAttr } = require("./computePetAttr");
+const { computePotentialAttr } = require("./computePotentialAttr");
 module.exports = {
     /**
      * 计算角色属性
@@ -17,7 +18,9 @@ module.exports = {
             console.log('调用computeRoleAttr函数：未传递role字段');
             return;
         }
-        const { addition, role_buff, role_level, role_career, role_realm } = role;
+        const { role_attr, role_buff, role_level, role_career, role_realm, } = role;
+        const { addition, potential } = role_attr;
+        const potentialAttr = computePotentialAttr(potential);
         // 玩家属性 = 职业属性 * 等级 * 境界
         const base = library.getRoleBaseAttr(role_career);
         const levelAttr = role_level * role_realm;
@@ -27,8 +30,12 @@ module.exports = {
                 base[key] *= levelAttr;
                 attr[key] += base[key];
             }
+            if(potentialAttr[key]){
+                attr[key] += potentialAttr[key];
+            }
             attr[key] += addition[key];
         })
+       
         // buff属性
         let { attr: attrBuff, vip } = role_buff;
         const buffs = [];

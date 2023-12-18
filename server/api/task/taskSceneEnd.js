@@ -3,6 +3,8 @@
 const { GrandG, TaskG, RoleG, DailysG } = require('../../global');
 const { taskFn, grandFn, knapsackFn } = require('../../utils');
 const { TASK_TYPE, TASK_TYPE_MEUN } = TaskG;
+
+// 任务状态 0：未领取 1：未完成 2：可完成 3：已完成
 module.exports = {
     /**
      * 任务场景结束,即完成任务
@@ -36,61 +38,50 @@ module.exports = {
 
         // 记录最初状态
         const oldStatus = task.status;
-        // 判断是否为接任务且为副本 
-        if (oldStatus === 0 && taskType === TASK_TYPE_MEUN.copy) {
-            const { copyTask } = DailysG.getDailysGlobal(req, res);
-            if (copyTask[taskId] <= 0) {
-                return res.send({
-                    code: 0,
-                    data: {
-                        levelText: '今日领取次数已用完！',
-                    }
-                })
-            }
-            copyTask[taskId] -= 1;
-            DailysG.updataDailysGlobal(req, res, { copyTask });
+        // // 判断是否为接任务且为副本 
+        // if (oldStatus === 0 && taskType === TASK_TYPE_MEUN.copy) {
+        //     const { copyTask } = DailysG.getDailysGlobal(req, res);
+        //     if (copyTask[taskId] <= 0) {
+        //         return res.send({
+        //             code: 0,
+        //             data: {
+        //                 levelText: '今日领取次数已用完！',
+        //             }
+        //         })
+        //     }
+        //     copyTask[taskId] -= 1;
+        //     DailysG.updataDailysGlobal(req, res, { copyTask });
+        // }
+        // 接任务
+        if (task.status === 0) {
+            task.status = 1;
         }
-
-
-        // 计算是否完成任务
-        if (task.status === 0 || task.status === 1 || task.status === 2) {
+        // 未完成可转化已完成
+        // 已完成可转化未完成
+        if (task.status === 1 || task.status === 2) {
+            // 计算任务进度
             const speed = taskFn.speedTask(req, res, task);
             task.status = speed.done ? 2 : 1;
-            TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-        }
-        // 进行中，传送至任务目标
-        if (task.status === 1) {
-            taskFn.taskTp(req, res, task);
-            return;
-        }
-        let message = undefined;
-        // 完成任务  且 最初状态不为
-        if (task.status === 2 && oldStatus !== 0) {
-            // 获取任务奖励
-            message = taskFn.getTaskReward(req, res, reward);
-            if (!message) {
-                // 收集任务，扣除背包物品
-                if (type === TASK_TYPE.shouJi) {
-                    knapsackFn.deleteKnapsack(req, res, { article: { ...complete.article, ...complete.equip } });
-                }
-                // 更新为已完成状态
-                task.status = 3;
-                TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-            }
         }
 
-        // 任务未结束
-        if (task.status !== 3) {
+
+        let isCreta = false;
+        // 领取对话任务，不可直接完成
+        if (task.status === 2 && oldStatus !== 0) {
+            // 获取任务奖励
+            task.status = 3;
+            console.log('获取奖励')
+            isCreta = true;
+        }
+        TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
+        if (!isCreta) {
             res.send({
                 code: 0,
                 data: taskFn.getTaskSceneInfo(req, res, task),
-                message
             })
             return;
         }
-        // 已完成任务
-        // 完成任务将任务从已领取队列中删除
-        TaskG.deleteTaskGlobal(req, res, taskType, task.id);
+
         // 完成任务后判断是否有下个任务,有则加入可领取任务,并且传送目标地
         const { nextId } = task;
         if (!nextId) {
@@ -114,11 +105,10 @@ module.exports = {
                 code: 0,
                 data: taskFn.getTaskSceneInfo(req, res, nextTask),
                 nextTask,
-                message
             })
             return;
         }
         // 否则传送至领取任务npc位置
-        grandFn.tpDirUpdate(req, res, nextNpc.address)
+        grandFn.tpDirUpdate(req, res, nextNpc.address);
     }
 }

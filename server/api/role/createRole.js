@@ -2,6 +2,7 @@ const { AttributeTable } = require('@/table');
 const { roleFn } = require('@/utils');
 const { roleSql, knapsackSql, warehouseSql, friendsSql } = require('@/mysql');
 const AttrSystem = require('@/system/AttrSystem');
+const { REGION_EUNM } = require('@/meun');
 
 module.exports = {
     /**
@@ -9,8 +10,17 @@ module.exports = {
      */
     createRole: async (req, res) => {
         const user = req.cookies["q_uid"];
+        const region = req.cookies["region"];
+        if (!REGION_EUNM[region]) {
+            res.send({
+                code: 0,
+                message: '大区异常'
+            })
+            return;
+        }
+
         const { role_name, role_sex, role_career, role_race } = req.body;
-        const isName = await roleSql.asyncGetRoleName(role_name);
+        const isName = await roleSql.asyncGetRoleName(req, res, role_name);
         if (isName) {
             res.send({
                 code: 0,
@@ -19,8 +29,8 @@ module.exports = {
             return;
         }
 
-        const RoleList = await roleSql.asyncGetRoleList(user) || [];
-        let ids = [`${user}1`, `${user}2`, `${user}3`];
+        const RoleList = await roleSql.asyncGetRoleList(req, res) || [];
+        let ids = [`${user}_${region}1`, `${user}_${region}2`, `${user}_${region}3`];
         RoleList.forEach(({ role_id }) => {
             ids = ids.filter((id) => role_id !== id)
         })
@@ -38,6 +48,7 @@ module.exports = {
             user_id: user,
             role_id,
             role_name,
+            region,
             role_race,
             role_career,
             role_sex,
@@ -48,13 +59,23 @@ module.exports = {
             role_lx: 0,
             life: attr.life,
             mana: attr.mana,
-            addition: AttributeTable.getInitAttr(),
+            role_attr: {
+                addition: AttributeTable.getInitAttr(),
+                qian_li: 0,
+                max_qian_li: 0,
+                potential: {
+                    ti_zhi: 0,
+                    geng_gu: 0,
+                    bi_li: 0,
+                    nai_li: 0,
+                    shen_fa: 0,
+                },
+            },
             role_buff: {
                 attr: [],
                 vip: {}
             },
             address: '10000,0,0',
-            role_signature: '',
             socialize_pool: {},
             equip_pool: {},
             skill_pool: {
@@ -71,7 +92,7 @@ module.exports = {
                     { id: 2, n: '御宠之术', p: 9 },
                 ]
             },
-            task_pool: [{ id: 100, s: 0 }],
+            task_pool:  [{id:100,p:1}],
             role_integral: {},
             pet_pool: {
                 c: {},

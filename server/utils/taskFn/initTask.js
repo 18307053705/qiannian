@@ -11,6 +11,7 @@ module.exports = {
         const { task_pool, role_level } = RoleG.getRoleGlobal(req, res);
         // 记录在任务中的副本
         const copyTaskIds = {};
+       
         task_pool.forEach(({ p, id, f, s = 0 }) => {
             if (p === TASK_TYPE_MEUN.copy) {
                 copyTaskIds[id] = {

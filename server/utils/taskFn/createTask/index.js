@@ -1,10 +1,11 @@
 const { RoleG, TaskG } = require('../../../global');
-const { TaskTable } = require('../../../table');
-const { getDailyReward } = require('./getDailyReward');
-const { getReward } = require('./getReward');
-const { getGrand } = require('./getGrand');
-const { getComplete } = require('./getComplete');
-const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = TaskG;
+// const { TaskTable } = require('../../../table');
+const { TaskSystem } = require('@/system');
+// const { getDailyReward } = require('./getDailyReward');
+// const { getReward } = require('./getReward');
+// const { getGrand } = require('./getGrand');
+// const { getComplete } = require('./getComplete');
+// const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = TaskG;
 module.exports = {
     /**
      * 创建任务
@@ -16,34 +17,37 @@ module.exports = {
      * @returns tasks {id:task}
      */
     createTask: function (req, res, type, id, { callback } = {}) {
-        const { role_level } = RoleG.getRoleGlobal(req, res);
-        const task = TaskTable.getTask(req, res, type, id);
-        let reward = undefined;
-        // 每日任务奖励解析
-        if (DAIL_TYPE_LIST.includes(type)) {
-            reward = getDailyReward(type, role_level);
-        }
-        // 主线任务奖励解析
-        if (type === TASK_TYPE_MEUN.main) {
-            reward = getReward(task.reward, req, res);
-        }
-        // 副本任务奖励解析
-        if (type === TASK_TYPE_MEUN.copy) {
-            reward = getReward(task.reward, req, res);
-        }
-        task.reward = reward;
-        const { grand, complete } = task;
-        // 地图解析
-        if (grand) {
-            getGrand(grand, type, id);
-        }
-        // 完成条件解析
-        if (complete || grand.freak) {
-            task.complete = getComplete(complete, grand);
-        }
+        const role = RoleG.getRoleGlobal(req, res);
+        const task = TaskSystem.analyTask(id, type, role)
 
-        task.taskType = type;
-        task.status = 0;
+        // const { role_level } = RoleG.getRoleGlobal(req, res);
+        // const task = TaskTable.getTask(req, res, type, id);
+        // let reward = undefined;
+        // // 每日任务奖励解析
+        // if (DAIL_TYPE_LIST.includes(type)) {
+        //     reward = getDailyReward(type, role_level);
+        // }
+        // // 主线任务奖励解析
+        // if (type === TASK_TYPE_MEUN.main) {
+        //     reward = getReward(task.reward, req, res);
+        // }
+        // // 副本任务奖励解析
+        // if (type === TASK_TYPE_MEUN.copy) {
+        //     reward = getReward(task.reward, req, res);
+        // }
+        // task.reward = reward;
+        // const { grand, complete } = task;
+        // // 地图解析
+        // if (grand) {
+        //     getGrand(grand, type, id);
+        // }
+        // // 完成条件解析
+        // if (complete || grand.freak) {
+        //     task.complete = getComplete(complete, grand);
+        // }
+
+        // task.taskType = type;
+        // task.status = 0;
         const tasks = { [id]: task };
         callback && callback(task);
         // 加入全局任务列表

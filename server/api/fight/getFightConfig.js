@@ -1,4 +1,5 @@
-const { FightG, RoleG, KnapsackG } = require('../../global');
+const { FightG, RoleG, KnapsackG } = require('@/global');
+const { knapsackTable } = require('@/table');
 module.exports = {
     /**
      * 获取战斗配置
@@ -9,8 +10,8 @@ module.exports = {
         const { skill_pool } = RoleG.getRoleGlobal(req, res);
         const drug = [];
         const art = [];
-        data.forEach(({ n, id, p }) => {
-            if (p === 1) {
+        data.forEach(({id }) => {
+            if (knapsackTable.isReply(id)) {
                 drug.push({ n, id, })
             }
         })

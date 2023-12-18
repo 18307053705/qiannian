@@ -17,20 +17,17 @@ module.exports = {
         Object.keys(taskG || {}).forEach((type) => {
             const tasks = taskG[type];
             let isUpdata = false;
-            Object.values(tasks).forEach(({ title, complete, type: taskType }, index) => {
-                if (taskType !== 1) {
-                    return;
-                }
-                const { freak: freaks } = complete;
+            Object.values(tasks).forEach(({ title, complete }, index) => {
+                const { freak: freaks } = complete || {};
                 if (freaks && freaks[freakId]) {
                     const freak = freaks[freakId];
                     freak.c += num;
                     freak.c > freak.s && (freak.c = freak.s);
-                    isUpdata = true;
                     freakObj[`${type}${index}`] = {
                         ...freak,
                         title
                     };
+                    isUpdata = true;
                 }
             })
             if (isUpdata) {
@@ -43,7 +40,6 @@ module.exports = {
         listenTaskShenyuan(req, res, freakId);
         // 监听彩灵洞
         ActivityG.listenCaiLingDong(req, res, freakId);
-
         return freakObj;
     }
 }

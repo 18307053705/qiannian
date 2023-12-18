@@ -40,7 +40,10 @@ module.exports = {
         //     return peopleMian[id] ? JSON.parse(JSON.stringify(peopleMian[id])) : undefined;
         // }
         if (type === TASK_TYPE_MEUN.main) {
-            return peopleMian[id] ? JSON.parse(JSON.stringify(peopleMian[id])) : undefined;
+            return peopleMian[id] ? JSON.parse(JSON.stringify({
+                ...peopleMian[id],
+                id
+            })) : undefined;
         }
         if (type === TASK_TYPE_MEUN.copy) {
             return copy[id] ? JSON.parse(JSON.stringify(copy[id])) : undefined;

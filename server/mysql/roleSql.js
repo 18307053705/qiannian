@@ -2,10 +2,12 @@ const { asyncQuery, asyncAdd } = require('./config');
 module.exports = {
     /**
     * 获取角色列表
-    * @param {*} user 账号
+    * @param {*} req 账号
     */
-    asyncGetRoleList: async function (user) {
-        const { results } = await asyncQuery(`select * from role  where user_id="${user}"`);
+    asyncGetRoleList: async function (req) {
+        const user = req.cookies["q_uid"];
+        const region = req.cookies["region"];
+        const { results } = await asyncQuery(`select * from role  where user_id="${user}" and region="${region}"`);
         return results;
     },
     /**
@@ -20,8 +22,9 @@ module.exports = {
     * 获取角色名称是否存在
     * @param {*} role_name 角色名称
     */
-    asyncGetRoleName: async function (role_name) {
-        const { results } = await asyncQuery(`select * from role  where role_name="${role_name}"`);
+    asyncGetRoleName: async function (req, res, role_name) {
+        const region = req.cookies["region"];
+        const { results } = await asyncQuery(`select * from role  where role_name="${role_name}" and region="${region}"`);
         return results[0];
     },
     /**

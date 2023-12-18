@@ -67,11 +67,12 @@ export const taskScene = () => {
             </div>
         )
     }
-    const active = connet.splice(-1)[0].split('&');
+    const taskConnet = JSON.parse(JSON.stringify(connet));
+    const active = taskConnet.splice(-1)[0].split('&');
     return (
         <div className={Styles['page-task-scene']}>
             {status !== 0 && <TaskResult reward={reward} />}
-            {connet.map((text, index) => <div key={index}>{text}</div>)}
+            {taskConnet.map((text, index) => <div key={index}>{text}</div>)}
             <div>
                 <span>{active[0]}</span>
                 <span className='g_u_end' onClick={doneTask}>{active[1]}</span>

@@ -8,7 +8,7 @@ module.exports = {
             return;
         };
         const results = await userSql.asyncGetUserInfo(user,pass);
-        if (results[0]) {
+        if (results) {
             res.cookie("q_uid", user);
             res.cookie("token", userFn.creatToken(user, pass));
             res.cookie("q_m", userFn.encryptionPass(pass));

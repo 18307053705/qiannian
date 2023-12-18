@@ -4,8 +4,7 @@ module.exports = {
      * 获取角色列表 
      */
     getRoleList: async (req, res) => {
-        const user = req.cookies["q_uid"];
-        const list = await roleSql.asyncGetRoleList(user);
+        const list = await roleSql.asyncGetRoleList(req,res);
         res.send({
             code: 0,
             data: list

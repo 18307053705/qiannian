@@ -10,7 +10,6 @@ module.exports = {
      */
     setFightConfig: async (req, res) => {
         const { dir_id, dir_type, dir_inx } = req.body;
-
         const { skill_pool } = RoleG.getRoleGlobal(req, res);
         const { art, fight } = skill_pool;
         // 对应指令列表

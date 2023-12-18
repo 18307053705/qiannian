@@ -2,6 +2,7 @@ const freakMap = {
     2000: {
         name: "巡逻山贼",
         level: 1,
+        attr:0.1
     },
     2001: {
         name: "持刀山贼",
