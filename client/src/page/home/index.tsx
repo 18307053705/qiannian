@@ -17,6 +17,7 @@ const Home = ({ history }) => {
         Cookies.remove('q_uid');
         Cookies.remove('token');
         Cookies.remove('q_m');
+        Cookies.remove('region');
     }
 
     return (

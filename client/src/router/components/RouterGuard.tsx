@@ -7,39 +7,23 @@ import config from "../config";
 import Tips from './Tips';
 
 function RouterGuard() {
-    let history = useHistory();
-    let location = useLocation();
-    // 拿到路径
-    let { pathname } = location;
+    const history = useHistory();
+    const location = useLocation();
+    const { pathname } = location;
+    const thisRoute = config.find((el) => el['path'] == pathname);
+    const isLogin = Cookies.get("token");
+    const region = Cookies.get("region");
     useEffect(() => {
         window.QN.history = history;
     }, [])
-
-    // 拿到当前路由
-    let thisRoute = config.find((el) => el['path'] == pathname);
-    let isLogin = Cookies.get("token");
-    //如果没登录且页面为登录页的话渲染登录页
-    if (pathname == '/login' && !isLogin) {
-        return <Route path={pathname} component={thisRoute['component']} exact={thisRoute['component']} />
+    if ((isLogin && region) || (pathname == '/login' && !isLogin) || (pathname == '/constituency' && !region)) {
+        return thisRoute ? <Route path={pathname} component={thisRoute['component']} exact /> : <Redirect to="/error" />;
     }
-    //如果已经登录渲染页面
-    if (isLogin) {
-        //如果登陆了跳转login页，则重定向
-        if (pathname == '/login') {
-            return <Redirect to="/" />
-        }
-
-        // 判定路由是否存在，如果存在正常渲染
-        if (thisRoute) {
-            return <Route path={pathname} component={thisRoute['component']} exact />
-        } else {
-            //否则进入404页面
-            return <Redirect to="/error" />;
-        }
-    } else {
-        // 否则跳转到登录页
+    // 未登录
+    if (!isLogin) {
         return <Redirect to="/login" />
     }
+    return <Redirect to="/constituency" />
 }
 
 // export const RouterGuardMemo = memo(() => {

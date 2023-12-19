@@ -15,7 +15,7 @@ const Constituency = ({ history }) => {
         Cookies.set('region', value);
         history.push('/');
     }
-
+    console.log(111)
     const prefix = ({ lable, value }) => {
         return (
             <div>
@@ -28,6 +28,7 @@ const Constituency = ({ history }) => {
         Cookies.remove('q_uid');
         Cookies.remove('token');
         Cookies.remove('q_m');
+        Cookies.remove('region');
     }
     return (
         <div>

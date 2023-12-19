@@ -1,39 +1,23 @@
 import React, { useState, useEffect } from 'react';
-
 import { getTaskScene, taskSceneEnd } from '@cgi/taks';
 import { tpDir } from '@cgi/grand';
 import { backGrand } from '@utils/grand';
+import TaskReward from './taskReward';
+import TaskSpeed from './taskSpeed';
+import TaskAction from './taskAction';
 import Styles from './index.less';
-
-
-const TaskResult = ({ reward }) => {
-    const { text = [] } = reward || {};
-    return (
-        text.map((text, index) => <div key={index}>{text}</div>)
-    )
-}
-
-const SpeedText = ({ speed }) => {
-    if (speed) {
-        const { fight, exist } = speed;
-        const speedArr = [...Object.values(fight || {}), ...Object.values(exist || {})];
-        return <div>进度：{speedArr.map(({ n, s, c }: any) => `${n}(${c}/${s})`).join(',')}</div>;
-    }
-    return null;
-}
 
 export const taskScene = () => {
     const [taskInfo, setTaskInof] = useState();
-    const getTaskInfo = () => {
+    useEffect(() => {
         getTaskScene().then(({ data }) => {
             setTaskInof(data)
         })
-    }
-    useEffect(getTaskInfo, []);
+    }, []);
     if (!taskInfo) {
         return null;
     }
-    const { connet, speed, levelText, endText, reward, status, tpInfo }: any = taskInfo || {};
+    const { connet, speed, levelText, endText, reward, status, tpInfo, action }: any = taskInfo || {};
 
     const doneTask = () => {
         taskSceneEnd().then(({ data }) => {
@@ -50,19 +34,11 @@ export const taskScene = () => {
         )
     }
     // 任务进行中
-    if (status === 1) {
+    if ((status === 1 || status === 0) && action) {
         return (
             <div className={Styles['page-task-scene']}>
-                <SpeedText speed={speed} />
                 {connet.map((text, index) => <div key={index}>{text}</div>)}
-                {
-                    tpInfo && <span className='g_u_end' onClick={() => {
-                        tpDir({ dir: tpInfo.address }).then(() => {
-                            backGrand();
-                        })
-
-                    }}>传送到{tpInfo.addressName}</span>
-                }
+                <TaskAction action={action} doneTask={doneTask} />
                 <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
             </div>
         )
@@ -71,8 +47,9 @@ export const taskScene = () => {
     const active = taskConnet.splice(-1)[0].split('&');
     return (
         <div className={Styles['page-task-scene']}>
-            {status !== 0 && <TaskResult reward={reward} />}
+            <TaskReward reward={reward} status={status} />
             {taskConnet.map((text, index) => <div key={index}>{text}</div>)}
+            <TaskSpeed speed={speed} status={status} />
             <div>
                 <span>{active[0]}</span>
                 <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
