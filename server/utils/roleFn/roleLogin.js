@@ -25,7 +25,7 @@ module.exports = {
         DailysG.initDailysGlobal(req, res);
         // 全局深渊
         ShenYuanG.setShenYuan(req, res);
-        //  初始化非日常任务
+        //  初始化任务
         initTask(req, res)
     },
 };

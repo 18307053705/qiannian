@@ -39,7 +39,7 @@ module.exports = {
                     exp = exps * 0.002;
                     break;
             }
-            return { exp: arseInt(exp) }
+            return { exp: parseInt(exp) }
         }
         // 每日金钱
         if (type === TASK_TYPE_MEUN.tael) {

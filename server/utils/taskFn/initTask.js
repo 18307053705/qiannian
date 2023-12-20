@@ -1,6 +1,5 @@
+const { TaskSystem } = require('@/system');
 const { RoleG, TaskG } = require('../../global');
-const { createTask } = require('./createTask');
-const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     /**
      * 初始化任务池
@@ -8,44 +7,28 @@ module.exports = {
      * @param {*} res 
      */
     initTask: function (req, res) {
-        const { task_pool, role_level } = RoleG.getRoleGlobal(req, res);
+        const { task_pool, ...role } = RoleG.getRoleGlobal(req, res);
         // 记录在任务中的副本
-        const copyTaskIds = {};
-       
+        const tasks = {};
+        // id 任务id
+        // p 任务类型
+        // f 击杀进度{id:c}
+        // s 任务状态
         task_pool.forEach(({ p, id, f, s = 0 }) => {
-            if (p === TASK_TYPE_MEUN.copy) {
-                copyTaskIds[id] = {
-                    f,
-                    s,
-                    id
-                };
+            tasks[p] || (tasks[p] = {});
+            const task = TaskSystem.analyTask(req, res, id, p, role);
+            task.status = s;
+            if (task?.complete?.freak) {
+                Object.keys(f || {}).forEach((freakId) => {
+                    task.complete.freak[freakId].c = f[freakId];
+                })
             }
-            createTask(req, res, p, id, {
-                callback: function (task) {
-                    if (task.complete) {
-                        const freaks = task.complete.freak;
-                        // 创建任务时通过回调,处理之前的杀怪任务进度
-                        Object.keys(f || {}).forEach((freakId) => {
-                            freaks[freakId].c = f[freakId];
-                        })
-                    }
-                    task.status = s;
-                }
-            })
+            tasks[p][id] = task;
+        });
+
+        Object.keys(tasks).forEach((type) => {
+            TaskG.updataTaskGlobal(req, res, Number(type), tasks[type]);
         })
-        Object.values(copyTaskIds).forEach(({ f, s, id }) => {
-            createTask(req, res, TASK_TYPE_MEUN.copy, id, {
-                callback: function (task) {
-                    if (task.complete) {
-                        const freaks = task.complete.freak;
-                        // 创建任务时通过回调,处理之前的杀怪任务进度
-                        Object.keys(f || {}).forEach((freakId) => {
-                            freaks[freakId].c = f[freakId];
-                        })
-                    }
-                    task.status = s;
-                }
-            });
-        })
+
     }
 }

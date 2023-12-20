@@ -1,5 +1,8 @@
+const { TaskSystem } = require('@/system');
 const { getRoleGlobal } = require('../roleG/getRoleGlobal');
-const copyTable = require('../../table/task/copy');
+
+const { TASK_TYPE_MEUN } = TaskSystem;
+
 module.exports = {
     /**
      * 初始化每日任务数量
@@ -19,27 +22,19 @@ module.exports = {
         }
         // 处理副本任务
         const copyTask = {};
-        Object.keys(copyTable).forEach((id) => {
+        Object.keys(TaskSystem.getCopyTackAll()).forEach((id) => {
             copyTask[id] = 2;
         })
         return {
-            exp: taskNum,
-            tael: taskNum,
-            world: taskNum,
-            exploit: exploitNum,
-            gang: socialize_pool.gang ? 8 : -1,
-            intersect: socialize_pool.intersect ? 8 : -1,
+            dailyTask: {
+                [TASK_TYPE_MEUN.exp]: taskNum,
+                [TASK_TYPE_MEUN.tael]: taskNum,
+                [TASK_TYPE_MEUN.world]: taskNum,
+                [TASK_TYPE_MEUN.exploit]: taskNum,
+                [TASK_TYPE_MEUN.gang]: taskNum,
+                [TASK_TYPE_MEUN.intersect]: taskNum
+            },
             copyTask,
-            // lianHunDong: 2,
-            // heiJiaoYu: 2,
-            // siHailongGong: 2,
-            // fengHuangTongMu: 2,
-            // moShenChuanShuo: 2,
-            // haiDiMoGong: 2,
-            // tinaMoYiZhi: 2,
-            // diFuChuanShuo: 2,
-            // qunMoLuanWu: 2,
-            // tianMoJIangLin: 2,
         }
     }
 }

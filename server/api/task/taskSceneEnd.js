@@ -1,7 +1,8 @@
 
 
-const { GrandG, TaskG, RoleG, DailysG } = require('../../global');
-const { taskFn, grandFn, knapsackFn } = require('../../utils');
+const { TaskSystem } = require('@/system');
+const { GrandG, TaskG, RoleG, DailysG } = require('@/global');
+const { taskFn, grandFn, knapsackFn } = require('@/utils');
 const { TASK_TYPE, TASK_TYPE_MEUN } = TaskG;
 
 // 任务状态 0：未领取 1：未完成 2：可完成 3：已完成
@@ -10,7 +11,7 @@ module.exports = {
      * 任务场景结束,即完成任务
      */
     taskSceneEnd: function (req, res) {
-        const { role_level } = RoleG.getRoleGlobal(req, res);
+        const { role_level, ...role } = RoleG.getRoleGlobal(req, res);
         const dir = GrandG.getDirGlobal(req, res);
         const { currentDir } = dir;
         const { taskId, taskType } = currentDir;
@@ -67,10 +68,18 @@ module.exports = {
 
         let isCreta = false;
         // 领取对话任务，不可直接完成
-        if (task.status === 2 && oldStatus !== 0) {
+        if (task.status === 2 && (oldStatus !== 0 || task.action)) {
             // 获取任务奖励
+            const message = taskFn.getTaskReward(req, res, task.reward);
+            if (message) {
+                res.send({
+                    code: 0,
+                    message,
+                    data: taskFn.getTaskSceneInfo(req, res, task),
+                })
+                return;
+            }
             task.status = 3;
-            console.log('获取奖励')
             isCreta = true;
         }
         TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
@@ -94,7 +103,8 @@ module.exports = {
             return;
         }
         // 创建下一个任务
-        const nextTask = taskFn.createTask(req, res, taskType, nextId)[nextId];
+        const nextTask = TaskSystem.analyTask(req, res, nextId, taskType);
+        TaskG.updataTaskGlobal(req, res, taskType, { [nextId]: nextTask });
         const nextNpc = nextTask.grand.npc;
         // 判断下个任务领取的npc是否就是当前npc且位置相同
         //  是直接返回任务信息

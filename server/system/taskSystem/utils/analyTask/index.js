@@ -7,7 +7,7 @@ const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = require('../../enum');
 
 module.exports = {
     // 解析任务
-    analyTask: function (id, type, role) {
+    analyTask: function (req, res, id, type, role) {
         const task = library.getTask(id);
         // 每日任务奖励解析
         if (DAIL_TYPE_LIST.includes(type)) {
@@ -15,11 +15,11 @@ module.exports = {
         }
         // 主线任务奖励解析
         if (type === TASK_TYPE_MEUN.main) {
-            task.reward = analyTaskReward(task.reward, role);
+            task.reward = analyTaskReward(req, res, task.reward);
         }
         // 副本任务奖励解析
         if (type === TASK_TYPE_MEUN.copy) {
-            task.reward = analyTaskReward(task.reward, role);
+            task.reward = analyTaskReward(req, res, task.reward);
         }
         const { grand, complete } = task;
         // 地图解析
@@ -33,7 +33,5 @@ module.exports = {
         task.taskType = type;
         task.status = 0;
         return task;
-
-
     }
 }

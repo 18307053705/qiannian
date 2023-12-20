@@ -1,6 +1,7 @@
 
 const { RoleG } = require('../../global');
 const { speedTask } = require('./speedTask');
+const taskTp = require('./taskTp');
 module.exports = {
     /**
      * 获取任务场景信息
@@ -26,7 +27,8 @@ module.exports = {
         return {
             ...task,
             speed: complete ? speedTask(req, res, task) : undefined,
-            connet
+            connet,
+            tpInfo: taskTp.getTaskTPInfo(task)
         }
 
     }

@@ -52,10 +52,9 @@ module.exports = {
         if (islevel) {
             const pet = PetG.getPetGlobal(req, res, roleInfo.role_id);
             const { attr } = AttrSystem.computeRoleAttr({ ...roleInfo, role_level }, { pet, keys: ['life_max', 'mana_max'] });
-            console.log(attr, 'attr...')
             update['life'] = attr.life_max;
             update['mana'] = attr.mana_max;
-            callback && callback(Boolean(base), update)
+            callback && callback(Boolean(base), update);
         }
         return RoleG.updataRoleGlobal(req, res, update);
 

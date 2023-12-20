@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { backGrand } from '@utils/grand';
+import { backGrand, getTaskReward } from '@utils';
 import { tpDir } from '@cgi/grand';
 import { getTaskList, doneTask } from '@cgi/taks';
 
@@ -27,8 +27,8 @@ const DeonTaskBtn = ({ task, dailList, deonTask }) => {
 
     }
     // 每日任务
-    if (dailList.includes(taskType) && speed.done) {
-        return <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div>;
+    if (dailList.includes(taskType)) {
+        return speed.done ? <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div> : null;
     }
 
     return (
@@ -80,12 +80,16 @@ export const Task = () => {
             <div>
                 {
                     taskDetail.map((itme) => {
-                        const { id, title, tips, reward = { text: [], hide: true } } = itme;
+                        const { id, title, tips, reward, taskType } = itme;
                         return (
                             <div key={id}>
                                 <div className='g_b'>{title}</div>
                                 <div>描述：{tips}</div>
-                                {!reward.hide && <div>奖励：{reward.text.join(',')}</div>}
+                                {
+                                    taskType !== 5 ? <div>奖励：{getTaskReward(reward).join(',')}</div> : ''
+                                }
+
+                                {/* {!taskType.hide && <div>奖励：{getTaskReward(reward).join(',')}</div>} */}
                                 <SpeedText task={itme} />
                                 <DeonTaskBtn task={itme} dailList={dailList} deonTask={deonTask} />
                             </div>

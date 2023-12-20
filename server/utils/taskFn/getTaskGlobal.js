@@ -1,5 +1,5 @@
 const { TaskG } = require('../../global');
-const { createTask } = require('./createTask');
+// const { createTask } = require('./createTask');
 const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     /**
@@ -40,7 +40,7 @@ module.exports = {
             return task;
         }
         // 创建副本任务
-        createTask(req, res, type, tasksId);
+        // createTask(req, res, type, tasksId);
         return TaskG.getTaskGlobal(req, res, type);
     }
 }

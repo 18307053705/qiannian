@@ -38,4 +38,11 @@ module.exports = {
         console.log('异常任务ID：', id)
         return undefined;
     },
+    getCopyTackAll: function () {
+        return JSON.parse(JSON.stringify(copy));
+    },
+    randomDailyTaskId: function () {
+        const ids = Object.keys(daily);
+        return ids[Math.floor(Math.random() * ids.length)];
+    }
 }
