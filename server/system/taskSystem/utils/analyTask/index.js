@@ -3,7 +3,7 @@ const { analyTaskReward } = require('./analyTaskReward');
 const { analyDailyReward } = require('./analyDailyReward');
 const { analyTaskComplete } = require('./analyTaskComplete');
 const { analyTaskGrand } = require('./analyTaskGrand');
-const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = require('../../meun');
+const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = require('../../enum');
 
 module.exports = {
     // 解析任务

@@ -1,9 +1,18 @@
-
-const { KnapsackG, RoleG } = require('../../global');
+const { KnapsackG, RoleG } = require('@/global');
 const { addKnapsack } = require('../knapsackFn/addKnapsack');
 const { computeRoleLevel } = require('../roleFn/computeRoleLevel');
 const { computePetLevel } = require('../petFn/computePetLevel');
-const { integralMeun } = RoleG;
+
+// 世界声望 world
+// 帮会声望 gang
+// 结义声望 intersect
+// 世界功勋 exploit
+// 经验 exp 
+// 元宝 yuanbao 
+// 银两 tael 
+// 物品 article 
+// 潜力 qian_li 
+
 module.exports = {
     /**
      * 获取任务奖励
@@ -16,35 +25,36 @@ module.exports = {
         if (!reward) {
             return;
         }
-        const { article, tael = 0, role, yuanbao = 0 } = reward;
-        if (reward) {
+        const { article, world, gang, intersect, exploit, exp = 0, yuanbao = 0, tael = 0 } = reward;
+
+        if (article) {
             const message = addKnapsack(req, res, { article });
             if (message) {
                 return message
             }
         }
         if (tael || yuanbao) {
-            const { tael: oldTael, yuanbao: oldYuanbao } = KnapsackG.getknapsackGlobal(req, res);
-            KnapsackG.updateknapsackGlobal(req, res, { tael: oldTael + tael, yuanbao: oldYuanbao + yuanbao });
+            const data = KnapsackG.getknapsackGlobal(req, res);
+            KnapsackG.updateknapsackGlobal(req, res, { tael: data.tael + tael, yuanbao: data.yuanbao + yuanbao });
         }
 
-        if (role) {
+        const integral = JSON.parse(JSON.stringify({
+            world,
+            gang,
+            intersect,
+            exploit,
+        }))
+        if (JSON.stringify(integral) !== '{}') {
             const { role_integral } = RoleG.getRoleGlobal(req, res);
-            let isIntegral = false;
-            Object.keys(role).forEach((key) => {
-                if (integralMeun.includes(key)) {
-                    isIntegral = true;
-                    role_integral[key] = role_integral[key] ? role_integral[key] + role[key] : role[key];
-                }
+            Object.keys(integral).forEach((key) => {
+                role_integral[key] = role_integral[key] ? role_integral[key] + integral[key] : integral[key];
             })
-            if (role.exp) {
-                computeRoleLevel(req, res, role.exp);
-                computePetLevel(req, res, role.exp);
-            }
-            if (isIntegral) {
-                RoleG.updataRoleGlobal(req, res, { role_integral });
-            }
+            RoleG.updataRoleGlobal(req, res, { role_integral });
         }
-
+        if (exp) {
+            computeRoleLevel(req, res, exp);
+            computePetLevel(req, res, exp);
+        }
     }
 }
+

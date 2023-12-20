@@ -44,7 +44,7 @@ module.exports = {
                 completes['freak'][id] = {
                     id,
                     n: name,
-                    s: s - 0,
+                    s: Number(s),
                     c: 0
                 }
             })

@@ -1,7 +1,3 @@
-const { knapsackTable } = require("../../table");
-const { deleteKnapsack } = require("../knapsackFn/deleteKnapsack");
-const { artLevelCompute } = require("./artLevelCompute");
-
 module.exports = {
     /**
      * 计算技能升级材料
@@ -13,17 +9,12 @@ module.exports = {
      * @returns up_art.l 升级后等级
      * @returns up_art.r 升级后转数
      */
-    getUpArtMaterial: function (req, res, art) {
-        const up_art = artLevelCompute(art.l, art.r);
-        if (!up_art) {
-            return { message: '技能已经满级，无法继续提升。' };
-        }
+    getUpArtMaterial: function (req, res, up_art, isPet) {
         const { l, r, p } = up_art;
         let materialId = undefined;
         let s = 1;
-        // 领悟技能不消耗材料
-        if (l === 0) {
-            delete up_art.p;
+        // 角色领悟技能不消耗材料
+        if (l === 1 && !isPet) {
             return {
                 up_art
             };
@@ -53,6 +44,11 @@ module.exports = {
             materialId = 1822 + r;
             s = r;
         }
+
+        if(l === 1){
+            materialId = 180
+        }
+
         // 计算消耗材料
         const { name } = knapsackTable.getArticle(materialId);
         const article = {
@@ -63,7 +59,6 @@ module.exports = {
             }
         }
         const { message, success } = deleteKnapsack(req, res, article);
-        delete up_art.p;
         return {
             message,
             up_art,
