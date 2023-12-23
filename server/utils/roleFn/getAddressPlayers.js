@@ -1,4 +1,4 @@
-const { RoleG, DailysG, ActiveQueueG } = require("../../global");
+const { DailysG, ActiveQueueG } = require("../../global");
 const { RACE_MEUN } = require("../../meun");
 
 

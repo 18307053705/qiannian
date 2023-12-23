@@ -1,4 +1,3 @@
-const RoleG = require('./roleG');
 const GrandG = require('./grandG');
 const FightG = require('./fightG');
 const KnapsackG = require('./knapsackG');
@@ -16,7 +15,6 @@ const ActiveQueueG = require('./activeQueueG');
 
 
 module.exports = {
-    RoleG,
     GrandG,
     FightG,
     KnapsackG,

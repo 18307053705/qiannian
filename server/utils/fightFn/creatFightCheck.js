@@ -1,4 +1,4 @@
-const { GrandG, FightG, RoleG } = require('../../global');
+const { GrandG, FightG } = require('@/global');
 const { getFightType } = require('./creatFight/getFightType');
 module.exports = {
     /**

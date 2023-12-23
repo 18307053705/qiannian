@@ -1,4 +1,4 @@
-const { FightG, RoleG } = require("../../../global");
+const { FightG } = require("../../../global");
 module.exports = {
     /**
      * 更新角色属性

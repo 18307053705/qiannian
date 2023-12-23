@@ -1,4 +1,3 @@
-const { RoleG } = require("../../global");
 const MOVE_MAP = {
     l: "l",
     u: "u",

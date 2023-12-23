@@ -1,4 +1,3 @@
-const { RoleG } = require("@/global");
 const { ShopSql } = require("@/mysql");
 const { knapsackTable } = require("@/table");
 

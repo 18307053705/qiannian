@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, GrandG, PetG, TaskG } = require("../../global");
+const { KnapsackG, GrandG, PetG, TaskG } = require("../../global");
 const { releaseFight } = require("../../utils/fightFn/releaseFight");
 
 const { TASK_TYPE_MEUN } = TaskG;

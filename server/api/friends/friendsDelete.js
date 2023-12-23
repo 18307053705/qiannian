@@ -1,4 +1,3 @@
-const { RoleG } = require("../../global");
 module.exports = {
     // 好友删除
     friendsDelete: async function (req, res) {

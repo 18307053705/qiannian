@@ -1,5 +1,4 @@
 const { FIGHT_MAP_Global, FIGHT_INFO_Global } = require('./config');
-const roleG = require('../roleG');
 module.exports = {
     /**
      * 设置全局战斗信息池
@@ -16,7 +15,7 @@ module.exports = {
      * @param {*} roleId 角色id,玩家之间的战斗使用
      */
     setFightGlobal: function (req, res, fightMap, fightInfo, roleId) {
-        const { role_id } = roleId ? { role_id: roleId } : roleG.getRoleGlobal(req, res);
+        const { role_id } = roleId ? { role_id: roleId } : RoleG.getRoleGlobal(req, res);
         FIGHT_MAP_Global[role_id] = JSON.parse(JSON.stringify(fightMap));
         FIGHT_INFO_Global[fightMap.id] = JSON.parse(JSON.stringify(fightInfo));
     }

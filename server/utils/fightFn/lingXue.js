@@ -1,4 +1,4 @@
-const { RoleG, FightG } = require('../../global');
+const { FightG } = require('../../global');
 module.exports = {
     /**
      * 灵血补充

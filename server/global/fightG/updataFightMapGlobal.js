@@ -1,5 +1,4 @@
 const { FIGHT_MAP_Global } = require('./config');
-const roleG = require('../roleG');
 
 
 module.exports = {
@@ -18,7 +17,7 @@ module.exports = {
      * @returns fightMap
      */
     updataFightMapGlobal: function (req, res, data, roleId) {
-        const { role_id } = roleId ? { role_id: roleId } : roleG.getRoleGlobal(req, res);
+        const { role_id } = roleId ? { role_id: roleId } : RoleG.getRoleGlobal(req, res);
         const fightMap = FIGHT_MAP_Global[role_id];
         const newFightMap = {
             ...fightMap,

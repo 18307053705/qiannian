@@ -1,4 +1,4 @@
-const { FightG, GrandG, RoleG } = require("../../../global");
+const { FightG, GrandG } = require("@/global");
 const { creatFreak } = require("./creatFreak");
 const { creatPlayer } = require("./creatPlayer");
 

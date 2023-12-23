@@ -1,6 +1,6 @@
 const schedule = require('node-schedule');
 const mysql = require("../../mysql");
-const { RoleG, ActiveQueueG } = require("../../global");
+const { ActiveQueueG } = require("../../global");
 const roleFn = require("../roleFn");
 // 十分钟时间戳
 // const time = 6000000;

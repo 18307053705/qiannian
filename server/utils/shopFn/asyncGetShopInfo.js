@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG } = require("@/global");
+const { KnapsackG } = require("@/global");
 const { knapsackTable } = require('@/table');
 const { ShopSql } = require("@/mysql");
 function dataListChang(data) {

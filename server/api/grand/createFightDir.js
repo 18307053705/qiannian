@@ -1,4 +1,4 @@
-const { GrandG, ErrorG, FightG, RoleG } = require('../../global');
+const { GrandG,  FightG } = require('../../global');
 
 module.exports = {
     /**

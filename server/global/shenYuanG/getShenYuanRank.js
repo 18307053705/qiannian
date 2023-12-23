@@ -1,6 +1,5 @@
 
 const { SHNEYUAN_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 获取深渊信息排名信息
@@ -10,7 +9,7 @@ module.exports = {
      * @returns role_id 自身id
      */
     getShenYuanRank: function (req, res) {
-        const { role_id, role_level } = getRoleGlobal(req, res);
+        const { role_id, role_level } = RoleG.getRoleGlobal(req, res);
         const list = Object.values(SHNEYUAN_Global);
         return {
             list,

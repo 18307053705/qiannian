@@ -1,6 +1,4 @@
 const { GRAND_ELE_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
-
 
 module.exports = {
     /**
@@ -13,7 +11,7 @@ module.exports = {
         if (!article) {
             return;
         }
-        const { address } = getRoleGlobal(req, res);
+        const { address } = RoleG.getRoleGlobal(req, res);
         const gandEle = GRAND_ELE_Global[address];
         if (!gandEle) {
             GRAND_ELE_Global[address] = {};

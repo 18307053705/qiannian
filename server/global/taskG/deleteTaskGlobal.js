@@ -1,4 +1,3 @@
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 const { TASKS_Global } = require('./config');
 
 module.exports = {
@@ -10,7 +9,7 @@ module.exports = {
      * @param {*} id 删除id
      */
     deleteTaskGlobal: function (req, res, type, id) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         const tasks = TASKS_Global[role_id];
         if (!tasks || !tasks[type] || !tasks[type][id]) {
           

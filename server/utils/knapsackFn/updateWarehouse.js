@@ -1,5 +1,5 @@
 
-const { RoleG, KnapsackG } = require("../../global");
+const { KnapsackG } = require("../../global");
 
 module.exports = {
     /**

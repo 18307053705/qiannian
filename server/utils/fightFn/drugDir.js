@@ -1,4 +1,4 @@
-const { FightG, RoleG, KnapsackG } = require("../../global");
+const { FightG, KnapsackG } = require("../../global");
 const { knapsackTable } = require("../../table");
 const deleteKnapsack = require("../knapsackFn/deleteKnapsack");
 

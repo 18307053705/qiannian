@@ -1,5 +1,4 @@
 const { GrandTable, ElementTable } = require("../../table");
-const { updataRoleGlobal } = require("../../global/roleG/updataRoleGlobal");
 const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
 const { getRankTaskEle } = require("../../global/rankTaskG/getRankTaskEle");
 const { getAcivityEle } = require("../../global/activityG/getAcivityEle");
@@ -57,7 +56,7 @@ module.exports = {
     getGrandInfo: function (req, res, address, players) {
         const gGrandInfo = GrandTable.getGrandInfo(address);
         if (!gGrandInfo) {
-            updataRoleGlobal(req, res, { address: "40000,0,0" })
+            RoleG.updataRoleGlobal(req, res, { address: "40000,0,0" })
         }
         const { x, y, grand } = gGrandInfo;
         const { name, data } = grand;

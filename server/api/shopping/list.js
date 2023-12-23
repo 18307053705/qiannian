@@ -1,4 +1,3 @@
-const { RoleG } = require("@/global");
 const { ShopSql } = require("@/mysql");
 
 module.exports = {

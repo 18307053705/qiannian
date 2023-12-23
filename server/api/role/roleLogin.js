@@ -1,4 +1,3 @@
-const { RoleG, KnapsackG, SocializeG, PetG, DailysG, ErrorG } = require('../../global');
 const { roleFn } = require('../../utils');
 const { roleSql, knapsackSql } = require('@/mysql')
 module.exports = {

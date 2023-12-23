@@ -1,5 +1,5 @@
 const { TaskSystem } = require('@/system');
-const { RoleG, TaskG } = require('../../global');
+const { TaskG } = require('../../global');
 module.exports = {
     /**
      * 初始化任务池

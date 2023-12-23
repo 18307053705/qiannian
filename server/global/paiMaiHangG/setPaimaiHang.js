@@ -1,6 +1,5 @@
 
 const { PAI_MAI_HANG_Global, OUT_TIME } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 创建全局拍卖物品
@@ -16,7 +15,7 @@ module.exports = {
                 message: '拍卖行已达最大拍卖数量。'
             }
         }
-        const { role_id, role_name } = getRoleGlobal(req, res);
+        const { role_id, role_name } = RoleG.getRoleGlobal(req, res);
         const unx = new Date() * 1;
         const id_p = `${unx}_${info.id}_${role_id}`;
         const data = {

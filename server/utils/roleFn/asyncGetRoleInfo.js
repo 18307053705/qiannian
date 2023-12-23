@@ -1,5 +1,3 @@
-const { RoleG } = require("../../global");
-const { ROLE_JSON_KEYS } = require("../../global/roleG");
 const roleSql = require("@/mysql/roleSql");
 module.exports = {
     /**
@@ -20,6 +18,7 @@ module.exports = {
         const results = roleSql.asyncGetRoleInfo(role_id);
         if (results[0]) {
             const role = {}
+            const { ROLE_JSON_KEYS } = RoleG;
             Object.keys(results[0]).forEach((key) => {
                 role[key] = ROLE_JSON_KEYS.includes(key) ? JSON.parse(results[0][key]) : results[0][key]
             })

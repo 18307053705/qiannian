@@ -1,6 +1,5 @@
 
 const { chatGlobal } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 获取队伍聊天
@@ -11,7 +10,7 @@ module.exports = {
      * @returns read:[id] 已读id
      */
     getRanks: function (req, res, isRead) {
-        const { socialize_pool, role_id } = getRoleGlobal(req, res);
+        const { socialize_pool, role_id } = RoleG.getRoleGlobal(req, res);
         const { ranks } = socialize_pool;
         if (!ranks) {
             return {

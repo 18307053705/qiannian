@@ -1,4 +1,4 @@
-const { FightG, RoleG } = require('../../global');
+const { FightG } = require('../../global');
 const { ElementTable } = require('../../table');
 const { setPet } = require('../petFn/setPet');
 const { FIGHT_TYPE } = FightG;

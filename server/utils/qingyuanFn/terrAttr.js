@@ -1,5 +1,4 @@
 const { getRoleInfo, updataRoleInfo } = require('../roleFn');
-const { RoleG } = require("../../global");
 const ADD_ATTR = {
     life_max: 100,
     life: 100,

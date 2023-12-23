@@ -1,4 +1,4 @@
-const { KnapsackG, ErrorG, RoleG } = require('../../global');
+const { KnapsackG, ErrorG } = require('../../global');
 const { knapsackTable } = require('../../table');
 const { knapsackFn } = require('../../utils');
 const materialIdMap = {

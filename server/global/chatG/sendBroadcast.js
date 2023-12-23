@@ -1,6 +1,5 @@
 
 const { chatGlobal } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 发送广播
@@ -13,7 +12,7 @@ module.exports = {
     sendbroadcast: function (req, res, text, name) {
         let role_name = name;
         if (!role_name) {
-            const role = getRoleGlobal(req, res);
+            const role =RoleG.getRoleGlobal(req, res);
             role_name = role.role_name;
         }
         if (chatGlobal['broadcast'].length >= 200) {

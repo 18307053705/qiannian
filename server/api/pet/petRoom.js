@@ -1,4 +1,3 @@
-const { RoleG } = require('../../global');
 const { knapsackFn } = require('../../utils');
 
 module.exports = {

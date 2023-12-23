@@ -1,6 +1,6 @@
 
 const { knapsackTable } = require('../../table');
-const { ErrorG, RoleG, KnapsackG } = require('../../global');
+const { KnapsackG } = require('../../global');
 const { knapsackFn } = require('../../utils');
 
 

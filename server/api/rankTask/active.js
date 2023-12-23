@@ -1,5 +1,5 @@
 
-const { GrandG, rankTaskG, RoleG } = require('../../global');
+const { GrandG, rankTaskG } = require('../../global');
 const { getReward } = require('./fun/getReward');
 const { getTask } = require('./fun/getTask');
 module.exports = {

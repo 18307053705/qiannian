@@ -1,5 +1,5 @@
-const { RoleG, KnapsackG, ChatG } = require('../../global');
-const { EffectTable } = require('../../table');
+const { KnapsackG, ChatG } = require('@/global');
+const { EffectTable } = require('@/table');
 module.exports = {
     /**
      * 搏一搏

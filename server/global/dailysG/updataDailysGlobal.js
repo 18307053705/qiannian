@@ -1,5 +1,4 @@
 const { DAILYS_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 module.exports = {
     /**
@@ -10,7 +9,7 @@ module.exports = {
      * @param {*} roleId 可选参数
      */
     updataDailysGlobal: function (req, res, data, roleId) {
-        const { role_id } = roleId ? { role_id: roleId } : getRoleGlobal(req, res);
+        const { role_id } = roleId ? { role_id: roleId } : RoleG.getRoleGlobal(req, res);
         const dailys = {
             ...DAILYS_Global[role_id],
             ...data

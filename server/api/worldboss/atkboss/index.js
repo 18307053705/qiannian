@@ -1,4 +1,4 @@
-const { RoleG, ActivityG, ActiveQueueG } = require("@/global");
+const { ActivityG, ActiveQueueG } = require("@/global");
 const { roleFn, fightFn } = require("@/utils");
 const { shedRandom } = require("./shedRandom");
 

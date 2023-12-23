@@ -1,4 +1,3 @@
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 const { TASKS_Global } = require('./config');
 
 module.exports = {
@@ -34,7 +33,7 @@ module.exports = {
      * @returns task.nextId 下一个任务id
      */
     getTaskGlobal: function (req, res, type) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         const tasks = TASKS_Global[role_id];
         if (type === 'all' && tasks) {
             return JSON.parse(JSON.stringify(tasks));

@@ -1,5 +1,3 @@
-const { RoleG } = require('../../global');
-
 const BUFF_MEUN = {
     life_max: '生命上限',
     mana_max: '法力上限',

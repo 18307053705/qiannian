@@ -1,4 +1,4 @@
-const { KnapsackG, RoleG } = require("../../global");
+const { KnapsackG } = require("../../global");
 const { dataListChang } = require("../../global/knapsackG/dataListChang");
 const { warehouseSql, knapsackSql } = require("@/mysql");
 module.exports = {

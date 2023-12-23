@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, PetG, SocializeG, DailysG, ShenYuanG } = require("../../global");
+const { KnapsackG, PetG, SocializeG, DailysG, ShenYuanG } = require("../../global");
 const { roleExit } = require("./roleExit");
 const { initTask } = require("../taskFn/initTask");
 module.exports = {

@@ -1,4 +1,4 @@
-const { ErrorG, RoleG, KnapsackG } = require('../../global');
+const { KnapsackG } = require('../../global');
 const { ruleFn } = require('../../utils');
 
 const TYPE_MEUN_NAME = {

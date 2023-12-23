@@ -1,6 +1,5 @@
 
 const { SHNEYUAN_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 获取深渊信息
@@ -16,7 +15,7 @@ module.exports = {
      * @returns shenyuan.career 玩家职业
      */
     getShenYuan: function (req, res, roleId) {
-        const { role_id } = roleId ? { role_id: roleId } : getRoleGlobal(req, res);
+        const { role_id } = roleId ? { role_id: roleId } : RoleG.getRoleGlobal(req, res);
         const shenyuan = SHNEYUAN_Global[role_id];
         return shenyuan ? JSON.parse(JSON.stringify(shenyuan)) : undefined;
     }

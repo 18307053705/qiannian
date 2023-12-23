@@ -1,6 +1,5 @@
-const { ErrorG, RoleG } = require('../../global');
-const { knapsackTable, EffectTable } = require('../../table');
-const { knapsackFn } = require('../../utils');
+const { knapsackTable, EffectTable } = require('@/table');
+const { knapsackFn } = require('@/utils');
 
 
 const materialIds = [148, 149, 1410, 1411, 1412, 1413, 1414];

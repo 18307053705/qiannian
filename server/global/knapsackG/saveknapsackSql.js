@@ -1,5 +1,4 @@
 const { KNAPSACK_Global, EQUIP_INIT_EXT } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 const { isEquip } = require('@/table/knapsack/article');
 
 function saveSqlChang(data) {
@@ -25,7 +24,7 @@ module.exports = {
      * @param {*} role_id 角色Id,可选
      */
     saveknapsackSql: async function (req, res, roleId) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         const { updateKeys, ...knapsack } = KNAPSACK_Global[roleId || role_id];
         const data = [];
         [...new Set(updateKeys)].forEach((key) => {

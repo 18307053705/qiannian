@@ -1,5 +1,5 @@
 
-const { GrandG, TaskG, RoleG } = require('../../global');
+const { GrandG, TaskG } = require('../../global');
 const { taskFn } = require('../../utils');
 module.exports = {
     /**

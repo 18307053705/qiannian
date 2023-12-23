@@ -1,6 +1,5 @@
 
 const { chatGlobal } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 发送帮会信息
@@ -11,7 +10,7 @@ module.exports = {
      * @returns gang.read:[id] 已读id
      */
     sendGang: function (req, res, text) {
-        const { socialize_pool, role_name, role_id } = getRoleGlobal(req, res);
+        const { socialize_pool, role_name, role_id } = RoleG.getRoleGlobal(req, res);
         const { gang } = socialize_pool;
         if (!gang) {
             return {

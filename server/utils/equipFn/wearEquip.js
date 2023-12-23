@@ -1,4 +1,4 @@
-const { RoleG } = require("../../global");
+
 const { knapsackTable } = require("../../table");
 const { computeEquipAttr } = require("./computeEquipAttr");
 const { computeSuitAttr } = require("./computeSuitAttr");

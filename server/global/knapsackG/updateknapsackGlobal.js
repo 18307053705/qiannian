@@ -1,5 +1,4 @@
 const { KNAPSACK_Global } = require('./config');
-const roleG = require('../roleG');
 
 module.exports = {
     /**
@@ -11,7 +10,7 @@ module.exports = {
      * @returns {*} knapsack:{data:[],yuanbao,tael}
      */
     updateknapsackGlobal: function (req, res, updata, roleId) {
-        const { role_id } = roleG.getRoleGlobal(req, res, roleId);
+        const { role_id } = RoleG.getRoleGlobal(req, res, roleId);
         const knapsack = KNAPSACK_Global[roleId || role_id];
         let updateKeys = Object.keys(updata);
         if (knapsack) {

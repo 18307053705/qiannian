@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, DailysG } = require("../../global");
+const {  KnapsackG, DailysG } = require("../../global");
 const { knapsackTable } = require("../../table");
 const { knapsackFn } = require('../../utils');
 

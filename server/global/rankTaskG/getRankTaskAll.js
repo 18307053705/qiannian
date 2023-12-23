@@ -1,7 +1,6 @@
 
 
 const { RANK_TASK_Global, RANK_TASK_TYPE } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 module.exports = {
     /**
@@ -10,7 +9,7 @@ module.exports = {
     * @return {qingyuan,xiulianfang}
     */
     getRankTaskAll: function (req, res) {
-        const { qingyuan, socialize_pool } = getRoleGlobal(req, res);
+        const { qingyuan, socialize_pool } = RoleG.getRoleGlobal(req, res);
         const { id: qyID } = qingyuan.d;
         const { id: gangID } = socialize_pool.gang || {};
         return {

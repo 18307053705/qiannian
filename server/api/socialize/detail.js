@@ -1,4 +1,4 @@
-const { ErrorG, RoleG, SocializeG } = require('../../global');
+const { SocializeG } = require('../../global');
 const { socializeFn } = require('../../utils');
 const TYPE_MEUN_NAME = {
     1: 'gang',

@@ -1,4 +1,4 @@
-const { ActivityG, RoleG, KnapsackG, ActiveQueueG } = require("../../global");
+const { ActivityG, KnapsackG, ActiveQueueG } = require("../../global");
 
 function getReward(index) {
     // 排名第一

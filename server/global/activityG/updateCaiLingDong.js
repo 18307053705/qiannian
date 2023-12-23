@@ -1,5 +1,4 @@
 const { CAI_LIN_DONG } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 module.exports = {
     /**
@@ -10,7 +9,7 @@ module.exports = {
      * @returns 
      */
     updateCaiLingDong: function (req, res, { integral, ...data }) {
-        const { socialize_pool } = getRoleGlobal(req, res);
+        const { socialize_pool } = RoleG.getRoleGlobal(req, res);
         const { ranks } = socialize_pool;
         if (!ranks) {
             return;

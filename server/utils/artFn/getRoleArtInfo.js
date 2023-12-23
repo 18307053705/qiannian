@@ -1,5 +1,4 @@
 
-const { RoleG } = require('../../global');
 module.exports = {
     /**
      * 获取角色技能信息

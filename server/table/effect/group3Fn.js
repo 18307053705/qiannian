@@ -1,5 +1,5 @@
-const { getRoleGlobal } = require('@/global/roleG/getRoleGlobal');
-const { computeUpExp } = require('@/utils/roleFn/computeUpExp');
+// const { getRoleGlobal } = require('@/global/roleG/getRoleGlobal');
+// const { computeUpExp } = require('@/utils/roleFn/computeUpExp');
 // const { computeRoleLevel } = require('@/utils/roleFn/computeRoleLevel');
 
 // const groups = {

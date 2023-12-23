@@ -1,4 +1,4 @@
-const { RoleG, PetG } = require("../../global");
+const { PetG } = require("../../global");
 const { AttributeTable, EffectTable } = require("../../table");
 const { computePetAttr } = require("../petFn/computePetAttr");
 module.exports = {

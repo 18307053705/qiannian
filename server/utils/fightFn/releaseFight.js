@@ -1,4 +1,4 @@
-const { FightG, RoleG } = require("../../global");
+const { FightG } = require("../../global");
 const { updateRoleAttr } = require('./getFightResults/updateRoleAttr');
 module.exports = {
     /**

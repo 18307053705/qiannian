@@ -1,4 +1,4 @@
-const { ChatG, RoleG } = require('../../global');
+const { ChatG } = require('../../global');
 module.exports = {
     /**
      * 获取未读信息

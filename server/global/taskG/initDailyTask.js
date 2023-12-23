@@ -1,5 +1,4 @@
 const { TaskSystem } = require('@/system');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 const { TASK_TYPE_MEUN } = TaskSystem;
 
@@ -10,7 +9,7 @@ module.exports = {
      * @param {*} res 
      */
     initDailyTask: function (req, res) {
-        const { role_level, socialize_pool } = getRoleGlobal(req, res);
+        const { role_level, socialize_pool } = RoleG.getRoleGlobal(req, res);
         let exploitNum = -1;
         let taskNum = 8;
         if (role_level > 65) {

@@ -1,4 +1,4 @@
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
+
 const { TASKS_Global } = require('./config');
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
      * @param {*} taks {id:{taks}}
      */
     updataTaskGlobal: function (req, res, type, taks) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         const tasks = TASKS_Global[role_id] || {};
         if (!tasks[type]) {
             tasks[type] = {};

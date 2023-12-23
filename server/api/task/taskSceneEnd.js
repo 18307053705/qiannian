@@ -1,7 +1,7 @@
 
 
 const { TaskSystem } = require('@/system');
-const { GrandG, TaskG, RoleG, DailysG } = require('@/global');
+const { GrandG, TaskG, DailysG } = require('@/global');
 const { taskFn, grandFn, knapsackFn } = require('@/utils');
 const { TASK_TYPE, TASK_TYPE_MEUN } = TaskG;
 

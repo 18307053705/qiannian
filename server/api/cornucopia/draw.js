@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, ChatG } = require('../../global');
+const { KnapsackG, ChatG } = require('../../global');
 const { cornuconpiaFn, knapsackFn } = require('../../utils');
 module.exports = {
     /**

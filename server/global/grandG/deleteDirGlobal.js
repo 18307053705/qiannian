@@ -1,5 +1,4 @@
 const { GRAND_Global } = require('./config');
-const roleG = require('../roleG');
 
 
 module.exports = {
@@ -9,7 +8,7 @@ module.exports = {
      * @param {*} res 
      */
     deleteDirGlobal: function (req, res) {
-        const { role_id } = roleG.getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         delete GRAND_Global[role_id];
     }
 

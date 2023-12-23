@@ -1,7 +1,6 @@
 
 const { knapsackFn, roleFn, qingyuanFn } = require('../../../utils');
 const { knapsackTable } = require('../../../table');
-const { RoleG } = require('../../../global');
 module.exports = {
     /**
   * 获取任务奖励

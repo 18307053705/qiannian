@@ -1,4 +1,4 @@
-const { ErrorG, RoleG, KnapsackG } = require("@/global");
+const {  KnapsackG } = require("@/global");
 const { ShopSql } = require("@/mysql");
 
 module.exports = {

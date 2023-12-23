@@ -1,5 +1,4 @@
 const { WORLD_BOSS } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 module.exports = {
     /**
@@ -10,7 +9,7 @@ module.exports = {
      * @returns 
      */
     updateWorldBoss: function (req, res, { dps, ...data }) {
-        const { role_id, role_name } = getRoleGlobal(req, res);
+        const { role_id, role_name } =RoleG.getRoleGlobal(req, res);
         const { rank } = WORLD_BOSS;
         if (dps) {
             const { v } = rank[role_id] || { v: 0 };

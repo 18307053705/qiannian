@@ -1,6 +1,5 @@
 
 const { chatGlobal } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 发送世界频道
@@ -9,7 +8,7 @@ module.exports = {
      * @param {*} text 发送的内容
      */
     sendWorld: function (req, res, text) {
-        const { role_name } = getRoleGlobal(req, res);
+        const { role_name } = RoleG.getRoleGlobal(req, res);
         if (chatGlobal['world'].length >= 200) {
             chatGlobal['world'].splic(0, 1);
         }

@@ -1,5 +1,5 @@
-const { ErrorG, RoleG, DailysG, KnapsackG } = require('../../global');
-const { EffectTable } = require('../../table');
+const { DailysG, KnapsackG } = require('@/global');
+const { EffectTable } = require('@/table');
 const INTEGRAL_MEUN = {
     1: {
         treasureKey: 'fw',

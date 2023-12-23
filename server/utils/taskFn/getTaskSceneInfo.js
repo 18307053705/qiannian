@@ -1,5 +1,4 @@
 
-const { RoleG } = require('../../global');
 const { speedTask } = require('./speedTask');
 const taskTp = require('./taskTp');
 module.exports = {

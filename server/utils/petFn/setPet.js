@@ -1,4 +1,3 @@
-const { RoleG } = require('../../global');
 const { AttributeTable } = require('../../table');
 const { getPetArt } = require('./getPetArt');
 

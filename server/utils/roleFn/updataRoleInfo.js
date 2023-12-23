@@ -1,5 +1,3 @@
-const { RoleG } = require("../../global");
-const { ROLE_JSON_KEYS } = require("../../global/roleG");
 module.exports = {
     /**
      * 更新角色信息
@@ -11,6 +9,7 @@ module.exports = {
      * 
      */
     updataRoleInfo: async function (req, res, data, role_id) {
+        const { ROLE_JSON_KEYS } = RoleG;
         // 判断角色是否在线
         if (RoleG.getRoleGlobal(req, res, { role_id })) {
             RoleG.updataRoleGlobal(req, res, data, { role_id })

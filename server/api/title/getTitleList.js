@@ -1,4 +1,4 @@
-const { RoleG } = require("../../global");
+
 const { TitleTable } = require('../../table');
 
 module.exports = {

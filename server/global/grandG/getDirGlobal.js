@@ -1,5 +1,4 @@
 const { GRAND_Global } = require('./config');
-const roleG = require('../roleG');
 
 // 怪物模版-> table-> ELEMENT_2.怪物模型
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
      * @returns {*} currentDir:当前指令信息,如战斗对手信息,任务信息等
      */
     getDirGlobal: function (req, res) {
-        const { role_id } = roleG.getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         return GRAND_Global[role_id] || {}
     }
 

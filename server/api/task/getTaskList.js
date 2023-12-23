@@ -1,5 +1,5 @@
 const { TaskSystem } = require('@/system');
-const { RoleG, TaskG, DailysG } = require('@/global');
+const { TaskG, DailysG } = require('@/global');
 const { taskFn } = require('@/utils');
 const { DAIL_TYPE_LIST, TASK_TYPE_TEXT_MEUN, TASK_TYPE_MEUN } = TaskSystem;
 module.exports = {

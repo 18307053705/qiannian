@@ -1,4 +1,4 @@
-const { ActivityG, RoleG } = require("../../global");
+const { ActivityG } = require("../../global");
 module.exports = {
     /**
      * 获取排名信息

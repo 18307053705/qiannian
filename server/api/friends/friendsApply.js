@@ -1,4 +1,4 @@
-const { RoleG, ErrorG } = require("../../global");
+const { ErrorG } = require("../../global");
 const { roleFn } = require("../../utils");
 module.exports = {
     // 好友申请

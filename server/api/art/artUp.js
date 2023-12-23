@@ -1,5 +1,5 @@
 const ArtSystem = require("@/system/ArtSystem");
-const { RoleG, ErrorG } = require("../../global");
+const { ErrorG } = require("../../global");
 const { artFn } = require("../../utils");
 module.exports = {
     /**

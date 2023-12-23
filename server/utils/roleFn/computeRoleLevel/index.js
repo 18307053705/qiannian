@@ -1,4 +1,4 @@
-const { RoleG, PetG } = require("@/global");
+const { PetG } = require("@/global");
 // const { AttributeTable, RealmTable } = require("@/table");
 const { computeUpExp } = require("../computeUpExp");
 // const { computeRoleAttr } = require("../computeRoleAttr");

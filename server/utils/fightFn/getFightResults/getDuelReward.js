@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { RoleG, DailysG, FightG } = require('../../../global');
+const { DailysG, FightG } = require('@/global');
 module.exports = {
     /**
      * 获取切磋奖励

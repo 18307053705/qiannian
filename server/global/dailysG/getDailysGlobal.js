@@ -1,5 +1,4 @@
 const { DAILYS_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 module.exports = {
     /**
@@ -20,7 +19,7 @@ module.exports = {
 
      */
     getDailysGlobal: function (req, res, { roleId } = {}) {
-        const { role_id } = roleId ? { role_id: roleId } : getRoleGlobal(req, res);
+        const { role_id } = roleId ? { role_id: roleId } :RoleG.getRoleGlobal(req, res);
         return DAILYS_Global[role_id] ? JSON.parse(JSON.stringify(DAILYS_Global[role_id])) : undefined;
     }
 }

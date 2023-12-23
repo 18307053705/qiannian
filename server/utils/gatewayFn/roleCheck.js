@@ -1,4 +1,3 @@
-const { RoleG, ErrorG } = require("../../global");
 // 无需角色验证的请求
 const roleApiList = [
     "/api/user/login",

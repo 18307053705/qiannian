@@ -1,5 +1,4 @@
 const { petGlobal, PET_JSON_KEYS } = require('./config')
-const { getRoleGlobal } = require('../roleG/getRoleGlobal')
 
 module.exports = {
     /**
@@ -8,7 +7,7 @@ module.exports = {
      * @param {*} res 
      */
     setPetGlobal: async function (req, res) {
-        const { role_id, pet_pool } = getRoleGlobal(req, res);
+        const { role_id, pet_pool } = RoleG.getRoleGlobal(req, res);
         let pet = undefined;
         if (pet_pool.c.id) {
             const { results } = await res.asyncQuery(`select * from  pet where id=${pet_pool.c.id}`);

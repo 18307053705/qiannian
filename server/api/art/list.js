@@ -1,5 +1,4 @@
 const { ArtTable } = require("../../table");
-const { RoleG } = require("../../global");
 module.exports = {
     /**
      * 计算技能属性

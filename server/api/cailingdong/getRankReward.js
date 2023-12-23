@@ -1,4 +1,4 @@
-const { ActivityG, RoleG, KnapsackG, ActiveQueueG } = require("../../global");
+const { ActivityG, KnapsackG, ActiveQueueG } = require("../../global");
 
 module.exports = {
     /**

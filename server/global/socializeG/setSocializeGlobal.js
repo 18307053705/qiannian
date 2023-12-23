@@ -1,5 +1,4 @@
 const { SOCIALIZE_Global } = require('./config');
-const roleG = require('../roleG');
 
 
 module.exports = {
@@ -9,7 +8,7 @@ module.exports = {
      * @param {*} res
      */
     setSocializeGlobal: function (req, res) {
-        const { role_id, role_level, socialize_pool } = roleG.getRoleGlobal(req, res);
+        const { role_id, role_level, socialize_pool } = RoleG.getRoleGlobal(req, res);
         Object.keys(socialize_pool).forEach(key => {
             let keyName = `${socialize_pool[key].id}_${key}`;
             const socialize = SOCIALIZE_Global[keyName];

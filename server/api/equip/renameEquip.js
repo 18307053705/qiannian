@@ -1,4 +1,3 @@
-const { ErrorG, RoleG } = require('../../global');
 const { ruleFn } = require('../../utils');
 module.exports = {
     /**

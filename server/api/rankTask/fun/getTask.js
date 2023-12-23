@@ -1,4 +1,4 @@
-const { RoleG, rankTaskG } = require('../../../global');
+const {  rankTaskG } = require('../../../global');
 module.exports = {
     /**
   * 领取任务

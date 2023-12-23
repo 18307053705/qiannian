@@ -1,5 +1,4 @@
 const { ElementTable } = require("../../table");
-const { RoleG } = require("../../global");
 
 module.exports = {
     /**

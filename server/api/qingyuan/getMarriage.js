@@ -1,5 +1,5 @@
 const { roleFn, qingyuanFn } = require('../../utils');
-const { DailysG, RoleG } = require("../../global");
+const { DailysG } = require("../../global");
 module.exports = {
     /**
      * 获取姻缘信息

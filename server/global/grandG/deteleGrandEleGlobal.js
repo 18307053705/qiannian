@@ -1,7 +1,4 @@
 const { GRAND_ELE_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
-
-
 module.exports = {
     /**
      * 删除地图物品元素
@@ -10,7 +7,7 @@ module.exports = {
      * @param {*} in_x 删除的下标
      */
     deteleGrandEleGlobal: function (req, res, in_x) {
-        const { address } = getRoleGlobal(req, res);
+        const { address } = RoleG.getRoleGlobal(req, res);
         const gandEle = GRAND_ELE_Global[address];
         const { articleEle = [] } = gandEle;
         articleEle.splice(in_x,1)

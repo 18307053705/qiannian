@@ -1,4 +1,4 @@
-const { RoleG, GrandG } = require('@/global');
+const { GrandG } = require('@/global');
 const { knapsackTable, ElementTable } = require('@/table');
 const { knapsackFn } = require('@/utils');
 const { randomGather } = require('./randomGather');

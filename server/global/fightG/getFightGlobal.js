@@ -1,6 +1,5 @@
 const { getFightInfo } = require("./getFightInfo");
 const { getFightMap } = require("./getFightMap");
-const roleG = require("../roleG");
 
 module.exports = {
   /**
@@ -27,7 +26,7 @@ module.exports = {
    * @returns fightInfo.template 敌人模版{id: (role_id, 怪物id), num: 对方数量}
    */
   getFightGlobal: function (req, res, roleId) {
-    const role = roleId ? { role_id: roleId } : roleG.getRoleGlobal(req, res);
+    const role = roleId ? { role_id: roleId } : RoleG.getRoleGlobal(req, res);
     if (role) {
       const fightMap = getFightMap(role.role_id);
       return fightMap

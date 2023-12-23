@@ -1,4 +1,4 @@
-const { ErrorG, RoleG, SocializeG } = require('../../global');
+const { SocializeG } = require('../../global');
 const { socializeFn, roleFn } = require('../../utils');
 
 const TYPE_MEUN_NAME = {
@@ -48,7 +48,7 @@ module.exports = {
                 }
                 const index = compose.findIndex(({ id }) => id === role_id);
                 const { level: tLevel } = compose[index];
-               
+
                 if (level >= tLevel) {
                     res.send({
                         code: 0,

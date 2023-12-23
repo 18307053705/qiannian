@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const gatewayFn = require("./utils/gatewayFn");
 const { scheduleCronstyle } = require("./utils/scheduleCronstyleFn");
 const { customRes } = require("./useFun/customRes");
-const RoleG = require("@/global/roleG");
+require("@/globals");
 
 // 定时任务
 scheduleCronstyle()

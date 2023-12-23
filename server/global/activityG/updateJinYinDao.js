@@ -1,6 +1,4 @@
 const { JIN_YIN_DAO } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
-
 module.exports = {
     /**
      * 
@@ -10,7 +8,7 @@ module.exports = {
      * @returns 
      */
     updateJinYinDao: function (req, res, { integral, ...data }) {
-        const { socialize_pool } = getRoleGlobal(req, res);
+        const { socialize_pool } = RoleG.getRoleGlobal(req, res);
         const { gang } = socialize_pool;
         if (!gang) {
             return;

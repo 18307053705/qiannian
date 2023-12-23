@@ -1,6 +1,5 @@
 
 const { chatGlobal } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 发送私聊信息信息
@@ -12,7 +11,7 @@ module.exports = {
      * @returns private.read: true 是否已读
      */
     sendPrivate: function (req, res, text, t_role) {
-        const { role_name, role_id } = getRoleGlobal(req, res);
+        const { role_name, role_id } = RoleG.getRoleGlobal(req, res);
         let private = chatGlobal['private'][t_role];
         if (!private) {
             private = {

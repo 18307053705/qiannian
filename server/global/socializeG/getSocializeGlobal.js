@@ -1,5 +1,4 @@
 const { SOCIALIZE_Global } = require('./config');
-const roleG = require('../roleG');
 
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
      * @returns num  在线人数
      */
     getSocializeGlobal: function (req, res, key) {
-        const { socialize_pool } = roleG.getRoleGlobal(req, res);
+        const { socialize_pool } = RoleG.getRoleGlobal(req, res);
         // 角色对应势力信息
         const sociInfo = socialize_pool[key];
         if (!sociInfo) {

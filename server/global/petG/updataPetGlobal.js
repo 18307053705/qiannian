@@ -1,5 +1,4 @@
 const { petGlobal } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 
 module.exports = {
     /**
@@ -24,7 +23,7 @@ module.exports = {
      * @returns petInfo.exp 宠物经验
      */
     updataPetGlobal: function (req, res,data) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         const pet = petGlobal[role_id];
         let updateKeys = Object.keys(data);
         if (pet) {

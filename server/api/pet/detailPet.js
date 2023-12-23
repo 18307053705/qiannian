@@ -1,5 +1,5 @@
 const { petFn } = require('../../utils');
-const { PetG, ErrorG, RoleG } = require("../../global");
+const { PetG } = require("../../global");
 const { ArtTable } = require("../../table");
 module.exports = {
     /**

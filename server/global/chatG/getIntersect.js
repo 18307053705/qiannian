@@ -1,6 +1,5 @@
 
 const { chatGlobal } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 module.exports = {
     /**
      * 获取结义聊天
@@ -11,7 +10,7 @@ module.exports = {
      * @returns read:[id] 已读id
      */
     getIntersect: function (req, res, isRead) {
-        const { socialize_pool, role_id } = getRoleGlobal(req, res);
+        const { socialize_pool, role_id } = RoleG.getRoleGlobal(req, res);
         const { intersect } = socialize_pool;
         if (!intersect) {
             return {

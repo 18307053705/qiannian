@@ -1,5 +1,4 @@
 const { GRAND_Global } = require('./config');
-const roleG = require('../roleG');
 
 
 module.exports = {
@@ -15,7 +14,7 @@ module.exports = {
      * @param {*} data.roleId: 设置目标的指令信息
      */
     setDirGlobal: function (req, res, dirInfo, { roleId } = {}) {
-        const { role_id } = roleG.getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         GRAND_Global[roleId || role_id] = dirInfo
     }
 

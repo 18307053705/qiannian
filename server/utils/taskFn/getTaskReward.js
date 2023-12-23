@@ -1,4 +1,4 @@
-const { KnapsackG, RoleG } = require('@/global');
+const { KnapsackG } = require('@/global');
 const { addKnapsack } = require('../knapsackFn/addKnapsack');
 const { computeRoleLevel } = require('../roleFn/computeRoleLevel');
 const { computePetLevel } = require('../petFn/computePetLevel');

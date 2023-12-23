@@ -1,5 +1,3 @@
-const { RoleG } = require("../../global");
-
 module.exports = {
     /**
      * 获取情缘信息

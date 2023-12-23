@@ -1,4 +1,3 @@
-const { ErrorG, RoleG } = require('../../global');
 const { socializeFn } = require('../../utils');
 const TYPE_MEUN = {
     1: '帮会',

@@ -1,4 +1,4 @@
-const { ShenYuanG, GrandG, RoleG } = require('../../global');
+const { ShenYuanG, GrandG } = require('@/global');
 module.exports = {
     /**
      * @param roleId 传代表提对方闯深渊

@@ -1,4 +1,4 @@
-const { KnapsackG, RoleG } = require('../../global');
+const { KnapsackG } = require('@/global');
 
 module.exports = {
     /**

@@ -1,5 +1,4 @@
 const { ACTIVE_QUEUE } = require("../utils/scheduleCronstyleFn");
-const RoleG = require("../global/roleG");
 const mysql = require("../mysql");
 
 module.exports = {

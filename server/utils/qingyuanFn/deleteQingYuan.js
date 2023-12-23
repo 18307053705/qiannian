@@ -1,5 +1,3 @@
-const { RoleG } = require("../../global");
-
 module.exports = {
     /**
      * 删除情缘

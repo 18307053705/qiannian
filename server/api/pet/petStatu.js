@@ -1,4 +1,4 @@
-const { ErrorG, RoleG, PetG } = require("../../global");
+const {  PetG } = require("../../global");
 const { petFn } = require('../../utils');
 module.exports = {
     /**

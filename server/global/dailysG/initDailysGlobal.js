@@ -1,5 +1,4 @@
 const { DAILYS_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 const { initDailyTask } = require('../taskG/initDailyTask');
 
 module.exports = {
@@ -10,7 +9,7 @@ module.exports = {
      * @param {*} res
      */
     initDailysGlobal: function (req, res) {
-        const { role_id, role_name } = getRoleGlobal(req, res);
+        const { role_id, role_name } = RoleG.getRoleGlobal(req, res);
         if (!DAILYS_Global[role_id]) {
             DAILYS_Global[role_id] = {
                 ...initDailyTask(req, res),

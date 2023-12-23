@@ -1,4 +1,4 @@
-const { DailysG, RoleG } = require("../../global");
+const { DailysG } = require("@/global");
 module.exports = {
     /**
      * 战场排名

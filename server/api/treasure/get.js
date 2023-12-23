@@ -1,4 +1,4 @@
-const { RoleG, DailysG } = require('../../global');
+const { DailysG } = require('../../global');
 module.exports = {
     /**
      * 获取珍宝信息

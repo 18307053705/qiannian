@@ -1,5 +1,4 @@
 const { KNAPSACK_Global } = require('./config');
-const { getRoleGlobal } = require('../roleG/getRoleGlobal');
 const { dataListChang } = require('./dataListChang');
 
 module.exports = {
@@ -11,7 +10,7 @@ module.exports = {
      * @returns {*} knapsack:{data:[],yuanbao,tael}| undefined
      */
     setknapsackGlobal: function (req, res, knapsack) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         KNAPSACK_Global[role_id] = {
             ...knapsack,
             data: dataListChang(knapsack['data']),

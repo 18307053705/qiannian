@@ -1,7 +1,6 @@
 
 
 const { RANK_TASKS, RANK_TASK_Global, RANK_TASK_TYPE } = require('../config');
-const { getRoleGlobal } = require('../../roleG/getRoleGlobal');
 const { grandEle } = require('./grandEle')
 
 module.exports = {
@@ -29,7 +28,7 @@ module.exports = {
         task.freak = grandEle(task.freak);
         task.status = 0;
         const { type } = task;
-        const { qingyuan, socialize_pool } = getRoleGlobal(req, res);
+        const { qingyuan, socialize_pool } = RoleG.getRoleGlobal(req, res);
         if (type === RANK_TASK_TYPE.qingyuan) {
             const { id } = qingyuan.d;
             RANK_TASK_Global[RANK_TASK_TYPE.qingyuan][id] || (RANK_TASK_Global[RANK_TASK_TYPE.qingyuan][id] = {});

@@ -1,5 +1,5 @@
 const { roleFn, grandFn, qingyuanFn } = require('../../utils');
-const { RoleG, KnapsackG } = require("../../global");
+const {  KnapsackG } = require("../../global");
 module.exports = {
     /**
      * 解除结缘

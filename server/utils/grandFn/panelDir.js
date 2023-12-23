@@ -1,6 +1,3 @@
-const { RoleG, FightG } = require("../../global");
-const fightFn = require("../fightFn");
-
 module.exports = {
     /**
      * 指令打开的面板信息

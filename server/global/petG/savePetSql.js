@@ -1,9 +1,7 @@
-const { petGlobal, PET_JSON_KEYS } = require('./config')
-const { getRoleGlobal } = require('../roleG/getRoleGlobal')
-
+const { petGlobal, PET_JSON_KEYS } = require('./config');
 module.exports = {
     savePetSql: async function (req,res) {
-        const { role_id } = getRoleGlobal(req, res);
+        const { role_id } = RoleG.getRoleGlobal(req, res);
         const petInfo = petGlobal[role_id];
         if (!petInfo) {
             return;

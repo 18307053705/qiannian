@@ -1,4 +1,4 @@
-const { RoleG, KnapsackG, PetG, FightG } = require("@/global");
+const { KnapsackG, PetG, FightG } = require("@/global");
 const { knapsackTable } = require("@/table");
 // const roleFn = require("@/roleFn");
 // const petFn = require("@/petFn");

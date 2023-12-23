@@ -1,4 +1,4 @@
-const { ErrorG, KnapsackG, RoleG } = require("@/global");
+const {KnapsackG } = require("@/global");
 const { shopFn, petFn, knapsackFn } = require("@/utils");
 module.exports = {
     /**
