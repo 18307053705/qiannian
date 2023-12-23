@@ -1,6 +1,3 @@
-
-const { getKnapsackInfo } = require('./asyncGetKnapsack');
-const { KnapsackG } = require('../../global');
 module.exports = {
     /**
      * 校验背包物品信息

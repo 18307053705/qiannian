@@ -1,4 +1,3 @@
-const {KnapsackG } = require("@/global");
 const { shopFn, petFn, knapsackFn } = require("@/utils");
 module.exports = {
     /**

@@ -1,6 +1,3 @@
-const { getknapsackGlobal } = require('@/global/knapsackG/getknapsackGlobal');
-const { updateknapsackGlobal } = require('@/global/knapsackG/updateknapsackGlobal');
-
 module.exports = {
     /**
      * 直接增加玩家属性的物品
@@ -172,13 +169,13 @@ module.exports = {
         return { text: `世界名气+${value}` };
     },
     yuanbao: function (req, res, value) {
-        const { yuanbao } = getknapsackGlobal(req);
-        updateknapsackGlobal(req, res, { yuanbao: yuanbao + value });
+        const { yuanbao } = KnapsackG.getknapsackGlobal(req);
+        KnapsackG.updateknapsackGlobal(req, res, { yuanbao: yuanbao + value });
         return { text: `元宝+${value}` };
     },
     tael: function (req, res, value) {
-        const { tael } = getknapsackGlobal(req);
-        updateknapsackGlobal(req, res, { tael: tael + value });
+        const { tael } = KnapsackG.getknapsackGlobal(req);
+        KnapsackG.updateknapsackGlobal(req, res, { tael: tael + value });
         return { text: `银两+${value}` };
     },
     lx: function (req, res, value) {

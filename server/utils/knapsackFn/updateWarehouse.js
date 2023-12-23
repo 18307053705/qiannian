@@ -1,6 +1,3 @@
-
-const { KnapsackG } = require("../../global");
-
 module.exports = {
     /**
      * 更新仓库

@@ -1,6 +1,5 @@
 
 const { knapsackTable } = require('@/table');
-const { ErrorG, KnapsackG } = require('@/global');
 const { knapsackFn } = require('@/utils');
 
 module.exports = {

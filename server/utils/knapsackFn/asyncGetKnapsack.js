@@ -1,5 +1,3 @@
-const { KnapsackG } = require("../../global");
-const { dataListChang } = require("../../global/knapsackG/dataListChang");
 const { warehouseSql, knapsackSql } = require("@/mysql");
 module.exports = {
     /**
@@ -14,7 +12,7 @@ module.exports = {
             // 仓库不存在获取其他人
             const { role_id: roleId } = RoleG.getRoleGlobal(req, res);
             const results = await warehouseSql.asyncGetarehouse(roleId);
-            const data = dataListChang(results.data, true);
+            const data = knapsackG.dataListChang(results.data, true);
             return {
                 ...results,
                 data
@@ -26,7 +24,7 @@ module.exports = {
             return knapsack;
         }
         const results = await knapsackSql.asyncGetKnapsack(role_id);
-        const data = dataListChang(results.data);
+        const data = knapsackG.dataListChang(results.data);
         return {
             ...results[0],
             data

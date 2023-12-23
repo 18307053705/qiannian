@@ -1,5 +1,3 @@
-const { KnapsackG } = require("../../global");
-
 module.exports = {
     /**
      * 消耗物品

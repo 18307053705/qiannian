@@ -1,5 +1,5 @@
 const { roleFn, qingyuanFn } = require('../../utils');
-const { ChatG,  KnapsackG } = require("../../global");
+const { ChatG } = require("../../global");
 const { knapsackTable } = require('../../table');
 
 function addYinYuanEquip(req, res, role_id) {

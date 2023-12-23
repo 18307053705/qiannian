@@ -1,4 +1,4 @@
-const { DailysG, KnapsackG, ActiveQueueG } = require("@/global");
+const { DailysG, ActiveQueueG } = require("@/global");
 const { TitleTable } = require('@/table');
 function getPrze(index) {
     // 排名第一

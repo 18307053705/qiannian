@@ -1,7 +1,5 @@
-const { KnapsackG, PetG, FightG } = require("@/global");
+const { PetG, FightG } = require("@/global");
 const { knapsackTable } = require("@/table");
-// const roleFn = require("@/roleFn");
-// const petFn = require("@/petFn");
 const AttrSystem = require("@/system/AttrSystem");
 module.exports = {
   /**

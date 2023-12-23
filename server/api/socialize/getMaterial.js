@@ -1,4 +1,3 @@
-const { ErrorG, KnapsackG } = require('../../global');
 const MATERIAL_MEUN = {
     1: [53, 54, 55, 56, 57, 58, 59]
 }

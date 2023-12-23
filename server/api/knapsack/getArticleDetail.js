@@ -1,5 +1,3 @@
-
-const { ErrorG, KnapsackG } = require('@/global');
 const { roleFn, knapsackFn, shopFn, petFn, equipFn } = require('@/utils');
 const { knapsackTable } = require('@/table');
 

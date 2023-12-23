@@ -1,8 +1,3 @@
-
-
-
-const { KnapsackG, ErrorG } = require('../../global');
-
 module.exports = {
     /**
      * 货币兑换

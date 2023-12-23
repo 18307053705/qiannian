@@ -1,4 +1,3 @@
-const { KnapsackG, ErrorG } = require('@/global');
 const { knapsackTable } = require('@/table');
 const { cornuconpiaFn, knapsackFn } = require('@/utils');
 module.exports = {

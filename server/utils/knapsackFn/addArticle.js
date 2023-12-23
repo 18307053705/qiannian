@@ -1,4 +1,3 @@
-const { KnapsackG } = require("@/global");
 const { knapsackTable } = require("@/table");
 module.exports = {
     /**

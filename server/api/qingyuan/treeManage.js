@@ -1,5 +1,5 @@
 const { qingyuanFn } = require('../../utils');
-const { ErrorG, KnapsackG, DailysG } = require("../../global");
+const { DailysG } = require("../../global");
 module.exports = {
     /**
      * 树打理

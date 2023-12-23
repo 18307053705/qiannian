@@ -1,5 +1,5 @@
 
-const { PaiMaiHangG, KnapsackG, ErrorG } = require('../../global');
+const { PaiMaiHangG } = require('../../global');
 const { knapsackFn } = require('../../utils');
 const { updateTimer } = require('../../global/paiMaiHangG/updateTimer');
 module.exports = {

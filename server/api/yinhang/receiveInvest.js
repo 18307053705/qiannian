@@ -1,5 +1,3 @@
-const { KnapsackG } = require('@/global');
-
 module.exports = {
     /**
      * 送财童子-领取投资

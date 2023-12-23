@@ -1,5 +1,4 @@
 const { knapsackTable } = require('@/table');
-const { ErrorG, KnapsackG } = require('@/global');
 const { knapsackFn } = require('@/utils');
 
 function getMaterial(material) {

@@ -1,4 +1,4 @@
-const {  KnapsackG, DailysG } = require("../../global");
+const { DailysG } = require("../../global");
 const { knapsackTable } = require("../../table");
 const { knapsackFn } = require('../../utils');
 

@@ -1,4 +1,4 @@
-const { KnapsackG, GrandG } = require('@/global');
+const { GrandG } = require('@/global');
 const { knapsackFn, equipFn } = require('@/utils');
 const { knapsackTable } = require('@/table');
 module.exports = {

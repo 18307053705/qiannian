@@ -1,4 +1,4 @@
-const { KnapsackG, FightG, GrandG, PetG } = require('../../../global');
+const { FightG, GrandG, PetG } = require('../../../global');
 const { knapsackTable, ElementTable } = require('../../../table');
 const knapsackFn = require('../../knapsackFn');
 const roleFn = require('../../roleFn');

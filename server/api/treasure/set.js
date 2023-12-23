@@ -1,4 +1,4 @@
-const { DailysG, KnapsackG } = require('@/global');
+const { DailysG } = require('@/global');
 const { EffectTable } = require('@/table');
 const INTEGRAL_MEUN = {
     1: {

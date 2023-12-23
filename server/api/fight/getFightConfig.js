@@ -1,4 +1,4 @@
-const { FightG, KnapsackG } = require('@/global');
+const { FightG } = require('@/global');
 const { knapsackTable } = require('@/table');
 module.exports = {
     /**

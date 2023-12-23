@@ -1,4 +1,3 @@
-const { ErrorG, KnapsackG } = require("@/global");
 const { shopFn } = require("@/utils");
 const { ShopSql } = require("@/mysql");
 module.exports = {

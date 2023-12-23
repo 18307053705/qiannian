@@ -1,4 +1,4 @@
-const { KnapsackG, ChatG } = require('@/global');
+const { ChatG } = require('@/global');
 const { EffectTable } = require('@/table');
 module.exports = {
     /**

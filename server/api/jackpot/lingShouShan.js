@@ -1,4 +1,3 @@
-const {  KnapsackG } = require("../../global");
 const { knapsackTable, PetTable } = require("../../table");
 const { petFn, knapsackFn } = require('../../utils');
 const moment = require('moment');
