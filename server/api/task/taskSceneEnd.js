@@ -90,7 +90,7 @@ module.exports = {
             }
             // 判断下个任务领取的npc是否就是当前npc且位置相同
             // 是直接返回任务信息,并且当前指令信息进行替换
-            const nextTask = taskFn.getTaskGlobal(req, res, taskType, task.nextId);
+            const nextTask = TaskG.getTaskGlobal(req, res, taskType)[task.nextId];
             const nextNpc = nextTask.grand.npc;
             if (currentDir.id === nextNpc.id && currentDir.address === nextNpc.address) {
                 GrandG.setDirGlobal(req, res, { currentDir: nextNpc });

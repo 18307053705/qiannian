@@ -1,7 +1,7 @@
 const { chekeKnapsack } = require('../knapsackFn/chekeKnapsack');
 const { GrandG } = require('@/global');
 const { TaskSystem } = require('@/system');
-const { TASK_TYPE, TASK_STATU } = TaskSystem;
+const { TASK_TYPE } = TaskSystem;
 module.exports = {
     /**
      * 获取任务进度
@@ -27,7 +27,7 @@ module.exports = {
         // 战斗任务
         if (TASK_TYPE.zhandou === type) {
             const done = Object.values(freak).find(({ s, c }) => s > c)
-            return { done: Boolean(done), freak };
+            return { done: !Boolean(done), freak };
         }
         // 收集任务
         if (TASK_TYPE.shouji === type) {
@@ -38,10 +38,10 @@ module.exports = {
         if ((TASK_TYPE.biaoxiang === type || TASK_TYPE.migong === type) && done) {
             return complete;
         }
-        // 宝箱任务
+        // 宝箱任务?
         if (TASK_TYPE.biaoxiang === type) {
-            const reat = Math.floor(Math.random() * (action.num || 9)) + 1;
-            return { done: reat === 1 };
+            const done = Math.floor(Math.random() * (action.num || 9)) + 1 === 1;
+            return { done, text: done ? '' : '选错了,重新选一个了吧!' };
         }
         // 迷宫任务
         if (TASK_TYPE.migong === type) {

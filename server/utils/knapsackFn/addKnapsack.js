@@ -1,4 +1,4 @@
-const { knapsackTable } = require("@/table");
+const { isEquip } = require("@/table/knapsack/article/index");
 
 module.exports = {
     /**
@@ -23,7 +23,7 @@ module.exports = {
         let equipNum = 0;
         Object.keys(article).forEach((id, index) => {
             const { name, n, ext = EQUIP_INIT_EXT, s = 1 } = article[id];
-            if (knapsackTable.isEquip(id)) {
+            if (isEquip(id)) {
                 equipNum++;
                 equipReward[id] = {
                     name,
@@ -80,7 +80,6 @@ module.exports = {
                 delete equipReward[key];
             })
         }
-
         KnapsackG.updateknapsackGlobal(req, res, { data });
         if (data.length > KNAPSACK_SIZE) {
             return '背包已满,请注意清理背包'

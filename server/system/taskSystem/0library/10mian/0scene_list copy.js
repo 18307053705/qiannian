@@ -19,6 +19,7 @@ module.exports = {
         ],
         reward: {
             exp: 200,
+            article:'1630'
         },
         grand: {
             npc: {

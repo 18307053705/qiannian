@@ -1,5 +1,4 @@
 const { TaskSystem } = require('@/system');
-const { speedTask } = require('./speedTask');
 const taskTp = require('./taskTp');
 const { TASK_STATU } = TaskSystem;
 module.exports = {
@@ -26,7 +25,6 @@ module.exports = {
 
         return {
             ...task,
-            // speed: speedTask(req, res, task),
             connet,
             tpInfo: taskTp.getTaskTPInfo(task),
             status

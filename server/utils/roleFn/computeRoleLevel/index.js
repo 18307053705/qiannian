@@ -1,4 +1,4 @@
-const { PetG } = require("@/global");
+const { getPetGlobal } = require("@/global/petG/getPetGlobal");
 // const { AttributeTable, RealmTable } = require("@/table");
 const { computeUpExp } = require("../computeUpExp");
 // const { computeRoleAttr } = require("../computeRoleAttr");
@@ -50,7 +50,7 @@ module.exports = {
         }
 
         if (islevel) {
-            const pet = PetG.getPetGlobal(req, res, roleInfo.role_id);
+            const pet = getPetGlobal(req, res, roleInfo.role_id);
             const { attr } = AttrSystem.computeRoleAttr({ ...roleInfo, role_level }, { pet, keys: ['life_max', 'mana_max'] });
             update['life'] = attr.life_max;
             update['mana'] = attr.mana_max;

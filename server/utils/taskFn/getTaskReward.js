@@ -27,7 +27,7 @@ module.exports = {
         const { article, world, gang, intersect, exploit, exp = 0, yuanbao = 0, tael = 0 } = reward;
 
         if (article) {
-            const message = addKnapsack(req, res, { article });
+            const message = addKnapsack(req, res, article);
             if (message) {
                 return message
             }

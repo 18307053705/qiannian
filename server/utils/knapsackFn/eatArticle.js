@@ -29,7 +29,8 @@ module.exports = {
 
         }
         if (group3) {
-            const { success, data } = EffectTable.group3Fn(req, res, name, group3, s);
+            const { success } = EffectTable.group3Fn(req, res, name, group3, s);
+            const { data } = KnapsackG.getknapsackGlobal(req, res);
             return { success, data };
 
         }

@@ -2,7 +2,7 @@
 const { TaskSystem } = require('@/system');
 const { GrandG, TaskG } = require('@/global');
 const { taskFn } = require('@/utils');
-const { TASK_STATU } = TaskSystem;
+const { TASK_STATU, TASK_TYPE } = TaskSystem;
 
 module.exports = {
     /**
@@ -45,15 +45,20 @@ module.exports = {
                 data: taskFn.getTaskScene(req, res, task),
             })
             return true;
+        }
 
+        // 获取场景，宝箱与迷宫类型任务不重新计算进度
+        if (task.type !== TASK_TYPE.biaoxiang && task.type !== TASK_TYPE.migong) {
+            // 三者状态可转换未完成与可完成
+            if (task.status === TASK_STATU.received || task.status === TASK_STATU.wait_complete || task.status === TASK_STATU.can_complete) {
+                // 计算任务进度
+                task.complete = taskFn.speedTask(req, res, task);
+                task.status = task.complete.done ? TASK_STATU.can_complete : TASK_STATU.wait_complete;
+                TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
+            }
         }
-        // 三者状态可转换未完成与可完成
-        if (task.status === TASK_STATU.received || task.status === TASK_STATU.wait_complete || task.status === TASK_STATU.can_complete) {
-            // 计算任务进度
-            task.complete = taskFn.speedTask(req, res, task);
-            task.status = task.complete.done ? TASK_STATU.can_complete : TASK_STATU.wait_complete;
-            TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-        }
+
+
         // 判断任务是否完成
         if (task.status === TASK_STATU.can_complete) {
             // 获取任务奖励
@@ -72,14 +77,12 @@ module.exports = {
             // 创建下一个任务
             if (task.nextId) {
                 const nextTask = TaskSystem.analyTask(req, res, task.nextId, taskType);
-                console.log(nextTask,'nextTask...')
                 TaskG.updataTaskGlobal(req, res, taskType, { [task.nextId]: nextTask });
             }
         }
         res.send({
             code: 0,
-            data: taskFn.getTaskScene(req, res, task),
-            mians: TaskG.getTaskGlobal(req, res, 1)
+            data: taskFn.getTaskScene(req, res, task)
         })
     }
 }

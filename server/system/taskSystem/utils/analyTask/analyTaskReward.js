@@ -1,4 +1,5 @@
-const { knapsackTable, TaskTable } = require('@/table');
+const knapsackTable = require('@/table/knapsack');
+const TaskTable = require('@/table/task');
 module.exports = {
     /**
      * 解析任务奖励

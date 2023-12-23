@@ -74,3 +74,22 @@ export const PET_TYPE_MEUN = {
   2: "憨厚",
   3: "活泼",
 };
+
+
+export const TASK_TYPE = {
+  zhandou: 1, // 战斗
+  duihau: 2, // 对话
+  shouji: 3, // 收集
+  biaoxiang: 4, // 宝箱
+  migong: 5, // 迷宫
+  task: 6, // 任务战斗
+}
+
+
+export const TASK_STATU = {
+  wait: 0, // 未领取
+  received: 1, // 已领取
+  wait_complete: 2, // 待完成
+  can_complete: 3, // 可完成
+  finished: 4, // 已完成
+}
