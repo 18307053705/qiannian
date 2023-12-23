@@ -1,7 +1,6 @@
 const GrandG = require('./grandG');
 const FightG = require('./fightG');
 const KnapsackG = require('./knapsackG');
-const ErrorG = require('./errorG');
 const SocializeG = require('./socializeG');
 const PetG = require('./petG');
 const DailysG = require('./dailysG');
@@ -18,7 +17,6 @@ module.exports = {
     GrandG,
     FightG,
     KnapsackG,
-    ErrorG,
     SocializeG,
     PetG,
     DailysG,
