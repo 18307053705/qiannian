@@ -12,11 +12,8 @@ module.exports = {
     updataTaskGlobal: function (req, res, type, taks) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
         const tasks = TASKS_Global[role_id] || {};
-        if (!tasks[type]) {
-            tasks[type] = {};
-        }
         tasks[type] = {
-            ...tasks[type],
+            ...(tasks[type] || {}),
             ...taks
         }
         TASKS_Global[role_id] = tasks;

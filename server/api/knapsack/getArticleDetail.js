@@ -36,7 +36,7 @@ module.exports = {
         let articleInfo = undefined;
         // 物品在背包
         if (form === 1) {
-            const { data } = await knapsackFn.getKnapsackInfo(req, res, { role_id });
+            const { data } = await knapsackFn.asyncGetKnapsack(req, res, { role_id });
             const in_x = data.findIndex((itme) => itme.uid === uid);
             articleInfo = data[in_x];
         }
@@ -49,7 +49,7 @@ module.exports = {
         }
         // 物品在仓库
         if (form === 3) {
-            const { data } = await knapsackFn.getKnapsackInfo(req, res, { type: 3 });
+            const { data } = await knapsackFn.asyncGetKnapsack(req, res, { type: 3 });
             const in_x = data.findIndex((itme) => itme.uid === uid);
             articleInfo = data[in_x];
         }

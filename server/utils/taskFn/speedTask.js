@@ -1,5 +1,7 @@
 const { chekeKnapsack } = require('../knapsackFn/chekeKnapsack');
-const { GrandG } = require('../../global');
+const { GrandG } = require('@/global');
+const { TaskSystem } = require('@/system');
+const { TASK_TYPE, TASK_STATU } = TaskSystem;
 module.exports = {
     /**
      * 获取任务进度
@@ -12,33 +14,49 @@ module.exports = {
      */
     speedTask: function (req, res, task) {
         // 完成条件 freak{id,n,s,c} article{id,p,n,s}
-        const { complete, grand } = task;
+        const { complete = {}, grand, type, action } = task;
         // 对话任务 
-        if (!complete) {
+        if (TASK_TYPE.duihau === type) {
             const { currentDir } = GrandG.getDirGlobal(req, res);
-            const { tNpc } = grand;
-            // 判断是否为NPC自身，是直接完成任务
-            return { done: !tNpc || currentDir.id === tNpc.id && currentDir.address === tNpc.address }
+            const { npc, tNpc } = grand;
+            // 判断目标NPC是否为当前npc，是则完成任务
+            const taskNpc = tNpc || npc;
+            return { done: currentDir.id === taskNpc.id && currentDir.address === taskNpc.address };
         }
-        const { freak, article } = complete;
-        let done = true;
-        let exist = undefined;
-        if (article) {
-            const { exist: exists, result } = chekeKnapsack(req, res, article);
-            done = result;
-            exist = exists;
+        const { freak, article, migong, done } = complete;
+        // 战斗任务
+        if (TASK_TYPE.zhandou === type) {
+            const done = Object.values(freak).find(({ s, c }) => s > c)
+            return { done: Boolean(done), freak };
         }
-        if (freak) {
-            Object.values(freak).map(({ s, c }) => {
-                if (s > c) {
-                    done = false;
-                }
-            })
+        // 收集任务
+        if (TASK_TYPE.shouji === type) {
+            const { exist, result } = chekeKnapsack(req, res, article);
+            return { done: result, article: exist };
         }
-        return {
-            done,
-            exist,
-            fight: JSON.stringify(freak) === '{}' ? undefined : freak
+        // 宝箱任务与迷宫 已完成 无需重新计算
+        if ((TASK_TYPE.biaoxiang === type || TASK_TYPE.migong === type) && done) {
+            return complete;
         }
+        // 宝箱任务
+        if (TASK_TYPE.biaoxiang === type) {
+            const reat = Math.floor(Math.random() * (action.num || 9)) + 1;
+            return { done: reat === 1 };
+        }
+        // 迷宫任务
+        if (TASK_TYPE.migong === type) {
+            const reat = Math.floor(Math.random() * 2);
+            const { num } = action;
+            let { s, c } = migong || { s: num, c: 0 };
+            if (s === c) {
+                return { done: true, migong: { s, c } };
+            }
+            if (reat === 1) {
+                c++;
+                return { done: s === c, migong: { s, c }, text: `恭喜你走对了，还差${s - c}步.` };
+            }
+            return { done: false, migong: { s: num, c: 0, text: '一步走错请重新再来吧.' } };
+        }
+        return complete;
     }
 }

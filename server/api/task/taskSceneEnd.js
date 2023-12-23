@@ -3,15 +3,15 @@
 const { TaskSystem } = require('@/system');
 const { GrandG, TaskG, DailysG } = require('@/global');
 const { taskFn, grandFn, knapsackFn } = require('@/utils');
-const { TASK_TYPE, TASK_TYPE_MEUN } = TaskG;
+const { TASK_STATU } = TaskSystem;
 
-// 任务状态 0：未领取 1：未完成 2：可完成 3：已完成
+// 任务状态 0：未领取 1：已领取 2：未完成 3：可完成 4:已完成
 module.exports = {
     /**
      * 任务场景结束,即完成任务
      */
     taskSceneEnd: function (req, res) {
-        const { role_level, ...role } = RoleG.getRoleGlobal(req, res);
+        const { role_level } = RoleG.getRoleGlobal(req, res);
         const dir = GrandG.getDirGlobal(req, res);
         const { currentDir } = dir;
         const { taskId, taskType } = currentDir;
@@ -26,7 +26,7 @@ module.exports = {
                 }
             })
         }
-        const { type, grand, level, complete, reward, levelText } = task;
+        const { level, levelText } = task;
 
         if (level > role_level) {
             return res.send({
@@ -37,88 +37,78 @@ module.exports = {
             })
         }
 
-        // 记录最初状态
-        const oldStatus = task.status;
-        // // 判断是否为接任务且为副本 
-        // if (oldStatus === 0 && taskType === TASK_TYPE_MEUN.copy) {
-        //     const { copyTask } = DailysG.getDailysGlobal(req, res);
-        //     if (copyTask[taskId] <= 0) {
-        //         return res.send({
-        //             code: 0,
-        //             data: {
-        //                 levelText: '今日领取次数已用完！',
-        //             }
-        //         })
-        //     }
-        //     copyTask[taskId] -= 1;
-        //     DailysG.updataDailysGlobal(req, res, { copyTask });
-        // }
         // 接任务
-        if (task.status === 0) {
-            task.status = 1;
+        if (task.status === TASK_STATU.wait) {
+            task.status = TASK_STATU.received;
+            TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
+            res.send({
+                code: 0,
+                data: taskFn.getTaskScene(req, res, task),
+            })
+            return;
         }
-        // 未完成可转化已完成
-        // 已完成可转化未完成
-        if (task.status === 1 || task.status === 2) {
+        const oldStatus = task.status;
+        // 三者状态可转换未完成与可完成
+        if (task.status === TASK_STATU.received || task.status === TASK_STATU.wait_complete || task.status === TASK_STATU.can_complete) {
             // 计算任务进度
-            const speed = taskFn.speedTask(req, res, task);
-            task.status = speed.done ? 2 : 1;
+            task.complete = taskFn.speedTask(req, res, task);
+            task.status = task.complete.done ? TASK_STATU.can_complete : TASK_STATU.wait_complete;
         }
 
-
-        let isCreta = false;
-        // 领取对话任务，不可直接完成
-        if (task.status === 2 && (oldStatus !== 0 || task.action)) {
+        // 判断任务是否完成
+        if (task.status === TASK_STATU.can_complete) {
             // 获取任务奖励
             const message = taskFn.getTaskReward(req, res, task.reward);
             if (message) {
                 res.send({
                     code: 0,
                     message,
-                    data: taskFn.getTaskSceneInfo(req, res, task),
+                    data: taskFn.getTaskScene(req, res, task),
                 })
                 return;
             }
-            task.status = 3;
-            isCreta = true;
+            // 改变未已完成
+            task.status = TASK_STATU.finished;
+            // 创建下一个任务
+            if (task.nextId) {
+                const nextTask = TaskSystem.analyTask(req, res, task.nextId, taskType);
+                TaskG.updataTaskGlobal(req, res, taskType, { [task.nextId]: nextTask });
+            }
         }
         TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-        if (!isCreta) {
-            res.send({
-                code: 0,
-                data: taskFn.getTaskSceneInfo(req, res, task),
-            })
+
+        // 已完成状态即传送至下个任务NPC位置
+        if (oldStatus === TASK_STATU.finished) {
+            if (!task.nextId) {
+                res.send({
+                    code: 0,
+                    data: {
+                        endText: '暂无更多任务！',
+                    }
+                })
+                return;
+            }
+            // 判断下个任务领取的npc是否就是当前npc且位置相同
+            // 是直接返回任务信息,并且当前指令信息进行替换
+            const nextTask = taskFn.getTaskGlobal(req, res, taskType, task.nextId);
+            const nextNpc = nextTask.grand.npc;
+            if (currentDir.id === nextNpc.id && currentDir.address === nextNpc.address) {
+                GrandG.setDirGlobal(req, res, { currentDir: nextNpc });
+                res.send({
+                    code: 0,
+                    data: taskFn.getTaskScene(req, res, nextTask),
+                    nextTask,
+                })
+                return;
+            }
+            // 否则传送至领取任务npc位置
+            grandFn.tpDirUpdate(req, res, nextNpc.address);
             return;
         }
 
-        // 完成任务后判断是否有下个任务,有则加入可领取任务,并且传送目标地
-        const { nextId } = task;
-        if (!nextId) {
-            res.send({
-                code: 0,
-                data: {
-                    endText: '暂无更多任务！',
-                }
-            })
-            return;
-        }
-        // 创建下一个任务
-        const nextTask = TaskSystem.analyTask(req, res, nextId, taskType);
-        TaskG.updataTaskGlobal(req, res, taskType, { [nextId]: nextTask });
-        const nextNpc = nextTask.grand.npc;
-        // 判断下个任务领取的npc是否就是当前npc且位置相同
-        //  是直接返回任务信息
-        // 并且当前指令信息进行替换
-        if (currentDir.id === nextNpc.id && currentDir.address === nextNpc.address) {
-            GrandG.setDirGlobal(req, res, { currentDir: nextNpc });
-            res.send({
-                code: 0,
-                data: taskFn.getTaskSceneInfo(req, res, nextTask),
-                nextTask,
-            })
-            return;
-        }
-        // 否则传送至领取任务npc位置
-        grandFn.tpDirUpdate(req, res, nextNpc.address);
+        res.send({
+            code: 0,
+            data: taskFn.getTaskScene(req, res, task),
+        })
     }
 }

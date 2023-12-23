@@ -1,5 +1,5 @@
 const { computeUpExp } = require('@/system/AttrSystem/utils/computeUpExp');
-const { TASK_TYPE_MEUN } = require('../../enum');
+const { TASK_TYPE_MEUN } = require('../../0library/enum');
 module.exports = {
     /**
      * 获取日常任务奖励

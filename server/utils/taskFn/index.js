@@ -4,7 +4,7 @@ const grandTaskEle = require('./grandTaskEle');
 // const getTasksInfo = require('./getTasksInfo');
 const listenTask = require('./listenTask');
 const getTaskReward = require('./getTaskReward');
-const getTaskSceneInfo = require('./getTaskSceneInfo');
+const getTaskScene = require('./getTaskScene');
 const taskTp = require('./taskTp');
 const getTaskGlobal = require('./getTaskGlobal');
 
@@ -15,7 +15,7 @@ module.exports = {
     // ...getTasksInfo,
     ...listenTask,
     ...getTaskReward,
-    ...getTaskSceneInfo,
+    ...getTaskScene,
     ...taskTp,
     ...getTaskGlobal
 }

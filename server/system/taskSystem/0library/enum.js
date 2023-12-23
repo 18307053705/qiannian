@@ -10,6 +10,25 @@ const TASKS_Global = {
     //     world:{},
     // }
 }
+
+const TASK_TYPE = {
+    zhandou: 1, // 战斗
+    duihau: 2, // 对话
+    shouji: 3, // 收集
+    biaoxiang: 4, // 宝箱
+    migong: 5, // 迷宫
+    task: 6, // 任务战斗
+}
+
+
+const TASK_STATU = {
+    wait: 0, // 未领取
+    received: 1, // 已领取
+    wait_complete: 2, // 待完成
+    can_complete: 3, // 可完成
+    finished: 4, // 已完成
+}
+
 const TASK_TYPE_MEUN = {
     main: 1,
     exp: 2,
@@ -49,4 +68,6 @@ module.exports = {
     TASK_TYPE_MEUN,
     TASK_TYPE_TEXT_MEUN,
     DAIL_TYPE_LIST,
+    TASK_TYPE,
+    TASK_STATU
 }

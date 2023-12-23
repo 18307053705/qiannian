@@ -65,7 +65,7 @@ module.exports = {
         const task = {};
         Object.keys(tasks || {}).forEach((taskId) => {
             task[taskId] = {
-                ...taskFn.getTaskSceneInfo(req, res, tasks[taskId]),
+                ...taskFn.getTaskScene(req, res, tasks[taskId]),
                 taskType: type
             };
 
