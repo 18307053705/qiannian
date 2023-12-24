@@ -22,7 +22,7 @@ module.exports = {
      * @returns petInfo.ele 元素类型(1:冰,2:雷,3:风,4:水,5:火)
      * @returns petInfo.exp 宠物经验
      */
-    updataPetGlobal: function (req, res,data) {
+    updataPetGlobal: function (req, res, data) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
         const pet = petGlobal[role_id];
         let updateKeys = Object.keys(data);

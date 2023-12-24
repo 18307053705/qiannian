@@ -1,5 +1,6 @@
-const {  PetG } = require("../../global");
-const { petFn } = require('../../utils');
+const { AttrSystem } = require("@/system");
+const { PetG } = require("@/global");
+const { petFn } = require('@/utils');
 module.exports = {
     /**
      * 切换宠物状态
@@ -13,7 +14,7 @@ module.exports = {
             return;
         }
 
-        const { pet_pool, role_id } = RoleG.getRoleGlobal(req, res);
+        const { pet_pool } = RoleG.getRoleGlobal(req, res);
         const { l: petList } = pet_pool;
         const in_x = petList.findIndex(({ id }) => petId === id);
         if (in_x === -1) {
@@ -43,7 +44,7 @@ module.exports = {
             message = '未出战宠物,无法进行附体。'
         }
         // 附体验证
-        if (state === 2 && l === -1) {
+        if (state === 2 && l === 0) {
             message = '宠物暂时未领悟附体技能。'
         }
         if (message) {
@@ -65,19 +66,23 @@ module.exports = {
         })
         // 更新角色宠物全局信息
         PetG.updataPetGlobal(req, res, { state });
+        let success = '';
         // 休战 释放宠物全局信息
         if (state === 0) {
             await PetG.savePetSql(req, res);
+            const { life } = AttrSystem.computePetAttr(pet, { life: 0 });
+            success = `休战成功,玩家生命上限-${parseInt(life * v / 100)}`;
         }
         // 出战 设置宠物全局信息,并更新状态为出战
         if (state === 1) {
             await PetG.setPetGlobal(req, res);
             PetG.updataPetGlobal(req, res, { state: 1 });
+            success = '出战成功';
         }
-        let success = '';
+       
         // 附体
         if (state === 2) {
-            const { life } = petFn.computePetAttr(pet, { life: 0 });
+            const { life } = AttrSystem.computePetAttr(pet, { life: 0 });
             success = `附体成功,玩家生命上限+${parseInt(life * v / 100)}`;
 
         }

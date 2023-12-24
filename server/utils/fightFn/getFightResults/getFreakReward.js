@@ -33,7 +33,7 @@ module.exports = {
                 if (rate > Math.floor(Math.random() * 100)) {
                     const { name, id } = knapsackTable.getArticle(articleId);
                     artReward[id] = { name, id, s: Number(s) };
-                    textReward.push(`获得[${name}]x${s}`)
+                    textReward.push(`获得[${name}]x${s}`);
                 }
             })
         }

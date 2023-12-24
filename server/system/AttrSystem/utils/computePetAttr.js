@@ -18,9 +18,9 @@ module.exports = {
         const rating = getPetRating(flair_x);
         // 宠物属性=等级*对应属性*星级加成 * (先天资质 + 后天资质)
         const levelAttr = (flair_x + flair) * level * rating;
-        Object.keys(initAttr).forEach((key) => {
+        Object.keys(attr).forEach((key) => {
             if (base[key]) {
-                base[key] = Math.floor(base[key] * levelAttr);
+                addition[key] += Math.floor(base[key] * levelAttr);
             }
             attr[key] += addition[key];
         })

@@ -23,7 +23,7 @@ module.exports = {
      * @returns petInfo.exp 宠物经验
      */
     getPetGlobal: function (req, res, roleId) {
-        const role = RoleG.getRoleGlobal(req, res, { role_id: roleId });
+        const role = RoleG.getRoleGlobal(req, res, roleId);
         if (role) {
             const pet = petGlobal[roleId || role.role_id];
             return pet ? JSON.parse(JSON.stringify(pet)) : undefined;

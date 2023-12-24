@@ -68,7 +68,7 @@ module.exports = {
         }))
     },
     /**
-    * 获取宠物基础属性
+    * 获取怪物基础属性
     * @param {*} career 
     */
     getFreakBaseAttr: function (career, ele) {

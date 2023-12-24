@@ -1,4 +1,4 @@
-const { AttributeTable } = require('../../table');
+const { AttrSystem } = require('@/system');
 const { getPetArt } = require('./getPetArt');
 
 module.exports = {
@@ -27,9 +27,9 @@ module.exports = {
             flair: 0,
             level: 1,
             art: JSON.stringify(getPetArt(flair_x, artId)),
-            attr: JSON.stringify(AttributeTable.getPetBaseAttr(type)),
+            attr: JSON.stringify(AttrSystem.getPetBaseAttr(type)),
             equip: '{}',
-            addition: JSON.stringify(AttributeTable.getInitAttr()),
+            addition: JSON.stringify(AttrSystem.getInitAttr()),
             reborn: 0,
             state: 0,
             ele,

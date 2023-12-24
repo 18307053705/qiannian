@@ -1,4 +1,4 @@
-const { ShenYuanG } = require('../../global')
+const { ShenYuanG } = require('@/global')
 module.exports = {
     getShenRank: function (req, res) {
         res.send({

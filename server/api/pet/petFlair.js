@@ -1,6 +1,6 @@
-const { PetG } = require("../../global");
-const { knapsackFn } = require("../../utils");
-const { knapsackTable } = require("../../table");
+const { PetG } = require("@/global");
+const { knapsackFn } = require("@/utils");
+const { knapsackTable } = require("@/table");
 module.exports = {
     /**
      * 宠物资质提升
@@ -22,12 +22,12 @@ module.exports = {
             return;
         }
         const article = {
-            [159]: {
-                ...knapsackTable.getArticle(159),
+            181: {
+                ...knapsackTable.getArticle(181),
                 s: flair + 1
             }
         }
-        const { message } = knapsackFn.deleteKnapsack(req, res, { article });
+        const { message } = knapsackFn.deleteKnapsack(req, res, article);
         if (message) {
             res.send({
                 code: 0,

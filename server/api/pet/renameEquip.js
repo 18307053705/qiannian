@@ -1,5 +1,5 @@
-const { PetG } = require('../../global');
-const { ruleFn } = require('../../utils');
+const { PetG } = require('@/global');
+const { ruleFn } = require('@/utils');
 module.exports = {
     /**
      * 装备重命名

@@ -1,4 +1,5 @@
-const { knapsackFn } = require('../../utils');
+const { knapsackTable } = require("@/table");
+const { knapsackFn } = require('@/utils');
 
 module.exports = {
     /**
@@ -16,13 +17,12 @@ module.exports = {
         }
         
         const article = {
-            161: {
-                p: 5,
-                s: 1,
-                n: "宠物扩房卷"
-            }
+            183: {
+                ...knapsackTable.getArticle(183),
+                s: 1
+            },
         }
-        const { message } = knapsackFn.deleteKnapsack(req, res, { article })
+        const { message } = knapsackFn.deleteKnapsack(req, res, article)
         if (message) {
             res.send({
                 code: 0,

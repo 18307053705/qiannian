@@ -1,4 +1,4 @@
-const { ShenYuanG, GrandG } = require('../../global');
+const { ShenYuanG, GrandG } = require('@/global');
 const { getRoleInfo } = require('../roleFn/asyncGetRoleInfo');
 const { updataRoleInfo } = require('../roleFn//updataRoleInfo');
 module.exports = {
@@ -38,6 +38,6 @@ module.exports = {
             const { l } = ShenYuanG.getShenYuan(req, res);
             ShenYuanG.updateShenYuan(req, res, { l: l + 1 });
         }
-
+        res.listText.push(`神装积分+${isAssist ? 1 : 2}`);
     }
 }

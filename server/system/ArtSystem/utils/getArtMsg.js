@@ -6,7 +6,7 @@ module.exports = {
      * @returns msg 描述
      */
     getArtMsg: function (art) {
-        const { v, p, t, e = '',msg } = art;
+        const { v, p, t, e = '', msg } = art;
         if (p === ART_TYPE.simple) {
             const [_, value] = e.split('-');
             return msg.replace('{v}', v).replace('{e}', value || 10);
@@ -31,12 +31,8 @@ module.exports = {
             })
             return str;
         }
-        if (p === 5) {
-            const [_, value] = e.split('-');
-            return msg.replace('&[v]&', v).replace('&[e]&', value || 10);
-        }
-        if (p === 6) {
-            return msg.replace('&[v]&', v);
+        if (p === ART_TYPE.fuTi) {
+            return msg.replace('{v}', v);
         }
     }
 }

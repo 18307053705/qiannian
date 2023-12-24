@@ -1,6 +1,6 @@
-const { PetG } = require("../../global");
-const { knapsackFn } = require("../../utils");
-const { knapsackTable } = require("../../table");
+const { PetG } = require("@/global");
+const { knapsackFn } = require("@/utils");
+const { knapsackTable } = require("@/table");
 module.exports = {
     /**
      * 宠物转生
@@ -22,12 +22,12 @@ module.exports = {
             return;
         }
         const article = {
-            [160]: {
-                ...knapsackTable.getArticle(160),
+            182: {
+                ...knapsackTable.getArticle(182),
                 s: reborn + 1
             }
         }
-        const { message } = knapsackFn.deleteKnapsack(req, article);
+        const { message } = knapsackFn.deleteKnapsack(req, res, article);
         if (message) {
             res.send({
                 code: 0,

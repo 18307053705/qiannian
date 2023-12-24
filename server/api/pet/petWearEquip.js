@@ -1,6 +1,6 @@
-const { PetG } = require("../../global");
-const { knapsackTable } = require("../../table");
-const { equipFn } = require("../../utils");
+const { PetG } = require("@/global");
+const { knapsackTable } = require("@/table");
+const { equipFn } = require("@/utils");
 module.exports = {
     /**
      * 宠物佩戴装备
