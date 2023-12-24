@@ -1,6 +1,5 @@
 const ArtSystem = require("@/system/ArtSystem");
-const { ErrorG } = require("../../global");
-const { artFn } = require("../../utils");
+const { artFn } = require("@/utils");
 module.exports = {
     /**
      * 计算技能属性
