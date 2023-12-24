@@ -1,5 +1,5 @@
-const { FightG, RoleG } = require('../../global');
-const { knapsackFn } = require('../../utils');
+const { FightG } = require('@/global');
+const { knapsackFn } = require('@/utils');
 
 module.exports = {
     /**
@@ -25,25 +25,27 @@ module.exports = {
         }
         if (dir_type === 2) {
             // 获取替换前的物品信息
-            const { num, id, p, n } = fight[dir_inx] = {};
+            const { num, id, n } = fight[dir_inx] || {};
             const article = {};
             // 消耗过该物品，则进行背包更新
             if (num) {
                 article[id] = {
-                    p,
                     s: num,
-                    n
+                    name: n
                 }
             }
-            const { data } = knapsackFn.deleteKnapsack(req, res, { article });
+            const { data } = knapsackFn.deleteKnapsack(req, res, article);
             list = data
         }
         const itme = list.find(({ id }) => dir_id == id);
         // 设置技能键未更改情况,不做处理返回之前战斗设置
         if (itme && (fight[dir_inx] === null || fight[dir_inx].id !== dir_id)) {
             fight[dir_inx] = {
-                ...itme,
                 p: dir_type,
+                n: itme.name || itme.n,
+                s: itme.s,
+                id: itme.id
+
             };
             RoleG.updataRoleGlobal(req, res, { skill_pool });
 

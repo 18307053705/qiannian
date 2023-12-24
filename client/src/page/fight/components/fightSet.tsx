@@ -58,9 +58,9 @@ const FightSet = ({  getFightInfo }) => {
                 ))
             }
             {
-                type === 2 && dirData.drug.map(({ id, n }) => (
+                type === 2 && dirData.drug.map(({ id, name }) => (
                     <div key={id}>
-                        <span>{n}</span>
+                        <span>{name}</span>
                         <span className="g_u_end" onClick={() => { setClick(id, 2) }}>设置</span>
                     </div>
                 ))

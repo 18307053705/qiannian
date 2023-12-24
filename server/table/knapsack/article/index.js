@@ -95,7 +95,7 @@ module.exports = {
     * 判断物品是否为恢复药品
     */
     isReply: function (id) {
-        return (id + "").slice(0, 2) === '1';
+        return (id + "").slice(0, 2) === '10';
     },
     /**
      * 获取全部装备

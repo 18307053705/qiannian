@@ -1,5 +1,7 @@
-const { TaskG, rankTaskG, ActivityG } = require('../../global');
+const { TaskSystem } = require('@/system');
+const { TaskG, rankTaskG, ActivityG } = require('@/global');
 const { listenTask: listenTaskShenyuan } = require('../shenyuan/listenTask');
+const { TASK_STATU, TASK_TYPE } = TaskSystem;
 module.exports = {
     /**
      * 监听任务击杀进度
@@ -14,24 +16,41 @@ module.exports = {
     listenTask: function (req, res, freakId, num) {
         const taskG = TaskG.getTaskGlobal(req, res, 'all');
         const freakObj = {};
-        Object.keys(taskG || {}).forEach((type) => {
-            const tasks = taskG[type];
+        Object.keys(taskG || {}).forEach((taskType) => {
+            const tasks = taskG[taskType];
             let isUpdata = false;
-            Object.values(tasks).forEach(({ title, complete }, index) => {
-                const { freak: freaks } = complete || {};
-                if (freaks && freaks[freakId]) {
-                    const freak = freaks[freakId];
-                    freak.c += num;
-                    freak.c > freak.s && (freak.c = freak.s);
-                    freakObj[`${type}${index}`] = {
-                        ...freak,
-                        title
-                    };
-                    isUpdata = true;
+            Object.values(tasks).forEach((task, index) => {
+                const { title, complete, status, type } = task;
+                if (type !== TASK_TYPE.zhandou) {
+                    return;
                 }
+                // 未领取 待完成 已完成 不计算
+                if (status === TASK_STATU.wait || status === TASK_STATU.can_complete || status === TASK_STATU.finished) {
+                    return;
+                }
+                const { freak: freaks } = complete;
+                if (!freaks[freakId]) {
+                    return;
+                }
+                const freak = freaks[freakId];
+                freak.c += num;
+                if (freak.c >= freak.s) {
+                    freak.c = freak.s;
+                    // 判断任务是否完成
+                    if (!Object.values(freaks).find(({ c, s }) => s > c)) {
+                        complete.done = true;
+                        task.status = TASK_STATU.can_complete;
+                    }
+                }
+                freakObj[`${taskType}${index}`] = {
+                    ...freak,
+                    title
+                };
+                isUpdata = true;
+
             })
             if (isUpdata) {
-                TaskG.updataTaskGlobal(req, res, type, tasks);
+                TaskG.updataTaskGlobal(req, res, taskType, tasks);
             }
         })
         // 监听组队任务

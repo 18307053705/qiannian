@@ -8,13 +8,8 @@ module.exports = {
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const { skill_pool } = RoleG.getRoleGlobal(req, res);
-        const drug = [];
         const art = [];
-        data.forEach(({id }) => {
-            if (knapsackTable.isReply(id)) {
-                drug.push({ n, id, })
-            }
-        })
+        const drug = data.filter(({ id }) =>  knapsackTable.isReply(id))
 
         if (skill_pool.art) {
             Object.keys(skill_pool.art).forEach((key) => {

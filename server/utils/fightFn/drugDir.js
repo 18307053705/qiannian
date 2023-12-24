@@ -1,5 +1,5 @@
-const { FightG } = require("../../global");
-const { knapsackTable } = require("../../table");
+const { FightG } = require("@/global");
+const { knapsackTable } = require("@/table");
 const deleteKnapsack = require("../knapsackFn/deleteKnapsack");
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         // 查找目标物品
-        const drugItme = data.find(({ id, p }) => id == drugId && p != 3)
+        const drugItme = data.find(({ id }) => id == drugId)
         const { roundText, player, roundAttr } = fightMap;
         let success = false;
         let drugInfo = undefined;
@@ -37,7 +37,7 @@ module.exports = {
                     s: 1
                 }
             }
-            const { message } = deleteKnapsack.deleteKnapsack(req, res, { article });
+            const { message } = deleteKnapsack.deleteKnapsack(req, res, article);
             // 消耗品不存在
             if (message) {
                 return message;

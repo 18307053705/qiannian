@@ -70,7 +70,7 @@ export const Task = () => {
             id
         }).then(({ message }) => {
             if (!message) {
-                getTaskInfo(type);
+                getTaskInfo(TASK_TYPE_MEUN.main);
             }
 
         })

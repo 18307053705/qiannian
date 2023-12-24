@@ -41,9 +41,11 @@ module.exports = {
             return true;
         }
 
+        const isCopy = taskType === TASK_TYPE_MEUN.copy;
         // 接任务
         if (task.status === TASK_STATU.wait) {
-            task.status = TASK_STATU.received;
+            // 副本任务不可直接领取
+            task.status = isCopy ? TASK_STATU.wait : TASK_STATU.received;
             TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
             res.send({
                 code: 0,
@@ -54,8 +56,8 @@ module.exports = {
         if (task.complete?.text) {
             task.complete.text = '';
         }
-        // 副本任务不可从待领取改变状态
-        if (task.status === TASK_STATU.received && taskType === TASK_TYPE_MEUN.copy) {
+        // 副本任务直接返回场景
+        if (isCopy) {
             res.send({
                 code: 0,
                 data: taskFn.getTaskScene(req, res, task),

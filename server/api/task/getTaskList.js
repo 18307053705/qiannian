@@ -20,7 +20,7 @@ module.exports = {
             } else {
                 const taskID = TaskSystem.randomDailyTaskId();
                 const task = taskFn.analyTask(req, res, taskID, type, role);
-                task.status = 1;
+                task.status = TASK_STATU.wait_complete;
                 tasks = { [taskID]: task };
                 // 加入任务队列
                 TaskG.updataTaskGlobal(req, res, type, tasks);
@@ -49,7 +49,7 @@ module.exports = {
         })
 
         const copys = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy) || {};
-        const copyLen = Object.values(copys).filter(({ status }) => status !== TASK_STATU.received && TASK_STATU.wait).length;
+        const copyLen = Object.values(copys).filter(({ status }) => status).length;
         if (copyLen) {
             taskList.push({
                 text: `${TASK_TYPE_TEXT_MEUN[TASK_TYPE_MEUN.copy]}(${copyLen})`,
@@ -72,7 +72,7 @@ module.exports = {
                 task,
                 DAIL_TYPE_LIST,
                 dailyTask,
-                tasks
+                tasks:TaskG.getTaskGlobal(req, res, 'all')
             },
         })
 

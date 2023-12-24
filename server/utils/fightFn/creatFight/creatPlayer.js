@@ -32,13 +32,15 @@ module.exports = {
       const { data } = knapasack;
       const len = data.length;
       for (let i = 0; i < len; i++) {
-        const { id } = data[i];
+        const { id, name, s } = data[i];
         // Id存在战斗设置中,且为消耗品
         if (knapasackId[id] && knapsackTable.isReply(id)) {
           knapasackId[id]["index"].forEach((index) => {
             fight[index] = {
-              ...data[i],
+              n: name,
+              s,
               p: 2,
+              id
             };
           })
           // 删除该项
