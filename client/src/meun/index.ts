@@ -93,3 +93,17 @@ export const TASK_STATU = {
   can_complete: 3, // 可完成
   finished: 4, // 已完成
 }
+
+
+export const TASK_TYPE_MEUN = {
+  main: 1,
+  exp: 2,
+  world: 3,
+  tael: 4,
+  exploit: 5,
+  gang: 6,
+  intersect: 7,
+  chance: 8,
+  copy: 9,
+  zudui: 10,
+}

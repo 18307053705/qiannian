@@ -1,4 +1,4 @@
-const { roleFn } = require('../../utils');
+const { roleFn } = require('@/utils');
 const { roleSql, knapsackSql } = require('@/mysql')
 module.exports = {
     /**

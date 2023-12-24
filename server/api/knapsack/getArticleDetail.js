@@ -42,7 +42,7 @@ module.exports = {
         }
         // 物品在身上(已穿戴装备)
         if (form === 2) {
-            const { equip_pool } = await roleFn.getRoleInfo(req, res, { role_id });
+            const { equip_pool } = await roleFn.asyncGetRoleInfo(req, res, role_id);
             // 对应部位装备
             const equip = equip_pool[pos];
             articleInfo = { ...equip, p: 3 };

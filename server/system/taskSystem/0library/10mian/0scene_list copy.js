@@ -115,11 +115,12 @@ module.exports = {
             },
         },
         complete: {
-            article: "200-2"
+            article: "210-2"
         },
         nextId: 1046
     },
     1046: {
+        type: TASK_TYPE.migong,
         title: "误入阵法",
         tips: "你们一路来到大泽谷深处，没想到竟然不小心闯入了阵法。",
         receive: [
@@ -137,7 +138,7 @@ module.exports = {
         action: {
             type: 2,
             text: ['东', '南', '西', '北'],
-            mun: 4
+            num: 4
         },
         reward: {
             exp: 200,

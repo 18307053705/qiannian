@@ -1,5 +1,5 @@
-const { TaskSystem } = require('@/system');
-const { TaskG } = require('../../global');
+const { TaskG } = require('@/global');
+const { analyTask } = require('./analyTask');
 module.exports = {
     /**
      * 初始化任务池
@@ -16,7 +16,7 @@ module.exports = {
         // s 任务状态
         task_pool.forEach(({ p, id, f, s = 0 }) => {
             tasks[p] || (tasks[p] = {});
-            const task = TaskSystem.analyTask(req, res, id, p, role);
+            const task = analyTask(req, res, id, p, role);
             task.status = s;
             if (task?.complete?.freak) {
                 Object.keys(f || {}).forEach((freakId) => {

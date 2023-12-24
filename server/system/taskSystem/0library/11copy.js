@@ -1,11 +1,13 @@
+const { TASK_TYPE } = require('./enum');
 module.exports = {
     110: {
         title: '炼魂洞',
         tips: '击败炼魂郎君的全部残魂，阻止他复活。',
-        level: 20,
+        level: 1,
         reward: {
             fun: 'lianHunDong',
         },
+        type: TASK_TYPE.zhandou,
         levelText: '等级不足28级，无法领取炼魂洞副本',
         grand: {
             npc: {

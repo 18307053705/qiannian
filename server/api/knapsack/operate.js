@@ -21,12 +21,13 @@ module.exports = {
         //  使用物品
         if (type === 1 && !isEquip) {
             const results = knapsackFn.eatArticle(req, res, id, s);
-            if (results.success) {
+            if (results.success || results.active) {
+                const list = results.data || data;
+                const in_x = list.findIndex((itme) => itme.uid === uid);
                 success = results.success;
-                data[in_x]['s'] -= s;
-                data[in_x]['s'] || data.splice(in_x, 1);
-                
-                KnapsackG.updateknapsackGlobal(req, res, { data: results.data || data });
+                list[in_x]['s'] -= s;
+                list[in_x]['s'] || list.splice(in_x, 1);
+                KnapsackG.updateknapsackGlobal(req, res, { data: list });
             } else {
                 message = results.message;
             }

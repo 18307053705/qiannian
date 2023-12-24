@@ -172,7 +172,7 @@ const ELEMENT_4 = {
         name: "【炼魂洞】",
         type: 4,
         path: '/taskScene',
-        taskId: 1,
+        taskId: 110,
         taskType: TASK_TYPE_MEUN.copy,
     },
     425: {

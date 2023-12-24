@@ -45,17 +45,18 @@ module.exports = {
         }
         // 迷宫任务
         if (TASK_TYPE.migong === type) {
-            const reat = Math.floor(Math.random() * 2);
+            const reat = Math.floor(Math.random() * 7);
+            
             const { num } = action;
             let { s, c } = migong || { s: num, c: 0 };
             if (s === c) {
                 return { done: true, migong: { s, c } };
             }
-            if (reat === 1) {
+            if (reat > 2) {
                 c++;
                 return { done: s === c, migong: { s, c }, text: `恭喜你走对了，还差${s - c}步.` };
             }
-            return { done: false, migong: { s: num, c: 0, text: '一步走错请重新再来吧.' } };
+            return { done: false, migong: { s: num, c: 0, }, text: '一步走错请重新再来吧.' };
         }
         return complete;
     }

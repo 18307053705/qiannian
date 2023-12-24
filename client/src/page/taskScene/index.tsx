@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getTaskScene, taskSceneEnd } from '@cgi/taks';
 import { backGrand, getTaskReward } from '@utils';
-import { TASK_TYPE, TASK_STATU } from '@meun';
-import TaskReward from './taskReward';
+import { TASK_TYPE } from '@meun';
 import TaskSpeed from './taskSpeed';
 import TaskAction from './taskAction';
 import Styles from './index.less';
@@ -17,7 +16,7 @@ export const taskScene = () => {
     if (!taskInfo) {
         return null;
     }
-    const { connet, speed, levelText, endText, reward, status, action, type, complete }: any = taskInfo || {};
+    const { connet, speed, levelNoText, endText, reward, status, action, type, complete, isActive }: any = taskInfo || {};
 
     const doneTask = () => {
         taskSceneEnd().then(({ data }) => {
@@ -25,10 +24,10 @@ export const taskScene = () => {
         })
     }
     // 等级不足 或者 无更多任务
-    if (endText || levelText) {
+    if (endText || levelNoText) {
         return (
             <div className={Styles['page-task-scene']}>
-                <div>{endText || levelText}</div>
+                <div>{endText || levelNoText}</div>
                 <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
             </div>
         )
@@ -45,18 +44,20 @@ export const taskScene = () => {
         )
     }
     const taskConnet = JSON.parse(JSON.stringify(connet));
-    const active = taskConnet.splice(-1)[0].split('&');
+    const active = isActive ? taskConnet.splice(-1)[0].split('&') : undefined;
     return (
         <div className={Styles['page-task-scene']}>
             {getTaskReward(done ? reward : []).map((text, index) => <div key={index}>{text}</div>)}
             {taskConnet.map((text, index) => <div key={index}>{text}</div>)}
             <TaskSpeed speed={speed} status={status} />
-            <div>
-                <span>{active[0]}</span>
-                <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
-            </div>
-            <div>
-            </div>
+            {
+                active ? (
+                    <div>
+                        <span>{active[0]}</span>
+                        <span className='g_u_end' onClick={doneTask}>{active[1]}</span>
+                    </div>
+                ) : ''
+            }
             <div><span className='g_u_end' onClick={backGrand}>返回游戏</span></div>
         </div>
     )

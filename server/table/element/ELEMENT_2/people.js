@@ -2,7 +2,7 @@ const freakMap = {
     2000: {
         name: "巡逻山贼",
         level: 1,
-        attr:0.1
+        attr: 0.1
     },
     2001: {
         name: "持刀山贼",
@@ -31,6 +31,7 @@ const freakMap = {
     2007: {
         name: "斑斓蛇",
         level: 5,
+        article: '210-1-50'
     },
     2008: {
         name: "大泽毒蟾",

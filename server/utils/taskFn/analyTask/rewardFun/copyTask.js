@@ -1,26 +1,31 @@
-
+const knapsackTable = require('@/table/knapsack');
 // 随机物品
 function getArticle(list, config) {
     const { rate = 49, maxNum = 5, minNum = 1 } = config || {};
-    const article = [];
-    list.forEach((id) => {
+    const data = {};
+    list.forEach((ids) => {
         if (Math.floor(Math.random() * 100) > rate) {
             const s = Math.floor(Math.random() * maxNum) + minNum;
-            article.push(`${id}-${s}`);
+            const { id, name } = knapsackTable.getArticle(ids);
+            data[id] = {
+                id,
+                name,
+                s
+            }
         }
     });
-    return article.join(',');
+    return data;
 }
 
 module.exports = {
     // 炼魂洞
-    lianHunDong: function (req, res) {
+    lianHunDong: function () {
         return {
-            attr: "exp-50000,world-100",
+            exp: 50000,
+            world: 100,
             tael: 20000,
             yuanbao: 50,
-            // article: getArticle([118, 122, 126, 130, 134, 138, 142]),
-            hide: true
+            article: getArticle([1861, 1865, 1869, 1873, 1877, 1881, 1885]),
         }
     },
     // 黑角域

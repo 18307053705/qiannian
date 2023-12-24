@@ -7,7 +7,6 @@ const knapsackTable = require('./knapsack');
 const ElementTable = require('./element');
 const ArtTable = require('./art');
 const PetTable = require('./pet');
-const TaskTable = require('./task');
 
 module.exports = {
     GrandTable,
@@ -18,6 +17,5 @@ module.exports = {
     knapsackTable,
     ElementTable,
     ArtTable,
-    PetTable,
-    TaskTable
+    PetTable
 }

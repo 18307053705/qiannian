@@ -15,8 +15,12 @@ module.exports = {
         const dir = GrandG.getDirGlobal(req, res);
         const { currentDir } = dir;
         const { taskId, taskType } = currentDir;
-        const tasks = taskFn.getTaskGlobal(req, res, taskType, taskId);
-        const task = tasks[taskId];
+        const tasks = TaskG.getTaskGlobal(req, res, taskType);
+        let task = tasks?.[taskId];
+        // 副本任务加入不存在则解析任务
+        if (!tasks && taskType === TASK_TYPE_MEUN.copy) {
+            task = taskFn.analyTask(req, res, taskId, taskType);
+        }
         // 不存在任务
         if (!task) {
             return res.send({
@@ -27,12 +31,12 @@ module.exports = {
             })
         }
         const { level, levelText } = task;
-
+       
         if (level > role_level) {
             return res.send({
                 code: 0,
                 data: {
-                    levelText: levelText || `等级不足${level},先去升级吧！`,
+                    levelNoText: levelText || `等级不足${level},先去升级吧！`,
                 }
             })
         }
@@ -71,7 +75,7 @@ module.exports = {
             task.status = TASK_STATU.finished;
             // 创建下一个任务
             if (task.nextId) {
-                const nextTask = TaskSystem.analyTask(req, res, task.nextId, taskType);
+                const nextTask = taskFn.analyTask(req, res, task.nextId, taskType);
                 TaskG.updataTaskGlobal(req, res, taskType, { [task.nextId]: nextTask });
             }
         }

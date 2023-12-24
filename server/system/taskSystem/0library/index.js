@@ -1,6 +1,7 @@
 const mian = require('./10mian');
 const copy = require('./11copy');
 const daily = require('./12daily');
+const enums = require('./enum');
 
 const task = {
     ...mian,
@@ -9,6 +10,7 @@ const task = {
 }
 
 module.exports = {
+    ...enums,
     /**
      * 获取任务信息
      * @param {*} id

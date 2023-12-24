@@ -1,4 +1,4 @@
-// const createTask = require('./createTask');
+const analyTask = require('./analyTask');
 const speedTask = require('./speedTask');
 const grandTaskEle = require('./grandTaskEle');
 // const getTasksInfo = require('./getTasksInfo');
@@ -9,7 +9,7 @@ const taskTp = require('./taskTp');
 const getTaskGlobal = require('./getTaskGlobal');
 
 module.exports = {
-    // ...createTask,
+    ...analyTask,
     ...speedTask,
     ...grandTaskEle,
     // ...getTasksInfo,

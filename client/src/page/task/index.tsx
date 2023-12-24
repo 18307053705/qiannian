@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { backGrand, getTaskReward } from '@utils';
 import { tpDir } from '@cgi/grand';
 import { getTaskList, doneTask } from '@cgi/taks';
+import { TASK_TYPE_MEUN } from '@meun';
 
 const SpeedText = ({ task }) => {
-    const { grand, speed, status } = task;
+    const { grand, complete, status } = task;
     if (status === 0) {
         return <div>进度：{grand.npc.name}(未领取)</div>;
     }
-    if (speed) {
-        const { fight, exist } = speed;
-        const speedArr = [...Object.values(fight || {}), ...Object.values(exist || {})];
+    if (complete) {
+        const { freak, article } = complete;
+        const speedArr = [...Object.values(freak || article || {})];
         return <div>进度：{speedArr.map(({ n, s, c }: any) => `${n}(${c}/${s})`).join(',')}</div>;
     }
     const { name } = grand.tNpc || grand.npc;
@@ -18,7 +19,7 @@ const SpeedText = ({ task }) => {
 }
 
 const DeonTaskBtn = ({ task, dailList, deonTask }) => {
-    const { id, speed, taskType, tpInfo } = task;
+    const { id, taskType, tpInfo, complete } = task;
     // 传送到目标位置
     const tpClick = () => {
         tpDir({ dir: tpInfo.address }).then(() => {
@@ -28,7 +29,7 @@ const DeonTaskBtn = ({ task, dailList, deonTask }) => {
     }
     // 每日任务
     if (dailList.includes(taskType)) {
-        return speed.done ? <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div> : null;
+        return complete.done ? <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div> : null;
     }
 
     return (
@@ -86,10 +87,8 @@ export const Task = () => {
                                 <div className='g_b'>{title}</div>
                                 <div>描述：{tips}</div>
                                 {
-                                    taskType !== 5 ? <div>奖励：{getTaskReward(reward).join(',')}</div> : ''
+                                    taskType !== TASK_TYPE_MEUN.copy ? <div>奖励：{getTaskReward(reward).join(',')}</div> : ''
                                 }
-
-                                {/* {!taskType.hide && <div>奖励：{getTaskReward(reward).join(',')}</div>} */}
                                 <SpeedText task={itme} />
                                 <DeonTaskBtn task={itme} dailList={dailList} deonTask={deonTask} />
                             </div>

@@ -1,7 +1,7 @@
 const { TaskSystem } = require('@/system');
 const { TaskG, DailysG } = require('@/global');
 const { taskFn } = require('@/utils');
-const { DAIL_TYPE_LIST, TASK_TYPE_TEXT_MEUN, TASK_TYPE_MEUN } = TaskSystem;
+const { DAIL_TYPE_LIST, TASK_TYPE_TEXT_MEUN, TASK_TYPE_MEUN, TASK_STATU } = TaskSystem;
 module.exports = {
     /**
      * 获取任务列表
@@ -19,7 +19,7 @@ module.exports = {
                 message = `${TASK_TYPE_TEXT_MEUN[type]}已经达到领取上限。`;
             } else {
                 const taskID = TaskSystem.randomDailyTaskId();
-                const task = TaskSystem.analyTask(req,res,taskID, type, role);
+                const task = taskFn.analyTask(req, res, taskID, type, role);
                 task.status = 1;
                 tasks = { [taskID]: task };
                 // 加入任务队列
@@ -34,7 +34,7 @@ module.exports = {
         // 主线任务文案
         const mains = type !== TASK_TYPE_MEUN.main ? (TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.main) || {}) : tasks;
         const taskList = [{
-            text: `${TASK_TYPE_TEXT_MEUN[TASK_TYPE_MEUN.main]}(${Object.values(mains).length})`,
+            text: `${TASK_TYPE_TEXT_MEUN[TASK_TYPE_MEUN.main]}(${Object.values(mains || {}).length})`,
             type: TASK_TYPE_MEUN.main
         }];
 
@@ -47,15 +47,9 @@ module.exports = {
                 type: type
             })
         })
-        // Object.keys(dailyTask).forEach(key => {
-        //     taskList.push({
-        //         text: `${TASK_TYPE_TEXT_MEUN[key]}(${dailyTask[key]})`,
-        //         type: Number(key)
-        //     })
-        // })
 
         const copys = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy) || {};
-        const copyLen = Object.values(copys).filter(({ status }) => status).length;
+        const copyLen = Object.values(copys).filter(({ status }) => status !== TASK_STATU.received && TASK_STATU.wait).length;
         if (copyLen) {
             taskList.push({
                 text: `${TASK_TYPE_TEXT_MEUN[TASK_TYPE_MEUN.copy]}(${copyLen})`,

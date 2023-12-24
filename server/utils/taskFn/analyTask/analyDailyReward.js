@@ -1,5 +1,5 @@
-const { computeUpExp } = require('@/system/AttrSystem/utils/computeUpExp');
-const { TASK_TYPE_MEUN } = require('../../0library/enum');
+const { AttrSystem, TaskSystem } = require('@/system');
+const { TASK_TYPE_MEUN } = TaskSystem;
 module.exports = {
     /**
      * 获取日常任务奖励
@@ -10,7 +10,7 @@ module.exports = {
     analyDailyReward: function (type, level) {
         // 每日经验
         if (type === TASK_TYPE_MEUN.exp) {
-            const exps = computeUpExp(level);
+            const exps = AttrSystem.computeUpExp(level);
             let exp = 0;
             switch (parseInt(level / 10)) {
                 case 0:

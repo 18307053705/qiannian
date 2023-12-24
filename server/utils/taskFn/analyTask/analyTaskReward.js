@@ -1,5 +1,5 @@
 const knapsackTable = require('@/table/knapsack');
-const TaskTable = require('@/table/task');
+const rewardFun = require('./rewardFun');
 module.exports = {
     /**
      * 解析任务奖励
@@ -14,7 +14,7 @@ module.exports = {
         }
         const { article, fun } = rewards;
         if (fun) {
-            return TaskTable.rewardFun[fun](req, res);
+            return rewardFun[fun](req, res);
         }
         if (article) {
             rewards.article = {};

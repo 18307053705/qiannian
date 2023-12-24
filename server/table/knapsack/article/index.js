@@ -11,6 +11,7 @@ const gemstone = require('./17_gemstone');
 const equipMaterial = require('./18_equipMaterial');
 const treasure = require('./19_treasure');
 const dongTian = require('./20_dongTian');
+const taskMaterial = require('./21_taskMaterial');
 
 module.exports = {
     /**
@@ -64,6 +65,8 @@ module.exports = {
                 return treasure.getArticle(idNum);
             case '20':
                 return dongTian.getArticle(idNum);
+            case '21':
+                return taskMaterial.getArticle(idNum);
             default:
                 console.log('未找到物品:::', idNum);
                 return undefined;
