@@ -18,7 +18,7 @@ module.exports = {
             return;
         }
 
-        const { skill_pool, role_level, addition } = RoleG.getRoleGlobal(req, res);
+        const { skill_pool, role_level, role_attr } = RoleG.getRoleGlobal(req, res);
         const { art: arts } = skill_pool;
         const art = arts[id];
         if (!art) {
@@ -29,7 +29,7 @@ module.exports = {
             return;
         }
         // 领悟技能检验
-        if (l === 0) {
+        if (art.l === 0) {
             const { condition } = ArtSystem.getArt(id);
             if (condition > role_level) {
                 res.send({
@@ -48,21 +48,23 @@ module.exports = {
             return;
         }
         // 升级需要计算升级材料
-        if (l !== 0) {
-            const message = artFn.getUpArtMaterial(req, res, up_art);
-            if (message) {
+        let success;
+        if (art.l !== 0) {
+            let result = artFn.getUpArtMaterial(req, res, up_art);
+            if (result.message) {
                 res.send({
                     code: 0,
-                    message
+                    message: result.message
                 })
                 return;
             }
+            success = result.success;
         }
         const { artInfo, attr } = ArtSystem.artUpLevel({ ...up_art, id });
         if (attr) {
             const { attr: oldAttr } = ArtSystem.artUpLevel({ ...art, id });
             Object.keys(attr).forEach((key) => {
-                addition[key] += attr[key] - oldAttr[key];
+                role_attr.addition[key] += attr[key] - oldAttr[key];
             })
         }
         // 更新技能
@@ -70,7 +72,7 @@ module.exports = {
         // 人物信息
         RoleG.updataRoleGlobal(req, res, {
             skill_pool,
-            addition
+            role_attr
         })
         res.send({
             code: 0,

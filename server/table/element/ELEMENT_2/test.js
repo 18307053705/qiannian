@@ -21,7 +21,6 @@ const TEST = {
         id: 2999989,
         name: "装备材料",
         type: 2,
-
         level: 1,
         attr: 1,
         isRanks: true,

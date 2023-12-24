@@ -32,7 +32,6 @@ module.exports = {
             artInfo['v'] = v + (r * rp) + (l * up);
             if (r >= 4 && effectValue) {
                 // 特效信息
-                console.log(data[art.id])
                 artInfo['e'] = `${effect}-${effectValue[r - 4]}`;
             }
         }

@@ -10,9 +10,9 @@ const RP_MEUN = {
 };
 
 export const getNameInfo = ({ l, n, r }) => {
-  return l === -1
+  return l === 0
     ? `${n}(未领悟)`
-    : `${n}(${RP_MEUN[r]}转${l === -1 ? 0 : l}重)`;
+    : `${n}(${RP_MEUN[r]}转${l}重)`;
 };
 
 export const getSuffix = (art, level) => {
@@ -23,7 +23,7 @@ export const getSuffix = (art, level) => {
       suffixClass: ""
     };
   }
-  if (l === -1 && condition <= level) {
+  if (l === 0 && condition <= level) {
     return {
       text: "领悟",
       suffixClass: "g_color"

@@ -1,3 +1,6 @@
+const { knapsackTable } = require('@/table');
+const { deleteKnapsack } = require('../knapsackFn/deleteKnapsack');
+
 module.exports = {
     /**
      * 计算技能升级材料
@@ -22,7 +25,7 @@ module.exports = {
         // 升重消耗材料
         if (p === 'l') {
             // 低于13级使用的材料Id
-            materialId = 1809 + l;
+            materialId = 1808 + l;
             // 13级及以上使用初阶技能升级书
             if (l > 13) {
                 materialId = 1830;
@@ -45,7 +48,7 @@ module.exports = {
             s = r;
         }
 
-        if(l === 1){
+        if (l === 1) {
             materialId = 180
         }
 
@@ -61,7 +64,6 @@ module.exports = {
         const { message, success } = deleteKnapsack(req, res, article);
         return {
             message,
-            up_art,
             success
         };
     }

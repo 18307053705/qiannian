@@ -36,10 +36,10 @@ export const Art = () => {
             upClick(art.id, index);
         } : undefined
 
-        const ArtNameClick = art.l !== -1 ? () => {
+        const ArtNameClick = art.l ? () => {
             setArtInx(index);
         } : undefined;
-        const nameClass = art.l !== -1 ? 'g_color' : '';
+        const nameClass = art.l  ? 'g_color' : '';
         return (
             <div>
                 <span className={nameClass} onClick={ArtNameClick}>{artName}</span>

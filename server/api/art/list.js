@@ -1,4 +1,4 @@
-const { ArtTable } = require("../../table");
+const { ArtSystem } = require("@/system");
 module.exports = {
     /**
      * 计算技能属性
@@ -14,23 +14,19 @@ module.exports = {
         let { art } = skill_pool;
         if (!art || JSON.stringify(art) === '{}') {
             art = {};
-            const artIds = ArtTable.getCareerArts(role_career);
+            const artIds = ArtSystem.getCareerArts(role_career);
             artIds.forEach((id) => {
-                const { p, n, t, v, d } = ArtTable.getArt(id);
-                const itme = {
+                const { p, n, t, v, d } = ArtSystem.getArt(id);
+                art[id] = {
                     id,
                     p,
                     n,
-                    l: -1,
+                    l: 0,
                     r: 0,
                     v,
                     d,
                     t
-                }
-                if (p === 2 || p === 3) {
-                    itme['t'] = t;
-                }
-                art[id] = itme;
+                };
             });
             RoleG.updataRoleGlobal(req, res, {
                 skill_pool: {
@@ -42,12 +38,10 @@ module.exports = {
 
         // 计算描述信息
         Object.keys(art).forEach(key => {
-            art[key]['msg'] = ArtTable.getArtMsg(art[key]);
-            const { condition } = ArtTable.getArt(art[key].id);
+            const { condition, msg } = ArtSystem.getArt(art[key].id);
             art[key]['condition'] = condition;
+            art[key]['msg'] = ArtSystem.getArtMsg({ ...art[key], msg });
         })
-
-
         res.send({
             code: 0,
             data: {
