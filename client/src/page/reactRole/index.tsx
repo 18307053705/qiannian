@@ -91,7 +91,7 @@ const ReactRole = ({ history }) => {
                     <input
                         type="radio"
                         name="role_sex"
-                        checked
+                        checked={sex === '1'}
                         value='1'
                         onChange={() => { setSex('1') }} />
                     <span>男</span>
@@ -101,6 +101,7 @@ const ReactRole = ({ history }) => {
                         type="radio"
                         name="role_sex"
                         value='2'
+                        checked={sex === '2'}
                         onChange={() => { setSex('2') }} />
                     <span>女</span>
                 </div>

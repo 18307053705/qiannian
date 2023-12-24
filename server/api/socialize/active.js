@@ -37,7 +37,7 @@ module.exports = {
         // 获取帮会信息
         const socialize = await socializeFn.getSocialize(req, res, id, type);
         if (socialize) {
-            const { socialize_pool: targSocialize, role_name } = await roleFn.getRoleInfo(req, res, { role_id });
+            const { socialize_pool: targSocialize, role_name } = await roleFn.asyncGetRoleInfo(req, res, role_id);
             const { apply, compose } = socialize;
             const role_a = apply.filter(({ id }) => id !== role_id);
             // 判断是否加入了其他势力

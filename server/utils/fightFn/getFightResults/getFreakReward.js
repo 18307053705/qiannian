@@ -1,5 +1,5 @@
-const { FightG, GrandG, PetG } = require('../../../global');
-const { knapsackTable, ElementTable } = require('../../../table');
+const { FightG, GrandG } = require('@/global');
+const { knapsackTable, ElementTable } = require('@/table');
 const knapsackFn = require('../../knapsackFn');
 const roleFn = require('../../roleFn');
 const { computePetLevel } = require('../../petFn/computePetLevel');

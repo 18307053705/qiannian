@@ -28,14 +28,14 @@ module.exports = {
                 equipReward[id] = {
                     name,
                     n,
-                    id,
+                    id: Number(id),
                     s,
                     ext,
                     uid: `${date}${index}`
                 }
             } else {
                 artReward[id] = {
-                    id,
+                    id: Number(id),
                     name,
                     s,
                     uid: `${date}${index}`

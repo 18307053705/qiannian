@@ -1,5 +1,6 @@
 const MATERIAL_MEUN = {
-    1: [53, 54, 55, 56, 57, 58, 59]
+    1: [140, 141, 142, 143, 144, 145, 146],
+    2: [147],
 }
 module.exports = {
     /**
@@ -16,8 +17,8 @@ module.exports = {
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         if (type === 1) {
             const material = {};
-            data.forEach(({ id, p, s }) => {
-                if (materialIdList.includes(id) && p === 5) {
+            data.forEach(({ id, s }) => {
+                if (materialIdList.includes(id)) {
                     material[id] = s;
                 }
             })

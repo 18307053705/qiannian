@@ -7,7 +7,8 @@ const TYPE_MEUN_NAME = {
     3: 'ranks',
 }
 const MATERIAL_MEUN = {
-    1: [53, 54, 55, 56, 57, 58, 59]
+    1: [140, 141, 142, 143, 144, 145, 146],
+    2: [147],
 }
 module.exports = {
     /**
@@ -20,18 +21,23 @@ module.exports = {
         const { type, materialId, materialNum } = req.body;
         const materialIdList = MATERIAL_MEUN[type] || [];
         const materialError = materialIdList.includes(materialId) || materialId === 'all' || materialId === -1;
-        if (materialNum <= 0 || !type || type === 3) {
+        if (!type) {
             ErrorG.paramsError(res);
             return;
         }
-        if (type === 1 && !materialError) {
+
+        if (materialNum <= 0 && !materialError) {
             ErrorG.paramsError(res);
             return;
         }
-        if (type === 2 && materialId !== -1) {
-            ErrorG.paramsError(res);
-            return;
-        }
+        // if (type === 1 && !materialError) {
+        //     ErrorG.paramsError(res);
+        //     return;
+        // }
+        // if (type === 2 && materialId !== -1) {
+        //     ErrorG.paramsError(res);
+        //     return;
+        // }
         // 获取全局角色信息
         const { role_integral, socialize_pool } = RoleG.getRoleGlobal(req, res);
         // 获取帮会信息
@@ -62,21 +68,16 @@ module.exports = {
                 text.push(`捐献${materialNum}银两，获得${typeText}贡献${proffer * 10}点,个人${typeText}声望${proffer}点`);
             }
         }
-        // 剩余材料
-        // const material = {};
-        // 消耗材料列表
-        // const materialList = [];
         let materialArticle = undefined;
-        // 消耗材料后的背包
+        // 消耗全部材料
         if (materialId === 'all') {
             materialArticle = {};
-            data.forEach(({ id, p, s, n }) => {
-                if (materialIdList.includes(id) && p === 5) {
+            data.forEach(({ id, s, name }) => {
+                if (materialIdList.includes(id)) {
                     materialArticle[id] = {
                         id,
-                        p,
                         s,
-                        n
+                        name
                     };
                 }
             })
@@ -84,13 +85,12 @@ module.exports = {
 
         if (materialIdList.includes(materialId)) {
             materialArticle = {};
-            data.forEach(({ id, p, n }) => {
-                if (materialId === id && p === 5) {
+            data.forEach(({ id, name }) => {
+                if (materialId === id) {
                     materialArticle[id] = {
                         id,
-                        p,
+                        name,
                         s: materialNum,
-                        n
                     };
                 }
             })
@@ -98,7 +98,7 @@ module.exports = {
 
 
         if (materialArticle) {
-            const result = knapsackFn.deleteKnapsack(req, res, { article: JSON.parse(JSON.stringify(materialArticle)) });
+            const result = knapsackFn.deleteKnapsack(req, res, JSON.parse(JSON.stringify(materialArticle)));
             message = result.message;
             data = result.data;
         }
@@ -112,11 +112,11 @@ module.exports = {
         }
 
         // 更新全局背包信息
-        KnapsackG.updateknapsackGlobal(req, res, { data, tael });
-        Object.values(materialArticle || {}).forEach(({ id, s, n }) => {
+        KnapsackG.updateknapsackGlobal(req, res, { tael });
+        Object.values(materialArticle || {}).forEach(({ id, s, name }) => {
             const { value } = knapsackTable.getArticle(id);
             proffer += value * s;
-            text.push(`捐献${s}个${n}，获得${typeText}贡献${value * s * 10}点,个人${typeText}声望${value * s}点`);
+            text.push(`捐献${s}个${name}，获得${typeText}贡献${value * s * 10}点,个人${typeText}声望${value * s}点`);
         })
         // 更新全局角色信息
         role_integral[sociKey] += proffer;

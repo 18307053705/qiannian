@@ -1,10 +1,11 @@
+const config = require("./config");
 const userSql = require('./userSql');
 const roleSql = require('./roleSql');
 const knapsackSql = require('./knapsackSql');
 const warehouseSql = require('./warehouseSql');
 const friendsSql = require('./friendsSql');
 const ShopSql = require('./shopSql');
-const config = require("./config");
+const SocializeSql = require("./socializeSql");
 
 
 
@@ -28,4 +29,5 @@ module.exports = {
   warehouseSql,
   friendsSql,
   ShopSql,
+  SocializeSql
 };

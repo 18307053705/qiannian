@@ -1,6 +1,5 @@
 
 const { PAI_MAI_HANG_Global, TIMER_CPNFIG } = require('./config');
-const { getPaimaiHang } = require('./getPaimaiHang');
 const { paiMaiEnd } = require('../../utils/paimaiFn/paiMaiEnd');
 module.exports = {
     /**

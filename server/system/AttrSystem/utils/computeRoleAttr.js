@@ -18,7 +18,7 @@ module.exports = {
             console.log('调用computeRoleAttr函数：未传递role字段');
             return;
         }
-        const { role_attr, role_buff, role_level, role_career, role_realm, } = role;
+        const { role_attr, role_buff, role_level, role_career, role_realm } = role;
         const { addition, potential } = role_attr;
         const potentialAttr = computePotentialAttr(potential);
         // 玩家属性 = 职业属性 * 等级 * 境界

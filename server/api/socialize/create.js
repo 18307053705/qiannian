@@ -1,4 +1,6 @@
-const { ruleFn } = require('../../utils');
+const { ruleFn, knapsackFn } = require('@/utils');
+const { SocializeSql } = require('@/mysql');
+const { knapsackTable } = require('@/table');
 
 const TYPE_MEUN_NAME = {
     1: 'gang',
@@ -12,8 +14,8 @@ const TYPE_MEUN = {
 }
 // 令牌ID
 const TOKEN_ID_MEUN = {
-    1: 59, // 帮会创建令
-    2: 60, // 庄园创建令
+    1: 146, // 帮会创建令
+    2: 147, // 庄园创建令
 }
 module.exports = {
     /**
@@ -33,75 +35,74 @@ module.exports = {
         }
         const { role_id, role_name, socialize_pool } = RoleG.getRoleGlobal(req, res);
         const sociKey = TYPE_MEUN_NAME[type];
-        if(socialize_pool[sociKey]){
+        if (socialize_pool[sociKey]) {
             res.send({
                 code: 0,
                 message: `你已经加入了${TYPE_MEUN[type]}`
             })
             return;
         }
-        const { results } = await res.asyncQuery(`select * from socialize  where name="${name}" and type=${type} `);
-        if (results[0]) {
+        const results = await SocializeSql.asyncGetNameSocialize(name, type);
+        if (results) {
             res.send({
                 code: 0,
-                message: `已经存在该${TYPE_MEUN[type]}`
+                message: `已存在${TYPE_MEUN[type]}名称：${name}`
             })
             return;
         }
-        
-       
-
-        let { tael, data } = KnapsackG.getknapsackGlobal(req, res);
+        const { tael } = KnapsackG.getknapsackGlobal(req, res);
         // 获取对应创建令ID
         const tokenId = TOKEN_ID_MEUN[type];
         let token = 0;
-        const chengData = [];
         // 队伍不需要创建令
         if (tokenId) {
-            data.forEach((itme) => {
-                if (itme.id === tokenId && itme.p === 5) {
-                    itme.s -= 1;
-                    token = 1;
-                    if (!itme.s) {
-                        return;
-                    }
+            const { name } = knapsackTable.getArticle(tokenId);
+            const { message } = knapsackFn.deleteKnapsack(req, res, {
+                [tokenId]: {
+                    id: tokenId,
+                    name,
+                    s: 1
                 }
-                chengData.push(itme);
             })
+            if (!message) {
+                token = 1;
+            }
         }
         // 创建银两 队伍100000 其他5000000
         const sumeTael = type === 3 ? 100000 : 5000000;
-        // 没有令牌则扣除银两
-        if (!token) {
-            if (tael < sumeTael) {
-                res.send({
-                    code: 0,
-                    message: `银两不足${sumeTael}`
-                })
-                return;
-            }
+        // 令牌不足，使用银两创建
+        if (!token && tael < sumeTael) {
+            res.send({
+                code: 0,
+                message: `银两不足${sumeTael}`
+            })
+            return;
         }
-
-      
         const compose = [{ id: role_id, name: role_name, level: 1 }];
-        const sqlStr = "insert into socialize(name,level,compose,text,type,soci_id,apply,exp) values(?,?,?,?,?,?,?,?)";
-        const sqlData = [name, 1, JSON.stringify(compose), text || '', type, role_id, '[]', '0/10000'];
-        await res.asyncAdd(sqlStr, sqlData)
+        // 势力id
+        const soci_id = `${new Date().getTime()}_${RegionG.getRegionNum(req)}`;
+        const data = {
+            name,
+            level: 1,
+            compose: JSON.stringify(compose),
+            text: text || '',
+            type,
+            soci_id,
+            apply: '[]',
+            exp: '0/10000'
+        }
+        await SocializeSql.asyncCreateSocialize(data)
         // 没有令牌消耗银两，反之消耗令牌
         if (!token) {
             KnapsackG.updateknapsackGlobal(req, res, {
                 tael: tael - sumeTael
-            })
-        } else {
-            KnapsackG.updateknapsackGlobal(req, res, {
-                data: chengData
             })
         }
         RoleG.updataRoleGlobal(req, res, {
             socialize_pool: {
                 ...socialize_pool,
                 [TYPE_MEUN_NAME[type]]: {
-                    id: role_id,
+                    id: soci_id,
                     name
                 }
             }

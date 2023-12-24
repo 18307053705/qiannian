@@ -1,5 +1,5 @@
-const { SocializeG } = require('../../global');
-const { socializeFn } = require('../../utils');
+const { SocializeG } = require('@/global');
+const { socializeFn } = require('@/utils');
 const TYPE_MEUN_NAME = {
     1: 'gang',
     2: 'intersect',
@@ -58,7 +58,7 @@ module.exports = {
         // id存在却未找到对应势力，代表势力已经解散
         if (soci_id) {
             delete socialize_pool[sociKey];
-            RoleG.updateRoleGlobal(req, {
+            RoleG.updataRoleGlobal(req, res, {
                 socialize_pool
             })
             res.send({

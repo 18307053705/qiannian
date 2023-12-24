@@ -1,4 +1,5 @@
-const { socializeFn } = require('../../utils');
+const { socializeFn } = require('@/utils');
+const { SocializeSql } = require('@/mysql');
 const TYPE_MEUN_NAME = {
     1: 'gang',
     2: 'intersect',
@@ -23,9 +24,9 @@ module.exports = {
         if (socialize) {
             delete socialize_pool[typeName];
             RoleG.updataRoleGlobal(req, res, { socialize_pool });
-            // 等级1操作即为解散操作
+            // 等级1操作即为帮主解散操作
             if (level === 1) {
-                await res.asyncQuery(`delete from socialize  where soci_id="${id}" and type=${type}`);
+                await SocializeSql.asyncDeleteSocialize(id, type);
                 res.send({
                     code: 0,
                     data: '成功退出！'

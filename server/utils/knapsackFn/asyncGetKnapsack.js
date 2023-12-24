@@ -12,7 +12,7 @@ module.exports = {
             // 仓库不存在获取其他人
             const { role_id: roleId } = RoleG.getRoleGlobal(req, res);
             const results = await warehouseSql.asyncGetarehouse(roleId);
-            const data = knapsackG.dataListChang(results.data, true);
+            const data = KnapsackG.dataListChang(results.data, true);
             return {
                 ...results,
                 data
@@ -24,7 +24,7 @@ module.exports = {
             return knapsack;
         }
         const results = await knapsackSql.asyncGetKnapsack(role_id);
-        const data = knapsackG.dataListChang(results.data);
+        const data = KnapsackG.dataListChang(results.data);
         return {
             ...results[0],
             data

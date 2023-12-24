@@ -1,7 +1,4 @@
-
-
 const { RANK_TASK_Global, RANK_TASK_TYPE } = require('./config');
-
 module.exports = {
     /**
     * @param {*} req 

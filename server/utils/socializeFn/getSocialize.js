@@ -1,4 +1,4 @@
-
+const { SocializeSql } = require('@/mysql')
 module.exports = {
     /**
      * 获取势力信息
@@ -18,12 +18,12 @@ module.exports = {
      * @returns  socialize.soci_id 
      */
     getSocialize: async function (req, res, id, type) {
-        const { results } = await res.asyncQuery(`select * from socialize  where soci_id="${id}" and type=${type}`);
-        if (results[0]) {
+        const results = await SocializeSql.asyncGeIDSocialize(id, type);
+        if (results) {
             return {
-                ...results[0],
-                compose: JSON.parse(results[0]['compose']),
-                apply: JSON.parse(results[0]['apply']),
+                ...results,
+                compose: JSON.parse(results['compose']),
+                apply: JSON.parse(results['apply']),
             }
         }
         return undefined;

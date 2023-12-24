@@ -35,7 +35,7 @@ module.exports = {
         // 获取帮会信息
         const socialize = await socializeFn.getSocialize(req, res, id, type);
         if (socialize) {
-            const { socialize_pool: targSocialize } = await roleFn.getRoleInfo(req, res, { role_id });
+            const { socialize_pool: targSocialize } = await roleFn.asyncGetRoleInfo(req, res, role_id);
             let { compose } = socialize;
             // 踢人操作
             if (chengLevel === -1) {

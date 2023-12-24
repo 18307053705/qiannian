@@ -1,3 +1,4 @@
+const { SocializeSql } = require('@/mysql');
 const JOSN_KEYS = ['compose', 'apply'];
 module.exports = {
     /**
@@ -24,8 +25,7 @@ module.exports = {
             let value = JOSN_KEYS.includes(key) ? JSON.stringify(data[key]) : data[key];
             upData.push(`${key}='${value}'`)
         })
-        // const { results } = await mysql.asyncQuery(`select * from socialize  where soci_id="${id}" and type=${type}`);
-        const { results } = await res.asyncQuery(`update socialize  SET ${upData.join(',')}  where soci_id="${id}" and type=${type}`);
+        const results = await SocializeSql.asyncUpdateSocialize(id, type, upData);
         return results;
     },
 }

@@ -11,8 +11,8 @@ module.exports = {
     updataRoleInfo: async function (req, res, data, role_id) {
         const { ROLE_JSON_KEYS } = RoleG;
         // 判断角色是否在线
-        if (RoleG.getRoleGlobal(req, res, { role_id })) {
-            RoleG.updataRoleGlobal(req, res, data, { role_id })
+        if (RoleG.getRoleGlobal(req, res, role_id)) {
+            RoleG.updataRoleGlobal(req, res, data, role_id)
             return;
         }
         // 否则更新数据库

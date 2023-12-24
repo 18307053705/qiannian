@@ -1,6 +1,6 @@
-const { roleFn } = require('../../utils');
-const { RealmTable, TitleTable } = require('../../table');
-const MEUN = require('../../meun')
+const { roleFn } = require('@/utils');
+const { RealmTable, TitleTable } = require('@/table');
+const MEUN = require('@/meun')
 const AttrSystem = require('@/system/AttrSystem')
 module.exports = {
     /**
@@ -15,7 +15,6 @@ module.exports = {
         }
         if (role) {
             // 计算角色属性
-           
             const data =  AttrSystem.computeRoleAttr(role)
             const realm = RealmTable.getRealm(role['role_realm']);
             const title = TitleTable.getTitle(role['role_title']);
