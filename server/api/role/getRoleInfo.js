@@ -1,5 +1,4 @@
 const { roleFn } = require('../../utils');
-const { ErrorG } = require('../../global');
 const { RealmTable, TitleTable } = require('../../table');
 const MEUN = require('../../meun')
 const AttrSystem = require('@/system/AttrSystem')

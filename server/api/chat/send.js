@@ -1,4 +1,4 @@
-const { ErrorG, ChatG } = require('../../global');
+const { ChatG } = require('../../global');
 
 module.exports = {
     /**

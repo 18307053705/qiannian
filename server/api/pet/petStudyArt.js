@@ -1,4 +1,4 @@
-const { PetG, ErrorG } = require("../../global");
+const { PetG } = require("../../global");
 const { knapsackFn, artFn } = require("../../utils");
 const { ArtTable, knapsackTable } = require("../../table");
 module.exports = {

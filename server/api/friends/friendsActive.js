@@ -1,4 +1,3 @@
-const { RoleG, ErrorG } = require("../../global");
 module.exports = {
     // 好友申请处理
     friendsActive: async function (req, res) {

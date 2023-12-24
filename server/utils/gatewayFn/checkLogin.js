@@ -1,4 +1,3 @@
-const { ErrorG } = require("../../global");
 const { checkToken } = require("../userFn/checkToken");
 // 无需网关验证的请求
 const whiteApiList = [

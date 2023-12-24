@@ -1,4 +1,4 @@
-const { ErrorG, PetG } = require('../../global');
+const { PetG } = require('../../global');
 const { ruleFn } = require('../../utils');
 module.exports = {
     /**

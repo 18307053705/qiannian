@@ -1,4 +1,3 @@
-const { ErrorG } = require('../../global');
 module.exports = {
     /**
      * 势力列表

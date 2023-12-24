@@ -1,5 +1,5 @@
 
-const { ErrorG, TaskG } = require('../../global');
+const { TaskG } = require('../../global');
 const { taskFn } = require('../../utils');
 module.exports = {
     /**

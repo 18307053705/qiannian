@@ -1,5 +1,3 @@
-const { ErrorG } = require("../../global");
-const { roleFn } = require("../../utils");
 module.exports = {
     // 好友申请
     friendsApply: async function (req, res) {

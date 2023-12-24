@@ -1,4 +1,3 @@
-const { ErrorG } = require('../../global');
 const { knapsackTable } = require('../../table');
 
 module.exports = {

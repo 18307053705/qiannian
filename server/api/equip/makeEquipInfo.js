@@ -1,4 +1,3 @@
-const { ErrorG } = require('../../global');
 const { equipFn } = require('../../utils');
 module.exports = {
     /**

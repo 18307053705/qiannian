@@ -1,5 +1,4 @@
 
-const { ErrorG } = require('../../global')
 module.exports = {
     /**
      * 验证物品信息
