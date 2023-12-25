@@ -1,5 +1,5 @@
-const { qingyuanFn } = require('../../utils');
-const { DailysG } = require("../../global");
+const { qingyuanFn } = require('@/utils');
+const { DailysG } = require("@/global");
 module.exports = {
     /**
      * 树打理
@@ -11,8 +11,9 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const qingyuan = await qingyuanFn.getQingyuanInfo(req, res);
-        if (!qingyuan) {
+        const { qingyuan } = RoleG.getRoleGlobal(req, res);
+        const { d } = qingyuan;
+        if (!d) {
             res.send({
                 code: 0,
                 message: `你没有姻缘树，快去姻缘石与心仪之人结缘吧！`

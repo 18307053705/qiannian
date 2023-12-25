@@ -5,6 +5,7 @@ const updateknapsackGlobal = require('./updateknapsackGlobal');
 const deleteknapsackGlobal = require('./deleteknapsackGlobal');
 const saveknapsackSql = require('./saveknapsackSql');
 const dataListChang = require('./dataListChang');
+const saveSqlChang = require('./saveSqlChang');
 global.KnapsackG = {
    KNAPSACK_LIMIT,
    KNAPSACK_SIZE,
@@ -14,5 +15,6 @@ global.KnapsackG = {
    ...updateknapsackGlobal,
    ...deleteknapsackGlobal,
    ...saveknapsackSql,
-   ...dataListChang
+   ...dataListChang,
+   ...saveSqlChang
 }

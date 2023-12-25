@@ -1,12 +1,13 @@
 const config = require("./config");
-const userSql = require('./userSql');
-const roleSql = require('./roleSql');
-const knapsackSql = require('./knapsackSql');
-const warehouseSql = require('./warehouseSql');
-const friendsSql = require('./friendsSql');
+const UserSql = require('./userSql');
+const RoleSql = require('./roleSql');
+const KnapsackSql = require('./knapsackSql');
+const WarehouseSql = require('./warehouseSql');
+const FriendsSql = require('./friendsSql');
 const ShopSql = require('./shopSql');
 const SocializeSql = require("./socializeSql");
-
+const QingyuanSql = require("./qingyuanSql");
+const PetSql = require("./petSql");
 
 
 module.exports = {
@@ -23,11 +24,13 @@ module.exports = {
    * @param {*} sqlInfo 接入数据库信息，可不传
    */
   asyncAdd: config.asyncAdd,
-  userSql,
-  roleSql,
-  knapsackSql,
-  warehouseSql,
-  friendsSql,
+  UserSql,
+  RoleSql,
+  KnapsackSql,
+  WarehouseSql,
+  FriendsSql,
   ShopSql,
-  SocializeSql
+  SocializeSql,
+  QingyuanSql,
+  PetSql
 };

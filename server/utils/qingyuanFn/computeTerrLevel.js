@@ -1,5 +1,4 @@
-const { getQingyuanInfo } = require("./getQingyuanInfo");
-const { updataQingyuanInfo } = require("./updataQingyuanInfo");
+const { QingyuanSql } = require('@/mysql');
 const { terrAttr } = require("./terrAttr");
 
 module.exports = {
@@ -10,7 +9,9 @@ module.exports = {
      * @param {*} cExp 增加的经验 
      */
     computeTerrLevel: async function (req, res, cExp) {
-        const qingyuan = await getQingyuanInfo(req, res);
+        const role = RoleG.getRoleGlobal(req, res)
+        const { d } = role.qingyuan;
+        const qingyuan = await QingyuanSql.asyncGetQingYuan(d.id);
         // // 计算操作后的情缘信息
         const { level, exp, causality } = qingyuan;
         const [oldExp, upExp] = exp.split('/');
@@ -28,6 +29,6 @@ module.exports = {
             await terrAttr(req, res);
         }
         // 更新情缘
-        await updataQingyuanInfo(req, res, updata);
+        QingyuanSql.asyncUpdateQingYuan(d.id, updata);
     }
 }

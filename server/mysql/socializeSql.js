@@ -32,14 +32,15 @@ module.exports = {
     asyncCreateSocialize: async function (data) {
         const keys = [];
         const values = [];
-        const sqlData = [];
+        const list = [];
         Object.keys(data).forEach((key) => {
             keys.push(key);
             values.push('?');
-            sqlData.push(data[key]);
+            list.push(data[key]);
         })
         const sqlStr = `insert into socialize(${keys.join(',')}) values(${values.join(',')})`;
-        await asyncAdd(sqlStr, sqlData);
+        const { results } = await asyncAdd(sqlStr, list);
+        return results;
     },
     /**
      * 更新势力信息
@@ -64,5 +65,13 @@ module.exports = {
     asyncDeleteSocialize: async function (soci_id, type) {
         const { results } = await asyncQuery(`delete from socialize  where soci_id="${soci_id}" and type=${type}`);
         return results[0];
+    },
+    /**
+     * 获取势力列表
+     * @param {*} type 势力类型 1：帮会 2：庄园 3：队伍
+     */
+    asyncGetSocializeList: async function (type) {
+        const { results } = await asyncQuery(`select * from socialize  where type="${type}"`);
+        return results;
     },
 }

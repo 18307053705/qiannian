@@ -1,3 +1,4 @@
+const { SocializeSql } = require('@/mysql');
 module.exports = {
     /**
      * 势力列表
@@ -9,7 +10,7 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { results } = await res.asyncQuery(`select * from socialize  where type="${type}"`);
+        const results = await SocializeSql.asyncGetSocializeList(type);
         res.send({
             code: 0,
             data: results

@@ -43,9 +43,9 @@ module.exports = {
     */
     asyncCreateShop: async function ({ user_id, role_id, name, role_name }) {
         const createDte = new Date() * 1;
-        const shopSql = "insert into shop(user_id,role_id,name,petList,article,date,role_name) values(?,?,?,?,?,?,?)";
-        const shopData = [user_id, role_id, name, '[]', '[]', createDte, role_name];
-        await asyncAdd(shopSql, shopData);
+        const sqlStr = "insert into shop(user_id,role_id,name,petList,article,date,role_name) values(?,?,?,?,?,?,?)";
+        const list = [user_id, role_id, name, '[]', '[]', createDte, role_name];
+        await asyncAdd(sqlStr, list);
         const shop = {
             user_id,
             role_id,

@@ -1,3 +1,4 @@
+const { PetSql } = require('@/mysql');
 const { AttrSystem } = require('@/system');
 const { getPetArt } = require('./getPetArt');
 
@@ -26,25 +27,16 @@ module.exports = {
             flair_x,
             flair: 0,
             level: 1,
-            art: JSON.stringify(getPetArt(flair_x, artId)),
-            attr: JSON.stringify(AttrSystem.getPetBaseAttr(type)),
+            art: getPetArt(flair_x, artId),
+            attr: AttrSystem.getPetBaseAttr(type),
             equip: '{}',
-            addition: JSON.stringify(AttrSystem.getInitAttr()),
+            addition: AttrSystem.getInitAttr(),
             reborn: 0,
             state: 0,
             ele,
             exp: '0/100'
         };
-        const dataKey = [];
-        const dataValue = [];
-        const values = [];
-        Object.keys(petInfo).forEach(key => {
-            dataKey.push(key);
-            dataValue.push(petInfo[key]);
-            values.push("?");
-        })
-        const petSql = `insert into pet(${dataKey.join(',')}) values(${values.join(',')})`;
-        const { results } = await res.asyncAdd(petSql, dataValue);
+        const results = await PetSql.asyncInsertPet(petInfo);
         if (results) {
             const lastId = results.insertId;
             pet_pool['l'].push({

@@ -1,4 +1,4 @@
-const roleSql = require("@/mysql/roleSql");
+const RoleSql = require("@/mysql/roleSql");
 module.exports = {
     /**
      * 
@@ -15,7 +15,7 @@ module.exports = {
         if (roleInfo) {
             return roleInfo;
         }
-        const results = await roleSql.asyncGetRoleInfo(role_id);
+        const results = await RoleSql.asyncGetRoleInfo(role_id);
         if (results) {
             const role = {}
             const { ROLE_JSON_KEYS } = RoleG;

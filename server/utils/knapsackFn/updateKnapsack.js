@@ -1,3 +1,4 @@
+const { KnapsackSql } = require('@/mysql');
 module.exports = {
     /**
      * 更新背包
@@ -12,13 +13,10 @@ module.exports = {
             KnapsackG.updateknapsackGlobal(req, res, data, role_id);
             return;
         }
-        // 否则直接更新sql
-        const upData = [];
+        const upData = {};
         Object.keys(data).forEach(key => {
-            const value = key === 'data' ? KnapsackG.saveSqlChang(data[key]) : data[key];
-            upData.push(`${key}='${value}'`)
+            upData[key] = key === 'data' ? KnapsackG.saveSqlChang(data[key]) : data[key];
         })
-        const { results } = await res.asyncQuery(`update knapsack  SET ${upData.join(',')}  where role_id="${role_id}"`);
-        return results;
+        return KnapsackSql.asyncUpdateKnapsack(role_id, upData);
     },
 }

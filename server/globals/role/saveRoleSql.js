@@ -1,4 +1,5 @@
-const { ROLE_Global, ROLE_JSON_KEYS } = require('./config');
+const { RoleSql } = require('@/mysql');
+const { ROLE_Global } = require('./config');
 
 module.exports = {
     /**
@@ -11,13 +12,12 @@ module.exports = {
     saveRoleSql: async function (req, res, userId) {
         const user = userId || req.cookies["q_uid"];
         const { updateKeys, ...roleInfo } = ROLE_Global[user];
-        const data = [];
+        const data = {};
         [...new Set(updateKeys)].forEach((key) => {
-            const value = ROLE_JSON_KEYS.includes(key) ? JSON.stringify(roleInfo[key]) : roleInfo[key];
-            data.push(`${key}='${value}'`)
+            data[key] = roleInfo[key];
         })
-        if (data.length) {
-            await res.asyncQuery(`update role  SET ${data.join(',')}  where role_id="${roleInfo.role_id}"`);
+        if (JSON.stringify(data) !== '{}') {
+            await RoleSql.asyncUpdateRole(roleInfo.role_id, data);
         }
         return;
     }

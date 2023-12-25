@@ -1,5 +1,5 @@
 const { roleFn } = require('@/utils');
-const { roleSql, knapsackSql } = require('@/mysql')
+const { RoleSql, KnapsackSql } = require('@/mysql');
 module.exports = {
     /**
      * 角色登录
@@ -11,8 +11,8 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const role = await roleSql.asyncGetSelfRoleInfo(req);
-        const knapsack = await knapsackSql.asyncGetSelfKnapsack(req);
+        const role = await RoleSql.asyncGetRoleInfo(role_id);
+        const knapsack = await KnapsackSql.asyncGetKnapsack(role_id);
         if (!role && !knapsack) {
             res.send({
                 code: 100006,

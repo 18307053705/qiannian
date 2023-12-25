@@ -1,3 +1,4 @@
+const { WarehouseSql } = require('@/mysql');
 module.exports = {
     /**
      * 更新仓库
@@ -7,12 +8,10 @@ module.exports = {
      */
     updateWarehouse: async function (req, res, data) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
-        const upData = [];
+        const upData = {};
         Object.keys(data).forEach(key => {
-            const value = key === 'data' ? KnapsackG.saveSqlChang(data[key]) : data[key];
-            upData.push(`${key}='${value}'`)
+            upData[key] = key === 'data' ? KnapsackG.saveSqlChang(data[key]) : data[key];
         })
-        const { results } = await res.asyncQuery(`update warehouse  SET ${upData.join(',')}  where role_id="${role_id}"`);
-        return results;
+        return WarehouseSql.asyncUpdateWarehouse(role_id,upData);
     },
 }

@@ -20,7 +20,7 @@ const Plater = ({ history }) => {
             let falg = false;
             if (data) {
                 const { list } = data;
-                falg = JSON.parse(list).find(({ id }) => id === state.role_id);
+                falg = list.find(({ id }) => id === state.role_id);
             }
             setIsFriend(falg);
         })

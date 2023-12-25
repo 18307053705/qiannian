@@ -1,21 +1,22 @@
-const { roleFn, qingyuanFn } = require('../../utils');
-const { ChatG } = require("../../global");
-const { knapsackTable } = require('../../table');
+const { QingyuanSql } = require('@/mysql');
+const { roleFn, knapsackFn } = require('@/utils');
+const { ChatG } = require("@/global");
+const { knapsackTable } = require('@/table');
 
 function addYinYuanEquip(req, res, role_id) {
     const { data } = KnapsackG.getknapsackGlobal(req, res, role_id);
-    const list = [141, 142, 143, 144, 145];
+    const list = [13141, 13142, 13143, 13144, 13145];
+    const article = {};
     list.forEach(id => {
-        const { name } = knapsackTable.getEquip(id);
-        data.push({
+        const { name } = knapsackTable.getArticle(id);
+        article[id] = {
             id,
-            n: name,
-            p: 3,
+            name: name,
             s: 1,
-            ext: "0_0_0_0_0_0_0_0_0"
-        })
-    })
-    KnapsackG.updateknapsackGlobal(req, res, { data }, role_id);
+        };
+    });
+    const { data: updateData } = knapsackFn.addArticle(article, data, true)
+    KnapsackG.updateknapsackGlobal(req, res, { data: updateData }, role_id);
 }
 
 
@@ -32,7 +33,7 @@ module.exports = {
             return;
         }
         const iRole = RoleG.getRoleGlobal(req, res);
-        const tRole = RoleG.getRoleGlobal(req, res, { role_id });
+        const tRole = RoleG.getRoleGlobal(req, res, role_id);
         // 非拒绝操作，对方必须在线
         if (type !== 2 && !tRole) {
             res.send({
@@ -90,7 +91,7 @@ module.exports = {
                 r_id: iRoleId,
             };
             RoleG.updataRoleGlobal(req, res, { qingyuan: iQingYuan });
-            RoleG.updataRoleGlobal(req, res, { qingyuan: tQingYuan }, { role_id: tRoleId });
+            RoleG.updataRoleGlobal(req, res, { qingyuan: tQingYuan }, tRoleId);
             res.send({
                 code: 0,
                 data: {
@@ -113,12 +114,12 @@ module.exports = {
                 exp: '0/100',
                 causality: 0
             }
-            const results = await qingyuanFn.insertQingYuan(req, res, qingyuan)
+            const results = await QingyuanSql.asyncInsertQingYuan(qingyuan);
             const id = results.insertId;
             const iS = iQingYuan.s || 0;
             const tS = tQingYuan.s || 0;
             RoleG.updataRoleGlobal(req, res, { qingyuan: { d: { id, rId: tRoleId, n: tRoleName }, s: iS + 1 } });
-            RoleG.updataRoleGlobal(req, res, { qingyuan: { d: { id, rId: iRoleId, n: iRoleName }, s: tS + 1 } }, { role_id: tRoleId });
+            RoleG.updataRoleGlobal(req, res, { qingyuan: { d: { id, rId: iRoleId, n: iRoleName }, s: tS + 1 } }, tRoleId);
             ChatG.sendChat(req, res, 0, `恭喜玩家${iRoleName}与${tRoleName}喜结良缘，大家快去恭喜他们吧！！`);
             if (!iS) {
                 addYinYuanEquip(req, res);
@@ -145,7 +146,7 @@ module.exports = {
             delete iQingYuan.i;
             // 拒绝撤销结缘，对方可不在线，所有此处需额外判断
             if (!tRole) {
-                const { qingyuan: tQingYuans } = await roleFn.getRoleInfo(req, res, { role_id });
+                const { qingyuan: tQingYuans } = await roleFn.asyncGetRoleInfo(req, res, role_id);
                 delete tQingYuans.role;
                 delete tQingYuans.i;
             } else {
@@ -153,9 +154,11 @@ module.exports = {
                 delete tQingYuan.i;
             }
             RoleG.updataRoleGlobal(req, res, { qingyuan: iQingYuan });
-            await roleFn.updataRoleInfo(req, res, { qingyuan: tRole ? tQingYuan : tQingYuans }, role_id);
-            // 可申请情缘列表
-            const players = await roleFn.getAddressPlayers(req, res, address);
+            const [players] = await Promise.all([
+                roleFn.getAddressPlayers(req, res, address),
+                roleFn.updataRoleInfo(req, res, { qingyuan: tRole ? tQingYuan : tQingYuans }, role_id),
+
+            ]);
             const list = [];
             players.forEach(({ role_sex, role_id, role_name }) => {
                 if (iSex !== role_sex) {

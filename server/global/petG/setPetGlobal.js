@@ -1,4 +1,5 @@
-const { petGlobal, PET_JSON_KEYS } = require('./config')
+const { PetSql } = require('@/mysql');
+const { petGlobal } = require('./config');
 
 module.exports = {
     /**
@@ -8,18 +9,13 @@ module.exports = {
      */
     setPetGlobal: async function (req, res) {
         const { role_id, pet_pool } = RoleG.getRoleGlobal(req, res);
-        let pet = undefined;
+        let pet;
         if (pet_pool.c.id) {
-            const { results } = await res.asyncQuery(`select * from  pet where id=${pet_pool.c.id}`);
-            pet = results[0];
+            pet = await PetSql.asyncGetPet(pet_pool.c.id);
         }
         if (pet) {
-            const petInfo = {};
-            Object.keys(pet).forEach((key) => {
-                petInfo[key] = PET_JSON_KEYS.includes(key) ? JSON.parse(pet[key]) : pet[key]
-            })
             petGlobal[role_id] = {
-                ...petInfo,
+                ...pet,
                 updateKeys: []
             };
         }

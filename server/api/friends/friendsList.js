@@ -1,11 +1,12 @@
+const { FriendsSql } = require('@/mysql');
 module.exports = {
-    // 好友删除
+    // 获取好友列表
     friendsList: async function (req, res) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
-        const { results } = await res.asyncQuery(`select * from friends  where role_id="${role_id}"`)
+        const results = await FriendsSql.asyncGetFriendsInfo(role_id);
         res.send({
             code: 0,
-            data: results[0]
+            data: results
         })
 
     }

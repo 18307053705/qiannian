@@ -1,3 +1,4 @@
+const { FriendsSql } = require('@/mysql');
 module.exports = {
     // 好友申请
     friendsApply: async function (req, res) {
@@ -7,10 +8,9 @@ module.exports = {
             return;
         }
         const { role_id: roleId, role_name } = RoleG.getRoleGlobal(req, res);
-        const { results } = await res.asyncQuery(`select * from friends  where role_id="${role_id}"`);
-        if (results[0]) {
-            const apply = JSON.parse(results[0].apply);
-            const list = JSON.parse(results[0].list);
+        const data = await FriendsSql.asyncGetFriendsInfo(role_id);
+        if (data) {
+            const { apply, list } = data;
             if (list.length === 200) {
                 res.send({
                     code: 0,
@@ -44,8 +44,7 @@ module.exports = {
                 id: roleId,
                 n: role_name
             });
-
-            await res.asyncQuery(`update friends set apply='${JSON.stringify(apply)}' where role_id="${role_id}"; `);
+            await FriendsSql.asyncUpdateFriends(role_id, { apply });
             res.send({
                 code: 0,
                 success: '申请成功，请等待对方确定',

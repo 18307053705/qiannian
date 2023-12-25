@@ -1,5 +1,5 @@
-const { ruleFn, userFn } = require('../../utils');
-const userSql = require('@/mysql/userSql');
+const { ruleFn, userFn } = require('@/utils');
+const { UserSql } = require('@/mysql');
 module.exports = {
     login: async function (req, res) {
         const { user, pass } = req.body;
@@ -7,7 +7,7 @@ module.exports = {
         if (!ruleFn.checkLoginRule(res, user, pass)) {
             return;
         };
-        const results = await userSql.asyncGetUserInfo(user,pass);
+        const results = await UserSql.asyncGetUserInfo(user, pass);
         if (results) {
             res.cookie("q_uid", user);
             res.cookie("token", userFn.creatToken(user, pass));

@@ -1,10 +1,7 @@
 const { ACTIVE_QUEUE } = require("../utils/scheduleCronstyleFn");
-const mysql = require("../mysql");
 
 module.exports = {
     customRes: function (req, res) {
-        res.asyncQuery = mysql.asyncQuery;
-        res.asyncAdd = mysql.asyncAdd;
         res.customSuccess = '';
         res.listText = [];
         const _send = res.send;

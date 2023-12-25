@@ -46,7 +46,7 @@ module.exports = {
             }
         }
         // 物品奖励
-        if (artReward) {
+        if (JSON.stringify(artReward) !== '{}') {
             for (let index = 0; index < dataSize; index++) {
                 const { id, s } = data[index];
                 // 判断物品id与物品类型是否相同
@@ -74,7 +74,7 @@ module.exports = {
             })
         }
         // 装备奖励
-        if (equipReward) {
+        if (JSON.stringify(equipReward) !== '{}') {
             Object.keys(equipReward).forEach(key => {
                 data.push(equipReward[key]);
                 delete equipReward[key];

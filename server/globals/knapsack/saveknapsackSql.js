@@ -1,22 +1,8 @@
-const { KNAPSACK_Global, EQUIP_INIT_EXT } = require('./config');
-const { isEquip } = require('@/table/knapsack/article');
+const { KnapsackSql } = require('@/mysql');
+const { KNAPSACK_Global } = require('./config');
+const { saveSqlChang } = require('./saveSqlChang');
 
-function saveSqlChang(data) {
-    const list = JSON.parse(JSON.stringify(data));
-    return JSON.stringify(list.map((itme) => {
-        delete itme.name;
-        delete itme.uid;
-        if (isEquip(itme.id)) {
-            delete itme.s;
-        }
-        if (itme.ext === EQUIP_INIT_EXT) {
-            delete itme.ext;
-        }
-        return itme
-    }))
-}
 module.exports = {
-    saveSqlChang,
     /**
      * 保存背包信息至数据库
      * @param {*} req 
@@ -26,13 +12,12 @@ module.exports = {
     saveknapsackSql: async function (req, res, roleId) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
         const { updateKeys, ...knapsack } = KNAPSACK_Global[roleId || role_id];
-        const data = [];
+        const data = {};
         [...new Set(updateKeys)].forEach((key) => {
-            const value = key === 'data' ? saveSqlChang(knapsack[key]) : knapsack[key];
-            data.push(`${key}='${value}'`)
+            data[key] = key === 'data' ? saveSqlChang(knapsack[key]) : knapsack[key];
         })
-        if (data.length) {
-            await res.asyncQuery(`update knapsack  SET ${data.join(',')}  where role_id="${role_id}"`);
+        if (JSON.stringify(data) !== '{}') {
+            await KnapsackSql.asyncUpdateKnapsack(role_id, data);
         }
         return
     }

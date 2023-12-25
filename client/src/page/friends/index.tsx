@@ -16,7 +16,7 @@ export const Friends = ({ history }) => {
         getFriendsList().then(({ data }) => {
             if (data) {
                 const { list, apply } = data;
-                setFriend({ list: JSON.parse(list), apply: JSON.parse(apply) });
+                setFriend({ list, apply  });
             }
         });
     };

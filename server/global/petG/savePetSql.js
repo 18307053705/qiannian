@@ -1,19 +1,19 @@
-const { petGlobal, PET_JSON_KEYS } = require('./config');
+const { petGlobal } = require('./config');
+const { PetSql } = require('@/mysql');
 module.exports = {
-    savePetSql: async function (req,res) {
+    savePetSql: async function (req, res) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
         const petInfo = petGlobal[role_id];
         if (!petInfo) {
             return;
         }
         const { updateKeys, ...pet } = petInfo;
-        const data = [];
+        const data = {};
         [...new Set(updateKeys)].forEach((key) => {
-            const value = PET_JSON_KEYS.includes(key) ? JSON.stringify(pet[key]) : pet[key];
-            data.push(`${key}='${value}'`)
+            data[key] = pet[key];
         })
-        if (data.length) {
-            await res.asyncQuery(`update pet  SET ${data.join(',')}  where id="${pet.id}"`);
+        if (JSON.stringify(data) !== '{}') {
+            await PetSql.asyncUpdatePet(pet.id, data);
             delete petGlobal[role_id];
         }
         return;

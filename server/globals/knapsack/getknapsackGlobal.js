@@ -8,10 +8,8 @@ module.exports = {
      * @returns {*} knapsack:{data:[],yuanbao,tael}| undefined
      */
     getknapsackGlobal: function (req, res, roleId) {
-       
         const { role_id } = RoleG.getRoleGlobal(req, res, roleId) || {};
         const knapsack = KNAPSACK_Global[roleId || role_id];
-        // console.log(knapsack,'knapsack...')
         return knapsack ? JSON.parse(JSON.stringify(knapsack)) : undefined;
     }
 }

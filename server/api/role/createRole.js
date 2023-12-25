@@ -1,7 +1,7 @@
+const { RoleSql, KnapsackSql, WarehouseSql, FriendsSql } = require('@/mysql');
+const AttrSystem = require('@/system/AttrSystem');
 const { AttributeTable } = require('@/table');
 const { roleFn } = require('@/utils');
-const { roleSql, knapsackSql, warehouseSql, friendsSql } = require('@/mysql');
-const AttrSystem = require('@/system/AttrSystem');
 const { REGION_EUNM } = require('@/meun');
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
         }
 
         const { role_name, role_sex, role_career, role_race } = req.body;
-        const isName = await roleSql.asyncGetRoleName(req, res, role_name);
+        const isName = await RoleSql.asyncGetRoleName(req, res, role_name);
         if (isName) {
             res.send({
                 code: 0,
@@ -92,7 +92,7 @@ module.exports = {
                     { id: 2, n: '御宠之术', p: 9 },
                 ]
             },
-            task_pool:  [{id:100,p:1}],
+            task_pool: [{ id: 100, p: 1 }],
             role_integral: {},
             pet_pool: {
                 c: {},
@@ -110,6 +110,7 @@ module.exports = {
             qingyuan: {},
             upper_limit: {}
         }
+        
         // 角色信息
         const keys = [];
         const value = [];
@@ -122,18 +123,16 @@ module.exports = {
             value.push(roleInfo[key]);
             insert.push('?');
         })
-        const roleSqlstr = `insert into role(${keys.join(',')}) values(${insert.join(',')})`;
-        await res.asyncAdd(roleSqlstr, value);
+        await RoleSql.asyncInsertRole(roleInfo);
         await Promise.all([
-            knapsackSql.asyncAddKnapsack(user, role_id),
-            warehouseSql.asyncAddWarehouse(user, role_id),
-            friendsSql.asyncAddFriends(user, role_id)]
+            KnapsackSql.asyncAddKnapsack(user, role_id),
+            WarehouseSql.asyncAddWarehouse(user, role_id),
+            FriendsSql.asyncAddFriends(user, role_id)]
         );
         await roleFn.roleLogin(req, res, roleInfo, { user_id: user, role_id, tael: 1000, yuanbao: 0, data: '[]' });
         res.send({
             code: 0,
             data: '创建角色成功'
         })
-
     }
 };

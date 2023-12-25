@@ -1,4 +1,4 @@
-const { getRoleInfo, updataRoleInfo } = require('../roleFn');
+const { asyncGetRoleInfo, updataRoleInfo } = require('../roleFn');
 const ADD_ATTR = {
     life_max: 100,
     life: 100,
@@ -40,7 +40,7 @@ module.exports = {
     terrAttr: async function (req, res, level) {
         const { qingyuan, role_attr } = RoleG.getRoleGlobal(req, res);
         const { d } = qingyuan;
-        const { role_attr: TRoleAttr } = await getRoleInfo(req, res, { role_id: d.rId });
+        const { role_attr: TRoleAttr } = await asyncGetRoleInfo(req, res, d.rId);
         if (level) {
             addAttr(role_attr);
             addAttr(TRoleAttr);
