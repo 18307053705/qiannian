@@ -1,7 +1,7 @@
 const { FightG } = require('../../global');
 const { ElementTable } = require('../../table');
 const { setPet } = require('../petFn/setPet');
-const { FIGHT_TYPE } = FightG;
+const { FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
     /**
      * 捕捉宠物
@@ -18,7 +18,7 @@ module.exports = {
         const { id, name, num } = template;
         const { pet, level } = ElementTable.getElement(id) || {};
         // 非人机不可捕捉
-        if (FIGHT_TYPE.pve !== type || !pet) {
+        if (FIGHT_TYPE_EUNM.pve !== type || !pet) {
             roundText.message = '目标不可被捕捉。';
             FightG.updataFightMapGlobal(req, res, { roundText });
             return;

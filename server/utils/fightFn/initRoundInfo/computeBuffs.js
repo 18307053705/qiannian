@@ -6,9 +6,9 @@ module.exports = {
      * @param {*} res 
      */
     computeBuffs: function (req, res) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
-        const buffs = FIGHT_TYPE.rank === fightMap.type ? fightInfo.buffs : fightMap.buffs;
+        const buffs = FIGHT_TYPE_EUNM.rank === fightMap.type ? fightInfo.buffs : fightMap.buffs;
         // 不存在buff
         if (JSON.stringify(buffs) === '{}') {
             return;
@@ -45,7 +45,7 @@ module.exports = {
         })
 
         FightG.updataFightMapGlobal(req, res, { player });
-        FIGHT_TYPE.rank === fightMap.type ? FightG.updataFightInfoGlobal(req, res, { buffs }) : FightG.updataFightMapGlobal(req, res, { buffs });
+        FIGHT_TYPE_EUNM.rank === fightMap.type ? FightG.updataFightInfoGlobal(req, res, { buffs }) : FightG.updataFightMapGlobal(req, res, { buffs });
 
     },
 

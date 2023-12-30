@@ -7,7 +7,7 @@ module.exports = {
      * @returns state 0:战斗中,1:胜利,2:失败
      */
     computeRoleResults: function (req, res) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { player, roundAttr, type } = fightMap;
         const { role } = roundAttr;
@@ -22,7 +22,7 @@ module.exports = {
             if (!role.life) {
                 // 战斗失败
                 state = 2;
-                if (type !== FIGHT_TYPE.duel) {
+                if (type !== FIGHT_TYPE_EUNM.duel) {
                     // 非切切磋死亡，位置移动至云荒大陆
                     RoleG.updataRoleGlobal(req, res, { address: '40000,0,0' });
                 }

@@ -47,7 +47,7 @@ module.exports = {
             // 释放全局地图缓存
             GrandG.deleteDirGlobal(req, res);
             // 释放全局战斗缓存
-            releaseFight(req, res);
+            // releaseFight(req, res);
             // 保存角色信息
             RoleG.saveRoleSql(req, res, user);
             // 保存背包信息

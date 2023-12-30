@@ -24,9 +24,9 @@ module.exports = {
         if (roleFightApiList.includes(req.originalUrl)) {
             return true;
         }
-        const { fightMap } = FightG.getFightGlobal(req, res);
-        if (fightMap) {
-            console.log(req.originalUrl,'roleFn.roleFightCheck...')
+        const fight = FightG.getFightGlobal(req, res);
+        if (fight) {
+            console.log(req.originalUrl, 'roleFn.roleFightCheck...')
             res.send({
                 code: 0,
                 path: '/fight'

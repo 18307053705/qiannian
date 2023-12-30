@@ -16,7 +16,7 @@ module.exports = {
         const players = creatPlayer(req, res, type);
         const tPlayer = creatPlayer(req, res, type, role_id);
 
-        const fightMaps = {
+        const fightInfo = {
             id: role_id,
             type,
             player: players.completePlayer,
@@ -24,7 +24,7 @@ module.exports = {
             state: 0,
             buffs: {},
         };
-        const tFightMaps = {
+        const tFightInfo = {
             id: i_roleId,
             type,
             player: tPlayer.completePlayer,

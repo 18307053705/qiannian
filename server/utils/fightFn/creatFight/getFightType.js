@@ -8,12 +8,12 @@ module.exports = {
      * @returns type 战斗类型
      */
     getFightType: function (req, res) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { currentDir } = GrandG.getDirGlobal(req, res);
         const { rank, role_id, type } = currentDir;
         if (role_id) {
             return type;
         }
-        return rank ? FIGHT_TYPE.rank : FIGHT_TYPE.pve;
+        return rank ? FIGHT_TYPE_EUNM.rank : FIGHT_TYPE_EUNM.pve;
     },
 };

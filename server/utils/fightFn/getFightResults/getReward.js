@@ -9,11 +9,11 @@ module.exports = {
      * @param  res
      */
     getReward: function (req, res, type) {
-        const { FIGHT_TYPE } = FightG;
-        if (type === FIGHT_TYPE.pve || type === FIGHT_TYPE.rank) {
+        const { FIGHT_TYPE_EUNM } = FightG;
+        if (type === FIGHT_TYPE_EUNM.pve || type === FIGHT_TYPE_EUNM.rank) {
             getFreakReward(req, res);
         }
-        if (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill) {
+        if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
             getDuelReward(req,res);
         }
     },

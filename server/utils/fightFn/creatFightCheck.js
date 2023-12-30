@@ -9,7 +9,7 @@ module.exports = {
      * @returns Boolean true 不可创建，false 可创建
      */
     creatFightCheck: function (req, res, iscContinue) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { fightMap } = FightG.getFightGlobal(req, res);
         if (fightMap) {
             return false;
@@ -27,7 +27,7 @@ module.exports = {
         const { num, role_id } = currentDir;
         const type = getFightType(req, res);
         // 玩家战斗不可刷怪操作
-        if (iscContinue && (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill)) {
+        if (iscContinue && (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill)) {
             res.send({
                 code: 0,
                 message: "非法战斗"
@@ -35,7 +35,7 @@ module.exports = {
             return true;
         }
         // 人机战斗校验
-        if ((type === FIGHT_TYPE.pve || type === FIGHT_TYPE.rank) && num !== -1 && num === 0) {
+        if ((type === FIGHT_TYPE_EUNM.pve || type === FIGHT_TYPE_EUNM.rank) && num !== -1 && num === 0) {
             res.send({
                 code: 0,
                 message: "非法战斗"
@@ -43,7 +43,7 @@ module.exports = {
             return true;
         }
         // 玩家战斗
-        if (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill) {
+        if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
             // 检验对方是否处于战斗状态
             const tFightMap = FightG.getFightMap(role_id);
             if (tFightMap) {

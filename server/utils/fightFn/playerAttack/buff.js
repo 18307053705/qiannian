@@ -46,14 +46,14 @@ module.exports = {
      * @param artId 法术ID
      */
     buff: function (req, res, artId) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { v, n, t = 1 } = getRoleArtInfo(req, res, artId);
         const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
         const { player, type } = fightMap;
         const { role_id, name } = player;
         const buffId = `${role_id}_${artId}`;
         // 组队 buffs 保存在战斗信息池
-        if (type === FIGHT_TYPE.rank) {
+        if (type === FIGHT_TYPE_EUNM.rank) {
             const { buffs } = fightInfo;
             buffs[buffId] = getBuffInfo(v, t, n, name, buffs[buffId]);
             FightG.updataFightInfoGlobal(req, res, { buffs });

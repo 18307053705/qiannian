@@ -11,14 +11,25 @@ module.exports = {
    */
   creatRank: function (req, res) {
     const players = creatPlayer(req, res);
-    const { role_id, socialize_pool } = RoleG.getRoleGlobal(req, res);
-    const { ranks } = socialize_pool;
+    const { role_id, socialize_pool, qingyuan } = RoleG.getRoleGlobal(req, res);
+    const { ranks, gang } = socialize_pool;
     const { currentDir } = GrandG.getDirGlobal(req, res);
-    // 判断是否拥有队伍
-    const fightId = ranks ? `${ranks.id}_${currentDir.id}` : role_id;
-    let fightInfo = FightG.getFightInfo(fightId);
-
+    // 战斗id
+    let fightId = role_id;
+    // 情缘怪物
+    if (currentDir.rank === 'qingyuan' && qingyuan.d) {
+      fightId = `${qingyuan.d.id}_${currentDir.id}`
+    }
+    // 帮会怪物
+    if (currentDir.rank === 'gang' && gang) {
+      fightId = `${gang.id}_${currentDir.id}`
+    }
+    // 组队怪物
+    if (currentDir.rank === 'ranks' && ranks) {
+      fightId = `${ranks.id}_${currentDir.id}`
+    }
     // 判断是否存在组队战斗信息
+    let fightInfo = FightG.getFightInfo(fightId);
     if (fightInfo) {
       fightInfo.players.push(players.simplePlayer);
     } else {

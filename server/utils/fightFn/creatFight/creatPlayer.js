@@ -9,7 +9,7 @@ module.exports = {
    * @returns player 自身信息
    */
   creatPlayer: function (req, res, type, role_id) {
-    const { FIGHT_TYPE } = FightG;
+    const { FIGHT_TYPE_EUNM } = FightG;
     const roleInfo = RoleG.getRoleGlobal(req, res, role_id);
     const knapasack = KnapsackG.getknapsackGlobal(req, res, role_id);
     const pet = PetG.getPetGlobal(req, res, role_id);
@@ -78,7 +78,7 @@ module.exports = {
       };
     }
     // 切磋满状态,非死斗则是真实状态
-    const attr = type === FIGHT_TYPE.duel ? data.attr : {
+    const attr = type === FIGHT_TYPE_EUNM.duel ? data.attr : {
       ...data.attr,
       life: roleInfo['life'] > data.attr.life_max ? data.attr.life_max : roleInfo['life'],
       mana: roleInfo['mana'] > data.attr.mana_max ? data.attr.mana_max : roleInfo['mana'],

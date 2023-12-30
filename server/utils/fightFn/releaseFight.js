@@ -7,14 +7,14 @@ module.exports = {
      * @param {*} res
      */
     releaseFight: function (req, res) {
-        const { fightMap } = FightG.getFightGlobal(req, res);
-        if (fightMap) {
-            const { FIGHT_TYPE } = FightG;
-            const { type, id } = fightMap;
+        const { fightInfo } = FightG.getFightGlobal(req, res);
+        if (fightInfo) {
+            const { FIGHT_TYPE_EUNM } = FightG;
+            const { type, id } = fightInfo;
             // 更新角色属性
             updateRoleAttr(req,res)
             // 玩家战斗
-            if (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill) {
+            if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
                 const tFightMap = FightG.getFightMap(id);
                 // 判断对方战斗是否被释放
                 if (tFightMap) {
@@ -25,7 +25,7 @@ module.exports = {
             }
 
             // 非组队
-            // if (FIGHT_TYPE.rank !== type) {
+            // if (FIGHT_TYPE_EUNM.rank !== type) {
             //     FightG.deleteFightInfoGlobal(req, res);
             // }
             FightG.deleteFightMapGlobal(req, res);

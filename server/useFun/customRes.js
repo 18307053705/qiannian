@@ -22,7 +22,8 @@ module.exports = {
                 // 扩展信息
                 exts: {
                     activeQueue: ACTIVE_QUEUE,
-                    roleBase: RoleG.getRoleBase(req, res)
+                    roleBase: RoleG.getRoleBase(req, res),
+                    roleInfo: RoleG.getRoleGlobal(req, res)
                 },
                 time: new Date()
             })

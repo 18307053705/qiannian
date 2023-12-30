@@ -9,7 +9,7 @@ module.exports = {
      * @param res
      */
     getFightResults: function (req, res) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { type, state, reward, update } = fightMap;
         // 获取战斗奖励
@@ -17,7 +17,7 @@ module.exports = {
             getReward(req, res, type)
         }
         // 战斗结束,更新角色属性
-        if (state !== 0 && !update && type !== FIGHT_TYPE.duel) {
+        if (state !== 0 && !update && type !== FIGHT_TYPE_EUNM.duel) {
             updateRoleAttr(req, res);
         }
         // 返回给客户端的数据

@@ -6,12 +6,12 @@ module.exports = {
      * @param {*} res
      */
     lingXue: function (req, res) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         let { role_lx } = RoleG.getRoleGlobal(req, res);
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { player, type, roundText } = fightMap;
         // 玩家对战 或者 灵血不足不可使用灵血
-        if (FIGHT_TYPE.kill === type || FIGHT_TYPE.duel === type || role_lx <= 0) {
+        if (FIGHT_TYPE_EUNM.kill === type || FIGHT_TYPE_EUNM.duel === type || role_lx <= 0) {
             return;
         }
         const { life, life_max, mana_max, mana } = player.attr;

@@ -12,12 +12,12 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const tRoleInfo = RoleG.getRoleGlobal(req, res, { role_id });
         if (!tRoleInfo) {
             res.send({
                 code: 0,
-                message: `玩家未上线,无法进行${type === FIGHT_TYPE.duel ? "切磋" : "击杀"}`
+                message: `玩家未上线,无法进行${type === FIGHT_TYPE_EUNM.duel ? "切磋" : "击杀"}`
             })
             return;
         }
@@ -34,7 +34,7 @@ module.exports = {
         if (tRoleInfo.address !== iRoleInfo.address) {
             res.send({
                 code: 0,
-                message: `${tRoleInfo.role_name}与你不在一个地方,无法进行${type === FIGHT_TYPE.duel ? "切磋" : "击杀"}`
+                message: `${tRoleInfo.role_name}与你不在一个地方,无法进行${type === FIGHT_TYPE_EUNM.duel ? "切磋" : "击杀"}`
             })
             return;
         }

@@ -7,13 +7,13 @@ module.exports = {
      * @returns state 0:战斗中,1:胜利,2:失败
      */
     computeRivalResults: function (req, res) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
         const { type, id, roundAttr } = fightMap;
         const { rival } = roundAttr;
         let state = fightMap.state;
         // 人机对战
-        if (type === FIGHT_TYPE.pve || type === FIGHT_TYPE.rank && state === 0) {
+        if (type === FIGHT_TYPE_EUNM.pve || type === FIGHT_TYPE_EUNM.rank && state === 0) {
             const { rivals, players } = fightInfo;
             const list = rival.list.filter(({ life, mana }, index) => {
                 const { attr } = rivals[index];
@@ -36,7 +36,7 @@ module.exports = {
 
         }
         // 玩家对战
-        if (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill && state === 0) {
+        if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill && state === 0) {
             const tFightMap = FightG.getFightMap(id);
             const { player } = tFightMap;
             const { life, mana } = rival.list[0];
@@ -52,7 +52,7 @@ module.exports = {
                 // 对方状态失败
                 tFightMap.state = 2;
                 FightG.updataFightMapGlobal(req, res, { state });
-                if (type === FIGHT_TYPE.kill) {
+                if (type === FIGHT_TYPE_EUNM.kill) {
                     // 若死斗，对方位置移动至云荒大陆
                     RoleG.updataRoleGlobal(req, res, { address: '40000,0,0' }, { role_id: id });
                 }

@@ -8,15 +8,15 @@ module.exports = {
      * @returns true 逃跑成功
      */
     escapeFight: function (req, res) {
-        const { FIGHT_TYPE } = FightG;
+        const { FIGHT_TYPE_EUNM } = FightG;
         const { fightMap } = FightG.getFightGlobal(req, res);
         const { type, id: role_id, player  } = fightMap;
         // 非死斗逃跑概率100%,死斗逃跑概率1/4
-        const isEscape = FIGHT_TYPE.kill !== type || Math.floor(Math.random() * 4) === 0;
+        const isEscape = FIGHT_TYPE_EUNM.kill !== type || Math.floor(Math.random() * 4) === 0;
         // 判断是否逃跑成功
         if (isEscape) {
             // 玩家战斗，更新对方信息
-            if (type === FIGHT_TYPE.duel || type === FIGHT_TYPE.kill) {
+            if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
                 FightG.updataFightMapGlobal(req, res, { state: 3, escape: `${player.name}见势不对,脚底抹油直接跑了!` }, role_id);
             }
             // 更新角色属性
