@@ -1,5 +1,6 @@
-const { FightG } = require('../../../global')
+const { FightG } = require('@/global')
 const { randomAttr } = require('./randomAttr');
+const { FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
     /**
      * 创建战斗属性
@@ -7,9 +8,8 @@ module.exports = {
      * @param res 
      */
     initRoundAttr: function (req, res,) {
-        const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
-        const { type, id, player } = fightMap;
-        const { rivals } = fightInfo;
+        const { fightInfo, fightRankInfo } = FightG.getFightGlobal(req, res);
+        const { type, id, player } = fightInfo;
         const { attr, pet } = player;
         // 自身属性
         const role = {
@@ -30,7 +30,8 @@ module.exports = {
         // 对手属性
         const rival = {};
         // 人机对战
-        if (type === 1 || type === 2) {
+        if (type === FIGHT_TYPE_EUNM.pve || type === FIGHT_TYPE_EUNM.rank) {
+            const rivals = type ===  FIGHT_TYPE_EUNM.rank ? fightRankInfo.rivals : fightInfo.rivals;
             rival['num'] = 0;
             rival['list'] = rivals.map(({ attr }) => {
                 if (attr.life > 0) {
@@ -41,9 +42,9 @@ module.exports = {
             rival['attr'] = randomAttr(rivals[0].attr);
         }
         // 玩家对战
-        if (type === 3 || type === 4) {
-            const { fightMap: tFightMap } = FightG.getFightGlobal(req, res, id);
-            const { attr } = tFightMap.player;
+        if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
+            const { fightInfo: tFightInfo } = FightG.getFightGlobal(req, res, id);
+            const { attr } = tFightInfo.player;
             rival['list'] = [{
                 life: attr.life,
                 life_max: attr.life_max,

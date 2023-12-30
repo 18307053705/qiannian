@@ -8,6 +8,7 @@ const FIGHT_STATE_EUNM = {
     inCombat: 0, // 战斗中
     victory: 1, // 胜利
     fail: 2, // 失败
+    escape: 3, // 逃跑
 }
 
 

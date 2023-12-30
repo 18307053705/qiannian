@@ -1,6 +1,6 @@
-const { FightG } = require('../../global');
-const { ElementTable } = require('../../table');
-const { setPet } = require('../petFn/setPet');
+const { FightG } = require('@/global');
+const { ElementTable } = require('@/table');
+const { setPet } = require('@/utils/petFn/setPet');
 const { FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
     /**
@@ -20,19 +20,19 @@ module.exports = {
         // 非人机不可捕捉
         if (FIGHT_TYPE_EUNM.pve !== type || !pet) {
             roundText.message = '目标不可被捕捉。';
-            FightG.updataFightMapGlobal(req, res, { roundText });
+            FightG.updataFightInfoGlobal(req, res, { roundText });
             return;
         }
         if (role_level + 10 < level) {
             roundText.message = '低于目标10级,无法捕捉。';
-            FightG.updataFightMapGlobal(req, res, { roundText });
+            FightG.updataFightInfoGlobal(req, res, { roundText });
             return;
         }
         // 计算概率
         const rate = Math.floor(Math.random() * 101) + (role_level - level) - (num * 10);
         if (rate < 60) {
             roundText.message = '捕捉失败。';
-            FightG.updataFightMapGlobal(req, res, { roundText });
+            FightG.updataFightInfoGlobal(req, res, { roundText });
             return;
         }
         roundText.resultPet = `捕捉宠物[${name}]`;
@@ -40,7 +40,7 @@ module.exports = {
             attr.life = 0;
             return attr;
         })
-        FightG.updataFightMapGlobal(req, res, { roundAttr, roundText });
+        FightG.updataFightInfoGlobal(req, res, { roundAttr, roundText });
         setPet(req, res, { name, flair_x: level });
     },
 

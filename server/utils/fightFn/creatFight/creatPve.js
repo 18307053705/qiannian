@@ -1,7 +1,7 @@
 const { FightG } = require("@/global");
 const { creatFreak } = require("./creatFreak");
 const { creatPlayer } = require("./creatPlayer");
-
+const { FIGHT_STATE_EUNM } = FightG;
 module.exports = {
     /**
      * 创建战斗
@@ -13,19 +13,15 @@ module.exports = {
         const { role_id } = RoleG.getRoleGlobal(req, res);
         const players = creatPlayer(req, res);
         const { rivals, template } = creatFreak(req, res);
-        const fightMap = {
+        const fightInfo = {
             id: role_id,
             type: 1,
             player: players.completePlayer,
+            rivals: rivals,
             template,
-            state: 0,
+            state: FIGHT_STATE_EUNM.inCombat,
             buffs: {},
         };
-        const fightInfo = {
-            rivals: rivals,
-            players: [players.simplePlayer],
-            template,
-        };
-        FightG.setFightGlobal(req, res, fightMap, fightInfo);
+        FightG.setFightGlobal(req, res, fightInfo);
     },
 };

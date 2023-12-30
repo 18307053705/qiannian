@@ -1,6 +1,6 @@
-const { FightG } = require('../../global');
+const { FightG } = require('@/global');
 const { computeFightDps } = require('./computeFightDps');
-
+const { FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
     /**
      * 敌人出招-仅人机对战
@@ -8,10 +8,10 @@ module.exports = {
      * @param res
      */
     rivalAttack: function (req, res) {
-        const { fightMap } = FightG.getFightGlobal(req, res);
-        const { roundAttr, roundText, type } = fightMap;
+        const { fightInfo } = FightG.getFightGlobal(req, res);
+        const { roundAttr, roundText, type } = fightInfo;
 
-        if (type !== 1 && type !== 2) {
+        if (type !== FIGHT_TYPE_EUNM.pve && type !== FIGHT_TYPE_EUNM.rank) {
             return;
         }
 
@@ -22,7 +22,7 @@ module.exports = {
         }
         // 记录怪物伤害
         roundText.drain_life = `[-${dps}]`;
-        FightG.updataFightMapGlobal(req, res, { roundAttr, roundText });
+        FightG.updataFightInfoGlobal(req, res, { roundAttr, roundText });
 
     },
 

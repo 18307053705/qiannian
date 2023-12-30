@@ -1,7 +1,7 @@
 const { FightG, GrandG } = require("@/global");
 const { creatFreak } = require("./creatFreak");
 const { creatPlayer } = require("./creatPlayer");
-
+const { FIGHT_STATE_EUNM, FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
   /**
    * 创建组队战斗
@@ -10,10 +10,11 @@ module.exports = {
    * @param players 玩家信息
    */
   creatRank: function (req, res) {
-    const players = creatPlayer(req, res);
     const { role_id, socialize_pool, qingyuan } = RoleG.getRoleGlobal(req, res);
     const { ranks, gang } = socialize_pool;
     const { currentDir } = GrandG.getDirGlobal(req, res);
+    // 计算玩家属性
+    const players = creatPlayer(req, res);
     // 战斗id
     let fightId = role_id;
     // 情缘怪物
@@ -28,29 +29,28 @@ module.exports = {
     if (currentDir.rank === 'ranks' && ranks) {
       fightId = `${ranks.id}_${currentDir.id}`
     }
-    // 判断是否存在组队战斗信息
-    let fightInfo = FightG.getFightInfo(fightId);
-    if (fightInfo) {
-      fightInfo.players.push(players.simplePlayer);
-    } else {
-      // 否则创建战斗信息
+
+    // 获取组队战斗信息
+    let fightRankInfo = FightG.getFightRankGlobal(fightId);
+    // 不存在则进行创建
+    if (!fightRankInfo) {
       const { rivals, template } = creatFreak(req, res);
-      fightInfo = {
+      fightRankInfo = {
         rivals: rivals,
-        players: [players.simplePlayer],
+        players: [],
         buffs: {},
         template,
       };
+      FightG.setFightRankGlobal(fightId, fightRankInfo);
     }
-
-    const fightMap = {
+    fightRankInfo.players.push(players.simplePlayer);
+    const fightInfo = {
       id: fightId,
-      type: 2,
+      type: FIGHT_TYPE_EUNM.rank,
       player: players.completePlayer,
       template: fightInfo.template,
-      state: 0,
+      state: FIGHT_STATE_EUNM.inCombat,
     };
-
-    FightG.setFightGlobal(req, res, fightMap, fightInfo);
+    FightG.setFightGlobal(req, res, fightInfo);
   },
 };

@@ -1,4 +1,5 @@
-const { FightG } = require('../../global');
+const { FightG } = require('@/global');
+const { FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
     /**
      * 灵血补充
@@ -6,10 +7,9 @@ module.exports = {
      * @param {*} res
      */
     lingXue: function (req, res) {
-        const { FIGHT_TYPE_EUNM } = FightG;
         let { role_lx } = RoleG.getRoleGlobal(req, res);
-        const { fightMap } = FightG.getFightGlobal(req, res);
-        const { player, type, roundText } = fightMap;
+        const { fightInfo } = FightG.getFightGlobal(req, res);
+        const { player, type, roundText } = fightInfo;
         // 玩家对战 或者 灵血不足不可使用灵血
         if (FIGHT_TYPE_EUNM.kill === type || FIGHT_TYPE_EUNM.duel === type || role_lx <= 0) {
             return;
@@ -43,7 +43,7 @@ module.exports = {
                 roundText.restore_mana = roundText.restore_mana ? roundText.restore_mana + role_lx : role_lx;
             }
         }
-        FightG.updataFightMapGlobal(req, res, { player, roundText });
+        FightG.updataFightInfoGlobal(req, res, { player, roundText });
         RoleG.updataRoleGlobal(req, res, { role_lx });
     },
 

@@ -8,8 +8,8 @@ module.exports = {
      * @param res
      */
     petAttack: function (req, res) {
-        const { fightMap } = FightG.getFightGlobal(req, res);
-        const { roundAttr, roundText } = fightMap;
+        const { fightInfo } = FightG.getFightGlobal(req, res);
+        const { roundAttr, roundText } = fightInfo;
         const { pet, rival } = roundAttr;
         if (!pet) { return; }
         // 计算伤害
@@ -46,7 +46,7 @@ module.exports = {
         // 记录宠物伤害
         roundText.pet_dps = `[-${dps}]`;
 
-        FightG.updataFightMapGlobal(req, res, { roundAttr, roundText });
+        FightG.updataFightInfoGlobal(req, res, { roundAttr, roundText });
     },
 
 };

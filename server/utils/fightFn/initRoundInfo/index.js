@@ -23,7 +23,7 @@ module.exports = {
         // 回合属性
         const roundAttr = initRoundAttr(req, res);
         // 更新回合信息
-        FightG.updataFightMapGlobal(req, res, { roundText, roundAttr });
+        FightG.updataFightInfoGlobal(req, res, { roundText, roundAttr });
     },
 
 };

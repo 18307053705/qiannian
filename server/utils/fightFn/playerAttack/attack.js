@@ -10,13 +10,11 @@ module.exports = {
      * @param num 攻击数量,默认1
      */
     attack: function (req, res, rise = 100, num = 1) {
-        const { fightMap } = FightG.getFightGlobal(req, res);
-        const { roundAttr, roundText } = fightMap;
+        const { fightInfo } = FightG.getFightGlobal(req, res);
+        const { roundAttr, roundText } = fightInfo;
         const { role, rival } = roundAttr;
-        // console.log(dps)
         // 计算伤害
         const dps = computeFightDps(role.attr, rival.attr, rise);
-       
         if (dps) {
             roundAttr.rival.list = rival.list.map((attr) => {
                 const { life } = attr;
@@ -34,7 +32,7 @@ module.exports = {
         // 记录伤害
         roundText.dps = num > 1 ? `[-${dps}x${num}]` : `[-${dps}]`;
 
-        FightG.updataFightMapGlobal(req, res, { roundAttr, roundText });
+        FightG.updataFightInfoGlobal(req, res, { roundAttr, roundText });
     },
 
 };

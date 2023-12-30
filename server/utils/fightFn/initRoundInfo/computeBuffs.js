@@ -1,4 +1,5 @@
-const { FightG } = require('../../../global');
+const { FightG } = require('@/global');
+const { FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
     /**
      * 计算buff回合
@@ -6,14 +7,13 @@ module.exports = {
      * @param {*} res 
      */
     computeBuffs: function (req, res) {
-        const { FIGHT_TYPE_EUNM } = FightG;
-        const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
-        const buffs = FIGHT_TYPE_EUNM.rank === fightMap.type ? fightInfo.buffs : fightMap.buffs;
+        const { fightInfo, fightRankInfo } = FightG.getFightGlobal(req, res);
+        const { type, player } = fightInfo;
+        const buffs = FIGHT_TYPE_EUNM.rank === type ? fightRankInfo.buffs : fightInfo.buffs;
         // 不存在buff
         if (JSON.stringify(buffs) === '{}') {
             return;
         }
-        const { player } = fightMap;
         const { role_id, attr } = player;
         Object.keys(buffs).forEach((key) => {
             const { values, t, text, role } = buffs[key];
@@ -43,10 +43,12 @@ module.exports = {
                 role
             }
         })
-
-        FightG.updataFightMapGlobal(req, res, { player });
-        FIGHT_TYPE_EUNM.rank === fightMap.type ? FightG.updataFightInfoGlobal(req, res, { buffs }) : FightG.updataFightMapGlobal(req, res, { buffs });
-
+        if (FIGHT_TYPE_EUNM.rank === type) {
+            FightG.updataFightInfoGlobal(req, res, { player });
+            FightG.updataFightRankInfoGlobal(req, res, { buffs });
+        } else {
+            FightG.updataFightInfoGlobal(req, res, { player, buffs });
+        }
     },
 
 };

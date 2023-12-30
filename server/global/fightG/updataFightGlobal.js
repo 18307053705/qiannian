@@ -7,7 +7,7 @@ module.exports = {
      * @param req 
      * @param res 
      * @param fightInfo.id 战斗池信息Id|玩家对战则是对方role_id
-     * @param fightInfo.state 战斗状态(0:战斗中,1:胜利,2:失败)
+     * @param fightInfo.state 战斗状态(0:战斗中,1:胜利,2:失败,3:逃跑)
      * @param fightInfo.type 战斗类型战斗类型(1:玩家VS人机,2:多玩家VS人机家,3:切磋,4:击杀)
      * @param fightInfo.template 敌人模版{id:(role_id,怪物id),num:对方数量}
      * @param fightInfo.results 战斗结果(奖励信息)

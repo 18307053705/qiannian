@@ -17,7 +17,6 @@ module.exports = {
    * @returns fightInfo.reward 奖励信息,用于判断是否领取过奖励
    * @returns fightInfo.update 是否更新过人物属性，避免重复更新
    *
-   * @returns fightRankInfo.id 战斗池ID
    * @returns fightRankInfo.rivals 对方信息[]
    * @returns fightRankInfo.players 队友信息[]
    * @returns fightRankInfo.buffs buff信息
@@ -34,5 +33,17 @@ module.exports = {
       }))
     }
     return undefined;
+  },
+  /**
+   * 获取组队战斗信息
+   * @param {*} fightId 
+   * @returns fightRankInfo.rivals 对方信息[]
+   * @returns fightRankInfo.players 队友信息[]
+   * @returns fightRankInfo.buffs buff信息
+   * @returns fightRankInfo.template 敌人模版{id: (role_id, 怪物id), num: 对方数量}
+   */
+  getFightRankGlobal: function (fightId) {
+    const fightRankInfo = FIGHT_RANK_INFO_Global[fightId];
+    return fightRankInfo ? JSON.parse(JSON.stringify(fightRankInfo)) : undefined;
   },
 };

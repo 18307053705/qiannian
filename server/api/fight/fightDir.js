@@ -1,4 +1,4 @@
-const { fightFn } = require('../../utils');
+const { fightFn } = require('@/utils');
 
 module.exports = {
     /**
@@ -10,17 +10,25 @@ module.exports = {
         const { id = 0, p = 0 } = req.body;
         // 出招前检验
         if (fightFn.computeFightResults(req, res)) {
+            res.send({
+                code: 0,
+                data: fightFn.getFightFormat(req, res)
+            })
             return;
         }
         // 放弃战斗
         if (p === 9 && id === 1 && fightFn.escapeFight(req, res)) {
-            return
+            res.send({
+                code: 0,
+                path: '/grand',
+                success: '逃跑成功！'
+            });
+            return;
         }
         // 捉宠物
         if (p === 9 && id === 2) {
             fightFn.catchPet(req, res)
         }
-
         // 使用物品
         if (p === 2) {
             fightFn.drugDir(req, res, id);
@@ -33,18 +41,27 @@ module.exports = {
         fightFn.petAttack(req, res);
         // 出招后检验
         if (fightFn.computeFightResults(req, res)) {
+            res.send({
+                code: 0,
+                data: fightFn.getFightFormat(req, res)
+            })
             return;
         }
         // 怪物出招
         fightFn.rivalAttack(req, res);
         // 回合结束校验
         if (fightFn.computeFightResults(req, res)) {
+            res.send({
+                code: 0,
+                data: fightFn.getFightFormat(req, res)
+            })
             return;
         }
         // 灵血
         fightFn.lingXue(req, res);
-
-        fightFn.getFightResults(req, res);
-
+        res.send({
+            code: 0,
+            data: fightFn.getFightFormat(req, res)
+        })
     }
 };

@@ -1,4 +1,4 @@
-const { fightFn } = require("../../utils");
+const { fightFn } = require("@/utils");
 
 module.exports = {
   /**
@@ -7,10 +7,19 @@ module.exports = {
   creatFight: (req, res) => {
     const { iscContinue } = req.body;
     // 检验是否可继续
-    if (fightFn.creatFightCheck(req, res, iscContinue)) {
-      return;
-    }
+    // if (fightFn.creatFightCheck(req, res, iscContinue)) {
+    //   return;
+    // }
+    // 创建任务
     fightFn.creatFight(req, res, iscContinue);
-    fightFn.getFightResults(req, res);
+    // 计算战斗结果
+    fightFn.initRoundInfo(req, res);
+    // 计算战斗结果
+    fightFn.computeFightResults(req, res);
+    // 返回战斗信息
+    res.send({
+      code: 0,
+      data: fightFn.getFightFormat(req, res)
+    })
   },
 };

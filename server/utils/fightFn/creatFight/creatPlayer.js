@@ -6,6 +6,8 @@ module.exports = {
    * 创建玩家属性
    * @param req
    * @param res
+   * @param type 战斗类型
+   * @param role_id 角色id
    * @returns player 自身信息
    */
   creatPlayer: function (req, res, type, role_id) {

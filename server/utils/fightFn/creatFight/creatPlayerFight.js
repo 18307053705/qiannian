@@ -32,10 +32,10 @@ module.exports = {
             state: 0,
             buffs: {},
         };
-        // 创建化全局战斗
-        FightG.setFightGlobal(req, res, fightMaps, {});
-        FightG.setFightGlobal(req, res, tFightMaps, {}, role_id);
 
+        // 创建化全局战斗
+        FightG.setFightGlobal(req, res, fightInfo);
+        FightG.setFightGlobal(req, res, tFightInfo, role_id);
         // 保存我方id到对方战斗指令
         GrandG.setDirGlobal(req, res, { currentDir: { type, role_id: i_roleId, role_name, type } }, { roleId: role_id });
     },
