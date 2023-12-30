@@ -42,6 +42,7 @@ module.exports = {
             });
             return true;
         }
+        
         // 玩家战斗
         if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
             // 检验对方是否处于战斗状态
