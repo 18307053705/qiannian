@@ -11,13 +11,13 @@ module.exports = {
         if (!fightInfo) {
             return;
         }
-        const { type, id, player } = fightInfo;
+        const { type, id, player, template } = fightInfo;
         // 玩家战斗
         if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
             const { fightInfo: tFightInfo } = FightG.getFightGlobal(req, res, id) || {};
             // 对方状态更改为胜利
             if (tFightInfo?.state === FIGHT_STATE_EUNM.inCombat) {
-                FightG.updataFightMapGlobal(req, res, { state: FIGHT_STATE_EUNM.victory }, id);
+                FightG.updataFightMapGlobal(req, res, { state: FIGHT_STATE_EUNM.victory }, template.role_id);
             }
         }
         // 组队战斗

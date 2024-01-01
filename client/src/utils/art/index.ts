@@ -16,7 +16,7 @@ export const getNameInfo = ({ l, n, r }) => {
 };
 
 export const getSuffix = (art, level) => {
-  const { l, r, condition = 0 } = art;
+  const { l, r, condition = 0, id } = art;
   if (condition > level) {
     return {
       text: `${condition}级可领悟`,
@@ -29,7 +29,7 @@ export const getSuffix = (art, level) => {
       suffixClass: "g_color"
     };
   }
-  if (r === 7) {
+  if (r === 7 || (id === 60 && l === 9)) {
     return {
       text: "",
       suffixClass: ""

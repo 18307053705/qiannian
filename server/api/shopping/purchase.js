@@ -58,7 +58,10 @@ module.exports = {
                 })
                 return;
             }
-            const message = knapsackFn.addKnapsack(req, res, { [durg.id]: durg});
+            const message = knapsackFn.addKnapsack(req, res, { [durg.id]: {
+                ...durg,
+                s
+            } });
             if (message) {
                 res.send({
                     code: 0,
@@ -75,18 +78,20 @@ module.exports = {
             await shopFn.asyncUpdataShopInfo(req, res, { article }, role_id);
             // 计算双方货币
             // 获取店主背包
-            let { tael: tael_t, yuanbao: yuanbao_t } = await knapsackFn.getKnapsackInfo(req, res, { role_id });
+            let { tael: tael_t, yuanbao: yuanbao_t } = await knapsackFn.asyncGetKnapsack(req, res, { role_id });
             // 购买的玩家减少货币
             // 店主增加货币,扣除20%手续费
             if (unit === 'tael') {
                 tael -= prices;
-                tael_t += parseInt(prices * 0.8)
+                tael_t += parseInt(prices * 0.8);
             }
             if (unit === 'yuanbao') {
                 yuanbao -= prices;
-                yuanbao_t += parseInt(prices * 0.8)
+                yuanbao_t += parseInt(prices * 0.8);
             }
+            // 更新自身背包
             KnapsackG.updateknapsackGlobal(req, res, { tael, yuanbao });
+            // 更新店主背包
             await knapsackFn.updateKnapsack(req, res, { tael: tael_t, yuanbao: yuanbao_t }, role_id);
             res.send({
                 code: 0,
@@ -144,12 +149,12 @@ module.exports = {
             // 更新店主店铺信息
             shopFn.asyncUpdataShopInfo(req, res, { petList }, role_id);
             // 更新店主宠物信息
-            const { pet_pool: pet_pool_t } = await roleFn.getRoleInfo(req, res, { role_id });
+            const { pet_pool: pet_pool_t } = await roleFn.asyncGetRoleInfo(req, res, role_id);
             pet_pool_t['l'] = pet_pool_t['l'].filter(({ id }) => id !== petId);
             roleFn.updataRoleInfo(req, res, { pet_pool: pet_pool_t }, role_id);
             // 计算双方货币
             // 获取店主背包
-            let { tael: tael_t, yuanbao: yuanbao_t } = await knapsackFn.getKnapsackInfo(req, res, { role_id });
+            let { tael: tael_t, yuanbao: yuanbao_t } = await knapsackFn.asyncGetKnapsack(req, res, { role_id });
             // 购买的玩家减少货币
             // 店主增加货币,扣除20%手续费
             if (unit === 'tael') {

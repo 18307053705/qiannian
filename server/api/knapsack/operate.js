@@ -8,13 +8,28 @@ module.exports = {
      */
     operate: async (req, res) => {
         const { uid, s, type } = req.body;
-        const { data } = await knapsackFn.asyncGetKnapsack(req, res, { type });
-        // 验证物品信息
-        if (knapsackFn.chekeArticle(req, res, data)) {
+        if (!type || typeof s !== 'number') {
+            ErrorG.paramsError(res);
             return;
         }
+        const { data } = await knapsackFn.asyncGetKnapsack(req, res, { type });
         const in_x = data.findIndex((itme) => itme.uid === uid);
-        const { id, name, ext, n } = data[in_x];
+
+        if (in_x === -1) {
+            res.send({
+                code: 0,
+                message: '物品信息有误'
+            })
+            return;
+        }
+        const { id, name, ext, n, ...item } = data[in_x];
+        if (item.s < s) {
+            res.send({
+                code: 0,
+                message: '物品数量不足'
+            })
+            return;
+        }
         const isEquip = knapsackTable.isEquip(id);
         let message = '';
         let success = '';

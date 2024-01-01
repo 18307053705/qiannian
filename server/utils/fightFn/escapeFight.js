@@ -9,14 +9,14 @@ module.exports = {
      */
     escapeFight: function (req, res) {
         const { fightInfo, fightRankInfo } = FightG.getFightGlobal(req, res);
-        const { type, id, player } = fightInfo;
+        const { type, id, player, template } = fightInfo;
         // 非死斗逃跑概率100%,死斗逃跑概率1/4
         const isEscape = FIGHT_TYPE_EUNM.kill !== type || Math.floor(Math.random() * 4) === 0;
         // 判断是否逃跑成功
         if (isEscape) {
             // 玩家战斗，更新对方信息
             if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {
-                FightG.updataFightInfoGlobal(req, res, { state: FIGHT_STATE_EUNM.escape, escape: `${player.name}见势不对,脚底抹油直接跑了!` }, player.role_id);
+                FightG.updataFightInfoGlobal(req, res, { state: FIGHT_STATE_EUNM.escape, escape: `${player.name}见势不对,脚底抹油直接跑了!` }, template.role_id);
             }
             // 组队战斗
             if (type === FIGHT_TYPE_EUNM.rank) {

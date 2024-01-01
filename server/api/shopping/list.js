@@ -6,7 +6,7 @@ module.exports = {
      */
     list: async function (req, res) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
-        const { results } = await ShopSql.asyncShopList(role_id);
+        const results = await ShopSql.asyncShopList(role_id);
         res.send({
             code: 0,
             data: results

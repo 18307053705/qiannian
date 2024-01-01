@@ -7,11 +7,11 @@ module.exports = {
      * @param {*} role_id 可选参数
      * @returns {*} Promise(knapsack:{data:[],yuanbao,tael}| undefined)
      */
-    asyncGetKnapsack: async function (req, res, { role_id, type }) {
+    asyncGetKnapsack: async function (req, res, { role_id, type } = {}) {
         if (type == 3) {
             // 仓库不存在获取其他人
             const { role_id: roleId } = RoleG.getRoleGlobal(req, res);
-            const results = await WarehouseSql.asyncGetarehouse(roleId);
+            const results = await WarehouseSql.asyncGetWarehouse(roleId);
             const data = KnapsackG.dataListChang(results.data, true);
             return {
                 ...results,
@@ -26,7 +26,7 @@ module.exports = {
         const results = await KnapsackSql.asyncGetKnapsack(role_id);
         const data = KnapsackG.dataListChang(results.data);
         return {
-            ...results[0],
+            ...results,
             data
         };
     },

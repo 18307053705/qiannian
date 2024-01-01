@@ -9,14 +9,15 @@ const TianCaiDiBao = () => {
             clearInterval(timer.current);
         }
         let nums = Math.floor(num / 1000);
+        setText(`${nums}秒后可继续采集天材地宝`);
         timer.current = setInterval(() => {
+            nums--;
             if (nums === 0) {
                 setText('采集天材地宝');
                 clearInterval(timer.current);
                 return;
             }
             setText(`${nums}秒后可继续采集天材地宝`);
-            nums--;
         }, 1000)
     }
 

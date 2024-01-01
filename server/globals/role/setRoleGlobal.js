@@ -1,5 +1,5 @@
 const { ROLE_Global, ROLE_JSON_KEYS } = require('./config');
-
+const integral_key = ['world', 'gang', 'intersect', 'exploit','shenZhuang'];
 module.exports = {
     /**
      * 设置角色全局信息
@@ -17,6 +17,13 @@ module.exports = {
         };
         Object.keys(role).forEach((key) => {
             roleInfo[key] = ROLE_JSON_KEYS.includes(key) ? JSON.parse(role[key]) : role[key]
+        })
+
+        // 声望处理
+        integral_key.forEach((key) => {
+            if (!roleInfo['role_integral'][key]) {
+                roleInfo['role_integral'][key] = 0;
+            }
         })
         ROLE_Global[user] = {
             ...roleInfo,

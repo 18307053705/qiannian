@@ -1,6 +1,6 @@
-const { FightG } = require('../../../global');
-const { AttributeTable } = require('../../../table');
-const { getRoleArtInfo } = require('../../artFn/getRoleArtInfo');
+const { FightG } = require('@/global');
+const { AttributeTable } = require('@/table');
+const { getRoleArtInfo } = require('@/utils/artFn/getRoleArtInfo');
 
 function getBuffInfo(effect, t, n, name, buff) {
     if (buff) {
@@ -48,21 +48,21 @@ module.exports = {
     buff: function (req, res, artId) {
         const { FIGHT_TYPE_EUNM } = FightG;
         const { v, n, t = 1 } = getRoleArtInfo(req, res, artId);
-        const { fightMap, fightInfo } = FightG.getFightGlobal(req, res);
-        const { player, type } = fightMap;
+        const { fightInfo, fightRankInfo } = FightG.getFightGlobal(req, res);
+        const { player, type } = fightInfo;
         const { role_id, name } = player;
         const buffId = `${role_id}_${artId}`;
         // 组队 buffs 保存在战斗信息池
         if (type === FIGHT_TYPE_EUNM.rank) {
-            const { buffs } = fightInfo;
+            const { buffs } = fightRankInfo;
             buffs[buffId] = getBuffInfo(v, t, n, name, buffs[buffId]);
-            FightG.updataFightInfoGlobal(req, res, { buffs });
+            FightG.updataFightRankInfoGlobal(req, res, { buffs });
             return;
         } else {
             // 单人 保存在战斗map池
-            const { buffs } = fightMap;
+            const { buffs } = fightInfo;
             buffs[buffId] = getBuffInfo(v, t, n, name, buffs[buffId]);
-            FightG.updataFightMapGlobal(req, res, { buffs });
+            FightG.updataFightInfoGlobal(req, res, { buffs });
         }
 
     },

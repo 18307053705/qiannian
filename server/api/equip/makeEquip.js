@@ -36,7 +36,7 @@ module.exports = {
         // 材料打造
         if (type === 1) {
             // 判断声望
-            if (role_integral[key] < value) {
+            if ((role_integral[key]) < value) {
                 res.send({
                     code: 0,
                     message: `打造失败,${name}不足${value}。`

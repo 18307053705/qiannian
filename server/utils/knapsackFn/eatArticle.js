@@ -29,9 +29,9 @@ module.exports = {
 
         }
         if (group3) {
-            const { success, active } = EffectTable.group3Fn(req, res, name, group3, s);
+            const { success, active, message } = EffectTable.group3Fn(req, res, name, group3, s);
             const { data } = KnapsackG.getknapsackGlobal(req, res);
-            return { success, data, active };
+            return { success, data, active, message };
 
         }
         return { message: "该物品无法直接使用。" };

@@ -31,7 +31,7 @@ module.exports = {
         const rival = {};
         // 人机对战
         if (type === FIGHT_TYPE_EUNM.pve || type === FIGHT_TYPE_EUNM.rank) {
-            const rivals = type ===  FIGHT_TYPE_EUNM.rank ? fightRankInfo.rivals : fightInfo.rivals;
+            const rivals = type === FIGHT_TYPE_EUNM.rank ? fightRankInfo.rivals : fightInfo.rivals;
             rival['num'] = 0;
             rival['list'] = rivals.map(({ attr }) => {
                 if (attr.life > 0) {
@@ -52,6 +52,7 @@ module.exports = {
                 mana_max: attr.mana_ma
             }]
             rival['attr'] = randomAttr(attr);
+
         }
 
         return {

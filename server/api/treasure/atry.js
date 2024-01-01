@@ -9,6 +9,7 @@ module.exports = {
         const { yuanbao } = KnapsackG.getknapsackGlobal(req, res);
         // 判断是否已经博过
         if (treasure_pool['fw']['g']) {
+            res.send({ code: 0, message: '每个角色仅可博一次' });
             return;
         }
         // 判断元宝是否足够

@@ -111,10 +111,6 @@ const articleMap = {
         price: 200,
         unit: 'yuanbao',
         group3: 'renShenGuo',
-        group3: {
-            exp: 10000000,
-            conditioname: 50
-        },
         tips: '角色等级低于50级时使用，等级直接+1，50级及以上可获得10000000经验。',
     },
     1622: {
@@ -122,10 +118,6 @@ const articleMap = {
         price: 500,
         unit: 'yuanbao',
         group3: 'maoErDuo',
-        group3: {
-            exp: 100000000,
-            conditioname: 70,
-        },
         tips: '角色等级低于70级时使用，等级直接+1，70级及以上可获得100000000经验。',
     },
     1623: {
@@ -179,7 +171,7 @@ const articleMap = {
     1632: {
         name: '30级新手大礼包',
         group3: 'gift1632',
-        tips: '打开可获得30级新手大礼包与大量元宝。',
+        tips: '打开可获得50级新手大礼包与大量元宝。',
     },
     1633: {
         name: '50级新手大礼包',

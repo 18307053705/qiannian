@@ -31,7 +31,7 @@ export const PetArt = ({ petInfo, callback }) => {
             <div>
                 <div>
                     <span className={nameClass} onClick={ArtNameClick}>{artName}</span>
-                    <span> | </span>
+                    {text && <span> | </span>}
                     <span className={isFight ? suffixClass : ''} onClick={suffixClick}>{text}</span>
                 </div>
                 {artInx === index && <div>{art.msg}</div>}

@@ -24,7 +24,7 @@ export const PetState = ({ petInfo, callback, petId }) => {
         return <div>状态：{PET_STATE[0]}</div>
     }
     // 附体技能
-    const art = petInfo.art.find(({ id }) => id === 19) || { l: -1 }
+    const art = petInfo.art.find(({ id }) => id === 60) || { l: -1 }
     // 判断是否为出战宠物
     if (state === 1 || state === 2) {
         // 判断是否附体

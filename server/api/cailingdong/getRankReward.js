@@ -1,4 +1,4 @@
-const { ActivityG, ActiveQueueG } = require("../../global");
+const { ActivityG, ActiveQueueG } = require("@/global");
 
 module.exports = {
     /**
