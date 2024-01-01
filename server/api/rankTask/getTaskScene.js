@@ -1,5 +1,4 @@
-
-const { GrandG, rankTaskG } = require('../../global');
+const { GrandG, rankTaskG } = require('@/global');
 module.exports = {
     /**
      * 任务场景信息

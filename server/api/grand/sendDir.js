@@ -1,5 +1,5 @@
-const { grandFn } = require('../../utils');
-const { GrandG, ActivityG } = require('../../global');
+const { grandFn } = require('@/utils');
+const { GrandG, ActivityG } = require('@/global');
 
 module.exports = {
     /**
@@ -25,8 +25,7 @@ module.exports = {
         const currentDir = eleDir[dir] || {};
         const { type, dir: dirId } = currentDir;
         if (type === 3) {
-            const address = grandFn.tpDir(req, res, dirId);
-            return grandFn.updataDir(req, res, { address, currentDir });
+            return grandFn.updataDir(req, res, { address: dirId, currentDir });
         }
 
         if (type !== 3) {

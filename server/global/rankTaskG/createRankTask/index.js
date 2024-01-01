@@ -1,5 +1,3 @@
-
-
 const { RANK_TASKS, RANK_TASK_Global, RANK_TASK_TYPE } = require('../config');
 const { grandEle } = require('./grandEle')
 

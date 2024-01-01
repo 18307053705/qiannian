@@ -1,5 +1,4 @@
-const { getElement } = require('../../../table/element');
-
+const { getElement } = require('@/table/element');
 module.exports = {
     /**
      * 地图任务元素解析

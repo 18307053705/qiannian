@@ -34,9 +34,9 @@ module.exports = {
                     y--;
                     break;
             }
-            const upAddress = `${id},${x},${y}`;
-            RoleG.updataRoleGlobal(req, res, { address: upAddress });
-            return upAddress;
+            // const upAddress = `${id},${x},${y}`;
+            // RoleG.updataRoleGlobal(req, res, { address: upAddress });
+            return `${id},${x},${y}`;
         }
     },
 

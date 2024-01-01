@@ -68,6 +68,7 @@ const FightDuke = ({ dirClick, fight, setPanel }) => {
     return (
         <div className="duke">
             <div>{message}</div>
+            <div>{rivals[0].name}</div>
             {/* 技能栏1 */}
             <div>{art(dirClick, artList1)}</div>
             {/* 敌方状态 */}

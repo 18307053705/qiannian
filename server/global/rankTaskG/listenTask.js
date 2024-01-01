@@ -1,7 +1,6 @@
 const { ADDRESS_LIST } = require('./config');
 const { getRankTaskAll } = require('./getRankTaskAll');
 const { updataRankTask } = require('./updataRankTask');
-const { getDirGlobal } = require('../grandG/getDirGlobal')
 module.exports = {
     /**
      * 监听任务击杀进度
@@ -12,12 +11,9 @@ module.exports = {
      * @param {*} freakObj 杀怪信息
      */
     listenTask: function (req, res, freakId, num, freakObj) {
-        const { address } = getDirGlobal(req, res);
-        if (!address) {
-            return;
-        }
+        const { address } = RoleG.getRoleGlobal(req, res);
         // 判断是否为多人副本地图
-        if (address && !ADDRESS_LIST.includes(address.split(',')[0])) {
+        if (!ADDRESS_LIST.includes(address.split(',')[0])) {
             return;
         }
         // 监听组队任务
@@ -55,7 +51,6 @@ module.exports = {
                 }
             })
         })
-        // 监听深渊
         return freakObj;
     }
 }

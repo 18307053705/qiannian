@@ -1,5 +1,3 @@
-
-
 const { ADDRESS_LIST } = require('./config');
 const { getRankTaskAll } = require('./getRankTaskAll');
 

@@ -59,6 +59,12 @@ module.exports = {
         listenTaskShenyuan(req, res, freakId);
         // 监听彩灵洞
         ActivityG.listenCaiLingDong(req, res, freakId);
+        // 洞天福地监听
+        if ([20623, 20624, 20625, 20626, 20627, 20628].includes(freakId)) {
+            const { upper_limit } = RoleG.getRoleGlobal(req, res);
+            upper_limit.dongTian = (upper_limit.dongTian || 0) + 1;
+            RoleG.updataRoleGlobal(req, res, { upper_limit });
+        }
         return freakObj;
     }
 }
