@@ -1,5 +1,4 @@
-const { fightFn } = require('../../utils');
-
+const { fightFn } = require('@/utils');
 module.exports = {
     /**
      * 退出战斗
