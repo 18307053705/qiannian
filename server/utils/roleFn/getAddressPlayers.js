@@ -1,5 +1,5 @@
-const { DailysG, ActiveQueueG } = require("../../global");
-const { RACE_MEUN } = require("../../meun");
+const { DailysG, ActiveQueueG } = require("@/global");
+const { RACE_MEUN } = require("@/meun");
 
 
 function title(value) {
@@ -49,7 +49,7 @@ module.exports = {
      * @returns {*} roleInfo[]|[]
      * 
      */
-    getAddressPlayers: async function (req, res, address) {
+    getAddressPlayers: function (req, res, address) {
         const { roles, iRole } = RoleG.getRoleAllGlobal(req, res);
         delete roles[iRole.user_id];
         const namefn = getNameFn(address);

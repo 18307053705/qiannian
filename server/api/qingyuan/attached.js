@@ -154,11 +154,8 @@ module.exports = {
                 delete tQingYuan.i;
             }
             RoleG.updataRoleGlobal(req, res, { qingyuan: iQingYuan });
-            const [players] = await Promise.all([
-                roleFn.getAddressPlayers(req, res, address),
-                roleFn.updataRoleInfo(req, res, { qingyuan: tRole ? tQingYuan : tQingYuans }, role_id),
-
-            ]);
+            const players = roleFn.getAddressPlayers(req, res, address);
+            await roleFn.updataRoleInfo(req, res, { qingyuan: tRole ? tQingYuan : tQingYuans }, role_id);
             const list = [];
             players.forEach(({ role_sex, role_id, role_name }) => {
                 if (iSex !== role_sex) {

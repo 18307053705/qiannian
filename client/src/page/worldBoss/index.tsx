@@ -67,7 +67,7 @@ export const WorldBoss = () => {
                     </div>
                 )
             }
-            <div>世界BOSS活动，每日12:00,20:00火热开启,击杀BOSS可获得大量稀有道具掉落,更有大量伤害排名奖励！</div>
+            <div>世界BOSS活动，每日12:00,16:00,20:00火热开启,击杀BOSS可获得大量稀有道具掉落,更有大量伤害排名奖励！</div>
             <div>{life ? `世界BOSS(${life})${dpsText}` : '世界BOSS已死亡'}</div>
             {life ? <div><span className='g_u_end' onClick={atkBossClick}>攻击boss</span></div> : ''}
             {

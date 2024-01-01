@@ -112,7 +112,7 @@ const Grand = ({ history }) => {
                             className="g_u"
                             onClick={() => {
                                 if (zhangChang) {
-                                    createFightDir({ role_id, type: 3 })
+                                    createFightDir({ role_id, type: 4 })
                                 } else {
                                     history.push('/player', { role_id, role_name })
                                 }

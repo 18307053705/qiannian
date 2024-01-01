@@ -1,7 +1,5 @@
 const { getPetGlobal } = require("@/global/petG/getPetGlobal");
-// const { AttributeTable, RealmTable } = require("@/table");
 const { computeUpExp } = require("../computeUpExp");
-// const { computeRoleAttr } = require("../computeRoleAttr");
 const { pushTask } = require("./pushTask");
 const AttrSystem = require('@/system/AttrSystem');
 module.exports = {
@@ -32,14 +30,6 @@ module.exports = {
                 // 推送任务
                 pushTask(req, res, role_level);
             }
-            // // 获取境界对应属性增幅
-            // const { attr } = RealmTable.getRealm(role_realm)
-            // // 根据职业选择升级属性加成
-            // base = AttributeTable.getRoleBaseAttr(role_career);
-            // // 计算新的属性
-            // Object.keys(base).forEach(key => {
-            //     base[key] *= attr * role_level;
-            // })
             res.customSuccess = `恭喜玩家升到${role_level}级。`
             islevel = true;
 

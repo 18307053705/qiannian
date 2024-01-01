@@ -1,6 +1,6 @@
-const { GrandG } = require("../../global");
-const { ElementTable } = require("../../table");
-const roleFn = require("../roleFn");
+const { GrandG } = require("@/global");
+// const { ElementTable } = require("../../table");
+// const roleFn = require("../roleFn");
 const grandFn = require("./getGrandInfo");
 
 module.exports = {
@@ -28,11 +28,8 @@ module.exports = {
         //     }
         // }
 
-
-        // 获取地图玩家信息
-        const players = await roleFn.getAddressPlayers(req, res, address);
         // 获取地图元素信息
-        const grandInfo = grandFn.getGrandInfo(req, res, address, players);
+        const grandInfo = grandFn.getGrandInfo(req, res, address);
         // 更新对应角色全局地图指令
         GrandG.setDirGlobal(req, res, { ...grandInfo, currentDir, address });
         res.send({

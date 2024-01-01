@@ -1,5 +1,4 @@
-const { getFreak } = require('@/table/element/ELEMENT_2');
-const { ELEMENT_1 } = require('@/table/element/ELEMENT_1');
+const { ElementTable } = require('@/table');
 const { getCaiLingDong, getJinYindao } = require('../activeQueueG');
 
 module.exports = {
@@ -17,7 +16,7 @@ module.exports = {
                 if (eleItme.length < 3) {
                     const rate = Math.floor(Math.random() * 101);
                     if (rate <= r) {
-                        const eleInfo = getFreak(id);
+                        const eleInfo = ElementTable.getElement(id);
                         eleDir[id] = eleInfo;
                         eleItme.push({ name: eleInfo.name, dir: eleInfo.id });
                     }
@@ -34,7 +33,7 @@ module.exports = {
             list.forEach(({ id, r }) => {
                 const rate = Math.floor(Math.random() * 101);
                 if (rate <= r) {
-                    const eleInfo = ELEMENT_1[id]
+                    const eleInfo = ElementTable.getElement(id);
                     eleDir[id] = eleInfo;
                     eleItme.push({ name: eleInfo.name, dir: eleInfo.id });
                 }

@@ -1,8 +1,9 @@
-const { GrandTable, ElementTable } = require("../../table");
-const { getGrandEleGlobal } = require("../../global/grandG/getGrandEleGlobal");
-const { getRankTaskEle } = require("../../global/rankTaskG/getRankTaskEle");
-const { getAcivityEle } = require("../../global/activityG/getAcivityEle");
-const taskFn = require('../taskFn');
+const { GrandTable, ElementTable } = require("@/table");
+const { getAddressPlayers } = require("@/utils/roleFn/getAddressPlayers");
+const { grandTaskEle } = require('@/utils/taskFn/grandTaskEle');
+const { getGrandEleGlobal } = require("@/global/grandG/getGrandEleGlobal");
+const { getRankTaskEle } = require("@/global/rankTaskG/getRankTaskEle");
+const { getAcivityEle } = require("@/global/activityG/getAcivityEle");
 const { getSpecificGrand } = require('./getSpecificGrand');
 
 function getGrand(address) {
@@ -50,10 +51,9 @@ module.exports = {
      * @param {*} req 
      * @param {*} res 
      * @param {*} address 坐标
-     * @param {*} players 坐标内玩家列表
      * @requires {name:地图名称,x,y,eleLits:元素信息,eleDir:指令,movedir:可移动指令,players:坐标内玩家信息}
      */
-    getGrandInfo: function (req, res, address, players) {
+    getGrandInfo: function (req, res, address) {
         const gGrandInfo = GrandTable.getGrandInfo(address);
         if (!gGrandInfo) {
             RoleG.updataRoleGlobal(req, res, { address: "40000,0,0" })
@@ -75,7 +75,7 @@ module.exports = {
         // 获取必须满足某些条件才会出现的特殊元素
         getSpecificGrand(req, res, address, eleList, eleDir)
         // 获取任务临时元素
-        taskFn.grandTaskEle(req, res, address, eleList, eleDir);
+        grandTaskEle(req, res, address, eleList, eleDir);
         // 获取组队任务元素
         getRankTaskEle(req, res, address, eleList, eleDir);
         // 获取活动地图元素
@@ -89,7 +89,7 @@ module.exports = {
             eleList,
             eleDir,
             moveDir: getGrand(address),
-            players: players.map(({ role_name, role_id, zhangChang }) => ({ role_name, role_id, zhangChang })),
+            players: getAddressPlayers(req, res, address).map(({ role_name, role_id, zhangChang }) => ({ role_name, role_id, zhangChang })),
             tip,
             ...getGrandEleGlobal(req, res, address)
         };

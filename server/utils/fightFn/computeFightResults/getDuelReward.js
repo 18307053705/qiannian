@@ -16,7 +16,7 @@ module.exports = {
             let success = `战胜${template.name},战场积分+1,`;
             const { zhanChang } = DailysG.getDailysGlobal(req, res);
             const { zhanChang: tZhanChang } = DailysG.getDailysGlobal(req, res, { roleId: template.role_id });
-            if (zhanChang.v < 100) {
+            if (zhanChang.v < 2000) {
                 zhanChang.v += 50;
                 // 增加50功勋
                 role_integral.exploit += 50;

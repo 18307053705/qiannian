@@ -1,6 +1,7 @@
 const { ActivityG, ActiveQueueG } = require("@/global");
 const { roleFn, fightFn } = require("@/utils");
-const { shedRandom } = require("./shedRandom");
+const { AttrSystem } = require("@/system");
+const { shedRandom } = require("./shedRandom.js");
 
 
 
@@ -33,8 +34,8 @@ module.exports = {
             })
             return;
         }
-
-        const { attr } = roleFn.computeRoleAttr(req, res, roleInfo)
+        
+        const { attr } = AttrSystem.computeRoleAttr(roleInfo);
         const roleAttr = fightFn.randomAttr(attr);
         const bossAttr = fightFn.randomAttr(boss);
         const dps = fightFn.computeFightDps(roleAttr, bossAttr);

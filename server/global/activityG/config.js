@@ -13,7 +13,7 @@ module.exports = {
     },
     JIN_YIN_DAO: {
         create: false, // 是否创建
-        ids: {  }, // 可领奖id
+        ids: {}, // 可领奖id
         rank: {  // 排名
             // linsuqing_1: {
             //     id: 'linsuqing_1',
@@ -26,16 +26,18 @@ module.exports = {
     CAI_LIN_DONG: {
         create: false, // 是否创建
         // 活动结束计算所在队伍的成员
-        ids: { zhouxiaobing_1: 1, linsuqing_1: 2 }, // 可领奖id
+        ids: {
+            // linsuqing_00011: 1,
+            // zhouxiaobing_00011:1
+        }, // 可领奖角色id
         done: [], // 已领奖id
         rank: {  //排名信息
-            // "zhouxiaobing_1": {  队伍id
-            //     id: '"zhouxiaobing_1"',
-            //     v: 100, 积分
-            //     s: new Date() * 1, 时间
-            //     n: '诸天小队'
+            // "1704097787576_0001": {  // 队伍id
+            //     id: '1704097787576_0001',
+            //     v: 100, // 积分
+            //     s: new Date() * 1, // 时间
+            //     n: '对对对'
             // }
-        }
+        },
     }
 };
-
