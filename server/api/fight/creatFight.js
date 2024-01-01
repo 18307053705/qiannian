@@ -1,5 +1,5 @@
 const { fightFn } = require("@/utils");
-
+const { FightG } = require("@/global");
 module.exports = {
   /**
    * 创建战斗
@@ -7,9 +7,14 @@ module.exports = {
   creatFight: (req, res) => {
     const { iscContinue } = req.body;
     // 检验是否可继续
-    // if (fightFn.creatFightCheck(req, res, iscContinue)) {
-    //   return;
-    // }
+    const { check, message } = fightFn.checkFightCreat(req, res, iscContinue);
+    if (!check) {
+      res.send({
+        code: 0,
+        message
+      })
+      return;
+    }
     // 创建任务
     fightFn.creatFight(req, res, iscContinue);
     // 计算战斗结果
@@ -19,7 +24,10 @@ module.exports = {
     // 返回战斗信息
     res.send({
       code: 0,
-      data: fightFn.getFightFormat(req, res)
+      data: {
+        ...fightFn.getFightFormat(req, res),
+        fightS: FightG.getFightGlobal(req, res)
+      }
     })
   },
 };

@@ -1,5 +1,5 @@
-const { GrandG,  FightG } = require('../../global');
-
+const { GrandG, FightG } = require('@/global');
+const { FIGHT_TYPE_EUNM } = FightG;
 module.exports = {
     /**
      * 创建战斗指令
@@ -12,8 +12,9 @@ module.exports = {
             ErrorG.paramsError(res);
             return;
         }
-        const { FIGHT_TYPE_EUNM } = FightG;
-        const tRoleInfo = RoleG.getRoleGlobal(req, res, { role_id });
+        const iRoleInfo = RoleG.getRoleGlobal(req, res);
+        const tRoleInfo = RoleG.getRoleGlobal(req, res, role_id);
+        // 判断对方是否在线
         if (!tRoleInfo) {
             res.send({
                 code: 0,
@@ -21,7 +22,7 @@ module.exports = {
             })
             return;
         }
-
+        // 判断对方生命值
         if (tRoleInfo.life <= 0) {
             res.send({
                 code: 0,
@@ -29,15 +30,7 @@ module.exports = {
             })
             return;
         }
-
-        const iRoleInfo = RoleG.getRoleGlobal(req, res)
-        if (tRoleInfo.address !== iRoleInfo.address) {
-            res.send({
-                code: 0,
-                message: `${tRoleInfo.role_name}与你不在一个地方,无法进行${type === FIGHT_TYPE_EUNM.duel ? "切磋" : "击杀"}`
-            })
-            return;
-        }
+        // 判断我方生命值
         if (iRoleInfo.life <= 0) {
             res.send({
                 code: 0,
@@ -45,16 +38,31 @@ module.exports = {
             })
             return;
         }
-
-        const { fightMap } = FightG.getFightGlobal(req, res, role_id);
-        if (fightMap) {
+         // 判断对方位置是否与自己相同
+        if (tRoleInfo.address !== iRoleInfo.address) {
             res.send({
                 code: 0,
-                message: `${tRoleInfo.role_name}正在战斗中。`
+                message: `${tRoleInfo.role_name}与你不在一个地方,无法进行${type === FIGHT_TYPE_EUNM.duel ? "切磋" : "击杀"}`
             })
             return;
         }
 
+        const tFightInfo = FightG.getFightGlobal(req, res, role_id);
+        const iFightInfo = FightG.getFightGlobal(req, res);
+        if (tFightInfo) {
+            res.send({
+                code: 0,
+                message: `${tRoleInfo.role_name}正处于战斗中。`
+            })
+            return;
+        }
+        if (iFightInfo) {
+            res.send({
+                code: 0,
+                message: '你正处于战斗中。'
+            })
+            return;
+        }
         GrandG.setDirGlobal(req, res, { currentDir: { type, role_id, role_name: tRoleInfo.role_name } });
         res.send({
             code: 0,

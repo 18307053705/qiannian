@@ -20,9 +20,9 @@ module.exports = {
         if (type === FIGHT_TYPE_EUNM.rank) {
             return {
                 ...fightInfo,
-                players: fightRankInfo.players,
-                buffs: fightRankInfo.buffs,
-                rivals: fightRankInfo.rivals,
+                players: fightRankInfo?.players,
+                buffs: fightRankInfo?.buffs,
+                rivals: fightRankInfo?.rivals,
             };
         }
         // 玩家 vs 玩家

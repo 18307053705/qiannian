@@ -32,13 +32,15 @@ module.exports = {
                 getDuelReward(req, res);
             }
         }
-        // 战斗结束-未更新角色属性且非切磋-更新角色属性
+        // 战斗结束-非切磋更新角色属性
+     
         if (state === !FIGHT_STATE_EUNM.inCombat && !update && type !== FIGHT_TYPE_EUNM.duel) {
             const player = FightG.getFightGlobal(req, res).fightInfo.player;
             RoleG.updataRoleGlobal(req, res, {
                 life: player.attr.life,
                 mana: player.attr.mana
             })
+            // 记录角色属性已更新
             FightG.updataFightInfoGlobal(req, res, { update: true });
         }
         // 返回战斗状态

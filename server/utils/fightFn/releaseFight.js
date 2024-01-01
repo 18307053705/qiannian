@@ -21,7 +21,7 @@ module.exports = {
             }
         }
         // 组队战斗
-        if (type === FIGHT_TYPE_EUNM.rank) {
+        if (type === FIGHT_TYPE_EUNM.rank && fightInfo.state === FIGHT_STATE_EUNM.inCombat) {
             const { players } = fightRankInfo;
             if (players.length === 1) {
                 FightG.deleteFightRankGlobal(id);
@@ -29,11 +29,14 @@ module.exports = {
                 FightG.updataFightRankInfoGlobal(req, res, { players: players.filter(({ role_id }) => role_id !== roleInfo.role_id) })
             }
         }
-        // 更新角色属性
-        RoleG.updataRoleGlobal(req, res, {
-            life: player.attr.life,
-            mana: player.attr.mana
-        })
+        if (type !== FIGHT_TYPE_EUNM.duel) {
+            // 更新角色属性
+            RoleG.updataRoleGlobal(req, res, {
+                life: player.attr.life,
+                mana: player.attr.mana
+            })
+        }
+
         FightG.deleteFightGlobal(req, res);
     }
 };

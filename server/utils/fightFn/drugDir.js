@@ -10,11 +10,11 @@ module.exports = {
      * @param {*} drugId 物品id
      */
     drugDir: function (req, res, drugId) {
-        const { fightMap } = FightG.getFightGlobal(req, res);
+        const { fightInfo } = FightG.getFightGlobal(req, res);
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         // 查找目标物品
         const drugItme = data.find(({ id }) => id == drugId)
-        const { roundText, player, roundAttr } = fightMap;
+        const { roundText, player, roundAttr } = fightInfo;
         let success = false;
         let drugInfo = undefined;
         const newArt = player.art.map((itme) => {
@@ -52,7 +52,7 @@ module.exports = {
                 role[key] = role[`${key}_max`]
             }
             player.art = newArt;
-            FightG.updataFightMapGlobal(req, res, {
+            FightG.updataFightInfoGlobal(req, res, {
                 player,
                 roundText,
                 roundAttr

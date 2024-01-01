@@ -1,4 +1,4 @@
-const { FightG } = require('../../../global');
+const { FightG } = require('@/global');
 const { initRoundAttr } = require('./initRoundAttr');
 const { computeBuffs } = require('./computeBuffs');
 module.exports = {
@@ -8,6 +8,10 @@ module.exports = {
      * @param {*} res
      */
     initRoundInfo: function (req, res) {
+        const { fightInfo } = FightG.getFightGlobal(req, res) || {};
+        if(fightInfo?.state !== FightG.FIGHT_STATE_EUNM.inCombat){
+            return;
+        }
         // 回合文案
         const roundText = {
             dps: '',

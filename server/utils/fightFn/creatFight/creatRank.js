@@ -41,16 +41,16 @@ module.exports = {
         buffs: {},
         template,
       };
-      FightG.setFightRankGlobal(fightId, fightRankInfo);
     }
     fightRankInfo.players.push(players.simplePlayer);
     const fightInfo = {
       id: fightId,
       type: FIGHT_TYPE_EUNM.rank,
       player: players.completePlayer,
-      template: fightInfo.template,
+      template: fightRankInfo.template,
       state: FIGHT_STATE_EUNM.inCombat,
     };
     FightG.setFightGlobal(req, res, fightInfo);
+    FightG.setFightRankGlobal(fightId, fightRankInfo);
   },
 };

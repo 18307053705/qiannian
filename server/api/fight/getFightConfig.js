@@ -5,7 +5,7 @@ module.exports = {
      * 获取战斗配置
      */
     getFightConfig: async (req, res) => {
-        const { fightMap } = FightG.getFightGlobal(req, res);
+        const { fightInfo } = FightG.getFightGlobal(req, res);
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const { skill_pool } = RoleG.getRoleGlobal(req, res);
         const art = [];
@@ -25,7 +25,7 @@ module.exports = {
             data: {
                 drug,
                 art,
-                config: fightMap.player.art
+                config: fightInfo.player.art
             }
         });
     }

@@ -13,8 +13,8 @@ module.exports = {
         if (pet_pool['l'].length >= pet_pool['x']) {
             return '宠物房已满,无法获得更多宠物。';
         }
-        const { fightMap } = FightG.getFightGlobal(req, res);
-        const { roundAttr, roundText, type, template } = fightMap;
+        const { fightInfo } = FightG.getFightGlobal(req, res);
+        const { roundAttr, roundText, type, template } = fightInfo;
         const { id, name, num } = template;
         const { pet, level } = ElementTable.getElement(id) || {};
         // 非人机不可捕捉

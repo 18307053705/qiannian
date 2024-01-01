@@ -49,9 +49,11 @@ module.exports = {
                 players.forEach(({ role_id }) => {
                     FightG.updataFightInfoGlobal(req, res, { state }, role_id);
                 })
+            } else {
+                // 更新怪物信息
+                FightG.updataFightRankInfoGlobal(req, res, { rivals });
             }
-            // 更新怪物信息
-            FightG.updataFightRankInfoGlobal(req, res, { rivals });
+
         }
         // 玩家 vs 玩家
         if (type === FIGHT_TYPE_EUNM.duel || type === FIGHT_TYPE_EUNM.kill) {

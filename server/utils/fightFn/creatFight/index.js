@@ -10,11 +10,15 @@ module.exports = {
    * @param res
    * @param iscContinue 是否刷怪
    */
-  creatFight: function (req, res) {
+  creatFight: function (req, res, iscContinue) {
     const { currentDir } = GrandG.getDirGlobal(req, res);
+    const { fightInfo } = FightG.getFightGlobal(req, res) || {};
     const { rank, role_id, type } = currentDir;
     // 计算战斗类型
     const fightType = role_id ? type : (rank ? FIGHT_TYPE_EUNM.rank : FIGHT_TYPE_EUNM.pve);
+    if (fightInfo && !iscContinue) {
+      return;
+    }
     // 单人vs人机
     if (fightType === FIGHT_TYPE_EUNM.pve) {
       return creatPve(req, res);

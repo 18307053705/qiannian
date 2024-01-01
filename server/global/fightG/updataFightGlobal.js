@@ -1,6 +1,4 @@
 const { FIGHT_INFO_Global, FIGHT_RANK_INFO_Global } = require("./config");
-
-
 module.exports = {
     /**
      * 更新战斗信息池
@@ -17,10 +15,13 @@ module.exports = {
      */
     updataFightInfoGlobal: function (req, res, data, role_id) {
         const role = role_id ? { role_id } : RoleG.getRoleGlobal(req, res);
-        FIGHT_INFO_Global[role.role_id] = JSON.parse(JSON.stringify({
-            ...FIGHT_INFO_Global[role.role_id],
-            ...data
-        }));
+        if (FIGHT_INFO_Global[role.role_id]) {
+            FIGHT_INFO_Global[role.role_id] = JSON.parse(JSON.stringify({
+                ...FIGHT_INFO_Global[role.role_id],
+                ...data
+            }));
+        }
+
     },
     /**
      * 更新组队战斗信息池
@@ -31,10 +32,13 @@ module.exports = {
     updataFightRankInfoGlobal: function (req, res, data) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
         const { id } = FIGHT_INFO_Global[role_id];
-        FIGHT_RANK_INFO_Global[id] = JSON.parse(JSON.stringify({
-            ...FIGHT_RANK_INFO_Global[id],
-            ...data
-        }));
+        if (FIGHT_RANK_INFO_Global[id]) {
+            FIGHT_RANK_INFO_Global[id] = JSON.parse(JSON.stringify({
+                ...FIGHT_RANK_INFO_Global[id],
+                ...data
+            }));
+        }
+
     },
 
 }

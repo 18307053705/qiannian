@@ -14,7 +14,6 @@ const Fight = ({}) => {
     const [fight, setFight] = useState();
 
     const fightInfoChang = ({ data }) => {
-        // const { fightMap } = data;
         let panelKey = 'duke';
         if (data.state) {
             panelKey = 'result';

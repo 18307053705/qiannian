@@ -5,7 +5,7 @@ const petAttack = require('./petAttack');
 const rivalAttack = require('./rivalAttack');
 const computeFightResults = require('./computeFightResults');
 const getFightFormat = require('./getFightFormat');
-const creatFightCheck = require('./creatFightCheck');
+const checkFightCreat = require('./checkFightCreat');
 const releaseFight = require('./releaseFight');
 const drugDir = require('./drugDir');
 const lingXue = require('./lingXue');
@@ -23,7 +23,7 @@ module.exports = {
     ...rivalAttack,
     ...computeFightResults,
     ...getFightFormat,
-    ...creatFightCheck,
+    ...checkFightCreat,
     ...releaseFight,
     ...drugDir,
     ...lingXue,

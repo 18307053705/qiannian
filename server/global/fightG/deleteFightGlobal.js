@@ -1,4 +1,4 @@
-const { FIGHT_INFO_Global, FIGHT_RANK_INFO_Global, FIGHT_TYPE_EUNM } = require("./config");
+const { FIGHT_INFO_Global, FIGHT_RANK_INFO_Global } = require("./config");
 module.exports = {
   /**
    * 删除战斗信息
@@ -7,7 +7,7 @@ module.exports = {
    */
   deleteFightGlobal: function (req, res) {
     const role = RoleG.getRoleGlobal(req, res);
-    delete FIGHT_MAP_Global[role?.role_id];
+    delete FIGHT_INFO_Global[role?.role_id];
   },
   /**
    * 删除组队战斗信息

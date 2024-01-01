@@ -48,11 +48,10 @@ module.exports = {
 
             };
             RoleG.updataRoleGlobal(req, res, { skill_pool });
-
-            const { fightMap } = FightG.getFightGlobal(req, res);
-            const { player } = fightMap;
+            const { fightInfo } = FightG.getFightGlobal(req, res);
+            const { player } = fightInfo;
             player.art = fight;
-            FightG.updataFightMapGlobal(req, res, { player });
+            FightG.updataFightInfoGlobal(req, res, { player });
             res.send({
                 code: 0,
                 data: {
