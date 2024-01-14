@@ -14,7 +14,7 @@ module.exports = {
         }
         const { article, fun } = rewards;
         if (fun) {
-            return rewardFun[fun](req, res);
+            return rewardFun[fun]?.(req, res);
         }
         if (article) {
             rewards.article = {};

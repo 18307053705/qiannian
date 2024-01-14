@@ -12,30 +12,29 @@ module.exports = {
             case 2:
             case 3:
             case 4:
-                return 100 * (10 ** parseInt(level / 10)) * (level % 10 + 1);
+                return 100 * 10 ** Math.floor(level / 10) * ((level % 10) + 1);
             case 5:
-                return 10000000 + (level % 10 + 1) * 5000000;
+                return 10000000 + ((level % 10) + 1) * 5000000;
             case 6:
-                return 50000000 + (level % 10 + 1) * 5000000;
+                return 60000000 + ((level % 10) + 1) * 6000000;
             case 7:
-                return 100000000 + (level % 10 + 1) * 10000000;
+                return 100000000 + ((level % 10) + 1) * 10000000;
             case 8:
-                return 300000000 + (level % 10 + 1) * 20000000;
+                return 300000000 + ((level % 10) + 1) * 20000000;
             case 9:
-                return 500000000 + (level % 10 + 1) * 50000000;
+                return 1200000000 + ((level % 10) + 1) * 50000000;
             case 10:
             case 11:
-                return 1000000000 + (level - 100) * 500000000;
+                return 2000000000 + (level - 100) * 500000000;
             case 12:
             case 13:
             case 14:
             case 15:
             case 16:
             case 17:
-            case 18:
-                return 50000000000 + (level - 120) * 1000000000;
+                return 50000000000 + (level - 120) * 5000000000;
             default:
-                return 100000000000 + (level - 180) * 50000000000;
+                return 350000000000 + (level - 180) * 50000000000;
         }
     }
 };

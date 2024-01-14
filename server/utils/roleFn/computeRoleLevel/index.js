@@ -43,9 +43,9 @@ module.exports = {
             const pet = getPetGlobal(req, res, roleInfo.role_id);
             const { attr } = AttrSystem.computeRoleAttr({ ...roleInfo, role_level }, { pet, keys: ['life_max', 'mana_max'] });
             update['life'] = attr.life_max;
-            update['mana'] = attr.mana_max;
-            callback && callback(Boolean(base), update);
+            update['mana'] = attr.mana_max; 
         }
+        callback && callback(islevel, update);
         return RoleG.updataRoleGlobal(req, res, update);
 
     }

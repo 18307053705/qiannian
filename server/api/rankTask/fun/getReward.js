@@ -1,6 +1,5 @@
-
-const { knapsackFn, roleFn, qingyuanFn } = require('../../../utils');
-const { knapsackTable } = require('../../../table');
+const { knapsackFn, roleFn, qingyuanFn } = require('@/utils');
+const { knapsackTable } = require('@/table');
 module.exports = {
     /**
   * 获取任务奖励
@@ -11,18 +10,15 @@ module.exports = {
   */
     getReward: function (req, res, fun, freak) {
         if (fun === 'qingYuan1') {
-            const { type, n, id } = knapsackTable.getArticle(311);
+            const { name, id } = knapsackTable.getArticle(18102);
             const article = {
-                artReward: {
-                    [id]: {
-                        n,
-                        id,
-                        p: type,
-                        s: 1
-                    }
+                [id]: {
+                    name,
+                    id,
+                    s: 1
                 }
             }
-            const message = knapsackFn.addKnapsack(req, res, { article });
+            const message = knapsackFn.addKnapsack(req, res, article);
             if (message) {
                 return message;
             }

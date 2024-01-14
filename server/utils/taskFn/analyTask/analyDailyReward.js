@@ -12,33 +12,40 @@ module.exports = {
         if (type === TASK_TYPE_MEUN.exp) {
             const exps = AttrSystem.computeUpExp(level);
             let exp = 0;
-            switch (parseInt(level / 10)) {
+            switch (Math.floor(level / 10)) {
                 case 0:
                 case 1:
+                    exp = exps * 0.25;
+                    break;
                 case 2:
-                    exp = exps * 0.5;
+                    exp = exps * 0.125;
                     break;
                 case 3:
+                    exp = exps * 0.0625;
+                    break;
                 case 4:
-                    exp = exps * 0.2;
+                    exp = exps * 0.0425;
                     break;
                 case 5:
+                    exp = exps * (level > 55 ? 0.025 : 0.032);
+                    break;
                 case 6:
-                    exp = exps * 0.1;
+                    exp = exps * (level > 65 ? 0.02 : 0.025);
                     break;
                 case 7:
-                    exp = exps * 0.05;
+                    exp = exps * 0.0125;
                     break;
                 case 8:
-                    exp = exps * 0.02;
+                    exp = exps * 0.007;
                     break;
                 case 9:
-                    exp = exps * 0.01;
+                    exp = exps * 0.003;
                     break;
                 default:
-                    exp = exps * 0.002;
-                    break;
+                    exp = 5100000;
+                    break
             }
+
             return { exp: parseInt(exp) }
         }
         // 每日金钱
@@ -64,4 +71,3 @@ module.exports = {
 
     }
 }
-

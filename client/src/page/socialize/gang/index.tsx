@@ -28,7 +28,7 @@ export const Detail = ({ socialize, setPageName }) => {
                 <span className='g_u'><span onClick={() => { setPageName('tael') }}>捐献银两</span></span>
                 <span className='g_u'><span onClick={() => { setPageName('material') }}>捐献材料</span></span>
                 <span className='g_u'><span onClick={() => { jumpMakeEquip('gang') }}>帮会装备</span></span>
-                {socialize.level !== 5 && <span className='g_u' onClick={tpClick}><span>修炼房</span> </span>}
+                {socialize.level === 5 && <span className='g_u' onClick={tpClick}><span>修炼房</span> </span>}
             </div>
             <div>
                 <span className='g_u'><span onClick={() => { setPageName('adjust') }}>人员调整</span></span>

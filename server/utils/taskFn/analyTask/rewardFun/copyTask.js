@@ -19,7 +19,7 @@ function getArticle(list, config) {
 
 module.exports = {
     // 炼魂洞
-    lianHunDong: function () {
+    LianHunDong: function () {
         return {
             exp: 50000,
             world: 100,
