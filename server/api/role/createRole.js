@@ -29,7 +29,7 @@ module.exports = {
             return;
         }
 
-        const RoleList = await roleSql.asyncGetRoleList(req, res) || [];
+        const RoleList = await RoleSql.asyncGetRoleList(req, res) || [];
         let ids = [`${user}_${region}1`, `${user}_${region}2`, `${user}_${region}3`];
         RoleList.forEach(({ role_id }) => {
             ids = ids.filter((id) => role_id !== id)
@@ -110,26 +110,14 @@ module.exports = {
             qingyuan: {},
             upper_limit: {}
         }
-        
-        // 角色信息
-        const keys = [];
-        const value = [];
-        const insert = [];
-        Object.keys(roleInfo).forEach((key) => {
-            keys.push(key);
-            if (typeof roleInfo[key] === 'object') {
-                roleInfo[key] = JSON.stringify(roleInfo[key]);
-            }
-            value.push(roleInfo[key]);
-            insert.push('?');
-        })
+    
         await RoleSql.asyncInsertRole(roleInfo);
         await Promise.all([
             KnapsackSql.asyncAddKnapsack(user, role_id),
             WarehouseSql.asyncAddWarehouse(user, role_id),
             FriendsSql.asyncAddFriends(user, role_id)]
         );
-        await roleFn.roleLogin(req, res, roleInfo, { user_id: user, role_id, tael: 1000, yuanbao: 0, data: '[]' });
+        await roleFn.roleLogin(req, res, roleInfo, { user_id: user, role_id, tael: 1000, yuanbao: 0, data:[] });
         res.send({
             code: 0,
             data: '创建角色成功'

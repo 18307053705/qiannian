@@ -19,6 +19,8 @@ const ROLE_JSON_KEYS = [
     'title_list',
     'upper_limit',
 ];
+const integral_key = ['world', 'gang', 'intersect', 'exploit', 'shenZhuang'];
+
 module.exports = {
     /**
      * 添加角色信息
@@ -53,7 +55,21 @@ module.exports = {
      */
     asyncGetRoleInfo: async function (role_id) {
         const { results } = await asyncQuery(`select * from role  where role_id="${role_id}"`);
-        return results[0];
+        const role = results[0];
+        if (role) {
+            Object.keys(role).forEach((key) => {
+                if (ROLE_JSON_KEYS.includes(key)) {
+                    role[key] = JSON.parse(role[key]);
+                }
+            })
+            // 声望处理
+            integral_key.forEach((key) => {
+                if (!role['role_integral'][key]) {
+                    role['role_integral'][key] = 0;
+                }
+            })
+        }
+        return role;
     },
     /**
      * 获取角色名称是否存在
