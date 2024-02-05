@@ -5,6 +5,7 @@ const panelDir = require('./panelDir');
 const tpDir = require('./tpDir');
 const tpDirUpdate = require('./tpDirUpdate');
 const updataDir = require('./updataDir');
+const backGrand = require('./backGrand');
 
 module.exports = {
   ...getGrandInfo,
@@ -14,4 +15,5 @@ module.exports = {
   ...tpDir,
   ...tpDirUpdate,
   ...updataDir,
+  ...backGrand
 }

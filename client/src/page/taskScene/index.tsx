@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getTaskScene, taskSceneEnd } from '@cgi/taks';
+import { getTaskScene, taskSceneActive } from '@cgi/taks';
 import { backGrand, getTaskReward } from '@utils';
 import { TASK_TYPE } from '@meun';
 import TaskSpeed from './taskSpeed';
@@ -19,7 +19,7 @@ export const taskScene = () => {
     const { connet, speed, levelNoText, endText, reward, status, action, type, complete, isActive }: any = taskInfo || {};
 
     const doneTask = () => {
-        taskSceneEnd().then(({ data }) => {
+        taskSceneActive().then(({ data }) => {
             setTaskInof(data);
         })
     }

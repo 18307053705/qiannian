@@ -2,7 +2,7 @@ import { post } from "@request";
 const getTaskListUrl = "/task/getTaskList";
 const getTaskInfoUrl = "/task/getTaskInfo";
 const getTaskSceneUrl = "/task/getTaskScene";
-const taskSceneEndUrl = "/task/taskSceneEnd";
+const taskSceneActiveUrl = "/task/taskSceneActive";
 const doneTaskUrl = "/task/doneTask";
 
 
@@ -35,8 +35,8 @@ export function getTaskScene() {
   return post(getTaskSceneUrl);
 }
 // 任务场景操作
-export function taskSceneEnd() {
-  return post(taskSceneEndUrl);
+export function taskSceneActive() {
+  return post(taskSceneActiveUrl);
 }
 
 /**

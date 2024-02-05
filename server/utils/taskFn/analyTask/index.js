@@ -3,7 +3,7 @@ const { analyTaskReward } = require('./analyTaskReward');
 const { analyDailyReward } = require('./analyDailyReward');
 const { analyTaskComplete } = require('./analyTaskComplete');
 const { analyTaskGrand } = require('./analyTaskGrand');
-const { TASK_TYPE_MEUN, DAIL_TYPE_LIST } = TaskSystem;
+const { TASK_TYPE_MEUN, DAIL_TYPE_LIST, TASK_STATU } = TaskSystem;
 
 module.exports = {
     // 解析任务
@@ -31,7 +31,7 @@ module.exports = {
             task.complete = analyTaskComplete(complete, grand);
         }
         task.taskType = type;
-        task.status = 0;
+        task.status = TASK_STATU.wait;
         return task;
     }
 }

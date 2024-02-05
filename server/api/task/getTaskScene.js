@@ -1,4 +1,3 @@
-
 const { TaskSystem } = require('@/system');
 const { GrandG, TaskG } = require('@/global');
 const { taskFn } = require('@/utils');
@@ -41,23 +40,8 @@ module.exports = {
             return true;
         }
 
-        const isCopy = taskType === TASK_TYPE_MEUN.copy;
-        // 接任务
+        // 待领取 返回场景
         if (task.status === TASK_STATU.wait) {
-            // 副本任务不可直接领取
-            task.status = isCopy ? TASK_STATU.wait : TASK_STATU.received;
-            TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-            res.send({
-                code: 0,
-                data: taskFn.getTaskScene(req, res, task),
-            })
-            return true;
-        }
-        if (task.complete?.text) {
-            task.complete.text = '';
-        }
-        // 副本任务直接返回场景
-        if (isCopy) {
             res.send({
                 code: 0,
                 data: taskFn.getTaskScene(req, res, task),
@@ -67,8 +51,8 @@ module.exports = {
 
         // 获取场景，宝箱与迷宫类型任务不重新计算进度
         if (task.type !== TASK_TYPE.biaoxiang && task.type !== TASK_TYPE.migong) {
-            // 三者状态可转换未完成与可完成
-            if (task.status === TASK_STATU.received || task.status === TASK_STATU.wait_complete || task.status === TASK_STATU.can_complete) {
+            // 未完成与可完成可互相改变
+            if (task.status === TASK_STATU.wait_complete || task.status === TASK_STATU.can_complete) {
                 // 计算任务进度
                 task.complete = taskFn.speedTask(req, res, task);
                 task.status = task.complete.done ? TASK_STATU.can_complete : TASK_STATU.wait_complete;
@@ -76,28 +60,6 @@ module.exports = {
             }
         }
 
-
-        // 判断任务是否完成
-        if (task.status === TASK_STATU.can_complete) {
-            // 获取任务奖励
-            const message = taskFn.getTaskReward(req, res, task.reward);
-            if (message) {
-                res.send({
-                    code: 0,
-                    message,
-                    data: taskFn.getTaskScene(req, res, task),
-                })
-                return;
-            }
-            // 改变未已完成
-            task.status = TASK_STATU.finished;
-            TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-            // 创建下一个任务
-            if (task.nextId) {
-                const nextTask = taskFn.analyTask(req, res, task.nextId, taskType);
-                TaskG.updataTaskGlobal(req, res, taskType, { [task.nextId]: nextTask });
-            }
-        }
         res.send({
             code: 0,
             data: taskFn.getTaskScene(req, res, task)
