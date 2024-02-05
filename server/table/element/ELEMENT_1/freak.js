@@ -1,27 +1,35 @@
 const NpcMap = {
     110: {
-        name: "炼魂郎君",
-        level: 62,
+        name: "神秘刺客",
+        level: 10,
     },
     111: {
-        name: "御龙大将军",
-        level: 62,
+        name: "炼魂郎君",
+        level: 30,
     },
     112: {
-        name: "守崖人",
-        level: 62,
+        name: "白魂郎君",
+        level: 30,
     },
     113: {
-        name: "妖族探子",
-        level: 62,
+        name: "绿魂郎君",
+        level: 30,
     },
-    124: {
-        name: "仙族探子",
-        level: 62,
+    114: {
+        name: "蓝魂郎君",
+        level: 30,
     },
-    125: {
-        name: "人族探子",
-        level: 62,
+    115: {
+        name: "青魂郎君",
+        level: 30,
+    },
+    116: {
+        name: "金魂郎君",
+        level: 30,
+    },
+    117: {
+        name: "魔化炼魂郎君",
+        level: 35,
     },
 };
 

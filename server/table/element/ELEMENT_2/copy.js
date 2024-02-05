@@ -1,54 +1,54 @@
 const freakMap = {
     // 30级炼魂洞
-    2050: {
+    20511: {
         name: "白魂郎君",
         level: 25,
         noBoss: 1
     },
-    2051: {
+    20512: {
         name: "绿魂郎君",
         level: 25,
         noBoss: 1
     },
-    2052: {
+    20513: {
         name: "蓝魂郎君",
         level: 25,
         noBoss: 1
     },
-    2053: {
+    20514: {
         name: "青魂郎君",
         level: 25,
         noBoss: 1
     },
-    2054: {
+    20515: {
         name: "金魂郎君",
         level: 25,
         noBoss: 1
     },
-    2055: {
+    20516: {
         name: "红魂郎君",
         level: 25,
         noBoss: 1
     },
-    2056: {
+    20517: {
         name: "紫魂郎君",
         level: 30,
         noBoss: 1,
     },
-    2057: {
+    20518: {
         name: "炼魂郎君",
         level: 32,
         noBoss: 1,
         attr: 3
     },
-    2058: {
+    20519: {
         name: "幽冥凶魂",
         level: 25,
         exp: 100,
         tael: 20,
     },
-    2059: {
-        name: "幽冥怨魂",
+    205110: {
+        name: "幽冥煞魂",
         level: 25,
         exp: 100,
         tael: 20,
