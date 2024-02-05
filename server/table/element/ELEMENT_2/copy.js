@@ -54,444 +54,444 @@ const freakMap = {
         tael: 20,
     },
     // 40级黑魔宗
-    20510: {
+    20521: {
         name: "白袍护法",
         level: 35,
         noBoss: 2,
     },
-    20511: {
+    20522: {
         name: "青袍护法",
         level: 35,
         noBoss: 2,
     },
-    20512: {
+    20523: {
         name: "橙袍护法",
         level: 35,
         noBoss: 2,
     },
-    20513: {
+    20524: {
         name: "红袍护法",
         level: 35,
         noBoss: 2,
     },
-    20514: {
+    20525: {
         name: "紫袍护法",
         level: 35,
         noBoss: 2,
     },
-    20515: {
+    20526: {
         name: "二长老",
         level: 40,
         noBoss: 2
     },
-    20516: {
+    20527: {
         name: "大长老",
         level: 40,
         noBoss: 2,
     },
-    20517: {
+    20528: {
         name: "黑魔宗主",
         level: 42,
         noBoss: 2,
         attr: 3
     },
-    20518: {
+    20529: {
         name: "黑魔宗弟子",
         level: 35,
         exp: 200,
         tael: 50,
     },
-    20519: {
+    205210: {
         name: "黑魔魔弟子",
         level: 35,
         exp: 200,
         tael: 50,
     },
     // 50级四海龙宫
-    20520: {
+    20531: {
         name: "龙宫太子",
         level: 45,
         noBoss: 3,
     },
-    20521: {
+    20532: {
         name: "龟丞相",
         level: 45,
         noBoss: 3,
     },
-    20522: {
+    20533: {
         name: "南海龙王",
         level: 48,
         noBoss: 3,
     },
-    20523: {
+    20534: {
         name: "北海龙王",
         level: 48,
         noBoss: 3,
     },
-    20524: {
+    20535: {
         name: "西海龙王",
         level: 48,
         noBoss: 3,
     },
-    20525: {
+    20536: {
         name: "东海龙王",
         level: 48,
         noBoss: 3,
     },
-    20526: {
+    20537: {
         name: "五爪金龙",
         level: 50,
         noBoss: 3,
     },
-    20527: {
+    20538: {
         name: "镇海神龙",
         level: 55,
         noBoss: 3,
         attr: 3
     },
-    20528: {
+    20539: {
         name: "巡海夜叉",
         level: 45,
         exp: 300,
         tael: 70,
     },
-    20529: {
+    205310: {
         name: "千年海妖",
         level: 45,
         exp: 300,
         tael: 70,
     },
     // 60级凤凰桐木
-    20520: {
+    20541: {
         name: "道观图腾",
         level: 60,
         noBoss: 4,
     },
-    20521: {
+    20542: {
         name: "道观童子",
         level: 60,
         noBoss: 4,
     },
-    20522: {
+    20543: {
         name: "紫霞魔蛛",
         level: 62,
         noBoss: 4,
     },
-    20523: {
+    20544: {
         name: "青天魔牛",
         level: 62,
         noBoss: 4,
     },
-    20524: {
+    20545: {
         name: "火云真人",
         level: 62,
         noBoss: 4,
     },
-    20525: {
+    20546: {
         name: "凤凰真身",
         level: 62,
         noBoss: 4,
     },
-    20526: {
+    20547: {
         name: "万年桐木",
         level: 65,
         noBoss: 4,
         attr: 5
     },
-    20527: {
+    20548: {
         name: "上古凤凰",
         level: 65,
         noBoss: 4,
         attr: 5.5
     },
-    20528: {
+    20549: {
         name: "火焰狼",
         level: 60,
         exp: 500,
         tael: 100,
     },
-    20529: {
+    205410: {
         name: "火焰虎",
         level: 60,
         exp: 500,
         tael: 100,
     },
     // 70级魔神传说
-    20530: {
+    20551: {
         name: "精英弟子",
         level: 70,
         noBoss: 5,
     },
-    20531: {
+    20552: {
         name: "亲传弟子",
         level: 70,
         noBoss: 5,
     },
-    20532: {
+    20553: {
         name: "护宗魔兽",
         level: 72,
         noBoss: 5,
     },
-    20533: {
+    20554: {
         name: "左护法",
         level: 72,
         noBoss: 5,
     },
-    20534: {
+    20555: {
         name: "右护法",
         level: 72,
         noBoss: 5,
     },
-    20535: {
+    20556: {
         name: "血魔宗主",
         level: 72,
         noBoss: 5,
     },
-    20536: {
+    20557: {
         name: "血魔老祖",
         level: 75,
         noBoss: 5,
         attr: 5
     },
-    20537: {
+    20558: {
         name: "血魔真身",
         level: 75,
         noBoss: 5,
         attr: 5.5
     },
-    20538: {
+    20559: {
         name: "魔宗弟子",
         level: 70,
         exp: 700,
         tael: 150,
     },
-    20539: {
+    205510: {
         name: "魔宗弟子",
         level: 70,
         exp: 700,
         tael: 150,
     },
     // 80级海底魔宫
-    20530: {
+    20561: {
         name: "凡阶傀儡",
         level: 80,
         noBoss: 6,
     },
-    20531: {
+    20562: {
         name: "黄阶傀儡",
         level: 80,
         noBoss: 6,
     },
-    20532: {
+    20563: {
         name: "玄阶傀儡",
         level: 80,
         noBoss: 6,
     },
-    20533: {
+    20564: {
         name: "地阶傀儡",
         level: 80,
         noBoss: 6,
     },
-    20534: {
+    20565: {
         name: "天阶傀儡",
         level: 80,
         noBoss: 6,
     },
-    20535: {
+    20566: {
         name: "守殿人",
         level: 82,
         noBoss: 6,
     },
-    20536: {
+    20567: {
         name: "海魔",
         level: 82,
         noBoss: 6,
         attr: 6
     },
-    20537: {
+    20568: {
         name: "魔尊残影",
         level: 85,
         noBoss: 6,
         attr: 7
     },
-    20538: {
+    20569: {
         name: "入魔虾兵",
         level: 80,
         exp: 1000,
         tael: 200,
     },
-    20539: {
+    205610: {
         name: "入魔蟹将",
         level: 80,
         exp: 1000,
         tael: 200,
     },
     // 90级魔尊遗迹
-    20530: {
+    20571: {
         name: "天枢阵",
         level: 90,
         noBoss: 7,
     },
-    20531: {
+    20572: {
         name: "天璇阵",
         level: 90,
         noBoss: 7,
     },
-    20532: {
+    20573: {
         name: "天机阵",
         level: 90,
         noBoss: 7,
     },
-    20533: {
+    20574: {
         name: "天权阵",
         level: 90,
         noBoss: 7,
     },
-    20534: {
+    20575: {
         name: "玉衡阵",
         level: 90,
         noBoss: 7,
     },
-    20535: {
+    20576: {
         name: "开阳阵",
         level: 92,
         noBoss: 7,
     },
-    20536: {
+    20577: {
         name: "瑶光阵",
         level: 92,
         noBoss: 7,
         attr: 7
     },
-    20537: {
+    20578: {
         name: "魔尊化身",
         level: 95,
         noBoss: 7,
         attr: 10
     },
-    20538: {
+    20579: {
         name: "魔尊信徒",
         level: 90,
         exp: 1500,
         tael: 300,
     },
-    20539: {
+    205710: {
         name: "魔尊信徒",
         level: 90,
         exp: 1500,
         tael: 300,
     },
     // 100级地府传说
-    20540: {
+    20581: {
         name: "牛头",
         level: 100,
         noBoss: 8,
     },
-    20541: {
+    20582: {
         name: "马面",
         level: 100,
         noBoss: 8,
     },
-    20542: {
+    20583: {
         name: "白无常",
         level: 100,
         noBoss: 8,
     },
-    20543: {
+    20584: {
         name: "黑无常",
         level: 100,
         noBoss: 8,
     },
-    20544: {
+    20585: {
         name: "地府判官",
         level: 100,
         noBoss: 8,
     },
-    20545: {
+    20586: {
         name: "孟婆",
         level: 110,
         noBoss: 8,
         attr: 10,
         grade: 3,
     },
-    20546: {
+    20587: {
         name: "地藏菩萨",
         level: 110,
         noBoss: 8,
         attr: 10,
         grade: 3,
     },
-    20547: {
+    20588: {
         name: "酆都大帝",
         level: 120,
         noBoss: 8,
         attr: 12,
         grade: 3,
     },
-    20548: {
+    20589: {
         name: "地府小鬼",
         level: 100,
         exp: 2000,
         tael: 500,
     },
-    20549: {
+    205810: {
         name: "地府小鬼",
         level: 100,
         exp: 2000,
         tael: 500,
     },
     // 100级群魔乱舞
-    20550: {
+    20591: {
         name: "影魔",
         level: 100,
         noBoss: 8,
     },
-    20551: {
+    20592: {
         name: "魅魔",
         level: 100,
         noBoss: 8,
     },
-    20552: {
+    20593: {
         name: "琴魔",
         level: 100,
         noBoss: 8,
     },
-    20553: {
+    20594: {
         name: "血魔",
         level: 100,
         noBoss: 8,
     },
-    20554: {
+    20595: {
         name: "海魔石像",
         level: 100,
         noBoss: 8,
     },
-    20555: {
+    20596: {
         name: "地魔石像",
         level: 102,
         noBoss: 8,
         attr: 10
     },
-    20556: {
+    20597: {
         name: "天魔石像",
         level: 102,
         noBoss: 8,
         attr: 10
     },
-    20557: {
+    20598: {
         name: "魔尊石像",
         level: 105,
         noBoss: 8,
         attr: 10,
         grade: 3,
     },
-    20558: {
+    20599: {
         name: "魔族精英",
         level: 100,
         exp: 2000,
         tael: 500,
     },
-    20559: {
+    205910: {
         name: "魔族精英",
         level: 100,
         exp: 2000,
