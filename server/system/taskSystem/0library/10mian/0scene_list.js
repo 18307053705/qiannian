@@ -133,7 +133,8 @@ const taskMap = {
         ],
         action: {
             type: 1,
-            text: '破旧宝箱'
+            text: '破旧宝箱',
+            rate: 2
         },
         reward: {
             exp: 900,

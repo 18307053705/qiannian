@@ -21,11 +21,12 @@ module.exports = {
             let isUpdata = false;
             Object.values(tasks).forEach((task, index) => {
                 const { title, complete, status, type } = task;
+                // 非战斗类型不计算
                 if (type !== TASK_TYPE.zhandou) {
                     return;
                 }
-                // 未领取 待完成 已完成 不计算
-                if (status === TASK_STATU.wait || status === TASK_STATU.can_complete || status === TASK_STATU.finished) {
+                // 非未完成状态不计算
+                if (status !== TASK_STATU.wait_complete) {
                     return;
                 }
                 const { freak: freaks } = complete;

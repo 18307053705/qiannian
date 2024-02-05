@@ -43,14 +43,6 @@ module.exports = {
         // 接任务 
         if (task.status === TASK_STATU.wait) {
             task.status = TASK_STATU.wait_complete;
-            // 判断领取任务类型是否：战斗 | 收集
-            // 是直接返回地图
-            if (task.type === TASK_TYPE.zhandou || task.type === TASK_TYPE.shouji) {
-                // 更新任务信息
-                TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-                grandFn.backGrand(req, res);
-                return;
-            }
         }
 
         // 未完成与可完成可互相改变
@@ -84,21 +76,37 @@ module.exports = {
         // 更新任务信息
         TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
 
-        // 对话任务当前状态未完成直接传送到对话目标NPC
-        if (task.status === TASK_STATU.wait_complete && task.type === TASK_TYPE.duihau) {
-            const { tNpc } = task.grand;
-            tNpc ? grandFn.tpDirUpdate(req, res, tNpc.address) : grandFn.backGrand(req, res);
+        // 返回结果处理
+        // 战斗|收集任务 领取直接返回地图
+        if (oldStatus === TASK_STATU.wait && (task.type === TASK_TYPE.zhandou || task.type === TASK_TYPE.shouji)) {
+            grandFn.backGrand(req, res);
             return;
         }
 
-        // 任务初始状态未领取 或 未完成 直接返回任务场景
-        if (oldStatus === TASK_STATU.wait || TASK_STATU.finished !== task.status) {
+        // 宝箱|迷宫任务 未完成返回场景信息
+        if (oldStatus !== TASK_STATU.finished && (task.type === TASK_TYPE.migong || task.type === TASK_TYPE.biaoxiang)) {
             res.send({
                 code: 0,
                 data: taskFn.getTaskScene(req, res, task),
             })
             return;
         }
+        // 对话任务 当前状态未完成直接传送到对话目标NPC
+        if (task.type === TASK_TYPE.duihau && task.status === TASK_STATU.wait_complete) {
+            const { tNpc } = task.grand;
+            tNpc ? grandFn.tpDirUpdate(req, res, tNpc.address) : grandFn.backGrand(req, res);
+            return;
+        }
+
+        // 任务初始状态未领取 或 未完成 直接返回任务场景
+        if (oldStatus === TASK_STATU.wait) {
+            res.send({
+                code: 0,
+                data: taskFn.getTaskScene(req, res, task),
+            })
+            return;
+        }
+
 
         // 判断是否拥有下个任务
         if (!task.nextId) {

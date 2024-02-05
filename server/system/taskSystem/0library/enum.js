@@ -23,10 +23,9 @@ const TASK_TYPE = {
 
 const TASK_STATU = {
     wait: 0, // 未领取
-    received: 1, // 已领取
-    wait_complete: 2, // 待完成
-    can_complete: 3, // 可完成
-    finished: 4, // 已完成
+    wait_complete: 1, // 待完成
+    can_complete: 2, // 可完成
+    finished: 3, // 已完成
 }
 
 const TASK_TYPE_MEUN = {

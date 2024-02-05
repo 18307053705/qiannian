@@ -27,7 +27,7 @@ const taskMap = {
                 address: "10000,0,0"
             },
         },
-        nextId: 104
+        nextId: 101
     },
     101: {
         title: "初识狐晶丽",
@@ -57,7 +57,7 @@ const taskMap = {
                 address: "10000,0,1"
             },
         },
-        nextId: 102
+        nextId: 104
     },
     102: {
         title: "惩戒巡逻山贼",
@@ -133,7 +133,8 @@ const taskMap = {
         ],
         action: {
             type: 1,
-            text: '破旧宝箱'
+            text: '破旧宝箱',
+            rate: 2
         },
         reward: {
             exp: 900,
@@ -145,7 +146,7 @@ const taskMap = {
                 address: "10000,0,0"
             },
         },
-        nextId: 105
+        nextId: 1032
     },
     105: {
         title: "惩戒持刀山贼",
@@ -173,7 +174,7 @@ const taskMap = {
         complete: {
             freak: "20012-2"
         },
-        nextId: 1032
+        nextId: 106
     },
     106: {
         title: "击杀持斧山贼",
