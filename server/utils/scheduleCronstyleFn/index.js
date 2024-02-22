@@ -1,6 +1,6 @@
 const schedule = require('node-schedule');
 const mysql = require("@/mysql");
-const { ActiveQueueG } = require("@/global");
+const { ActiveQueueG,TianBangG } = require("@/global");
 const roleFn = require("../roleFn");
 // 十分钟时间戳
 // const time = 6000000;
@@ -47,6 +47,10 @@ const scheduleCronstyle = () => {
     // 周六,周日22点 开启金银岛活动
     schedule.scheduleJob('0 0 22 * * 0,6', () => {
         ActiveQueueG.openJinYindao();
+    })
+    // 周六23点 计算排名信息
+    schedule.scheduleJob('0 0 23 * * 6', () => {
+        TianBangG.computeRank();
     })
 }
 

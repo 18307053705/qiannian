@@ -45,7 +45,8 @@ module.exports = {
    */
     asyncGetRegionKnapsack: async function (req) {
         const region = req.cookies["region"];
-        const { results } = await asyncQuery(`select * from knapsack  where region="${region}" `);
+        // const { results } = await asyncQuery(`select * from knapsack  where region="${region}" `);
+        const { results } = await asyncQuery(`select * from knapsack`);
         return results;
     },
 }

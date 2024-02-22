@@ -55,7 +55,8 @@ module.exports = {
      */
     asyncGetRegionQingYuan: async function (req) {
         const region = req.cookies["region"];
-        const { results } = await asyncQuery(`select * from qingyuan where region="${region}"`);
+        // const { results } = await asyncQuery(`select * from qingyuan where region="${region}"`);
+        const { results } = await asyncQuery(`select * from qingyuan`);
         return results;
     },
 }

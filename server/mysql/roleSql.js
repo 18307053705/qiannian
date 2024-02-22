@@ -100,7 +100,8 @@ module.exports = {
     */
     asyncGetRegionRole: async function (req) {
         const region = req.cookies["region"];
-        const { results } = await asyncQuery(`select * from role  where region="${region}"`);
+        // const { results } = await asyncQuery(`select * from role  where region="${region}"`);
+        const { results } = await asyncQuery(`select * from role`);
         const list = results.map((role) => {
             Object.keys(role).forEach((key) => {
                 if (ROLE_JSON_KEYS.includes(key)) {
