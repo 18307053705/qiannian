@@ -40,7 +40,7 @@ module.exports = {
         }
         // 宝箱任务?
         if (TASK_TYPE.biaoxiang === type) {
-            const done = Math.floor(Math.random() * (action.rate || saction.num || 9)) + 1 === 1;
+            const done = Math.floor(Math.random() * (action.rate || action.num || 9)) + 1 === 1;
             return { done, text: done ? '' : '选错了,重新选一个了吧!' };
         }
         // 迷宫任务

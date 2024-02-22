@@ -6,9 +6,10 @@ module.exports = {
     * @param {*} user 账号
     * @param {*} role_id 角色id
     */
-    asyncAddKnapsack: async function (user, role_id) {
-        const sqlStr = "insert into knapsack(user_id,role_id,tael,yuanbao,data) values(?,?,?,?,?)";
-        const list = [user, role_id, 1000, 0, '[]'];
+    asyncAddKnapsack: async function (user, role_id, name) {
+        const region = req.cookies["region"];
+        const sqlStr = "insert into knapsack(user_id,role_id,name,tael,yuanbao,data,region) values(?,?,?,?,?,?,?)";
+        const list = [user, role_id, name, 1000, 0, '[]', region];
         const { results } = await asyncAdd(sqlStr, list);
         return results.insertId;;
     },
@@ -37,5 +38,14 @@ module.exports = {
         })
         const { results } = await asyncQuery(`update knapsack  SET ${upData.join(',')}  where role_id="${role_id}"`);
         return results[0];
+    },
+    /**
+   * 获取全区背包
+   * @param {*} req
+   */
+    asyncGetRegionKnapsack: async function (req) {
+        const region = req.cookies["region"];
+        const { results } = await asyncQuery(`select * from knapsack  where region="${region}" `);
+        return results;
     },
 }

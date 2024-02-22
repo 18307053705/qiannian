@@ -58,9 +58,11 @@ module.exports = {
         }
         const task = {};
         Object.keys(tasks || {}).forEach((taskId) => {
+
             task[taskId] = {
                 ...taskFn.getTaskScene(req, res, tasks[taskId]),
-                taskType: type
+                taskType: type,
+                complete: taskFn.speedTask(req, res, tasks[taskId])
             };
 
         })
@@ -72,7 +74,7 @@ module.exports = {
                 task,
                 DAIL_TYPE_LIST,
                 dailyTask,
-                tasks:TaskG.getTaskGlobal(req, res, 'all')
+                tasks: TaskG.getTaskGlobal(req, res, 'all')
             },
         })
 

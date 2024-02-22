@@ -1,9 +1,8 @@
 const { TaskSystem } = require('@/system');
 const { GrandG, TaskG } = require('@/global');
-const { taskFn, grandFn } = require('@/utils');
+const { taskFn, grandFn, knapsackFn } = require('@/utils');
 const { TASK_STATU, TASK_TYPE } = TaskSystem;
 
-// 任务状态: 0：未领取 1：已领取 2：未完成 3：可完成 4:已完成
 module.exports = {
     /**
      * 任务场景操作
@@ -51,6 +50,53 @@ module.exports = {
             task.complete = taskFn.speedTask(req, res, task);
             task.status = task.complete.done ? TASK_STATU.can_complete : TASK_STATU.wait_complete;
         }
+        // 更新任务信息
+        TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
+
+        // 战斗|收集任务
+        if (task.type === TASK_TYPE.zhandou || task.type === TASK_TYPE.shouji) {
+            // 领取任务 -> 可完成 返回场景
+            if (oldStatus === TASK_STATU.wait && task.status === TASK_STATU.can_complete) {
+                res.send({
+                    code: 0,
+                    data: taskFn.getTaskScene(req, res, task),
+                })
+                return;
+            }
+            // 未完成 - 返回地图
+            if (task.status === TASK_STATU.wait_complete) {
+                grandFn.backGrand(req, res);
+                return;
+            }
+        }
+
+        // 对话任务
+        if (task.type === TASK_TYPE.duihau) {
+            // 领取任务 -> 未完成 返回地图
+            if (oldStatus === TASK_STATU.wait && task.status === TASK_STATU.wait_complete) {
+                const { tNpc } = task.grand;
+                tNpc ? grandFn.tpDirUpdate(req, res, tNpc.address) : grandFn.backGrand(req, res);
+                return;
+            }
+            // 领取任务 -> 可完成 返回场景
+            if (oldStatus === TASK_STATU.wait && task.status === TASK_STATU.can_complete) {
+                res.send({
+                    code: 0,
+                    data: taskFn.getTaskScene(req, res, task),
+                })
+                return;
+            }
+        }
+        // 迷宫|宝箱任务
+        if (task.type === TASK_TYPE.migong || task.type === TASK_TYPE.biaoxiang) {
+            if (oldStatus !== TASK_STATU.can_complete) {
+                res.send({
+                    code: 0,
+                    data: taskFn.getTaskScene(req, res, task),
+                })
+                return;
+            }
+        }
 
 
         // 判断任务是否完成
@@ -65,48 +111,25 @@ module.exports = {
                 })
                 return;
             }
+            // 减少对应物品
+            if (task.complete?.article) {
+                const delArticle = {};
+                Object.values(task.complete?.article).forEach(({ id, s, name }) => {
+                    delArticle[id] = { s, name };
+                })
+                knapsackFn.deleteKnapsack(req, res, delArticle)
+            }
+
             // 已完成
             task.status = TASK_STATU.finished;
+            // 更新任务信息
+            TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
             // 创建下一个任务
             if (task.nextId) {
                 const nextTask = taskFn.analyTask(req, res, task.nextId, taskType);
                 TaskG.updataTaskGlobal(req, res, taskType, { [task.nextId]: nextTask });
             }
         }
-        // 更新任务信息
-        TaskG.updataTaskGlobal(req, res, taskType, { [taskId]: task });
-
-        // 返回结果处理
-        // 战斗|收集任务 领取直接返回地图
-        if (oldStatus === TASK_STATU.wait && (task.type === TASK_TYPE.zhandou || task.type === TASK_TYPE.shouji)) {
-            grandFn.backGrand(req, res);
-            return;
-        }
-
-        // 宝箱|迷宫任务 未完成返回场景信息
-        if (oldStatus !== TASK_STATU.finished && (task.type === TASK_TYPE.migong || task.type === TASK_TYPE.biaoxiang)) {
-            res.send({
-                code: 0,
-                data: taskFn.getTaskScene(req, res, task),
-            })
-            return;
-        }
-        // 对话任务 当前状态未完成直接传送到对话目标NPC
-        if (task.type === TASK_TYPE.duihau && task.status === TASK_STATU.wait_complete) {
-            const { tNpc } = task.grand;
-            tNpc ? grandFn.tpDirUpdate(req, res, tNpc.address) : grandFn.backGrand(req, res);
-            return;
-        }
-
-        // 任务初始状态未领取 或 未完成 直接返回任务场景
-        if (oldStatus === TASK_STATU.wait) {
-            res.send({
-                code: 0,
-                data: taskFn.getTaskScene(req, res, task),
-            })
-            return;
-        }
-
 
         // 判断是否拥有下个任务
         if (!task.nextId) {

@@ -277,6 +277,11 @@ export const config: RouterType[] = [
     name: "测试",
     path: "/test",
     component: lazy(() => import("@page/test"))
+  },
+  {
+    name: "天榜",
+    path: "/ranking",
+    component: lazy(() => import("@page/ranking"))
   }
 ];
 

@@ -7,3 +7,4 @@ export * from './equipList';
 export * from './radio';
 export * from './groupRadio';
 export * from './tpBtn';
+export * from './backGrand';

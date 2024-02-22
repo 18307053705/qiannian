@@ -49,4 +49,13 @@ module.exports = {
         const { results } = await asyncQuery(`delete from qingyuan  where id="${id}"`);
         return results[0]
     },
+    /**
+     * 获取全区情缘
+     * @param {*} id 情缘id
+     */
+    asyncGetRegionQingYuan: async function (req) {
+        const region = req.cookies["region"];
+        const { results } = await asyncQuery(`select * from qingyuan where region="${region}"`);
+        return results;
+    },
 }

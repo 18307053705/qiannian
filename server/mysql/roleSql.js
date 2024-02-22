@@ -94,4 +94,28 @@ module.exports = {
         const { results } = await asyncQuery(`update role  SET ${upData.join(',')}  where role_id="${role_id}"`);
         return results[0];
     },
+    /**
+    * 获取全区角色
+    * @param {*} req
+    */
+    asyncGetRegionRole: async function (req) {
+        const region = req.cookies["region"];
+        const { results } = await asyncQuery(`select * from role  where region="${region}"`);
+        const list = results.map((role) => {
+            Object.keys(role).forEach((key) => {
+                if (ROLE_JSON_KEYS.includes(key)) {
+                    role[key] = JSON.parse(role[key]);
+                }
+            })
+            // 声望处理
+            integral_key.forEach((key) => {
+                if (!role['role_integral'][key]) {
+                    role['role_integral'][key] = 0;
+                }
+            })
+            return role;
+        })
+
+        return list;
+    },
 }

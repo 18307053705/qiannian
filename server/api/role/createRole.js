@@ -110,14 +110,14 @@ module.exports = {
             qingyuan: {},
             upper_limit: {}
         }
-    
+
         await RoleSql.asyncInsertRole(roleInfo);
         await Promise.all([
-            KnapsackSql.asyncAddKnapsack(user, role_id),
+            KnapsackSql.asyncAddKnapsack(user, role_id, role_name),
             WarehouseSql.asyncAddWarehouse(user, role_id),
             FriendsSql.asyncAddFriends(user, role_id)]
         );
-        await roleFn.roleLogin(req, res, roleInfo, { user_id: user, role_id, tael: 1000, yuanbao: 0, data:[] });
+        await roleFn.roleLogin(req, res, roleInfo, { user_id: user, role_id, tael: 1000, yuanbao: 0, data: [] });
         res.send({
             code: 0,
             data: '创建角色成功'

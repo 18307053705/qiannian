@@ -12,7 +12,7 @@ module.exports = {
         const user = req.cookies["q_uid"];
         return {
             roles: JSON.parse(JSON.stringify(ROLE_Global)),
-            iRole: JSON.parse(JSON.stringify(ROLE_Global[user])),
+            iRole: user ? JSON.parse(JSON.stringify(ROLE_Global[user])) : undefined,
         }
 
     }

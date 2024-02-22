@@ -40,9 +40,13 @@ module.exports = {
             return undefined;
         }
         return JSON.parse(JSON.stringify({
-            type: 1,
             id: npcId,
+            type: 1,
+            attr:1,
+            num: 1,
             ...NpcMap[npcId],
+            
+
         }))
 
     }

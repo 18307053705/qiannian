@@ -48,7 +48,7 @@ export const taskScene = () => {
     return (
         <div className={Styles['page-task-scene']}>
             {getTaskReward(done ? reward : []).map((text, index) => <div key={index}>{text}</div>)}
-            {taskConnet.map((text, index) => <div key={index}>{text}</div>)}
+            {taskConnet.map((text, index) => <div key={index} className={Styles.connet}>{text}</div>)}
             <TaskSpeed speed={speed} status={status} />
             {
                 active ? (

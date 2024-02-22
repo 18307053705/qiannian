@@ -20,7 +20,7 @@ const SpeedText = ({ task }) => {
     if (complete && (type === TASK_TYPE.zhandou || type === TASK_TYPE.shouji)) {
         const { freak, article } = complete;
         const speedArr = [...Object.values(freak || article || {})];
-        return <div>进度：{speedArr.map(({ n, s, c }: any) => `${n}(${c}/${s})`).join(',')}</div>;
+        return <div>进度：{speedArr.map(({ name, n, s, c }: any) => `${name || n}(${c}/${s})`).join(',')}</div>;
     }
     if (type === TASK_TYPE.duihau) {
         const { name } = grand.tNpc || grand.npc;

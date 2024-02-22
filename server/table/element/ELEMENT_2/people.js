@@ -62,12 +62,12 @@ const freakMap = {
     20023: {
         name: "大泽毒蛙",
         level: 24,
-        article: '211-1-50'
+        article: '211-1-100'
     },
     20024: {
         name: "大泽毒蝎",
         level: 26,
-        article: '212-1-50'
+        article: '212-1-100'
     },
     20025: {
         name: "青鲤鱼",
