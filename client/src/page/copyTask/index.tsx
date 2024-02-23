@@ -6,7 +6,7 @@ import { getRankList, getRankReward } from '@cgi/ranking';
 // 1:消耗品 2:buff丹药 3:装备 4:卷轴 5:材料 6:任务 7:杂物
 const nva = [
     {
-        label: '等级',
+        title: '炼魂洞',
         value: 1
     },
     {

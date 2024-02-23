@@ -48,10 +48,10 @@ const scheduleCronstyle = () => {
     schedule.scheduleJob('0 0 22 * * 0,6', () => {
         ActiveQueueG.openJinYindao();
     })
-    // 周六23点 计算排名信息
-    schedule.scheduleJob('0 0 23 * * 6', () => {
-        TianBangG.computeRank();
-    })
+    // // 周六23点 计算排名信息 咱不开启
+    // schedule.scheduleJob('0 0 23 * * 6', () => {
+    //     TianBangG.computeRank();
+    // })
 }
 
 module.exports = {

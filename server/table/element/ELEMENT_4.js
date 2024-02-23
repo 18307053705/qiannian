@@ -112,9 +112,10 @@ const ELEMENT_4 = {
     },
     415: {
         id: 415,
-        name: "【送财童子】",
+        name: "送财童子",
         type: 4,
-        path: '/songCaiTongZi'
+        path: '/songCaiTongZi',
+        cs: "g_b_u",
     },
     416: {
         id: 416,
@@ -133,26 +134,30 @@ const ELEMENT_4 = {
         name: "帮会管理",
         type: 4,
         path: '/socialize',
-        state: { type: 1 }
+        state: { type: 1 },
+        cs: "g_b_u",
     },
     419: {
         id: 419,
         name: "庄园管理",
         type: 4,
         path: '/socialize',
-        state: { type: 2 }
+        state: { type: 2 },
+        cs: "g_b_u",
     },
     420: {
         id: 420,
         name: "队伍管理",
         type: 4,
         path: '/socialize',
-        state: { type: 3 }
+        state: { type: 3 },
+        cs: "g_b_u",
     },
     421: {
         id: 421,
         name: "洞天福地",
         type: 4,
+        cs: "g_b_u",
     },
     422: {
         id: 422,
@@ -163,17 +168,18 @@ const ELEMENT_4 = {
     },
     423: {
         id: 423,
-        name: "发布追杀令",
+        name: "悬赏榜",
         type: 4,
         cs: "g_b_u"
     },
     424: {
         id: 424,
-        name: "【炼魂洞】",
+        name: "炼魂洞",
         type: 4,
         path: '/taskScene',
         taskId: 110,
         taskType: TASK_TYPE_MEUN.copy,
+        cs: "g_b_u"
     },
     425: {
         id: 425,

@@ -2,37 +2,37 @@ const freakMap = {
     // 云荒大陆
     20411: {
         name: "孤魂",
-        level: 10,
+        level: 20,
     },
     20412: {
         name: "野鬼",
-        level: 10,
+        level: 20,
     },
     20413: {
         name: "树妖",
-        level: 12,
+        level: 22,
     },
     20414: {
         name: "桑树",
-        level: 12,
+        level: 22,
         article: '215-1-50'
     },
     20415: {
         name: "大耳猴",
-        level: 12,
+        level: 24,
     },
     20416: {
         name: "皮皮猴",
-        level: 12,
+        level: 26,
     },
     20417: {
         name: "赤炎蜘蛛",
-        level: 15,
+        level: 28,
         article: '216-1-50'
     },
     20418: {
         name: "灵异小妖",
-        level: 15,
+        level: 30,
         article: '217-1-50'
     },
     // 无妄海

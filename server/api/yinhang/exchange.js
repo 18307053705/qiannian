@@ -12,7 +12,7 @@ module.exports = {
         }
         let { yuanbao, tael } = KnapsackG.getknapsackGlobal(req, res);
 
-        const drain = type === 1 ? num * 70000 : null;
+        const drain = type === 1 ? num * 100000 : num;
         // 兑换元宝校验
         if (type === 1 && drain > tael) {
             res.send({
@@ -38,7 +38,7 @@ module.exports = {
         } else {
             yuanbao -= drain;
             tael += num * 50000;
-            success = `消耗${num}元宝,兑换${num * 50000}银两`
+            success = `消耗${drain}元宝,兑换${num * 50000}银两`
         }
         KnapsackG.updateknapsackGlobal(req, res, { yuanbao, tael });
         res.send({

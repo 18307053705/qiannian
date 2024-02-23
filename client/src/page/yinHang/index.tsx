@@ -19,7 +19,7 @@ export const YinHang = ({ history }) => {
     if (pageKey) {
         return (
             <div>
-                <div>{pageKey === 1 ? '提示：兑换1元宝需要消耗70000银两' : '提示：1元宝可兑换成50000银两'}</div>
+                <div>{pageKey === 1 ? '提示：兑换1元宝需要消耗100000银两' : '提示：1元宝可兑换成50000银两'}</div>
                 <Input
                     label='数量'
                     submit={submit}

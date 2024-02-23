@@ -7,7 +7,7 @@ module.exports = {
      * @param page 页数 1:等级，2:境界，3:生命，4:法力，5:攻击，6:防御，7:命中，8:闪避，9:暴击,100:姻缘树,101：财富
      */
     getRankList: async function (req, res) {
-        const { type, page = 0, size = 2 } = req.body;
+        const { type, page = 0, size = 20 } = req.body;
         if (![1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 101].includes(type)) {
             ErrorG.paramsError(res);
             return;
