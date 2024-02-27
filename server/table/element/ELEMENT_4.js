@@ -170,6 +170,7 @@ const ELEMENT_4 = {
         id: 423,
         name: "悬赏榜",
         type: 4,
+        // path: '/xuanShanBang',
         cs: "g_b_u"
     },
     424: {

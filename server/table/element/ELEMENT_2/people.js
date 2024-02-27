@@ -32,7 +32,7 @@ const freakMap = {
     20018: {
         name: "斑斓蛇",
         level: 5,
-        article: '210-1-50'
+        article: '210-1-70'
     },
     20019: {
         name: "溪中青鱼",
@@ -52,40 +52,39 @@ const freakMap = {
     },
     // 大泽谷
     20021: {
-        name: "大地魔熊",
+        name: "大泽毒蚊",
         level: 20,
     },
     20022: {
-        name: "黑白魔熊",
+        name: "大泽毒蛇",
         level: 22,
     },
     20023: {
         name: "大泽毒蛙",
         level: 24,
-        article: '211-1-100'
+        article: '211-1-70'
     },
     20024: {
         name: "大泽毒蝎",
         level: 26,
-        article: '212-1-100'
     },
     20025: {
-        name: "青鲤鱼",
+        name: "大地魔熊",
         level: 28,
     },
     20026: {
-        name: "河藤葵",
+        name: "大泽妖狼",
         level: 30,
+        article: '212-1-70'
     },
     20027: {
-        name: "藏羚羊",
+        name: "大泽树妖",
         level: 28,
-        article: '213-1-50'
     },
     20028: {
-        name: "巨羊角",
+        name: "大泽巨蟒",
         level: 30,
-        article: '214-1-50'
+        article: '214-1-70'
     },
     // 映月崖
     20031: {
