@@ -71,35 +71,38 @@ const freakMap = {
     },
     // 迷雾森林
     20231: {
-        name: "光头纸人",
+        name: "纸人男童",
         level: 28,
     },
     20232: {
-        name: "长发纸人",
+        name: "纸人女童",
         level: 30,
     },
     20233: {
         name: "红木古树",
         level: 28,
+        article: '2110-1-50'
     },
     20234: {
-        name: "盗墓贼",
+        name: "金丝古树",
         level: 30,
+        article: '2111-1-50'
     },
     20235: {
-        name: "古墓游尸",
+        name: "幻境游魂",
         level: 28,
     },
     20236: {
-        name: "五色毒蛛",
+        name: "幻境行尸",
         level: 30,
     },
     20237: {
-        name: "尸煞",
+        name: "百年白蚁",
         level: 28,
+        article: '2112-1-50'
     },
     20238: {
-        name: "魔族弟子",
+        name: "百年猴精",
         level: 30,
     },
     // 妖魔岭
