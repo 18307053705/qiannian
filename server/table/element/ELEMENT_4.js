@@ -313,6 +313,13 @@ const ELEMENT_4 = {
         path: '/tianCaiDiBao',
         state: { id: 443 }
     },
+    445: {
+        id: 445,
+        name: "天机老人",
+        type: 4,
+        path: '/tianCaiDiBao',
+        state: { id: 443 }
+    },
 };
 module.exports = {
     ELEMENT_4

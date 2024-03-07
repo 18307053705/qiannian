@@ -34,36 +34,40 @@ const freakMap = {
     },
     // 不夜城
     20221: {
-        name: "流氓",
+        name: "荒漠毒蝎",
         level: 20,
+        article: '216-1-50'
     },
     20222: {
-        name: "瘪三",
+        name: "荒漠毒蛇",
         level: 22,
     },
     20223: {
-        name: "亡命恶徒",
+        name: "小型仙人掌",
         level: 24,
+        article: '217-1-50'
     },
     20224: {
-        name: "亡命狂徒",
+        name: "巨型仙人掌",
         level: 26,
     },
     20225: {
-        name: "神秘刺客",
+        name: "地痞",
         level: 28,
     },
     20226: {
-        name: "血魔宗外门弟子",
+        name: "流氓",
         level: 30,
     },
     20227: {
-        name: "独角狮虎",
+        name: "幻青蛇",
         level: 28,
+        article: '218-1-50'
     },
     20228: {
-        name: "血魔宗内门弟子",
+        name: "食金兽",
         level: 30,
+        article: '219-1-50'
     },
     // 迷雾森林
     20231: {

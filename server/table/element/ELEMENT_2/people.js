@@ -84,7 +84,7 @@ const freakMap = {
     20028: {
         name: "大泽巨蟒",
         level: 30,
-        article: '214-1-70'
+        article: '213-1-70'
     },
     // 映月崖
     20031: {
@@ -104,52 +104,54 @@ const freakMap = {
         level: 30,
     },
     20035: {
-        name: "粉红毒蝎",
+        name: "幽光月狼",
         level: 28,
+        article: '214-1-70'
     },
     20036: {
-        name: "人脸魔蛛",
+        name: "幽冰魔狼",
         level: 30,
+        article: '215-1-70'
     },
     20037: {
-        name: "魔族探子",
+        name: "魔化妖虎",
         level: 28,
     },
     20038: {
-        name: "魔化狼妖",
+        name: "魔化妖狼",
         level: 30,
     },
     // 藏剑冢
     20041: {
-        name: "夺宝剑修",
+        name: "盗墓贼",
         level: 28,
     },
     20042: {
-        name: "夺宝体修",
+        name: "破阵魔修",
         level: 30,
     },
     20043: {
-        name: "守墓铁尸",
+        name: "守墓铁甲",
         level: 28,
     },
     20044: {
-        name: "守墓银尸",
+        name: "守墓银甲",
         level: 30,
     },
     20045: {
-        name: "左剑死侍",
+        name: "吸血冥蝠",
         level: 28,
     },
     20046: {
-        name: "右剑死侍",
+        name: "镇墓剑侍",
         level: 30,
     },
     20047: {
-        name: "上古龙魂",
+        name: "魔修傀儡",
         level: 30,
     },
     20048: {
-        name: "上古剑灵",
+        name: "剑魔分身",
         level: 30,
     },
 }

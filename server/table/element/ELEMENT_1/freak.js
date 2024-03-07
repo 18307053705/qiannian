@@ -1,6 +1,6 @@
 const NpcMap = {
     110: {
-        name: "神秘刺客",
+        name: "剑魔",
         level: 10,
     },
     111: {
