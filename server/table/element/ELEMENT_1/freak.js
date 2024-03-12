@@ -4,7 +4,7 @@ const NpcMap = {
         level: 10,
     },
     111: {
-        name: "炼魂郎君",
+        name: "千年巨蟒妖",
         level: 30,
     },
     112: {

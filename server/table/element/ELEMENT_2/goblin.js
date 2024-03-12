@@ -9,7 +9,7 @@ const freakMap = {
         level: 3,
     },
     20213: {
-        name: "食人花妖",
+        name: "巨石兽",
         level: 5,
     },
     20214: {
@@ -21,15 +21,15 @@ const freakMap = {
         level: 5,
     },
     20216: {
-        name: "黑蛇精",
-        level: 5,
-    },
-    20217: {
         name: "白骨蜘蛛",
         level: 5,
     },
+    20217: {
+        name: "黑蛇精",
+        level: 5,
+    },
     20218: {
-        name: "神秘高手",
+        name: "护洞蛇妖",
         level: 5,
     },
     // 不夜城
@@ -107,15 +107,15 @@ const freakMap = {
     },
     // 妖魔岭
     20241: {
-        name: "金甲魔虫",
+        name: "尸魔虫",
         level: 28,
     },
     20242: {
-        name: "看守弟子",
+        name: "尸魔鹰",
         level: 30,
     },
     20243: {
-        name: "入魔修士",
+        name: "粉红毒蝎",
         level: 28,
     },
     20244: {
@@ -123,21 +123,21 @@ const freakMap = {
         level: 30,
     },
     20245: {
-        name: "红河水鬼",
+        name: "狐族高手",
         level: 28,
     },
     20246: {
-        name: "紫叶花魔",
+        name: "狐族精英",
         level: 30,
     },
-    20247: {
-        name: "食人魔",
-        level: 30,
-    },
-    20248: {
-        name: "魔族高手",
-        level: 30,
-    },
+    // 20247: {
+    //     name: "食人魔",
+    //     level: 30,
+    // },
+    // 20248: {
+    //     name: "魔族高手",
+    //     level: 30,
+    // },
 }
 
 module.exports = {
