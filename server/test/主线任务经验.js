@@ -1,3 +1,4 @@
+const TASK_TYPE = {};
 // 计算经验
 function computeUpExp(level) {
     switch (parseInt(level / 10)) {
@@ -42,30 +43,30 @@ function taskExp(taskMap) {
     // 当前等级
     let level = 1;
     let upExp = computeUpExp(level);
-    Object.values(taskMap).forEach(({ title, reward }) => {
+    Object.values(taskMap).forEach(({ title, reward, level: taskLevl = 0 }) => {
+        if (taskLevl > level) {
+            level = taskLevl;
+            upExp = computeUpExp(level);
+            // curExp = 0;
+            console.log('任务等级:', taskLevl);
+        }
         exps += reward.exp;
         curExp += reward.exp;
         console.log('任务:', title, '经验:', reward.exp, '总经验:', exps);
         // 计算经验
         if (curExp >= upExp) {
+
             curExp -= upExp;
             level++;
+
             upExp = computeUpExp(level);
             console.log('任务:', title, '恭喜你升到', level, '级！');
+
         }
-
-
 
     })
 }
 
-const TASK_TYPE = {
-    zhandou: 1, // 战斗
-    duihau: 2, // 对话
-    shouji: 3, // 收集
-    biaoxiang: 4, // 宝箱
-    migong: 5, // 迷宫
-    task: 6, // 任务战斗
-}
 
-taskExp()
+
+// taskExp(taskMap)

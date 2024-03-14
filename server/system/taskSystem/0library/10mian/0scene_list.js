@@ -83,8 +83,8 @@ const taskMap = {
         nextId: 103
     },
     103: {
-        title: "呼",
-        tips: "巡逻山贼就在仙隐村(1,2)，赶紧过去惩戒他们。",
+        title: "狼狈逃回",
+        tips: "仙隐村外的山贼数量实在是太多了赶紧撤吧。",
         type: TASK_TYPE.duihau,
         receive: [
             "你头也不回的跑回了仙隐村，这时狐晶丽也气喘吁吁的追了上来",
@@ -439,7 +439,7 @@ const taskMap = {
             "你掏出一锭银子：&带我四处转转吧。",
         ],
         reward: {
-            exp: 4000,
+            exp: 5000,
         },
         grand: {
             npc: {
@@ -466,7 +466,7 @@ const taskMap = {
             "你点了点头：&知道了。",
         ],
         reward: {
-            exp: 4000,
+            exp: 6000,
         },
         grand: {
             npc: {
@@ -489,7 +489,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 4000,
+            exp: 7000,
         },
         grand: {
             npc: {
@@ -515,7 +515,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 4000,
+            exp: 8000,
         },
         grand: {
             npc: {
@@ -542,7 +542,7 @@ const taskMap = {
             "&天机老人",
         ],
         reward: {
-            exp: 4000,
+            exp: 9000,
         },
         grand: {
             npc: {
@@ -568,7 +568,7 @@ const taskMap = {
             "&前往大泽谷",
         ],
         reward: {
-            exp: 4000,
+            exp: 10000,
         },
         grand: {
             npc: {
@@ -598,7 +598,7 @@ const taskMap = {
             "&继续赶路。",
         ],
         reward: {
-            exp: 5000,
+            exp: 12000,
         },
         grand: {
             npc: {
@@ -626,7 +626,7 @@ const taskMap = {
             "&上去询问。",
         ],
         reward: {
-            exp: 5000,
+            exp: 15000,
         },
         grand: {
             npc: {
@@ -654,7 +654,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 5000,
+            exp: 18000,
         },
         grand: {
             npc: {
@@ -683,7 +683,7 @@ const taskMap = {
             "狐晶丽：&这是要成熟了！",
         ],
         reward: {
-            exp: 5000,
+            exp: 20000,
         },
         grand: {
             npc: {
@@ -711,7 +711,7 @@ const taskMap = {
             "你：&不愧是天地奇物。",
         ],
         reward: {
-            exp: 5000,
+            exp: 25000,
         },
         grand: {
             npc: {
@@ -738,7 +738,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 5000,
+            exp: 30000,
         },
         grand: {
             npc: {
@@ -764,7 +764,7 @@ const taskMap = {
             "&这些树不对劲。",
         ],
         reward: {
-            exp: 5000,
+            exp: 35000,
         },
         grand: {
             npc: {
@@ -793,7 +793,7 @@ const taskMap = {
             "&欧冶子居所",
         ],
         reward: {
-            exp: 28000,
+            exp: 40000,
         },
         grand: {
             npc: {
@@ -826,7 +826,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 28000,
+            exp: 45000,
         },
         grand: {
             npc: {
@@ -851,7 +851,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 28000,
+            exp: 50000,
         },
         grand: {
             npc: {
@@ -879,7 +879,7 @@ const taskMap = {
             "&前往映月崖",
         ],
         reward: {
-            exp: 28000,
+            exp: 100000,
         },
         grand: {
             npc: {
@@ -893,6 +893,7 @@ const taskMap = {
         title: "映月崖",
         tips: "干枯行尸在映月崖(1,1)朝你们发起攻击，快出手击败它们吧。",
         type: TASK_TYPE.zhandou,
+        level: 30,
         receive: [
             "映月崖一片荒凉，整个天空都蒙着一层灰雾仿佛这方天地都被遗弃了一般看不到丝毫的生机。",
             "这时一群干枯的行尸缓缓朝你们围了过来。",
@@ -905,7 +906,7 @@ const taskMap = {
             "你连忙将她控制住喊道：&快醒醒！",
         ],
         reward: {
-            exp: 28000,
+            exp: 75000,
         },
         grand: {
             npc: {
@@ -934,7 +935,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 28000,
+            exp: 75000,
         },
         grand: {
             npc: {
@@ -964,7 +965,7 @@ const taskMap = {
             "你也抬手回应：&在下{name}。",
         ],
         reward: {
-            exp: 28000,
+            exp: 100000,
         },
         grand: {
             npc: {
@@ -992,7 +993,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 28000,
+            exp: 100000,
         },
         grand: {
             npc: {
@@ -1021,7 +1022,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 28000,
+            exp: 150000,
         },
         grand: {
             npc: {
@@ -1046,7 +1047,7 @@ const taskMap = {
             "&下个材料是什么呢？",
         ],
         reward: {
-            exp: 28000,
+            exp: 150000,
         },
         grand: {
             npc: {
@@ -1073,7 +1074,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 28000,
+            exp: 200000,
         },
         grand: {
             npc: {
@@ -1106,7 +1107,7 @@ const taskMap = {
             "你一脸震撼：&所以说天地间还有魔族存在？",
         ],
         reward: {
-            exp: 28000,
+            exp: 200000,
         },
         grand: {
             npc: {
@@ -1133,7 +1134,7 @@ const taskMap = {
             "&跟上去",
         ],
         reward: {
-            exp: 28000,
+            exp: 250000,
         },
         grand: {
             npc: {
@@ -1157,7 +1158,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 28000,
+            exp: 250000,
         },
         grand: {
             npc: {
@@ -1186,7 +1187,7 @@ const taskMap = {
             "&进入葬剑冢",
         ],
         reward: {
-            exp: 28000,
+            exp: 300000,
         },
         grand: {
             npc: {
@@ -1203,6 +1204,7 @@ const taskMap = {
         title: "惩戒盗墓贼",
         tips: "盗墓贼就在葬剑冢(1,1)盗取先辈坟冢，快去狠狠的惩戒它们吧。",
         type: TASK_TYPE.zhandou,
+        level: 40,
         receive: [
             "你们刚刚踏入葬剑冢就发现一群鬼鬼祟祟的人。",
             "拎壶冲的脸色顿时一变：这群该死的盗墓贼，竟然连先辈坟冢都敢觊觎！",
@@ -1213,7 +1215,7 @@ const taskMap = {
             "&跟上去",
         ],
         reward: {
-            exp: 28000,
+            exp: 500000,
         },
         grand: {
             npc: {
@@ -1242,7 +1244,7 @@ const taskMap = {
             "你：&现在怎么办？",
         ],
         reward: {
-            exp: 28000,
+            exp: 500000,
         },
         grand: {
             npc: {
@@ -1272,7 +1274,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 750000,
         },
         grand: {
             npc: {
@@ -1301,7 +1303,7 @@ const taskMap = {
             "当即看向拎壶冲询问：&难道没有什么密道直接到镇压剑魔的墓室？",
         ],
         reward: {
-            exp: 55000,
+            exp: 750000,
         },
         grand: {
             npc: {
@@ -1330,7 +1332,7 @@ const taskMap = {
             "&进入密道",
         ],
         reward: {
-            exp: 55000,
+            exp: 1000000,
         },
         grand: {
             npc: {
@@ -1362,7 +1364,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 1000000,
         },
         grand: {
             npc: {
@@ -1395,7 +1397,7 @@ const taskMap = {
             "陨落千年依旧不忘抵御魔族，你不由得心生敬佩：&晚辈定不负前辈所托。",
         ],
         reward: {
-            exp: 55000,
+            exp: 1250000,
         },
         grand: {
             npc: {
@@ -1425,7 +1427,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 1250000,
         },
         grand: {
             npc: {
@@ -1454,7 +1456,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 1500000,
         },
         grand: {
             npc: {
@@ -1486,7 +1488,7 @@ const taskMap = {
             "你双眼瞬间猩红：&狐晶丽！！！",
         ],
         reward: {
-            exp: 55000,
+            exp: 3000000,
         },
         grand: {
             npc: {
@@ -1516,7 +1518,7 @@ const taskMap = {
             "&回大泽谷",
         ],
         reward: {
-            exp: 55000,
+            exp: 1500000,
         },
         grand: {
             npc: {
@@ -1540,7 +1542,7 @@ const taskMap = {
             "&我这就去不夜城寻找鬼医。",
         ],
         reward: {
-            exp: 55000,
+            exp: 1500000,
         },
         grand: {
             npc: {
@@ -1567,7 +1569,7 @@ const taskMap = {
             "&独身前往不夜城。",
         ],
         reward: {
-            exp: 55000,
+            exp: 1500000,
         },
         grand: {
             npc: {
@@ -1581,6 +1583,7 @@ const taskMap = {
         title: "荒漠中的小女孩",
         tips: "荒漠中有个小女孩似乎遇到了麻烦，过去帮助她并打听不夜城的位置吧。",
         type: TASK_TYPE.duihau,
+        level: 50,
         receive: [
             "不夜城，传说是在一片无尽荒漠中的孤城，因为极难寻找到位置所以成了无数亡命徒的聚集之地。",
             "你顶着风沙在大漠中走了数日都没找到不夜城，这时不远处似乎有个带着红帽子的小女孩遇到了一点麻烦。",
@@ -1592,7 +1595,7 @@ const taskMap = {
             "&当然可以。",
         ],
         reward: {
-            exp: 55000,
+            exp: 3000000,
         },
         grand: {
             npc: {
@@ -1618,7 +1621,7 @@ const taskMap = {
             "&你知道不夜城的位置？",
         ],
         reward: {
-            exp: 55000,
+            exp: 3250000,
         },
         grand: {
             npc: {
@@ -1646,7 +1649,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 3500000,
         },
         grand: {
             npc: {
@@ -1676,7 +1679,7 @@ const taskMap = {
             "&无论鬼医前辈愿不愿意出手，我都要去试一试。",
         ],
         reward: {
-            exp: 55000,
+            exp: 3750000,
         },
         grand: {
             npc: {
@@ -1702,7 +1705,7 @@ const taskMap = {
             "&接过水袋。",
         ],
         reward: {
-            exp: 55000,
+            exp: 4000000,
         },
         grand: {
             npc: {
@@ -1730,7 +1733,7 @@ const taskMap = {
             "&不夜城",
         ],
         reward: {
-            exp: 55000,
+            exp: 4300000,
         },
         grand: {
             npc: {
@@ -1760,7 +1763,7 @@ const taskMap = {
             "&原地地痞摇人。",
         ],
         reward: {
-            exp: 55000,
+            exp: 4500000,
         },
         grand: {
             npc: {
@@ -1790,7 +1793,7 @@ const taskMap = {
             "&鬼医居所",
         ],
         reward: {
-            exp: 55000,
+            exp: 4800000,
         },
         grand: {
             npc: {
@@ -1822,7 +1825,7 @@ const taskMap = {
             "你：&还请鬼医前辈出手相救。",
         ],
         reward: {
-            exp: 55000,
+            exp: 5000000,
         },
         grand: {
             npc: {
@@ -1846,7 +1849,7 @@ const taskMap = {
             "你微微一笑：&不知是那两种药材？",
         ],
         reward: {
-            exp: 55000,
+            exp: 5500000,
         },
         grand: {
             npc: {
@@ -1871,7 +1874,7 @@ const taskMap = {
             "&不知道前辈所需第二味药材是何物？",
         ],
         reward: {
-            exp: 55000,
+            exp: 6000000,
         },
         grand: {
             npc: {
@@ -1897,7 +1900,7 @@ const taskMap = {
             "你轻轻一笑：&如此，前辈是否可以出手了呢？",
         ],
         reward: {
-            exp: 55000,
+            exp: 7500000,
         },
         grand: {
             npc: {
@@ -1926,7 +1929,7 @@ const taskMap = {
             "&迷雾森林",
         ],
         reward: {
-            exp: 55000,
+            exp: 10000000,
         },
         grand: {
             npc: {
@@ -1940,6 +1943,7 @@ const taskMap = {
         title: "迷雾森林",
         tips: "调皮的纸人男童就在迷雾森林(1,1)，快去教训它一下吧。",
         type: TASK_TYPE.zhandou,
+        level: 60,
         receive: [
             "你来到迷雾森林的入口，还没有进去你就发现了一些不寻常的地方。",
             "森林内被一层层诡异的红雾笼罩，阴风阵阵，时不时还会传出诡异空灵的声音。",
@@ -1953,7 +1957,7 @@ const taskMap = {
             "&纸人活了？",
         ],
         reward: {
-            exp: 55000,
+            exp: 10000000,
         },
         grand: {
             npc: {
@@ -1981,7 +1985,7 @@ const taskMap = {
             "你大喜：&那就多谢姑娘了。",
         ],
         reward: {
-            exp: 55000,
+            exp: 10000000,
         },
         grand: {
             npc: {
@@ -2010,7 +2014,7 @@ const taskMap = {
             "你：&还真是奇妙。",
         ],
         reward: {
-            exp: 55000,
+            exp: 12000000,
         },
         grand: {
             npc: {
@@ -2040,7 +2044,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 12000000,
         },
         grand: {
             npc: {
@@ -2068,7 +2072,7 @@ const taskMap = {
             "你一脸震惊：&这是魔族？",
         ],
         reward: {
-            exp: 55000,
+            exp: 15000000,
         },
         grand: {
             npc: {
@@ -2097,7 +2101,7 @@ const taskMap = {
             "你压下心中的杀意看着他问道：&你是？",
         ],
         reward: {
-            exp: 55000,
+            exp: 15000000,
         },
         grand: {
             npc: {
@@ -2127,7 +2131,7 @@ const taskMap = {
             "&大哥风华绝代，举世无双，天上的星辰与你比也是黯然失色，谁敢说大哥老，小弟保证打死他。",
         ],
         reward: {
-            exp: 55000,
+            exp: 15000000,
         },
         grand: {
             npc: {
@@ -2154,7 +2158,7 @@ const taskMap = {
             "你愣了愣收集黄砂砾的路上确实看到过：&不过这两者有什么关系？",
         ],
         reward: {
-            exp: 55000,
+            exp: 15000000,
         },
         grand: {
             npc: {
@@ -2183,7 +2187,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 15000000,
         },
         grand: {
             npc: {
@@ -2212,7 +2216,7 @@ const taskMap = {
             "&前往盘丝洞",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2226,6 +2230,7 @@ const taskMap = {
         title: "抓个舌头",
         tips: "虎妖就在盘丝洞(1,1)，快去抓几只询问狐晶丽的下落吧。",
         type: TASK_TYPE.zhandou,
+        level: 70,
         receive: [
             "你们来到一处极为偏僻的乱石窟，突然赶尸人前进的步伐停了下来。",
             "你：秦大哥，怎么了？",
@@ -2239,7 +2244,7 @@ const taskMap = {
             "&你们老大是谁？",
         ],
         reward: {
-            exp: 55000,
+            exp: 15000000,
         },
         grand: {
             npc: {
@@ -2267,7 +2272,7 @@ const taskMap = {
             "&继续盘问。",
         ],
         reward: {
-            exp: 55000,
+            exp: 15000000,
         },
         grand: {
             npc: {
@@ -2294,7 +2299,7 @@ const taskMap = {
             "你：&那现在怎么办？",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2318,7 +2323,7 @@ const taskMap = {
             "&那我们要更快行动了。",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2347,7 +2352,7 @@ const taskMap = {
             "&继续。",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2375,7 +2380,7 @@ const taskMap = {
             "&进入洞府。",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2403,7 +2408,7 @@ const taskMap = {
             "&继续。",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2432,7 +2437,7 @@ const taskMap = {
             "你：&秦大哥，你们有仇？",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2460,7 +2465,7 @@ const taskMap = {
             "你眉头轻轻一皱：&不知前辈如何才能归还？",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2488,7 +2493,7 @@ const taskMap = {
             "&跟上去。",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2516,7 +2521,7 @@ const taskMap = {
             "&继续。",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2545,7 +2550,7 @@ const taskMap = {
             "&回鬼医居所",
         ],
         reward: {
-            exp: 55000,
+            exp: 20000000,
         },
         grand: {
             npc: {
@@ -2573,7 +2578,7 @@ const taskMap = {
             "你：&鬼医前辈，这是怎么回事？",
         ],
         reward: {
-            exp: 55000,
+            exp: 25000000,
         },
         grand: {
             npc: {
@@ -2601,7 +2606,7 @@ const taskMap = {
             "&前往妖魔岭",
         ],
         reward: {
-            exp: 55000,
+            exp: 30000000,
         },
         grand: {
             npc: {
@@ -2615,6 +2620,7 @@ const taskMap = {
         title: "尸魔虫",
         tips: "尸魔虫就在妖魔岭(1,1)，快去将它们全部击败吧。",
         type: TASK_TYPE.zhandou,
+        level: 80,
         receive: [
             "你刚刚来到妖魔岭就发现上空的魔气遮天蔽日，显然也是千年前大战遗留下的痕迹。",
             "你在映月崖见识过这些古战场的可怕，明白四处都是危险。",
@@ -2626,7 +2632,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2654,7 +2660,7 @@ const taskMap = {
             "你顿时大喜跑过去：&前辈可是九尾天狐一族？",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2682,7 +2688,7 @@ const taskMap = {
             "&有劳前辈了。",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2707,7 +2713,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2736,7 +2742,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2764,7 +2770,7 @@ const taskMap = {
             "你一愣：&这是不是有什么误会？",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2793,7 +2799,7 @@ const taskMap = {
             "你一喜：&多谢前辈通报。",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2826,7 +2832,7 @@ const taskMap = {
             "&继续",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2853,7 +2859,7 @@ const taskMap = {
             "&回大泽谷",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2880,7 +2886,7 @@ const taskMap = {
             "&修士根源之地，那为何我从未听过昆仑山？",
         ],
         reward: {
-            exp: 55000,
+            exp: 50000000,
         },
         grand: {
             npc: {
@@ -2907,7 +2913,7 @@ const taskMap = {
             "&那晚辈就去试试。",
         ],
         reward: {
-            exp: 55000,
+            exp: 100000000,
         },
         grand: {
             npc: {

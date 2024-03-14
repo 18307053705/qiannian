@@ -168,9 +168,9 @@ const ELEMENT_4 = {
     },
     423: {
         id: 423,
-        name: "悬赏榜",
+        name: "天机老人",
         type: 4,
-        // path: '/xuanShanBang',
+        path: '/jingJie',
         cs: "g_b_u"
     },
     424: {
@@ -311,14 +311,12 @@ const ELEMENT_4 = {
         name: "采集天材地宝",
         type: 4,
         path: '/tianCaiDiBao',
-        state: { id: 443 }
     },
     445: {
         id: 445,
-        name: "天机老人",
+        name: "时光回廊",
         type: 4,
         path: '/tianCaiDiBao',
-        state: { id: 443 }
     },
 };
 module.exports = {

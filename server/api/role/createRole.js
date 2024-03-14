@@ -54,7 +54,7 @@ module.exports = {
             role_sex,
             role_level: 1,
             role_exp: '0/200',
-            role_realm: 1,
+            role_realm: 0,
             role_title: 0,
             role_lx: 0,
             life: attr.life,

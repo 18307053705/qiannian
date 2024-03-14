@@ -309,7 +309,7 @@ const freakMap = {
         attr: 6
     },
     20568: {
-        name: "魔尊残影",
+        name: "天魔残影",
         level: 85,
         noBoss: 6,
         attr: 7
@@ -364,19 +364,19 @@ const freakMap = {
         attr: 7
     },
     20578: {
-        name: "魔尊化身",
+        name: "天魔化身",
         level: 95,
         noBoss: 7,
         attr: 10
     },
     20579: {
-        name: "魔尊信徒",
+        name: "天魔信徒",
         level: 90,
         exp: 1500,
         tael: 300,
     },
     205710: {
-        name: "魔尊信徒",
+        name: "天魔信徒",
         level: 90,
         exp: 1500,
         tael: 300,

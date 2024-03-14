@@ -11,7 +11,6 @@ function RouterGuard() {
     const location = useLocation();
     const { pathname } = location;
     const thisRoute = config.find((el) => el['path'] == pathname);
-    console.log(pathname,'pathname...')
     const isLogin = Cookies.get("token");
     const region = Cookies.get("region");
     useEffect(() => {
