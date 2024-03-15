@@ -56,6 +56,13 @@ module.exports = {
         return obj;
     },
     /**
+     * 获取元素初始化属性
+     * @param {Array} keys 
+     */
+    getInitEleAttr: function () {
+        return JSON.parse(JSON.stringify(data.AllEleAttr));
+    },
+    /**
      * 获取宠物基础属性
      * @param {*} career 
      */

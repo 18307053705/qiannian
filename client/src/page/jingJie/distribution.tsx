@@ -75,13 +75,14 @@ export default ({ setPageKey, data, distributionPotentiaClick }) => {
             }
             <div><span className='g_u_end' onClick={check}>确定分配</span></div>
             <div>========属性=========</div>
-            <div>生命：{(potential.ti_zhi + addNum.ti_zhi) * 100}</div>
-            <div>法力：{(potential.geng_gu + addNum.geng_gu) * 100}</div>
-            <div>攻击：{(potential.bi_li + addNum.bi_li) * 8} - {(potential.bi_li + addNum.bi_li) * 12}</div>
-            <div>防御：{(potential.nai_li + addNum.nai_li) * 4} - {(potential.nai_li + addNum.nai_li) * 5}</div>
-            <div>命中：{(potential.shen_fa + addNum.shen_fa) * 3}</div>
-            <div>闪避：{(potential.shen_fa + addNum.shen_fa) * 2}</div>
-            <div>暴击：{(potential.shen_fa + addNum.shen_fa) * 2}</div>
+            <div>生命：{potential.ti_zhi * 100}</div>
+            <div>法力：{potential.geng_gu * 100}</div>
+            <div>攻击：{potential.bi_li * 8} - {potential.bi_li * 12}</div>
+            <div>防御：{potential.nai_li * 4} - {potential.nai_li * 5}</div>
+            <div>命中：{potential.shen_fa * 3}</div>
+            <div>命中：{potential.shen_fa * 3}</div>
+            <div>闪避：{potential.shen_fa * 2}</div>
+            <div>暴击：{potential.shen_fa * 2}</div>
             <div><span className="g_u_end" onClick={() => { setPageKey('base') }}>返回上页</span></div>
         </div>
     )

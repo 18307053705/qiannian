@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { backGrand } from '@utils/grand';
-import { getJingJie, distributionPotentia, resetPotential } from '@cgi/jingJie';
+import { getJingJie, distributionPotentia, resetPotential, advanced } from '@cgi/jingJie';
 
 import Base from './base';
 import Dstribution from './distribution';
@@ -19,7 +19,7 @@ export default () => {
 
 
     useEffect(getDataInfo, [])
-
+    // 分配潜力
     const distributionPotentiaClick = (values) => {
         distributionPotentia(values).then((res) => {
             if (!res.message) {
@@ -28,6 +28,7 @@ export default () => {
 
         })
     }
+    // 重置潜力
     const resetPotentialClick = () => {
         resetPotential().then((res) => {
             if (!res.message) {
@@ -35,7 +36,14 @@ export default () => {
             }
         })
     }
-
+    // 突破境界
+    const advancedClick = () => {
+        advanced().then((res) => {
+            if (!res.message) {
+                getDataInfo()
+            }
+        })
+    }
 
     if (!data) {
         return null;
@@ -48,6 +56,7 @@ export default () => {
                     setPageKey={setPageKey}
                     data={data}
                     resetPotentialClick={resetPotentialClick}
+                    advancedClick={advancedClick}
                 /> :
                 <Dstribution
                     setPageKey={setPageKey}

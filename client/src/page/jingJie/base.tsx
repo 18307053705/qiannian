@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default ({ setPageKey, data, resetPotentialClick }) => {
+export default ({ setPageKey, data, resetPotentialClick, advancedClick }) => {
 
     const { max_qian_li, qian_li, eles, role_realm, next } = data;
-
+    const { condition } = next || {};
     return (
         <div>
             {next ? '' : <div>恭喜玩家已修炼至最高境界！</div>}
@@ -26,12 +26,14 @@ export default ({ setPageKey, data, resetPotentialClick }) => {
             {
                 next && (
                     <div>
-                        <div>下个境界需玩家达到10级方可开启！</div>
-                        <div><span className='g_u_end'>突破{next.name}</span></div>
+                        <div>下个境界条件</div>
+                        <div>等级：{condition.level}级</div>
+                        <div>银两：{condition.tael}</div>
+                        <div>物品：{condition.article}</div>
+                        <div><span className='g_u_end' onClick={advancedClick}>突破{next.name}</span></div>
                     </div>
                 )
             }
-
         </div>
     )
 

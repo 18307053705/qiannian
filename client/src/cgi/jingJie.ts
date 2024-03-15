@@ -2,6 +2,7 @@ import { post } from "@request";
 const distributionPotentialUrl = '/jingjie/distributionPotential';
 const getJingJieUrl = '/jingjie/getJingJie';
 const resetPotentialUrl = '/jingjie/resetPotential';
+const advancedUrl = '/jingjie/advanced';
 
 
 // 分配潜力
@@ -17,4 +18,9 @@ export function resetPotential() {
 // 获取境界
 export function getJingJie() {
     return post(getJingJieUrl);
+}
+
+// 突破境界
+export function advanced() {
+    return post(advancedUrl);
 }

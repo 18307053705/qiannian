@@ -2,6 +2,7 @@ const express = require("express");
 const { distributionPotential } = require('./distributionPotential');
 const { getJingJie } = require('./getJingJie');
 const { resetPotential } = require('./resetPotential');
+const { advanced } = require('./advanced');
 
 const router = new express.Router();
 
@@ -11,5 +12,7 @@ router.post("/distributionPotential", distributionPotential);
 router.post("/getJingJie", getJingJie);
 // 重置潜力
 router.post("/resetPotential", resetPotential);
+// 突破境界
+router.post("/advanced", advanced);
 
 module.exports = router;

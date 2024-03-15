@@ -1,9 +1,10 @@
+const { knapsackTable } = require('@/table');
 module.exports = {
     /**
      * 消耗物品
      * @param {*} req 
      * @param {*} res 
-     * @param {*} article 必传{id:{s:数量,name:名称,in_x:下标可选}}
+     * @param {*} article 必传{id:{s:数量,id,name:名称,in_x:下标可选}}
      * @param {*} data 可选
      * @returns {string}  message 
      * @returns {string}  success 消耗的物品信息 
@@ -40,8 +41,8 @@ module.exports = {
             chengData.push(itme)
         })
         if (JSON.stringify(article) !== '{}') {
-            Object.values(article).forEach(({ name }) => {
-                message.push(`${name}数量不足`);
+            Object.values(article).forEach(({ name, id }) => {
+                message.push(`${name || knapsackTable.getDataName(id)}数量不足`);
             })
         } else {
             KnapsackG.updateknapsackGlobal(req, res, { data: chengData });

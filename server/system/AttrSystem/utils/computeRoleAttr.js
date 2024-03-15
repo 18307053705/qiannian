@@ -1,7 +1,7 @@
 const library = require("../0library");
 const { computePetAttr } = require("./computePetAttr");
 const { computePotentialAttr } = require("./computePotentialAttr");
-const getRealm = require("@/table/realm/getRealm");
+const { getRealm } = require("@/table/realm/getRealm");
 module.exports = {
     /**
      * 计算角色属性

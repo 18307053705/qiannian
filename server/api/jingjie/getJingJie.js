@@ -1,4 +1,4 @@
-const { RealmTable } = require('@/table');
+const { RealmTable, knapsackTable } = require('@/table');
 module.exports = {
     /**
      * 获取境界
@@ -11,8 +11,19 @@ module.exports = {
         let eles = 0;
         // 循环计算当前境界元素属性
         for (let key = 0; key <= role_realm; key++) {
-            eles = realmMeun[key]?.ele || 0
+            eles += realmMeun[key]?.ele || 0
         }
+
+        // 获取下个境界
+        const next = RealmTable.getRealm(role_realm + 1);
+        if (next) {
+            const { condition } = next;
+            next.condition.article = condition.article.split(',').map((itme) => {
+                const [id, s] = itme.split('-');
+                return `${knapsackTable.getDataName(id)}x${s}`;
+            }).join(',')
+        }
+
         res.send({
             code: 0,
             data: {
@@ -21,7 +32,7 @@ module.exports = {
                 potential,
                 eles,
                 role_realm: RealmTable.getRealm(role_realm).name,
-                next:RealmTable.getRealm(role_realm + 1),
+                next: next ? { name: next.name, condition: next.condition } : undefined
             }
         })
     }
