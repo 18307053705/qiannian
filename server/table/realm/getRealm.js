@@ -1,6 +1,4 @@
 const realmMeun = require('./realmMeun');
-
-
 module.exports = {
     /**
      * 
@@ -14,6 +12,7 @@ module.exports = {
         }
      */
     getRealm: function (realmId) {
-        return realmMeun[realmId] || { name: '无', attr: 1 }
+        const data = realmMeun[realmId];
+        return data ? JSON.parse(JSON.stringify(data)) : undefined
     }
 }

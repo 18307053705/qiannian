@@ -1,6 +1,7 @@
 const library = require("../0library");
 const { computePetAttr } = require("./computePetAttr");
 const { computePotentialAttr } = require("./computePotentialAttr");
+const getRealm = require("@/table/realm/getRealm");
 module.exports = {
     /**
      * 计算角色属性
@@ -20,22 +21,23 @@ module.exports = {
         }
         const { role_attr, role_buff, role_level, role_career, role_realm } = role;
         const { addition, potential } = role_attr;
+        // 潜力属性
         const potentialAttr = computePotentialAttr(potential);
         // 玩家属性 = 职业属性 * 等级 * 境界
         const base = library.getRoleBaseAttr(role_career);
-        const levelAttr = role_level * role_realm;
+        const levelAttr = role_level * getRealm(role_realm).attr;
         // 基础属性与额外属性
         Object.keys(attr).forEach((key) => {
             if (base[key]) {
                 base[key] *= levelAttr;
                 attr[key] += base[key];
             }
-            if(potentialAttr[key]){
+            if (potentialAttr[key]) {
                 attr[key] += potentialAttr[key];
             }
             attr[key] += addition[key];
         })
-       
+
         // buff属性
         let { attr: attrBuff, vip } = role_buff;
         const buffs = [];
@@ -64,6 +66,9 @@ module.exports = {
                 })
             }
         }
+        // 计算结果取整
+        Object.keys(attr).forEach((key) => { attr[key] = Math.floor(attr[key]) });
+
         // 返回属性与buff信息
         return {
             attr,
