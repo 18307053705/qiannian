@@ -1,6 +1,6 @@
 
-const { TaskG } = require('../../global');
-const { taskFn } = require('../../utils');
+const { TaskG } = require('@/global');
+const { taskFn } = require('@/utils');
 module.exports = {
     /**
      * 完成任务

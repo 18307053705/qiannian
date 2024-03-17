@@ -10,14 +10,15 @@ module.exports = {
      */
     initDailyTask: function (req, res) {
         const { role_level, socialize_pool } = RoleG.getRoleGlobal(req, res);
-        let exploitNum = -1;
+        let exploitNum = 0;
         let taskNum = 8;
-        if (role_level > 65) {
-            taskNum = 12;
-        }
-        if (role_level > 74) {
+        if (role_level > 60) {
             exploitNum = 8;
-            taskNum = 15;
+            taskNum = 10;
+        }
+        if (role_level > 100) {
+            exploitNum = 10;
+            taskNum = 12;
         }
         // 处理副本任务
         const copyTask = {};
@@ -29,7 +30,7 @@ module.exports = {
                 [TASK_TYPE_MEUN.exp]: taskNum,
                 [TASK_TYPE_MEUN.tael]: taskNum,
                 [TASK_TYPE_MEUN.world]: taskNum,
-                [TASK_TYPE_MEUN.exploit]: taskNum,
+                [TASK_TYPE_MEUN.exploit]: exploitNum,
                 [TASK_TYPE_MEUN.gang]: taskNum,
                 [TASK_TYPE_MEUN.intersect]: taskNum
             },

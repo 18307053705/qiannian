@@ -109,6 +109,20 @@ export const TASK_TYPE_MEUN = {
 }
 
 
+
+export const TASK_TYPE_TEXT_MEUN = {
+  [TASK_TYPE_MEUN.main]: '主线任务',
+  [TASK_TYPE_MEUN.exp]: '每日经验',
+  [TASK_TYPE_MEUN.tael]: '每日金钱',
+  [TASK_TYPE_MEUN.world]: '每日声望',
+  [TASK_TYPE_MEUN.gang]: '每日帮会',
+  [TASK_TYPE_MEUN.intersect]: '每日结义',
+  [TASK_TYPE_MEUN.exploit]: '每日功勋',
+  [TASK_TYPE_MEUN.chance]: '奇遇任务',
+  [TASK_TYPE_MEUN.copy]: '副本任务',
+  [TASK_TYPE_MEUN.zudui]: '组队副本',
+};
+
 export const REALM_TYPE_MEUN = {
   0: '凡人境',
   1: '淬体初期',

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { backGrand, getTaskReward } from '@utils';
 import { tpDir } from '@cgi/grand';
 import { getTaskList, doneTask } from '@cgi/taks';
-import { TASK_TYPE_MEUN } from '@meun';
+import { TASK_TYPE_MEUN, TASK_TYPE_TEXT_MEUN } from '@meun';
 const TASK_TYPE = {
     zhandou: 1, // 战斗
     duihau: 2, // 对话
@@ -29,7 +29,7 @@ const SpeedText = ({ task }) => {
     return null;
 }
 
-const DeonTaskBtn = ({ task, dailList, deonTask }) => {
+const DeonTaskBtn = ({ task, deonTask }) => {
     const { id, taskType, tpInfo, complete } = task;
     // 传送到目标位置
     const tpClick = () => {
@@ -39,7 +39,7 @@ const DeonTaskBtn = ({ task, dailList, deonTask }) => {
 
     }
     // 每日任务
-    if (dailList.includes(taskType)) {
+    if (taskType !== 1) {
         return complete.done ? <div><span className='g_u_end' onClick={() => { deonTask(id, taskType) }}>领取奖励</span></div> : null;
     }
 
@@ -55,20 +55,19 @@ export const Task = () => {
     const [tasks, setTasks]: any = useState({
         taskList: [],
         taskDetail: [],
-        dailList: []
     })
 
     const getTaskInfo = (type?: number) => {
-        if (type) {
-            sessionStorage.setItem('taskType', type.toString())
-        }
-        const taskType = sessionStorage.getItem('taskType') || '1';
-        getTaskList({ type: type || Number(taskType) }).then(({ data, message }) => {
+        getTaskList({ type: type || 1 }).then(({ data, message }) => {
             if (!message) {
+                const { task, taskGNum } = data;
+                const taskList = taskGNum.map(({ p, s }) => ({
+                    text: `${TASK_TYPE_TEXT_MEUN[p]}(${s})`,
+                    type: p
+                }))
                 setTasks({
-                    taskList: data.taskList,
-                    taskDetail: data.task ? Object.values(data.task) : [],
-                    dailList: data.DAIL_TYPE_LIST
+                    taskList,
+                    taskDetail: Object.values(task || {}),
                 });
             }
         })
@@ -86,7 +85,7 @@ export const Task = () => {
 
         })
     }
-    const { taskDetail, taskList, dailList } = tasks;
+    const { taskDetail, taskList } = tasks;
     return (
         <div>
             <div>
@@ -101,7 +100,7 @@ export const Task = () => {
                                     taskType !== TASK_TYPE_MEUN.copy ? <div>奖励：{getTaskReward(reward).join(',')}</div> : ''
                                 }
                                 <SpeedText task={itme} />
-                                <DeonTaskBtn task={itme} dailList={dailList} deonTask={deonTask} />
+                                <DeonTaskBtn task={itme}  deonTask={deonTask} />
                             </div>
                         )
                     })
@@ -113,7 +112,7 @@ export const Task = () => {
                 {
                     taskList.map(({ text, type }, index) => {
                         return (<div key={index}>
-                            <span className='g_u_end' onClick={() => { getTaskInfo(type) }}>{text}</span>
+                            <span className='g_u_end' onClick={() => { getTaskInfo(type); }}>{text}</span>
                         </div>)
                     })
                 }
