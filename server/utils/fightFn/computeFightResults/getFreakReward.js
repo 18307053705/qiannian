@@ -4,6 +4,7 @@ const { addKnapsack } = require('@/utils/knapsackFn/addKnapsack');
 const { computeRoleLevel } = require('@/utils/roleFn/computeRoleLevel');
 const { computePetLevel } = require('@/utils/petFn/computePetLevel');
 const { listenTask } = require('@/utils/taskFn/listenTask');
+const customCallbackJSON = require('./customCallbackJSON');
 
 
 module.exports = {
@@ -19,8 +20,8 @@ module.exports = {
         const knapsack = KnapsackG.getknapsackGlobal(req, res);
         const { template, player, roundText } = fightInfo;
         // 判断是否为深渊怪,是则使用指令中的信息
-        const freak = currentDir.shenyuan ? currentDir : ElementTable.getElement(template.id);
-        const { article, exp: f_exp, tael: f_tael, level, grade } = freak;
+        const freak = currentDir.customFreak ? currentDir : ElementTable.getElement(template.id);
+        const { article, exp: f_exp, tael: f_tael, level, grade, customCallback } = freak;
 
         // -----------------计算物品奖励--------------------
         const textReward = [];
@@ -88,6 +89,10 @@ module.exports = {
         });
         // 监听任务池
         const tasks = listenTask(req, res, template.id, freakNum);
+        // 自定义逻辑
+        if (customCallback) {
+            customCallbackJSON[customCallback]?.(req, res, freak);
+        }
         const expText = vipExp && !exps ? `${exp}(${vipExp}倍经验)` : exp;
         const reward = {
             textReward: tip ? [] : textReward,

@@ -3,6 +3,8 @@ const distributionPotentialUrl = '/jingjie/distributionPotential';
 const getJingJieUrl = '/jingjie/getJingJie';
 const resetPotentialUrl = '/jingjie/resetPotential';
 const advancedUrl = '/jingjie/advanced';
+const getTianJieUrl = '/jingjie/getTianJie';
+const tianJieFightUrl = '/jingjie/tianJieFight';
 
 
 // 分配潜力
@@ -23,4 +25,12 @@ export function getJingJie() {
 // 突破境界
 export function advanced() {
     return post(advancedUrl);
+}
+// 获取天劫信息
+export function getTianJie() {
+    return post(getTianJieUrl);
+}
+// 天劫战斗
+export function tianJieFight() {
+    return post(tianJieFightUrl);
 }

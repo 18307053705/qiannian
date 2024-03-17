@@ -18,6 +18,9 @@ module.exports = {
         const next = RealmTable.getRealm(role_realm + 1);
         if (next) {
             const { condition } = next;
+            if (condition.leiJieId) {
+                condition.leiJieId = RealmTable.getLeiJie(condition.leiJieId).name;
+            }
             next.condition.article = condition.article.split(',').map((itme) => {
                 const [id, s] = itme.split('-');
                 return `${knapsackTable.getDataName(id)}x${s}`;
@@ -32,7 +35,21 @@ module.exports = {
                 potential,
                 eles,
                 role_realm: RealmTable.getRealm(role_realm).name,
-                next: next ? { name: next.name, condition: next.condition } : undefined
+                next: next ? { name: next.name, condition: next.condition } : undefined,
+                list: Object.values(realmMeun).map(realm => {
+                    const { condition } = realm;
+                    if(!condition){
+                        return realm;
+                    }
+                    if (condition.leiJieId) {
+                        condition.leiJieId = RealmTable.getLeiJie(condition.leiJieId).name;
+                    }
+                    realm.condition.article = condition.article.split(',').map((itme) => {
+                        const [id, s] = itme.split('-');
+                        return `${knapsackTable.getDataName(id)}x${s}`;
+                    }).join(',')
+                    return realm;
+                })
             }
         })
     }

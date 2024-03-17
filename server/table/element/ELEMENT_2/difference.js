@@ -71,6 +71,7 @@ const freakMap = {
         level: 30,
         attr: 1,
         integral: 1,
+        customCallback: 'caiLingDong',
     },
     20612: {
         name: "蓝灵子",
@@ -78,6 +79,7 @@ const freakMap = {
         level: 30,
         attr: 1,
         integral: 3,
+        customCallback: 'caiLingDong',
     },
     20613: {
         name: "红灵子",
@@ -85,6 +87,7 @@ const freakMap = {
         level: 40,
         attr: 1,
         integral: 5,
+        customCallback: 'caiLingDong',
     },
     20614: {
         name: "紫灵子",
@@ -92,6 +95,7 @@ const freakMap = {
         level: 50,
         attr: 1,
         integral: 10,
+        customCallback: 'caiLingDong',
     },
 
     20615: {
@@ -156,7 +160,7 @@ const freakMap = {
         attr: 5,
         grade: 3,
         article: '2056-3,2057-3,2058-3,2059-3,2060-3',
-        fun: 'dognTian'
+        customCallback: 'dongTianFuDi',
     },
     20624: {
         name: "二层守护BOSS",
@@ -164,7 +168,7 @@ const freakMap = {
         attr: 7,
         grade: 3,
         article: '2056-5,2057-5,2058-5,2059-5,2060-5',
-        fun: 'dognTian'
+        customCallback: 'dongTianFuDi',
     },
     20625: {
         name: "三层守护BOSS",
@@ -172,7 +176,7 @@ const freakMap = {
         attr: 8,
         grade: 3,
         article: '2056-10,2057-10,2058-10,2059-10,2060-10',
-        fun: 'dognTian'
+        customCallback: 'dongTianFuDi',
     },
     20626: {
         name: "四层守护BOSS",
@@ -180,7 +184,7 @@ const freakMap = {
         attr: 10,
         grade: 3,
         article: '2056-15,2057-15,2058-15,2059-15,2060-15',
-        fun: 'dognTian'
+        customCallback: 'dongTianFuDi',
     },
     20627: {
         name: "五层守护BOSS",
@@ -188,7 +192,7 @@ const freakMap = {
         attr: 12,
         grade: 3,
         article: '2056-20,2057-20,2058-20,2059-20,2060-20',
-        fun: 'dognTian'
+        customCallback: 'dongTianFuDi',
     },
     20628: {
         name: "六层守护BOSS",
@@ -196,7 +200,7 @@ const freakMap = {
         attr: 15,
         grade: 3,
         article: '2056-30,2057-30,2058-30,2059-30,2060-30',
-        fun: 'dognTian'
+        customCallback: 'dongTianFuDi',
     },
     20629: {
         name: "守护妖兽",

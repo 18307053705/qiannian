@@ -283,6 +283,11 @@ export const config: RouterType[] = [
     path: "/jingJie",
     component: lazy(() => import("@page/jingJie"))
   },
+  {
+    name: "渡劫台",
+    path: "/duJieTai",
+    component: lazy(() => import("@page/duJieTai"))
+  },
 ];
 
 export default config;

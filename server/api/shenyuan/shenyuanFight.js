@@ -47,7 +47,8 @@ module.exports = {
             // 对方id
             role_id: roleId,
             path: '/shenYuan',
-            shenyuan: true
+            customFreak: true,
+            customCallback:'shenYuan'
         }
         GrandG.setCurrentDir(req, res, currentDir);
         res.send({

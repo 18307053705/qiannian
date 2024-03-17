@@ -6,29 +6,40 @@ const { getGoblinFreak } = require('./goblin');
 const { getImmortalFreak } = require('./immortal');
 const { TEST_FREAK } = require('./test');
 // 怪物模型
-const DOME_FREAK = {
-    id: 1,
-    name: "怪物名称",
-    level: 1, // 等级
-    tag: 1, // 默认1,怪物标签(1:普通地图怪,2:副本任务怪)
-    attrType: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷),
-    attr: 1, // 默认1，属性增幅
-    grade: 1, // 默认1，怪物品阶(1:普通,2:精英,3:boss)
-    pet: true, // 默认false，是否可捕获
-    rank: true, // 默认false，是否可组队
-    creatNum: 4, // 默认4，最大生成数量
-    num: -1, // 默认：无限，可击杀次数
-    exp: 10000, // 默认随等级，经验
-    tael: 10000, // 默认随等级，银两
-    article: '1-20,2-20,3', // 默认无，掉落物品信息(id-s-rate)多个物品使用,分隔 id：物品ID,s:数量,rate:概率
-    equip: '1-50,2-50,3-50,4-50,5-50', // 默认无，掉落装备信息(id-s-rate)多个物品使用,分隔 id：装备ID,rate:概率
+// const DOME_FREAK = {
+//     id: 1,
+//     name: "怪物名称",
+//     level: 1, // 等级
+//     tag: 1, // 默认1,怪物标签(1:普通地图怪,2:副本任务怪)
+//     attrType: 1, // 默认1，属性类型(1:攻击,2:防御,3:敏捷),
+//     attr: 1, // 默认1，属性增幅
+//     grade: 1, // 默认1，怪物品阶(1:普通,2:精英,3:boss)
+//     pet: true, // 默认false，是否可捕获
+//     rank: true, // 默认false，是否可组队
+//     creatNum: 4, // 默认4，最大生成数量
+//     num: -1, // 默认：无限，可击杀次数
+//     exp: 10000, // 默认随等级，经验
+//     tael: 10000, // 默认随等级，银两
+//     article: '1-20,2-20,3', // 默认无，掉落物品信息(id-s-rate)多个物品使用,分隔 id：物品ID,s:数量,rate:概率
+//     equip: '1-50,2-50,3-50,4-50,5-50', // 默认无，掉落装备信息(id-s-rate)多个物品使用,分隔 id：装备ID,rate:概率
+// }
+
+const SHNEYUAN_FREAK_ID = 299000;
+const LEIJIE_FREAK_ID = 299001;
+
+const TE_SHU_FREAK_ID_MAP = {
+    SHNEYUAN_FREAK_ID,
+    LEIJIE_FREAK_ID
 }
-
-
 const freakMap = {
-    299000: {
-        id: 299000,
-        name: "深渊怪(深渊模怪物占位)",
+    [TE_SHU_FREAK_ID_MAP.SHNEYUAN_FREAK_ID]: {
+        id: TE_SHU_FREAK_ID_MAP.SHNEYUAN_FREAK_ID,
+        name: "深渊怪(深渊怪物ID占位)",
+        type: 2,
+    },
+    [TE_SHU_FREAK_ID_MAP.LEIJIE_FREAK_ID]: {
+        id: TE_SHU_FREAK_ID_MAP.LEIJIE_FREAK_ID,
+        name: "渡劫怪(渡劫怪物ID占位)",
         type: 2,
     },
     //  以下为测试怪物
@@ -38,6 +49,7 @@ const freakMap = {
 
 
 module.exports = {
+    TE_SHU_FREAK_ID_MAP,
     /**
      * 获取怪物信息
      * @param {*} 怪物ID

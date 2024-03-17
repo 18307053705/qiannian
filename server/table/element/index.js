@@ -1,10 +1,11 @@
 const { getNpc } = require('./ELEMENT_1');
-const { getFreak } = require('./ELEMENT_2');
+const { getFreak, TE_SHU_FREAK_ID_MAP } = require('./ELEMENT_2');
 const { ELEMENT_3 } = require('./ELEMENT_3');
 const { ELEMENT_4 } = require('./ELEMENT_4');
 
 
 module.exports = {
+    TE_SHU_FREAK_ID_MAP,
     /**
      * 获取元素信息
      * @param {*} eleId 元素id(1开头:NPC元素,2开头:怪物元素,3开头:传送元素,4:面板元素)
@@ -64,8 +65,6 @@ module.exports = {
         for (start = startId; start <= endId; start++) {
             eleList.push(eleMap[start])
         }
-
-
         return JSON.parse(JSON.stringify(eleList));
     }
 }

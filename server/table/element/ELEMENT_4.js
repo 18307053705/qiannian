@@ -318,6 +318,12 @@ const ELEMENT_4 = {
         type: 4,
         path: '/tianCaiDiBao',
     },
+    446: {
+        id: 446,
+        name: "渡劫台",
+        type: 4,
+        path: '/duJieTai',
+    },
 };
 module.exports = {
     ELEMENT_4

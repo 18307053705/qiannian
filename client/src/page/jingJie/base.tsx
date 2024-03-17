@@ -7,6 +7,7 @@ export default ({ setPageKey, data, resetPotentialClick, advancedClick }) => {
     return (
         <div>
             {next ? '' : <div>恭喜玩家已修炼至最高境界！</div>}
+            <div>提示：突破某些大境界时唯有渡过对应天劫方可突破。</div>
             <div>=================</div>
             <div>当前境界：{role_realm}</div>
             <div>元素属性</div>
@@ -29,6 +30,7 @@ export default ({ setPageKey, data, resetPotentialClick, advancedClick }) => {
                         <div>下个境界条件</div>
                         <div>等级：{condition.level}级</div>
                         <div>银两：{condition.tael}</div>
+                        {condition.leiJieId && <div>天劫：{condition.leiJieId}</div>}
                         <div>物品：{condition.article}</div>
                         <div><span className='g_u_end' onClick={advancedClick}>突破{next.name}</span></div>
                     </div>

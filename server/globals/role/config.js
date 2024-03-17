@@ -27,7 +27,7 @@
 //     `pet_pool` varchar(1000) DEFAULT NULL COMMENT '{c:当前宠物信息(id,n,攻击，暴击，命中,s:状态0:休息1:出战，2附体3上架，技能,id,l,r,),l:宠物房列表id,n,s  x:宠物房最大空间}',
 //     `treasure_pool` varchar(300) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT NULL COMMENT '{fw房屋:{exp:10000000,ext:10_10_10_10_10_10_10,g:0},xz勋章:1000000,hb徽标:10000000,lp令牌:10000000,jbp: 聚宝盆00000}  ',
 //     `role_lx` int unsigned DEFAULT NULL,
-//     `upper_limit` varchar(100) 各类上限，如洞天层数上限{dongtian:洞天层数}
+//     `upper_limit` varchar(100) 各类上限，如洞天层数上限{dongtian:洞天层数,leiJie:13-9,shenyuan：深渊层数}
 //     PRIMARY KEY (`id`),
 //     UNIQUE KEY `role_id_UNIQUE` (`role_id`)
 //   ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
