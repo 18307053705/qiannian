@@ -43,7 +43,8 @@ module.exports = {
                     }
                 }
                 freakObj[`${taskType}${index}`] = {
-                    ...freak,
+                    c:freak.c,
+                    s:freak.s,
                     title
                 };
                 isUpdata = true;

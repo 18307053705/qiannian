@@ -14,13 +14,11 @@ const art = (dirClick, artList) => {
 const getAttrIfno = (attrs: any[]) => {
     const lifeList: any[] = [];
     const stateList: any[] = [];
-    attrs.forEach(({ attr, life, life_max, name }) => {
-        const lifec = attr ? attr.life : life;
-        const life_maxc = attr ? attr.life_max : life_max;
-        lifeList.push(lifec);
+    attrs.forEach(({ life, life_max, name }) => {
+        lifeList.push(life);
         stateList.push({
-            percent: (lifec / life_maxc * 100).toFixed(0),
-            state: lifec > 0 ? 1 : 0,
+            percent: (life / life_max * 100).toFixed(0),
+            state: life > 0 ? 1 : 0,
             name
         });
     })
@@ -76,12 +74,12 @@ const FightDuke = ({ dirClick, fight, setPanel }) => {
             {/* 敌方血量百分比 */}
             {rivalAttr.stateList.map(({ percent }, index) => <FightPercent key={index} percent={percent} />)}
             {/* 我的状态 */}
-            <div>你命:{`${player.attr.life}/${player.attr.life_max}`}{drain_life}{restore_life ? `[+${restore_life}]` : ''}</div>
+            <div>你命:{`${player.life}/${player.life_max}`}{drain_life}{restore_life ? `[+${restore_life}]` : ''}</div>
             {/* 我方血量百分比 */}
-            <FightPercent percent={(player.attr.life / player.attr.life_max * 100).toFixed(0)} />
-            <div>你法:{`${player.attr.mana}/${player.attr.mana_max}`}{drain_mana}{restore_mana ? `[+${restore_mana}]` : ''}</div>
+            <FightPercent percent={(player.life / player.life_max * 100).toFixed(0)} />
+            <div>你法:{`${player.mana}/${player.mana_max}`}{drain_mana}{restore_mana ? `[+${restore_mana}]` : ''}</div>
             {/* 我方法力百分比 */}
-            <FightPercent percent={(player.attr.mana / player.attr.mana_max * 100).toFixed(0)} color='blue' />
+            <FightPercent percent={(player.mana / player.mana_max * 100).toFixed(0)} color='blue' />
             {/* 技能栏2 */}
             <div>{art(dirClick, artList2)}</div>
             {/* 技能栏3 */}

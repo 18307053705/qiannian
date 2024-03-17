@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 const sceneText = {
     110: '无妄海内突然出现一块诡异的石碑，引起无数骷髅生灵暴动，据说石碑的内部乃是数百年前一位强大邪修炼魂郎君的洞府，其中或许隐藏着什么阴谋。',
     111: '你答应老者的请求进入十万大山寻找他的孙女，最终你竟然查到了黑炎宗身上，于是你选择了拜访黑炎宗却发现这个宗门竟然血祭了数百万凡人妄图复活传说中的血魔。',
@@ -28,11 +28,14 @@ const TaskDetail = ({ curId, taskInfo, id, receiveTaskClick }) => {
         )
     }
     const { freak, done } = complete;
-    const speedArr = [...Object.values(freak || {})];
     return (
         <div>
             <div>简介：{sceneText[id]}</div>
-            <div>进度：{speedArr.map(({ name, n, s, c }: any) => `${name || n}(${c}/${s})`).join(',')}</div>
+            {
+                    [...Object.values(freak || {})].map(({ name, n, s, c }: any, index) => (
+                        <div key={index}>击败{c === s ? `${name || n}(已完成)` : `${name || n}(${c}/${s})`}</div>
+                    ))
+                }
             {
                 !done && <div><span className='g_u_end' onClick={() => { receiveTaskClick(id, 2) }}>完成悬赏</span></div>
             }

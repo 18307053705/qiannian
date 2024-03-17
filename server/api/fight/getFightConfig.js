@@ -9,8 +9,8 @@ module.exports = {
         const { data } = KnapsackG.getknapsackGlobal(req, res);
         const { skill_pool } = RoleG.getRoleGlobal(req, res);
         const art = [];
-        const drug = data.filter(({ id }) =>  knapsackTable.isReply(id))
-
+        const drug = data.filter(({ id }) =>  knapsackTable.isReply(id));
+    
         if (skill_pool.art) {
             Object.keys(skill_pool.art).forEach((key) => {
                 const { n, id, p, l } = skill_pool.art[key]

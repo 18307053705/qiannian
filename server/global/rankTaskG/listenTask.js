@@ -23,7 +23,7 @@ module.exports = {
                     return;
                 }
                 let isUpdata = false;
-                freak.forEach(({ id, s, c, name, ...itme }, index) => {
+                freak.forEach(({ id, s, c, name }, index) => {
                     if (freakId === id) {
                         isUpdata = true;
                         const nums = c + num;
@@ -36,9 +36,7 @@ module.exports = {
                         freakObj[`${id}${index}`] = {
                             s,
                             c: freak[index]['c'],
-                            id,
                             title: name,
-                            ...itme,
                         };
                     }
                 })
