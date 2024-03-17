@@ -1,7 +1,7 @@
 const { TaskSystem } = require('@/system');
 const { GrandG, TaskG } = require('@/global');
 const { taskFn, grandFn, knapsackFn } = require('@/utils');
-const { TASK_STATU, TASK_TYPE } = TaskSystem;
+const { TASK_STATU, TASK_TYPE_MEUN } = TaskSystem;
 
 module.exports = {
     /**
@@ -106,8 +106,7 @@ module.exports = {
             if (message) {
                 res.send({
                     code: 0,
-                    message,
-                    data: taskFn.getTaskScene(req, res, task),
+                    message
                 })
                 return;
             }

@@ -62,6 +62,7 @@ app.use("/api/jinyindao", require("./api/jinyindao"));
 app.use("/api/synthesis", require("./api/synthesis"));
 app.use("/api/ranking", require("./api/ranking"));
 app.use("/api/jingjie", require("./api/jingjie"));
+app.use("/api/xuanshanbang", require("./api/xuanshanbang"));
 
 
 // 静态文件 js img

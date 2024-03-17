@@ -288,6 +288,11 @@ export const config: RouterType[] = [
     path: "/duJieTai",
     component: lazy(() => import("@page/duJieTai"))
   },
+  {
+    name: "悬赏榜",
+    path: "/xuanShanBang",
+    component: lazy(() => import("@page/xuanShanBang"))
+  },
 ];
 
 export default config;

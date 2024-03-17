@@ -11,12 +11,11 @@ module.exports = {
     deleteTaskGlobal: function (req, res, type, id) {
         const { role_id } = RoleG.getRoleGlobal(req, res);
         const tasks = TASKS_Global[role_id];
-        if (!tasks || !tasks[type] || !tasks[type][id]) {
-          
+        if (!(tasks?.[type]?.[id])) {
             return;
         }
         delete tasks[type][id];
-        if(JSON.stringify(tasks[type]) === '{}'){
+        if (JSON.stringify(tasks[type]) === '{}') {
             delete tasks[type];
         }
         TASKS_Global[role_id] = tasks;

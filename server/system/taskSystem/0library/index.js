@@ -46,5 +46,5 @@ module.exports = {
     randomDailyTaskId: function () {
         const ids = Object.keys(daily);
         return ids[Math.floor(Math.random() * ids.length)];
-    }
+    },
 }
