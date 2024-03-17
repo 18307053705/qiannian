@@ -25,8 +25,7 @@ module.exports = {
     res.send({
       code: 0,
       data: {
-        ...fightFn.getFightFormat(req, res),
-        // fightS: FightG.getFightGlobal(req, res)
+        ...fightFn.getFightFormat(req, res)
       }
     })
   },
