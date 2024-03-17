@@ -1,5 +1,5 @@
-const { ChatG } = require('../../global');
-const { cornuconpiaFn, knapsackFn } = require('../../utils');
+const { ChatG } = require('@/global');
+const { cornuconpiaFn, knapsackFn } = require('@/utils');
 module.exports = {
     /**
      * 聚宝盆等级抽奖

@@ -421,14 +421,14 @@ module.exports = {
         ]
     },
     116: {
-        title: '幽冥地府',
-        tips: '幽冥地府',
+        title: '地府传说',
+        tips: '地府传说',
         level: 100,
         reward: {
             fun: 'YouMingDiFu',
         },
         type: TASK_TYPE.zhandou,
-        levelText: '等级不足100级，无法领取幽冥地府副本。',
+        levelText: '等级不足100级，无法领取地府传说副本。',
         grand: {
             npc: {
                 id: 431,

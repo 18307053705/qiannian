@@ -43,7 +43,7 @@ module.exports = {
         })
 
         const eleValueList = Object.values(eleVal);
-        const itme = eleValueList.find((value) => value < 100);
+        const itme = eleValueList.find((value) => value < 200);
         if (eleValueList < 5 || itme) {
             res.send({
                 code: 0,

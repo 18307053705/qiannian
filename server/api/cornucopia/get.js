@@ -1,5 +1,5 @@
-const { knapsackTable } = require('../../table');
-const { cornuconpiaFn } = require('../../utils');
+const { knapsackTable } = require('@/table');
+const { cornuconpiaFn } = require('@/utils');
 module.exports = {
     /**
      * 获取聚宝盆信息
@@ -7,6 +7,7 @@ module.exports = {
      * @param {*} res 
      */
     get: function (req, res) {
+        // 获取聚宝盆信息
         const { treasure_pool, role_level } = RoleG.getRoleGlobal(req, res);
         const { id } = treasure_pool['jbp'];
         let name = ''
@@ -19,7 +20,7 @@ module.exports = {
         } else {
             name = knapsackTable.getArticle(id).name;
         }
-
+       
         res.send({
             code: 0,
             data: {
@@ -27,7 +28,7 @@ module.exports = {
                     ...treasure_pool['jbp'],
                     id: name,
                 },
-                limits: role_level >= 50
+                limits: role_level >= 50,
             }
         })
     }

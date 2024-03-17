@@ -1,5 +1,5 @@
-const { knapsackTable } = require('../../table');
-const { cornuconpiaFn, knapsackFn } = require('../../utils');
+const { knapsackTable } = require('@/table');
+const { cornuconpiaFn, knapsackFn } = require('@/utils');
 module.exports = {
     /**
      * 改变聚宝物品
