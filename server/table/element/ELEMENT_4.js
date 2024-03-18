@@ -349,6 +349,12 @@ const ELEMENT_4 = {
         type: 4,
         path: '/xuanShanBang',
     },
+    448: {
+        id: 448,
+        name: "合成物品",
+        type: 4,
+        path: '/compound',
+    },
 };
 module.exports = {
     ELEMENT_4

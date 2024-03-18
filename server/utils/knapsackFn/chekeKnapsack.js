@@ -14,14 +14,13 @@ module.exports = {
         const exist = {};
         const length = data.length;
         for (let i = 0; i < length; i++) {
-            const { id, p, n, s } = data[i];
+            const { id, s } = data[i];
             const itme = articles[id];
-            if (itme && itme.p === p) {
+            if (itme) {
                 exist[id] = {
                     ...itme,
                     c: s,
                 };
-                // 判断数量是否足够
                 s >= itme.s && delete articles[id];
             }
             if (JSON.stringify(articles) === '{}') {

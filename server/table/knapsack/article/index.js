@@ -108,5 +108,9 @@ module.exports = {
     /**
      * 获取对应等级的天材地宝
      */
-    getLevelIds: dongTian.getLevelIds
+    getLevelIds: dongTian.getLevelIds,
+    /**
+    * 获取全部装备材料
+    */
+    getAllEquipMaterial: equipMaterial.getArticleList,
 }

@@ -293,6 +293,11 @@ export const config: RouterType[] = [
     path: "/xuanShanBang",
     component: lazy(() => import("@page/xuanShanBang"))
   },
+  {
+    name: "合成物品",
+    path: "/compound",
+    component: lazy(() => import("@page/compound"))
+  },
 ];
 
 export default config;
