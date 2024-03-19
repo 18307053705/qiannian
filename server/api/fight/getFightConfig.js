@@ -14,7 +14,7 @@ module.exports = {
         if (skill_pool.art) {
             Object.keys(skill_pool.art).forEach((key) => {
                 const { n, id, p, l } = skill_pool.art[key]
-                if (p !== 4 && l !== -1) {
+                if (p !== 4 && l) {
                     art.push({ n, id, })
                 }
             })
