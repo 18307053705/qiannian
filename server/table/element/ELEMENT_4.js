@@ -345,7 +345,7 @@ const ELEMENT_4 = {
     },
     447: {
         id: 447,
-        name: "【副本榜单】",
+        name: "【副本入口】",
         type: 4,
         path: '/xuanShanBang',
     },

@@ -1,7 +1,23 @@
 const { TaskSystem } = require('@/system');
 const { GrandG, TaskG } = require('@/global');
 const { taskFn, grandFn, knapsackFn } = require('@/utils');
-const { TASK_STATU, TASK_TYPE_MEUN } = TaskSystem;
+const { TASK_STATU, TASK_TYPE_MEUN, TASK_TYPE } = TaskSystem;
+
+
+function taskFormat(req, res, task) {
+    const { connet, speed, endText, reward, status, action, type, complete, isActive } = taskFn.getTaskScene(req, res, task);
+    return {
+        connet,
+        speed,
+        endText,
+        reward,
+        status,
+        action,
+        type,
+        complete,
+        isActive
+    }
+}
 
 module.exports = {
     /**
@@ -59,7 +75,7 @@ module.exports = {
             if (oldStatus === TASK_STATU.wait && task.status === TASK_STATU.can_complete) {
                 res.send({
                     code: 0,
-                    data: taskFn.getTaskScene(req, res, task),
+                    data: taskFormat(req, res, task) ,
                 })
                 return;
             }
@@ -82,7 +98,7 @@ module.exports = {
             if (oldStatus === TASK_STATU.wait && task.status === TASK_STATU.can_complete) {
                 res.send({
                     code: 0,
-                    data: taskFn.getTaskScene(req, res, task),
+                    data: taskFormat(req, res, task) ,
                 })
                 return;
             }
@@ -92,7 +108,7 @@ module.exports = {
             if (oldStatus !== TASK_STATU.can_complete) {
                 res.send({
                     code: 0,
-                    data: taskFn.getTaskScene(req, res, task),
+                    data: taskFormat(req, res, task) ,
                 })
                 return;
             }
@@ -148,8 +164,7 @@ module.exports = {
             GrandG.setDirGlobal(req, res, { currentDir: nextNpc });
             res.send({
                 code: 0,
-                data: taskFn.getTaskScene(req, res, nextTask),
-                nextTask,
+                data: taskFormat(req, res, nextTask),
             })
             return;
         }

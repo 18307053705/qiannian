@@ -15,6 +15,8 @@ export const equipFreeForge = ({ history }) => {
     }
     return (
         <div>
+            <div>提示：所有装备可在这里免费锻造最多+20，锻造失败的话装备将会被摧毁。</div>
+            <div>==============</div>
             {pageKey === 'home' && <EquipHome historyClick={historyClick} />}
             {pageKey === 'list' && <Equiplist historyClick={historyClick} />}
             {pageKey === 'forge' && <ForgeEquip history={history} historyClick={historyClick} />}

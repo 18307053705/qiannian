@@ -61,10 +61,12 @@ module.exports = {
         if (oldAddress !== address) {
             RoleG.updataRoleGlobal(req, res, { address });
         }
+
+        const { eleDir, ...data } = grandInfo;
         res.send({
             code: 0,
             data: {
-                ...grandInfo,
+                ...data,
                 path: path || currentDir.path,
                 state: currentDir.state,
             }

@@ -113,7 +113,7 @@ module.exports = {
 
         await RoleSql.asyncInsertRole(roleInfo);
         await Promise.all([
-            KnapsackSql.asyncAddKnapsack(user, role_id, role_name),
+            KnapsackSql.asyncAddKnapsack(req, user, role_id, role_name),
             WarehouseSql.asyncAddWarehouse(user, role_id),
             FriendsSql.asyncAddFriends(user, role_id)]
         );

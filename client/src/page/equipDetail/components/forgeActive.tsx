@@ -24,6 +24,14 @@ export const ForgeActive = ({ query, getEquipDetail, equip }) => {
         text = ['顶级玄石', '顶级玄石', '顶级玉石', '顶级云石'][career];
         yuanbao = 200;
     }
+    if (level > 89) {
+        text = '法则之石';
+        yuanbao = 300;
+    }
+    if (level > 99) {
+        text = '大道光韵';
+        yuanbao = 500;
+    }
     const forgeClick = (type) => {
         forgeEquip({
             materialtype: type,

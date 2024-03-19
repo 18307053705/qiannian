@@ -67,17 +67,29 @@ module.exports = {
             })
         }
         const task = {};
+        // 判断是否为副本任务
+        const isCopy = type === TASK_TYPE_MEUN.copy;
         Object.keys(tasks || {}).forEach((taskId) => {
             const taskItme = taskFn.getTaskScene(req, res, tasks[taskId]);
-            const { tpInfo } = taskItme;
+            const { tpInfo, status, level, connet, tips, levelText } = taskItme;
+            // 未领取任务 且 自身等级小于任务等级
+            const isLevel = !status && (level || 0) > role_level;
+            // 未领取任务 剧情处理
+            if (connet[connet.length - 1].includes('&')) {
+                connet.splice(-1);
+            }
+
             task[taskId] = {
-                taskType: type,
-                complete: taskFn.speedTask(req, res, taskItme),
-                tips: taskItme.tips,
+                taskType: type, // 任务类型：主线|副本等
+                complete: status ? taskFn.speedTask(req, res, taskItme) : undefined,
+                connet: status ? [tips] : connet,
                 title: taskItme.title,
                 isActive: taskItme.isActive,
-                reward: taskItme.reward,
+                reward: isCopy ? undefined : taskItme.reward,
                 tpInfo: tpInfo ? { address: tpInfo.address, addressName: tpInfo.addressName } : undefined,
+                type: taskItme.type, // 任务类型：战斗，收集等
+                levelText: isLevel ? (levelText || `等级不足${level},先去升级吧！`) : undefined,
+                status
             };
 
         })

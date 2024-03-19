@@ -1,6 +1,5 @@
-const { knapsackTable } = require('../../table');
-const { knapsackFn } = require('../../utils');
-
+const { knapsackTable } = require('@/table');
+const { knapsackFn } = require('@/utils');
 
 module.exports = {
     /**
@@ -47,6 +46,15 @@ module.exports = {
         if (level > 74) {
             materialId = [1852, 1852, 1856, 1860][career];
             y_b = 200;
+        }
+
+        if (level > 89) {
+            materialId = 18100;
+            y_b = 300;
+        }
+        if (level > 99) {
+            materialId = 18101;
+            y_b = 500;
         }
         let result = {
             data,

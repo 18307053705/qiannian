@@ -6,7 +6,7 @@ module.exports = {
     * @param {*} user 账号
     * @param {*} role_id 角色id
     */
-    asyncAddKnapsack: async function (user, role_id, name) {
+    asyncAddKnapsack: async function (req, user, role_id, name) {
         const region = req.cookies["region"];
         const sqlStr = "insert into knapsack(user_id,role_id,name,tael,yuanbao,data,region) values(?,?,?,?,?,?,?)";
         const list = [user, role_id, name, 1000, 0, '[]', region];

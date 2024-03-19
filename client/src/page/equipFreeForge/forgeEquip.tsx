@@ -7,7 +7,7 @@ export const ForgeEquip = ({ history, historyClick }) => {
     const { state, pathname } = history.location;
 
     const { uid } = state;
-    const [equip, setEquip] = useState();
+    const [equip, setEquip]: any = useState();
     const [forgeNum, setForgeNum] = useState(0);
     const [isContinue, setIsContinue] = useState(false);
     // 获取武器详情

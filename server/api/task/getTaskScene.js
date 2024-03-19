@@ -3,6 +3,22 @@ const { GrandG, TaskG } = require('@/global');
 const { taskFn } = require('@/utils');
 const { TASK_STATU, TASK_TYPE, TASK_TYPE_MEUN } = TaskSystem;
 
+
+function taskFormat(req, res, task) {
+    const { connet, speed, endText, reward, status, action, type, complete, isActive } = taskFn.getTaskScene(req, res, task);
+    return {
+        connet,
+        speed,
+        endText,
+        reward,
+        status,
+        action,
+        type,
+        complete,
+        isActive
+    }
+}
+
 module.exports = {
     /**
      * 获取任务场景信息
@@ -44,7 +60,7 @@ module.exports = {
         if (task.status === TASK_STATU.wait) {
             res.send({
                 code: 0,
-                data: taskFn.getTaskScene(req, res, task),
+                data: taskFormat(req, res, task),
             })
             return true;
         }
@@ -62,7 +78,8 @@ module.exports = {
 
         res.send({
             code: 0,
-            data: taskFn.getTaskScene(req, res, task)
+            data: taskFormat(req, res, task)
         })
     }
 }
+

@@ -7,7 +7,7 @@ module.exports = {
         const list = await RoleSql.asyncGetRoleList(req, res);
         res.send({
             code: 0,
-            data: list
+            data: list.map(({ role_name, role_level, role_id, role_career }) => ({ role_name, role_level, role_id, role_career }))
         });
     }
 };
