@@ -10,7 +10,8 @@ const roleFightApiList = [
     "/api/player/playerFightDir",
     "/api/player/creatPlayerFight",
     "/api/player/exitFight",
-    "/api/fight/exitFight"
+    "/api/fight/exitFight",
+    "/api/fight/getFightAttr",
 ];
 
 module.exports = {

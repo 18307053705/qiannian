@@ -4,6 +4,7 @@ const { fightDir } = require('./fightDir');
 const { exitFight } = require('./exitFight');
 const { getFightConfig } = require('./getFightConfig');
 const { setFightConfig } = require('./setFightConfig');
+const { getFightAttr } = require('./getFightAttr');
 
 
 
@@ -18,4 +19,6 @@ router.post("/exitFight", exitFight);
 router.post("/getFightConfig", getFightConfig);
 // 设置战斗配置
 router.post("/setFightConfig", setFightConfig);
+// 获取战斗属性
+router.post("/getFightAttr", getFightAttr);
 module.exports = router;

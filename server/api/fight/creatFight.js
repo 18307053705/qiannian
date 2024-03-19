@@ -1,5 +1,4 @@
 const { fightFn } = require("@/utils");
-const { FightG } = require("@/global");
 module.exports = {
   /**
    * 创建战斗

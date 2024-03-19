@@ -6,6 +6,7 @@ const fightDirUrl = '/fight/fightDir';
 const exitFightUrl = '/fight/exitFight';
 const getFightConfigUrl = '/fight/getFightConfig';
 const setFightConfigUrl = '/fight/setFightConfig';
+const getFightAttrUrl = '/fight/getFightAttr';
 
 type FightInfoType = {
     rival: {
@@ -60,4 +61,10 @@ type setFightDirReq = {
 // 更换角色战斗指令
 export async function setFightConfig(data: setFightDirReq) {
     return await post(setFightConfigUrl, data);
+}
+
+
+//获取属性信息
+export async function getFightAttr(data: { id?: string }) {
+    return await post(getFightAttrUrl, data);
 }

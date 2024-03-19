@@ -43,11 +43,11 @@ module.exports = {
             buffs,
             state,
             roundText,
+            template: template ? { name: template.name } : undefined,
         }
         if (state !== 0) {
             return {
                 state,
-                template: template ? { name: template.name } : undefined,
                 reward,
                 continue: fightInfo.continue,
                 escape: fightInfo.escape,
@@ -71,7 +71,6 @@ module.exports = {
                 rivals: getRivals(fightRankInfo?.rivals || []),
                 players: getPlayers(fightRankInfo?.players),
                 buffs: fightRankInfo?.buffs,
-                // fightRankInfo
             };
         }
         // 玩家 vs 玩家

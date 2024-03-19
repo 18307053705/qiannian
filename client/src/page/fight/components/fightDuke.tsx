@@ -11,15 +11,16 @@ const art = (dirClick, artList) => {
     ))
 }
 
-const getAttrIfno = (attrs: any[]) => {
+const getAttrIfno = (data: any[]) => {
     const lifeList: any[] = [];
     const stateList: any[] = [];
-    attrs.forEach(({ life, life_max, name }) => {
+    data.forEach(({ life, life_max, name, role_id }) => {
         lifeList.push(life);
         stateList.push({
             percent: (life / life_max * 100).toFixed(0),
             state: life > 0 ? 1 : 0,
-            name
+            name,
+            role_id
         });
     })
     return {
@@ -54,8 +55,8 @@ const FightPercent = ({ percent, color = 'red' }) => {
 }
 
 
-const FightDuke = ({ dirClick, fight, setPanel }) => {
-    const { buffs, players, player, rivals, roundText = {} } = fight;
+const FightDuke = ({ dirClick, fight, setPanel, openFightAttr }) => {
+    const { buffs, players, player, rivals, roundText = {}, template } = fight;
     const artList1 = player.art.slice(0, 3);
     const artList2 = player.art.slice(3, 6);
     const artList3 = player.art.slice(6, 9);
@@ -66,7 +67,7 @@ const FightDuke = ({ dirClick, fight, setPanel }) => {
     return (
         <div className="duke">
             <div>{message}</div>
-            <div>{rivals[0].name}</div>
+            <div>{template.name}<span className="g_color" onClick={() => { openFightAttr() }}>[查]</span></div>
             {/* 技能栏1 */}
             <div>{art(dirClick, artList1)}</div>
             {/* 敌方状态 */}
@@ -88,13 +89,18 @@ const FightDuke = ({ dirClick, fight, setPanel }) => {
             {
                 Object.values(buffs).map(({ t, text }: any, index) => (<div key={index}>{`${text},剩余${t}回合。`}</div>))
             }
-
             {/* 我方成员状态 */}
             <div>
                 <span>状态</span>:
                 {
-                    playerAttr.stateList.map(({ name, percent }, index) => (
-                        <span key={index} >{name}({percent}%)</span>
+                    playerAttr.stateList.map(({ name, percent, role_id }, index) => (
+                        <span
+                            key={index}
+                            onClick={() => { openFightAttr(role_id) }}
+                            className="g_u"
+                        >
+                            <span>{name}({percent}%)</span>
+                        </span>
                     ))
                 }
             </div>
