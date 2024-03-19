@@ -45,6 +45,8 @@ module.exports = {
         // 判断该部位是否替换装备
         if (replaceEquip) {
             replaceEquip.name = replaceEquip.n;
+            // 增加唯一标识uid
+            replaceEquip.uid = `${new Date() * 1}1`;
             replaceEquip.s = 1;
             delete replaceEquip.n;
             const { attr: deleteAttr } = computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), replaceEquip.ext, posKey);

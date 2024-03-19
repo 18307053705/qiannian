@@ -47,6 +47,7 @@ module.exports = {
         }
         if (state !== 0) {
             return {
+                template: template ? { name: template.name } : undefined,
                 state,
                 reward,
                 continue: fightInfo.continue,

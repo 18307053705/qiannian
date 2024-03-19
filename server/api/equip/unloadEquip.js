@@ -1,5 +1,5 @@
-const { knapsackFn, equipFn } = require('../../utils');
-const { knapsackTable } = require('../../table');
+const { knapsackFn, equipFn } = require('@/utils');
+const { knapsackTable } = require('@/table');
 module.exports = {
     /**
      * 卸下装备
