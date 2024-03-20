@@ -1,5 +1,4 @@
 import React from 'react';
-import { TASK_TYPE, TASK_STATU } from '@meun';
 const TaskReward = ({ reward, status }) => {
     if (status !== 2 && status !== 3) {
         return null;

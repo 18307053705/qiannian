@@ -71,11 +71,11 @@ module.exports = {
         const isCopy = type === TASK_TYPE_MEUN.copy;
         Object.keys(tasks || {}).forEach((taskId) => {
             const taskItme = taskFn.getTaskScene(req, res, tasks[taskId]);
-            const { tpInfo, status, level, connet, tips, levelText } = taskItme;
+            const { tpInfo, status, level, connet, tips, levelText, grand } = taskItme;
             // 未领取任务 且 自身等级小于任务等级
             const isLevel = !status && (level || 0) > role_level;
             // 未领取任务 剧情处理
-            if (connet[connet.length - 1].includes('&')) {
+            if (connet?.[connet.length - 1].includes('&')) {
                 connet.splice(-1);
             }
 
@@ -89,7 +89,9 @@ module.exports = {
                 tpInfo: tpInfo ? { address: tpInfo.address, addressName: tpInfo.addressName } : undefined,
                 type: taskItme.type, // 任务类型：战斗，收集等
                 levelText: isLevel ? (levelText || `等级不足${level},先去升级吧！`) : undefined,
-                status
+                status,
+                grand: isLevel ? undefined : grand,
+                id: taskId
             };
 
         })

@@ -20,7 +20,7 @@ module.exports = {
             pet = await petFn.getPetInfo(req, res, petId);
         }
         pet.art = pet.art.map(art => {
-            const { condition,msg } = ArtSystem.getArt(art.id);
+            const { condition, msg } = ArtSystem.getArt(art.id);
             art.condition = condition;
             art.msg = ArtSystem.getArtMsg({ ...art, msg });
             return art;
@@ -30,8 +30,16 @@ module.exports = {
         res.send({
             code: 0,
             data: {
-                ...pet,
                 attr: AttrSystem.computePetAttr(pet),
+                art: pet.art,
+                equip: pet.equip,
+                exp: pet.exp,
+                flair: pet.flair,
+                flair_x: pet.flair_x,
+                name: pet.name,
+                reborn: pet.reborn,
+                level: pet.level,
+                type: pet.type,
                 isRole: index !== -1,
                 state: pet_pool.l[index].s || 0
             }

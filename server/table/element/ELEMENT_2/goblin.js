@@ -142,12 +142,18 @@ const freakMap = {
 
 module.exports = {
     getGoblinFreak: function (freakId) {
-        if (freakMap[freakId]) {
-            return {
-                id: freakId,
-                ...JSON.parse(JSON.stringify(freakMap[freakId]))
-            }
+        const freak = freakMap[freakId];
+        if (!freak) {
+            console.log('异常怪物ID：', freakId);
+            return undefined;
         }
-        return undefined;
+        // 是否可捕捉
+        if (freak.level < 45 && !freak.grade && freak.pet === undefined) {
+            freak.pet = true;
+        }
+        return {
+            id: freakId,
+            ...JSON.parse(JSON.stringify(freak))
+        }
     }
 }

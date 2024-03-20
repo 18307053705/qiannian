@@ -41,7 +41,7 @@ module.exports = {
         TaskG.deleteTaskGlobal(req, res, type, id);
         res.send({
             code: 0,
-            data: 'ok'
+            data: task.reward
         })
     }
 }

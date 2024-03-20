@@ -13,10 +13,12 @@ module.exports = {
         const { role_id, address } = RoleG.getRoleGlobal(req, res);
         const time = new Date() - (roleIds[role_id] || 0);
         // 冷却中
-        if (time < 10000) {
+        if (time <= 10000) {
             res.send(({
                 code: 0,
-                data: 10000 - time
+                data: {
+                    time: 10000 - time
+                }
             }))
             return;
         }
@@ -50,7 +52,9 @@ module.exports = {
         roleIds[role_id] = new Date() * 1;
         res.send({
             code: 0,
-            success: `突然你眼前一亮，定睛一看竟然是${name}。`
+            data: {
+                text: `突然你眼前一亮，定睛一看竟然是${name}。`
+            },
         })
     }
 }

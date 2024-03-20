@@ -8,8 +8,9 @@ module.exports = {
         switch (parseInt(flair_x / 10)) {
             case 3:
             case 4:
-                return 2;
+                return 1;
             case 5:
+                return 2;
             case 6:
                 return 3;
             case 7:
@@ -24,7 +25,7 @@ module.exports = {
             case 12:
                 return 25 + (flair_x - 100);
             default:
-                return 1;
+                return 0.5;
         }
     },
 }
