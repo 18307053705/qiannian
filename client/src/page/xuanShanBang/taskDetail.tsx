@@ -37,7 +37,7 @@ const TaskDetail = ({ curId, taskInfo, id, receiveTaskClick }) => {
                     ))
                 }
             {
-                !done && <div><span className='g_u_end' onClick={() => { receiveTaskClick(id, 2) }}>完成悬赏</span></div>
+                done && <div><span className='g_u_end' onClick={() => { receiveTaskClick(id, 2) }}>完成悬赏</span></div>
             }
             <div>=================</div>
         </div>

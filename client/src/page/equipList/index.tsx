@@ -10,7 +10,7 @@ import { jumpDetail } from '@utils/jumpPage'
 export const EquipList = ({ history }) => {
     const { state } = history.location;
     const { posInx, form, petId } = state;
-    const [list, setList] = useState();
+    const [list, setList] = useState([]);
     useEffect(() => {
         getEquipList().then(({ data }) => {
             const posv = posInx > 7 ? 8 : posInx;
@@ -20,15 +20,12 @@ export const EquipList = ({ history }) => {
     }, [])
 
 
-    const operateClick = (in_x) => {
-        const posKey = EQUIP_POS_LIST[posInx - 1].value;
+    const operateClick = (uid) => {
         const resquet = form === 2 ? petWearEquip : operate;
         resquet({
+            uid,
             s: 1,
-            posKey,
-            type: 1,
-            in_x,
-            petId
+            type: 1
         }).then(({ message }) => {
             if (!message) {
                 history.goBack();
@@ -49,9 +46,9 @@ export const EquipList = ({ history }) => {
             </span>
         )
     }
-    const active = ({ in_x }, index) => {
+    const active = ({ uid }, index) => {
         return (
-            <span key={`${index}_1`} className='g_u_end' onClick={() => { operateClick(in_x) }}>换</span>
+            <span key={`${index}_1`} className='g_u_end' onClick={() => { operateClick(uid) }}>换</span>
         )
     }
 

@@ -1287,7 +1287,7 @@ const taskMap = {
         },
         nextId: 1047
     },
-    1046: {
+    1047: {
         title: "守墓银甲",
         tips: "守墓银甲被魔气污浊在葬剑冢(1,2)阻拦了你们的去路。",
         type: TASK_TYPE.zhandou,
@@ -1314,9 +1314,9 @@ const taskMap = {
         complete: {
             freak: "20044-8"
         },
-        nextId: 1047
+        nextId: 1048
     },
-    1047: {
+    1048: {
         title: "墓室暗格",
         tips: "拎壶冲竟然忘记了通往墓室的密道暗格，你也只能随便猜一个了。",
         type: TASK_TYPE.biaoxiang,
@@ -1345,9 +1345,9 @@ const taskMap = {
             text: '暗格',
             num: 6,
         },
-        nextId: 1048
+        nextId: 1049
     },
-    1048: {
+    1049: {
         title: "吸血魔蝠",
         tips: "浓厚的魔气在葬剑冢(1,3)诞生了一群吸血魔蝠拦住了去路。",
         type: TASK_TYPE.zhandou,
@@ -1375,9 +1375,9 @@ const taskMap = {
         complete: {
             freak: "20045-8"
         },
-        nextId: 1049
+        nextId: 1050
     },
-    1049: {
+    1050: {
         title: "镇墓剑侍",
         tips: "千年前封印剑魔的最强人族剑修竟然也被魔气污染了。",
         type: TASK_TYPE.zhandou,
@@ -1408,9 +1408,9 @@ const taskMap = {
         complete: {
             freak: "20046-8"
         },
-        nextId: 1050
+        nextId: 1051
     },
-    1050: {
+    1051: {
         title: "魔修傀儡",
         tips: "千年前的魔族强者剑魔即将破开封印，召唤了一群魔修傀儡争取时间。",
         type: TASK_TYPE.zhandou,
@@ -1438,9 +1438,9 @@ const taskMap = {
         complete: {
             freak: "20047-8"
         },
-        nextId: 1051
+        nextId: 1052
     },
-    1051: {
+    1052: {
         title: "剑魔分身",
         tips: "剑魔分化出数十道强大的分身围攻拎壶冲，赶紧去帮忙吧。",
         type: TASK_TYPE.zhandou,
@@ -1467,9 +1467,9 @@ const taskMap = {
         complete: {
             freak: "20048-8"
         },
-        nextId: 1052
+        nextId: 1053
     },
-    1052: {
+    1053: {
         title: "镇杀剑魔",
         tips: "传说中的剑魔竟然破开了封印，快去将它消灭避免世间大乱吧。",
         type: TASK_TYPE.zhandou,
@@ -1500,9 +1500,9 @@ const taskMap = {
                 address: "10004,0,3"
             }]
         },
-        nextId: 1053
+        nextId: 1054
     },
-    1053: {
+    1054: {
         title: "狐晶丽陨落？",
         tips: "拎壶冲似乎有办法救狐晶丽，快去葬剑冢(1,4)找他了解情况。",
         type: TASK_TYPE.duihau,
@@ -1526,9 +1526,9 @@ const taskMap = {
                 address: "10004,0,3"
             },
         },
-        nextId: 1054
+        nextId: 1055
     },
-    1054: {
+    1055: {
         title: "鬼医下落",
         tips: "传说中的鬼医可以救回狐晶丽，快去找欧冶子询问鬼医的下落吧。",
         type: TASK_TYPE.duihau,
@@ -1550,9 +1550,9 @@ const taskMap = {
                 address: "10002,0,4"
             },
         },
-        nextId: 1055
+        nextId: 1056
     },
-    1055: {
+    1056: {
         title: "前往不夜城",
         tips: "欧冶子拦住了拎壶冲与你同行，快去大泽谷(1,5)找他了解原因吧。",
         type: TASK_TYPE.duihau,
@@ -1577,9 +1577,9 @@ const taskMap = {
                 address: "10002,0,4"
             },
         },
-        nextId: 1056
+        nextId: 1057
     },
-    1056: {
+    1057: {
         title: "荒漠中的小女孩",
         tips: "荒漠中有个小女孩似乎遇到了麻烦，过去帮助她并打听不夜城的位置吧。",
         type: TASK_TYPE.duihau,
@@ -1603,9 +1603,9 @@ const taskMap = {
                 address: "20002,0,0"
             },
         },
-        nextId: 1057
+        nextId: 1058
     },
-    1057: {
+    1058: {
         title: "紫藤萝花",
         tips: "荒漠毒蝎就在不夜城(1,1)，击杀后有一定的概率掉落紫藤萝花。",
         type: TASK_TYPE.shouji,
@@ -1632,9 +1632,9 @@ const taskMap = {
         complete: {
             article: "216-6"
         },
-        nextId: 1058
+        nextId: 1059
     },
-    1058: {
+    1059: {
         title: "驱赶毒蛇",
         tips: "荒漠毒蛇就在不夜城(1,1)，快去将它们驱赶走吧。",
         type: TASK_TYPE.zhandou,
@@ -1660,9 +1660,9 @@ const taskMap = {
         complete: {
             freak: "20222-10"
         },
-        nextId: 1059
+        nextId: 1060
     },
-    1059: {
+    1060: {
         title: "小红的身份",
         tips: "小红竟然是传说中的鬼医的孙女，快去找她了解鬼医的事情吧。",
         type: TASK_TYPE.duihau,
@@ -1687,9 +1687,9 @@ const taskMap = {
                 address: "20002,0,0"
             },
         },
-        nextId: 1060
+        nextId: 1061
     },
-    1060: {
+    1061: {
         title: "清水解渴",
         tips: "小型仙人掌就在不夜城(1,2)，击杀后有一定的概率掉落清水。",
         type: TASK_TYPE.shouji,
@@ -1716,9 +1716,9 @@ const taskMap = {
         complete: {
             article: "217-6"
         },
-        nextId: 1061
+        nextId: 1062
     },
-    1061: {
+    1062: {
         title: "打了小的，来了老的？",
         tips: "小仙人掌妖就在不夜城(1,2)，击杀后有一定的概率掉落清水。",
         type: TASK_TYPE.zhandou,
@@ -1744,9 +1744,9 @@ const taskMap = {
         complete: {
             freak: "20224-10"
         },
-        nextId: 1062
+        nextId: 1063
     },
-    1062: {
+    1063: {
         title: "惩戒地痞",
         tips: "地痞就在不夜城(1,3)，快去教训他们一顿吧。",
         type: TASK_TYPE.zhandou,
@@ -1760,7 +1760,7 @@ const taskMap = {
             "不过你没想到这群地痞跑远了后竟然开始放狠话让你有种就在这等着，他们去城里摇人。",
             "小红也是看热闹不事大：行，本姑奶奶就在这等着。",
             "你见此也无奈的摇了摇头，这小红姑娘不愧是不夜城长大的。",
-            "&原地地痞摇人。",
+            "&继续。",
         ],
         reward: {
             exp: 4500000,
@@ -1774,9 +1774,9 @@ const taskMap = {
         complete: {
             freak: "20225-10"
         },
-        nextId: 1063
+        nextId: 1064
     },
-    1063: {
+    1064: {
         title: "惩戒流氓",
         tips: "流氓就在不夜城(1,3)，快去教训他们一顿吧。",
         type: TASK_TYPE.zhandou,
@@ -1784,6 +1784,7 @@ const taskMap = {
             "不多时一群流氓混混就提着刀枪棍棒从城里朝冲了出来，不过看到你身边的小红后瞬间傻眼了。",
             "流氓瞬间如见了鬼一般惊呼道：小...小红姑娘！！！",
             "你见此微微一愣看来这小红姑娘在不夜城的威望还不小，不过既然这群流氓都来了你也不打算就这样放了他们。",
+            "&惩戒流氓",
         ],
         done: [
             "毫无疑问，这群地痞流氓被你揍得直接又跪地求饶。",
@@ -1804,9 +1805,9 @@ const taskMap = {
         complete: {
             freak: "20226-10"
         },
-        nextId: 1064
+        nextId: 1065
     },
-    1064: {
+    1065: {
         title: "初见鬼医",
         tips: "鬼医就在不夜城(1,5)，快请他出手搭救狐晶丽吧。",
         type: TASK_TYPE.duihau,
@@ -1833,9 +1834,9 @@ const taskMap = {
                 address: "20002,0,4"
             },
         },
-        nextId: 1065
+        nextId: 1066
     },
-    1065: {
+    1066: {
         title: "鬼医的考验",
         tips: "鬼医就在不夜城(1,5)，他似乎需要你帮他做什么才肯出手救狐晶丽。",
         type: TASK_TYPE.duihau,
@@ -1857,9 +1858,9 @@ const taskMap = {
                 address: "20002,0,4"
             },
         },
-        nextId: 1066
+        nextId: 1067
     },
-    1066: {
+    1067: {
         title: "幻灵青涎",
         tips: "幻青蛇在不夜城(1,4)，击杀后有概率掉落幻灵青涎。",
         type: TASK_TYPE.shouji,
@@ -1885,9 +1886,9 @@ const taskMap = {
         complete: {
             article: "218-6"
         },
-        nextId: 1067
+        nextId: 1068
     },
-    1067: {
+    1068: {
         title: "大地之石",
         tips: "食金兽在不夜城(1,4)，击杀后有概率掉落大地之石。",
         type: TASK_TYPE.shouji,
@@ -1911,9 +1912,9 @@ const taskMap = {
         complete: {
             article: "219-6"
         },
-        nextId: 1068
+        nextId: 1069
     },
-    1068: {
+    1069: {
         title: "寻找妖灵",
         tips: "鬼医就在不夜城(1,5)，快去找他询问如何找到狐晶丽的妖灵吧。",
         type: TASK_TYPE.duihau,
@@ -1937,9 +1938,9 @@ const taskMap = {
                 address: "20002,0,4"
             },
         },
-        nextId: 1069
+        nextId: 1070
     },
-    1069: {
+    1070: {
         title: "迷雾森林",
         tips: "调皮的纸人男童就在迷雾森林(1,1)，快去教训它一下吧。",
         type: TASK_TYPE.zhandou,
@@ -1968,9 +1969,9 @@ const taskMap = {
         complete: {
             freak: "20231-12"
         },
-        nextId: 1070
+        nextId: 1071
     },
-    1070: {
+    1071: {
         title: "纸人女童",
         tips: "调纸人女童在迷雾森林(1,1)，她似乎以为你欺负了纸人男童。",
         type: TASK_TYPE.zhandou,
@@ -1996,9 +1997,9 @@ const taskMap = {
         complete: {
             freak: "20232-12"
         },
-        nextId: 1071
+        nextId: 1072
     },
-    1071: {
+    1072: {
         title: "哭瞎了眼？",
         tips: "红木古树就在迷雾森林(1,2)，击杀后有概率掉落朱砂。",
         type: TASK_TYPE.shouji,
@@ -2025,9 +2026,9 @@ const taskMap = {
         complete: {
             article: "2110-6"
         },
-        nextId: 1072
+        nextId: 1073
     },
-    1072: {
+    1073: {
         title: "修补身体",
         tips: "红木古树就在迷雾森林(1,2)，击杀后有概率掉落朱砂。",
         type: TASK_TYPE.shouji,
@@ -2055,9 +2056,9 @@ const taskMap = {
         complete: {
             article: "2111-6"
         },
-        nextId: 1073
+        nextId: 1074
     },
-    1073: {
+    1074: {
         title: "中计？",
         tips: "幻境游魂在迷雾森林(1,3)朝你发起攻击，快去将它们消灭吧。",
         type: TASK_TYPE.zhandou,
@@ -2083,9 +2084,9 @@ const taskMap = {
         complete: {
             freak: "20235-12"
         },
-        nextId: 1074
+        nextId: 1075
     },
-    1074: {
+    1075: {
         title: "入魔？",
         tips: "幻境行尸在迷雾森林(1,3)朝你发起攻击，快去将它们消灭吧。",
         type: TASK_TYPE.zhandou,
@@ -2112,9 +2113,9 @@ const taskMap = {
         complete: {
             freak: "20236-12"
         },
-        nextId: 1075
+        nextId: 1076
     },
-    1075: {
+    1076: {
         title: "赶尸人",
         tips: "白衣青年突然在迷雾森林(1,4)，快去找他聊聊吧。",
         type: TASK_TYPE.duihau,
@@ -2139,9 +2140,9 @@ const taskMap = {
                 address: "20003,0,3"
             },
         },
-        nextId: 1076
+        nextId: 1077
     },
-    1076: {
+    1077: {
         title: "收集黄砂砾",
         tips: "百年白蚁就在迷雾森林(1,4)，击杀后有概率掉落黄砂砾。",
         type: TASK_TYPE.shouji,
@@ -2169,9 +2170,9 @@ const taskMap = {
         complete: {
             article: "2112-6"
         },
-        nextId: 1077
+        nextId: 1078
     },
-    1077: {
+    1078: {
         title: "教训百年猴精",
         tips: "百年猴精在迷雾森林(1,4)，快去教训它们一顿吧。",
         type: TASK_TYPE.zhandou,
@@ -2198,9 +2199,9 @@ const taskMap = {
         complete: {
             freak: "20238-12"
         },
-        nextId: 1078
+        nextId: 1079
     },
-    1078: {
+    1079: {
         title: "召灵失败",
         tips: "你使用召灵符竟然失败了，快去找赶尸人了解情况吧。",
         type: TASK_TYPE.duihau,
@@ -2224,9 +2225,9 @@ const taskMap = {
                 address: "20003,0,3"
             },
         },
-        nextId: 1079
+        nextId: 1080
     },
-    1079: {
+    1080: {
         title: "抓个舌头",
         tips: "虎妖就在盘丝洞(1,1)，快去抓几只询问狐晶丽的下落吧。",
         type: TASK_TYPE.zhandou,
@@ -2255,9 +2256,9 @@ const taskMap = {
         complete: {
             freak: "20211-15"
         },
-        nextId: 1080
+        nextId: 1081
     },
-    1080: {
+    1081: {
         title: "虎妖同伙",
         tips: "狼妖就在盘丝洞(1,1)，立刻追上去把它们抓起来吧。",
         type: TASK_TYPE.zhandou,
@@ -2283,9 +2284,9 @@ const taskMap = {
         complete: {
             freak: "20212-15"
         },
-        nextId: 1081
+        nextId: 1082
     },
-    1081: {
+    1082: {
         title: "盘丝大仙",
         tips: "赶尸人就在盘丝洞(1,1)，他似乎认识盘丝大仙。",
         type: TASK_TYPE.zhandou,
@@ -2307,9 +2308,9 @@ const taskMap = {
                 address: "20000,0,0"
             },
         },
-        nextId: 1082
+        nextId: 1083
     },
-    1082: {
+    1083: {
         title: "乱石阵",
         tips: "你们在盘丝洞(1,2)被乱石阵困住了，赶紧走出去吧。",
         type: TASK_TYPE.migong,
@@ -2336,9 +2337,9 @@ const taskMap = {
             text: ['东', '南', '西', '北'],
             num: 2
         },
-        nextId: 1083
+        nextId: 1084
     },
-    1083: {
+    1084: {
         title: "清理巨石兽",
         tips: "巨石兽就在盘丝洞(1,2)，赶路前先将它们处理了吧。",
         type: TASK_TYPE.zhandou,
@@ -2363,9 +2364,9 @@ const taskMap = {
         complete: {
             freak: "20213-15"
         },
-        nextId: 1084
+        nextId: 1085
     },
-    1084: {
+    1085: {
         title: "食人树妖",
         tips: "食人树妖就在盘丝洞(1,2)，快去救出被它们吞进去的赶尸人吧。",
         type: TASK_TYPE.zhandou,
@@ -2391,9 +2392,9 @@ const taskMap = {
         complete: {
             freak: "20214-15"
         },
-        nextId: 1085
+        nextId: 1086
     },
-    1085: {
+    1086: {
         title: "偷溜进府",
         tips: "黑熊精就在盘丝洞(1,3)，快去将它们打晕溜进盘丝大仙洞府吧。",
         type: TASK_TYPE.zhandou,
@@ -2419,9 +2420,9 @@ const taskMap = {
         complete: {
             freak: "20215-15"
         },
-        nextId: 1086
+        nextId: 1087
     },
-    1086: {
+    1087: {
         title: "白骨蜘蛛",
         tips: "白骨蜘蛛就在盘丝洞(1,3)，快去将它们也全部击败吧。",
         type: TASK_TYPE.zhandou,
@@ -2448,9 +2449,9 @@ const taskMap = {
         complete: {
             freak: "20216-15"
         },
-        nextId: 1087
+        nextId: 1088
     },
-    1087: {
+    1088: {
         title: "盘丝大仙现身",
         tips: "盘丝大仙就在盘丝洞(1,3)，快去找她要回狐晶丽的妖灵吧。",
         type: TASK_TYPE.duihau,
@@ -2474,9 +2475,9 @@ const taskMap = {
             },
 
         },
-        nextId: 1088
+        nextId: 1089
     },
-    1088: {
+    1089: {
         title: "证明实力",
         tips: "黑蛇精就在盘丝洞(1,4)，快去击杀它们证明自身实力吧。",
         type: TASK_TYPE.zhandou,
@@ -2504,9 +2505,9 @@ const taskMap = {
         complete: {
             freak: "20217-15"
         },
-        nextId: 1089
+        nextId: 1090
     },
-    1089: {
+    1090: {
         title: "击杀护洞蛇妖",
         tips: "护洞蛇妖就在盘丝洞(1,4)，快去将它们全部击杀吧。",
         type: TASK_TYPE.zhandou,
@@ -2532,9 +2533,9 @@ const taskMap = {
         complete: {
             freak: "20218-15"
         },
-        nextId: 1090
+        nextId: 1091
     },
-    1090: {
+    1091: {
         title: "千年巨蟒妖",
         tips: "邪恶的千年巨蟒妖就在盘丝洞(1,4)，快去与盘丝大仙联手将它击杀吧。",
         type: TASK_TYPE.zhandou,
@@ -2562,9 +2563,9 @@ const taskMap = {
                 address: "20000,0,3"
             }]
         },
-        nextId: 1091
+        nextId: 1092
     },
-    1091: {
+    1092: {
         title: "狐晶丽苏醒？",
         tips: "狐晶丽似乎已经醒过来了，快去不夜城(1,5)看看她的情况吧。",
         type: TASK_TYPE.duihau,
@@ -2586,9 +2587,9 @@ const taskMap = {
                 address: "20002,0,4"
             },
         },
-        nextId: 1092
+        nextId: 1093
     },
-    1092: {
+    1093: {
         title: "前往妖魔岭",
         tips: "九尾天狐一族或许并没有灭族，快去找鬼医了解情况吧。",
         type: TASK_TYPE.duihau,
@@ -2614,9 +2615,9 @@ const taskMap = {
                 address: "20002,0,4"
             },
         },
-        nextId: 1093
+        nextId: 1094
     },
-    1093: {
+    1094: {
         title: "尸魔虫",
         tips: "尸魔虫就在妖魔岭(1,1)，快去将它们全部击败吧。",
         type: TASK_TYPE.zhandou,
@@ -2643,9 +2644,9 @@ const taskMap = {
         complete: {
             freak: "20241-18"
         },
-        nextId: 1094
+        nextId: 1095
     },
-    1094: {
+    1095: {
         title: "尸魔鹰",
         tips: "尸魔鹰就在妖魔岭(1,1)，快去将它们全部击败吧。",
         type: TASK_TYPE.zhandou,
@@ -2671,9 +2672,9 @@ const taskMap = {
         complete: {
             freak: "20242-18"
         },
-        nextId: 1095
+        nextId: 1096
     },
-    1095: {
+    1096: {
         title: "狐山",
         tips: "狐山就在妖魔岭(1,1)，快去找他询问九尾天狐一族的下落吧。",
         type: TASK_TYPE.duihau,
@@ -2696,9 +2697,9 @@ const taskMap = {
                 address: "20004,0,0"
             },
         },
-        nextId: 1096
+        nextId: 1097
     },
-    1096: {
+    1097: {
         title: "粉红毒蝎",
         tips: "粉红毒蝎就在妖魔岭(1,2)，快去将它们击败。",
         type: TASK_TYPE.zhandou,
@@ -2724,9 +2725,9 @@ const taskMap = {
         complete: {
             freak: "20243-18"
         },
-        nextId: 1097
+        nextId: 1098
     },
-    1097: {
+    1098: {
         title: "红石骨魔",
         tips: "红石骨魔就在妖魔岭(1,2)，快去将它们击败。",
         type: TASK_TYPE.zhandou,
@@ -2753,9 +2754,9 @@ const taskMap = {
         complete: {
             freak: "20244-18"
         },
-        nextId: 1098
+        nextId: 1099
     },
-    1098: {
+    1099: {
         title: "狐族高手",
         tips: "狐族高手就在妖魔岭(1,3)，快去将它们击败。",
         type: TASK_TYPE.zhandou,
@@ -2781,9 +2782,9 @@ const taskMap = {
         complete: {
             freak: "20245-18"
         },
-        nextId: 1099
+        nextId: 10100
     },
-    1099: {
+    10100: {
         title: "狐族精英",
         tips: "狐族精英就在妖魔岭(1,3)，快去将它们击败。",
         type: TASK_TYPE.zhandou,
@@ -2814,9 +2815,9 @@ const taskMap = {
         complete: {
             freak: "20246-18"
         },
-        nextId: 10100
+        nextId: 10101
     },
-    10100: {
+    10101: {
         title: "狐晶丽母亲",
         tips: "没想到九尾天狐一族的族长竟然就是狐晶丽的母亲，快去与她了解更多吧。",
         type: TASK_TYPE.duihau,
@@ -2840,9 +2841,9 @@ const taskMap = {
                 address: "20004,0,3"
             },
         },
-        nextId: 10101
+        nextId: 10102
     },
-    10101: {
+    10102: {
         title: "狐晶丽苏醒",
         tips: "三滴精血竟然自动飞进了狐晶丽的体内，快去看看她的情况吧。",
         type: TASK_TYPE.duihau,
@@ -2867,9 +2868,9 @@ const taskMap = {
                 address: "20004,0,3"
             },
         },
-        nextId: 10102
+        nextId: 10103
     },
-    10102: {
+    10103: {
         title: "馒头的下落",
         tips: "羊皮卷中的秘密已经被破解，快去找欧冶子聊聊吧。",
         type: TASK_TYPE.duihau,
@@ -2894,9 +2895,9 @@ const taskMap = {
                 address: "10002,0,4"
             },
         },
-        nextId: 10103
+        nextId: 10104
     },
-    10103: {
+    10104: {
         title: "昆仑山传说",
         tips: "传说中的昆仑山早已经消失只留下一缕昆仑土，快去找欧冶子打听昆仑土的下落吧。",
         type: TASK_TYPE.duihau,

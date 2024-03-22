@@ -41,7 +41,8 @@ module.exports = {
                 level: pet.level,
                 type: pet.type,
                 isRole: index !== -1,
-                state: pet_pool.l[index].s || 0
+                state: pet_pool.l[index].s || 0,
+                id: pet.id
             }
         })
     }

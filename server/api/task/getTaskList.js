@@ -16,14 +16,13 @@ module.exports = {
         let message = '';
         // 判断是否为每日任务且未领取同类型任务
         if (DAIL_TYPE_LIST.includes(type) && !tasks) {
-            if (dailyTask[type] <= 0) {
+            // 功勋任务需60级方可领取
+            if (60 > role_level && type === TASK_TYPE_MEUN.exploit) {
+                message = `每日功勋任务需要60级方才开启。`;
+            } else if (dailyTask[type] <= 0) {
                 message = `${TASK_TYPE_TEXT_MEUN[type]}已经达到领取上限。`;
-                // 功勋任务需60级方可领取
-            } else if (60 > role_level && type === TASK_TYPE_MEUN.exploit) {
-                message = `${TASK_TYPE_TEXT_MEUN[type]}已经达到领取上限。`;
-            }
-            else {
-                const taskID = TaskSystem.randomDailyTaskId();
+            } else {
+                const taskID = TaskSystem.randomDailyTaskId(role_level);
                 const task = taskFn.analyTask(req, res, taskID, type, role);
                 task.status = TASK_STATU.wait_complete;
                 tasks = { [taskID]: task };

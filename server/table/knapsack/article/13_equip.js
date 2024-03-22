@@ -106,7 +106,7 @@ const articleMap = {
         career: 1,
         level: 20,
         pos: 1,
-        attr: 1,
+        attr: 1.2,
         group: 10002,
         tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
@@ -117,7 +117,7 @@ const articleMap = {
         career: 1,
         level: 20,
         pos: 2,
-        attr: 1,
+        attr: 1.2,
         group: 10002,
         tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
@@ -128,7 +128,7 @@ const articleMap = {
         career: 1,
         level: 20,
         pos: 3,
-        attr: 1,
+        attr: 1.2,
         group: 10002,
         tips: '五大皇极套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
@@ -139,7 +139,7 @@ const articleMap = {
         career: 1,
         level: 20,
         pos: 4,
-        attr: 1,
+        attr: 1.2,
         group: 10002,
         tips: '五大皇极套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
@@ -150,7 +150,7 @@ const articleMap = {
         career: 1,
         level: 20,
         pos: 5,
-        attr: 1,
+        attr: 1.2,
         group: 10002,
         tips: '五大皇极套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
@@ -161,7 +161,7 @@ const articleMap = {
         career: 2,
         level: 20,
         pos: 1,
-        attr: 1,
+        attr: 1.2,
         group: 10003,
         tips: '五大皇鼎套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
@@ -172,7 +172,7 @@ const articleMap = {
         career: 2,
         level: 20,
         pos: 2,
-        attr: 1,
+        attr: 1.2,
         group: 10003,
         tips: '五大皇鼎装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
@@ -183,7 +183,7 @@ const articleMap = {
         career: 2,
         level: 20,
         pos: 3,
-        attr: 1,
+        attr: 1.2,
         group: 10003,
         tips: '五大皇鼎套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
@@ -194,7 +194,7 @@ const articleMap = {
         career: 2,
         level: 20,
         pos: 4,
-        attr: 1,
+        attr: 1.2,
         group: 10003,
         tips: '五大皇鼎套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
@@ -205,7 +205,7 @@ const articleMap = {
         career: 2,
         level: 20,
         pos: 5,
-        attr: 1,
+        attr: 1.2,
         group: 10003,
         tips: '五大皇鼎套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },
@@ -216,7 +216,7 @@ const articleMap = {
         career: 3,
         level: 20,
         pos: 1,
-        attr: 1,
+        attr: 1.2,
         group: 10004,
         tips: '五大皇泽套装之一,吸收天地煞气而成,蕴含了毁天灭地的力量。'
     },
@@ -227,7 +227,7 @@ const articleMap = {
         career: 3,
         level: 20,
         pos: 2,
-        attr: 1,
+        attr: 1.2,
         group: 10004,
         tips: '五大皇泽装之一,吸收天地煞气而成,蕴含了源源不断的法力。'
     },
@@ -238,7 +238,7 @@ const articleMap = {
         career: 3,
         level: 20,
         pos: 3,
-        attr: 1,
+        attr: 1.2,
         group: 10004,
         tips: '五大皇泽套装之一,吸收天地煞气而成,蕴含了无穷无尽的生机。'
     },
@@ -249,7 +249,7 @@ const articleMap = {
         career: 3,
         level: 20,
         pos: 4,
-        attr: 1,
+        attr: 1.2,
         group: 10004,
         tips: '五大皇泽套装之一,吸收天地煞气而成,拥有极为恐怖的防御。'
     },
@@ -260,7 +260,7 @@ const articleMap = {
         career: 3,
         level: 20,
         pos: 5,
-        attr: 1,
+        attr: 1.2,
         group: 10004,
         tips: '五大皇泽套装之一,吸收天地煞气而成,拥有鬼魅般的速度。'
     },

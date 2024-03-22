@@ -2,6 +2,8 @@ const articleMap = {
     180: {
         name: '宠物技能卷',
         tips: '极为稀有的卷轴，据说拥有极为神秘的力量，可为宠物觉醒技能。',
+        price: 100,
+        unit: 'yuanbao',
     },
     181: {
         name: '宠物进化卷',

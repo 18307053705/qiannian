@@ -89,15 +89,12 @@ const ELEMENT_4 = {
         type: 4,
         path: '/shops',
     },
-    // 412: {
-    //     id: 412,
-    //     name: "仓库",
-    //     type: 4,
-    //     path: '/warehouse',
-    //     ext: {
-    //         type: 3
-    //     }
-    // },
+    412: {
+        id: 412,
+        name: "杂货店",
+        type: 4,
+        path: '/zaHuoDian',
+    },
     413: {
         id: 413,
         name: "银行",

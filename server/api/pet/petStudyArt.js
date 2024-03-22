@@ -57,7 +57,7 @@ module.exports = {
                 180: {
                     id: 180,
                     name,
-                    s: condition
+                    s: 3
                 }
             }
             const { message, success } = knapsackFn.deleteKnapsack(req, res, article);

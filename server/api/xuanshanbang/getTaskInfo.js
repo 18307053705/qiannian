@@ -1,4 +1,5 @@
 const { TaskG } = require('@/global');
+const { taskFn } = require('@/utils');
 const { TASK_TYPE_MEUN } = TaskG;
 module.exports = {
     /**
@@ -7,13 +8,18 @@ module.exports = {
      */
     getTaskInfo: function (req, res) {
         const { id } = req.body;
-        const task = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy) || {};
-        const { status, complete } = task[id] || { status: 0 };
+        const tasks = TaskG.getTaskGlobal(req, res, TASK_TYPE_MEUN.copy) || {};
+
+        const task = tasks[id];
+        if (task) {
+            task.complete = taskFn.speedTask(req, res, task);
+        }
+        const { status, complete } = task || { status: 0 };
         res.send({
             code: 0,
             data: {
                 status,
-                complete
+                complete,
             },
         })
     }

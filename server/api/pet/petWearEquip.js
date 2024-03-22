@@ -8,8 +8,8 @@ module.exports = {
      * @param in_x 背包所在下标(背包,仓库,店铺)
      */
     petWearEquip: async function (req, res) {
-        const { posKey, in_x } = req.body;
-        if (!posKey || in_x === undefined) {
+        const { uid } = req.body;
+        if (!uid) {
             ErrorG.paramsError(res);
             return;
         }
@@ -23,6 +23,7 @@ module.exports = {
             return;
         }
         const { data } = KnapsackG.getknapsackGlobal(req, res);
+        const in_x = data.findIndex((itme) => itme.uid === uid);
         const equip = data[in_x];
         if (!equip) {
             res.send({
@@ -52,13 +53,17 @@ module.exports = {
             return;
         }
         const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
-        const { attr: addAttr } = equipFn.computeEquipAttr(equipWear, ext);
+        const { attr: addAttr, posName } = equipFn.computeEquipAttr(equipWear, ext);
         // 替换下装备
-        let replaceEquip = equip_pool[posKey];
+        let replaceEquip = equip_pool[posName];
         // 判断该部位是否替换装备
         if (replaceEquip) {
-            const { id, ext, n } = replaceEquip;
-            const { attr: deleteAttr } = equipFn.computeEquipAttr(knapsackTable.getArticle(id), ext, posKey);
+            replaceEquip.name = replaceEquip.n;
+            // 增加唯一标识uid
+            replaceEquip.uid = `${new Date() * 1}1`;
+            replaceEquip.s = 1;
+            delete replaceEquip.n;
+            const { attr: deleteAttr } = equipFn.computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), replaceEquip.ext, posName);
             Object.keys(deleteAttr).forEach(key => {
                 if (addAttr[key]) {
                     addAttr[key] -= deleteAttr[key];
@@ -66,12 +71,7 @@ module.exports = {
                     addAttr[key] = deleteAttr[key] * -1
                 }
             })
-            data[in_x] = {
-                id,
-                ext,
-                name: n,
-                s: 1
-            };
+            data[in_x] = replaceEquip;
         } else {
             data.splice(in_x, 1)
         }
@@ -83,13 +83,14 @@ module.exports = {
                 addition[key] = addAttr[key];
             }
         })
-        equip_pool[posKey] = {
+
+        equip_pool[posName] = {
             id,
             n: name,
             ext
         }
         if (equip.n) {
-            equip_pool[posKey]['n2'] = equip.n;
+            equip_pool[posName]['n2'] = equip.n;
         }
         const { attrs, suit } = equipFn.computeSuitAttr(equip_pool, old_equip_pool);
         // 更新套装信息

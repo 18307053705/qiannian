@@ -43,8 +43,11 @@ module.exports = {
     getCopyTackAll: function () {
         return JSON.parse(JSON.stringify(copy));
     },
-    randomDailyTaskId: function () {
-        const ids = Object.keys(daily);
+    randomDailyTaskId: function (level) {
+        const ids = Object.keys(daily).filter((id) => {
+            const task = daily[id];
+            return task.level < level;
+        });
         return ids[Math.floor(Math.random() * ids.length)];
     },
 }

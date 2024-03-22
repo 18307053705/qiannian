@@ -41,8 +41,8 @@ module.exports = {
             chengData.push(itme)
         })
         if (JSON.stringify(article) !== '{}') {
-            Object.values(article).forEach(({ name, id }) => {
-                message.push(`${name || knapsackTable.getDataName(id)}数量不足`);
+            Object.values(article).forEach(({ name, id, s }) => {
+                message.push(`${name || knapsackTable.getDataName(id)}数量不足${s}`);
             })
         } else {
             KnapsackG.updateknapsackGlobal(req, res, { data: chengData });

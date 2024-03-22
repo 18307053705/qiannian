@@ -4,6 +4,7 @@ const getTaskInfoUrl = "/task/getTaskInfo";
 const getTaskSceneUrl = "/task/getTaskScene";
 const taskSceneActiveUrl = "/task/taskSceneActive";
 const doneTaskUrl = "/task/doneTask";
+const completionTaskUrl = "/task/completionTask";
 
 
 
@@ -46,4 +47,13 @@ export function taskSceneActive() {
  */
 export function doneTask(data) {
   return post(doneTaskUrl, data);
+}
+
+
+/**
+ * 一键完成任务
+ * @param {*} req.type 任务类型
+ */
+export function completionTask(data) {
+  return post(completionTaskUrl, data);
 }

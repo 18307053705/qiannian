@@ -123,6 +123,15 @@ export const TASK_TYPE_TEXT_MEUN = {
   [TASK_TYPE_MEUN.zudui]: '组队副本',
 };
 
+export const DAIL_TYPE_LIST = [
+  TASK_TYPE_MEUN.exp,
+  TASK_TYPE_MEUN.tael,
+  TASK_TYPE_MEUN.world,
+  TASK_TYPE_MEUN.gang,
+  TASK_TYPE_MEUN.intersect,
+  TASK_TYPE_MEUN.exploit,
+];
+
 export const REALM_TYPE_MEUN = {
   0: '凡人境',
   1: '淬体初期',

@@ -55,7 +55,7 @@ module.exports = {
         tips: "传承千年的黑炎宗竟然在血祭数万凡人，复活传说中的血魔。",
         level: 40,
         reward: {
-            fun: 'HeiYanZong',
+            fun: 'heiYanZong',
         },
         type: TASK_TYPE.zhandou,
         levelText: '等级不足40级，无法领取黑炎宗副本。',

@@ -29,7 +29,7 @@ module.exports = {
             level: 1,
             art: getPetArt(flair_x, artId),
             attr: AttrSystem.getPetBaseAttr(type),
-            equip: '{}',
+            equip: {},
             addition: AttrSystem.getInitAttr(),
             reborn: 0,
             state: 0,

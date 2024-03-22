@@ -18,6 +18,7 @@ const EquipDetail = ({ history }) => {
     // 获取武器详情
     const getEquipDetail = (params = {}) => {
         const { state } = history.location;
+        console.log(state, 'state...')
         history.location.state = {
             ...state,
             ...params,

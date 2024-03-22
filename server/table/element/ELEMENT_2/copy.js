@@ -518,24 +518,24 @@ module.exports = {
                 delete base.taelField;
             }
             if (noBoss === 1) {
-                base.exp = 12500;
+                base.exp = 55000;
                 base.tael = 2000;
             }
             if (noBoss === 2) {
-                base.exp = 62500;
+                base.exp = 125000;
                 base.tael = 3000;
             }
             if (noBoss === 3) {
-                base.exp = 320000;
+                base.exp = 450000;
                 base.tael = 5000;
             }
             if (noBoss === 4) {
-                base.exp = 750000;
+                base.exp = 800000;
                 base.tael = 10000;
                 base.attr = 3;
             }
             if (noBoss === 5) {
-                base.exp = 1000000;
+                base.exp = 1500000;
                 base.tael = 20000;
                 base.attr = 5;
             }
@@ -550,7 +550,7 @@ module.exports = {
                 base.attr = 7;
             }
             if (noBoss === 8) {
-                base.exp = 4500000;
+                base.exp = 5000000;
                 base.tael = 100000;
                 base.attr = 9;
             }

@@ -26,7 +26,8 @@ module.exports = {
         const role = RoleG.getRoleGlobal(req, res, roleId);
         if (role) {
             const pet = petGlobal[roleId || role.role_id];
-            return pet ? JSON.parse(JSON.stringify(pet)) : undefined;
+            const data = pet ? JSON.parse(JSON.stringify(pet)) : undefined;
+            return data;
         }
         return undefined;
 

@@ -10,7 +10,7 @@ export default () => {
     const [list, setList] = useState([]);
     const [curId, setCurId] = useState<number>(110);
     const [taskInfo, setTaskInfo] = useState();
-    const [reward, setReward] = useState();
+    const [reward, setReward] = useState([]);
 
     useEffect(() => {
         getCopyTaskList().then((res) => {
@@ -20,6 +20,7 @@ export default () => {
 
     // 获取任务详情
     const getTaskInfoClick = (id) => {
+        setReward([]);
         getTaskInfo({ id }).then((res => {
             setTaskInfo(res.data);
             setCurId(id);
@@ -27,6 +28,7 @@ export default () => {
     }
     // 领取任务 || 完成任务
     const receiveTaskClick = (id, type) => {
+        setReward([]);
         receiveTask({ id, type }).then((res => {
             const { data, success } = res;
             if (type === 1 && success) {

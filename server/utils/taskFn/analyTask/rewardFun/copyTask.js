@@ -34,7 +34,7 @@ module.exports = {
     // 炼魂洞
     LianHunDong: function () {
         return {
-            exp: 37500,
+            exp: 200000,
             world: 100,
             tael: 20000,
             yuanbao: 10,
@@ -44,7 +44,7 @@ module.exports = {
     // 黑炎宗
     heiYanZong: function (req, res) {
         return {
-            exp: 125000,
+            exp: 3500000,
             world: 120,
             tael: 50000,
             yuanbao: 15,
@@ -54,7 +54,7 @@ module.exports = {
     // 四海龙宫
     SiHaiLongGong: function (req, res) {
         return {
-            exp: 640000,
+            exp: 6400000,
             world: 150,
             tael: 50000,
             yuanbao: 20,
@@ -64,7 +64,7 @@ module.exports = {
     // 凤凰桐木
     FengHuangTongMu: function (req, res) {
         return {
-            exp: 1500000,
+            exp: 10000000,
             world: 150,
             tael: 50000,
             yuanbao: 25,
@@ -74,7 +74,7 @@ module.exports = {
     // 血魔老祖
     XueMoLaoZu: function (req, res) {
         return {
-            exp: 2000000,
+            exp: 20000000,
             world: 180,
             tael: 50000,
             yuanbao: 30,
@@ -84,7 +84,7 @@ module.exports = {
     // 海底魔宫
     HaiDiMoGong: function (req, res) {
         return {
-            exp: 5000000,
+            exp: 30000000,
             world: 180,
             tael: 50000,
             yuanbao: 35,
@@ -94,7 +94,7 @@ module.exports = {
     // 天魔传说
     TianMoChuanShuo: function (req, res) {
         return {
-            exp: 7000000,
+            exp: 50000000,
             world: 200,
             tael: 50000,
             yuanbao: 40,
@@ -104,7 +104,7 @@ module.exports = {
     // 地府传说
     DiFuChuanShuo: function (req, res) {
         return {
-            exp: 9000000,
+            exp: 80000000,
             world: 300,
             tael: 50000,
             yuanbao: 50,
@@ -114,7 +114,7 @@ module.exports = {
     // 魔族遗迹
     MoZuYiJi: function (req, res) {
         return {
-            exp: 10000000,
+            exp: 80000000,
             world: 300,
             tael: 50000,
             yuanbao: 50,
