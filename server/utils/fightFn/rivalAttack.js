@@ -16,7 +16,7 @@ module.exports = {
         }
 
         const { role, rival } = roundAttr;
-        const dps = computeFightDps(rival.attr, role.attr) * (rival.num > 3 ? 3 : rival.num);
+        const dps = computeFightDps(rival.attr, role.attr, 200) * (rival.num > 3 ? 3 : rival.num);
         if (dps) {
             role.life = role.life - dps > 0 ? role.life - dps : 0;
         }

@@ -44,7 +44,7 @@ const RoleBuff = ({ roleInfo }) => {
             <div className="g_fgx"></div>
             {
                 Object.keys(VIP_MUEN).map((key, index) => {
-                    const timer = vip[key] ? getUinxDay(vip[key]['end']) : '';
+                    const timer = vip[key] ? getUinxDay(vip[key]['d']) : '';
                     return (
                         <div key={`${index}_1`}>
                             <span className="g_b">{VIP_MUEN[key]}</span>：
@@ -54,8 +54,8 @@ const RoleBuff = ({ roleInfo }) => {
                 })
             }
             {
-                attr.map(({ text, end }, index) => {
-                    const timer = getUinxDay(end);
+                attr.map(({ text, d }, index) => {
+                    const timer = getUinxDay(d);
                     return (
                         <div key={index}>
                             <span>{text}</span>,

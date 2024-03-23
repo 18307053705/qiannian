@@ -411,21 +411,18 @@ const freakMap = {
         name: "孟婆",
         level: 110,
         noBoss: 8,
-        attr: 10,
         grade: 3,
     },
     20587: {
         name: "地藏菩萨",
         level: 110,
         noBoss: 8,
-        attr: 10,
         grade: 3,
     },
     20588: {
         name: "酆都大帝",
         level: 120,
         noBoss: 8,
-        attr: 12,
         grade: 3,
     },
     20589: {
@@ -469,20 +466,17 @@ const freakMap = {
     20596: {
         name: "地魔石像",
         level: 102,
-        noBoss: 8,
-        attr: 10
+        noBoss: 8
     },
     20597: {
         name: "天魔石像",
         level: 102,
-        noBoss: 8,
-        attr: 10
+        noBoss: 8
     },
     20598: {
         name: "魔尊石像",
         level: 105,
         noBoss: 8,
-        attr: 10,
         grade: 3,
     },
     20599: {
@@ -552,11 +546,35 @@ module.exports = {
             if (noBoss === 8) {
                 base.exp = 5000000;
                 base.tael = 100000;
-                base.attr = 20;
-                base.baseAttr = {
-                    atk_max: 40,
-                    atk_min: 20,
-                }
+                base.attr = 1;
+                // base.baseAttr = {
+                //     atk_max: 75,
+                //     atk_min: 60,
+                //     dfs_max: 20,
+                //     dfs_min: 15,
+                //     hit: 20,
+                //     sudden: 10,
+                //     ice_atk_min: 5,
+                //     ice_atk_max: 8,
+                //     mine_atk_min: 5,
+                //     mine_atk_max: 8,
+                //     wind_atk_min: 5,
+                //     wind_atk_max: 8,
+                //     water_atk_min: 5,
+                //     water_atk_max: 8,
+                //     fire_atk_min: 5,
+                //     fire_atk_max: 8,
+                //     ice_dfs_min: 5,
+                //     ice_dfs_max: 8,
+                //     mine_dfs_min: 5,
+                //     mine_dfs_max: 8,
+                //     wind_dfs_min: 5,
+                //     wind_dfs_max: 8,
+                //     water_dfs_min: 5,
+                //     water_dfs_max: 8,
+                //     fire_dfs_min: 5,
+                //     fire_dfs_max: 8,
+                // }
             }
             return {
                 ...base,

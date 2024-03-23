@@ -12,14 +12,15 @@ const BUFF_MEUN = {
 }
 
 // 半小时时间戳
-const DateTitme = 1000 * 60 * 30;
+const DateTitme = 1000 * 60 * 10;
+const DateTitmeVip = 1000 * 60 * 30;
 function vipBuff(req, res, group, s) {
     const { role_buff } = RoleG.getRoleGlobal(req, res);
     const { vip } = role_buff;
     if (vip[group]) {
-        vip[group]['d'] += DateTitme * s
+        vip[group]['d'] += DateTitmeVip * s
     } else {
-        vip[group] = { d: DateTitme * s + new Date() * 1 }
+        vip[group] = { d: DateTitmeVip * s + new Date() * 1 }
     }
     role_buff.vip = vip;
     RoleG.updataRoleGlobal(req, res, { role_buff });
@@ -33,8 +34,14 @@ function attrBuff(req, res, group, s) {
     let { attr } = role_buff;
     let add = true;
     attr = attr.map((itme) => {
-        if (itme.e === group) {
-            itme.d = itme.d + DateTitme * s;
+        const [eKey, _, eValue] = itme.e.split('-');
+        if (eKey === key) {
+            if (Number(eValue) === Number(value)) {
+                itme.d += DateTitme * s;
+            } else {
+                itme.d = DateTitme * s + new Date() * 1;
+                itme.e = group;
+            }
             add = false;
         }
         return itme;
@@ -47,19 +54,9 @@ function attrBuff(req, res, group, s) {
     }
     role_buff.attr = attr;
     RoleG.updataRoleGlobal(req, res, { role_buff });
-    return { text: `${BUFF_MEUN[key]}+${value},增加${30 * s}分钟。` };
+    return { text: `${BUFF_MEUN[key]}+${value}增加${10 * s}分钟。` };
 }
 
-// const exp2= vipBuff;
-// const exp3=  vipBuff;
-// const exp5= vipBuff;
-// money2: vipBuff,
-// money3: vipBuff,
-// money5: vipBuff,
-// atk: attrBuff,
-// dfs: attrBuff,
-// life_max: attrBuff,
-// mana_max: attrBuff,
 
 module.exports = {
     /**

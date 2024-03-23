@@ -46,7 +46,7 @@ module.exports = {
             const { text } = library.effect1Fn(e, attr, base);
             buffs.push({
                 text,
-                end: d
+                d
             })
             return true;
         })

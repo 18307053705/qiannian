@@ -93,13 +93,13 @@ module.exports = {
         if (customCallback) {
             customCallbackJSON[customCallback]?.(req, res, freak);
         }
-        const expText = vipExp && !exps ? `${exp}(${vipExp}倍经验)` : exp;
+        const expText = vipExp && !f_exp ? `${exp}(${vipExp}倍经验)` : exp;
         const reward = {
             textReward: tip ? [] : textReward,
             tip: tip,
             tasks: tasks,
             exp: expText,
-            tael: vipTael && !taels ? `${tael}(${vipTael}倍银两)` : tael,
+            tael: vipTael && !f_tael ? `${tael}(${vipTael}倍银两)` : tael,
             pet: roundText.resultPet,
             petExp: player.pet ? `${player.pet.name}经验：${expText}` : '',
         }
