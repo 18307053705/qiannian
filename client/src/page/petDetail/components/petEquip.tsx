@@ -2,7 +2,7 @@ import React from "react";
 import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
 import { jumpDetail, jumpEquipList, jumpSuitDetail } from '@utils/jumpPage';
 
-export const PetEquip = ({ petInfo, history }) => {
+export const PetEquip = ({ petInfo }) => {
     const { equip, level, id, state } = petInfo;
     const isFight = state === 1 || state === 2;
     const { suit = [] } = equip;
@@ -37,7 +37,8 @@ export const PetEquip = ({ petInfo, history }) => {
                                             jumpEquipList({
                                                 posInx: index + 1,
                                                 form: 2,
-                                                petId: id
+                                                petId: id,
+                                                path: '/petDetail'
                                             });
                                         }}>换</span>
                                     </span>

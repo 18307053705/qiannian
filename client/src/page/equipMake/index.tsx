@@ -29,10 +29,10 @@ export const GangEquip = ({ history }) => {
         if (pageKey === 'faBao') {
             config = faBaoConfig
         }
-        if (level < 80) {
-            // 过滤当前等级无法打造的装备
-            config.tabList = config.tabList.filter(({ value }) => value < 80);
-        }
+        // if (level < 80) {
+        //     // 过滤当前等级无法打造的装备
+        //     config.tabList = config.tabList.filter(({ value }) => value < 80);
+        // }
         return config
     }, [pageKey, level])
 

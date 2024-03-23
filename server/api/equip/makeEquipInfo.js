@@ -1,4 +1,4 @@
-const { equipFn } = require('../../utils');
+const { equipFn } = require('@/utils');
 module.exports = {
     /**
      * 打造装备的信息
@@ -14,8 +14,13 @@ module.exports = {
         res.send({
             code: 0,
             data: {
+                equip: {
+                    id: equip.id,
+                    attr: equip.attr,
+                    level: equip.level,
+                    career: equip.career
+                },
                 ...equipFn.getMakeInfo(equip),
-                equip
             }
         })
     }

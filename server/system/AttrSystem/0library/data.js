@@ -44,6 +44,22 @@ const AgileBaseAttr = {
 }
 
 
+// 均衡职业-基础属性
+const AverageRoleBaseAttr = {
+    life: 225,
+    life_max: 225,
+    mana: 150,
+    mana_max: 150,
+    atk_max: 18,
+    atk_min: 10,
+    dfs_max: 4,
+    dfs_min: 3,
+    hit: 3,
+    dodge: 1,
+    sudden: 2
+}
+
+
 // 均衡职业(怪物)
 const AverageBaseAttr =  {
     life: 225,
@@ -158,5 +174,6 @@ module.exports = {
     AllEleAttr,
     AllAttrMap,
     PetBaseEleAttr,
-    AverageBaseAttr
+    AverageBaseAttr,
+    AverageRoleBaseAttr
 }

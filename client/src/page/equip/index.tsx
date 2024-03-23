@@ -42,7 +42,7 @@ export const EquipList = () => {
                             ) : '无'}
                             <span> | </span>
                             <span className="g_u_end" onClick={() => {
-                                jumpEquipList({ posInx: index + 1, form: 1 });
+                                jumpEquipList({ posInx: index + 1, form: 1, path: '/equip' });
                             }}>换</span>
                         </div>
                     )

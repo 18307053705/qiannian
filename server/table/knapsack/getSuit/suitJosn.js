@@ -2,6 +2,8 @@ const SUIT_TYPE = {
     BASE_ATTR: 1, // 基础属性
     JEWElRY: 2, // 首饰
     ELE: 3, // 元素属性单一
+    JIU_ZHOU: 4, // 九纹大道の钟~山河社稷の图 专属
+    DAO_JUN: 5, // 青莲造化の盏~大道轮回の印 专属
     // ELE_ALL: 4, // 全部元素属性
 }
 
@@ -397,13 +399,13 @@ const SUIT_EFFECT = {
     10053: {
         ids: [13206, 13207],
         name: '九州の山河',
-        type: SUIT_TYPE.BASE_ATTR,
+        type: SUIT_TYPE.JIU_ZHOU,
         er: 100,
     },
     10054: {
         ids: [13208, 13209],
         name: '青莲の轮回',
-        type: SUIT_TYPE.ELE,
+        type: SUIT_TYPE.DAO_JUN,
         er: 100,
     },
     10055: {

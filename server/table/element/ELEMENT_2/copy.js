@@ -552,7 +552,11 @@ module.exports = {
             if (noBoss === 8) {
                 base.exp = 5000000;
                 base.tael = 100000;
-                base.attr = 9;
+                base.attr = 20;
+                base.baseAttr = {
+                    atk_max: 40,
+                    atk_min: 20,
+                }
             }
             return {
                 ...base,

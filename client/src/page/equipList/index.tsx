@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { getEquipList } from '@cgi/equip';
 import { petWearEquip } from '@cgi/pet';
 import { List } from '@components/list'
-import { getEquipName, EQUIP_POS_LIST } from '@utils/equip';
+import { getEquipName } from '@utils/equip';
 import { operate } from '@cgi/knapsack';
 import { jumpDetail } from '@utils/jumpPage'
 
 
 export const EquipList = ({ history }) => {
     const { state } = history.location;
-    const { posInx, form, petId } = state;
+    const { posInx, form, path } = state;
     const [list, setList] = useState([]);
     useEffect(() => {
         getEquipList().then(({ data }) => {
@@ -28,7 +28,7 @@ export const EquipList = ({ history }) => {
             type: 1
         }).then(({ message }) => {
             if (!message) {
-                history.goBack();
+                history.push(path, state);
             }
         })
     }
@@ -55,7 +55,7 @@ export const EquipList = ({ history }) => {
     return (
         <div>
             <List data={list} prefix={prefix} active={active} prefix_d={true} />
-            <div><span className='g_u_end' onClick={() => { history.goBack(); }}>返回上页</span></div>
+            <div><span className='g_u_end' onClick={() => { history.push(path, state); }}>返回上页</span></div>
         </div>
 
     )

@@ -13,7 +13,7 @@ module.exports = {
      */
     deleteKnapsack: function (req, res, article, list) {
         if (!article) {
-            return undefined;
+            return {};
         }
         const { data } = list ? { data: list } : KnapsackG.getknapsackGlobal(req, res);
         const chengData = [];

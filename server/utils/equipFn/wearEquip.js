@@ -1,5 +1,4 @@
-
-const { knapsackTable } = require("../../table");
+const { knapsackTable } = require("@/table");
 const { computeEquipAttr } = require("./computeEquipAttr");
 const { computeSuitAttr } = require("./computeSuitAttr");
 module.exports = {
@@ -8,11 +7,11 @@ module.exports = {
      * @param {*} req 
      * @param {*} res 
      * @param {*} equip 佩戴的装备信息{id,n,ext}
-     * @param {*} pos 装备部位,可选,默认为装备自身部位
+     * @param {*} pos 替换部位
      * @return {*} message 错误信息,存在即佩戴失败
      * @return {*} replaceEquip 替换下来的装备信息
      */
-    wearEquip: function (req, res, equip, pos) {
+    wearEquip: function (req, res, equip) {
         const { equip_pool, role_attr, role_level, role_career } = RoleG.getRoleGlobal(req, res);
         const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
         const { id, name, ext } = equip;
@@ -24,24 +23,22 @@ module.exports = {
                 message: `等级不足,无法该佩戴${name}`
             }
         }
-        // 判断职业是否满足
-        if (equipWear.career) {
-            if (equipWear.career === 1 && !([1, 4, 7].includes(role_career))) {
-                return { message: `职业不符合,无法该佩戴${name}` }
-            }
-            if (equipWear.career === 2 && !([2, 5, 8].includes(role_career))) {
-                return { message: `职业不符合,无法该佩戴${name}` }
-            }
-            if (equipWear.career === 3 && !([3, 6, 9].includes(role_career))) {
-                return { message: `职业不符合,无法该佩戴${name}` }
-            }
-        }
+        // // 判断职业是否满足
+        // if (equipWear.career) {
+        //     if (equipWear.career === 1 && !([1, 4, 7].includes(role_career))) {
+        //         return { message: `职业不符合,无法该佩戴${name}` }
+        //     }
+        //     if (equipWear.career === 2 && !([2, 5, 8].includes(role_career))) {
+        //         return { message: `职业不符合,无法该佩戴${name}` }
+        //     }
+        //     if (equipWear.career === 3 && !([3, 6, 9].includes(role_career))) {
+        //         return { message: `职业不符合,无法该佩戴${name}` }
+        //     }
+        // }
 
-        const { attr: addAttr, posName } = computeEquipAttr(equipWear, ext);
-        const posKey = pos || posName;
+        const { attr: addAttr, posName } = computeEquipAttr(equipWear, equip_pool, ext);
         // 替换装备
-        const replaceEquip = equip_pool[posKey];
-
+        const replaceEquip = equip_pool[posName];
         // 判断该部位是否替换装备
         if (replaceEquip) {
             replaceEquip.name = replaceEquip.n;
@@ -49,7 +46,7 @@ module.exports = {
             replaceEquip.uid = `${new Date() * 1}1`;
             replaceEquip.s = 1;
             delete replaceEquip.n;
-            const { attr: deleteAttr } = computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), replaceEquip.ext, posKey);
+            const { attr: deleteAttr } = computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), equip_pool, replaceEquip.ext);
             Object.keys(deleteAttr).forEach(key => {
                 if (addAttr[key]) {
                     addAttr[key] -= deleteAttr[key];
@@ -59,13 +56,13 @@ module.exports = {
             })
         }
         // 更新装备
-        equip_pool[posKey] = {
+        equip_pool[posName] = {
             id,
             n: name,
             ext
         }
         if (equip.n) {
-            equip_pool[posKey]['n2'] = equip.n;
+            equip_pool[posName]['n2'] = equip.n;
         }
         const { attrs, suit } = computeSuitAttr(equip_pool, old_equip_pool);
         // 更新套装信息

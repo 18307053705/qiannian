@@ -1,7 +1,8 @@
 
-const { knapsackTable, AttributeTable } = require('@/table');
+const { AttrSystem } = require('@/system');
+const { knapsackTable } = require('@/table');
 const { computeEquipAttr } = require('./computeEquipAttr');
-
+const { ATTR_KEY_TEXT } = AttrSystem;
 module.exports = {
     /**
      * 获取装备描述
@@ -12,22 +13,21 @@ module.exports = {
     getEquipInfo: function (equipId, ext) {
         const equip = knapsackTable.getArticle(equipId);
         const { attr } = computeEquipAttr(equip, ext);
-        const MEUN = AttributeTable.getAttrMeun();
         const attrMap = {};
         Object.keys(attr).forEach((key) => {
             if (['life_max', 'mana_max'].includes(key)) {
                 let str = key.replace('_min', '').replace('_max', '');
-                attrMap[MEUN[str]] = attr[key]
+                attrMap[ATTR_KEY_TEXT[str]] = attr[key]
                 return;
             }
             if (['hit', 'dodge', 'sudden'].includes(key)) {
-                attrMap[MEUN[key]] = attr[key];
+                attrMap[ATTR_KEY_TEXT[key]] = attr[key];
                 return;
             }
             let str = key.replace('_min', '').replace('_max', '');
             const min = `${str}_min`;
             const max = `${str}_max`;
-            attrMap[MEUN[str]] = `${attr[min]}~${attr[max]}`;
+            attrMap[ATTR_KEY_TEXT[str]] = `${attr[min]}~${attr[max]}`;
         })
 
         return {

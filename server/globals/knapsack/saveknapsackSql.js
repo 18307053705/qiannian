@@ -16,6 +16,7 @@ module.exports = {
         [...new Set(updateKeys)].forEach((key) => {
             data[key] = key === 'data' ? saveSqlChang(knapsack[key]) : knapsack[key];
         })
+
         if (JSON.stringify(data) !== '{}') {
             await KnapsackSql.asyncUpdateKnapsack(role_id, data);
         }

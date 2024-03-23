@@ -1,5 +1,6 @@
 const { SUIT_TYPE, SUIT_EFFECT } = require('./suitJosn');
-const { getRoleEleBaseAttr,getRoleBaseAttr } = require('@/table/attribute');
+const { AttrSystem } = require('@/system');
+
 
 const suitFn = {
     /**
@@ -9,8 +10,8 @@ const suitFn = {
      */
     [SUIT_TYPE.BASE_ATTR]: function (suit, num) {
         const { name, san, wu, career } = suit;
-        let attr = getRoleBaseAttr(career);
-        let tAttr = getRoleBaseAttr(career);
+        let attr = AttrSystem.getRoleBaseAttr(career);
+        let tAttr = AttrSystem.getRoleBaseAttr(career);
         let addition = wu;
         let tAddition = wu;
         const meet = num === 5 ? 5 : (num >= 3 ? 3 : 0)
@@ -52,7 +53,7 @@ const suitFn = {
     */
     [SUIT_TYPE.JEWElRY]: function (suit, num) {
         const { name, er: addition, career } = suit;
-        let attr = getRoleBaseAttr(career);
+        let attr = AttrSystem.getRoleBaseAttr(career);
         attr = {
             atk_max: attr.atk_max,
             atk_min: attr.atk_min,
@@ -75,7 +76,7 @@ const suitFn = {
      */
     [SUIT_TYPE.ELE]: function (suit, num) {
         const { name, er: addition, ele } = suit;
-        let attr = getRoleEleBaseAttr();
+        let attr = AttrSystem.getInitEleAttr();
         if (ele === 1) {
             attr = {
                 ice_atk_min: attr.ice_atk_min,
@@ -125,7 +126,41 @@ const suitFn = {
             attr,
             meet: num === 2 ? 2 : 0
         }
-    }
+    },
+    /**
+     * 九纹大道の钟~山河社稷の图 专属
+     * @param {*} suit 套装信息
+     * @param {*} num 佩戴数量 
+     */
+    [SUIT_TYPE.JIU_ZHOU]: function (suit, num) {
+        const { name, er: addition, career } = suit;
+        let attr = AttrSystem.getRoleBaseAttr(career);
+        Object.keys(attr).forEach((key) => {
+            attr[key] *= addition;
+        })
+        return {
+            name: `${name}(${num}/2)`,
+            attr,
+            meet: num === 2 ? 2 : 0
+        }
+    },
+    /**
+     * 青莲造化の盏~大道轮回の印 专属
+     * @param {*} suit 套装信息
+     * @param {*} num 佩戴数量 
+     */
+    [SUIT_TYPE.DAO_JUN]: function (suit, num) {
+        const { name, er: addition } = suit;
+        const attr = AttrSystem.getInitEleAttr();
+        Object.keys(attr).forEach((key) => {
+            attr[key] *= addition;
+        })
+        return {
+            name: `${name}(${num}/2)`,
+            attr,
+            meet: num === 2 ? 2 : 0
+        }
+    },
 }
 
 

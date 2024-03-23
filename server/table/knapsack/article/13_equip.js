@@ -2816,11 +2816,6 @@ const articleMap = {
         integral: 3344,
         customAttr: ['ice_atk_min', 'ice_atk_max', 'mine_atk_min', 'mine_atk_max', 'wind_atk_min', 'wind_atk_max', 'water_atk_min', 'water_atk_max', 'fire_atk_min', 'fire_atk_max'],
         tips: '据说乃是一株青莲所化的古灯,无人知晓其来历,神秘无比,可化万千大道。',
-        make: {
-            article: '18101-320',
-            integral: 'world-15000',
-            yuanbao: 36000
-        },
     },
     13209: {
         name: '大道轮回の印',
@@ -2832,11 +2827,6 @@ const articleMap = {
         integral: 3344,
         customAttr: ['ice_dfs_min', 'ice_dfs_max', 'mine_dfs_min', 'mine_dfs_max', 'wind_dfs_min', 'wind_dfs_max', 'water_dfs_min', 'water_dfs_max', 'fire_dfs_min', 'fire_dfs_max'],
         tips: '据说持此印者,乃大道所定之人,承载了无尽因果,可包容万物。',
-        make: {
-            article: '18101-320',
-            integral: 'world-15000',
-            yuanbao: 36000
-        },
     },
     13210: {
         name: '月华相思の戒',

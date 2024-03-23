@@ -31,8 +31,8 @@ export function jumpDetail({ form, pos, role_id, petId, id, isEquip, uid }: Jump
  * @param param.posInx 装备部位:1-12
  * @param param.form 跳转来源:1人物,2宠物
  */
-export function jumpEquipList({ posInx, form, petId }: any) {
-  window.QN.history.push("/equipList", { form, posInx, petId });
+export function jumpEquipList({ posInx, form, petId, path }: any) {
+  window.QN.history.push("/equipList", { form, posInx, petId, path });
 }
 
 /**

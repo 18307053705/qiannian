@@ -34,7 +34,7 @@ const Grand = ({ history }) => {
             }
         })
     }
-    console.log(grandInfo)
+    // console.log(grandInfo)
     return (
         <div className={Styles['grand-page']}>
             <div className="g_b">{`${name}(${x}.${y})`}</div>

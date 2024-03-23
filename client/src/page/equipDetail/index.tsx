@@ -12,13 +12,12 @@ import Style from './index.less';
 
 const EquipDetail = ({ history }) => {
     const { state: query } = history.location;
-    const [equip, setEquip] = useState();
+    const [equip, setEquip]:any = useState();
     const [isMosaic, setIsMosaic] = useState(false);
 
     // 获取武器详情
     const getEquipDetail = (params = {}) => {
         const { state } = history.location;
-        console.log(state, 'state...')
         history.location.state = {
             ...state,
             ...params,

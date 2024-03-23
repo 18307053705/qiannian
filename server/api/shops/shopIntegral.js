@@ -1,9 +1,6 @@
+const { knapsackTable } = require('@/table');
+const { knapsackFn } = require('@/utils');
 
-const { knapsackTable } = require('../../table');
-const { knapsackFn } = require('../../utils');
-
-
-const ids = [1141, 1144, 13156, 13157, 13158, 13159, 13160, 13161, 13162, 13163, 13164, 13165, 13180, 13181,]
 module.exports = {
     /**
      * 兑换物品

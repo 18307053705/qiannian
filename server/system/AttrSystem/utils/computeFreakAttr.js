@@ -9,10 +9,13 @@ module.exports = {
      * @returns {*} att
      * 
      */
-    computeFreakAttr: function ({ level, attr, career, ele }) {
+    computeFreakAttr: function ({ level, attr, career, ele, baseAttr }) {
         const atts = library.getInitAttr();
         // 玩家属性 = 职业属性 * 等级 * 境界
         const base = library.getFreakBaseAttr(career, ele);
+        Object.keys(baseAttr || {}).forEach((key) => {
+            base[key] = baseAttr[key];
+        })
         const levelAttr = level * attr;
         // 基础属性与额外属性
         Object.keys(atts).forEach((key) => {

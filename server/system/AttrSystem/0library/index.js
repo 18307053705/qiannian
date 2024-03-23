@@ -3,6 +3,7 @@ const enums = require('./enum');
 const effect = require('./effect');
 
 function getRoleBaseAttr(career) {
+    let base;
     // 法皇,血煞,星君 攻击职业
     if ([1, 4, 7].includes(career)) {
         base = data.AttackBaseAttr;
@@ -15,9 +16,9 @@ function getRoleBaseAttr(career) {
     if ([3, 6, 9].includes(career)) {
         base = data.AgileBaseAttr;
     }
+    // 均衡职业
     if (!base) {
-        console.log('调用getRoleBaseAttr函数职业异常：', career);
-        return;
+        base =  data.AverageRoleBaseAttr;
     }
     return JSON.parse(JSON.stringify(base));
 }

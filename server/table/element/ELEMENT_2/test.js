@@ -24,7 +24,7 @@ const TEST = {
         level: 1,
         attr: 1,
         isRanks: true,
-        article: equipMaterial.getArticleList().map(({ id }) => `${id}-200`).join(','),
+        article: equipMaterial.getArticleList().map(({ id }) => `${id}-20000`).join(','),
     },
     2999990: {
         id: 2999990,
