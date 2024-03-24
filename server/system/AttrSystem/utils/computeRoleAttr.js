@@ -12,14 +12,14 @@ module.exports = {
      * @returns {*} buff
      * 
      */
-    computeRoleAttr: function (role, config = {}) {
-        const { pet, keys } = config;
+    computeRoleAttr: function (req, res, role, config = {}) {
+        const { pet, keys, upData } = config;
         const attr = library.getInitAttr(keys);
         if (!role) {
             console.log('调用computeRoleAttr函数：未传递role字段');
             return;
         }
-        const { role_attr, role_buff, role_level, role_career, role_realm } = role;
+        const { role_attr, role_buff, role_level, role_career, role_realm, role_id } = role;
         const { addition, potential } = role_attr;
         // 潜力属性
         const potentialAttr = computePotentialAttr(potential);
@@ -69,6 +69,15 @@ module.exports = {
         // 计算结果取整
         Object.keys(attr).forEach((key) => { attr[key] = Math.floor(attr[key]) });
 
+        // 
+        if (upData) {
+            const role_buff = JSON.parse(JSON.stringify({
+                attr: buffs,
+                vip
+            }))
+            // 更新战斗信息
+            RoleG.updataRoleGlobal(req, res, { role_buff }, role_id);
+        }
         // 返回属性与buff信息
         return {
             attr,

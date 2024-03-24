@@ -9,13 +9,13 @@ module.exports = {
     getRoleInfo: async (req, res) => {
         const { role_id } = req.body;
         const role = await roleFn.asyncGetRoleInfo(req, res, role_id);
-        if(!role){
+        if (!role) {
             ErrorG.roleError(res);
             return;
         }
         if (role) {
             // 计算角色属性
-            const data =  AttrSystem.computeRoleAttr(role)
+            const data = AttrSystem.computeRoleAttr(req, res,role, { upData: true })
             const realm = RealmTable.getRealm(role['role_realm']);
             const title = TitleTable.getTitle(role['role_title']);
             const role_career = MEUN.CAREER_MEUN[role['role_career']];
@@ -49,6 +49,6 @@ module.exports = {
                 }
             });
         }
-       
+
     }
 };

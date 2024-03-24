@@ -69,7 +69,7 @@ module.exports = {
     // 更新战斗信息
     RoleG.updataRoleGlobal(req, res, { skill_pool: roleInfo.skill_pool }, role_id);
     // 计算角色属性
-    const data = AttrSystem.computeRoleAttr(roleInfo, { pet });
+    const data = AttrSystem.computeRoleAttr(req, res, roleInfo, { pet, upData: true });
     // 获取宠物信息
     let petInfo;
     if (pet) {
@@ -94,6 +94,7 @@ module.exports = {
         mana: attr.mana,
         life_max: attr.life_max,
         mana_max: attr.mana_max,
+        level: roleInfo.role_level
       },
       completePlayer: {
         role_id: roleInfo.role_id,
@@ -102,6 +103,7 @@ module.exports = {
         art: fight,
         pet: petInfo,
         buffs: {},
+        level: roleInfo.role_level
       },
     };
   },

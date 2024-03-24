@@ -43,11 +43,11 @@ module.exports = {
             buffs,
             state,
             roundText,
-            template: template ? { name: template.name } : undefined,
+            template: template ? { name: template.name, level: template.level } : undefined,
         }
         if (state !== 0) {
             return {
-                template: template ? { name: template.name } : undefined,
+                template: template ? { name: template.name, level: template.level } : undefined,
                 state,
                 reward,
                 continue: fightInfo.continue,

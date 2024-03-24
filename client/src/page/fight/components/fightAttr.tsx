@@ -12,10 +12,11 @@ const FightAttrShow = ({ id, close }) => {
     if (!data) {
         return null;
     }
-    const { name, attr } = data;
+    const { name, attr, level } = data;
     return (
         <div>
-            <div>{name}</div>
+            <div><span className="g_b">{name}</span></div>
+            <div><span className="g_b">等级</span>：<span>{level}</span></div>
             <div><span className="g_b">生命</span>：<span>{attr.life_max}</span></div>
             <div><span className="g_b">法力</span>：<span>{attr.mana_max}</span></div>
             <div><span className="g_b">攻击</span>：<span>{`${attr.atk_min}~${attr.atk_max}`}</span></div>

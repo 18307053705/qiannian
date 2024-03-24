@@ -67,7 +67,6 @@ const RoleAttr = ({ roleInfo, history }) => {
                     ))
                 }
             </div>
-            <div></div>
 
         </>
     )

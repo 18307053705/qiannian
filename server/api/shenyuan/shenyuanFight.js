@@ -1,4 +1,35 @@
 const { ShenYuanG, GrandG } = require('@/global');
+function getBaseAttr() {
+    return {
+        life: 1000,
+        atk_max: 180,
+        atk_min: 150,
+        dfs_max: 50,
+        dfs_min: 30,
+        hit: 20,
+        sudden: 10,
+        ice_atk_min: 25,
+        ice_atk_max: 40,
+        mine_atk_min: 25,
+        mine_atk_max: 40,
+        wind_atk_min: 25,
+        wind_atk_max: 40,
+        water_atk_min: 25,
+        water_atk_max: 40,
+        fire_atk_min: 25,
+        fire_atk_max: 40,
+        ice_dfs_min: 25,
+        ice_dfs_max: 40,
+        mine_dfs_min: 25,
+        mine_dfs_max: 40,
+        wind_dfs_min: 25,
+        wind_dfs_max: 40,
+        water_dfs_min: 25,
+        water_dfs_max: 40,
+        fire_dfs_min: 25,
+        fire_dfs_max: 40,
+    }
+}
 module.exports = {
     /**
      * @param roleId 传代表提对方闯深渊
@@ -34,13 +65,14 @@ module.exports = {
         const currentDir = {
             id: ShenYuanG.SHNEYUAN_FREAK_ID,
             name: "深渊BOSS",
-            type: 2,
+            type: 0,
             num: 1,
-            grade: 3,
+            grade: 2,
             career: 1,
-            level: l > 50 ? 100 : l + 50,
-            // 每五层加1倍属性
-            attr: parseInt(l / 5) + 5,
+            // 层数
+            level: l * 5 + 50,
+            // 每2层加1倍属性
+            attr: parseInt(l / 2) + 5,
             // 帮人杀怪仅有经验奖励
             exp: roleId ? parseInt(exps / 2) : exps,
             tael: roleId ? parseInt(taels / 2) : taels,
@@ -48,7 +80,8 @@ module.exports = {
             role_id: roleId,
             path: '/shenYuan',
             customFreak: true,
-            customCallback:'shenYuan'
+            customCallback: 'shenYuan',
+            baseAttr: getBaseAttr()
         }
         GrandG.setCurrentDir(req, res, currentDir);
         res.send({

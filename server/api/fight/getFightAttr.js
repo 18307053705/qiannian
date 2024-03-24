@@ -15,6 +15,7 @@ module.exports = {
       return;
     }
     const { fightInfo, fightRankInfo } = fight;
+    const { template } = fightInfo;
     // 组队战斗怪物信息储存在fightRankInfo
     const rival = fightInfo.type === FIGHT_TYPE_EUNM.rank ? fightRankInfo.rivals[0] : fightInfo.rivals[0];
     if (!id) {
@@ -23,6 +24,7 @@ module.exports = {
         data: {
           attr: rival.attr,
           name: rival.name,
+          level: template.level
         }
       })
       return;
@@ -33,6 +35,7 @@ module.exports = {
       data: {
         attr: player.attr,
         name: player.name,
+        level: player.level,
       }
     })
   },

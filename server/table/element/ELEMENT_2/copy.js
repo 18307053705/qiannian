@@ -493,6 +493,37 @@ const freakMap = {
     },
 }
 
+function getBaseAttr() {
+    return {
+        life: 500,
+        atk_max: 125,
+        atk_min: 100,
+        dfs_max: 20,
+        dfs_min: 15,
+        hit: 20,
+        sudden: 10,
+        ice_atk_min: 10,
+        ice_atk_max: 15,
+        mine_atk_min: 10,
+        mine_atk_max: 15,
+        wind_atk_min: 10,
+        wind_atk_max: 15,
+        water_atk_min: 10,
+        water_atk_max: 15,
+        fire_atk_min: 10,
+        fire_atk_max: 15,
+        ice_dfs_min: 10,
+        ice_dfs_max: 15,
+        mine_dfs_min: 10,
+        mine_dfs_max: 15,
+        wind_dfs_min: 10,
+        wind_dfs_max: 15,
+        water_dfs_min: 10,
+        water_dfs_max: 15,
+        fire_dfs_min: 10,
+        fire_dfs_max: 15,
+    }
+}
 
 module.exports = {
     getCopyFreak: function (freakId) {
@@ -514,67 +545,71 @@ module.exports = {
             if (noBoss === 1) {
                 base.exp = 55000;
                 base.tael = 2000;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             if (noBoss === 2) {
                 base.exp = 125000;
                 base.tael = 3000;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             if (noBoss === 3) {
                 base.exp = 450000;
                 base.tael = 5000;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             if (noBoss === 4) {
                 base.exp = 800000;
                 base.tael = 10000;
                 base.attr = 3;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             if (noBoss === 5) {
                 base.exp = 1500000;
                 base.tael = 20000;
                 base.attr = 5;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             if (noBoss === 6) {
                 base.exp = 2500000;
                 base.tael = 50000;
                 base.attr = 6;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             if (noBoss === 7) {
                 base.exp = 3500000;
                 base.tael = 75000;
                 base.attr = 7;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             if (noBoss === 8) {
                 base.exp = 5000000;
                 base.tael = 100000;
-                base.attr = 1;
-                // base.baseAttr = {
-                //     atk_max: 75,
-                //     atk_min: 60,
-                //     dfs_max: 20,
-                //     dfs_min: 15,
-                //     hit: 20,
-                //     sudden: 10,
-                //     ice_atk_min: 5,
-                //     ice_atk_max: 8,
-                //     mine_atk_min: 5,
-                //     mine_atk_max: 8,
-                //     wind_atk_min: 5,
-                //     wind_atk_max: 8,
-                //     water_atk_min: 5,
-                //     water_atk_max: 8,
-                //     fire_atk_min: 5,
-                //     fire_atk_max: 8,
-                //     ice_dfs_min: 5,
-                //     ice_dfs_max: 8,
-                //     mine_dfs_min: 5,
-                //     mine_dfs_max: 8,
-                //     wind_dfs_min: 5,
-                //     wind_dfs_max: 8,
-                //     water_dfs_min: 5,
-                //     water_dfs_max: 8,
-                //     fire_dfs_min: 5,
-                //     fire_dfs_max: 8,
-                // }
+                base.attr = 14;
+                base.baseAttr = getBaseAttr();
+                if (freak.grade === 3) {
+                    base.baseAttr.life = 120;
+                }
             }
             return {
                 ...base,

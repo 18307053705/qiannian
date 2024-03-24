@@ -35,7 +35,7 @@ module.exports = {
             return;
         }
         
-        const { attr } = AttrSystem.computeRoleAttr(roleInfo);
+        const { attr } = AttrSystem.computeRoleAttr(req, res,roleInfo);
         const roleAttr = fightFn.randomAttr(attr);
         const bossAttr = fightFn.randomAttr(boss);
         const dps = fightFn.computeFightDps(roleAttr, bossAttr);

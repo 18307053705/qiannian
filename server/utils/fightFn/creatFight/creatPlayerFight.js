@@ -20,7 +20,7 @@ module.exports = {
             id: role_id,
             type,
             player: players.completePlayer,
-            template: { role_id, name: tPlayer.completePlayer.name },
+            template: { role_id, name: tPlayer.completePlayer.name, level: players.simplePlayer.level },
             state: 0,
             buffs: {},
         };
@@ -28,7 +28,7 @@ module.exports = {
             id: i_roleId,
             type,
             player: tPlayer.completePlayer,
-            template: { role_id: i_roleId, name: role_name },
+            template: { role_id: i_roleId, name: role_name, level: tPlayer.simplePlayer.level },
             state: 0,
             buffs: {},
         };

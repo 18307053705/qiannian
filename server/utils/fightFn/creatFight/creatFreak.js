@@ -53,7 +53,8 @@ module.exports = {
             template: {
                 id,
                 num: rivals.length,
-                name
+                name,
+                level
             }
         };
     },
