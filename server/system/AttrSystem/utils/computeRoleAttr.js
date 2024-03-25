@@ -58,9 +58,9 @@ module.exports = {
             }
         })
         if (pet) {
-            const rate = pet.art[1].l === -1 ? 0 : pet.art[1].v / 100;
+            const rate = pet.art[1].l ? pet.art[1].v / 100 : 0;
             if (pet.state === 2 && rate) {
-                const petAttr = computePetAttr(pet, ['life_max', 'life']);
+                const petAttr = computePetAttr(pet, { 'life_max': 0, 'life': 0 });
                 Object.keys(petAttr).forEach(key => {
                     attr[key] += parseInt(petAttr[key] * rate);
                 })

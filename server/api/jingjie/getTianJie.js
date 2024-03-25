@@ -16,6 +16,21 @@ module.exports = {
             leiJieInfo = RealmTable.getLeiJie(leiJieId + 1);
             leiJieNum = 0;
         }
+        if (leiJieInfo.last) {
+            const { realm, name, max, level } = RealmTable.getLeiJie(leiJieInfo.id);
+            res.send({
+                code: 0,
+                data: {
+                    last: true,
+                    name,
+                    max,
+                    level,
+                    num: leiJieNum,
+                    realm: RealmTable.getRealm(realm).name
+                }
+            })
+            return;
+        }
         const { realm, name, max, level } = leiJieInfo;
         res.send({
             code: 0,

@@ -7,8 +7,7 @@ module.exports = {
      * @param
      */
     advanced: function (req, res) {
-        const { role_attr, role_realm, role_level } = RoleG.getRoleGlobal(req, res);
-
+        const { role_attr, role_realm, role_level, upper_limit } = RoleG.getRoleGlobal(req, res);
         // 前置校验
         // 获取突破的境界信息
         const nextRealm = RealmTable.getRealm(role_realm + 1);
@@ -20,7 +19,11 @@ module.exports = {
             return;
         }
         const { condition } = nextRealm;
-        const { article, level, tael } = condition;
+        const { leiJie = '1-0' } = upper_limit;
+        const { article, level, tael, leiJieId } = condition;
+        const leiJieArr = leiJie.split('-');
+        // 雷劫ID
+        const currentLeiJieID = Number(leiJieArr[0]);
         if (role_level < level) {
             res.send({
                 code: 0,
@@ -28,6 +31,16 @@ module.exports = {
             })
             return;
         }
+
+        if (leiJieId && leiJieId + 1 > currentLeiJieID) {
+            const { name } = RealmTable.getLeiJie(leiJieId);
+            res.send({
+                code: 0,
+                message: `角色未渡过${name}，快去渡劫台渡劫吧！`
+            })
+            return;
+        }
+
         const { tael: taels, data } = KnapsackG.getknapsackGlobal(req, res);
         if (taels < tael) {
             res.send({

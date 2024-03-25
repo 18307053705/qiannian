@@ -1,5 +1,31 @@
 const { ArtSystem } = require('@/system');
-const { getPetRating } = require('./getPetRating');
+
+const getTating = (flair_x) => {
+    switch (parseInt(flair_x / 10)) {
+        case 0:
+        case 1:
+        case 2:
+            return 0;
+        case 3:
+        case 4:
+            return 1;
+           
+        case 5:
+        case 6:
+            return 2;
+           
+        case 7:
+            return 3;
+           
+        case 8:
+            return 4;
+           
+        case 9:
+            return 5;
+        default:
+            return 6;
+    }
+}
 
 module.exports = {
     /**
@@ -13,7 +39,7 @@ module.exports = {
             const tianFu = [56, 57, 58, 59];
             artId = flair_x < 75 ? tianFu[0] : tianFu[Math.floor(Math.random() * 3) + 1];
         }
-        const rating = getPetRating(flair_x);
+        const rating = getTating(flair_x);
         // 天赋技能
         const { v, n, effect, p, effectValue } = ArtSystem.getArt(artId);
         const talentArt = {

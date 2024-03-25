@@ -1,6 +1,7 @@
 const { knapsackTable } = require("@/table");
 const { computeEquipAttr } = require("./computeEquipAttr");
 const { computeSuitAttr } = require("./computeSuitAttr");
+const { computeEquipPosKey } = require("./computeEquipPosKey");
 module.exports = {
     /**
      * 
@@ -23,20 +24,21 @@ module.exports = {
                 message: `等级不足,无法该佩戴${name}`
             }
         }
-        // // 判断职业是否满足
-        // if (equipWear.career) {
-        //     if (equipWear.career === 1 && !([1, 4, 7].includes(role_career))) {
-        //         return { message: `职业不符合,无法该佩戴${name}` }
-        //     }
-        //     if (equipWear.career === 2 && !([2, 5, 8].includes(role_career))) {
-        //         return { message: `职业不符合,无法该佩戴${name}` }
-        //     }
-        //     if (equipWear.career === 3 && !([3, 6, 9].includes(role_career))) {
-        //         return { message: `职业不符合,无法该佩戴${name}` }
-        //     }
-        // }
+        // 判断职业是否满足
+        if (equipWear.career) {
+            if (equipWear.career === 1 && !([1, 4, 7].includes(role_career))) {
+                return { message: `职业不符合,无法该佩戴${name}` }
+            }
+            if (equipWear.career === 2 && !([2, 5, 8].includes(role_career))) {
+                return { message: `职业不符合,无法该佩戴${name}` }
+            }
+            if (equipWear.career === 3 && !([3, 6, 9].includes(role_career))) {
+                return { message: `职业不符合,无法该佩戴${name}` }
+            }
+        }
 
-        const { attr: addAttr, posName } = computeEquipAttr(equipWear, equip_pool, ext);
+        const addAttr = computeEquipAttr(equipWear, ext);
+        const posName = computeEquipPosKey(equipWear, equip_pool)
         // 替换装备
         const replaceEquip = equip_pool[posName];
         // 判断该部位是否替换装备
@@ -46,7 +48,7 @@ module.exports = {
             replaceEquip.uid = `${new Date() * 1}1`;
             replaceEquip.s = 1;
             delete replaceEquip.n;
-            const { attr: deleteAttr } = computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), equip_pool, replaceEquip.ext);
+            const deleteAttr = computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), replaceEquip.ext);
             Object.keys(deleteAttr).forEach(key => {
                 if (addAttr[key]) {
                     addAttr[key] -= deleteAttr[key];

@@ -10,7 +10,7 @@ const realmMeun = {
     1: {
         id: 1,
         name: '淬体初期',
-        attr: 1.2,
+        attr: 1.5,
         ele: 50,
         potential: 10,
         condition: {
@@ -22,7 +22,7 @@ const realmMeun = {
     2: {
         id: 2,
         name: '淬体中期',
-        attr: 1.2,
+        attr: 2,
         ele: 25,
         potential: 5,
         condition: {
@@ -34,7 +34,7 @@ const realmMeun = {
     3: {
         id: 3,
         name: '淬体后期',
-        attr: 1.2,
+        attr: 2.5,
         ele: 30,
         potential: 6,
         condition: {
@@ -46,7 +46,7 @@ const realmMeun = {
     4: {
         id: 4,
         name: '淬体巅峰',
-        attr: 1.2,
+        attr: 3,
         ele: 35,
         potential: 7,
         condition: {
@@ -58,7 +58,7 @@ const realmMeun = {
     5: {
         id: 5,
         name: '筑基初期',
-        attr: 1.5,
+        attr: 5,
         ele: 100,
         potential: 20,
         condition: {
@@ -70,7 +70,7 @@ const realmMeun = {
     6: {
         id: 6,
         name: '筑基中期',
-        attr: 1.5,
+        attr: 7,
         ele: 50,
         potential: 10,
         condition: {
@@ -82,7 +82,7 @@ const realmMeun = {
     7: {
         id: 7,
         name: '筑基后期',
-        attr: 1.5,
+        attr: 8,
         ele: 60,
         potential: 12,
         condition: {
@@ -94,7 +94,7 @@ const realmMeun = {
     8: {
         id: 8,
         name: '筑基巅峰',
-        attr: 1.5,
+        attr: 10,
         ele: 75,
         potential: 15,
         condition: {
@@ -106,7 +106,7 @@ const realmMeun = {
     9: {
         id: 9,
         name: '造化初期',
-        attr: 2,
+        attr: 12,
         ele: 300,
         potential: 30,
         condition: {
@@ -119,7 +119,7 @@ const realmMeun = {
     10: {
         id: 10,
         name: '造化中期',
-        attr: 2,
+        attr: 14,
         ele: 150,
         potential: 15,
         condition: {
@@ -131,7 +131,7 @@ const realmMeun = {
     11: {
         id: 11,
         name: '造化后期',
-        attr: 2,
+        attr: 16,
         ele: 180,
         potential: 20,
         condition: {
@@ -143,7 +143,7 @@ const realmMeun = {
     12: {
         id: 12,
         name: '造化巅峰',
-        attr: 2,
+        attr: 18,
         ele: 240,
         potential: 25,
         condition: {
@@ -155,7 +155,7 @@ const realmMeun = {
     13: {
         id: 13,
         name: '涅槃初期',
-        attr: 2.5,
+        attr: 20,
         ele: 500,
         potential: 40,
         condition: {
@@ -167,7 +167,7 @@ const realmMeun = {
     14: {
         id: 14,
         name: '涅槃中期',
-        attr: 2.5,
+        attr: 24,
         ele: 250,
         potential: 20,
         condition: {
@@ -179,7 +179,7 @@ const realmMeun = {
     15: {
         id: 15,
         name: '涅槃后期',
-        attr: 2.5,
+        attr: 26,
         ele: 300,
         potential: 25,
         condition: {
@@ -191,7 +191,7 @@ const realmMeun = {
     16: {
         id: 16,
         name: '涅槃巅峰',
-        attr: 2.5,
+        attr: 28,
         ele: 350,
         potential: 30,
         condition: {
@@ -203,7 +203,7 @@ const realmMeun = {
     17: {
         id: 17,
         name: '灵海初期',
-        attr: 3,
+        attr: 30,
         ele: 700,
         potential: 50,
         condition: {
@@ -216,7 +216,7 @@ const realmMeun = {
     18: {
         id: 18,
         name: '灵海中期',
-        attr: 3,
+        attr: 32,
         ele: 350,
         potential: 25,
         condition: {
@@ -228,7 +228,7 @@ const realmMeun = {
     19: {
         id: 19,
         name: '灵海后期',
-        attr: 3,
+        attr: 35,
         ele: 400,
         potential: 30,
         condition: {
@@ -240,7 +240,7 @@ const realmMeun = {
     20: {
         id: 20,
         name: '灵海巅峰',
-        attr: 3,
+        attr: 40,
         ele: 500,
         potential: 35,
         condition: {
@@ -252,7 +252,7 @@ const realmMeun = {
     21: {
         id: 21,
         name: '彼岸初期',
-        attr: 3.5,
+        attr: 50,
         ele: 1000,
         potential: 70,
         condition: {
@@ -264,7 +264,7 @@ const realmMeun = {
     22: {
         id: 22,
         name: '彼岸中期',
-        attr: 3.5,
+        attr: 55,
         ele: 500,
         potential: 35,
         condition: {
@@ -276,7 +276,7 @@ const realmMeun = {
     23: {
         id: 23,
         name: '彼岸后期',
-        attr: 3.5,
+        attr: 60,
         ele: 600,
         potential: 50,
         condition: {
@@ -288,7 +288,7 @@ const realmMeun = {
     24: {
         id: 24,
         name: '彼岸巅峰',
-        attr: 3.5,
+        attr: 70,
         ele: 700,
         potential: 60,
         condition: {
@@ -300,7 +300,7 @@ const realmMeun = {
     25: {
         id: 25,
         name: '神轮初期',
-        attr: 4,
+        attr: 75,
         ele: 1500,
         potential: 100,
         condition: {
@@ -313,7 +313,7 @@ const realmMeun = {
     26: {
         id: 26,
         name: '神轮中期',
-        attr: 4,
+        attr: 80,
         ele: 750,
         potential: 50,
         condition: {
@@ -325,7 +325,7 @@ const realmMeun = {
     27: {
         id: 27,
         name: '神轮后期',
-        attr: 4,
+        attr: 85,
         ele: 1000,
         potential: 70,
         condition: {
@@ -337,7 +337,7 @@ const realmMeun = {
     28: {
         id: 28,
         name: '神轮巅峰',
-        attr: 4,
+        attr: 90,
         ele: 1250,
         potential: 80,
         condition: {
@@ -349,7 +349,7 @@ const realmMeun = {
     29: {
         id: 29,
         name: '超凡初期',
-        attr: 5,
+        attr: 100,
         ele: 3000,
         potential: 150,
         condition: {
@@ -362,7 +362,7 @@ const realmMeun = {
     30: {
         id: 30,
         name: '超凡中期',
-        attr: 5,
+        attr: 110,
         ele: 1500,
         potential: 75,
         condition: {
@@ -374,7 +374,7 @@ const realmMeun = {
     31: {
         id: 31,
         name: '超凡后期',
-        attr: 5,
+        attr: 120,
         ele: 2000,
         potential: 100,
         condition: {
@@ -386,7 +386,7 @@ const realmMeun = {
     32: {
         id: 32,
         name: '超凡巅峰',
-        attr: 5,
+        attr: 130,
         ele: 2500,
         potential: 125,
         condition: {
@@ -398,7 +398,7 @@ const realmMeun = {
     33: {
         id: 33,
         name: '至尊初期',
-        attr: 6,
+        attr: 150,
         ele: 5000,
         potential: 300,
         condition: {
@@ -411,7 +411,7 @@ const realmMeun = {
     34: {
         id: 34,
         name: '至尊中期',
-        attr: 6,
+        attr: 160,
         ele: 2500,
         potential: 150,
         condition: {
@@ -423,7 +423,7 @@ const realmMeun = {
     35: {
         id: 35,
         name: '至尊后期',
-        attr: 6,
+        attr: 170,
         ele: 3000,
         potential: 180,
         condition: {
@@ -435,7 +435,7 @@ const realmMeun = {
     36: {
         id: 36,
         name: '至尊巅峰',
-        attr: 6,
+        attr: 180,
         ele: 3500,
         potential: 240,
         condition: {
@@ -447,7 +447,7 @@ const realmMeun = {
     37: {
         id: 37,
         name: '黄庭初期',
-        attr: 7,
+        attr: 200,
         ele: 7000,
         potential: 500,
         condition: {
@@ -460,11 +460,11 @@ const realmMeun = {
     38: {
         id: 38,
         name: '黄庭中期',
-        attr: 7,
+        attr: 220,
         ele: 3500,
         potential: 250,
         condition: {
-            level: 101,
+            level: 105,
             tael: 10000000,
             article: '207-1000,2015-1000,2023-1000,2056-50,2057-50,2058-50,2059-50,2060-50'
         }
@@ -472,11 +472,11 @@ const realmMeun = {
     39: {
         id: 39,
         name: '黄庭后期',
-        attr: 7,
+        attr: 240,
         ele: 4000,
         potential: 300,
         condition: {
-            level: 102,
+            level: 110,
             tael: 10000000,
             article: '207-1000,2015-1000,2023-1000,2056-50,2057-50,2058-50,2059-50,2060-50'
         }
@@ -484,11 +484,11 @@ const realmMeun = {
     40: {
         id: 40,
         name: '黄庭巅峰',
-        attr: 7,
+        attr: 260,
         ele: 5000,
         potential: 400,
         condition: {
-            level: 105,
+            level: 115,
             tael: 10000000,
             article: '207-1000,2015-1000,2023-1000,2056-50,2057-50,2058-50,2059-50,2060-50'
         }
@@ -496,11 +496,11 @@ const realmMeun = {
     41: {
         id: 41,
         name: '鸿蒙初期',
-        attr: 8,
+        attr: 300,
         ele: 10000,
         potential: 1000,
         condition: {
-            level: 106,
+            level: 120,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-100,2057-100,2058-100,2059-100,2060-100',
             leiJieId: 7
@@ -509,11 +509,11 @@ const realmMeun = {
     42: {
         id: 42,
         name: '鸿蒙中期',
-        attr: 8,
+        attr: 340,
         ele: 5000,
         potential: 500,
         condition: {
-            level: 107,
+            level: 125,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-100,2057-100,2058-100,2059-100,2060-100'
         }
@@ -521,11 +521,11 @@ const realmMeun = {
     43: {
         id: 43,
         name: '鸿蒙后期',
-        attr: 8,
+        attr: 380,
         ele: 6000,
         potential: 650,
         condition: {
-            level: 108,
+            level: 130,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-100,2057-100,2058-100,2059-100,2060-100'
         }
@@ -533,11 +533,11 @@ const realmMeun = {
     44: {
         id: 44,
         name: '鸿蒙巅峰',
-        attr: 8,
+        attr: 420,
         ele: 7000,
         potential: 800,
         condition: {
-            level: 109,
+            level: 140,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-100,2057-100,2058-100,2059-100,2060-100'
         }
@@ -545,11 +545,11 @@ const realmMeun = {
     45: {
         id: 45,
         name: '道境初期',
-        attr: 10,
+        attr: 500,
         ele: 20000,
         potential: 3000,
         condition: {
-            level: 110,
+            level: 150,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-200,2057-200,2058-200,2059-200,2060-200',
             leiJieId: 8
@@ -558,11 +558,11 @@ const realmMeun = {
     46: {
         id: 46,
         name: '道境中期',
-        attr: 10,
+        attr: 600,
         ele: 10000,
         potential: 1500,
         condition: {
-            level: 115,
+            level: 160,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-200,2057-200,2058-200,2059-200,2060-200'
         }
@@ -570,11 +570,11 @@ const realmMeun = {
     47: {
         id: 47,
         name: '道境后期',
-        attr: 10,
+        attr: 700,
         ele: 12000,
         potential: 2000,
         condition: {
-            level: 120,
+            level: 170,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-200,2057-200,2058-200,2059-200,2060-200'
         }
@@ -582,11 +582,11 @@ const realmMeun = {
     48: {
         id: 48,
         name: '道境巅峰',
-        attr: 10,
+        attr: 1000,
         ele: 15000,
         potential: 2500,
         condition: {
-            level: 120,
+            level: 180,
             tael: 10000000,
             article: '207-1200,2015-1200,2023-1200,2056-200,2057-200,2058-200,2059-200,2060-200'
         }

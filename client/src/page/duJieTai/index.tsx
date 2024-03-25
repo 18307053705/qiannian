@@ -18,8 +18,10 @@ export default () => {
             <div>{data.name}</div>
             <div>等级：{data.level}</div>
             <div>境界：{data.realm || '无'}</div>
-            <div>当前层数：{data.num}/{data.max}</div>
-            <div><span className='g_u_end' onClick={tianJieFight}>开始渡劫</span></div>
+            <div>当前层数：{data.last ? data.max : data.num}/{data.max}</div>
+            <div>
+                {data.last ? <span>恭喜你渡过全部天劫！！！</span> : <span className='g_u_end' onClick={tianJieFight}>开始渡劫</span>}
+            </div>
             <div>=================</div>
             <div>
                 灵气充沛的渡劫台，周围布下了玄奥的阵法，周围还残余着天劫的痕迹。

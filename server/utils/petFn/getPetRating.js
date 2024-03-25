@@ -24,7 +24,7 @@ module.exports = {
             case 11:
                 return 10 + ((flair_x - 100) * 0.5);
             case 12:
-                return 25 + (flair_x - 100);
+                return 25 + (flair_x - 120);
             default:
                 return 1;
         }

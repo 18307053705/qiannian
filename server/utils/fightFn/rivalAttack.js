@@ -20,6 +20,7 @@ module.exports = {
         if (dps) {
             role.life = role.life - dps > 0 ? role.life - dps : 0;
         }
+        console.log(dps,'dps...')
         // 记录怪物伤害
         roundText.drain_life = `[-${dps}]`;
         FightG.updataFightInfoGlobal(req, res, { roundAttr, roundText });

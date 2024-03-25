@@ -18,15 +18,19 @@ module.exports = {
             isHit = Math.floor(Math.random() * (100 - 1)) + 1 > rate;
         }
         let dps = 0;
+        let eleDps = 0;
         if (isHit) {
             dps = (atk - dfs) * (rise / 100);
             let rate = 10;
             let sudden = 100;
-            dps += ice_atk - ice_dfs;
-            dps += mine_atk - mine_dfs;
-            dps += wind_atk - wind_dfs;
-            dps += water_atk - water_dfs;
-            dps += fire_atk - fire_dfs;
+            eleDps += ice_atk - ice_dfs;
+            eleDps += mine_atk - mine_dfs;
+            eleDps += wind_atk - wind_dfs;
+            eleDps += water_atk - water_dfs;
+            eleDps += fire_atk - fire_dfs;
+            if (eleDps > 0) {
+                dps = dps > 0 ? dps + eleDps : eleDps;
+            }
             if (sudden1 < 3000) {
                 rate += sudden1 / 150;
             } else if (sudden1 < 10000) {
@@ -49,6 +53,7 @@ module.exports = {
                     sudden += diff;
                 }
             }
+
             dps = parseInt(dps * sudden / 100);
         }
         return dps < 0 ? 0 : dps

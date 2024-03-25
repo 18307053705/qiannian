@@ -52,7 +52,7 @@ module.exports = {
         // 属性排名统一计算属性
         if ([3, 4, 5, 6, 7, 8, 9].includes(type)) {
             rankList = rankList.map((role) => {
-                const { attr } = AttrSystem.computeRoleAttr(req, res,role);
+                const { attr } = AttrSystem.computeRoleAttr(req, res, role);
                 role.attr = attr;
                 return role;
             })

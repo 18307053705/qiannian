@@ -53,7 +53,8 @@ module.exports = {
             return;
         }
         const old_equip_pool = JSON.parse(JSON.stringify(equip_pool));
-        const { attr: addAttr, posName } = equipFn.computeEquipAttr(equipWear, equip_pool, ext);
+        const addAttr = equipFn.computeEquipAttr(equipWear, ext);
+        const posName = equipFn.computeEquipPosKey(equipWear, equip_pool);
         // 替换下装备
         let replaceEquip = equip_pool[posName];
         // 判断该部位是否替换装备
@@ -63,7 +64,7 @@ module.exports = {
             replaceEquip.uid = `${new Date() * 1}1`;
             replaceEquip.s = 1;
             delete replaceEquip.n;
-            const { attr: deleteAttr } = equipFn.computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), equip_pool, replaceEquip.ext, posName);
+            const deleteAttr = equipFn.computeEquipAttr(knapsackTable.getArticle(replaceEquip.id), replaceEquip.ext);
             Object.keys(deleteAttr).forEach(key => {
                 if (addAttr[key]) {
                     addAttr[key] -= deleteAttr[key];

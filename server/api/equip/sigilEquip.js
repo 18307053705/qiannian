@@ -1,5 +1,5 @@
-const { knapsackTable } = require('../../table');
-const { knapsackFn } = require('../../utils');
+const { knapsackTable } = require('@/table');
+const { knapsackFn } = require('@/utils');
 
 module.exports = {
     /**

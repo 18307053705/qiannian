@@ -37,7 +37,7 @@ module.exports = {
         res.listText.push(`神装积分+${isAssist ? 1 : 2}`);
     },
     /**
-     * 雷劫
+     * 境界雷劫
      * @param  req 
      * @param  res
      */
@@ -48,13 +48,13 @@ module.exports = {
         // 雷劫ID
         const leiJieId = Number(leiJieArr[0]);
         // 雷劫层数
-        let leiJieNum = Number(leiJieArr[1]);
+        let leiJieNum = Number(leiJieArr[1]) + 1;
         let leiJieInfo = RealmTable.getLeiJie(leiJieId);
         if (leiJieInfo.max === leiJieNum) {
             leiJieInfo = RealmTable.getLeiJie(leiJieId + 1);
             leiJieNum = 0;
         }
-        upper_limit.leiJie = `${leiJieInfo.id}-${leiJieNum + 1}`
+        upper_limit.leiJie = `${leiJieInfo.id}-${leiJieNum}`
         RoleG.updataRoleGlobal(req, res, { upper_limit });
     },
     /**

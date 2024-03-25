@@ -12,7 +12,7 @@ module.exports = {
      */
     getEquipInfo: function (equipId, ext) {
         const equip = knapsackTable.getArticle(equipId);
-        const { attr } = computeEquipAttr(equip, ext);
+        const attr = computeEquipAttr(equip, ext);
         const attrMap = {};
         Object.keys(attr).forEach((key) => {
             if (['life_max', 'mana_max'].includes(key)) {

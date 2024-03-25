@@ -1,3 +1,4 @@
+const { PetG } = require('@/global');
 const { roleFn } = require('@/utils');
 const { RealmTable, TitleTable } = require('@/table');
 const MEUN = require('@/meun')
@@ -14,8 +15,9 @@ module.exports = {
             return;
         }
         if (role) {
+            const pet = PetG.getPetGlobal(req, res, role_id);
             // 计算角色属性
-            const data = AttrSystem.computeRoleAttr(req, res,role, { upData: true })
+            const data = AttrSystem.computeRoleAttr(req, res, role, { upData: true, pet })
             const realm = RealmTable.getRealm(role['role_realm']);
             const title = TitleTable.getTitle(role['role_title']);
             const role_career = MEUN.CAREER_MEUN[role['role_career']];

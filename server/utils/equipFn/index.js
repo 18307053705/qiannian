@@ -3,6 +3,8 @@ const getEquipInfo = require('./getEquipInfo');
 const computeEquipAttr = require('./computeEquipAttr');
 const getMakeInfo = require('./getMakeInfo');
 const computeSuitAttr = require('./computeSuitAttr');
+const computeEquipPosKey = require('./computeEquipPosKey');
+const commputeEqipAttrRole = require('./commputeEqipAttrRole');
 
 
 module.exports = {
@@ -10,5 +12,7 @@ module.exports = {
     ...getEquipInfo,
     ...computeEquipAttr,
     ...getMakeInfo,
-    ...computeSuitAttr
+    ...computeSuitAttr,
+    ...computeEquipPosKey,
+    ...commputeEqipAttrRole
 }

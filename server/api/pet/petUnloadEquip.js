@@ -35,7 +35,7 @@ module.exports = {
             return;
         }
         const equipWear = knapsackTable.getArticle(id);
-        const { attr: deleteAttr } = equipFn.computeEquipAttr(equipWear, ext);
+        const deleteAttr = equipFn.computeEquipAttr(equipWear, ext);
         // 更新卸下装备后的属性
         Object.keys(deleteAttr).forEach(key => {
             addition[key] -= deleteAttr[key];

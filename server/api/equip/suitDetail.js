@@ -1,4 +1,4 @@
-const { knapsackTable } = require('../../table');
+const { knapsackTable } = require('@/table');
 
 module.exports = {
     /**

@@ -3,11 +3,11 @@ module.exports = {
         name: '〓九转翼天龙〓',
         flair_x: 100
     },
-    1001: {
+    1002: {
         name: '〓九转涅槃凤〓',
         flair_x: 100
     },
-    1002: {
+    1003: {
         name: '〓九转圣麒麟〓',
         flair_x: 100
     },

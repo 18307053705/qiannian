@@ -11,7 +11,7 @@ module.exports = {
         if (!SHNEYUAN_Global[role_id] && role_level >= 50) {
             SHNEYUAN_Global[role_id] = {
                 s: 5,
-                l: 12,
+                l: 99,
                 id: role_id,
                 n: role_name,
                 level: role_level,

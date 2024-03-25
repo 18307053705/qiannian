@@ -30,6 +30,34 @@ function getBaseAttr() {
         fire_dfs_max: 40,
     }
 }
+
+function computeShenYuan(l) {
+    // 层数
+    let level = l * 5 + 50;
+    // 每2层加1倍属性
+    let attr = Math.floor((l / 2)) + 10;
+    let baseAttr = getBaseAttr();
+    if (l >= 50) {
+        level = l * 10 + 50;
+        attr = 40 + l - 50;
+    }
+    if (l >= 90) {
+        level = l * 10 + 10;
+        attr = 50;
+        baseAttr.life = 2000;
+    }
+    if (l >= 100) {
+        level = l * 10 + 10;
+        attr = 80;
+        baseAttr.life = 5000;
+    }
+    return {
+        level,
+        attr,
+        baseAttr
+    }
+}
+
 module.exports = {
     /**
      * @param roleId 传代表提对方闯深渊
@@ -69,10 +97,6 @@ module.exports = {
             num: 1,
             grade: 2,
             career: 1,
-            // 层数
-            level: l * 5 + 50,
-            // 每2层加1倍属性
-            attr: parseInt(l / 2) + 5,
             // 帮人杀怪仅有经验奖励
             exp: roleId ? parseInt(exps / 2) : exps,
             tael: roleId ? parseInt(taels / 2) : taels,
@@ -81,7 +105,8 @@ module.exports = {
             path: '/shenYuan',
             customFreak: true,
             customCallback: 'shenYuan',
-            baseAttr: getBaseAttr()
+            // baseAttr: getBaseAttr(),
+            ...computeShenYuan(l)
         }
         GrandG.setCurrentDir(req, res, currentDir);
         res.send({

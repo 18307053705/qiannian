@@ -90,11 +90,11 @@ module.exports = {
             rowid = 5;
         }
         let success = '';
-        const petPool = petPoolMap[rowid];
+        const petPool = petPoolMap[8];
         // 随机对应奖励池中的id
-        const indxe = Math.floor(Math.random() * petPool.length);
-        const id = petPool[indxe];
-        if (rowid === 1) {
+        // const indxe = Math.floor(Math.random() * petPool.length);
+        const id = petPool[0];
+        if (rowid === 1 && false) {
             const { name } = knapsackTable.getArticle(id);
             knapsackFn.addKnapsack(req, res, { [id]: { name, s: 1, id } });
             success = `消耗200元宝,在灵兽山获得${name}x1`;

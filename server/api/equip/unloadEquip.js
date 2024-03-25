@@ -41,7 +41,7 @@ module.exports = {
             // 更新套装信息
             equip_pool['suit'] = suit;
             // 计算属性
-            const { attr } = equipFn.computeEquipAttr(knapsackTable.getArticle(id), ext);
+            const attr = equipFn.computeEquipAttr(knapsackTable.getArticle(id), ext);
             const { addition } = role_attr;
             Object.keys(attr).forEach(key => {
                 addition[key] -= attr[key];
